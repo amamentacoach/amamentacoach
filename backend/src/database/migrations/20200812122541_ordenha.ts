@@ -4,8 +4,8 @@ import * as Knex from "knex";
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable('ordenha',table =>{
         table.increments('id').primary();
-        table.dateTime('data').notNullable();
-        table.float('qtdLeite').notNullable();
+        table.dateTime('data_hora').notNullable();
+        table.integer('qtd_leite').notNullable();
         table.string('mama',1).notNullable();
         table.integer('duracao').notNullable();
         table.integer('mae_id').notNullable();
