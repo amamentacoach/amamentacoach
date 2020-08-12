@@ -11,6 +11,7 @@ export async function up(knex: Knex): Promise<void> {
         table.integer('idadeGestacional').notNullable();
         table.float('pesoNascimento').notNullable();
         table.string('imagemBebe');
+        table.string('imagemPai');
     });
 }
 
