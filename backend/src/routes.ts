@@ -4,6 +4,7 @@ import OrdenhasController from './controllers/OrdenhasController';
 import MensagensController from './controllers/MensagensController';
 import PerguntasController from './controllers/PerguntasController';
 import RespostasMaeController from './controllers/RespostasMaeController';
+import RespostasController from './controllers/RespostasController';
 
 
 const maesController = new MaesController();
@@ -11,6 +12,7 @@ const ordenhasController = new OrdenhasController();
 const mensagensController = new MensagensController();
 const perguntasController = new PerguntasController();
 const respostasMaeController = new RespostasMaeController();
+const respostasController = new RespostasController();
 
 const routes = Router()
 
@@ -31,5 +33,7 @@ routes.get('/mensagens',mensagensController.index);
 
 routes.post('/perguntas',perguntasController.create);
 routes.get('/perguntas/:categoria',perguntasController.index);
+
+routes.get('/perguntas/:pergunta_id/respostas',respostasController.show);
 
 export default routes;
