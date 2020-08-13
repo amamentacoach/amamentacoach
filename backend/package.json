@@ -19,6 +19,7 @@
   },
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
+    "build":"tsc",
     "start": "knex migrate:latest && ts-node src/server.ts"
   }
 }
