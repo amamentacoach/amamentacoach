@@ -5,7 +5,7 @@ class OrdenhasController{
     async show(req:Request, res:Response){
         const {mae_id} = req.params;
 
-        const {nome} = await knex('mae').select('nome').first()
+        const {nome} = await knex('mae').select('nome').where('mae_id',mae_id).first();
 
         const ordenhas = await knex('ordenha')
             .select('*')
