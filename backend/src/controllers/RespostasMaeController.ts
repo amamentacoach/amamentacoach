@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import knex from '../database/connection';
 
-class RespostasController{
+class RespostasMaeController{
     async create(req:Request, res:Response){
         const {mae_id,pergunta_id} = req.params;
         const {descricao} = req.body;
@@ -27,4 +27,4 @@ class RespostasController{
     }
 }
 
-export default RespostasController;
+export default RespostasMaeController;
