@@ -23,7 +23,7 @@
 
 Para funcionar corretamente, você vai precisar:
 - [Node.js](nodejs.org) (versão 12.14.x ou mais recente)
-- [Yarn](https://yarnpkg.com/) (versão 1.22.4 ou mais recente) Opcional
+- [Yarn](https://yarnpkg.com/) (versão 1.22.4 ou mais recente) opcional
 - [React Native CLI](https://reactnative.dev/) (versão 0.63)
 
 ## Ambiente de desenvolvimento
