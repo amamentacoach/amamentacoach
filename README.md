@@ -36,7 +36,7 @@ Depois de clonado o repositório, para executar o backend digite:
 ```
 cd ./backend
 npm install ou yarn install
-npm dev ou yarn dev
+npm run dev ou yarn dev
 ```
 Para executar o aplicativo digite:
 ```
