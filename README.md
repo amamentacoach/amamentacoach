@@ -13,7 +13,7 @@
 <div align="center">
   <h4>
     <a href="#requisitos">Requisitos</a> |
-    <a href="#setup">Ambiente de desenvolvimento</a> |
+    <a href="#ambiente-de-desenvolvimento">Ambiente de desenvolvimento</a> |
     <a href="#releases">Releases</a> |
     <a href="#participantes">Participantes</a>
   </h4>
