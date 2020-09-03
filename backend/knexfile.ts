@@ -5,8 +5,8 @@ module.exports = {
   client:'pg',
   connection:process.env.DATABASE_URL ||{
       host:'localhost',
-      user:'joao',
-      password:'joao',
+      user:'postgres',
+      password:'postgres',
       database:'amamentacoach'
   },
   

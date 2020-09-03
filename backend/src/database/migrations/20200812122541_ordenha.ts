@@ -8,8 +8,8 @@ export async function up(knex: Knex): Promise<void> {
         table.integer('qtd_leite').notNullable();
         table.string('mama',1).notNullable();
         table.integer('duracao').notNullable();
-        table.integer('mae_id').notNullable();
-        table.foreign('mae_id').references('id').inTable('mae');
+        table.integer('bebe_id').notNullable();
+        table.foreign('bebe_id').references('id').inTable('bebe');
     });
 }
 
