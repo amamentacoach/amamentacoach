@@ -84,7 +84,7 @@ routes.get('/maes/:id', maesController.show);
  * @api {post} /maes/:id_mae/bebes Cadastro de bebê
  * @apiGroup Bebês
  *
- * @apiParam {Integer} id Id da mãe.
+ * @apiParam {Integer} id_mae Id da mãe.
  * 
  * @apiParamExample {json} Exemplo Request:
  *      {
@@ -112,7 +112,7 @@ routes.post('/maes/:id_mae/bebes', bebesController.create);
  * @api {get} /maes/:id_mae/bebes Listagem dos bebes de uma determinada mãe
  * @apiGroup Bebês
  *
- * @apiParam {Integer} id Id da mãe.
+ * @apiParam {Integer} id_mae Id da mãe.
  * 
  * 
  * @apiSuccessExample {json} Sucesso

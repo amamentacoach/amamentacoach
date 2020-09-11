@@ -11,7 +11,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "Integer",
             "optional": false,
-            "field": "id",
+            "field": "id_mae",
             "description": "<p>Id da mãe.</p>"
           }
         ]
@@ -21,7 +21,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Sucesso",
-          "content": "HTTP/1.1 200 OK\n[\n  {\n      \"id_bebe\":7,\n      \"nome\":\"Enzo Gabriel\",\n      \"data_parto\":\"2020-08-28\",\n      \"semanas_gest\": 35,\n      \"dias_gest\":10,\n      \"peso\":2.5,\n      \"tipo_parto\":true, // false: parto normal | true: cesaria\n      \"local\":\"UCI\",\n  },\n  {\n      \"id_bebe\":8,\n      \"nome\":\"Valentina\",\n      \"data_parto\":\"2020-08-28\",\n      \"semanas_gest\": 35,\n      \"dias_gest\":10,\n      \"peso\":2.7,\n      \"tipo_parto\":true, // false: parto normal | true: cesaria\n      \"local\":\"UCI\",\n  }\n]",
+          "content": "HTTP/1.1 200 OK\n[\n  {\n      \"id_bebe\":7,\n      \"nome\":\"Enzo Gabriel\",\n      \"data_parto\":\"2020-08-28\",\n      \"semanas_gest\": 35,\n      \"dias_gest\":5,\n      \"peso\":2.5,\n      \"tipo_parto\":true, // false: parto normal | true: cesaria\n      \"local\":\"UCI\",\n  },\n  {\n      \"id_bebe\":8,\n      \"nome\":\"Valentina\",\n      \"data_parto\":\"2020-08-28\",\n      \"semanas_gest\": 35,\n      \"dias_gest\":5,\n      \"peso\":2.7,\n      \"tipo_parto\":true, // false: parto normal | true: cesaria\n      \"local\":\"UCI\",\n  }\n]",
           "type": "json"
         }
       ]
@@ -43,7 +43,7 @@ define({ "api": [
             "group": "Parameter",
             "type": "Integer",
             "optional": false,
-            "field": "id",
+            "field": "id_mae",
             "description": "<p>Id da mãe.</p>"
           }
         ]
@@ -51,7 +51,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"nome\":\"Enzo Gabriel\",\n    \"data_parto\":\"2020-08-28\",\n    \"semanas_gest\": 35,\n    \"dias_gest\":10,\n    \"peso\":2.5,\n    \"tipo_parto\":true, // false: parto normal | true: cesaria\n    \"local\":\"UCI\",\n}",
+          "content": "{\n    \"nome\":\"Enzo Gabriel\",\n    \"data_parto\":\"2020-08-28\",\n    \"semanas_gest\": 35,\n    \"dias_gest\":5,\n    \"peso\":2.5,\n    \"tipo_parto\":true, // false: parto normal | true: cesaria\n    \"local\":\"UCI\",\n}",
           "type": "json"
         }
       ]
