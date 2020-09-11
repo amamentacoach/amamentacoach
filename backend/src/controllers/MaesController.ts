@@ -4,13 +4,16 @@ import bcrypt from 'bcrypt';
 
 class MaesController{
     async index(req:Request, res:Response){
-        const maes = await knex('mae').select('*');  
+        const maes = await knex('mae')
+            .select('id, email, nome, data_nascimento, companheiro, escolaridade, renda, qtd_gravidez, ultimo_acesso, imagem_mae, imagem_pai');  
         return res.json(maes)
     }
 
     async show(req:Request, res:Response){
         const {id} = req.params;
-        const mae = await knex('mae').select('*').where('id',id).first()
+        const mae = await knex('mae')
+            .select('id, email, nome, data_nascimento, companheiro, escolaridade, renda, qtd_gravidez, ultimo_acesso, imagem_mae, imagem_pai')
+            .where('id',id).first()
         return res.json(mae);
     }
 
@@ -42,9 +45,6 @@ class MaesController{
 
         return res.json({
             id,
-            email,
-            nome,
-            data_nascimento,
         });
 
 

@@ -4,6 +4,7 @@ import routes from './routes';
 
 const app = express()
 
+app.use("/",express.static(path.resolve(__dirname, '..', 'public','apidoc')));
 app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')))
 app.use(express.json());
 app.use(routes);

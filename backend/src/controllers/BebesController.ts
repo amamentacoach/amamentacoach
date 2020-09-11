@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import knex from '../database/connection';
-import bcrypt from 'bcrypt';
 
 class BebesController{
     async index(req:Request, res:Response){
@@ -41,7 +40,7 @@ class BebesController{
         const [id] = await knex('mae').insert(bebe).returning('id')
 
         return res.json({
-            id,
+            id_bebe:id,
             nome,
         });
 
