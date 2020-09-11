@@ -9,9 +9,11 @@ import PerguntasController from './controllers/PerguntasController';
 import RespostasMaeController from './controllers/RespostasMaeController';
 import RespostasController from './controllers/RespostasController';
 import UploadController from './controllers/UploadController';
+import BebesController from './controllers/BebesController';
 
 
 const maesController = new MaesController();
+const bebesController = new BebesController();
 const ordenhasController = new OrdenhasController();
 const mensagensController = new MensagensController();
 const perguntasController = new PerguntasController();
@@ -28,10 +30,15 @@ routes.post('/maes',maesController.create);
 routes.get('/maes', maesController.index);
 routes.get('/maes/:id', maesController.show);
 
-routes.post('/maes/:mae_id/upload/:tipo',uploadMiddleware.single('foto'),uploadController.create);
+routes.post('/maes/:id_mae/bebes', bebesController.create);
+routes.get('/maes/:id_mae/bebes', bebesController.index);
 
-routes.post('/maes/:mae_id/ordenhas',ordenhasController.create);
-routes.get('/maes/:mae_id/ordenhas',ordenhasController.show);
+routes.get('/bebes/:id', bebesController.show);
+
+routes.post('/upload/:id/:tipo',uploadMiddleware.single('foto'),uploadController.create);
+
+routes.post('/bebes/:bebe_id/ordenhas',ordenhasController.create);
+routes.get('/bebes/:bebe_id/ordenhas',ordenhasController.show);
 
 routes.post('/maes/:mae_id/respostas/:pergunta_id',respostasMaeController.create);
 routes.get('/maes/:mae_id/respostas',respostasMaeController.index);
