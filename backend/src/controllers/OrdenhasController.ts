@@ -25,9 +25,9 @@ class OrdenhasController{
             duracao,
         } = req.body;
 
-        const {mae_id} = req.params;
+        const {bebe_id} = req.params;
 
-        const ordenha = {mae_id:parseInt(mae_id), qtd_leite, mama, duracao, data_hora:new Date}
+        const ordenha = {bebe_id:parseInt(bebe_id), qtd_leite, mama, duracao, data_hora:new Date}
         
         await knex('ordenha').insert(ordenha);
 

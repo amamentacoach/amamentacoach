@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import knex from '../database/connection';
+import bcrypt from 'bcrypt';
 
 class MaesController{
     async index(req:Request, res:Response){
@@ -15,28 +16,35 @@ class MaesController{
 
     async create(req:Request, res:Response){
         const {
+            email,
+            senha,
             nome, 
             data_nascimento, 
-            nome_bebe, 
-            data_parto, 
-            idade_gestacional, 
-            peso_nascimento
+            companheiro, 
+            escolaridade, 
+            renda, 
+            qtd_gravidez,
+
         } = req.body;
 
         const mae = {
+            email,
+            senha: await bcrypt.hash(senha,10),
             nome,
             data_nascimento,
-            nome_bebe,
-            data_parto,
-            idade_gestacional,
-            peso_nascimento
+            companheiro,
+            escolaridade,
+            renda,
+            qtd_gravidez
         };
         
         const [id] = await knex('mae').insert(mae).returning('id')
 
         return res.json({
             id,
-            ...mae
+            email,
+            nome,
+            data_nascimento,
         });
 
 

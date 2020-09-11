@@ -4,12 +4,15 @@ import knex from '../database/connection';
 class UploadController{
     async create(req:Request,res:Response){
         const {filename} = req.file;
-        const {mae_id,tipo} = req.params
+        const {id,tipo} = req.params
         if(tipo==='bebe'){
-            await knex('mae').update('imagem_bebe',filename).where('id',mae_id);
+            await knex('bebe').update('imagem_bebe',filename).where('id',id);
             res.json({filename});
         }else if(tipo==='pai'){
-            await knex('mae').update('imagem_pai',filename).where('id',mae_id);
+            await knex('mae').update('imagem_pai',filename).where('id',id);
+            res.json({filename});
+        }else if(tipo==='mae'){
+            await knex('mae').update('imagem_mae',filename).where('id',id);
             res.json({filename});
         }else{
             res.sendStatus(404);

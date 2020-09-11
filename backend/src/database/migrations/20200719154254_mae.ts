@@ -13,6 +13,7 @@ export async function up(knex: Knex): Promise<void> {
         table.float('renda');
         table.integer('qtd_gravidez').notNullable();
         table.dateTime('ultimo_acesso').notNullable();
+        table.string('imagem_mae');
         table.string('imagem_pai');
         table.unique(['email']);
     });
