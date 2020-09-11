@@ -91,7 +91,7 @@ routes.get('/maes/:id', maesController.show);
  *          "nome":"Enzo Gabriel",
  *          "data_parto":"2020-08-28",
  *          "semanas_gest": 35,
- *          "dias_gest":10,
+ *          "dias_gest":5,
  *          "peso":2.5,
  *          "tipo_parto":true, // false: parto normal | true: cesaria
  *          "local":"UCI",
@@ -123,7 +123,7 @@ routes.post('/maes/:id_mae/bebes', bebesController.create);
  *          "nome":"Enzo Gabriel",
  *          "data_parto":"2020-08-28",
  *          "semanas_gest": 35,
- *          "dias_gest":10,
+ *          "dias_gest":5,
  *          "peso":2.5,
  *          "tipo_parto":true, // false: parto normal | true: cesaria
  *          "local":"UCI",
@@ -133,7 +133,7 @@ routes.post('/maes/:id_mae/bebes', bebesController.create);
  *          "nome":"Valentina",
  *          "data_parto":"2020-08-28",
  *          "semanas_gest": 35,
- *          "dias_gest":10,
+ *          "dias_gest":5,
  *          "peso":2.7,
  *          "tipo_parto":true, // false: parto normal | true: cesaria
  *          "local":"UCI",
