@@ -11,6 +11,10 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
+  rules: {
+    'react/prop-types': 'off',
+    'no-plusplus': 'off',
+  },
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
 };
