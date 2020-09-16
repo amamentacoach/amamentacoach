@@ -1,10 +1,6 @@
 import React, { useRef } from 'react';
 import { SafeAreaView, FlatList, Dimensions, Image } from 'react-native';
 
-import ProgressDots from '../../components/ProgressDots/index';
-
-import placeholderImage from '../../../assets/images/placeholder.png';
-
 import {
   Container,
   Header,
@@ -14,6 +10,10 @@ import {
   ContentParagraph,
   Footer,
 } from './styles';
+
+import ProgressDots from '../ProgressDots/index';
+
+import placeholderImage from '../../../assets/images/placeholder.png';
 
 interface InfoPage {
   index: number;
@@ -28,6 +28,7 @@ interface PageListProps {
 
 const InfoList: React.FC<PageListProps> = ({ pages }) => {
   const { width, height } = Dimensions.get('window');
+
   const pageFlatList = useRef<FlatList>(null);
 
   function goToPage(page: number) {
@@ -66,21 +67,19 @@ const InfoList: React.FC<PageListProps> = ({ pages }) => {
   }
 
   return (
-    <>
-      <SafeAreaView>
-        <FlatList
-          ref={pageFlatList}
-          data={pages}
-          renderItem={({ item, index }) => (
-            <InfoPage index={index} paragraph={item.paragraph} />
-          )}
-          keyExtractor={(item) => item.paragraph}
-          horizontal
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-        />
-      </SafeAreaView>
-    </>
+    <SafeAreaView>
+      <FlatList
+        ref={pageFlatList}
+        data={pages}
+        renderItem={({ item, index }) => (
+          <InfoPage index={index} paragraph={item.paragraph} />
+        )}
+        keyExtractor={(item) => item.paragraph}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+      />
+    </SafeAreaView>
   );
 };
 
