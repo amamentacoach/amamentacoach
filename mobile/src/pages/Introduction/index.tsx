@@ -1,6 +1,8 @@
 import React from 'react';
 
+import { useNavigation } from '@react-navigation/native';
 import InfoList from '../../components/InfoList';
+import { ContinueButton, ButtonText } from './styles';
 
 const pages = [
   {
@@ -21,7 +23,17 @@ const pages = [
 ];
 
 const Introduction: React.FC = () => {
-  return <InfoList pages={pages} />;
+  const navigation = useNavigation();
+
+  function continueButton() {
+    return (
+      <ContinueButton onPress={() => navigation.navigate('Cadastro')}>
+        <ButtonText>Vamos começar!</ButtonText>
+      </ContinueButton>
+    );
+  }
+
+  return <InfoList pages={pages} lastPageButton={continueButton()} />;
 };
 
 export default Introduction;

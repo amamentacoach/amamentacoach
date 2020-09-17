@@ -1,33 +1,40 @@
 import React, { useRef } from 'react';
-import { SafeAreaView, FlatList, Dimensions, Image } from 'react-native';
+import { FlatList, Dimensions, Image } from 'react-native';
 
 import {
-  Container,
   Header,
   SkipButton,
   ButtonText,
   ContentWrapper,
   ContentParagraph,
   Footer,
+  LastPageButtonWrapper,
+  ListContainer,
+  PageContainer,
 } from './styles';
 
 import ProgressDots from '../ProgressDots/index';
 
 import placeholderImage from '../../../assets/images/placeholder.png';
 
-interface InfoPage {
-  index: number;
-  paragraph: string;
-}
-
-interface PageListProps {
+interface InfoListProps {
   pages: {
     paragraph: string;
   }[];
+  lastPageButton?: React.ReactElement;
 }
 
-const InfoList: React.FC<PageListProps> = ({ pages }) => {
-  const { width, height } = Dimensions.get('window');
+interface PageArguments {
+  index: number;
+  paragraph: string;
+  ContinueButton: React.ReactElement | null;
+}
+
+const InfoList: React.FC<InfoListProps> = ({
+  pages,
+  lastPageButton = null,
+}) => {
+  const { width } = Dimensions.get('window');
 
   const pageFlatList = useRef<FlatList>(null);
 
@@ -41,9 +48,13 @@ const InfoList: React.FC<PageListProps> = ({ pages }) => {
     });
   }
 
-  function InfoPage({ index, paragraph }: InfoPage) {
+  function InfoPage({
+    index,
+    paragraph,
+    ContinueButton = null,
+  }: PageArguments) {
     return (
-      <Container height={height} width={width}>
+      <PageContainer width={width}>
         <Header>
           {index < pages.length - 1 ? (
             <SkipButton onPress={() => goToPage(pages.length - 1)}>
@@ -61,25 +72,32 @@ const InfoList: React.FC<PageListProps> = ({ pages }) => {
             selectedIndex={index}
             length={pages.length}
           />
+          {index === pages.length - 1 ? (
+            <LastPageButtonWrapper>{ContinueButton}</LastPageButtonWrapper>
+          ) : null}
         </Footer>
-      </Container>
+      </PageContainer>
     );
   }
 
   return (
-    <SafeAreaView>
+    <ListContainer>
       <FlatList
         ref={pageFlatList}
         data={pages}
         renderItem={({ item, index }) => (
-          <InfoPage index={index} paragraph={item.paragraph} />
+          <InfoPage
+            index={index}
+            paragraph={item.paragraph}
+            ContinueButton={lastPageButton}
+          />
         )}
         keyExtractor={(item) => item.paragraph}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
       />
-    </SafeAreaView>
+    </ListContainer>
   );
 };
 

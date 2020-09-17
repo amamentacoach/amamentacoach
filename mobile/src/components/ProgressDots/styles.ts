@@ -5,9 +5,10 @@ interface CircleShapeProps {
 }
 
 export const Container = styled.View`
-  height: 50px;
+  height: 40px;
   flex-direction: row;
-  margin: auto;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const CircleShape = styled.TouchableOpacity<CircleShapeProps>`
@@ -15,5 +16,5 @@ export const CircleShape = styled.TouchableOpacity<CircleShapeProps>`
   width: 15px;
   height: 15px;
   border-radius: 7.5px;
-  margin: 12px;
+  margin: 0 12px;
 `;

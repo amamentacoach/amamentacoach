@@ -2,20 +2,17 @@ import styled from 'styled-components/native';
 
 interface ContainerProps {
   width: number;
+  height: number;
 }
 
-export const ListContainer = styled.SafeAreaView`
-  flex: 1;
-`;
-
-export const PageContainer = styled.View<ContainerProps>`
+export const Container = styled.View<ContainerProps>`
   width: ${(props) => props.width}px;
-  flex: 1;
+  height: ${(props) => props.height}px;
 `;
 
 export const Header = styled.View`
   flex-direction: row;
-  flex: 0.2;
+  min-height: 100px;
 `;
 
 export const SkipButton = styled.TouchableOpacity`
@@ -29,7 +26,8 @@ export const ButtonText = styled.Text`
 `;
 
 export const ContentWrapper = styled.View`
-  flex: 2;
+  margin-top: 30px;
+  flex: 1;
   justify-content: center;
   align-items: center;
 `;
@@ -37,19 +35,11 @@ export const ContentWrapper = styled.View`
 export const ContentParagraph = styled.Text`
   font-size: 16px;
   margin: 0 24px;
-  flex: 1;
   text-align: center;
 `;
 
 export const Footer = styled.View`
-  flex-direction: column;
-  height: 170px;
-  margin: 0 auto;
-  bottom: 20px;
-  justify-content: space-between;
-`;
-
-export const LastPageButtonWrapper = styled.View`
-  height: 52px;
-  width: 287px;
+  flex-direction: row;
+  height: 50px;
+  flex: 1;
 `;
