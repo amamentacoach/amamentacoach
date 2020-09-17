@@ -11,13 +11,13 @@ class MaesController{
     }
 
     async show(req:Request, res:Response){
-        const {id} = req.params;
-        console.log("id",id)
-        console.log(req.mae_id)
+        const id = req.mae_id;
         if(id==req.mae_id){
             const mae = await knex('mae')
-            .select('id', 'email', 'nome', 'ultimo_acesso', 'imagem_mae', 'imagem_pai')
-            .where('id',id).first()
+            .select('mae.id', 'email', 'mae.nome', 'ultimo_acesso', 'imagem_mae', 'imagem_pai')
+            .where('mae.id',id).first()
+            const bebes = await knex('bebe').select('*').where('mae_id',id)
+            mae.bebes=bebes
             return res.json(mae);
         }else{
             res.sendStatus(401)

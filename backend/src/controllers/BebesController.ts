@@ -3,7 +3,7 @@ import knex from '../database/connection';
 
 class BebesController{
     async index(req:Request, res:Response){
-        const {id_mae} = req.params;
+        const id_mae = req.mae_id;
         const bebes = await knex('bebe').select('*').where('mae_id',id_mae);  
         return res.json(bebes)
     }
@@ -15,7 +15,7 @@ class BebesController{
     }
 
     async create(req:Request, res:Response){
-        const {id_mae} = req.params
+        const id_mae = req.mae_id
         const {
             nome,
             data_parto,

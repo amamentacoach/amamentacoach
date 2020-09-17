@@ -76,13 +76,14 @@ routes.get('/maes', maesController.index);
 *                   "semanas_gest": 35,
 *                   "dias_gest":5,
 *                   "peso":2.5,
+*                   "imagem_bebe:foto.jpg",
 *                   "tipo_parto":true, // false: parto normal | true: cesaria
 *                   "local":"UCI",
 *               }
- *          ]
- *      }
- *
- */
+*          ]
+*      }
+*
+*/
 routes.get('/maes/:id', verifyJWT,maesController.show);
 
 
@@ -148,7 +149,7 @@ routes.post('/bebes', verifyJWT, bebesController.create);
  *
  */
 
-routes.get('/bebes', bebesController.index);
+routes.get('/bebes',verifyJWT,bebesController.index);
 
 routes.post('/login',maesController.auth);
 
