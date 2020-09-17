@@ -8,9 +8,9 @@ export async function up(knex: Knex): Promise<void> {
         table.string('senha').notNullable()
         table.string('nome').notNullable();
         table.date('data_nascimento').notNullable();
-        table.boolean('companheiro');
+        table.string('companheiro');
         table.string('escolaridade').notNullable();
-        table.float('renda');
+        table.string('renda');
         table.integer('qtd_gravidez').notNullable();
         table.dateTime('ultimo_acesso').notNullable();
         table.string('imagem_mae');

@@ -1,6 +1,7 @@
 import {Router, Request, Response} from 'express';
 import multer from 'multer';
 import uploadConfig from './config/upload';
+import verifyJWT from './middleware/verifyJWT';
 
 import MaesController from './controllers/MaesController';
 import OrdenhasController from './controllers/OrdenhasController';
@@ -37,7 +38,7 @@ const uploadMiddleware = multer(uploadConfig);
  *          "data_nascimento":"1990-05-05",
  *          "companheiro":"Beltrano da Silva",
  *          "escolaridade":"Ensino Medio Completo",
- *          "renda":1500.00,
+ *          "renda":"Entre 1 e 3 salarios minimos",
  *          "qtd_gravidez":2
  *      }
  * 
@@ -64,24 +65,29 @@ routes.get('/maes', maesController.index);
  *      {
  *          "id":1
  *          "email":"fulana@email.com",
- *          "senha":"abc123",
  *          "nome": "Fulana de Tal",
- *          "data_nascimento":"1990-05-05",
- *          "companheiro":"Beltrano da Silva",
- *          "escolaridade":"Ensino Medio Completo",
- *          "renda":1500.00,
- *          "qtd_gravidez":2,
  *          "ultimo_acesso":"2020-08-29T10:30:15",
  *          "imagem_mae":"mae.jpg",
- *          "imagem_pai":"pai.jpg"
+ *          "imagem_pai":"pai.jpg",
+ *          "bebes":[
+ *              {
+*                   "nome":"Enzo Gabriel",
+*                   "data_parto":"2020-08-28",
+*                   "semanas_gest": 35,
+*                   "dias_gest":5,
+*                   "peso":2.5,
+*                   "tipo_parto":true, // false: parto normal | true: cesaria
+*                   "local":"UCI",
+*               }
+ *          ]
  *      }
  *
  */
-routes.get('/maes/:id', maesController.show);
+routes.get('/maes/:id', verifyJWT,maesController.show);
 
 
 /**
- * @api {post} /maes/:id_mae/bebes Cadastro de bebê
+ * @api {post} /bebes Cadastro de bebê
  * @apiGroup Bebês
  *
  * @apiParam {Integer} id_mae Id da mãe.
@@ -106,10 +112,10 @@ routes.get('/maes/:id', maesController.show);
  *
  */
 
-routes.post('/maes/:id_mae/bebes', bebesController.create);
+routes.post('/bebes', verifyJWT, bebesController.create);
 
 /**
- * @api {get} /maes/:id_mae/bebes Listagem dos bebes de uma determinada mãe
+ * @api {get} /bebes Listagem dos bebes de uma determinada mãe
  * @apiGroup Bebês
  *
  * @apiParam {Integer} id_mae Id da mãe.
@@ -142,7 +148,9 @@ routes.post('/maes/:id_mae/bebes', bebesController.create);
  *
  */
 
-routes.get('/maes/:id_mae/bebes', bebesController.index);
+routes.get('/bebes', bebesController.index);
+
+routes.post('/login',maesController.auth);
 
 routes.get('/bebes/:id', bebesController.show);
 
