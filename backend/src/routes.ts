@@ -27,7 +27,7 @@ const uploadMiddleware = multer(uploadConfig);
 
 
 /**
- * @api {post} /maes Cadastro das mães
+ * @api {post} /maes Cadastro
  * @apiGroup Mães
  *
  * @apiParamExample {json} Exemplo Request:
@@ -56,10 +56,12 @@ routes.get('/maes', maesController.index);
 
 
 /**
- * @api {get} /maes/:id Retorna os dados da mae do id informado 
+ * @api {get} /maes/:id Dados da mae
+ * @apiDescription Retorna os dados da mae do id informado 
  * @apiGroup Mães
  *
  * @apiParam {Integer} id Id da mãe.
+ * @apiHeader {String} authorization Token de acesso.
  * 
  * @apiSuccessExample {json} Sucesso:
  *      {
@@ -88,10 +90,10 @@ routes.get('/maes/:id', verifyJWT,maesController.show);
 
 
 /**
- * @api {post} /bebes Cadastro de bebê
+ * @api {post} /bebes Cadastro
  * @apiGroup Bebês
  *
- * @apiParam {Integer} id_mae Id da mãe.
+ * @apiHeader {String} authorization Token de acesso.
  * 
  * @apiParamExample {json} Exemplo Request:
  *      {
@@ -115,11 +117,14 @@ routes.get('/maes/:id', verifyJWT,maesController.show);
 
 routes.post('/bebes', verifyJWT, bebesController.create);
 
+
+
 /**
- * @api {get} /bebes Listagem dos bebes de uma determinada mãe
+ * @api {get} /bebes Listagem
+ * @apiDescription Listagem dos bebes de uma determinada mãe
  * @apiGroup Bebês
  *
- * @apiParam {Integer} id_mae Id da mãe.
+ * @apiHeader {String} authorization Token de acesso.
  * 
  * 
  * @apiSuccessExample {json} Sucesso
@@ -151,6 +156,26 @@ routes.post('/bebes', verifyJWT, bebesController.create);
 
 routes.get('/bebes',verifyJWT,bebesController.index);
 
+/**
+ * @api {post} /login Login
+ * @apiDescription Realiza o login da mae e retorna o token de acesso.
+ * @apiGroup Mães
+ *
+ * 
+ * 
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "email":"fulana@email.com",
+ *          "senha":"abc123"
+ *      }
+ * 
+ * @apiSuccessExample {json} Sucesso
+ *    HTTP/1.1 200 OK
+ *      {
+ *          "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5bGFuQGJvc2Nhcmluby5jb20iLCJwYXNzd29yZCI6InlhMGdzcWh5NHd6dnV2YjQifQ.yN_8-ge9mFgsnYHnPEh_ZzNP7YKvSbQ3Alug9HMCsM",
+ *      }
+ *
+ */
 routes.post('/login',maesController.auth);
 
 routes.get('/bebes/:id', bebesController.show);
