@@ -7,10 +7,9 @@ import SignUp from '../pages/SignUp';
 
 const Routes: React.FC = () => {
   const Stack = createStackNavigator();
-
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerTitleAlign: 'center' }}>
         <Stack.Screen
           name="Introducao"
           component={Introduction}
