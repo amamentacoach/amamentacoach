@@ -13,5 +13,4 @@ export const ContinueButton = styled.TouchableOpacity`
   border-radius: 3.6px;
   align-items: center;
   justify-content: center;
-  bottom: 45px;
 `;

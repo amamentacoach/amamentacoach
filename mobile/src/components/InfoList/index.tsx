@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { FlatList, Dimensions, Image } from 'react-native';
+import { FlatList, Dimensions } from 'react-native';
 
 import {
   Header,
@@ -11,6 +11,8 @@ import {
   LastPageButtonWrapper,
   ListContainer,
   PageContainer,
+  CurrentPageWrapper,
+  ContentImage,
 } from './styles';
 
 import ProgressDots from '../ProgressDots/index';
@@ -63,18 +65,20 @@ const InfoList: React.FC<InfoListProps> = ({
           ) : null}
         </Header>
         <ContentWrapper>
-          <Image source={placeholderImage} />
+          <ContentImage source={placeholderImage} resizeMode="contain" />
           <ContentParagraph>{paragraph}</ContentParagraph>
         </ContentWrapper>
         <Footer>
-          <ProgressDots
-            navigateToPage={(page: number) => goToPage(page)}
-            selectedIndex={index}
-            length={pages.length}
-          />
-          {index === pages.length - 1 ? (
-            <LastPageButtonWrapper>{ContinueButton}</LastPageButtonWrapper>
-          ) : null}
+          <CurrentPageWrapper>
+            <ProgressDots
+              navigateToPage={(page: number) => goToPage(page)}
+              selectedIndex={index}
+              length={pages.length}
+            />
+          </CurrentPageWrapper>
+          <LastPageButtonWrapper>
+            {index === pages.length - 1 ? ContinueButton : null}
+          </LastPageButtonWrapper>
         </Footer>
       </PageContainer>
     );

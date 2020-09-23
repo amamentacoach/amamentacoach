@@ -34,6 +34,11 @@ export const ContentWrapper = styled.View`
   align-items: center;
 `;
 
+export const ContentImage = styled.Image`
+  flex: 1;
+  margin-bottom: 10px;
+`;
+
 export const ContentParagraph = styled.Text`
   font-size: 16px;
   margin: 0 24px;
@@ -43,13 +48,16 @@ export const ContentParagraph = styled.Text`
 
 export const Footer = styled.View`
   flex-direction: column;
-  height: 170px;
+  flex: 1;
   margin: 0 auto;
-  bottom: 20px;
-  justify-content: space-between;
+`;
+
+export const CurrentPageWrapper = styled.View`
+  margin-top: auto;
 `;
 
 export const LastPageButtonWrapper = styled.View`
   height: 52px;
   width: 287px;
+  margin: 44px 0;
 `;
