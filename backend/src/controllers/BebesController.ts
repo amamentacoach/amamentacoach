@@ -37,7 +37,7 @@ class BebesController{
             mae_id:id_mae
         };
         
-        const [id] = await knex('mae').insert(bebe).returning('id')
+        const [id] = await knex('bebe').insert(bebe).returning('id')
 
         return res.json({
             id_bebe:id,
