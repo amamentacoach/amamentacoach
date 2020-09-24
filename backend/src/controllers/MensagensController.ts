@@ -20,7 +20,7 @@ class MensagensController{
         else page = "1"
 
         const [count] = await knex('mensagem').count()
-        res.header('X-Total-Count', count["count"] )
+        //res.header('X-Total-Count', count["count"] )
 
         const mensagens = await knex('mae')
             .join('mensagem','mae.id','=','mensagem.mae_id')
