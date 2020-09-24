@@ -63,7 +63,7 @@ class MaesController{
         const {email,senha} = req.body;
         const mae = await knex('mae').select('*').where('email','=',email).first()
 
-        if(await bcrypt.compare(senha,mae.senha)){
+        if(mae && await bcrypt.compare(senha,mae.senha)){
             const secret = process.env.SECRET
             await knex('mae').update({ultimo_acesso:new Date()}).where('id',mae.id)
             const token = jwt.sign({id:mae.id},secret?secret:"segredo",{
