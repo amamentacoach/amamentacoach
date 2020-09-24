@@ -52,9 +52,6 @@ const uploadMiddleware = multer(uploadConfig);
 routes.post('/maes',maesController.create);
 
 
-routes.get('/maes', maesController.index);
-
-
 /**
  * @api {get} /maes/:id Dados da mae
  * @apiDescription Retorna os dados da mae do id informado 
@@ -64,28 +61,39 @@ routes.get('/maes', maesController.index);
  * @apiHeader {String} authorization Token de acesso.
  * 
  * @apiSuccessExample {json} Sucesso:
- *      {
- *          "id":1
- *          "email":"fulana@email.com",
- *          "nome": "Fulana de Tal",
- *          "ultimo_acesso":"2020-08-29T10:30:15",
- *          "imagem_mae":"mae.jpg",
- *          "imagem_pai":"pai.jpg",
- *          "bebes":[
- *              {
-*                   "nome":"Enzo Gabriel",
-*                   "data_parto":"2020-08-28",
-*                   "semanas_gest": 35,
-*                   "dias_gest":5,
-*                   "peso":2.5,
-*                   "imagem_bebe:foto.jpg",
-*                   "tipo_parto":true, // false: parto normal | true: cesaria
-*                   "local":"UCI",
-*               }
-*          ]
-*      }
-*
-*/
+ *       {
+ *       "id": 1,
+ *       "email": "fulana@email.com",
+ *       "nome": "Fulana de Tal",
+ *       "ultimo_acesso": "2020-09-24T17:32:34.810Z",
+ *       "imagem_mae": null,
+ *       "imagem_pai": null,
+ *       "bebes": [
+ *           {
+ *           "id": 1,
+ *           "nome": "Enzo Gabriel",
+ *           "data_parto": "2020-08-28T03:00:00.000Z",
+ *           "semanas_gest": 35,
+ *           "dias_gest": 5,
+ *           "peso": 2.5,
+ *           "imagem_bebe": null,
+ *           "tipo_parto": true,
+ *           "local": "UCI",
+ *           "mae_id": 1,
+ *           "ordenhas": [
+ *               {
+ *               "id": 1,
+ *               "qtd_leite": 100,
+ *               "data_hora": "2020-09-24T17:40:31.501Z",
+ *               "mama": "D",
+ *               "duracao": 5
+ *               }
+ *           ]
+ *           }
+ *       ]
+ *       }
+ *
+ */
 routes.get('/maes/:id', verifyJWT,maesController.show);
 
 
@@ -148,7 +156,7 @@ routes.post('/bebes', verifyJWT, bebesController.create);
  *          "dias_gest":5,
  *          "peso":2.7,
  *          "tipo_parto":true, // false: parto normal | true: cesaria
- *          "local":"UCI",
+ *          "local":"UCI"
  *      }
  *    ]
  *
@@ -178,17 +186,62 @@ routes.get('/bebes',verifyJWT,bebesController.index);
  */
 routes.post('/login',maesController.auth);
 
+/**
+ * @api {post} /bebes/:bebe_id/ordenhas Cadastro
+ * @apiDescription Cadastra uma ordenha do bebe de id informado
+ * @apiGroup Ordenhas
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ * 
+ * 
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "qtd_leite":100,
+ *          "mama":"D",
+ *          "duracao":5
+ *      }
+ * 
+ *
+ */
+routes.post('/bebes/:bebe_id/ordenhas',verifyJWT,ordenhasController.create);
+
+
+/**
+ * @api {get} /bebes/:bebe_id/ordenhas Listagem
+ * @apiDescription Lista uma ordenha do bebe de id informado
+ * @apiGroup Ordenhas
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ * 
+ * 
+ * @apiSuccessExample {json} Sucesso: Status 200
+ * 
+ *        {
+ *         "id": 1,
+ *         "nome": "Enzo Gabriel",
+ *         "ordenhas": [
+ *           {
+ *             "id": 1,
+ *             "data_hora": "2020-09-24T17:40:31.501Z",
+ *             "qtd_leite": 100,
+ *             "mama": "D",
+ *             "duracao": 5,
+ *             "bebe_id": 1
+ *           }
+ *         ]
+ *       }
+ *
+ */
+routes.get('/bebes/:bebe_id/ordenhas',verifyJWT,ordenhasController.show);
+
 routes.get('/bebes/:id', bebesController.show);
 
 routes.post('/upload/:id/:tipo',uploadMiddleware.single('foto'),uploadController.create);
 
-routes.post('/bebes/:bebe_id/ordenhas',ordenhasController.create);
-routes.get('/bebes/:bebe_id/ordenhas',ordenhasController.show);
-
 routes.post('/maes/:mae_id/respostas/:pergunta_id',respostasMaeController.create);
 routes.get('/maes/:mae_id/respostas',respostasMaeController.index);
 
-routes.post('/mensagens',mensagensController.create);
+routes.post('/mensagens',verifyJWT,mensagensController.create);
 routes.get('/mensagens',mensagensController.index);
 
 routes.post('/perguntas',perguntasController.create);
