@@ -1,5 +1,5 @@
 import React from 'react';
-// import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -11,12 +11,11 @@ import {
   HeaderText,
   HeaderSubText,
   FormContainer,
-  SubmitButton,
-  TextSubmitButton,
 } from './styles';
+import MainButton from '../../components/MainButton';
 
 const SignUp: React.FC = () => {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   const SignUpSchema = Yup.object().shape({
     email: Yup.string().email('Email Inválido').required('Obrigatório'),
@@ -41,7 +40,10 @@ const SignUp: React.FC = () => {
       <Formik
         initialValues={{ email: '', password: '', password_confirmation: '' }}
         validationSchema={SignUpSchema}
-        onSubmit={(values) => console.log(values)}>
+        onSubmit={(values) => {
+          console.log(values);
+          navigation.navigate('CadastroMae');
+        }}>
         {({ handleChange, handleSubmit, dirty, isValid, errors, values }) => (
           <FormContainer>
             <FormTextInput
@@ -70,12 +72,11 @@ const SignUp: React.FC = () => {
               secureTextEntry
             />
 
-            <SubmitButton
+            <MainButton
               onPress={handleSubmit}
               disabled={!(isValid && dirty)}
-              activeOpacity={0.7}>
-              <TextSubmitButton>Próximo</TextSubmitButton>
-            </SubmitButton>
+              buttonText="Próximo"
+            />
           </FormContainer>
         )}
       </Formik>
