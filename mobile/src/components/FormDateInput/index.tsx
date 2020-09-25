@@ -9,7 +9,7 @@ interface FormDateProps {
   label: string;
   error?: string | undefined;
   placeholder: string;
-  onChange: (fieldName: string, fieldValue: string) => void;
+  setField: (fieldName: string, fieldValue: string) => void;
 }
 
 const FormDateInput: React.FC<FormDateProps> = ({
@@ -17,7 +17,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
   label,
   placeholder,
   error,
-  onChange,
+  setField,
 }) => {
   const [show, setShow] = useState(false);
   const [date, setDate] = useState('');
@@ -36,7 +36,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
     setShow(Platform.OS === 'ios');
     if (selectedDate) {
       setDate(formatDate(selectedDate));
-      onChange(name, formatDate(selectedDate, '-'));
+      setField(name, formatDate(selectedDate, '-'));
     }
   }
 
@@ -50,8 +50,8 @@ const FormDateInput: React.FC<FormDateProps> = ({
           placeholderTextColor="#acaab2"
           editable={false}
         />
-        {error ? <Text>{error}</Text> : null}
       </TouchableOpacity>
+      {error ? <Text>{error}</Text> : null}
 
       {show && (
         <DateTimePicker

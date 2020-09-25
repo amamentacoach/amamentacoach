@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  border-radius: 3.6px;
   margin-bottom: 15px;
 `;
 
@@ -16,4 +15,5 @@ export const TextInput = styled.TextInput`
   background-color: #e7e7e7;
   color: #161026;
   padding-left: 20px;
+  border-radius: 3.6px;
 `;

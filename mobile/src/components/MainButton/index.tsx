@@ -13,11 +13,9 @@ const MainButton: React.FC<MainButtonProps> = ({
   disabled,
 }) => {
   return (
-    <Container>
-      <Button onPress={onPress} disabled={disabled} activeOpacity={0.7}>
-        <TextButton>{buttonText}</TextButton>
-      </Button>
-    </Container>
+    <Button onPress={onPress} disabled={disabled} activeOpacity={0.7}>
+      <TextButton>{buttonText}</TextButton>
+    </Button>
   );
 };
 

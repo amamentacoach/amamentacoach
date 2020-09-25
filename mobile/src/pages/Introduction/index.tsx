@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import InfoList from '../../components/InfoList';
-import { ContinueButton, ButtonText } from './styles';
+import MainButton from '../../components/MainButton';
 
 const pages = [
   {
@@ -27,9 +27,10 @@ const Introduction: React.FC = () => {
 
   function continueButton() {
     return (
-      <ContinueButton onPress={() => navigation.navigate('Cadastro')}>
-        <ButtonText>Vamos começar!</ButtonText>
-      </ContinueButton>
+      <MainButton
+        buttonText="Vamos começar!"
+        onPress={() => navigation.navigate('Cadastro')}
+      />
     );
   }
 
