@@ -1,11 +1,10 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  margin-bottom: 15px;
+  flex: 1;
 `;
 
 export const LabelText = styled.Text`
-  height: 20px;
   color: #161026;
   font-size: 14px;
   margin-bottom: 5px;
@@ -16,4 +15,14 @@ export const TextInput = styled.TextInput`
   color: #161026;
   padding-left: 20px;
   border-radius: 3.6px;
+`;
+
+export const ErrorContainer = styled.View`
+  flex: 1;
+  min-height: 20px;
+`;
+
+export const ErrorText = styled.Text`
+  color: #ea3c3c;
+  font-size: 14px;
 `;

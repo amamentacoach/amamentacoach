@@ -19,9 +19,7 @@ export const Header = styled.View`
 `;
 
 export const SkipButton = styled.TouchableOpacity`
-  margin-left: auto;
-  margin-top: 30px;
-  margin-right: 30px;
+  margin: 30px 30px 0 auto;
 `;
 
 export const ButtonText = styled.Text`
@@ -29,6 +27,7 @@ export const ButtonText = styled.Text`
 `;
 
 export const ContentWrapper = styled.View`
+  margin-top: 40px;
   flex: 2;
   justify-content: center;
   align-items: center;

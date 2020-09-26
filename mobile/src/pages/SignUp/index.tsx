@@ -55,6 +55,7 @@ const SignUp: React.FC = () => {
                 onChangeText={handleChange('email')}
                 value={values.email}
                 placeholder="Email"
+                keyboardType="email-address"
               />
 
               <FormTextInput

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Text } from 'react-native';
 
 import {
   Container,
@@ -9,6 +8,8 @@ import {
   Option,
   OuterCircle,
   InnerCircle,
+  ErrorContainer,
+  ErrorText,
 } from './styles';
 
 interface FormRadioGroupProps {
@@ -16,7 +17,7 @@ interface FormRadioGroupProps {
   label: string;
   options: string[];
   error?: string | undefined;
-  setField: (fieldName: string, fieldValue: string) => void;
+  onChange: (fieldName: string, fieldValue: string) => void;
 }
 
 const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
@@ -24,13 +25,13 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   label,
   options,
   error,
-  setField,
+  onChange,
 }) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   function handleOptionSelected(index: number) {
     setSelectedIndex(index);
-    setField(name, options[index]);
+    onChange(name, options[index]);
   }
 
   return (
@@ -50,7 +51,9 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
           </Option>
         ))}
       </OptionsContainer>
-      {error ? <Text>{error}</Text> : null}
+      <ErrorContainer>
+        {error ? <ErrorText>{error}</ErrorText> : null}
+      </ErrorContainer>
     </Container>
   );
 };

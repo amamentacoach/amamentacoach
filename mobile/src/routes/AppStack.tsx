@@ -11,12 +11,12 @@ const Routes: React.FC = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerTitleAlign: 'center' }}>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Introducao"
           component={Introduction}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Cadastro" component={SignUp} />
+        <Stack.Screen name="Cadastro" component={SignUp} /> */}
         <Stack.Screen
           name="CadastroMae"
           options={{ title: 'Cadastro' }}

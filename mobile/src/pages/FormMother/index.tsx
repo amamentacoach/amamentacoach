@@ -3,6 +3,8 @@ import React from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
+import MainButton from '../../components/MainButton';
+import FormRadioGroupInput from '../../components/FormRadioGroup';
 import FormTextInput from '../../components/FormTextInput';
 import FormDateInput from '../../components/FormDateInput';
 
@@ -16,8 +18,6 @@ import {
   ButtonContainer,
 } from './styles';
 
-import MainButton from '../../components/MainButton';
-
 const SignUp: React.FC = () => {
   // const navigation = useNavigation();
 
@@ -25,6 +25,11 @@ const SignUp: React.FC = () => {
     name: Yup.string()
       .min(3, 'O nome deve ter pelo menos 3 caracteres!')
       .required('Campo obrigatório'),
+    date: Yup.string().required('Campo obrigatório'),
+    pregnantCount: Yup.number().required('Campo obrigatório'),
+    alreadyBreastfeed: Yup.string().required('Campo obrigatório'),
+    married: Yup.string().required('Campo obrigatório'),
+    education: Yup.string().required('Campo obrigatório'),
   });
 
   return (
@@ -38,7 +43,14 @@ const SignUp: React.FC = () => {
           </HeaderSubText>
         </Header>
         <Formik
-          initialValues={{ name: '', date: '' }}
+          initialValues={{
+            name: '',
+            date: '',
+            pregnantCount: '',
+            alreadyBreastfeed: '',
+            married: '',
+            education: '',
+          }}
           validationSchema={SignUpSchema}
           onSubmit={(values) => console.log(values)}>
           {({
@@ -62,9 +74,34 @@ const SignUp: React.FC = () => {
               <FormDateInput
                 label="Sua data de nascimento"
                 name="date"
+                onChange={setFieldValue}
                 error={errors.date}
-                setField={setFieldValue}
                 placeholder="Data de nascimento"
+              />
+
+              <FormTextInput
+                label="Quantas vezes já esteve grávida? (contando abortos)"
+                value={values.pregnantCount}
+                onChangeText={handleChange('pregnantCount')}
+                error={errors.pregnantCount}
+                placeholder="Insira o número de vezes"
+                keyboardType="numeric"
+              />
+
+              <FormRadioGroupInput
+                label="Você já amamentou antes?"
+                name="alreadyBreastfeed"
+                onChange={setFieldValue}
+                options={['Sim', 'Não']}
+                error={errors.alreadyBreastfeed}
+              />
+
+              <FormRadioGroupInput
+                label="Tem companheiro?"
+                name="married"
+                onChange={setFieldValue}
+                options={['Sim', 'Não']}
+                error={errors.married}
               />
 
               <ButtonContainer>
