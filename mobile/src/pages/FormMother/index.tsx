@@ -7,6 +7,7 @@ import MainButton from '../../components/MainButton';
 import FormRadioGroupInput from '../../components/FormRadioGroup';
 import FormTextInput from '../../components/FormTextInput';
 import FormDateInput from '../../components/FormDateInput';
+import FormPickerInput from '../../components/FormPickerInput';
 
 import {
   Container,
@@ -102,6 +103,21 @@ const SignUp: React.FC = () => {
                 onChange={setFieldValue}
                 options={['Sim', 'Não']}
                 error={errors.married}
+              />
+
+              <FormPickerInput
+                label="Qual sua escolaridade?"
+                name="education"
+                onChange={setFieldValue}
+                error={errors.education}
+                options={[
+                  'Fundamental incompleto',
+                  'Fundamental completo',
+                  'Ensino médio incompleto',
+                  'Ensino médio completo',
+                  'Superior incompleto',
+                  'Superior completo',
+                ]}
               />
 
               <ButtonContainer>
