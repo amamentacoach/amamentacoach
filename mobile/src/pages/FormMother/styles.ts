@@ -31,7 +31,21 @@ export const FormContainer = styled.View`
   margin: 0 24px;
 `;
 
-export const ButtonContainer = styled.View`
+export const MarriedSubOptionsContainer = styled.View`
+  flex: 1;
+  flex-direction: 'row';
+`;
+
+export const MarriedTimeContainer = styled.View`
+  flex: 2;
+  margin-right: 4;
+`;
+
+export const MarriedMetricContainer = styled.View`
+  flex: 1;
+`;
+
+export const SubmitButtonContainer = styled.View`
   flex: 1;
   padding: 15px 0px;
   flex-direction: column-reverse;

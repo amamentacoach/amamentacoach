@@ -16,21 +16,34 @@ import {
   HeaderText,
   HeaderSubText,
   FormContainer,
-  ButtonContainer,
+  MarriedSubOptionsContainer,
+  MarriedTimeContainer,
+  MarriedMetricContainer,
+  SubmitButtonContainer,
 } from './styles';
 
 const SignUp: React.FC = () => {
   // const navigation = useNavigation();
 
   const SignUpSchema = Yup.object().shape({
-    name: Yup.string()
-      .min(3, 'O nome deve ter pelo menos 3 caracteres!')
-      .required('Campo obrigatório'),
+    name: Yup.string().required('Campo obrigatório'),
     date: Yup.string().required('Campo obrigatório'),
     pregnantCount: Yup.number().required('Campo obrigatório'),
     alreadyBreastfeed: Yup.string().required('Campo obrigatório'),
     married: Yup.string().required('Campo obrigatório'),
+    liveTogether: Yup.string().when('married', {
+      is: 'Sim',
+      then: Yup.string().required('Campo obrigatório'),
+      otherwise: Yup.string(),
+    }),
+    marriedTime: Yup.string().when('married', {
+      is: 'Sim',
+      then: Yup.string().required('Campo obrigatório'),
+      otherwise: Yup.string(),
+    }),
+    marriedMetric: Yup.string(),
     education: Yup.string().required('Campo obrigatório'),
+    wage: Yup.string().required('Campo obrigatório'),
   });
 
   return (
@@ -50,16 +63,20 @@ const SignUp: React.FC = () => {
             pregnantCount: '',
             alreadyBreastfeed: '',
             married: '',
+            liveTogether: '',
+            marriedTime: '0',
+            marriedMetric: 'meses',
             education: '',
+            wage: '',
           }}
           validationSchema={SignUpSchema}
+          validateOnChange={false}
           onSubmit={(values) => console.log(values)}>
           {({
             handleChange,
             handleSubmit,
             setFieldValue,
             dirty,
-            isValid,
             errors,
             values,
           }) => (
@@ -100,10 +117,54 @@ const SignUp: React.FC = () => {
               <FormRadioGroupInput
                 label="Tem companheiro?"
                 name="married"
-                onChange={setFieldValue}
+                onChange={(fieldName: string, fieldValue: string) => {
+                  setFieldValue(fieldName, fieldValue);
+                  if (fieldValue === 'Não') {
+                    setFieldValue('marriedTime', '0');
+                  } else if (fieldValue === 'Sim') {
+                    // Reinicia os campos abaixo quando o valor do campo married é 'Sim'.
+                    setFieldValue('marriedTime', '');
+                  }
+                  setFieldValue('liveTogether', '');
+                  setFieldValue('marriedMetric', 'meses');
+                }}
                 options={['Sim', 'Não']}
                 error={errors.married}
               />
+
+              {values.married === 'Sim' && (
+                <>
+                  <FormRadioGroupInput
+                    label="Moram juntos?"
+                    name="liveTogether"
+                    onChange={setFieldValue}
+                    options={['Sim', 'Não']}
+                    error={errors.liveTogether}
+                  />
+
+                  <MarriedSubOptionsContainer>
+                    <MarriedTimeContainer>
+                      <FormPickerInput
+                        label="Há quanto tempo?"
+                        name="marriedTime"
+                        onChange={setFieldValue}
+                        error={errors.marriedTime}
+                        options={['1 a 3', '4 a 6', '7 a 9', '10 ou mais']}
+                      />
+                    </MarriedTimeContainer>
+                    <MarriedMetricContainer>
+                      <FormPickerInput
+                        label=""
+                        placeholder=""
+                        name="marriedMetric"
+                        onChange={setFieldValue}
+                        error={errors.marriedMetric}
+                        options={['meses', 'anos']}
+                      />
+                    </MarriedMetricContainer>
+                  </MarriedSubOptionsContainer>
+                </>
+              )}
 
               <FormPickerInput
                 label="Qual sua escolaridade?"
@@ -120,13 +181,26 @@ const SignUp: React.FC = () => {
                 ]}
               />
 
-              <ButtonContainer>
+              <FormPickerInput
+                label="Em qual faixa sua renda familiar se encaixa?"
+                name="wage"
+                onChange={setFieldValue}
+                error={errors.wage}
+                options={[
+                  'Até 1 salário mínimo',
+                  'Entre 1 e 3 salários mínimos',
+                  'Entre 4 e 6 salários mínimos',
+                  'Mais que 6 salários mínimos',
+                ]}
+              />
+
+              <SubmitButtonContainer>
                 <MainButton
                   onPress={handleSubmit}
-                  disabled={!(isValid && dirty)}
+                  disabled={!dirty}
                   buttonText="Próximo"
                 />
-              </ButtonContainer>
+              </SubmitButtonContainer>
             </FormContainer>
           )}
         </Formik>

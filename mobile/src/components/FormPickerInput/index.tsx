@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Picker } from '@react-native-community/picker';
 
 import {
@@ -11,6 +11,7 @@ import {
 
 interface FormPickerProps {
   name: string;
+  placeholder?: string | undefined;
   label: string;
   options: string[];
   error?: string | undefined;
@@ -19,6 +20,7 @@ interface FormPickerProps {
 
 const FormPickerInput: React.FC<FormPickerProps> = ({
   name,
+  placeholder = 'Selecione uma opção',
   label,
   error,
   options,
@@ -40,14 +42,15 @@ const FormPickerInput: React.FC<FormPickerProps> = ({
           onValueChange={(itemValue) =>
             handleItemSelected(itemValue.toString())
           }>
-          <Picker.Item
-            key="Selecione uma opção"
-            label="Selecione uma opção"
-            value=""
-          />
-          {options.map((option) => (
-            <Picker.Item key={option} label={option} value={option} />
-          ))}
+          {[placeholder, ...options]
+            .filter((option) => option !== '')
+            .map((option) => (
+              <Picker.Item
+                key={option}
+                label={option}
+                value={option === placeholder ? '' : option}
+              />
+            ))}
         </Picker>
       </PickerContainer>
       <ErrorContainer>
