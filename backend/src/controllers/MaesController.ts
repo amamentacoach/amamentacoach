@@ -70,7 +70,7 @@ class MaesController{
             const secret = process.env.SECRET
             await knex('mae').update({ultimo_acesso:new Date()}).where('id',mae.id)
             const token = jwt.sign({id:mae.id},secret?secret:"segredo",{
-                expiresIn:86400
+                expiresIn:2592000
             })
             res.json({token})
         }else{
