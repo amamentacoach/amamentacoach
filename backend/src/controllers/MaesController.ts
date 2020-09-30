@@ -33,11 +33,11 @@ class MaesController{
             senha,
             nome, 
             data_nascimento, 
-            companheiro, 
+            companheiro,
+            moram_juntos,
             escolaridade, 
             renda, 
             qtd_gravidez,
-
         } = req.body;
 
         const mae = {
@@ -46,10 +46,11 @@ class MaesController{
             nome,
             data_nascimento,
             companheiro,
+            moram_juntos,
             escolaridade,
             renda,
             qtd_gravidez,
-            ultimo_acesso:new Date()
+            ultimo_acesso:new Date(),
         };
         
         const [id] = await knex('mae').insert(mae).returning('id')

@@ -8,7 +8,8 @@ export async function up(knex: Knex): Promise<void> {
         table.string('senha').notNullable()
         table.string('nome').notNullable();
         table.date('data_nascimento').notNullable();
-        table.string('companheiro');
+        table.boolean('companheiro').notNullable();
+        table.string('moram_juntos');
         table.string('escolaridade').notNullable();
         table.string('renda');
         table.integer('qtd_gravidez').notNullable();

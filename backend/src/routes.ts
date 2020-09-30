@@ -36,7 +36,8 @@ const uploadMiddleware = multer(uploadConfig);
  *          "senha":"abc123",
  *          "nome": "Fulana de Tal",
  *          "data_nascimento":"1990-05-05",
- *          "companheiro":"Beltrano da Silva",
+ *          "companheiro":True,
+ *          "moram_juntos":"2 anos", // caso nao more junto enviar NULL
  *          "escolaridade":"Ensino Medio Completo",
  *          "renda":"Entre 1 e 3 salarios minimos",
  *          "qtd_gravidez":2
