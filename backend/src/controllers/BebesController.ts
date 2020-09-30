@@ -22,6 +22,8 @@ class BebesController{
             semanas_gest, 
             dias_gest, 
             peso, 
+            apgar1,
+            apgar2,
             tipo_parto, 
             local,
         } = req.body;
@@ -32,6 +34,8 @@ class BebesController{
             semanas_gest,
             dias_gest,
             peso,
+            apgar1,
+            apgar2,
             tipo_parto,
             local,
             mae_id:id_mae

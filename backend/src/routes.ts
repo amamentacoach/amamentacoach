@@ -111,8 +111,10 @@ routes.get('/maes/:id', verifyJWT,maesController.show);
  *          "semanas_gest": 35,
  *          "dias_gest":5,
  *          "peso":2.5,
+*           "apgar1":8,
+            "apgar2":10,
  *          "tipo_parto":true, // false: parto normal | true: cesaria
- *          "local":"UCI",
+ *          "local":"UCI Neonatal"
  *      }
  * 
  * @apiSuccessExample {json} Sucesso
