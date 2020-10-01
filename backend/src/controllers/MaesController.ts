@@ -1,7 +1,9 @@
 import { Request, Response } from 'express';
 import knex from '../database/connection';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
+import nodemailer from 'nodemailer';
+require('dotenv/config');
 
 class MaesController{
 
@@ -76,6 +78,57 @@ class MaesController{
         }else{
             res.sendStatus(401)
         }
+    }
+
+    async forgot(req:Request,res:Response){
+        const {email} = req.body;
+        const resul = await knex('mae').select('*').where('email','=',email).first()
+        if(resul){
+            const transporter = nodemailer.createTransport({
+                    service: 'Hotmail',
+                    auth: {
+                        user: process.env.EMAIL,
+                        pass: process.env.SENHA
+                    }
+            });
+
+            const secret = process.env.SECRET
+            const token = jwt.sign({id:resul.id},secret?secret:"segredo",{
+                expiresIn:86400
+            })
+
+
+            const link = `${process.env.HOST}/recuperar/${token}` // gerar link
+
+            const email = {
+                from: process.env.EMAIL,
+                to: resul.email,
+                subject: 'Amamenta Coach - Recuperação de senha',
+                text: `Olá ${resul.nome}, clique no link abaixo para recuperar sua senha no app Amamenta Coach:\n${link}`,
+                html: `<p>Olá <b>${resul.nome}</b>, clique no link abaixo para recuperar sua senha no app <b>Amamenta Coach</b>:</p>${link}`
+            }
+
+            transporter.sendMail(email,(err,resul)=>{
+                if(err)
+                    return res.sendStatus(401)
+                else return res.sendStatus(200)
+            })
+        }
+    }
+
+    async recuperarSenha(req:Request,res:Response){
+        const {senha} = req.body;
+
+        await knex('mae').update({senha:await bcrypt.hash(senha,10)}).where('id',req.mae_id);
+        return res.render('sucesso')
+        
+    }
+
+    async alterarSenha(req:Request,res:Response){
+        const {senha} = req.body;
+
+        await knex('mae').update({senha:await bcrypt.hash(senha,10)}).where('id',req.mae_id);
+        return res.sendStatus(200)
     }
 }
 

@@ -36,7 +36,7 @@ const uploadMiddleware = multer(uploadConfig);
  *          "senha":"abc123",
  *          "nome": "Fulana de Tal",
  *          "data_nascimento":"1990-05-05",
- *          "companheiro":True,
+ *          "companheiro":true,
  *          "moram_juntos":"2 anos", // caso nao more junto enviar NULL
  *          "escolaridade":"Ensino Medio Completo",
  *          "renda":"Entre 1 e 3 salarios minimos",
@@ -251,5 +251,41 @@ routes.post('/perguntas',perguntasController.create);
 routes.get('/perguntas/:categoria',perguntasController.index);
 
 routes.get('/perguntas/:pergunta_id/respostas',respostasController.show);
+
+/**
+ * @api {post} /esqueceusenha Esqueceu sua senha
+ * @apiDescription Mãe recebe um email com um link para alteração da sua senha.
+ * @apiGroup Mães
+ * 
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "email":"fulana@email.com"
+ *      }
+ *
+ */
+routes.post('/esqueceusenha',maesController.forgot);
+
+/**
+ * @api {post} /alterarsenha Alterar senha
+ * @apiDescription Altera a senha da mãe logada
+ * @apiGroup Mães
+ *
+ * @apiHeader {String} authorization Token de acesso.
+ * 
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "senha":"novasenha"
+ *      }
+ *
+ */
+routes.post('/alterarsenha',verifyJWT,maesController.alterarSenha)
+
+routes.get('/recuperar/:token',(req,res)=>{
+    res.render('recuperar')
+});
+
+routes.post('/recuperar/:token',verifyJWT,maesController.recuperarSenha)
+
+
 
 export default routes;

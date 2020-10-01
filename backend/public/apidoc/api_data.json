@@ -121,6 +121,59 @@
   },
   {
     "type": "post",
+    "url": "/alterarsenha",
+    "title": "Alterar senha",
+    "description": "<p>Altera a senha da mãe logada</p>",
+    "group": "Mães",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "{\n    \"senha\":\"novasenha\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Mães",
+    "name": "PostAlterarsenha"
+  },
+  {
+    "type": "post",
+    "url": "/esqueceusenha",
+    "title": "Esqueceu sua senha",
+    "description": "<p>Mãe recebe um email com um link para alteração da sua senha.</p>",
+    "group": "Mães",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "{\n    \"email\":\"fulana@email.com\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Mães",
+    "name": "PostEsqueceusenha"
+  },
+  {
+    "type": "post",
     "url": "/login",
     "title": "Login",
     "description": "<p>Realiza o login da mae e retorna o token de acesso.</p>",
@@ -157,7 +210,7 @@
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"email\":\"fulana@email.com\",\n    \"senha\":\"abc123\",\n    \"nome\": \"Fulana de Tal\",\n    \"data_nascimento\":\"1990-05-05\",\n    \"companheiro\":True,\n    \"moram_juntos\":\"2 anos\", // caso nao more junto enviar NULL\n    \"escolaridade\":\"Ensino Medio Completo\",\n    \"renda\":\"Entre 1 e 3 salarios minimos\",\n    \"qtd_gravidez\":2\n}",
+          "content": "{\n    \"email\":\"fulana@email.com\",\n    \"senha\":\"abc123\",\n    \"nome\": \"Fulana de Tal\",\n    \"data_nascimento\":\"1990-05-05\",\n    \"companheiro\":true,\n    \"moram_juntos\":\"2 anos\", // caso nao more junto enviar NULL\n    \"escolaridade\":\"Ensino Medio Completo\",\n    \"renda\":\"Entre 1 e 3 salarios minimos\",\n    \"qtd_gravidez\":2\n}",
           "type": "json"
         }
       ]

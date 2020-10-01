@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 
 function verifyJWT(req, res, next){ 
 
-    const token = req.headers.authorization; 
+    const token = req.headers.authorization || req.params.token; 
     
     if (!token) 
         return res.status(401).send({ auth: false, message: 'Token não informado.' }); 
