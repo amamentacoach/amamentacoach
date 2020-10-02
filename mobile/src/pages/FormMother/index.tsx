@@ -25,10 +25,10 @@ import {
   SecondSubOptionContainer,
 } from './styles';
 
-const SignUp: React.FC = () => {
+const FormMother: React.FC = () => {
   const navigation = useNavigation();
 
-  const SignUpSchema = Yup.object().shape({
+  const FormMotherSchema = Yup.object().shape({
     name: Yup.string().required('Campo obrigatório'),
     date: Yup.string().required('Campo obrigatório'),
     pregnantCount: Yup.string()
@@ -74,7 +74,7 @@ const SignUp: React.FC = () => {
             education: '',
             wage: '',
           }}
-          validationSchema={SignUpSchema}
+          validationSchema={FormMotherSchema}
           validateOnChange={false}
           onSubmit={(values) => {
             console.log(values);
@@ -225,4 +225,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default FormMother;

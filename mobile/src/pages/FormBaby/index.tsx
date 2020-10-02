@@ -46,7 +46,7 @@ const FormBaby: React.FC = () => {
   const navigation = useNavigation();
   const [babyCount, setBabyCount] = useState(0);
 
-  const SignUpSchema = Yup.object().shape({
+  const FormBabySchema = Yup.object().shape({
     numberOfBabies: Yup.string()
       .matches(new RegExp('^\\d+$'), 'Deve ser um número')
       .required('Campo obrigatório'),
@@ -150,7 +150,7 @@ const FormBaby: React.FC = () => {
             numberOfBabies: '1',
             babies: [newBaby(0)],
           }}
-          validationSchema={SignUpSchema}
+          validationSchema={FormBabySchema}
           validateOnChange={false}
           onSubmit={(values) => {
             console.log(values);
