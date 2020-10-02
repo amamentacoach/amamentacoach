@@ -10,7 +10,6 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 }))``;
 
 export const Header = styled.View`
-  margin: 0 auto;
   padding: 20px;
 `;
 
@@ -32,8 +31,40 @@ export const FormContainer = styled.View`
   margin: 0 24px;
 `;
 
+export const SubOptionsContainer = styled.View`
+  flex: 1;
+  flex-direction: row;
+`;
+
+export const BirthAgeWeeksContainer = styled.View`
+  flex: 2;
+  margin-right: 4px;
+`;
+
+export const BirthAgeDaysContainer = styled.View`
+  flex: 1;
+`;
+
+export const FirstSubOptionContainer = styled.View`
+  flex: 1;
+  margin-right: 4px;
+`;
+
+export const SecondSubOptionContainer = styled.View`
+  flex: 1;
+`;
+
+export const ApgarTextContainer = styled.View`
+  align-content: center;
+  justify-content: center;
+`;
+
+export const ApgarText = styled.Text`
+  margin-right: 4px;
+`;
+
 export const SubmitButtonContainer = styled.View`
   flex: 1;
+  flex-direction: row;
   padding: 15px 0px;
-  flex-direction: column-reverse;
 `;

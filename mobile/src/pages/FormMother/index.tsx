@@ -1,9 +1,10 @@
 import React from 'react';
-// import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import MainButton from '../../components/MainButton';
+import SecondaryButton from '../../components/SecondaryButton';
 import FormRadioGroupInput from '../../components/FormRadioGroup';
 import FormTextInput from '../../components/FormTextInput';
 import FormDateInput from '../../components/FormDateInput';
@@ -20,15 +21,19 @@ import {
   MarriedTimeContainer,
   MarriedMetricContainer,
   SubmitButtonContainer,
+  FirstSubOptionContainer,
+  SecondSubOptionContainer,
 } from './styles';
 
 const SignUp: React.FC = () => {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   const SignUpSchema = Yup.object().shape({
     name: Yup.string().required('Campo obrigatório'),
     date: Yup.string().required('Campo obrigatório'),
-    pregnantCount: Yup.number().required('Campo obrigatório'),
+    pregnantCount: Yup.string()
+      .matches(new RegExp('^\\d+$'), 'Deve ser um número')
+      .required('Campo obrigatório'),
     alreadyBreastfeed: Yup.string().required('Campo obrigatório'),
     married: Yup.string().required('Campo obrigatório'),
     liveTogether: Yup.string().when('married', {
@@ -71,7 +76,10 @@ const SignUp: React.FC = () => {
           }}
           validationSchema={SignUpSchema}
           validateOnChange={false}
-          onSubmit={(values) => console.log(values)}>
+          onSubmit={(values) => {
+            console.log(values);
+            navigation.navigate('CadastroBebe');
+          }}>
           {({
             handleChange,
             handleSubmit,
@@ -195,11 +203,19 @@ const SignUp: React.FC = () => {
               />
 
               <SubmitButtonContainer>
-                <MainButton
-                  onPress={handleSubmit}
-                  disabled={!dirty}
-                  buttonText="Próximo"
-                />
+                <FirstSubOptionContainer>
+                  <SecondaryButton
+                    onPress={() => navigation.goBack()}
+                    buttonText="Voltar"
+                  />
+                </FirstSubOptionContainer>
+                <SecondSubOptionContainer>
+                  <MainButton
+                    onPress={handleSubmit}
+                    disabled={!dirty}
+                    buttonText="Próximo"
+                  />
+                </SecondSubOptionContainer>
               </SubmitButtonContainer>
             </FormContainer>
           )}

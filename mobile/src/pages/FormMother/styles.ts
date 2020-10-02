@@ -33,20 +33,29 @@ export const FormContainer = styled.View`
 
 export const MarriedSubOptionsContainer = styled.View`
   flex: 1;
-  flex-direction: 'row';
+  flex-direction: row;
 `;
 
 export const MarriedTimeContainer = styled.View`
   flex: 2;
-  margin-right: 4;
+  margin-right: 4px;
 `;
 
 export const MarriedMetricContainer = styled.View`
   flex: 1;
 `;
 
+export const FirstSubOptionContainer = styled.View`
+  flex: 1;
+  margin-right: 4px;
+`;
+
+export const SecondSubOptionContainer = styled.View`
+  flex: 1;
+`;
+
 export const SubmitButtonContainer = styled.View`
   flex: 1;
+  flex-direction: row;
   padding: 15px 0px;
-  flex-direction: column-reverse;
 `;

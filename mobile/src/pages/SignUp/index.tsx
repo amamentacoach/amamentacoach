@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -12,7 +13,7 @@ import {
   HeaderText,
   HeaderSubText,
   FormContainer,
-  ButtonContainer,
+  SubmitButtonContainer,
 } from './styles';
 import MainButton from '../../components/MainButton';
 
@@ -49,40 +50,42 @@ const SignUp: React.FC = () => {
           }}>
           {({ handleChange, handleSubmit, dirty, isValid, errors, values }) => (
             <FormContainer>
-              <FormTextInput
-                label="Email"
-                error={errors.email}
-                onChangeText={handleChange('email')}
-                value={values.email}
-                placeholder="Email"
-                keyboardType="email-address"
-              />
+              <View>
+                <FormTextInput
+                  label="Email"
+                  error={errors.email}
+                  onChangeText={handleChange('email')}
+                  value={values.email}
+                  placeholder="Email"
+                  keyboardType="email-address"
+                />
 
-              <FormTextInput
-                label="Senha"
-                error={errors.password}
-                onChangeText={handleChange('password')}
-                value={values.password}
-                placeholder="Senha"
-                secureTextEntry
-              />
+                <FormTextInput
+                  label="Senha"
+                  error={errors.password}
+                  onChangeText={handleChange('password')}
+                  value={values.password}
+                  placeholder="Senha"
+                  secureTextEntry
+                />
 
-              <FormTextInput
-                label="Confirme sua senha"
-                error={errors.password_confirmation}
-                onChangeText={handleChange('password_confirmation')}
-                value={values.password_confirmation}
-                placeholder="Confirme sua senha"
-                secureTextEntry
-              />
+                <FormTextInput
+                  label="Confirme sua senha"
+                  error={errors.password_confirmation}
+                  onChangeText={handleChange('password_confirmation')}
+                  value={values.password_confirmation}
+                  placeholder="Confirme sua senha"
+                  secureTextEntry
+                />
+              </View>
 
-              <ButtonContainer>
+              <SubmitButtonContainer>
                 <MainButton
                   onPress={handleSubmit}
                   disabled={!(isValid && dirty)}
                   buttonText="Próximo"
                 />
-              </ButtonContainer>
+              </SubmitButtonContainer>
             </FormContainer>
           )}
         </Formik>
