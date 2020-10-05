@@ -28,7 +28,7 @@ import {
   SubmitButtonContainer,
 } from './styles';
 
-interface Baby {
+interface IBaby {
   id: number;
   name: string;
   birthday: string;
@@ -41,51 +41,65 @@ interface Baby {
   apgar2: string;
   birthLocation: string;
 }
+interface IFormValues {
+  numberOfBabies: string;
+  babies: IBaby[];
+}
 
 const FormBaby: React.FC = () => {
   const navigation = useNavigation();
   const [babyCount, setBabyCount] = useState(0);
 
-  const FormBabySchema = Yup.object().shape({
+  const FormBabySchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     numberOfBabies: Yup.string()
-      .matches(new RegExp('^\\d+$'), 'Deve ser um número')
+      .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
       .required('Campo obrigatório'),
     babies: Yup.array()
       .of(
-        Yup.object()
-          .shape<Baby>({
-            id: Yup.number(),
-            name: Yup.string().required('Campo obrigatório'),
-            birthday: Yup.string().required('Campo obrigatório'),
-            weight: Yup.string()
-              .matches(new RegExp('^\\d+$'), 'Deve ser um número')
-              .required('Campo obrigatório'),
-            birthType: Yup.string().required('Campo obrigatório'),
-            complications: Yup.string().required('Campo obrigatório'),
-            birthAgeWeeks: Yup.string().required('Campo obrigatório'),
-            birthAgeDays: Yup.string().required('Campo obrigatório'),
-            apgar1: Yup.string()
-              .matches(new RegExp('^\\d+$'), 'Deve ser um número')
-              .required('Campo obrigatório'),
-            apgar2: Yup.string()
-              .matches(new RegExp('^\\d+$'), 'Deve ser um número')
-              .required('Campo obrigatório'),
-            birthLocation: Yup.string().required('Campo obrigatório'),
-          })
-          .noUnknown(true),
+        Yup.object({
+          id: Yup.number(),
+          name: Yup.string().required('Campo obrigatório'),
+          birthday: Yup.string().required('Campo obrigatório'),
+          weight: Yup.string()
+            .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
+            .required('Campo obrigatório'),
+          birthType: Yup.string().required('Campo obrigatório'),
+          complications: Yup.string().required('Campo obrigatório'),
+          birthAgeWeeks: Yup.string().required('Campo obrigatório'),
+          birthAgeDays: Yup.string().required('Campo obrigatório'),
+          apgar1: Yup.string()
+            .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
+            .required('Campo obrigatório'),
+          apgar2: Yup.string()
+            .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
+            .required('Campo obrigatório'),
+          birthLocation: Yup.string().required('Campo obrigatório'),
+        }).required(),
       )
       .min(1, 'Pelo menos um bebê deve ser cadastrado!')
       .required(),
-  });
+  }).required();
 
-  // Retorna um objeto Baby vazio.
-  function newBaby(babyId: number): Baby {
-    return { id: babyId } as Baby;
+  // Retorna um novo objeto Baby com um id especificado.
+  function newBaby(babyId: number): IBaby {
+    return {
+      id: babyId,
+      name: '',
+      birthday: '',
+      weight: '',
+      birthType: '',
+      complications: '',
+      birthAgeWeeks: '',
+      birthAgeDays: '',
+      apgar1: '',
+      apgar2: '',
+      birthLocation: '',
+    };
   }
 
   // Retorna a mensagem de erro um bebê caso exista.
   function getBabyError(
-    errors: FormikErrors<{ numberOfBabies: number; babies: Baby[] }>,
+    errors: FormikErrors<IFormValues>,
     index: number,
     field: string,
   ) {
@@ -95,17 +109,18 @@ const FormBaby: React.FC = () => {
     return '';
   }
 
+  // Adiciona ou remove um bebê de acordo com a entrada do usuário.
   function handleNewBaby(
     fieldValue: string,
-    babies: Baby[],
+    babies: IBaby[],
     setFieldValue: (field: string, value: any) => void,
   ) {
-    const newBabyCount = parseInt(fieldValue, 10);
     // Caso o texto possua caracteres não numéricos ele é ignorado.
     if (fieldValue !== '' && !new RegExp('^\\d+$').test(fieldValue)) {
       return;
     }
 
+    const newBabyCount = parseInt(fieldValue, 10);
     // Caso o texto não possa ser convertido para inteiro, limpa o formulário.
     if (!newBabyCount) {
       setFieldValue('numberOfBabies', '');
@@ -122,11 +137,11 @@ const FormBaby: React.FC = () => {
     let newBabies = [...babies];
     for (let index = 0; index < Math.abs(newBabyCount - babyCount); index++) {
       if (newBabyCount > babyCount) {
-        // Caso o novo valor seja maior que o anterior é necessário criar novos objetos Bebe e
+        // Caso o novo valor seja maior que o anterior é necessário criar novos objetos IBaby e
         // adiciona-los a lista existente.
         newBabies = [...newBabies, newBaby(babyCount + index + 1)];
       } else if (newBabyCount < babyCount) {
-        // Caso o novo valor seja menor que o anterior é necessário remover os n últimos elementos
+        // Caso o novo valor seja menor que o anterior é necessário remover os n últimos objetos
         // existentes.
         newBabies.pop();
       }

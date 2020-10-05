@@ -1,7 +1,7 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
 
-import Routes from './routes/AppStack';
+import Routes from './routes/auth';
 
 // TODO Adicionar fontes.
 const App: React.FC = () => {

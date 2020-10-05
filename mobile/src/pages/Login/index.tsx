@@ -4,23 +4,28 @@ import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import FormTextInput from '../../components/FormTextInput';
+import MainButton from '../../components/MainButton';
 
+import logo from '../../../assets/images/logo_primary.png';
 import {
   Container,
   ScrollView,
   Header,
-  HeaderText,
-  HeaderSubText,
+  HeaderImage,
   FormContainer,
   SubmitButtonContainer,
+  HeaderText,
+  ForgotPasswordText,
+  NoAccountText,
+  SignUpText,
+  SignUpContainer,
 } from './styles';
-import MainButton from '../../components/MainButton';
 
 interface IFormValues {
   email: string;
   password: string;
-  password_confirmation: string;
 }
 
 const SignUp: React.FC = () => {
@@ -28,32 +33,24 @@ const SignUp: React.FC = () => {
   const formInitialValues: IFormValues = {
     email: '',
     password: '',
-    password_confirmation: '',
   };
   const SignUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Obrigatório'),
     password: Yup.string()
       .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
       .required('Campo obrigatório'),
-    password_confirmation: Yup.string()
-      .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
-      .oneOf([Yup.ref('password')], 'As senhas precisam ser iguais!')
-      .required('Campo obrigatório'),
   }).required();
 
-  function handleFormSubmit({ email, password }: IFormValues) {
-    navigation.navigate('FormMother', { email, password });
+  function handleSignUp() {
+    navigation.navigate('SignUp');
   }
 
   return (
     <Container>
       <ScrollView>
         <Header>
-          <HeaderText>Passo 1 de 3</HeaderText>
-          <HeaderSubText>
-            Primeiro, precisamos dos seguintes dados para que você possa acessar
-            nossa plataforma:
-          </HeaderSubText>
+          <HeaderImage resizeMode="contain" source={logo} />
+          <HeaderText>Amamenta Coach</HeaderText>
         </Header>
         <Formik
           initialValues={formInitialValues}
@@ -68,7 +65,7 @@ const SignUp: React.FC = () => {
                   error={errors.email}
                   onChangeText={handleChange('email')}
                   value={values.email}
-                  placeholder="Email"
+                  placeholder="Insira seu email"
                   keyboardType="email-address"
                 />
 
@@ -77,27 +74,27 @@ const SignUp: React.FC = () => {
                   error={errors.password}
                   onChangeText={handleChange('password')}
                   value={values.password}
-                  placeholder="Senha"
-                  secureTextEntry
-                />
-
-                <FormTextInput
-                  label="Confirme sua senha"
-                  error={errors.password_confirmation}
-                  onChangeText={handleChange('password_confirmation')}
-                  value={values.password_confirmation}
-                  placeholder="Confirme sua senha"
+                  placeholder="Insira sua senha"
                   secureTextEntry
                 />
               </View>
+
+              <ForgotPasswordText>Esqueceu a senha?</ForgotPasswordText>
 
               <SubmitButtonContainer>
                 <MainButton
                   onPress={handleSubmit}
                   disabled={!dirty}
-                  buttonText="Próximo"
+                  buttonText="Entrar"
                 />
               </SubmitButtonContainer>
+
+              <SignUpContainer>
+                <NoAccountText>Ainda não possui uma conta?</NoAccountText>
+                <TouchableOpacity onPress={handleSignUp} activeOpacity={0.7}>
+                  <SignUpText>Cadastrar-se</SignUpText>
+                </TouchableOpacity>
+              </SignUpContainer>
             </FormContainer>
           )}
         </Formik>

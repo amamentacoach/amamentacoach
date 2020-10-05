@@ -38,13 +38,13 @@ const InfoList: React.FC<InfoListProps> = ({
 }) => {
   const { width } = Dimensions.get('window');
 
-  const pageFlatList = useRef<FlatList>(null);
+  const pageFlatListRef = useRef<FlatList>(null);
 
   function goToPage(page: number) {
     if (page >= pages.length) {
       return;
     }
-    pageFlatList.current?.scrollToIndex({
+    pageFlatListRef.current?.scrollToIndex({
       animated: true,
       index: page,
     });
@@ -87,7 +87,7 @@ const InfoList: React.FC<InfoListProps> = ({
   return (
     <ListContainer>
       <FlatList
-        ref={pageFlatList}
+        ref={pageFlatListRef}
         data={pages}
         renderItem={({ item, index }) => (
           <InfoPage
