@@ -96,7 +96,7 @@ routes.post('/maes',maesController.create);
  *       }
  *
  */
-routes.get('/maes/:id', verifyJWT,maesController.show);
+routes.get('/maes', verifyJWT,maesController.show);
 
 
 /**

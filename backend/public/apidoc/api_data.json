@@ -75,23 +75,10 @@
   },
   {
     "type": "get",
-    "url": "/maes/:id",
+    "url": "/maes",
     "title": "Dados da mae",
-    "description": "<p>Retorna os dados da mae do id informado</p>",
+    "description": "<p>Retorna os dados da mae logada</p>",
     "group": "Mães",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "Integer",
-            "optional": false,
-            "field": "id",
-            "description": "<p>Id da mãe.</p>"
-          }
-        ]
-      }
-    },
     "header": {
       "fields": {
         "Header": [
@@ -109,7 +96,7 @@
       "examples": [
         {
           "title": "Sucesso:",
-          "content": "{\n\"id\": 1,\n\"email\": \"fulana@email.com\",\n\"nome\": \"Fulana de Tal\",\n\"ultimo_acesso\": \"2020-09-24T17:32:34.810Z\",\n\"imagem_mae\": null,\n\"imagem_pai\": null,\n\"bebes\": [\n    {\n    \"id\": 1,\n    \"nome\": \"Enzo Gabriel\",\n    \"data_parto\": \"2020-08-28T03:00:00.000Z\",\n    \"semanas_gest\": 35,\n    \"dias_gest\": 5,\n    \"peso\": 2.5,\n    \"imagem_bebe\": null,\n    \"tipo_parto\": true,\n    \"local\": \"UCI\",\n    \"mae_id\": 1,\n    \"ordenhas\": [\n        {\n        \"id\": 1,\n        \"qtd_leite\": 100,\n        \"data_hora\": \"2020-09-24T17:40:31.501Z\",\n        \"mama\": \"D\",\n        \"duracao\": 5\n        }\n    ]\n    }\n]\n}",
+          "content": "{\n\"id\": 1,\n\"email\": \"fulana@email.com\",\n\"nome\": \"Fulana de Tal\",\n\"ultimo_acesso\": \"2020-09-24T17:32:34.810Z\",\n\"imagem_mae\": null,\n\"imagem_bebe\": null,\n\"imagem_pai\": null,\n\"bebes\": [\n    {\n    \"id\": 1,\n    \"nome\": \"Enzo Gabriel\",\n    \"data_parto\": \"2020-08-28T03:00:00.000Z\",\n    \"semanas_gest\": 35,\n    \"dias_gest\": 5,\n    \"peso\": 2.5,\n    \"imagem_bebe\": null,\n    \"tipo_parto\": true,\n    \"local\": \"UCI\",\n    \"mae_id\": 1,\n    \"ordenhas\": [\n        {\n        \"id\": 1,\n        \"qtd_leite\": 100,\n        \"data_hora\": \"2020-09-24T17:40:31.501Z\",\n        \"mama\": \"D\",\n        \"duracao\": 5\n        }\n    ]\n    }\n]\n}",
           "type": "json"
         }
       ]
@@ -117,7 +104,7 @@
     "version": "0.0.0",
     "filename": "./src/routes.ts",
     "groupTitle": "Mães",
-    "name": "GetMaesId"
+    "name": "GetMaes"
   },
   {
     "type": "post",
@@ -334,7 +321,7 @@
             "group": "Success 200",
             "optional": false,
             "field": "filename",
-            "description": "<p>Endpoint da imagem /uploads/picture-1602090536124.jpg</p>"
+            "description": "<p>Endpoint da imagem: /uploads/picture-1602090536124.jpg</p>"
           }
         ]
       },
@@ -390,7 +377,7 @@
             "group": "Success 200",
             "optional": false,
             "field": "filename",
-            "description": "<p>Endpoint da imagem /uploads/picture-1602090536124.jpg</p>"
+            "description": "<p>Endpoint da imagem: /uploads/picture-1602090536124.jpg</p>"
           }
         ]
       },
@@ -446,7 +433,7 @@
             "group": "Success 200",
             "optional": false,
             "field": "filename",
-            "description": "<p>Endpoint da imagem /uploads/picture-1602090536124.jpg</p>"
+            "description": "<p>Endpoint da imagem: /uploads/picture-1602090536124.jpg</p>"
           }
         ]
       },
