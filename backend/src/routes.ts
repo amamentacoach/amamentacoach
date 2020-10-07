@@ -240,7 +240,67 @@ routes.get('/bebes/:bebe_id/ordenhas',verifyJWT,ordenhasController.show);
 
 routes.get('/bebes/:id', bebesController.show);
 
-routes.post('/upload/:id/:tipo',uploadMiddleware.single('foto'),uploadController.create);
+
+/**
+ * @api {post} /upload/mae Upload foto da mae
+ * @apiDescription Faz o upload da foto da mae
+ * @apiGroup Uploads
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ * 
+ * 
+ * @apiParam {File} foto Foto da mae
+ * 
+ * @apiSuccess filename Endpoint da imagem: /uploads/picture-1602090536124.jpg
+ * 
+ * @apiSuccessExample {json} Sucesso: Status 200
+ * 
+ *        {
+ *              "filename": "picture-1602090536124.jpg"
+ *        }
+ *
+ */
+
+ /**
+ * @api {post} /upload/pai Upload foto do pai
+ * @apiDescription Faz o upload da foto do pai
+ * @apiGroup Uploads
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ * 
+ * 
+ * @apiParam {File} foto Foto do pai
+ * 
+ * @apiSuccess filename Endpoint da imagem: /uploads/picture-1602090536124.jpg
+ * 
+ * @apiSuccessExample {json} Sucesso: Status 200
+ * 
+ *        {
+ *              "filename": "picture-1602090536124.jpg"
+ *        }
+ *
+ */
+
+/**
+ * @api {post} /upload/bebe Upload foto do bebe
+ * @apiDescription Faz o upload da foto da bebe
+ * @apiGroup Uploads
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ * 
+ * 
+ * @apiParam {File} foto Foto do bebe
+ * 
+ * @apiSuccess filename Endpoint da imagem: /uploads/picture-1602090536124.jpg
+ * 
+ * @apiSuccessExample {json} Sucesso: Status 200
+ * 
+ *        {
+ *              "filename": "picture-1602090536124.jpg"
+ *        }
+ *
+ */
+routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadController.create);
 
 routes.post('/maes/:mae_id/respostas/:pergunta_id',respostasMaeController.create);
 routes.get('/maes/:mae_id/respostas',respostasMaeController.index);

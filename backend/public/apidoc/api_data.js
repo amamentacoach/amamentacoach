@@ -294,5 +294,173 @@ define({ "api": [
     "filename": "./src/routes.ts",
     "groupTitle": "Ordenhas",
     "name": "PostBebesBebe_idOrdenhas"
+  },
+  {
+    "type": "post",
+    "url": "/upload/bebe",
+    "title": "Upload foto do bebe",
+    "description": "<p>Faz o upload da foto da bebe</p>",
+    "group": "Uploads",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "foto",
+            "description": "<p>Foto do bebe</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "filename",
+            "description": "<p>Endpoint da imagem /uploads/picture-1602090536124.jpg</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Sucesso: Status 200",
+          "content": "\n{\n      \"filename\": \"picture-1602090536124.jpg\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Uploads",
+    "name": "PostUploadBebe"
+  },
+  {
+    "type": "post",
+    "url": "/upload/mae",
+    "title": "Upload foto da mae",
+    "description": "<p>Faz o upload da foto da mae</p>",
+    "group": "Uploads",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "foto",
+            "description": "<p>Foto da mae</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "filename",
+            "description": "<p>Endpoint da imagem /uploads/picture-1602090536124.jpg</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Sucesso: Status 200",
+          "content": "\n{\n      \"filename\": \"picture-1602090536124.jpg\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Uploads",
+    "name": "PostUploadMae"
+  },
+  {
+    "type": "post",
+    "url": "/upload/pai",
+    "title": "Upload foto do pai",
+    "description": "<p>Faz o upload da foto do pai</p>",
+    "group": "Uploads",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "foto",
+            "description": "<p>Foto do pai</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "optional": false,
+            "field": "filename",
+            "description": "<p>Endpoint da imagem /uploads/picture-1602090536124.jpg</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Sucesso: Status 200",
+          "content": "\n{\n      \"filename\": \"picture-1602090536124.jpg\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Uploads",
+    "name": "PostUploadPai"
   }
 ] });
