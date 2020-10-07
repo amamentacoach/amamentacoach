@@ -14,7 +14,7 @@
   <h4>
     <a href="#requisitos">Requisitos</a> |
     <a href="#ambiente-de-desenvolvimento">Ambiente de desenvolvimento</a> |
-    <a href="#releases">Releases</a> |
+    <a href="https://github.com/joao-alex/amamentacoach/releases">Releases</a> |
     <a href="#participantes">Participantes</a>
   </h4>
 </div>
@@ -44,3 +44,5 @@ cd ./mobile
 npm install ou yarn install
 react-native run-android
 ```
+
+## Participantes
