@@ -12,7 +12,7 @@ export const Container = styled.View`
 `;
 
 export const CircleShape = styled.TouchableOpacity<CircleShapeProps>`
-  background-color: ${(props) => (props.selected ? '#979797' : '#C4C4C4')};
+  background-color: ${(props) => (props.selected ? '#7D5CD7' : '#C4C4C4')};
   width: 15px;
   height: 15px;
   border-radius: 7.5px;

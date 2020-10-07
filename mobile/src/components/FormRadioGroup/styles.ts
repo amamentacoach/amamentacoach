@@ -5,19 +5,16 @@ interface RadioButtonProps {
 }
 
 export const Container = styled.View`
-  border-radius: 3.6px;
-  margin-bottom: 15px;
+  flex: 1;
 `;
 
 export const LabelText = styled.Text`
-  height: 20px;
   color: #161026;
   font-size: 14px;
-  margin-bottom: 5px;
 `;
 
 export const OptionsContainer = styled.View`
-  margin-bottom: 5px;
+  flex: 1;
 `;
 
 export const Option = styled.TouchableOpacity<RadioButtonProps>`
@@ -25,8 +22,8 @@ export const Option = styled.TouchableOpacity<RadioButtonProps>`
   flex-direction: row;
   padding: 13px;
   border-radius: 3.6px;
-  margin-bottom: 5px;
   align-items: center;
+  margin-top: 5px;
 `;
 
 export const OuterCircle = styled.View<RadioButtonProps>`
@@ -49,4 +46,14 @@ export const InnerCircle = styled.View<RadioButtonProps>`
 export const TextOption = styled.Text`
   margin-left: 15px;
   font-size: 16px;
+`;
+
+export const ErrorContainer = styled.View`
+  flex: 1;
+  min-height: 20px;
+`;
+
+export const ErrorText = styled.Text`
+  color: #ea3c3c;
+  font-size: 14px;
 `;

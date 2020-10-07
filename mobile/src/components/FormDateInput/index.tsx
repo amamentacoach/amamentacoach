@@ -1,23 +1,31 @@
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, Platform } from 'react-native';
+import { TouchableOpacity, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-import { Container, LabelText, TextInput } from './styles';
+import {
+  Container,
+  LabelText,
+  TextInput,
+  ErrorContainer,
+  ErrorText,
+} from './styles';
 
 interface FormDateProps {
   name: string;
   label: string;
   error?: string | undefined;
   placeholder: string;
-  setField: (fieldName: string, fieldValue: string) => void;
+  maxDate?: Date | undefined;
+  onChange: (fieldName: string, fieldValue: string) => void;
 }
 
 const FormDateInput: React.FC<FormDateProps> = ({
   name,
   label,
-  placeholder,
   error,
-  setField,
+  placeholder,
+  maxDate = new Date(),
+  onChange,
 }) => {
   const [show, setShow] = useState(false);
   const [date, setDate] = useState('');
@@ -36,7 +44,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
     setShow(Platform.OS === 'ios');
     if (selectedDate) {
       setDate(formatDate(selectedDate));
-      setField(name, formatDate(selectedDate, '-'));
+      onChange(name, formatDate(selectedDate, '-'));
     }
   }
 
@@ -51,15 +59,17 @@ const FormDateInput: React.FC<FormDateProps> = ({
           editable={false}
         />
       </TouchableOpacity>
-      {error ? <Text>{error}</Text> : null}
+      <ErrorContainer>
+        {error ? <ErrorText>{error}</ErrorText> : null}
+      </ErrorContainer>
 
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={new Date()}
+          value={maxDate}
           mode="date"
           display="calendar"
-          maximumDate={new Date()}
+          maximumDate={maxDate}
           onChange={handleDateSelected}
         />
       )}

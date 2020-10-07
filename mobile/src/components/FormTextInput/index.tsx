@@ -1,7 +1,13 @@
 import React from 'react';
-import { Text, TextInputProps } from 'react-native';
+import { TextInputProps } from 'react-native';
 
-import { Container, LabelText, TextInput } from './styles';
+import {
+  Container,
+  LabelText,
+  TextInput,
+  ErrorContainer,
+  ErrorText,
+} from './styles';
 
 interface FormTextProps extends TextInputProps {
   label: string;
@@ -15,6 +21,7 @@ const FormTextInput: React.FC<FormTextProps> = ({
   placeholder,
   error,
   secureTextEntry,
+  keyboardType,
 }) => {
   return (
     <Container>
@@ -25,8 +32,11 @@ const FormTextInput: React.FC<FormTextProps> = ({
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
         placeholderTextColor="#acaab2"
+        keyboardType={keyboardType}
       />
-      {error ? <Text>{error}</Text> : null}
+      <ErrorContainer>
+        {error ? <ErrorText>{error}</ErrorText> : null}
+      </ErrorContainer>
     </Container>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { useNavigation } from '@react-navigation/native';
+
 import InfoList from '../../components/InfoList';
 import MainButton from '../../components/MainButton';
 

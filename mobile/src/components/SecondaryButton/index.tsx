@@ -3,11 +3,11 @@ import { TouchableOpacityProps } from 'react-native';
 
 import { TextButton, Button } from './styles';
 
-interface MainButtonProps extends TouchableOpacityProps {
+interface SecondaryButtonProps extends TouchableOpacityProps {
   buttonText: string;
 }
 
-const MainButton: React.FC<MainButtonProps> = ({
+const SecondaryButton: React.FC<SecondaryButtonProps> = ({
   buttonText,
   onPress,
   disabled,
@@ -19,4 +19,4 @@ const MainButton: React.FC<MainButtonProps> = ({
   );
 };
 
-export default MainButton;
+export default SecondaryButton;

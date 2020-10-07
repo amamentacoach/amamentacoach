@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Introduction from '../pages/Introduction';
 import SignUp from '../pages/SignUp';
 import FormMother from '../pages/FormMother';
+import FormBaby from '../pages/FormBaby';
 
 const Routes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -21,6 +22,11 @@ const Routes: React.FC = () => {
           name="CadastroMae"
           options={{ title: 'Cadastro' }}
           component={FormMother}
+        />
+        <Stack.Screen
+          name="CadastroBebe"
+          options={{ title: 'Cadastro' }}
+          component={FormBaby}
         />
       </Stack.Navigator>
     </NavigationContainer>

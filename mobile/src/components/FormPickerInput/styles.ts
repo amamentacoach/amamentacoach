@@ -10,11 +10,14 @@ export const LabelText = styled.Text`
   margin-bottom: 5px;
 `;
 
-export const TextInput = styled.TextInput`
-  background-color: #e7e7e7;
-  color: #161026;
-  padding-left: 20px;
-  border-radius: 3.6px;
+export const PickerContainer = styled.View`
+  border: 1px solid #545454;
+  margin-bottom: 5px;
+`;
+
+export const TextOption = styled.Text`
+  margin-left: 15px;
+  font-size: 16px;
 `;
 
 export const ErrorContainer = styled.View`
