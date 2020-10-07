@@ -8,6 +8,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string('senha').notNullable()
         table.string('nome').notNullable();
         table.date('data_nascimento').notNullable();
+        table.boolean('amamentou_antes').notNullable();
         table.boolean('companheiro').notNullable();
         table.string('moram_juntos');
         table.string('escolaridade').notNullable();
@@ -16,6 +17,7 @@ export async function up(knex: Knex): Promise<void> {
         table.dateTime('ultimo_acesso').notNullable();
         table.string('imagem_mae');
         table.string('imagem_pai');
+        table.string('imagem_bebe');
         table.unique(['email']);
     });
 }

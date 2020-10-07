@@ -36,6 +36,7 @@ const uploadMiddleware = multer(uploadConfig);
  *          "senha":"abc123",
  *          "nome": "Fulana de Tal",
  *          "data_nascimento":"1990-05-05",
+ *          "amamentou_antes":false,
  *          "companheiro":true,
  *          "moram_juntos":"2 anos", // caso nao more junto enviar NULL
  *          "escolaridade":"Ensino Medio Completo",
@@ -111,8 +112,8 @@ routes.get('/maes/:id', verifyJWT,maesController.show);
  *          "semanas_gest": 35,
  *          "dias_gest":5,
  *          "peso":2.5,
-*           "apgar1":8,
-            "apgar2":10,
+ *          "apgar1":8,
+ *          "apgar2":10,
  *          "tipo_parto":true, // false: parto normal | true: cesaria
  *          "local":"UCI Neonatal"
  *      }

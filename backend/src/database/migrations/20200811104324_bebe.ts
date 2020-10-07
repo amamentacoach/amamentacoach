@@ -11,7 +11,6 @@ export async function up(knex: Knex): Promise<void> {
         table.float('peso').notNullable();
         table.integer('apgar1');
         table.integer('apgar2');
-        table.string('imagem_bebe');
         table.boolean('tipo_parto').notNullable();
         table.string('local').notNullable();
         table.integer('mae_id').notNullable();
