@@ -55,11 +55,10 @@ routes.post('/maes',maesController.create);
 
 
 /**
- * @api {get} /maes/:id Dados da mae
- * @apiDescription Retorna os dados da mae do id informado 
+ * @api {get} /maes Dados da mae
+ * @apiDescription Retorna os dados da mae logada
  * @apiGroup Mães
  *
- * @apiParam {Integer} id Id da mãe.
  * @apiHeader {String} authorization Token de acesso.
  * 
  * @apiSuccessExample {json} Sucesso:
@@ -69,6 +68,7 @@ routes.post('/maes',maesController.create);
  *       "nome": "Fulana de Tal",
  *       "ultimo_acesso": "2020-09-24T17:32:34.810Z",
  *       "imagem_mae": null,
+ *       "imagem_bebe": null,
  *       "imagem_pai": null,
  *       "bebes": [
  *           {
