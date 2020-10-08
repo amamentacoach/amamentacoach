@@ -17,24 +17,25 @@ import {
 
 import ProgressDots from '../ProgressDots/index';
 
-import placeholderImage from '../../../assets/images/placeholder.png';
-
-interface InfoListProps {
+interface IInfoListProps {
   pages: {
     paragraph: string;
+    image: any;
   }[];
-  lastPageButton?: React.ReactElement;
+  LastPageButton?: React.ReactElement;
+  skipIntroduction?: (() => void) | null;
 }
 
-interface PageArguments {
+interface IInfoPageProps {
   index: number;
   paragraph: string;
-  ContinueButton: React.ReactElement | null;
+  image: any;
 }
 
-const InfoList: React.FC<InfoListProps> = ({
+const InfoList: React.FC<IInfoListProps> = ({
   pages,
-  lastPageButton = null,
+  LastPageButton = null,
+  skipIntroduction = null,
 }) => {
   const { width } = Dimensions.get('window');
 
@@ -50,22 +51,18 @@ const InfoList: React.FC<InfoListProps> = ({
     });
   }
 
-  function InfoPage({
-    index,
-    paragraph,
-    ContinueButton = null,
-  }: PageArguments) {
+  function InfoPage({ index, paragraph, image }: IInfoPageProps) {
     return (
       <PageContainer width={width}>
         <Header>
-          {index < pages.length - 1 ? (
-            <SkipButton onPress={() => goToPage(pages.length - 1)}>
+          {skipIntroduction && index < pages.length - 1 ? (
+            <SkipButton onPress={() => skipIntroduction()}>
               <ButtonText>Pular</ButtonText>
             </SkipButton>
           ) : null}
         </Header>
         <ContentWrapper>
-          <ContentImage source={placeholderImage} resizeMode="contain" />
+          <ContentImage source={image} resizeMode="contain" />
           <ContentParagraph>{paragraph}</ContentParagraph>
         </ContentWrapper>
         <Footer>
@@ -77,7 +74,7 @@ const InfoList: React.FC<InfoListProps> = ({
             />
           </CurrentPageWrapper>
           <LastPageButtonWrapper>
-            {index === pages.length - 1 ? ContinueButton : null}
+            {index === pages.length - 1 ? LastPageButton : null}
           </LastPageButtonWrapper>
         </Footer>
       </PageContainer>
@@ -93,7 +90,7 @@ const InfoList: React.FC<InfoListProps> = ({
           <InfoPage
             index={index}
             paragraph={item.paragraph}
-            ContinueButton={lastPageButton}
+            image={item.image}
           />
         )}
         keyExtractor={(item) => item.paragraph}

@@ -34,7 +34,7 @@ export const ContentWrapper = styled.View`
 `;
 
 export const ContentImage = styled.Image`
-  flex: 1;
+  flex: 2;
   margin-bottom: 10px;
 `;
 

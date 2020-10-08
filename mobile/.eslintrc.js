@@ -14,9 +14,10 @@ module.exports = {
   rules: {
     'react/prop-types': 'off',
     'no-plusplus': 'off',
+    'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars-experimental': 'error',
-    'no-unused-vars': 'off',
+    'global-require': 'off',
   },
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
