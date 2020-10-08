@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -9,6 +9,7 @@ import FormRadioGroupInput from '../../components/FormRadioGroup';
 import FormTextInput from '../../components/FormTextInput';
 import FormDateInput from '../../components/FormDateInput';
 import FormPickerInput from '../../components/FormPickerInput';
+import { useAuth } from '../../contexts/auth';
 
 import {
   Container,
@@ -25,31 +26,84 @@ import {
   SecondSubOptionContainer,
 } from './styles';
 
-const FormMother: React.FC = () => {
-  const navigation = useNavigation();
+interface IFormValues {
+  name: string;
+  birthday: string;
+  pregnantCount: string;
+  alreadyBreastfeed: string;
+  married: string;
+  liveTogether: string;
+  marriedTime: string;
+  marriedMetric: string;
+  education: string;
+  wage: string;
+}
 
-  const FormMotherSchema = Yup.object().shape({
+type IScreenParams = {
+  MotherForm: {
+    email: string;
+    password: string;
+  };
+};
+
+const MotherForm: React.FC = () => {
+  const navigation = useNavigation();
+  const { signUp } = useAuth();
+  const { email, password } = useRoute<
+    RouteProp<IScreenParams, 'MotherForm'>
+  >().params;
+
+  const formInitialValues: IFormValues = {
+    name: '',
+    birthday: '',
+    pregnantCount: '',
+    alreadyBreastfeed: '',
+    married: '',
+    liveTogether: 'Não',
+    marriedTime: '0',
+    marriedMetric: 'meses',
+    education: '',
+    wage: '',
+  };
+  const MotherFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     name: Yup.string().required('Campo obrigatório'),
-    date: Yup.string().required('Campo obrigatório'),
+    birthday: Yup.string().required('Campo obrigatório'),
     pregnantCount: Yup.string()
-      .matches(new RegExp('^\\d+$'), 'Deve ser um número')
+      .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
       .required('Campo obrigatório'),
     alreadyBreastfeed: Yup.string().required('Campo obrigatório'),
     married: Yup.string().required('Campo obrigatório'),
-    liveTogether: Yup.string().when('married', {
-      is: 'Sim',
-      then: Yup.string().required('Campo obrigatório'),
-      otherwise: Yup.string(),
-    }),
-    marriedTime: Yup.string().when('married', {
-      is: 'Sim',
-      then: Yup.string().required('Campo obrigatório'),
-      otherwise: Yup.string(),
-    }),
-    marriedMetric: Yup.string(),
+    liveTogether: Yup.string().required('Campo obrigatório'),
+    marriedTime: Yup.string().required('Campo obrigatório'),
+    marriedMetric: Yup.string().required('Campo obrigatório'),
     education: Yup.string().required('Campo obrigatório'),
     wage: Yup.string().required('Campo obrigatório'),
-  });
+  }).required();
+
+  function registerNewMother(formValue: IFormValues) {
+    const married: boolean = formValue.married === 'Sim';
+    const alreadyBreastfeed: boolean = formValue.alreadyBreastfeed === 'Sim';
+    const liveTogether: string | null =
+      formValue.married !== 'Não'
+        ? `${formValue.marriedTime} ${formValue.marriedMetric}`
+        : null;
+    const pregnantCount: number = parseInt(formValue.pregnantCount, 10);
+
+    const motherInfo = {
+      email,
+      password,
+      alreadyBreastfeed,
+      married,
+      liveTogether,
+      pregnantCount,
+      name: formValue.name,
+      birthday: formValue.birthday,
+      education: formValue.education,
+      wage: formValue.wage,
+    };
+    signUp(motherInfo);
+    navigation.navigate('BabyForm');
+  }
 
   return (
     <Container>
@@ -62,24 +116,10 @@ const FormMother: React.FC = () => {
           </HeaderSubText>
         </Header>
         <Formik
-          initialValues={{
-            name: '',
-            date: '',
-            pregnantCount: '',
-            alreadyBreastfeed: '',
-            married: '',
-            liveTogether: '',
-            marriedTime: '0',
-            marriedMetric: 'meses',
-            education: '',
-            wage: '',
-          }}
-          validationSchema={FormMotherSchema}
+          initialValues={formInitialValues}
+          validationSchema={MotherFormSchema}
           validateOnChange={false}
-          onSubmit={(values) => {
-            console.log(values);
-            navigation.navigate('CadastroBebe');
-          }}>
+          onSubmit={(values) => registerNewMother(values)}>
           {({
             handleChange,
             handleSubmit,
@@ -99,9 +139,9 @@ const FormMother: React.FC = () => {
 
               <FormDateInput
                 label="Sua data de nascimento"
-                name="date"
+                name="birthday"
                 onChange={setFieldValue}
-                error={errors.date}
+                error={errors.birthday}
                 placeholder="Data de nascimento"
               />
 
@@ -129,11 +169,12 @@ const FormMother: React.FC = () => {
                   setFieldValue(fieldName, fieldValue);
                   if (fieldValue === 'Não') {
                     setFieldValue('marriedTime', '0');
+                    setFieldValue('liveTogether', 'Não');
                   } else if (fieldValue === 'Sim') {
                     // Reinicia os campos abaixo quando o valor do campo married é 'Sim'.
                     setFieldValue('marriedTime', '');
+                    setFieldValue('liveTogether', '');
                   }
-                  setFieldValue('liveTogether', '');
                   setFieldValue('marriedMetric', 'meses');
                 }}
                 options={['Sim', 'Não']}
@@ -225,4 +266,4 @@ const FormMother: React.FC = () => {
   );
 };
 
-export default FormMother;
+export default MotherForm;
