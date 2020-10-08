@@ -29,7 +29,7 @@ const Introduction: React.FC = () => {
     return (
       <MainButton
         buttonText="Vamos começar!"
-        onPress={() => navigation.navigate('Cadastro')}
+        onPress={() => navigation.navigate('Login')}
       />
     );
   }

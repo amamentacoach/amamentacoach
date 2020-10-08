@@ -46,11 +46,11 @@ interface IFormValues {
   babies: IBaby[];
 }
 
-const FormBaby: React.FC = () => {
+const BabyForm: React.FC = () => {
   const navigation = useNavigation();
   const [babyCount, setBabyCount] = useState(0);
 
-  const FormBabySchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const BabyFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     numberOfBabies: Yup.string()
       .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
       .required('Campo obrigatório'),
@@ -165,7 +165,7 @@ const FormBaby: React.FC = () => {
             numberOfBabies: '1',
             babies: [newBaby(0)],
           }}
-          validationSchema={FormBabySchema}
+          validationSchema={BabyFormSchema}
           validateOnChange={false}
           onSubmit={(values) => {
             console.log(values);
@@ -341,4 +341,4 @@ const FormBaby: React.FC = () => {
   );
 };
 
-export default FormBaby;
+export default BabyForm;

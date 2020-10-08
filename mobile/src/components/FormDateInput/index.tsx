@@ -34,17 +34,15 @@ const FormDateInput: React.FC<FormDateProps> = ({
     setShow(true);
   }
 
-  function formatDate(dateToFormat: Date, separator: string = '/'): string {
-    return `${dateToFormat.getDate()}${separator}${
-      dateToFormat.getMonth() + 1
-    }${separator}${dateToFormat.getFullYear()}`;
-  }
-
-  function handleDateSelected(_: Event, selectedDate?: Date | undefined) {
+  function handleDateSelected(selectedDate?: Date | undefined) {
     setShow(Platform.OS === 'ios');
     if (selectedDate) {
-      setDate(formatDate(selectedDate));
-      onChange(name, formatDate(selectedDate, '-'));
+      setDate(
+        `${selectedDate.getDate()}/${
+          selectedDate.getMonth() + 1
+        }/${selectedDate.getFullYear()}`,
+      );
+      onChange(name, selectedDate.toISOString().split('T')[0]);
     }
   }
 
@@ -70,7 +68,9 @@ const FormDateInput: React.FC<FormDateProps> = ({
           mode="date"
           display="calendar"
           maximumDate={maxDate}
-          onChange={handleDateSelected}
+          onChange={(_: Event, selectedDate?: Date | undefined) =>
+            handleDateSelected(selectedDate)
+          }
         />
       )}
     </Container>

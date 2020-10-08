@@ -23,7 +23,7 @@ interface IFormValues {
   password_confirmation: string;
 }
 
-const SignUp: React.FC = () => {
+const FormSignUp: React.FC = () => {
   const navigation = useNavigation();
   const formInitialValues: IFormValues = {
     email: '',
@@ -42,7 +42,7 @@ const SignUp: React.FC = () => {
   }).required();
 
   function handleFormSubmit({ email, password }: IFormValues) {
-    navigation.navigate('FormMother', { email, password });
+    navigation.navigate('MotherForm', { email, password });
   }
 
   return (
@@ -106,4 +106,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default FormSignUp;
