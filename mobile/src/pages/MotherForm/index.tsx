@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
+import { signUpMother } from '../../services/auth';
 import MainButton from '../../components/MainButton';
 import SecondaryButton from '../../components/SecondaryButton';
 import FormRadioGroupInput from '../../components/FormRadioGroup';
 import FormTextInput from '../../components/FormTextInput';
 import FormDateInput from '../../components/FormDateInput';
 import FormPickerInput from '../../components/FormPickerInput';
-import { useAuth } from '../../contexts/auth';
 
 import {
   Container,
@@ -48,7 +48,7 @@ type IScreenParams = {
 
 const MotherForm: React.FC = () => {
   const navigation = useNavigation();
-  const { signUp } = useAuth();
+  const [isSendingForm, setIsSendingForm] = useState(false);
   const { email, password } = useRoute<
     RouteProp<IScreenParams, 'MotherForm'>
   >().params;
@@ -80,29 +80,28 @@ const MotherForm: React.FC = () => {
     wage: Yup.string().required('Campo obrigatório'),
   }).required();
 
-  function registerNewMother(formValue: IFormValues) {
-    const married: boolean = formValue.married === 'Sim';
-    const alreadyBreastfeed: boolean = formValue.alreadyBreastfeed === 'Sim';
-    const liveTogether: string | null =
-      formValue.married !== 'Não'
-        ? `${formValue.marriedTime} ${formValue.marriedMetric}`
-        : null;
-    const pregnantCount: number = parseInt(formValue.pregnantCount, 10);
+  async function registerNewMother(formValue: IFormValues) {
+    setIsSendingForm(true);
 
     const motherInfo = {
       email,
       password,
-      alreadyBreastfeed,
-      married,
-      liveTogether,
-      pregnantCount,
+      alreadyBreastfeed: formValue.alreadyBreastfeed.toLowerCase() === 'sim',
+      married: formValue.married.toLowerCase() === 'sim',
+      liveTogether:
+        formValue.married.toLowerCase() !== 'não'
+          ? `${formValue.marriedTime} ${formValue.marriedMetric}`
+          : null,
+      pregnantCount: parseInt(formValue.pregnantCount, 10),
       name: formValue.name,
       birthday: formValue.birthday,
       education: formValue.education,
       wage: formValue.wage,
     };
-    signUp(motherInfo);
-    navigation.navigate('BabyForm');
+
+    await signUpMother(motherInfo);
+    setIsSendingForm(false);
+    navigation.navigate('BabyForm', { email, password });
   }
 
   return (
@@ -139,7 +138,7 @@ const MotherForm: React.FC = () => {
 
               <FormDateInput
                 label="Sua data de nascimento"
-                name="birthday"
+                fieldName="birthday"
                 onChange={setFieldValue}
                 error={errors.birthday}
                 placeholder="Data de nascimento"
@@ -156,7 +155,7 @@ const MotherForm: React.FC = () => {
 
               <FormRadioGroupInput
                 label="Você já amamentou antes?"
-                name="alreadyBreastfeed"
+                fieldName="alreadyBreastfeed"
                 onChange={setFieldValue}
                 options={['Sim', 'Não']}
                 error={errors.alreadyBreastfeed}
@@ -164,7 +163,7 @@ const MotherForm: React.FC = () => {
 
               <FormRadioGroupInput
                 label="Tem companheiro?"
-                name="married"
+                fieldName="married"
                 onChange={(fieldName: string, fieldValue: string) => {
                   setFieldValue(fieldName, fieldValue);
                   if (fieldValue === 'Não') {
@@ -185,7 +184,7 @@ const MotherForm: React.FC = () => {
                 <>
                   <FormRadioGroupInput
                     label="Moram juntos?"
-                    name="liveTogether"
+                    fieldName="liveTogether"
                     onChange={setFieldValue}
                     options={['Sim', 'Não']}
                     error={errors.liveTogether}
@@ -195,7 +194,7 @@ const MotherForm: React.FC = () => {
                     <MarriedTimeContainer>
                       <FormPickerInput
                         label="Há quanto tempo?"
-                        name="marriedTime"
+                        fieldName="marriedTime"
                         onChange={setFieldValue}
                         error={errors.marriedTime}
                         options={['1 a 3', '4 a 6', '7 a 9', '10 ou mais']}
@@ -205,7 +204,7 @@ const MotherForm: React.FC = () => {
                       <FormPickerInput
                         label=""
                         placeholder=""
-                        name="marriedMetric"
+                        fieldName="marriedMetric"
                         onChange={setFieldValue}
                         error={errors.marriedMetric}
                         options={['meses', 'anos']}
@@ -217,7 +216,7 @@ const MotherForm: React.FC = () => {
 
               <FormPickerInput
                 label="Qual sua escolaridade?"
-                name="education"
+                fieldName="education"
                 onChange={setFieldValue}
                 error={errors.education}
                 options={[
@@ -232,7 +231,7 @@ const MotherForm: React.FC = () => {
 
               <FormPickerInput
                 label="Em qual faixa sua renda familiar se encaixa?"
-                name="wage"
+                fieldName="wage"
                 onChange={setFieldValue}
                 error={errors.wage}
                 options={[
@@ -253,7 +252,7 @@ const MotherForm: React.FC = () => {
                 <SecondSubOptionContainer>
                   <MainButton
                     onPress={handleSubmit}
-                    disabled={!dirty}
+                    disabled={!dirty || isSendingForm}
                     buttonText="Próximo"
                   />
                 </SecondSubOptionContainer>

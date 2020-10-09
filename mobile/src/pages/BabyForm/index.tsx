@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Formik, FormikErrors } from 'formik';
 import * as Yup from 'yup';
 
+import { signUpBaby, signIn as getMotherToken } from '../../services/auth';
 import MainButton from '../../components/MainButton';
 import SecondaryButton from '../../components/SecondaryButton';
 import FormRadioGroupInput from '../../components/FormRadioGroup';
@@ -21,12 +22,13 @@ import {
   SubOptionsContainer,
   FirstSubOptionContainer,
   SecondSubOptionContainer,
-  BirthAgeWeeksContainer,
-  BirthAgeDaysContainer,
+  GestationWeeksContainer,
+  GestationDaysContainer,
   ApgarTextContainer,
   ApgarText,
   SubmitButtonContainer,
 } from './styles';
+import { useAuth } from '../../contexts/auth';
 
 interface IBaby {
   id: number;
@@ -34,9 +36,9 @@ interface IBaby {
   birthday: string;
   weight: string;
   birthType: string;
-  complications: string;
-  birthAgeWeeks: string;
-  birthAgeDays: string;
+  difficulties: string;
+  gestationWeeks: string;
+  gestationDays: string;
   apgar1: string;
   apgar2: string;
   birthLocation: string;
@@ -46,9 +48,22 @@ interface IFormValues {
   babies: IBaby[];
 }
 
+type IScreenParams = {
+  BabyForm: {
+    email: string;
+    password: string;
+  };
+};
+
 const BabyForm: React.FC = () => {
-  const navigation = useNavigation();
+  const { signIn } = useAuth();
+  const [isSendingForm, setIsSendingForm] = useState(false);
   const [babyCount, setBabyCount] = useState(0);
+
+  const navigation = useNavigation();
+  const { email, password } = useRoute<
+    RouteProp<IScreenParams, 'BabyForm'>
+  >().params;
 
   const BabyFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     numberOfBabies: Yup.string()
@@ -64,9 +79,9 @@ const BabyForm: React.FC = () => {
             .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
             .required('Campo obrigatório'),
           birthType: Yup.string().required('Campo obrigatório'),
-          complications: Yup.string().required('Campo obrigatório'),
-          birthAgeWeeks: Yup.string().required('Campo obrigatório'),
-          birthAgeDays: Yup.string().required('Campo obrigatório'),
+          difficulties: Yup.string().required('Campo obrigatório'),
+          gestationWeeks: Yup.string().required('Campo obrigatório'),
+          gestationDays: Yup.string().required('Campo obrigatório'),
           apgar1: Yup.string()
             .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
             .required('Campo obrigatório'),
@@ -88,9 +103,9 @@ const BabyForm: React.FC = () => {
       birthday: '',
       weight: '',
       birthType: '',
-      complications: '',
-      birthAgeWeeks: '',
-      birthAgeDays: '',
+      difficulties: '',
+      gestationWeeks: '',
+      gestationDays: '',
       apgar1: '',
       apgar2: '',
       birthLocation: '',
@@ -137,8 +152,8 @@ const BabyForm: React.FC = () => {
     let newBabies = [...babies];
     for (let index = 0; index < Math.abs(newBabyCount - babyCount); index++) {
       if (newBabyCount > babyCount) {
-        // Caso o novo valor seja maior que o anterior é necessário criar novos objetos IBaby e
-        // adiciona-los a lista existente.
+        // Caso o novo valor seja maior que o anterior é necessário criar novos objetos do tipo
+        // IBaby e adiciona-los a lista existente.
         newBabies = [...newBabies, newBaby(babyCount + index + 1)];
       } else if (newBabyCount < babyCount) {
         // Caso o novo valor seja menor que o anterior é necessário remover os n últimos objetos
@@ -148,6 +163,31 @@ const BabyForm: React.FC = () => {
     }
     setFieldValue('babies', newBabies);
     setBabyCount(newBabyCount);
+  }
+
+  // Registra todos os bebês do formulário.
+  async function registerNewBaby(formValue: IFormValues) {
+    setIsSendingForm(true);
+    const token = await getMotherToken(email, password);
+
+    formValue.babies.forEach(async (baby) => {
+      const babyInfo = {
+        name: baby.name,
+        birthday: baby.birthday,
+        weight: parseInt(baby.weight, 10),
+        birthType: baby.birthType.toLowerCase() === 'normal',
+        gestationWeeks: parseInt(baby.gestationWeeks, 10),
+        gestationDays: parseInt(baby.gestationDays, 10),
+        apgar1: parseInt(baby.apgar1, 10),
+        apgar2: parseInt(baby.apgar2, 10),
+        birthLocation: baby.birthLocation,
+        difficulties: baby.birthLocation,
+      };
+      await signUpBaby(token, babyInfo);
+    });
+
+    setIsSendingForm(false);
+    await signIn(email, password);
   }
 
   return (
@@ -167,9 +207,7 @@ const BabyForm: React.FC = () => {
           }}
           validationSchema={BabyFormSchema}
           validateOnChange={false}
-          onSubmit={(values) => {
-            console.log(values);
-          }}>
+          onSubmit={registerNewBaby}>
           {({
             handleChange,
             handleSubmit,
@@ -183,13 +221,13 @@ const BabyForm: React.FC = () => {
                 <FormContainer>
                   <FormTextInput
                     label="Número de filhos nesta gestação"
+                    value={values.numberOfBabies}
+                    placeholder="Insira o número de filhos"
+                    keyboardType="number-pad"
                     onChangeText={(text: string) =>
                       handleNewBaby(text, values.babies, setFieldValue)
                     }
-                    value={values.numberOfBabies}
                     error={errors.numberOfBabies}
-                    placeholder="Insira o número de filhos"
-                    keyboardType="number-pad"
                   />
 
                   {values.babies.map((baby, index) => (
@@ -197,51 +235,49 @@ const BabyForm: React.FC = () => {
                       <FormTextInput
                         label="Nome do seu bebê"
                         onChangeText={handleChange(`babies[${index}].name`)}
+                        placeholder="Nome"
                         value={values.babies[index].name}
                         error={getBabyError(errors, index, 'name')}
-                        placeholder="Nome"
                       />
 
                       <FormDateInput
                         label="Data do parto"
-                        name={`babies[${index}].birthday`}
+                        fieldName={`babies[${index}].birthday`}
+                        placeholder="Insira a data do parto"
                         onChange={setFieldValue}
                         error={getBabyError(errors, index, 'birthday')}
-                        placeholder="Insira a data do parto"
                       />
 
                       <FormTextInput
                         label="Peso de nascimento"
-                        onChangeText={handleChange(`babies[${index}].weight`)}
                         value={values.babies[index].weight}
-                        error={getBabyError(errors, index, 'weight')}
                         placeholder="Insira o peso do bebê ao nascer"
                         keyboardType="number-pad"
+                        onChangeText={handleChange(`babies[${index}].weight`)}
+                        error={getBabyError(errors, index, 'weight')}
                       />
 
                       <FormRadioGroupInput
                         label="Tipo de parto"
-                        name={`babies[${index}].birthType`}
-                        error={getBabyError(errors, index, 'birthType')}
-                        onChange={setFieldValue}
+                        fieldName={`babies[${index}].birthType`}
                         options={['Normal', 'Cesária']}
+                        onChange={setFieldValue}
+                        error={getBabyError(errors, index, 'birthType')}
                       />
 
                       <FormRadioGroupInput
                         label="Presença de complicação pós-parto?"
-                        name={`babies[${index}].complications`}
-                        error={getBabyError(errors, index, 'complications')}
-                        onChange={setFieldValue}
+                        fieldName={`babies[${index}].difficulties`}
                         options={['Sim', 'Não']}
+                        onChange={setFieldValue}
+                        error={getBabyError(errors, index, 'difficulties')}
                       />
 
                       <SubOptionsContainer>
-                        <BirthAgeWeeksContainer>
+                        <GestationWeeksContainer>
                           <FormPickerInput
                             label="Idade gestacional ao nascer"
-                            name={`babies[${index}].birthAgeWeeks`}
-                            error={getBabyError(errors, index, 'birthAgeWeeks')}
-                            onChange={setFieldValue}
+                            fieldName={`babies[${index}].gestationWeeks`}
                             options={[
                               '36',
                               '35',
@@ -258,31 +294,37 @@ const BabyForm: React.FC = () => {
                               '24',
                             ]}
                             placeholder="Semanas"
+                            onChange={setFieldValue}
+                            error={getBabyError(
+                              errors,
+                              index,
+                              'gestationWeeks',
+                            )}
                           />
-                        </BirthAgeWeeksContainer>
-                        <BirthAgeDaysContainer>
+                        </GestationWeeksContainer>
+                        <GestationDaysContainer>
                           <FormPickerInput
                             label=""
-                            name={`babies[${index}].birthAgeDays`}
-                            error={getBabyError(errors, index, 'birthAgeDays')}
-                            onChange={setFieldValue}
+                            fieldName={`babies[${index}].gestationDays`}
                             options={['6', '5', '4', '3', '2', '1', '0']}
                             placeholder="Dias"
+                            onChange={setFieldValue}
+                            error={getBabyError(errors, index, 'gestationDays')}
                           />
-                        </BirthAgeDaysContainer>
+                        </GestationDaysContainer>
                       </SubOptionsContainer>
 
                       <SubOptionsContainer>
                         <FirstSubOptionContainer>
                           <FormTextInput
                             label="Apgar (opcional)"
+                            value={values.babies[index].apgar1}
+                            placeholder=""
+                            keyboardType="number-pad"
                             onChangeText={handleChange(
                               `babies[${index}].apgar1`,
                             )}
-                            value={values.babies[index].apgar1}
                             error={getBabyError(errors, index, 'apgar1')}
-                            placeholder=""
-                            keyboardType="number-pad"
                           />
                         </FirstSubOptionContainer>
                         <ApgarTextContainer>
@@ -291,27 +333,27 @@ const BabyForm: React.FC = () => {
                         <SecondSubOptionContainer>
                           <FormTextInput
                             label=""
+                            value={values.babies[index].apgar2}
+                            placeholder=""
+                            keyboardType="number-pad"
                             onChangeText={handleChange(
                               `babies[${index}].apgar2`,
                             )}
-                            value={values.babies[index].apgar2}
                             error={getBabyError(errors, index, 'apgar2')}
-                            placeholder=""
-                            keyboardType="number-pad"
                           />
                         </SecondSubOptionContainer>
                       </SubOptionsContainer>
 
                       <FormRadioGroupInput
                         label="Ao nascer, seu bebê foi para:"
-                        name={`babies[${index}].birthLocation`}
-                        error={getBabyError(errors, index, 'birthLocation')}
-                        onChange={setFieldValue}
+                        fieldName={`babies[${index}].birthLocation`}
                         options={[
                           'Alojamento conjunto',
                           'UCI Neonatal',
                           'UTI Neonatal',
                         ]}
+                        onChange={setFieldValue}
+                        error={getBabyError(errors, index, 'birthLocation')}
                       />
                     </View>
                   ))}
@@ -326,7 +368,7 @@ const BabyForm: React.FC = () => {
                     <SecondSubOptionContainer>
                       <MainButton
                         onPress={handleSubmit}
-                        disabled={!dirty}
+                        disabled={!dirty || isSendingForm}
                         buttonText="Próximo"
                       />
                     </SecondSubOptionContainer>

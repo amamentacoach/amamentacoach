@@ -36,12 +36,12 @@ export const SubOptionsContainer = styled.View`
   flex-direction: row;
 `;
 
-export const BirthAgeWeeksContainer = styled.View`
+export const GestationWeeksContainer = styled.View`
   flex: 2;
   margin-right: 4px;
 `;
 
-export const BirthAgeDaysContainer = styled.View`
+export const GestationDaysContainer = styled.View`
   flex: 1;
 `;
 

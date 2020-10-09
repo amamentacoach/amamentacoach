@@ -7,8 +7,6 @@ import api from '../services/api';
 interface IAuthContextData {
   signed: boolean;
   token: string | null;
-  id: number | null;
-  signUp(motherInfo: auth.IMotherInfo): Promise<void>;
   signIn(email: string, password: string): Promise<void>;
   signOut(): void;
 }
@@ -16,16 +14,13 @@ interface IAuthContextData {
 const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [id, setId] = useState<number | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     async function checkDataInStorage() {
-      const storageId = await AsyncStorage.getItem('@AmamentaCoach:id');
       const storageToken = await AsyncStorage.getItem('@AmamentaCoach:token');
 
-      if (storageId && storageToken) {
-        setId(parseInt(storageId, 10));
+      if (storageToken) {
         setToken(storageToken);
         api.defaults.headers.common.Authorization = storageToken;
       }
@@ -33,12 +28,6 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     checkDataInStorage();
   });
-
-  async function signUp(motherInfo: auth.IMotherInfo) {
-    const userId = await auth.signUp(motherInfo);
-    setId(userId);
-    await AsyncStorage.setItem('@AmamentaCoach:id', userId.toString());
-  }
 
   async function signIn(email: string, password: string) {
     const userToken = await auth.signIn(email, password);
@@ -51,12 +40,17 @@ export const AuthProvider: React.FC = ({ children }) => {
     await AsyncStorage.removeItem('@AmamentaCoach:id');
     await AsyncStorage.removeItem('@AmamentaCoach:token');
     setToken(null);
-    setId(null);
+    api.defaults.headers.common.Authorization = null;
   }
 
   return (
     <AuthContext.Provider
-      value={{ signed: !!token, id, token, signUp, signIn, signOut }}>
+      value={{
+        signed: !!token,
+        token,
+        signIn,
+        signOut,
+      }}>
       {children}
     </AuthContext.Provider>
   );

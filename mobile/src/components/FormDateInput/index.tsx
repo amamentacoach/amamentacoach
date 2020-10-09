@@ -11,7 +11,7 @@ import {
 } from './styles';
 
 interface FormDateProps {
-  name: string;
+  fieldName: string;
   label: string;
   error?: string | undefined;
   placeholder: string;
@@ -20,7 +20,7 @@ interface FormDateProps {
 }
 
 const FormDateInput: React.FC<FormDateProps> = ({
-  name,
+  fieldName,
   label,
   error,
   placeholder,
@@ -42,7 +42,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
           selectedDate.getMonth() + 1
         }/${selectedDate.getFullYear()}`,
       );
-      onChange(name, selectedDate.toISOString().split('T')[0]);
+      onChange(fieldName, selectedDate.toISOString().split('T')[0]);
     }
   }
 

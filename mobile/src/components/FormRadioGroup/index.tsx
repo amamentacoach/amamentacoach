@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 
 import {
   Container,
-  LabelText,
-  TextOption,
-  OptionsContainer,
-  Option,
-  OuterCircle,
-  InnerCircle,
   ErrorContainer,
   ErrorText,
+  InnerCircle,
+  LabelText,
+  Option,
+  OptionsContainer,
+  OuterCircle,
+  TextOption,
 } from './styles';
 
 interface FormRadioGroupProps {
-  name: string;
+  fieldName: string;
   label: string;
   options: string[];
   error?: string | undefined;
@@ -21,7 +21,7 @@ interface FormRadioGroupProps {
 }
 
 const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
-  name,
+  fieldName,
   label,
   options,
   error,
@@ -31,7 +31,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
 
   function handleOptionSelected(index: number) {
     setSelectedIndex(index);
-    onChange(name, options[index]);
+    onChange(fieldName, options[index]);
   }
 
   return (
