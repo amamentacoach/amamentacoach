@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -32,6 +32,7 @@ interface IFormValues {
 const FormLogin: React.FC = () => {
   const navigation = useNavigation();
   const { signIn } = useAuth();
+  const [isSendingForm, setIsSendingForm] = useState(false);
 
   const formInitialValues: IFormValues = {
     email: '',
@@ -45,8 +46,9 @@ const FormLogin: React.FC = () => {
   }).required();
 
   function handleSignIn({ email, password }: IFormValues) {
+    setIsSendingForm(true);
     signIn(email, password);
-    // TODO Navigate to main screen
+    setIsSendingForm(false);
   }
 
   function handleSignUp() {
@@ -92,7 +94,7 @@ const FormLogin: React.FC = () => {
               <SubmitButtonContainer>
                 <MainButton
                   onPress={handleSubmit}
-                  disabled={!dirty}
+                  disabled={!dirty || isSendingForm}
                   buttonText="Entrar"
                 />
               </SubmitButtonContainer>
