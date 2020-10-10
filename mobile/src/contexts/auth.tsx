@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-
 import AsyncStorage from '@react-native-community/async-storage';
 import * as auth from '../services/auth';
 import api from '../services/api';
@@ -15,6 +14,7 @@ const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function checkDataInStorage() {
@@ -24,6 +24,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         setToken(storageToken);
         api.defaults.headers.common.Authorization = storageToken;
       }
+      setLoading(false);
     }
 
     checkDataInStorage();
@@ -37,10 +38,13 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   async function signOut() {
-    await AsyncStorage.removeItem('@AmamentaCoach:id');
     await AsyncStorage.removeItem('@AmamentaCoach:token');
     setToken(null);
     api.defaults.headers.common.Authorization = null;
+  }
+
+  if (loading) {
+    return <></>;
   }
 
   return (

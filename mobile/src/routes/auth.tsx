@@ -1,7 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Introduction from '../pages/Introduction';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import MotherForm from '../pages/MotherForm';
@@ -11,11 +10,6 @@ const AuthRoutes: React.FC = () => {
   const Stack = createStackNavigator();
   return (
     <Stack.Navigator screenOptions={{ headerTitleAlign: 'center' }}>
-      <Stack.Screen
-        name="Introduction"
-        component={Introduction}
-        options={{ headerShown: false }}
-      />
       <Stack.Screen
         name="Login"
         component={Login}

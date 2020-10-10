@@ -1,8 +1,10 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useRoute, RouteProp } from '@react-navigation/native';
 
+import AsyncStorage from '@react-native-community/async-storage';
 import InfoList from '../../components/InfoList';
 import MainButton from '../../components/MainButton';
+import { useIsFirstRun } from '../../contexts/firstRun';
 
 const pages = [
   {
@@ -27,19 +29,14 @@ const pages = [
 ];
 
 const Introduction: React.FC = () => {
-  const navigation = useNavigation();
+  const { setNotFirstRun } = useIsFirstRun();
 
-  function continueButton() {
-    return (
-      <MainButton
-        buttonText="Vamos começar!"
-        onPress={() => navigation.navigate('Login')}
-      />
-    );
+  async function handleSkip() {
+    setNotFirstRun();
   }
 
-  function handleSkip() {
-    navigation.navigate('Login');
+  function continueButton() {
+    return <MainButton buttonText="Vamos começar!" onPress={handleSkip} />;
   }
 
   return (
