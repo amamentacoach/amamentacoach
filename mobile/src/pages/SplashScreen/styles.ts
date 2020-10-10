@@ -14,8 +14,9 @@ export const LogoImage = styled.Image`
 `;
 
 export const AppNameText = styled.Text`
-  width: 150px;
+  font-family: 'Manjari-Bold';
   font-size: 30px;
-  text-align: center;
   color: white;
+  width: 150px;
+  text-align: center;
 `;

@@ -4,7 +4,7 @@ import { FlatList, Dimensions } from 'react-native';
 import {
   Header,
   SkipButton,
-  ButtonText,
+  SkipButtonText,
   ContentWrapper,
   ContentParagraph,
   Footer,
@@ -57,7 +57,7 @@ const InfoList: React.FC<IInfoListProps> = ({
         <Header>
           {skipIntroduction && index < pages.length - 1 ? (
             <SkipButton onPress={() => skipIntroduction()}>
-              <ButtonText>Pular</ButtonText>
+              <SkipButtonText>Pular</SkipButtonText>
             </SkipButton>
           ) : null}
         </Header>

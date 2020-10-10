@@ -1,7 +1,5 @@
 import React from 'react';
-import { useRoute, RouteProp } from '@react-navigation/native';
 
-import AsyncStorage from '@react-native-community/async-storage';
 import InfoList from '../../components/InfoList';
 import MainButton from '../../components/MainButton';
 import { useIsFirstRun } from '../../contexts/firstRun';

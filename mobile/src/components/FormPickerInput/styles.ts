@@ -5,6 +5,7 @@ export const Container = styled.View`
 `;
 
 export const LabelText = styled.Text`
+  font-family: 'OpenSans-Regular';
   color: #161026;
   font-size: 14px;
   margin-bottom: 5px;
@@ -16,6 +17,7 @@ export const PickerContainer = styled.View`
 `;
 
 export const TextOption = styled.Text`
+  font-family: 'OpenSans-Regular';
   margin-left: 15px;
   font-size: 16px;
 `;
@@ -26,6 +28,7 @@ export const ErrorContainer = styled.View`
 `;
 
 export const ErrorText = styled.Text`
+  font-family: 'OpenSans-Regular';
   color: #ea3c3c;
   font-size: 14px;
 `;
