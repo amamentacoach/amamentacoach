@@ -30,6 +30,10 @@ interface IFormValues {
   name: string;
   birthday: string;
   pregnantCount: string;
+  timeSpentBreastFeeding: {
+    id: number;
+    value: string;
+  }[];
   alreadyBreastfeed: string;
   married: string;
   liveTogether: string;
@@ -48,6 +52,7 @@ type IScreenParams = {
 
 const MotherForm: React.FC = () => {
   const navigation = useNavigation();
+  const [breastFeedingCount, setBreastFeedingCount] = useState(0);
   const [isSendingForm, setIsSendingForm] = useState(false);
   const { email, password } = useRoute<
     RouteProp<IScreenParams, 'MotherForm'>
@@ -57,6 +62,7 @@ const MotherForm: React.FC = () => {
     name: '',
     birthday: '',
     pregnantCount: '',
+    timeSpentBreastFeeding: [],
     alreadyBreastfeed: '',
     married: '',
     liveTogether: 'Não',
@@ -71,7 +77,23 @@ const MotherForm: React.FC = () => {
     pregnantCount: Yup.string()
       .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
       .required('Campo obrigatório'),
-    alreadyBreastfeed: Yup.string().required('Campo obrigatório'),
+    timeSpentBreastFeeding: Yup.array()
+      .of(
+        Yup.object({
+          id: Yup.number().required(),
+          value: Yup.string().required('Campo obrigatório'),
+        }).required(),
+      )
+      .required(),
+    alreadyBreastfeed: Yup.string()
+      .when('pregnantCount', {
+        is: '0',
+        then: Yup.string().oneOf(
+          ['Não'],
+          'Você deve ter engravidado pelo menos uma vez',
+        ),
+      })
+      .required('Campo obrigatório'),
     married: Yup.string().required('Campo obrigatório'),
     liveTogether: Yup.string().required('Campo obrigatório'),
     marriedTime: Yup.string().required('Campo obrigatório'),
@@ -80,9 +102,57 @@ const MotherForm: React.FC = () => {
     wage: Yup.string().required('Campo obrigatório'),
   }).required();
 
+  // Adiciona ou remove um bebê de acordo com a entrada do usuário.
+  function handleNewTimeBreastFeeding(
+    fieldValue: string,
+    timeSpentBreastFeeding: { id: number; value: string }[],
+    setFieldValue: (field: string, value: any) => void,
+  ) {
+    // Caso o texto possua caracteres não numéricos ele é ignorado.
+    if (fieldValue !== '' && !new RegExp('^\\d+$').test(fieldValue)) {
+      return;
+    }
+
+    const newBreastFeedingCount = parseInt(fieldValue, 10);
+    // Caso o texto não possa ser convertido para inteiro, limpa o formulário.
+    if (!newBreastFeedingCount) {
+      setFieldValue('pregnantCount', '');
+      setBreastFeedingCount(0);
+      setFieldValue('timeSpentBreastFeeding', []);
+      return;
+    }
+    // Limita o formulário a um máximo de 20 bebês.
+    if (newBreastFeedingCount > 20) {
+      return;
+    }
+
+    setFieldValue('pregnantCount', fieldValue);
+    let newTimeSpentBreastFeeding = [...timeSpentBreastFeeding];
+    for (
+      let index = 0;
+      index < Math.abs(newBreastFeedingCount - breastFeedingCount);
+      index++
+    ) {
+      if (newBreastFeedingCount > breastFeedingCount) {
+        // Caso o novo valor seja maior que o anterior é necessário criar novos objetos e
+        // adiciona-los a lista existente.
+        newTimeSpentBreastFeeding = [
+          ...newTimeSpentBreastFeeding,
+          { id: breastFeedingCount + index + 1, value: '' },
+        ];
+      } else if (newBreastFeedingCount < breastFeedingCount) {
+        // Caso o novo valor seja menor que o anterior é necessário remover os n últimos objetos
+        // existentes.
+        newTimeSpentBreastFeeding.pop();
+      }
+    }
+    setFieldValue('timeSpentBreastFeeding', newTimeSpentBreastFeeding);
+    setBreastFeedingCount(newBreastFeedingCount);
+  }
+
+  // Registra o usuário no sistema.
   async function registerNewMother(formValue: IFormValues) {
     setIsSendingForm(true);
-
     const motherInfo = {
       email,
       password,
@@ -140,18 +210,47 @@ const MotherForm: React.FC = () => {
                 label="Sua data de nascimento"
                 fieldName="birthday"
                 onChange={setFieldValue}
-                error={errors.birthday}
                 placeholder="Data de nascimento"
+                error={errors.birthday}
               />
 
               <FormTextInput
                 label="Quantas vezes já esteve grávida? (contando abortos)"
                 value={values.pregnantCount}
-                onChangeText={handleChange('pregnantCount')}
-                error={errors.pregnantCount}
+                onChangeText={(text: string) => {
+                  handleNewTimeBreastFeeding(
+                    text,
+                    values.timeSpentBreastFeeding,
+                    setFieldValue,
+                  );
+                }}
                 placeholder="Insira o número de vezes"
                 keyboardType="numeric"
+                error={errors.pregnantCount}
               />
+
+              {values.timeSpentBreastFeeding.map((item, index) => (
+                <FormPickerInput
+                  key={item.id}
+                  label={`Tempo de amamentação (gravidez ${index + 1})`}
+                  fieldName={`timeSpentBreastFeeding[${index}].value`}
+                  options={[
+                    'Menos de 1 ano',
+                    '1 ano',
+                    '2 anos',
+                    '3 ou mais anos',
+                  ]}
+                  onChange={setFieldValue}
+                  error={
+                    errors?.timeSpentBreastFeeding &&
+                    errors?.timeSpentBreastFeeding[index]
+                      ? (errors?.timeSpentBreastFeeding[index] as {
+                          [key: string]: any;
+                        }).value
+                      : ''
+                  }
+                />
+              ))}
 
               <FormRadioGroupInput
                 label="Você já amamentou antes?"

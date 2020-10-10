@@ -18,7 +18,7 @@ export const OptionsContainer = styled.View`
   flex: 1;
 `;
 
-export const Option = styled.TouchableOpacity<RadioButtonProps>`
+export const OptionButton = styled.TouchableOpacity<RadioButtonProps>`
   border: 1.4px solid ${(props) => (props.selected ? '#7D5CD7' : '#C4C4C4')};
   flex-direction: row;
   padding: 13px;

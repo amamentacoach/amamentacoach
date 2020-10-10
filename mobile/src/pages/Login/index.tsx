@@ -46,10 +46,9 @@ const FormLogin: React.FC = () => {
       .required('Campo obrigatório'),
   }).required();
 
-  function handleSignIn({ email, password }: IFormValues) {
+  async function handleSignIn({ email, password }: IFormValues) {
     setIsSendingForm(true);
-    signIn(email, password);
-    setIsSendingForm(false);
+    await signIn(email, password);
   }
 
   function handleSignUp() {

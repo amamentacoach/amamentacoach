@@ -6,7 +6,7 @@ import {
   ErrorText,
   InnerCircle,
   LabelText,
-  Option,
+  OptionButton,
   OptionsContainer,
   OuterCircle,
   TextOption,
@@ -39,7 +39,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
       <LabelText>{label}</LabelText>
       <OptionsContainer>
         {options.map((option, index) => (
-          <Option
+          <OptionButton
             selected={index === selectedIndex}
             key={option}
             activeOpacity={1}
@@ -48,7 +48,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
               <InnerCircle selected={index === selectedIndex} />
             </OuterCircle>
             <TextOption>{option}</TextOption>
-          </Option>
+          </OptionButton>
         ))}
       </OptionsContainer>
       <ErrorContainer>
