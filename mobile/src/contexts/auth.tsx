@@ -2,9 +2,10 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as auth from '../services/auth';
 import api from '../services/api';
+import SplashScreen from '../pages/SplashScreen';
 
 interface IAuthContextData {
-  signed: boolean;
+  isSigned: boolean;
   token: string | null;
   signIn(email: string, password: string): Promise<void>;
   signOut(): void;
@@ -44,13 +45,13 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   if (loading) {
-    return <></>;
+    return <SplashScreen />;
   }
 
   return (
     <AuthContext.Provider
       value={{
-        signed: !!token,
+        isSigned: !!token,
         token,
         signIn,
         signOut,

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+import SplashScreen from '../pages/SplashScreen';
 
 interface IIsFirstRunContextData {
   isFirstRun: boolean;
@@ -35,7 +36,7 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
   }
 
   if (loading) {
-    return <></>;
+    return <SplashScreen />;
   }
 
   return (

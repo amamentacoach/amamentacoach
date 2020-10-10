@@ -9,7 +9,6 @@ import FormTextInput from '../../components/FormTextInput';
 import MainButton from '../../components/MainButton';
 import { useAuth } from '../../contexts/auth';
 
-import logo from '../../../assets/images/logo_primary.png';
 import {
   Container,
   ScrollView,
@@ -23,6 +22,8 @@ import {
   SignUpText,
   SignUpContainer,
 } from './styles';
+
+import logo from '../../../assets/images/logo_primary.png';
 
 interface IFormValues {
   email: string;
