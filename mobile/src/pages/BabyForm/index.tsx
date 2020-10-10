@@ -4,7 +4,10 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Formik, FormikErrors } from 'formik';
 import * as Yup from 'yup';
 
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useAuth } from '../../contexts/auth';
 import { signUpBaby, signIn as getMotherToken } from '../../services/auth';
+import Modal from '../../components/Modal';
 import MainButton from '../../components/MainButton';
 import SecondaryButton from '../../components/SecondaryButton';
 import FormRadioGroupInput from '../../components/FormRadioGroup';
@@ -27,8 +30,9 @@ import {
   ApgarTextContainer,
   ApgarText,
   SubmitButtonContainer,
+  ApgarTextHeader,
+  ApgarHelpButton,
 } from './styles';
-import { useAuth } from '../../contexts/auth';
 
 interface IBaby {
   id: number;
@@ -57,13 +61,14 @@ type IScreenParams = {
 
 const BabyForm: React.FC = () => {
   const { signIn } = useAuth();
-  const [isSendingForm, setIsSendingForm] = useState(false);
-  const [babyCount, setBabyCount] = useState(0);
-
   const navigation = useNavigation();
   const { email, password } = useRoute<
     RouteProp<IScreenParams, 'BabyForm'>
   >().params;
+
+  const [isSendingForm, setIsSendingForm] = useState(false);
+  const [isApgarModalVisible, setIsApgarModalVisible] = useState(false);
+  const [babyCount, setBabyCount] = useState(0);
 
   const BabyFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     numberOfBabies: Yup.string()
@@ -192,6 +197,13 @@ const BabyForm: React.FC = () => {
 
   return (
     <Container>
+      <Modal
+        text="Apgar é a nota, de 0 a 10, que o bebê recebe de acordo com o estado em que ele se apresenta no momento de nascimento e consta no cartão da criança.
+Se não souber, tudo bem, continue seu cadastro normalmente!"
+        visible={isApgarModalVisible}
+        closeModal={() => setIsApgarModalVisible(false)}
+      />
+
       <ScrollView>
         <Header>
           <HeaderText>Passo 3 de 3</HeaderText>
@@ -314,10 +326,11 @@ const BabyForm: React.FC = () => {
                         </GestationDaysContainer>
                       </SubOptionsContainer>
 
+                      <ApgarTextHeader>Apgar (Opcional)</ApgarTextHeader>
                       <SubOptionsContainer>
                         <FirstSubOptionContainer>
                           <FormTextInput
-                            label="Apgar (opcional)"
+                            label=""
                             value={values.babies[index].apgar1}
                             placeholder=""
                             keyboardType="number-pad"
@@ -342,8 +355,11 @@ const BabyForm: React.FC = () => {
                             error={getBabyError(errors, index, 'apgar2')}
                           />
                         </SecondSubOptionContainer>
+                        <ApgarHelpButton
+                          onPress={() => setIsApgarModalVisible(true)}>
+                          <Icon name="help-outline" size={22} color="#7D5CD7" />
+                        </ApgarHelpButton>
                       </SubOptionsContainer>
-
                       <FormRadioGroupInput
                         label="Ao nascer, seu bebê foi para:"
                         fieldName={`babies[${index}].birthLocation`}

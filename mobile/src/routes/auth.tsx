@@ -10,11 +10,11 @@ const AuthRoutes: React.FC = () => {
   const Stack = createStackNavigator();
   return (
     <Stack.Navigator screenOptions={{ headerTitleAlign: 'center' }}>
-      {/* <Stack.Screen
+      <Stack.Screen
         name="Login"
         component={Login}
         options={{ headerShown: false }}
-      /> */}
+      />
       <Stack.Screen
         name="SignUp"
         options={{ title: 'Cadastro' }}

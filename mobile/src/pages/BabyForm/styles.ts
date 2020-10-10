@@ -34,6 +34,7 @@ export const FormContainer = styled.View`
 `;
 
 export const SubOptionsContainer = styled.View`
+  margin-top: -16px;
   flex: 1;
   flex-direction: row;
 `;
@@ -54,6 +55,13 @@ export const FirstSubOptionContainer = styled.View`
 
 export const SecondSubOptionContainer = styled.View`
   flex: 1;
+  align-content: center;
+  justify-content: center;
+`;
+
+export const ApgarTextHeader = styled.Text`
+  font-family: 'OpenSans-Regular';
+  font-size: 14px;
 `;
 
 export const ApgarTextContainer = styled.View`
@@ -64,6 +72,12 @@ export const ApgarTextContainer = styled.View`
 export const ApgarText = styled.Text`
   font-family: 'OpenSans-Regular';
   margin-right: 4px;
+`;
+
+export const ApgarHelpButton = styled.TouchableOpacity`
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
 `;
 
 export const SubmitButtonContainer = styled.View`
