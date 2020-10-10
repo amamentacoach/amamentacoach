@@ -98,3 +98,9 @@ export async function signIn(email: string, password: string): Promise<string> {
   });
   return request.data.token;
 }
+
+export async function forgotPassword(email: string): Promise<void> {
+  await api.post('/esqueceusenha', {
+    email,
+  });
+}

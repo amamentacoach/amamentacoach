@@ -51,6 +51,10 @@ const FormLogin: React.FC = () => {
     await signIn(email, password);
   }
 
+  function handleForgotPassword() {
+    navigation.navigate('ForgotPassword');
+  }
+
   function handleSignUp() {
     navigation.navigate('SignUp');
   }
@@ -89,7 +93,11 @@ const FormLogin: React.FC = () => {
                 />
               </View>
 
-              <ForgotPasswordText>Esqueceu a senha?</ForgotPasswordText>
+              <TouchableOpacity
+                onPress={handleForgotPassword}
+                activeOpacity={0.7}>
+                <ForgotPasswordText>Esqueceu a senha?</ForgotPasswordText>
+              </TouchableOpacity>
 
               <SubmitButtonContainer>
                 <MainButton
