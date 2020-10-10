@@ -1,13 +1,7 @@
 import * as React from 'react';
-import { Modal as ReactNativeModal } from 'react-native';
+import { Modal as ReactNativeModal, TouchableOpacity } from 'react-native';
 
-import {
-  CloseButton,
-  Container,
-  Message,
-  CloseButtonText,
-  Line,
-} from './styles';
+import { Container, Message, CloseButtonText, Line } from './styles';
 
 interface IMainModalProps {
   text: string;
@@ -21,9 +15,9 @@ const Modal = ({ text, visible, closeModal }: IMainModalProps) => {
       <Container>
         <Message>{text}</Message>
         <Line />
-        <CloseButton onPress={() => closeModal()}>
+        <TouchableOpacity onPress={() => closeModal()} activeOpacity={0.7}>
           <CloseButtonText>Fechar</CloseButtonText>
-        </CloseButton>
+        </TouchableOpacity>
       </Container>
     </ReactNativeModal>
   );

@@ -24,8 +24,6 @@ export const Line = styled.View`
   opacity: 0.2;
 `;
 
-export const CloseButton = styled.TouchableOpacity``;
-
 export const CloseButtonText = styled.Text`
   font-family: 'OpenSans-Bold';
   font-size: 16px;

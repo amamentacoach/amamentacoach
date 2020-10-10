@@ -68,6 +68,7 @@ const BabyForm: React.FC = () => {
 
   const [isSendingForm, setIsSendingForm] = useState(false);
   const [isApgarModalVisible, setIsApgarModalVisible] = useState(false);
+  const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
   const [babyCount, setBabyCount] = useState(0);
 
   const BabyFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
@@ -192,7 +193,7 @@ const BabyForm: React.FC = () => {
     });
 
     setIsSendingForm(false);
-    await signIn(email, password);
+    setIsSignUpModalVisible(true);
   }
 
   return (
@@ -202,6 +203,14 @@ const BabyForm: React.FC = () => {
 Se não souber, tudo bem, continue seu cadastro normalmente!"
         visible={isApgarModalVisible}
         closeModal={() => setIsApgarModalVisible(false)}
+      />
+      <Modal
+        text="Conta criada com sucesso! Seja muito bem-vinda ao AmamentaCoach!"
+        visible={isSignUpModalVisible}
+        closeModal={async () => {
+          setIsSignUpModalVisible(false);
+          await signIn(email, password);
+        }}
       />
 
       <ScrollView>
