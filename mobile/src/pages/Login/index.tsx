@@ -24,6 +24,7 @@ import {
 } from './styles';
 
 import logo from '../../../assets/images/logo_primary.png';
+import Modal from '../../components/Modal';
 
 interface IFormValues {
   email: string;
@@ -33,6 +34,8 @@ interface IFormValues {
 const FormLogin: React.FC = () => {
   const navigation = useNavigation();
   const { signIn } = useAuth();
+
+  const [isSubmitModalVisible, setIsSubmitModalVisible] = useState(false);
   const [isSendingForm, setIsSendingForm] = useState(false);
 
   const formInitialValues: IFormValues = {
@@ -48,7 +51,11 @@ const FormLogin: React.FC = () => {
 
   async function handleSignIn({ email, password }: IFormValues) {
     setIsSendingForm(true);
-    await signIn(email, password);
+    const validLogin = await signIn(email, password);
+    if (!validLogin) {
+      setIsSubmitModalVisible(true);
+      setIsSendingForm(false);
+    }
   }
 
   function handleForgotPassword() {
@@ -61,6 +68,12 @@ const FormLogin: React.FC = () => {
 
   return (
     <Container>
+      <Modal
+        text="E-mail ou senha incorretos!"
+        visible={isSubmitModalVisible}
+        closeModal={() => setIsSubmitModalVisible(false)}
+      />
+
       <ScrollView>
         <Header>
           <HeaderImage resizeMode="contain" source={logo} />

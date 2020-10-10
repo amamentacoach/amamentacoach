@@ -7,7 +7,7 @@ import SplashScreen from '../pages/SplashScreen';
 interface IAuthContextData {
   isSigned: boolean;
   token: string | null;
-  signIn(email: string, password: string): Promise<void>;
+  signIn(email: string, password: string): Promise<boolean>;
   signOut(): void;
 }
 
@@ -33,9 +33,14 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   async function signIn(email: string, password: string) {
     const userToken = await auth.signIn(email, password);
+    if (userToken === null) {
+      return false;
+    }
+
     await AsyncStorage.setItem('@AmamentaCoach:token', userToken);
     setToken(userToken);
     api.defaults.headers.common.Authorization = userToken;
+    return true;
   }
 
   async function signOut() {

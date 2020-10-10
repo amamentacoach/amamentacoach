@@ -91,12 +91,19 @@ export async function signUpBaby(
   );
 }
 
-export async function signIn(email: string, password: string): Promise<string> {
-  const request = await api.post('/login', {
-    email,
-    senha: password,
-  });
-  return request.data.token;
+export async function signIn(
+  email: string,
+  password: string,
+): Promise<string | null> {
+  try {
+    const request = await api.post('/login', {
+      email,
+      senha: password,
+    });
+    return request.data.token;
+  } catch (error) {
+    return null;
+  }
 }
 
 export async function forgotPassword(email: string): Promise<void> {
