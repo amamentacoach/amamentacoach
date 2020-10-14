@@ -206,7 +206,7 @@
       "examples": [
         {
           "title": "Sucesso",
-          "content": "HTTP/1.1 200 OK\n  {\n      \"id\":1\n  }",
+          "content": "HTTP/1.1 200 OK\n  {\n      \"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjAyNjczMDA5LCJleHAiOjE2MDUyNjUwMDl9.wFrGTEfQ3s_7DNlsFDV88NDYGtXPMrpT-mlWvSAEomg\"\n  }",
           "type": "json"
         }
       ]
