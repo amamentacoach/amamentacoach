@@ -9,6 +9,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string('nome').notNullable();
         table.date('data_nascimento').notNullable();
         table.boolean('amamentou_antes').notNullable();
+        table.string('tempo_amamentacao');
         table.boolean('companheiro').notNullable();
         table.string('moram_juntos');
         table.string('escolaridade').notNullable();
