@@ -22,7 +22,8 @@ export const SkipButton = styled.TouchableOpacity`
   margin: 30px 30px 0 auto;
 `;
 
-export const ButtonText = styled.Text`
+export const SkipButtonText = styled.Text`
+  font-family: 'OpenSans-Regular';
   font-size: 16px;
 `;
 
@@ -34,11 +35,12 @@ export const ContentWrapper = styled.View`
 `;
 
 export const ContentImage = styled.Image`
-  flex: 1;
+  flex: 2;
   margin-bottom: 10px;
 `;
 
 export const ContentParagraph = styled.Text`
+  font-family: 'OpenSans-Regular';
   font-size: 16px;
   margin: 0 24px;
   flex: 1;

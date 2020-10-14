@@ -17,11 +17,11 @@ interface FormTextProps extends TextInputProps {
 const FormTextInput: React.FC<FormTextProps> = ({
   label,
   value,
-  onChangeText,
   placeholder,
   error,
   secureTextEntry,
   keyboardType,
+  onChangeText,
 }) => {
   return (
     <Container>

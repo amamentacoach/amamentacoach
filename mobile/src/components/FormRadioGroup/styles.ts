@@ -9,6 +9,7 @@ export const Container = styled.View`
 `;
 
 export const LabelText = styled.Text`
+  font-family: 'OpenSans-Regular';
   color: #161026;
   font-size: 14px;
 `;
@@ -17,7 +18,7 @@ export const OptionsContainer = styled.View`
   flex: 1;
 `;
 
-export const Option = styled.TouchableOpacity<RadioButtonProps>`
+export const OptionButton = styled.TouchableOpacity<RadioButtonProps>`
   border: 1.4px solid ${(props) => (props.selected ? '#7D5CD7' : '#C4C4C4')};
   flex-direction: row;
   padding: 13px;
@@ -44,6 +45,7 @@ export const InnerCircle = styled.View<RadioButtonProps>`
 `;
 
 export const TextOption = styled.Text`
+  font-family: 'OpenSans-Regular';
   margin-left: 15px;
   font-size: 16px;
 `;
@@ -54,6 +56,7 @@ export const ErrorContainer = styled.View`
 `;
 
 export const ErrorText = styled.Text`
+  font-family: 'OpenSans-Regular';
   color: #ea3c3c;
   font-size: 14px;
 `;

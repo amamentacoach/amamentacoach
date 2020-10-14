@@ -17,10 +17,20 @@ import {
 } from './styles';
 import MainButton from '../../components/MainButton';
 
-const SignUp: React.FC = () => {
-  const navigation = useNavigation();
+interface IFormValues {
+  email: string;
+  password: string;
+  password_confirmation: string;
+}
 
-  const SignUpSchema = Yup.object().shape({
+const FormSignUp: React.FC = () => {
+  const navigation = useNavigation();
+  const formInitialValues: IFormValues = {
+    email: '',
+    password: '',
+    password_confirmation: '',
+  };
+  const SignUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Obrigatório'),
     password: Yup.string()
       .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
@@ -29,7 +39,11 @@ const SignUp: React.FC = () => {
       .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
       .oneOf([Yup.ref('password')], 'As senhas precisam ser iguais!')
       .required('Campo obrigatório'),
-  });
+  }).required();
+
+  function handleFormSubmit({ email, password }: IFormValues) {
+    navigation.navigate('MotherForm', { email, password });
+  }
 
   return (
     <Container>
@@ -42,13 +56,11 @@ const SignUp: React.FC = () => {
           </HeaderSubText>
         </Header>
         <Formik
-          initialValues={{ email: '', password: '', password_confirmation: '' }}
+          initialValues={formInitialValues}
           validationSchema={SignUpSchema}
-          onSubmit={(values) => {
-            console.log(values);
-            navigation.navigate('CadastroMae');
-          }}>
-          {({ handleChange, handleSubmit, dirty, isValid, errors, values }) => (
+          validateOnChange={false}
+          onSubmit={(values) => handleFormSubmit(values)}>
+          {({ handleChange, handleSubmit, dirty, errors, values }) => (
             <FormContainer>
               <View>
                 <FormTextInput
@@ -82,7 +94,7 @@ const SignUp: React.FC = () => {
               <SubmitButtonContainer>
                 <MainButton
                   onPress={handleSubmit}
-                  disabled={!(isValid && dirty)}
+                  disabled={!dirty}
                   buttonText="Próximo"
                 />
               </SubmitButtonContainer>
@@ -94,4 +106,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default FormSignUp;

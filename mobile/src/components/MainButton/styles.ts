@@ -13,6 +13,7 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
 `;
 
 export const TextButton = styled.Text`
-  color: #fafafa;
+  font-family: 'OpenSans-Bold';
   font-size: 16px;
+  color: #fafafa;
 `;

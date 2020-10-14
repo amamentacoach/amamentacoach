@@ -27,11 +27,7 @@ const ProgressDots: React.FC<ProgressDotsProps> = ({
     return circles;
   }
 
-  return (
-    <>
-      <Container>{createCircles()}</Container>
-    </>
-  );
+  return <Container>{createCircles()}</Container>;
 };
 
 export default ProgressDots;

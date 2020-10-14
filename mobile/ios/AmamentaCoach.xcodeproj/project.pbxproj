@@ -16,6 +16,11 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* AmamentaCoachTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AmamentaCoachTests.m */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		251D7C10A5514BD3A6A7BD8B /* Manjari-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4543B548471C453A8C9F7BA1 /* Manjari-Bold.ttf */; };
+		1543B58D86064E90B7902FEC /* Manjari-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5C106698D8EA48DA96B43ACE /* Manjari-Regular.ttf */; };
+		31FBCFC8C77E40DBA38695D0 /* Manjari-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D559DB75E0F34A79879736FA /* Manjari-Thin.ttf */; };
+		F946FECDA5714DB0AA8BE8F3 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF557C94A2584939A7578CC9 /* OpenSans-Bold.ttf */; };
+		AF773594B2ED4B188BAA8CA6 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B19A554B827461F99EFD9E8 /* OpenSans-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +56,11 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AmamentaCoach/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		4543B548471C453A8C9F7BA1 /* Manjari-Bold.ttf */ = {isa = PBXFileReference; name = "Manjari-Bold.ttf"; path = "../assets/fonts/Manjari-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		5C106698D8EA48DA96B43ACE /* Manjari-Regular.ttf */ = {isa = PBXFileReference; name = "Manjari-Regular.ttf"; path = "../assets/fonts/Manjari-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D559DB75E0F34A79879736FA /* Manjari-Thin.ttf */ = {isa = PBXFileReference; name = "Manjari-Thin.ttf"; path = "../assets/fonts/Manjari-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		BF557C94A2584939A7578CC9 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; name = "OpenSans-Bold.ttf"; path = "../assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6B19A554B827461F99EFD9E8 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; name = "OpenSans-Regular.ttf"; path = "../assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +150,7 @@
 				00E356EF1AD99517003FC87E /* AmamentaCoachTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				4779FFC26CB94F7597E55DF7 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -156,6 +167,19 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		4779FFC26CB94F7597E55DF7 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				4543B548471C453A8C9F7BA1 /* Manjari-Bold.ttf */,
+				5C106698D8EA48DA96B43ACE /* Manjari-Regular.ttf */,
+				D559DB75E0F34A79879736FA /* Manjari-Thin.ttf */,
+				BF557C94A2584939A7578CC9 /* OpenSans-Bold.ttf */,
+				6B19A554B827461F99EFD9E8 /* OpenSans-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -295,6 +319,11 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				251D7C10A5514BD3A6A7BD8B /* Manjari-Bold.ttf in Resources */,
+				1543B58D86064E90B7902FEC /* Manjari-Regular.ttf in Resources */,
+				31FBCFC8C77E40DBA38695D0 /* Manjari-Thin.ttf in Resources */,
+				F946FECDA5714DB0AA8BE8F3 /* OpenSans-Bold.ttf in Resources */,
+				AF773594B2ED4B188BAA8CA6 /* OpenSans-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
