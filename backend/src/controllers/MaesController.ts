@@ -44,7 +44,12 @@ class MaesController{
             qtd_gravidez,
         } = req.body;
 
-        const t_amamentacao_serializable = tempo_amamentacao.join()
+        let t_amamentacao_serializable
+        if(tempo_amamentacao){
+            t_amamentacao_serializable = tempo_amamentacao.join()
+        }else{
+            t_amamentacao_serializable=null
+        }
 
         const mae = {
             email,
