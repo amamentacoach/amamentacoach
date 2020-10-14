@@ -36,6 +36,7 @@ class MaesController{
             nome, 
             data_nascimento, 
             amamentou_antes,
+            tempo_amamentacao,
             companheiro,
             moram_juntos,
             escolaridade, 
@@ -43,12 +44,15 @@ class MaesController{
             qtd_gravidez,
         } = req.body;
 
+        const t_amamentacao_serializable = tempo_amamentacao.join()
+
         const mae = {
             email,
             senha: await bcrypt.hash(senha,10),
             nome,
             data_nascimento,
             amamentou_antes,
+            tempo_amamentacao:t_amamentacao_serializable,
             companheiro,
             moram_juntos,
             escolaridade,
@@ -59,9 +63,11 @@ class MaesController{
         
         const [id] = await knex('mae').insert(mae).returning('id')
 
-        return res.json({
-            id,
-        });
+        const secret = process.env.SECRET
+        const token = jwt.sign({id},secret?secret:"segredo",{
+            expiresIn:2592000
+        })
+        res.json({token})
 
 
     }

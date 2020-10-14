@@ -41,7 +41,8 @@ const uploadMiddleware = multer(uploadConfig);
  *          "moram_juntos":"2 anos", // caso nao more junto enviar NULL
  *          "escolaridade":"Ensino Medio Completo",
  *          "renda":"Entre 1 e 3 salarios minimos",
- *          "qtd_gravidez":2
+ *          "qtd_gravidez":2,
+ *          "tempo_amamentacao":["Menos de 1 ano","2 anos"]
  *      }
  * 
  * @apiSuccessExample {json} Sucesso
