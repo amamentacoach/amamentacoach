@@ -48,7 +48,7 @@ const uploadMiddleware = multer(uploadConfig);
  * @apiSuccessExample {json} Sucesso
  *    HTTP/1.1 200 OK
  *      {
- *          "id":1
+ *          "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjAyNjczMDA5LCJleHAiOjE2MDUyNjUwMDl9.wFrGTEfQ3s_7DNlsFDV88NDYGtXPMrpT-mlWvSAEomg"
  *      }
  *
  */
