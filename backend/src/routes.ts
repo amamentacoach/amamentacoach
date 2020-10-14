@@ -112,6 +112,7 @@ routes.get('/maes', verifyJWT,maesController.show);
  *          "data_parto":"2020-08-28",
  *          "semanas_gest": 35,
  *          "dias_gest":5,
+ *          "complicacoes":true,
  *          "peso":2.5,
  *          "apgar1":8,
  *          "apgar2":10,

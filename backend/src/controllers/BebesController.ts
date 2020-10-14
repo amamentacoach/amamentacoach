@@ -26,6 +26,7 @@ class BebesController{
             apgar2,
             tipo_parto, 
             local,
+            complicacoes
         } = req.body;
 
         const bebe = {
@@ -38,6 +39,7 @@ class BebesController{
             apgar2,
             tipo_parto,
             local,
+            complicacoes:complicacoes || false,
             mae_id:id_mae
         };
         

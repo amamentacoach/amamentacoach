@@ -54,7 +54,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"nome\":\"Enzo Gabriel\",\n    \"data_parto\":\"2020-08-28\",\n    \"semanas_gest\": 35,\n    \"dias_gest\":5,\n    \"peso\":2.5,\n    \"apgar1\":8,\n    \"apgar2\":10,\n    \"tipo_parto\":true, // false: parto normal | true: cesaria\n    \"local\":\"UCI Neonatal\"\n}",
+          "content": "{\n    \"nome\":\"Enzo Gabriel\",\n    \"data_parto\":\"2020-08-28\",\n    \"semanas_gest\": 35,\n    \"dias_gest\":5,\n    \"complicacoes\":true,\n    \"peso\":2.5,\n    \"apgar1\":8,\n    \"apgar2\":10,\n    \"tipo_parto\":true, // false: parto normal | true: cesaria\n    \"local\":\"UCI Neonatal\"\n}",
           "type": "json"
         }
       ]

@@ -14,6 +14,7 @@ export async function up(knex: Knex): Promise<void> {
         table.boolean('tipo_parto').notNullable();
         table.string('local').notNullable();
         table.integer('mae_id').notNullable();
+        table.boolean('complicacoes').notNullable();
         table.foreign('mae_id').references('id').inTable('mae');
     });
 }
