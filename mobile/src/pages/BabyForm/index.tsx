@@ -197,22 +197,22 @@ const BabyForm: React.FC = () => {
 
   return (
     <Container>
-      <Modal
-        text="Apgar é a nota, de 0 a 10, que o bebê recebe de acordo com o estado em que ele se apresenta no momento de nascimento e consta no cartão da criança.
-Se não souber, tudo bem, continue seu cadastro normalmente!"
-        visible={isApgarModalVisible}
-        closeModal={() => setIsApgarModalVisible(false)}
-      />
-      <Modal
-        text="Conta criada com sucesso! Seja muito bem-vinda ao AmamentaCoach!"
-        visible={isSignUpModalVisible}
-        closeModal={async () => {
-          setIsSignUpModalVisible(false);
-          await signIn(email, password);
-        }}
-      />
-
       <ScrollView>
+        <Modal
+          text="Apgar é a nota, de 0 a 10, que o bebê recebe de acordo com o estado em que ele se apresenta no momento de nascimento e consta no cartão da criança.
+Se não souber, tudo bem, continue seu cadastro normalmente!"
+          visible={isApgarModalVisible}
+          closeModal={() => setIsApgarModalVisible(false)}
+        />
+        <Modal
+          text="Conta criada com sucesso! Seja muito bem-vinda ao AmamentaCoach!"
+          visible={isSignUpModalVisible}
+          closeModal={async () => {
+            setIsSignUpModalVisible(false);
+            await signIn(email, password);
+          }}
+        />
+
         <Header>
           <HeaderText>Passo 3 de 3</HeaderText>
           <HeaderSubText>

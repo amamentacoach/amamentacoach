@@ -159,14 +159,17 @@ const MotherForm: React.FC = () => {
       alreadyBreastfeed: formValue.alreadyBreastfeed.toLowerCase() === 'sim',
       married: formValue.married.toLowerCase() === 'sim',
       liveTogether:
-        formValue.married.toLowerCase() !== 'não'
-          ? `${formValue.marriedTime} ${formValue.marriedMetric}`
-          : null,
+        formValue.married.toLowerCase() === 'sim'
+          ? null
+          : `${formValue.marriedTime} ${formValue.marriedMetric}`,
       pregnantCount: parseInt(formValue.pregnantCount, 10),
       name: formValue.name,
       birthday: formValue.birthday,
       education: formValue.education,
       wage: formValue.wage,
+      timeSpentBreastFeeding: formValue.timeSpentBreastFeeding.map(
+        (item) => item.value,
+      ),
     };
 
     const token = await signUpMother(motherInfo);

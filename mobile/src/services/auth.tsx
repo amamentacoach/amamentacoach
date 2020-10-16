@@ -11,6 +11,7 @@ export interface IMotherSignUpInfo {
   education: string;
   wage: string;
   pregnantCount: number;
+  timeSpentBreastFeeding: string[];
 }
 
 interface IBabySignUpInfo {
@@ -37,6 +38,7 @@ export async function signUpMother({
   education,
   wage,
   pregnantCount,
+  timeSpentBreastFeeding,
 }: IMotherSignUpInfo): Promise<string | null> {
   try {
     const request = await api.post('/maes', {
@@ -50,6 +52,7 @@ export async function signUpMother({
       escolaridade: education,
       renda: wage,
       qtd_gravidez: pregnantCount,
+      tempo_amamentacao: timeSpentBreastFeeding,
     });
     return request.data.token;
   } catch (error) {
