@@ -7,8 +7,7 @@ import logo from '../../../assets/images/logo_white.png';
 const SplashScreen: React.FC = () => {
   return (
     <Container>
-      <LogoImage source={logo} resizeMode="contain" />
-      <AppNameText>Amamenta Coach</AppNameText>
+      <LogoImage source={logo} resizeMode="stretch" />
     </Container>
   );
 };

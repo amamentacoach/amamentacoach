@@ -4,7 +4,7 @@ import SplashScreen from '../pages/SplashScreen';
 
 interface IIsFirstRunContextData {
   isFirstRun: boolean;
-  setNotFirstRun: () => void;
+  setNotFirstRun: () => Promise<void>;
 }
 
 const IsFirstRun = createContext<IIsFirstRunContextData>(
@@ -12,7 +12,7 @@ const IsFirstRun = createContext<IIsFirstRunContextData>(
 );
 
 export const IsFirstRunProvider: React.FC = ({ children }) => {
-  const [isFirstRun, setIsFirstRun] = useState<boolean | null>(true);
+  const [isFirstRun, setIsFirstRun] = useState<boolean>(true);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,9 +21,7 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
         '@AmamentaCoach:isFirstRun',
       );
 
-      if (isFirstRunStorage) {
-        setIsFirstRun(isFirstRunStorage === null);
-      }
+      setIsFirstRun(isFirstRunStorage === null);
       setLoading(false);
     }
 
@@ -42,7 +40,7 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
   return (
     <IsFirstRun.Provider
       value={{
-        isFirstRun: !!isFirstRun,
+        isFirstRun,
         setNotFirstRun,
       }}>
       {children}

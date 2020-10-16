@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import InfoList from '../../components/InfoList';
 import MainButton from '../../components/MainButton';
 import { useIsFirstRun } from '../../contexts/firstRun';
@@ -30,7 +31,7 @@ const Introduction: React.FC = () => {
   const { setNotFirstRun } = useIsFirstRun();
 
   async function handleSkip() {
-    setNotFirstRun();
+    await setNotFirstRun();
   }
 
   function continueButton() {

@@ -10,13 +10,5 @@ export const Container = styled.View`
 export const LogoImage = styled.Image`
   height: 200px;
   width: 200px;
-  margin-top: -30px;
-`;
-
-export const AppNameText = styled.Text`
-  font-family: 'Manjari-Bold';
-  font-size: 30px;
-  color: white;
-  width: 150px;
-  text-align: center;
+  margin-top: -22px;
 `;

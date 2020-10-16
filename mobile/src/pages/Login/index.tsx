@@ -5,6 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
+import Modal from '../../components/Modal';
 import FormTextInput from '../../components/FormTextInput';
 import MainButton from '../../components/MainButton';
 import { useAuth } from '../../contexts/auth';
@@ -24,7 +25,6 @@ import {
 } from './styles';
 
 import logo from '../../../assets/images/logo_primary.png';
-import Modal from '../../components/Modal';
 
 interface IFormValues {
   email: string;
