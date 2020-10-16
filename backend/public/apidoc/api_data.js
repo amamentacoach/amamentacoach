@@ -75,6 +75,59 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/perguntas/:categoria",
+    "title": "Listagem de perguntas",
+    "description": "<p>Lista todas as perguntas de uma enquete<br/> Categoria das Enquetes:<br/> 1 - Amamentar um prematuro<br/> 2 - DIÁRIO: Sentimentos<br/> 3 - DIÁRIO: Metas - Geral<br/> 4 - DIÁRIO: Metas - Alojamento Conjunto<br/> 5 - DIÁRIO: Metas - UCI/UTI<br/> 6 - DIÁRIO: Ajuda<br/> 7 - Participação Pai: UCI/UTI<br/> 8 - Participação Pai: Alojamento Conjunto<br/></p>",
+    "group": "Enquetes",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "[\n    {\n        \"id\": 1,\n        \"categoria\": 1,\n        \"descricao\": \"Pra você, qual é a melhor parte de dedicar-se a amamentar um bebê prematuro?\",\n        \"alternativas\": [\n        \"Sentimento de empoderamento (lidar com este desafio me faz acreditar que sou capaz de outras grandes coisas)\",\n        \"Gratidão pela oportunidade (penso que muitas mulheres, por muitas razões, não conseguem nem tentar)\",\n        \"A formação de um poderoso vínculo ao travar uma batalha em parceria com meu(a) pequeno(a)\",\n        \"Não consigo identificar nada de bom\"\n        ],\n        \"outro\": true,\n        \"multiplas\": true\n    },\n    {\n        \"id\": 2,\n        \"categoria\": 1,\n        \"descricao\": \"O que te motiva a continuar tentando amamentar?\",\n        \"alternativas\": [\n        \"Pensar que é o melhor para o meu bebê\",\n        \"O incentivo que estou recebendo dos profissionais\",\n        \"O incentivo que estou recebendo da minha família\",\n        \"Pensar no custo da fórmula\",\n        \"Outras motivações\",\n        \"Não estou muito motivada a continuar\"\n        ],\n        \"outro\": false,\n        \"multiplas\": true\n    },\n    {\n        \"id\": 3,\n        \"categoria\": 1,\n        \"descricao\": \"Você sente que está recebendo toda a ajuda de que precisa para continuar tentando amamentar seu bebê?\",\n        \"alternativas\": [\n        \"Sim, tanto dos profissionais quanto da minha família\",\n        \"Apenas da minha família\",\n        \"Apenas dos profissionais\",\n        \"Parcialmente, tanto dos profissionais quanto da minha família\",\n        \"Não estou recebendo ajuda\"\n        ],\n        \"outro\": false,\n        \"multiplas\": false\n    }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Enquetes",
+    "name": "GetPerguntasCategoria"
+  },
+  {
+    "type": "post",
+    "url": "/responder/:pergunta_id",
+    "title": "Responder pergunta",
+    "description": "<p>Responde uma pergunta</p>",
+    "group": "Enquetes",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "{\n    \"descricao\":\"O incentivo que estou recebendo dos profissionais\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Enquetes",
+    "name": "PostResponderPergunta_id"
+  },
+  {
+    "type": "get",
     "url": "/maes",
     "title": "Dados da mae",
     "description": "<p>Retorna os dados da mae logada</p>",
