@@ -384,7 +384,7 @@ routes.get('/perguntas/:categoria',perguntasController.index);
  * 
  * @apiParamExample {json} Exemplo Request:
  *      {
- *          "respostas":["O incentivo que estou recebendo dos profissionais"] // um array para caso for mais de uma resposta
+ *          "respostas":["O incentivo que estou recebendo dos profissionais"] // um array para caso selecione mais de uma opcao
  *      }
  *
  */
