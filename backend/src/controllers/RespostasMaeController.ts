@@ -3,14 +3,19 @@ import knex from '../database/connection';
 
 class RespostasMaeController{
     async create(req:Request, res:Response){
-        const {mae_id,pergunta_id} = req.params;
-        const {descricao} = req.body;
-        await knex('resposta').insert({mae_id,pergunta_id,descricao,data:new Date()});
+        const {pergunta_id} = req.params;
+        let respostas: any[];
+        respostas = req.body.respostas;
+        const {mae_id} = req;
+        respostas.map(async (resposta,i)=>{
+            await knex('resposta').insert({mae_id,pergunta_id,descricao:resposta,data:new Date()});
+        })
+        
         res.sendStatus(200)
     }
 
     async index(req:Request, res:Response){
-        const {mae_id} = req.params;
+        const {mae_id} = req;
 
         const {nome} = await knex('mae').select('nome').where('mae.id',mae_id).first();
 

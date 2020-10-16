@@ -304,14 +304,98 @@ routes.get('/bebes/:id', bebesController.show);
  */
 routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadController.create);
 
-routes.post('/maes/:mae_id/respostas/:pergunta_id',respostasMaeController.create);
-routes.get('/maes/:mae_id/respostas',respostasMaeController.index);
+
+/**
+ * @api {get} /perguntas/:categoria Listagem de perguntas
+ * @apiDescription Lista todas as perguntas de uma enquete<br/>
+ *  Categoria das Enquetes:<br/>
+ *      1 - Amamentar um prematuro<br/>
+ *      2 - DIÁRIO: Sentimentos<br/>
+ *      3 - DIÁRIO: Metas - Geral<br/>
+ *      4 - DIÁRIO: Metas - Alojamento Conjunto<br/>
+ *      5 - DIÁRIO: Metas - UCI/UTI<br/>
+ *      6 - DIÁRIO: Ajuda<br/>
+ *      7 - Participação Pai: UCI/UTI<br/>
+ *      8 - Participação Pai: Alojamento Conjunto<br/>
+ * 
+ *      
+ * @apiGroup Enquetes
+ *
+ * 
+ * 
+ * @apiParamExample {json} Exemplo Request:
+ *      [
+ *          {
+ *              "id": 1,
+ *              "categoria": 1,
+ *              "descricao": "Pra você, qual é a melhor parte de dedicar-se a amamentar um bebê prematuro?",
+ *              "alternativas": [
+ *              "Sentimento de empoderamento (lidar com este desafio me faz acreditar que sou capaz de outras grandes coisas)",
+ *              "Gratidão pela oportunidade (penso que muitas mulheres, por muitas razões, não conseguem nem tentar)",
+ *              "A formação de um poderoso vínculo ao travar uma batalha em parceria com meu(a) pequeno(a)",
+ *              "Não consigo identificar nada de bom"
+ *              ],
+ *              "outro": true,
+ *              "multiplas": true
+ *          },
+ *          {
+ *              "id": 2,
+ *              "categoria": 1,
+ *              "descricao": "O que te motiva a continuar tentando amamentar?",
+ *              "alternativas": [
+ *              "Pensar que é o melhor para o meu bebê",
+ *              "O incentivo que estou recebendo dos profissionais",
+ *              "O incentivo que estou recebendo da minha família",
+ *              "Pensar no custo da fórmula",
+ *              "Outras motivações",
+ *              "Não estou muito motivada a continuar"
+ *              ],
+ *              "outro": false,
+ *              "multiplas": true
+ *          },
+ *          {
+ *              "id": 3,
+ *              "categoria": 1,
+ *              "descricao": "Você sente que está recebendo toda a ajuda de que precisa para continuar tentando amamentar seu bebê?",
+ *              "alternativas": [
+ *              "Sim, tanto dos profissionais quanto da minha família",
+ *              "Apenas da minha família",
+ *              "Apenas dos profissionais",
+ *              "Parcialmente, tanto dos profissionais quanto da minha família",
+ *              "Não estou recebendo ajuda"
+ *              ],
+ *              "outro": false,
+ *              "multiplas": false
+ *          }
+ *      ]
+ * 
+ *
+ */
+routes.get('/perguntas/:categoria',perguntasController.index);
+
+
+ /**
+ * @api {post} /responder/:pergunta_id Responder pergunta
+ * @apiDescription Responde uma pergunta
+ * @apiGroup Enquetes
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ * 
+ * 
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "respostas":["O incentivo que estou recebendo dos profissionais"] // um array para caso for mais de uma resposta
+ *      }
+ *
+ */
+routes.post('/responder/:pergunta_id',verifyJWT,respostasMaeController.create);
+routes.get('/maes/:mae_id/respostas',verifyJWT,respostasMaeController.index);
 
 routes.post('/mensagens',verifyJWT,mensagensController.create);
 routes.get('/mensagens',mensagensController.index);
 
 routes.post('/perguntas',perguntasController.create);
-routes.get('/perguntas/:categoria',perguntasController.index);
+
 
 routes.get('/perguntas/:pergunta_id/respostas',respostasController.show);
 
