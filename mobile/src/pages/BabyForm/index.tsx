@@ -175,6 +175,10 @@ const BabyForm: React.FC = () => {
   async function registerNewBaby(formValue: IFormValues) {
     setIsSendingForm(true);
     const token = await getMotherToken(email, password);
+    if (token === null) {
+      setIsSendingForm(false);
+      return;
+    }
 
     formValue.babies.forEach(async (baby) => {
       const babyInfo = {
@@ -187,7 +191,7 @@ const BabyForm: React.FC = () => {
         apgar1: parseInt(baby.apgar1, 10),
         apgar2: parseInt(baby.apgar2, 10),
         birthLocation: baby.birthLocation,
-        difficulties: baby.birthLocation,
+        difficulties: baby.difficulties.toLowerCase() === 'sim',
       };
       await signUpBaby(token, babyInfo);
     });

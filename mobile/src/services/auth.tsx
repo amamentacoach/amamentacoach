@@ -23,7 +23,7 @@ interface IBabySignUpInfo {
   apgar2: number;
   birthType: boolean;
   birthLocation: string;
-  difficulties: string;
+  difficulties: boolean;
 }
 
 export async function signUpMother({
@@ -82,6 +82,7 @@ export async function signUpBaby(
       apgar2,
       tipo_parto: birthType,
       local: birthLocation,
+      complicacoes: difficulties,
     },
     {
       headers: {
