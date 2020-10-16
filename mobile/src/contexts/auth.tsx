@@ -31,7 +31,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     checkDataInStorage();
   });
 
-  async function signIn(email: string, password: string) {
+  async function signIn(email: string, password: string): Promise<boolean> {
     const userToken = await auth.signIn(email, password);
     if (userToken === null) {
       return false;
@@ -43,7 +43,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     return true;
   }
 
-  async function signOut() {
+  async function signOut(): Promise<void> {
     await AsyncStorage.removeItem('@AmamentaCoach:token');
     setToken(null);
     api.defaults.headers.common.Authorization = null;

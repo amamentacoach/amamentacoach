@@ -169,9 +169,13 @@ const MotherForm: React.FC = () => {
       wage: formValue.wage,
     };
 
-    await signUpMother(motherInfo);
+    const token = await signUpMother(motherInfo);
     setIsSendingForm(false);
-    navigation.navigate('BabyForm', { email, password });
+    if (token === null) {
+      return;
+    }
+
+    navigation.navigate('BabyForm', { email, password, token });
   }
 
   return (

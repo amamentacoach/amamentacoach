@@ -3,10 +3,10 @@ import { View } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Formik, FormikErrors } from 'formik';
 import * as Yup from 'yup';
-
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import { useAuth } from '../../contexts/auth';
-import { signUpBaby, signIn as getMotherToken } from '../../services/auth';
+import { signUpBaby } from '../../services/auth';
 import Modal from '../../components/Modal';
 import MainButton from '../../components/MainButton';
 import SecondaryButton from '../../components/SecondaryButton';
@@ -53,17 +53,18 @@ interface IFormValues {
 }
 
 type IScreenParams = {
-  BabyForm: {
+  MotherForm: {
     email: string;
     password: string;
+    token: string;
   };
 };
 
 const BabyForm: React.FC = () => {
   const { signIn } = useAuth();
   const navigation = useNavigation();
-  const { email, password } = useRoute<
-    RouteProp<IScreenParams, 'BabyForm'>
+  const { email, password, token } = useRoute<
+    RouteProp<IScreenParams, 'MotherForm'>
   >().params;
 
   const [isSendingForm, setIsSendingForm] = useState(false);
@@ -174,12 +175,6 @@ const BabyForm: React.FC = () => {
   // Registra todos os bebês do formulário.
   async function registerNewBaby(formValue: IFormValues) {
     setIsSendingForm(true);
-    const token = await getMotherToken(email, password);
-    if (token === null) {
-      setIsSendingForm(false);
-      return;
-    }
-
     formValue.babies.forEach(async (baby) => {
       const babyInfo = {
         name: baby.name,

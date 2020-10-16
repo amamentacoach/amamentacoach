@@ -37,20 +37,24 @@ export async function signUpMother({
   education,
   wage,
   pregnantCount,
-}: IMotherSignUpInfo): Promise<number> {
-  const request = await api.post('/maes', {
-    email,
-    senha: password,
-    nome: name,
-    data_nascimento: birthday,
-    amamentou_antes: alreadyBreastfeed,
-    companheiro: married,
-    moram_juntos: liveTogether,
-    escolaridade: education,
-    renda: wage,
-    qtd_gravidez: pregnantCount,
-  });
-  return request.data.id;
+}: IMotherSignUpInfo): Promise<string | null> {
+  try {
+    const request = await api.post('/maes', {
+      email,
+      senha: password,
+      nome: name,
+      data_nascimento: birthday,
+      amamentou_antes: alreadyBreastfeed,
+      companheiro: married,
+      moram_juntos: liveTogether,
+      escolaridade: education,
+      renda: wage,
+      qtd_gravidez: pregnantCount,
+    });
+    return request.data.token;
+  } catch (error) {
+    return null;
+  }
 }
 
 export async function signUpBaby(
@@ -68,8 +72,6 @@ export async function signUpBaby(
     difficulties,
   }: IBabySignUpInfo,
 ): Promise<void> {
-  // TODO Add difficulties
-  // difficulties
   await api.post(
     '/bebes',
     {
