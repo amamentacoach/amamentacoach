@@ -116,7 +116,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"descricao\":\"O incentivo que estou recebendo dos profissionais\"\n}",
+          "content": "{\n    \"respostas\":[\"O incentivo que estou recebendo dos profissionais\"] // um array para caso selecione mais de uma opcao\n}",
           "type": "json"
         }
       ]
