@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, LogoImage, AppNameText } from './styles';
+import { Container, LogoImage } from './styles';
 
 import logo from '../../../assets/images/logo_white.png';
 

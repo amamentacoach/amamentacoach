@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Formik, FormikErrors } from 'formik';
 import * as Yup from 'yup';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { useAuth } from '../../contexts/auth';
 import { signUpBaby } from '../../services/auth';
@@ -33,6 +32,8 @@ import {
   ApgarTextHeader,
   ApgarHelpButton,
 } from './styles';
+
+import helpIcon from '../../../assets/images/icons/ic_question.png';
 
 interface IBaby {
   id: number;
@@ -364,8 +365,9 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                           />
                         </SecondSubOptionContainer>
                         <ApgarHelpButton
-                          onPress={() => setIsApgarModalVisible(true)}>
-                          <Icon name="help-outline" size={22} color="#7D5CD7" />
+                          onPress={() => setIsApgarModalVisible(true)}
+                          activeOpacity={0.8}>
+                          <Image source={helpIcon} height={22} width={22} />
                         </ApgarHelpButton>
                       </SubOptionsContainer>
                       <FormRadioGroupInput

@@ -5,7 +5,7 @@ import RNBootSplash from 'react-native-bootsplash';
 
 import { AuthProvider } from './contexts/auth';
 import { IsFirstRunProvider } from './contexts/firstRun';
-import Routes from './routes/index';
+import Routes from './routes/routes';
 
 const App: React.FC = () => {
   setTimeout(() => {
