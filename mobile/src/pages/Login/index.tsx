@@ -76,7 +76,7 @@ const FormLogin: React.FC = () => {
 
       <ScrollView>
         <Header>
-          <HeaderImage resizeMode="contain" source={logo} />
+          <HeaderImage source={logo} />
           <HeaderText>Amamenta Coach</HeaderText>
         </Header>
         <Formik
