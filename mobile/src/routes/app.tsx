@@ -16,7 +16,7 @@ const AppRoutes: React.FC = () => {
       <Stack.Screen
         name="NewPassword"
         component={NewPassword}
-        options={{ title: 'Esqueceu a senha?' }}
+        options={{ title: 'Alterar senha' }}
       />
     </Stack.Navigator>
   );

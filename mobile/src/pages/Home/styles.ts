@@ -10,54 +10,94 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 }))``;
 
 export const Header = styled.View`
-  flex: 1;
-  max-height: 200px;
-  margin: 30px auto;
-  justify-content: space-between;
+  width: 100%;
+  height: 254px;
 `;
 
-export const HeaderImage = styled.Image`
-  min-height: 100px;
-  min-width: 100px;
-  margin: 0 auto;
+export const HeaderBackground = styled.View`
+  background-color: #7d5cd7;
+  align-items: center;
+  width: 100%;
+  height: 170px;
+  padding: 0 24px;
+`;
+
+export const BannerImage = styled.Image`
+  width: 100%;
 `;
 
 export const HeaderText = styled.Text`
+  font-family: 'Manjari-Bold';
   font-size: 24px;
-  margin: 0 auto;
-  color: #7d5cd7;
-  width: 180px;
-  text-align: center;
+  color: #fafafa;
+  margin-top: 30px;
 `;
 
-export const FormContainer = styled.View`
-  flex: 1;
-  margin: 0 24px;
+export const HUButton = styled.TouchableOpacity`
+  background-color: #30d2f5;
+  height: 30px;
+  width: 185px;
+  margin-top: -48px;
+  justify-content: center;
+  align-items: center;
 `;
 
-export const ForgotPasswordText = styled.Text`
+export const HUButtonText = styled.Text`
+  font-family: 'Manjari-Bold';
   font-size: 14px;
-  margin: auto 0 40px auto;
-  color: #545454;
-  text-align: center;
+  color: #fafafa;
 `;
 
-export const SubmitButtonContainer = styled.View`
-  margin-bottom: 40px;
+export const ContentContainer = styled.View`
+  flex: 1;
+  margin: 24px 24px 0 24px;
 `;
 
-export const SignUpContainer = styled.View`
+export const ContentHeader = styled.Text`
+  font-family: 'Manjari-Bold';
+  font-size: 20px;
+`;
+
+export const Option = styled.TouchableOpacity`
   flex: 1;
 `;
 
-export const NoAccountText = styled.Text`
-  font-size: 16px;
-  color: #545454;
-  margin: 0 auto;
+export const ContentOption = styled.TouchableOpacity`
+  flex: 1;
+  width: 100%;
+  flex-direction: row;
 `;
 
-export const SignUpText = styled.Text`
+export const ContentImage = styled.Image`
+  height: 100px;
+  width: 100px;
+`;
+
+export const ContentTextContainer = styled.View`
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 15px;
+`;
+
+export const ContentTitle = styled.Text`
+  color: #000000;
+  font-family: 'Open-Sans-Bold';
   font-size: 16px;
-  color: #7d5cd7;
-  margin: 0 auto;
+  flex-wrap: wrap;
+`;
+
+export const ContentSubtitle = styled.Text`
+  color: #545454;
+  font-family: 'Open-Sans-Regular';
+  font-size: 16px;
+  flex-wrap: wrap;
+`;
+
+export const ContentSeparator = styled.View`
+  height: 1px;
+  width: 100%;
+  background-color: #979797;
+  opacity: 0.25;
+  margin: 20px 0;
 `;
