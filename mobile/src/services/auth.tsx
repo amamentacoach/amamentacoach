@@ -112,8 +112,24 @@ export async function signIn(
   }
 }
 
-export async function forgotPassword(email: string): Promise<void> {
-  await api.post('/esqueceusenha', {
-    email,
-  });
+export async function forgotPassword(email: string): Promise<boolean> {
+  try {
+    await api.post('/esqueceusenha', {
+      email,
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+export async function newPassword(password: string): Promise<boolean> {
+  try {
+    await api.post('/alterarsenha', {
+      senha: password,
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
 }

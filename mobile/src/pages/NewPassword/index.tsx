@@ -3,9 +3,10 @@ import { View } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { forgotPassword } from '../../services/auth';
+import { newPassword } from '../../services/auth';
 import FormTextInput from '../../components/FormTextInput';
 import MainButton from '../../components/MainButton';
+import Modal from '../../components/Modal';
 
 import {
   Container,
@@ -14,10 +15,10 @@ import {
   SubmitButtonContainer,
   HeaderText,
 } from './styles';
-import Modal from '../../components/Modal';
 
 interface IFormValues {
-  email: string;
+  password: string;
+  password_confirmation: string;
 }
 
 const NewPassword: React.FC = () => {
@@ -25,53 +26,67 @@ const NewPassword: React.FC = () => {
   const [isSendingForm, setIsSendingForm] = useState(false);
 
   const formInitialValues: IFormValues = {
-    email: '',
+    password: '',
+    password_confirmation: '',
   };
-  const SignUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
-    email: Yup.string().email('Email Inválido').required('Obrigatório'),
+  const newPasswordSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+    password: Yup.string()
+      .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
+      .required('Campo obrigatório'),
+    password_confirmation: Yup.string()
+      .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
+      .oneOf([Yup.ref('password')], 'As senhas precisam ser iguais!')
+      .required('Campo obrigatório'),
   }).required();
 
-  async function handleForgotPassword({ email }: IFormValues) {
+  async function handleNewPassword({ password }: IFormValues) {
     setIsSendingForm(true);
-    await forgotPassword(email);
+    const successfulRequest = await newPassword(password);
     setIsSendingForm(false);
-    setIsSubmitModalVisible(true);
+    if (successfulRequest) {
+      setIsSubmitModalVisible(true);
+    }
   }
 
   return (
     <Container>
       <ScrollView>
         <Modal
-          text="Cheque sua caixa de entrada do e-mail e acesse o link que enviamos para a redefinição de sua senha."
+          text="Senha alterada com sucesso!"
           visible={isSubmitModalVisible}
           closeModal={() => setIsSubmitModalVisible(false)}
         />
 
-        <HeaderText>
-          Preencha o campo abaixo com o seu e-mail de cadastro para que possamos
-          enviar um link de redefinição de senha.
-        </HeaderText>
+        <HeaderText>Insira e confirme a nova senha</HeaderText>
         <Formik
           initialValues={formInitialValues}
-          validationSchema={SignUpSchema}
+          validationSchema={newPasswordSchema}
           validateOnChange={false}
-          onSubmit={(values) => handleForgotPassword(values)}>
+          onSubmit={(values) => handleNewPassword(values)}>
           {({ handleChange, handleSubmit, dirty, errors, values }) => (
             <FormContainer>
               <View>
                 <FormTextInput
-                  label="Email"
-                  onChangeText={handleChange('email')}
-                  value={values.email}
-                  placeholder="Insira seu email"
-                  keyboardType="email-address"
-                  error={errors.email}
+                  label="Nova senha"
+                  onChangeText={handleChange('password')}
+                  value={values.password}
+                  placeholder="Inserir nova senha"
+                  error={errors.password}
+                  secureTextEntry
+                />
+                <FormTextInput
+                  label="Confirme nova senha"
+                  onChangeText={handleChange('password_confirmation')}
+                  value={values.password_confirmation}
+                  placeholder="Confirme sua nova senha"
+                  error={errors.password_confirmation}
+                  secureTextEntry
                 />
               </View>
 
               <SubmitButtonContainer>
                 <MainButton
-                  buttonText="Enviar"
+                  buttonText="Salvar"
                   onPress={handleSubmit}
                   disabled={!dirty || isSendingForm}
                 />

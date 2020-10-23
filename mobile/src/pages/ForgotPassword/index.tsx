@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { forgotPassword } from '../../services/auth';
 import FormTextInput from '../../components/FormTextInput';
 import MainButton from '../../components/MainButton';
+import Modal from '../../components/Modal';
 
 import {
   Container,
@@ -14,7 +15,6 @@ import {
   SubmitButtonContainer,
   HeaderText,
 } from './styles';
-import Modal from '../../components/Modal';
 
 interface IFormValues {
   email: string;
@@ -33,9 +33,11 @@ const ForgotPassword: React.FC = () => {
 
   async function handleForgotPassword({ email }: IFormValues) {
     setIsSendingForm(true);
-    await forgotPassword(email);
+    const successfulRequest = await forgotPassword(email);
     setIsSendingForm(false);
-    setIsSubmitModalVisible(true);
+    if (successfulRequest) {
+      setIsSubmitModalVisible(true);
+    }
   }
 
   return (

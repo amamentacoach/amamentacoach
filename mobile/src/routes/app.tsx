@@ -7,7 +7,7 @@ import NewPassword from '../pages/NewPassword';
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerTitleAlign: 'center' }}>
       <Stack.Screen
         name="Home"
         component={HomeRoutes}
