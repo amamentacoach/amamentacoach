@@ -7,7 +7,7 @@ async function sendPushNotification(){
 
     if(users.length>0){
         const include_player_ids:string[] = [];
-        users.map((value,i)=>include_player_ids.push(value.userId))
+        users.map((value,i)=>include_player_ids.push(value.user_id))
 
         const data = {
             app_id:process.env.OS_APP_ID,
