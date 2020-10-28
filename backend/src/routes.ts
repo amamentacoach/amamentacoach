@@ -438,7 +438,7 @@ routes.post('/alterarsenha',verifyJWT,maesController.alterarSenha)
  *      }
  *
  */
-routes.post('/subscribe',maesController.subscribe);
+routes.post('/subscribe',verifyJWT,maesController.subscribe);
 
 routes.get('/recuperar/:token',(req,res)=>{
     res.render('recuperar')
