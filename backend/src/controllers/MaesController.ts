@@ -143,6 +143,12 @@ class MaesController{
         await knex('mae').update({senha:await bcrypt.hash(senha,10)}).where('id',req.mae_id);
         return res.sendStatus(200)
     }
+
+    async subscribe(req:Request,res:Response){
+        const {userId} = req.body;
+        await knex('mae').update(userId).where('id',req.mae_id);
+        return res.sendStatus(200)
+    }
 }
 
 export default MaesController;
