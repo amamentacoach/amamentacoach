@@ -11,6 +11,7 @@ import RespostasMaeController from './controllers/RespostasMaeController';
 import RespostasController from './controllers/RespostasController';
 import UploadController from './controllers/UploadController';
 import BebesController from './controllers/BebesController';
+import sendPushNotification from './utils/sendPushNotification';
 
 
 const maesController = new MaesController();
@@ -445,7 +446,5 @@ routes.get('/recuperar/:token',(req,res)=>{
 });
 
 routes.post('/recuperar/:token',verifyJWT,maesController.recuperarSenha)
-
-
 
 export default routes;

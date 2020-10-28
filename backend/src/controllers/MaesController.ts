@@ -146,7 +146,7 @@ class MaesController{
 
     async subscribe(req:Request,res:Response){
         const {userId} = req.body;
-        await knex('mae').update(userId).where('id',req.mae_id);
+        await knex('mae').update({user_id:userId}).where('id',req.mae_id);
         return res.sendStatus(200)
     }
 }
