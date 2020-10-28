@@ -6,6 +6,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string('alternativas',2048).notNullable();
         table.boolean('outro').notNullable().defaultTo(false);
         table.boolean('multiplas').notNullable();
+        table.string('alvo').notNullable().defaultTo("GERAL");
     });
 }
 
