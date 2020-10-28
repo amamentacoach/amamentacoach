@@ -311,12 +311,9 @@ routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadCont
  *  Categoria das Enquetes:<br/>
  *      1 - Amamentar um prematuro<br/>
  *      2 - DIÁRIO: Sentimentos<br/>
- *      3 - DIÁRIO: Metas - Geral<br/>
- *      4 - DIÁRIO: Metas - Alojamento Conjunto<br/>
- *      5 - DIÁRIO: Metas - UCI/UTI<br/>
- *      6 - DIÁRIO: Ajuda<br/>
- *      7 - Participação Pai: UCI/UTI<br/>
- *      8 - Participação Pai: Alojamento Conjunto<br/>
+ *      3 - DIÁRIO: Metas<br/>
+ *      4 - DIÁRIO: Ajuda<br/>
+ *      5 - Participação do pai<br/>
  * 
  *      
  * @apiGroup Enquetes
@@ -335,8 +332,9 @@ routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadCont
  *              "A formação de um poderoso vínculo ao travar uma batalha em parceria com meu(a) pequeno(a)",
  *              "Não consigo identificar nada de bom"
  *              ],
- *              "outro": true,
- *              "multiplas": true
+ *              "outro": true, // Caso true ter um campo para preencher Outro
+ *              "multiplas": true,
+ *              "alvo": "GERAL" // Publico alvo da pergunta. Pode ser: "GERAL", "AC" ou "UCI/UTI"
  *          },
  *          {
  *              "id": 2,
@@ -351,7 +349,8 @@ routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadCont
  *              "Não estou muito motivada a continuar"
  *              ],
  *              "outro": false,
- *              "multiplas": true
+ *              "multiplas": true,
+ *              "alvo": "GERAL" // Publico alvo da pergunta. Pode ser: "GERAL", "AC" ou "UCI/UTI"
  *          },
  *          {
  *              "id": 3,
@@ -365,7 +364,8 @@ routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadCont
  *              "Não estou recebendo ajuda"
  *              ],
  *              "outro": false,
- *              "multiplas": false
+ *              "multiplas": false,
+*               "alvo": "GERAL" // Publico alvo da pergunta. Pode ser: "GERAL", "AC" ou "UCI/UTI"
  *          }
  *      ]
  * 
