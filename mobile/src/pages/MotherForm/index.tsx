@@ -72,6 +72,7 @@ const MotherForm: React.FC = () => {
   const MotherFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     name: Yup.string().required('Campo obrigatório'),
     birthday: Yup.string().required('Campo obrigatório'),
+    alreadyBreastfeed: Yup.string().required('Campo obrigatório'),
     pregnantCount: Yup.string()
       .matches(new RegExp('^\\d+$'), 'Deve ser um número inteiro positivo')
       .required('Campo obrigatório'),
@@ -82,16 +83,7 @@ const MotherForm: React.FC = () => {
           value: Yup.string().required('Campo obrigatório'),
         }).required(),
       )
-      .required(),
-    alreadyBreastfeed: Yup.string()
-      .when('pregnantCount', {
-        is: '0',
-        then: Yup.string().oneOf(
-          ['Não'],
-          'Você deve ter engravidado pelo menos uma vez',
-        ),
-      })
-      .required('Campo obrigatório'),
+      .defined(),
     married: Yup.string().required('Campo obrigatório'),
     liveTogether: Yup.string().required('Campo obrigatório'),
     marriedTime: Yup.string().required('Campo obrigatório'),
@@ -211,20 +203,37 @@ const MotherForm: React.FC = () => {
                 error={errors.birthday}
               />
 
-              <FormTextInput
-                label="Quantas vezes já esteve grávida? (contando abortos)"
-                value={values.pregnantCount}
-                onChangeText={(text: string) => {
-                  handleNewTimeBreastFeeding(
-                    text,
-                    values.timeSpentBreastFeeding,
-                    setFieldValue,
-                  );
+              <FormRadioGroupInput
+                label="Você já amamentou antes?"
+                fieldName="alreadyBreastfeed"
+                onChange={(fieldName: string, fieldValue: string) => {
+                  setFieldValue(fieldName, fieldValue);
+                  if (fieldValue === 'Não') {
+                    setFieldValue('pregnantCount', '0');
+                  } else if (fieldValue === 'Sim') {
+                    setFieldValue('pregnantCount', '');
+                  }
                 }}
-                placeholder="Insira o número de vezes"
-                keyboardType="numeric"
-                error={errors.pregnantCount}
+                options={['Sim', 'Não']}
+                error={errors.alreadyBreastfeed}
               />
+
+              {values.alreadyBreastfeed === 'Sim' && (
+                <FormTextInput
+                  label="Quantas vezes já esteve grávida? (contando abortos)"
+                  value={values.pregnantCount}
+                  onChangeText={(text: string) => {
+                    handleNewTimeBreastFeeding(
+                      text,
+                      values.timeSpentBreastFeeding,
+                      setFieldValue,
+                    );
+                  }}
+                  placeholder="Insira o número de vezes"
+                  keyboardType="numeric"
+                  error={errors.pregnantCount}
+                />
+              )}
 
               {values.timeSpentBreastFeeding.map((item, index) => (
                 <FormPickerInput
@@ -248,14 +257,6 @@ const MotherForm: React.FC = () => {
                   }
                 />
               ))}
-
-              <FormRadioGroupInput
-                label="Você já amamentou antes?"
-                fieldName="alreadyBreastfeed"
-                onChange={setFieldValue}
-                options={['Sim', 'Não']}
-                error={errors.alreadyBreastfeed}
-              />
 
               <FormRadioGroupInput
                 label="Tem companheiro?"
