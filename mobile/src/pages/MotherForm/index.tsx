@@ -73,7 +73,7 @@ const MotherForm: React.FC = () => {
     name: Yup.string().required('Campo obrigatório'),
     birthday: Yup.string().required('Campo obrigatório'),
     pregnantCount: Yup.string()
-      .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
+      .matches(new RegExp('^\\d+$'), 'Deve ser um número inteiro positivo')
       .required('Campo obrigatório'),
     timeSpentBreastFeeding: Yup.array()
       .of(
@@ -264,7 +264,7 @@ const MotherForm: React.FC = () => {
                   setFieldValue(fieldName, fieldValue);
                   if (fieldValue === 'Não') {
                     setFieldValue('marriedTime', '0');
-                    setFieldValue('liveTogether', '');
+                    setFieldValue('liveTogether', 'Não');
                   } else if (fieldValue === 'Sim') {
                     // Reinicia os campos abaixo quando o valor do campo married é 'Sim'.
                     setFieldValue('marriedTime', '');

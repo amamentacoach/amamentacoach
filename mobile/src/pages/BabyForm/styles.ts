@@ -34,7 +34,6 @@ export const FormContainer = styled.View`
 `;
 
 export const SubOptionsContainer = styled.View`
-  margin-top: -16px;
   flex: 1;
   flex-direction: row;
 `;
@@ -62,6 +61,7 @@ export const SecondSubOptionContainer = styled.View`
 export const ApgarTextHeader = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 14px;
+  margin-bottom: -16px;
 `;
 
 export const ApgarTextContainer = styled.View`

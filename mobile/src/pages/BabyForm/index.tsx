@@ -86,7 +86,10 @@ const BabyForm: React.FC = () => {
           name: Yup.string().required('Campo obrigatório'),
           birthday: Yup.string().required('Campo obrigatório'),
           weight: Yup.string()
-            .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
+            .matches(
+              new RegExp('^(\\d+(\\.\\d\\d*)?)$'),
+              'Deve ser um número positivo. Ex: 3.4',
+            )
             .required('Campo obrigatório'),
           birthType: Yup.string().required('Campo obrigatório'),
           difficulties: Yup.string().required('Campo obrigatório'),
@@ -290,7 +293,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                       <FormTextInput
                         label="Peso de nascimento"
                         value={values.babies[index].weight.toString()}
-                        placeholder="Insira o peso do bebê ao nascer"
+                        placeholder="Insira o peso do bebê ao nascer (kg)"
                         keyboardType="number-pad"
                         onChangeText={handleChange(`babies[${index}].weight`)}
                         error={getBabyError(errors, index, 'weight')}
