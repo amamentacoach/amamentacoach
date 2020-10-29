@@ -3,7 +3,6 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { signUpMother } from '../../services/auth';
 import MainButton from '../../components/MainButton';
 import SecondaryButton from '../../components/SecondaryButton';
 import FormRadioGroupInput from '../../components/FormRadioGroup';
@@ -53,7 +52,6 @@ type IScreenParams = {
 const MotherForm: React.FC = () => {
   const navigation = useNavigation();
   const [breastFeedingCount, setBreastFeedingCount] = useState(0);
-  const [isSendingForm, setIsSendingForm] = useState(false);
   const { email, password } = useRoute<
     RouteProp<IScreenParams, 'MotherForm'>
   >().params;
@@ -150,35 +148,27 @@ const MotherForm: React.FC = () => {
     setBreastFeedingCount(newBreastFeedingCount);
   }
 
-  // Registra o usuário no sistema.
-  async function registerNewMother(formValue: IFormValues) {
-    setIsSendingForm(true);
+  // Avança para a próxima página passando as informações do usuário.
+  function handleFormSubmit(formValues: IFormValues) {
     const motherInfo = {
       email,
       password,
-      alreadyBreastfeed: formValue.alreadyBreastfeed.toLowerCase() === 'sim',
-      married: formValue.married.toLowerCase() === 'sim',
+      alreadyBreastfeed: formValues.alreadyBreastfeed.toLowerCase() === 'sim',
+      married: formValues.married.toLowerCase() === 'sim',
       liveTogether:
-        formValue.married.toLowerCase() === 'sim'
+        formValues.married.toLowerCase() === 'sim'
           ? null
-          : `${formValue.marriedTime} ${formValue.marriedMetric}`,
-      pregnantCount: parseInt(formValue.pregnantCount, 10),
-      name: formValue.name,
-      birthday: formValue.birthday,
-      education: formValue.education,
-      wage: formValue.wage,
-      timeSpentBreastFeeding: formValue.timeSpentBreastFeeding.map(
+          : `${formValues.marriedTime} ${formValues.marriedMetric}`,
+      pregnantCount: parseInt(formValues.pregnantCount, 10),
+      name: formValues.name,
+      birthday: formValues.birthday,
+      education: formValues.education,
+      wage: formValues.wage,
+      timeSpentBreastFeeding: formValues.timeSpentBreastFeeding.map(
         (item) => item.value,
       ),
     };
-
-    const token = await signUpMother(motherInfo);
-    setIsSendingForm(false);
-    if (token === null) {
-      return;
-    }
-
-    navigation.navigate('BabyForm', { email, password, token });
+    navigation.navigate('BabyForm', { motherInfo });
   }
 
   return (
@@ -195,7 +185,7 @@ const MotherForm: React.FC = () => {
           initialValues={formInitialValues}
           validationSchema={MotherFormSchema}
           validateOnChange={false}
-          onSubmit={(values) => registerNewMother(values)}>
+          onSubmit={(values) => handleFormSubmit(values)}>
           {({
             handleChange,
             handleSubmit,
@@ -274,7 +264,7 @@ const MotherForm: React.FC = () => {
                   setFieldValue(fieldName, fieldValue);
                   if (fieldValue === 'Não') {
                     setFieldValue('marriedTime', '0');
-                    setFieldValue('liveTogether', 'Não');
+                    setFieldValue('liveTogether', '');
                   } else if (fieldValue === 'Sim') {
                     // Reinicia os campos abaixo quando o valor do campo married é 'Sim'.
                     setFieldValue('marriedTime', '');
@@ -358,7 +348,7 @@ const MotherForm: React.FC = () => {
                 <SecondSubOptionContainer>
                   <MainButton
                     onPress={handleSubmit}
-                    disabled={!dirty || isSendingForm}
+                    disabled={!dirty}
                     buttonText="Próximo"
                   />
                 </SecondSubOptionContainer>

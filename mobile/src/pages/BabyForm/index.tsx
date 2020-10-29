@@ -5,7 +5,11 @@ import { Formik, FormikErrors } from 'formik';
 import * as Yup from 'yup';
 
 import { useAuth } from '../../contexts/auth';
-import { signUpBaby } from '../../services/auth';
+import {
+  signUpBaby,
+  IMotherSignUpInfo,
+  signUpMother,
+} from '../../services/auth';
 import Modal from '../../components/Modal';
 import MainButton from '../../components/MainButton';
 import SecondaryButton from '../../components/SecondaryButton';
@@ -55,16 +59,14 @@ interface IFormValues {
 
 type IScreenParams = {
   MotherForm: {
-    email: string;
-    password: string;
-    token: string;
+    motherInfo: IMotherSignUpInfo;
   };
 };
 
 const BabyForm: React.FC = () => {
   const { signIn } = useAuth();
   const navigation = useNavigation();
-  const { email, password, token } = useRoute<
+  const { motherInfo } = useRoute<
     RouteProp<IScreenParams, 'MotherForm'>
   >().params;
 
@@ -156,7 +158,6 @@ const BabyForm: React.FC = () => {
       return;
     }
 
-    setFieldValue('numberOfBabies', fieldValue);
     let newBabies = [...babies];
     for (let index = 0; index < Math.abs(newBabyCount - babyCount); index++) {
       if (newBabyCount > babyCount) {
@@ -169,14 +170,20 @@ const BabyForm: React.FC = () => {
         newBabies.pop();
       }
     }
+    setFieldValue('numberOfBabies', fieldValue);
     setFieldValue('babies', newBabies);
     setBabyCount(newBabyCount);
   }
 
+  // Registra a mãe no sistema.
+  async function registerNewMother(): Promise<string | null> {
+    const token = await signUpMother(motherInfo);
+    return token;
+  }
+
   // Registra todos os bebês do formulário.
-  async function registerNewBaby(formValue: IFormValues) {
-    setIsSendingForm(true);
-    formValue.babies.forEach(async (baby) => {
+  async function registerNewBabies(token: string, formValues: IFormValues) {
+    formValues.babies.forEach(async (baby) => {
       const babyInfo = {
         name: baby.name,
         birthday: baby.birthday,
@@ -191,7 +198,18 @@ const BabyForm: React.FC = () => {
       };
       await signUpBaby(token, babyInfo);
     });
+  }
 
+  // Registra a mãe e os bebês.
+  async function handleFormSubmit(formValues: IFormValues) {
+    setIsSendingForm(true);
+    const token = await registerNewMother();
+    if (token === null) {
+      setIsSendingForm(false);
+      return;
+    }
+
+    registerNewBabies(token, formValues);
     setIsSendingForm(false);
     setIsSignUpModalVisible(true);
   }
@@ -210,7 +228,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
           visible={isSignUpModalVisible}
           closeModal={async () => {
             setIsSignUpModalVisible(false);
-            await signIn(email, password);
+            await signIn(motherInfo.email, motherInfo.password);
           }}
         />
 
@@ -228,7 +246,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
           }}
           validationSchema={BabyFormSchema}
           validateOnChange={false}
-          onSubmit={registerNewBaby}>
+          onSubmit={handleFormSubmit}>
           {({
             handleChange,
             handleSubmit,
@@ -271,7 +289,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
 
                       <FormTextInput
                         label="Peso de nascimento"
-                        value={values.babies[index].weight}
+                        value={values.babies[index].weight.toString()}
                         placeholder="Insira o peso do bebê ao nascer"
                         keyboardType="number-pad"
                         onChangeText={handleChange(`babies[${index}].weight`)}
@@ -340,7 +358,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                         <FirstSubOptionContainer>
                           <FormTextInput
                             label=""
-                            value={values.babies[index].apgar1}
+                            value={values.babies[index].apgar1.toString()}
                             placeholder=""
                             keyboardType="number-pad"
                             onChangeText={handleChange(
@@ -355,7 +373,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                         <SecondSubOptionContainer>
                           <FormTextInput
                             label=""
-                            value={values.babies[index].apgar2}
+                            value={values.babies[index].apgar2.toString()}
                             placeholder=""
                             keyboardType="number-pad"
                             onChangeText={handleChange(
