@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import HomeRoutes from './home';
+import TabNavigator from './tabNavigator';
 import NewPassword from '../pages/NewPassword';
 
 const AppRoutes: React.FC = () => {
@@ -10,7 +10,7 @@ const AppRoutes: React.FC = () => {
     <Stack.Navigator screenOptions={{ headerTitleAlign: 'center' }}>
       <Stack.Screen
         name="Home"
-        component={HomeRoutes}
+        component={TabNavigator}
         options={{ headerShown: false }}
       />
       <Stack.Screen

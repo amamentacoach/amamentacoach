@@ -10,62 +10,29 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 }))``;
 
 export const Header = styled.View`
+  margin: 20px 24px;
+`;
+
+export const BannerImage = styled.Image`
   width: 100%;
-  height: 274px;
-`;
-
-export const HeaderBackground = styled.View`
-  background-color: #7d5cd7;
-  align-items: center;
-  width: 100%;
-  height: 70%;
-`;
-
-export const HeaderText = styled.Text`
-  font-family: 'Manjari-Bold';
-  font-size: 24px;
-  color: #fafafa;
-  margin-top: 30px;
-`;
-
-export const BannerImage = styled.ImageBackground`
-  flex: 1;
-  margin: -112px 24px 0 24px;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-export const HUButton = styled.TouchableOpacity`
-  background-color: #30d2f5;
-  height: 30px;
-  width: 185px;
-  margin-bottom: 21px;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const HUButtonText = styled.Text`
-  font-family: 'Manjari-Bold';
-  font-size: 14px;
-  color: #fafafa;
 `;
 
 export const ContentContainer = styled.View`
   flex: 1;
-  margin: 30px 24px 0 24px;
+  margin: 0 24px;
 `;
 
 export const ContentHeader = styled.Text`
   font-family: 'Manjari-Bold';
   font-size: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 `;
 
 export const Option = styled.View`
   margin-bottom: 20px;
 `;
 
-export const ContentOption = styled.TouchableOpacity`
+export const ContentOptionButton = styled.TouchableOpacity`
   width: 100%;
   flex-direction: row;
   align-items: center;
@@ -104,4 +71,9 @@ export const ContentSeparator = styled.View`
   background-color: #979797;
   opacity: 0.25;
   margin-top: 20px;
+`;
+
+export const OpenIconImage = styled.Image`
+  height: 15px;
+  width: 20px;
 `;

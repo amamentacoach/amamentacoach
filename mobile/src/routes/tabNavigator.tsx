@@ -1,11 +1,13 @@
 import React from 'react';
 import { Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from '../pages/Home';
 import Diary from '../pages/Diary';
 import Survey from '../pages/Survey';
 import Profile from '../pages/Profile';
+import HU from '../pages/HU';
 
 import homeIcon from '../../assets/images/icons/ic_home_grey.png';
 import diaryIcon from '../../assets/images/icons/ic_diary_grey.png';
@@ -13,6 +15,24 @@ import surveyIcon from '../../assets/images/icons/ic_survey_grey.png';
 import profileIcon from '../../assets/images/icons/ic_profile_grey.png';
 
 const HomeRoutes: React.FC = () => {
+  const Stack = createStackNavigator();
+  return (
+    <Stack.Navigator screenOptions={{ headerTitleAlign: 'center' }}>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="HU"
+        component={HU}
+        options={{ title: 'Sinta-se em casa!' }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const TabNavigator: React.FC = () => {
   const Tab = createBottomTabNavigator();
   return (
     <Tab.Navigator
@@ -21,11 +41,12 @@ const HomeRoutes: React.FC = () => {
         inactiveTintColor: '#545454',
         style: {
           paddingBottom: 6,
+          paddingTop: 6,
         },
       }}>
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeRoutes}
         options={{
           tabBarLabel: 'Início',
           tabBarIcon: ({ color, size }) => {
@@ -95,4 +116,4 @@ const HomeRoutes: React.FC = () => {
   );
 };
 
-export default HomeRoutes;
+export default TabNavigator;
