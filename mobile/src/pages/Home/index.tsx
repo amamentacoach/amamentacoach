@@ -31,7 +31,9 @@ const Home: React.FC = () => {
       image: require('../../../assets/images/home_baby.png'),
       title: 'Olá, sou o prematuro',
       subtitle: 'Subtítulo 1',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('Premature');
+      },
     },
     {
       image: require('../../../assets/images/home_breastfeed.png'),

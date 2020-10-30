@@ -8,6 +8,7 @@ import Diary from '../pages/Diary';
 import Survey from '../pages/Survey';
 import Profile from '../pages/Profile';
 import HU from '../pages/HU';
+import Premature from '../pages/Premature';
 
 import homeIcon from '../../assets/images/icons/ic_home_grey.png';
 import diaryIcon from '../../assets/images/icons/ic_diary_grey.png';
@@ -27,6 +28,11 @@ const HomeRoutes: React.FC = () => {
         name="HU"
         component={HU}
         options={{ title: 'Sinta-se em casa!' }}
+      />
+      <Stack.Screen
+        name="Premature"
+        component={Premature}
+        options={{ title: 'O Prematuro' }}
       />
     </Stack.Navigator>
   );
