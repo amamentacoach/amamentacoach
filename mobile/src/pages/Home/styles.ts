@@ -78,7 +78,6 @@ export const ContentImage = styled.Image`
 
 export const ContentTextContainer = styled.View`
   flex: 1;
-  flex-direction: column;
   justify-content: space-around;
   margin-left: 15px;
 `;

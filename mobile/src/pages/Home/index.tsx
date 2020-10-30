@@ -39,7 +39,9 @@ const Home: React.FC = () => {
       image: require('../../../assets/images/home_breastfeed.png'),
       title: 'Passo a passo para amamentar o prematuro',
       subtitle: 'Subtítulo 2',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('StepByStepPremature');
+      },
     },
     {
       image: require('../../../assets/images/home_milk.png'),

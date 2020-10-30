@@ -9,6 +9,7 @@ import Survey from '../pages/Survey';
 import Profile from '../pages/Profile';
 import HU from '../pages/HU';
 import Premature from '../pages/Premature';
+import StepByStepPremature from '../pages/StepByStepPremature';
 
 import homeIcon from '../../assets/images/icons/ic_home_grey.png';
 import diaryIcon from '../../assets/images/icons/ic_diary_grey.png';
@@ -33,6 +34,11 @@ const HomeRoutes: React.FC = () => {
         name="Premature"
         component={Premature}
         options={{ title: 'O Prematuro' }}
+      />
+      <Stack.Screen
+        name="StepByStepPremature"
+        component={StepByStepPremature}
+        options={{ title: 'Infográfico' }}
       />
     </Stack.Navigator>
   );
