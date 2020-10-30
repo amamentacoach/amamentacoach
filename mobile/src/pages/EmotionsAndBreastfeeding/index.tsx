@@ -4,22 +4,22 @@ import OptionsList from '../../components/OptionList';
 
 import { Container, ScrollView } from './styles';
 
-const Premature: React.FC = () => {
+const EmotionsAndBreastfeeding: React.FC = () => {
   const options = [
     {
-      image: require('../../../assets/images/premature_birth.png'),
+      image: require('../../../assets/images/emotions_info.png'),
       title: 'Informação: emoções X amamentação',
       subtitle: 'Subtítulo 1',
       onPress: () => {},
     },
     {
-      image: require('../../../assets/images/premature_baby.png'),
+      image: require('../../../assets/images/emotions_box.png'),
       title: 'Caixinha da distração',
       subtitle: 'Subtítulo 2',
       onPress: () => {},
     },
     {
-      image: require('../../../assets/images/premature_heart.png'),
+      image: require('../../../assets/images/emotions_jacobson.png'),
       title: 'Técnica de Relaxamento de Jacobson',
       subtitle: 'Subtítulo 3',
       onPress: () => {},
@@ -35,4 +35,4 @@ const Premature: React.FC = () => {
   );
 };
 
-export default Premature;
+export default EmotionsAndBreastfeeding;

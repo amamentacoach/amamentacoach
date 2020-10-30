@@ -55,7 +55,9 @@ const Home: React.FC = () => {
       image: require('../../../assets/images/home_emotions.png'),
       title: 'Emoções e Amamentação ',
       subtitle: 'Subtítulo 4',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('EmotionsAndBreastfeeding');
+      },
     },
     {
       image: require('../../../assets/images/home_more_information.png'),

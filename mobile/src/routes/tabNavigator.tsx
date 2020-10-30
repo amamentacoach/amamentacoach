@@ -11,6 +11,7 @@ import HU from '../pages/HU';
 import Premature from '../pages/Premature';
 import StepByStepPremature from '../pages/StepByStepPremature';
 import HowToBreastfeed from '../pages/HowToBreastfeed';
+import EmotionsAndBreastfeeding from '../pages/EmotionsAndBreastfeeding';
 
 import homeIcon from '../../assets/images/icons/ic_home_grey.png';
 import diaryIcon from '../../assets/images/icons/ic_diary_grey.png';
@@ -45,6 +46,11 @@ const HomeRoutes: React.FC = () => {
         name="HowToBreastfeed"
         component={HowToBreastfeed}
         options={{ title: 'Retirada do leite' }}
+      />
+      <Stack.Screen
+        name="EmotionsAndBreastfeeding"
+        component={EmotionsAndBreastfeeding}
+        options={{ title: 'Emoções e amamentação' }}
       />
     </Stack.Navigator>
   );

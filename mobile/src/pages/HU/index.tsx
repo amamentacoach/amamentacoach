@@ -1,24 +1,10 @@
 import React from 'react';
 
-import {
-  Container,
-  ScrollView,
-  Header,
-  ContentContainer,
-  ContentHeader,
-  ContentOptionButton,
-  BannerImage,
-  ContentImage,
-  ContentTitle,
-  ContentSubtitle,
-  ContentSeparator,
-  Option,
-  ContentTextContainer,
-  OpenIconImage,
-} from './styles';
+import OptionsList from '../../components/OptionList';
+
+import { Container, ScrollView, Header, BannerImage } from './styles';
 
 import HUBanner from '../../../assets/images/banner_hu.png';
-import NextIcon from '../../../assets/images/icons/ic_next.png';
 
 const HU: React.FC = () => {
   const options = [
@@ -42,22 +28,7 @@ const HU: React.FC = () => {
         <Header>
           <BannerImage source={HUBanner} />
         </Header>
-        <ContentContainer>
-          <ContentHeader>Vídeos</ContentHeader>
-          {options.map(({ image, title, subtitle, onPress }, index) => (
-            <Option key={title}>
-              <ContentOptionButton activeOpacity={0.7} onPress={onPress}>
-                <ContentImage source={image} />
-                <ContentTextContainer>
-                  <ContentTitle>{title}</ContentTitle>
-                  <ContentSubtitle>{subtitle}</ContentSubtitle>
-                </ContentTextContainer>
-                <OpenIconImage source={NextIcon} resizeMode="contain" />
-              </ContentOptionButton>
-              {index < options.length - 1 && <ContentSeparator />}
-            </Option>
-          ))}
-        </ContentContainer>
+        <OptionsList label="Vídeos" options={options} displayArrows />
       </ScrollView>
     </Container>
   );

@@ -1,17 +1,8 @@
 import React from 'react';
 
-import {
-  Container,
-  ContentContainer,
-  ContentImage,
-  ContentOptionButton,
-  ContentSeparator,
-  ContentTextContainer,
-  ContentTitle,
-  HeaderText,
-  Option,
-  ScrollView,
-} from './styles';
+import OptionsList from '../../components/OptionList';
+
+import { Container, HeaderText, ScrollView } from './styles';
 
 const HowToBreastFeed: React.FC = () => {
   const options = [
@@ -43,19 +34,7 @@ const HowToBreastFeed: React.FC = () => {
         <HeaderText>
           Tudo o que você precisa saber sobre retirada do leite
         </HeaderText>
-        <ContentContainer>
-          {options.map(({ image, title, onPress }, index) => (
-            <Option key={title}>
-              <ContentOptionButton activeOpacity={0.7} onPress={onPress}>
-                <ContentImage source={image} />
-                <ContentTextContainer>
-                  <ContentTitle>{title}</ContentTitle>
-                </ContentTextContainer>
-              </ContentOptionButton>
-              {index < options.length - 1 && <ContentSeparator />}
-            </Option>
-          ))}
-        </ContentContainer>
+        <OptionsList options={options} />
       </ScrollView>
     </Container>
   );
