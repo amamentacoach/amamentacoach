@@ -10,6 +10,7 @@ import Profile from '../pages/Profile';
 import HU from '../pages/HU';
 import Premature from '../pages/Premature';
 import StepByStepPremature from '../pages/StepByStepPremature';
+import HowToBreastfeed from '../pages/HowToBreastfeed';
 
 import homeIcon from '../../assets/images/icons/ic_home_grey.png';
 import diaryIcon from '../../assets/images/icons/ic_diary_grey.png';
@@ -39,6 +40,11 @@ const HomeRoutes: React.FC = () => {
         name="StepByStepPremature"
         component={StepByStepPremature}
         options={{ title: 'Infográfico' }}
+      />
+      <Stack.Screen
+        name="HowToBreastfeed"
+        component={HowToBreastfeed}
+        options={{ title: 'Retirada do leite' }}
       />
     </Stack.Navigator>
   );

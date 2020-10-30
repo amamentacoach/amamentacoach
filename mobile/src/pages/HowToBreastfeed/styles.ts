@@ -18,6 +18,14 @@ export const Option = styled.View`
   margin-bottom: 20px;
 `;
 
+export const HeaderText = styled.Text`
+  margin: 20px 24px 12px 24px;
+  color: #737373;
+  font-family: 'Open-Sans-Regular';
+  font-size: 16px;
+  text-align: center;
+`;
+
 export const ContentOptionButton = styled.TouchableOpacity`
   width: 100%;
   flex-direction: row;
@@ -42,13 +50,6 @@ export const ContentTitle = styled.Text`
   font-size: 16px;
   flex-wrap: wrap;
   margin-bottom: 3px;
-`;
-
-export const ContentSubtitle = styled.Text`
-  color: #545454;
-  font-family: 'Open-Sans-Regular';
-  font-size: 16px;
-  flex-wrap: wrap;
 `;
 
 export const ContentSeparator = styled.View`
