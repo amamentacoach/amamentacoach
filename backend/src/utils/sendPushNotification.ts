@@ -7,7 +7,12 @@ interface ConsultaRaw{
 
 async function sendPushNotification(){
     console.log("Enviando notificacoes...")
-    const users:ConsultaRaw = await knex.raw('SELECT user_id FROM mae WHERE user_id IS NOT NULL AND (SELECT EXTRACT(DAY FROM current_timestamp - RESPOSTA.data) AS DIF FROM RESPOSTA where RESPOSTA.mae_id=mae.id order by RESPOSTA.DATA DESC LIMIT 1)>=1');
+    const users:ConsultaRaw = await knex.raw(
+        'SELECT user_id ' +
+        'FROM mae '+
+        'WHERE user_id IS NOT NULL '+
+        'AND ((SELECT EXTRACT(DAY FROM current_timestamp - RESPOSTA.data) AS DIF FROM RESPOSTA where RESPOSTA.mae_id=mae.id order by RESPOSTA.DATA DESC LIMIT 1)>=1 '+
+        'OR (SELECT COUNT(*) FROM RESPOSTA where RESPOSTA.mae_id=mae.id) = 0)');
     if(users.rows.length>0){
         const include_player_ids:string[] = [];
         users.rows.map((value,i)=>include_player_ids.push(value.user_id))
