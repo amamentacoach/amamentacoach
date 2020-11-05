@@ -432,7 +432,7 @@ routes.post('/alterarsenha',verifyJWT,maesController.alterarSenha)
  * @api {post} /subscribe Inscricao para PushNotification
  * @apiDescription Informa o userId retornado pelo OneSignal para o recebimento de Push Notifications
  * @apiGroup Mães
- * 
+ * @apiHeader {String} authorization Token de acesso.
  * @apiParamExample {json} Exemplo Request:
  *      {
  *          "userId":"aabd2dcd-d5d6-4dba-9959-89019e66e78c"
