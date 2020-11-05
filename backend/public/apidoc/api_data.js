@@ -275,6 +275,19 @@ define({ "api": [
     "title": "Inscricao para PushNotification",
     "description": "<p>Informa o userId retornado pelo OneSignal para o recebimento de Push Notifications</p>",
     "group": "Mães",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
     "parameter": {
       "examples": [
         {
