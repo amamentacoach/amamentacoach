@@ -1,13 +1,16 @@
 import knex from '../database/connection';
 import api from '../config/api';
 
+interface ConsultaRaw{
+    rows:any[]
+}
+
 async function sendPushNotification(){
     console.log("Enviando notificacoes...")
-    const users:any[] = await knex.raw('SELECT user_id FROM mae WHERE (SELECT EXTRACT(DAY FROM current_timestamp - RESPOSTA.data) AS DIF FROM RESPOSTA where RESPOSTA.mae_id=mae.id order by RESPOSTA.DATA DESC LIMIT 1)>=1');
-
-    if(users.length>0){
+    const users:ConsultaRaw = await knex.raw('SELECT user_id FROM mae WHERE user_id IS NOT NULL AND (SELECT EXTRACT(DAY FROM current_timestamp - RESPOSTA.data) AS DIF FROM RESPOSTA where RESPOSTA.mae_id=mae.id order by RESPOSTA.DATA DESC LIMIT 1)>=1');
+    if(users.rows.length>0){
         const include_player_ids:string[] = [];
-        users.map((value,i)=>include_player_ids.push(value.user_id))
+        users.rows.map((value,i)=>include_player_ids.push(value.user_id))
 
         const data = {
             app_id:process.env.OS_APP_ID,
@@ -18,7 +21,14 @@ async function sendPushNotification(){
             headers:{Authorization:'Basic '+process.env.OS_API_KEY}
         };
         
-        await api.post('/notifications',data,config)
+        const response = await api.post('/notifications',data,config)
+        if(response.status===200)
+            console.log("Notificacoes enviadas")
+        else{
+            console.log("Erro!")
+        }
+    }else{
+        console.log("Ninguem foi notificado!")
     }
 }
 
