@@ -270,6 +270,26 @@
     "name": "PostMaes"
   },
   {
+    "type": "post",
+    "url": "/subscribe",
+    "title": "Inscricao para PushNotification",
+    "description": "<p>Informa o userId retornado pelo OneSignal para o recebimento de Push Notifications</p>",
+    "group": "Mães",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "{\n    \"userId\":\"aabd2dcd-d5d6-4dba-9959-89019e66e78c\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Mães",
+    "name": "PostSubscribe"
+  },
+  {
     "type": "get",
     "url": "/bebes/:bebe_id/ordenhas",
     "title": "Listagem",
@@ -334,6 +354,17 @@
     "filename": "./src/routes.ts",
     "groupTitle": "Ordenhas",
     "name": "PostBebesBebe_idOrdenhas"
+  },
+  {
+    "type": "get",
+    "url": "/testePush",
+    "title": "Teste de push",
+    "description": "<p>Envia notificacao para todas as maes que nao preencheram o diario nesse dia</br> <b>Uso somente para testes!</b></p>",
+    "group": "Testes",
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Testes",
+    "name": "GetTestepush"
   },
   {
     "type": "post",
