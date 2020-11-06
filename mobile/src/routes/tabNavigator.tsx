@@ -15,6 +15,7 @@ import EmotionsAndBreastfeeding from '../pages/EmotionsAndBreastfeeding';
 import AdditionalInformation from '../pages/AdditionalInformation';
 import NotWhatIExpected from '../pages/NotWhatIExpected';
 import VideoPage from '../pages/VideoPage';
+import BreastfeedingBenefits from '../pages/BreastfeedingBenefits';
 
 import homeIcon from '../../assets/images/icons/ic_home_grey.png';
 import diaryIcon from '../../assets/images/icons/ic_diary_grey.png';
@@ -83,6 +84,11 @@ const HomeRoutes: React.FC = () => {
         name="ThePremature"
         component={ThePremature}
         options={{ title: 'Sou o Prematuro' }}
+      />
+      <Stack.Screen
+        name="BreastfeedingBenefits"
+        component={BreastfeedingBenefits}
+        options={{ title: 'Infográfico' }}
       />
     </Stack.Navigator>
   );

@@ -34,7 +34,9 @@ const Premature: React.FC = () => {
       image: require('../../../assets/images/premature_trophy.png'),
       title: 'Um período de luta, toda uma vida de resultados',
       subtitle: 'Benefícios da amamentação',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('BreastfeedingBenefits');
+      },
     },
   ];
 
