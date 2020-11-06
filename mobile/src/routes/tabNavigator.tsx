@@ -14,6 +14,7 @@ import HowToBreastfeed from '../pages/HowToBreastfeed';
 import EmotionsAndBreastfeeding from '../pages/EmotionsAndBreastfeeding';
 import AdditionalInformation from '../pages/AdditionalInformation';
 import NotWhatIExpected from '../pages/NotWhatIExpected';
+import VideoPage from '../pages/VideoPage';
 
 import homeIcon from '../../assets/images/icons/ic_home_grey.png';
 import diaryIcon from '../../assets/images/icons/ic_diary_grey.png';
@@ -71,6 +72,11 @@ const HomeRoutes: React.FC = () => {
             shadowOpacity: 0, // Remove a sombra no iOS
           },
         }}
+      />
+      <Stack.Screen
+        name="VideoPage"
+        component={VideoPage}
+        options={{ title: 'Vídeo' }}
       />
     </Stack.Navigator>
   );
