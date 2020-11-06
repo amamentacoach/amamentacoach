@@ -20,6 +20,7 @@ import homeIcon from '../../assets/images/icons/ic_home_grey.png';
 import diaryIcon from '../../assets/images/icons/ic_diary_grey.png';
 import surveyIcon from '../../assets/images/icons/ic_survey_grey.png';
 import profileIcon from '../../assets/images/icons/ic_profile_grey.png';
+import ThePremature from '../pages/ThePremature';
 
 const HomeRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -77,6 +78,11 @@ const HomeRoutes: React.FC = () => {
         name="VideoPage"
         component={VideoPage}
         options={{ title: 'Vídeo' }}
+      />
+      <Stack.Screen
+        name="ThePremature"
+        component={ThePremature}
+        options={{ title: 'Sou o Prematuro' }}
       />
     </Stack.Navigator>
   );

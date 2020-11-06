@@ -20,7 +20,9 @@ const Premature: React.FC = () => {
       image: require('../../../assets/images/premature_baby.png'),
       title: 'Muito prazer, eu sou o Prematuro',
       subtitle: 'Subtítulo 2',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('ThePremature');
+      },
     },
     {
       image: require('../../../assets/images/premature_heart.png'),
