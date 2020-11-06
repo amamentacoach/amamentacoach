@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 export const Button = styled.TouchableOpacity`
   height: 50px;
+  width: 100%;
   background-color: transparent;
   border: 2px solid #7d5cd7;
   justify-content: center;

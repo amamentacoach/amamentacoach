@@ -13,6 +13,7 @@ import StepByStepPremature from '../pages/StepByStepPremature';
 import HowToBreastfeed from '../pages/HowToBreastfeed';
 import EmotionsAndBreastfeeding from '../pages/EmotionsAndBreastfeeding';
 import AdditionalInformation from '../pages/AdditionalInformation';
+import NotWhatIExpected from '../pages/NotWhatIExpected';
 
 import homeIcon from '../../assets/images/icons/ic_home_grey.png';
 import diaryIcon from '../../assets/images/icons/ic_diary_grey.png';
@@ -57,6 +58,19 @@ const HomeRoutes: React.FC = () => {
         name="AdditionalInformation"
         component={AdditionalInformation}
         options={{ title: 'Mais informações' }}
+      />
+      <Stack.Screen
+        name="NotWhatIExpected"
+        component={NotWhatIExpected}
+        options={{
+          title: 'O Prematuro',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: '#7D5CD7',
+            elevation: 0, // Remove a sombra no Android
+            shadowOpacity: 0, // Remove a sombra no iOS
+          },
+        }}
       />
     </Stack.Navigator>
   );
