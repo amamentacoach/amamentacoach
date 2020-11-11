@@ -3,7 +3,7 @@ import { Linking } from 'react-native';
 
 import OptionsList from '../../components/OptionList';
 
-import { Container, ScrollView, HeaderText } from './styles';
+import { ScrollView, HeaderText } from './styles';
 
 const Distractions: React.FC = () => {
   const options = [
@@ -40,15 +40,13 @@ const Distractions: React.FC = () => {
   ];
 
   return (
-    <Container>
-      <ScrollView>
-        <HeaderText>
-          Você não só pode como deve pensar em outras coisas além dos desafios
-          da prematuridade e da amamentação! E, às vezes, não pensar em NADA!
-        </HeaderText>
-        <OptionsList options={options} displayArrows />
-      </ScrollView>
-    </Container>
+    <ScrollView>
+      <HeaderText>
+        Você não só pode como deve pensar em outras coisas além dos desafios da
+        prematuridade e da amamentação! E, às vezes, não pensar em NADA!
+      </HeaderText>
+      <OptionsList options={options} displayArrows />
+    </ScrollView>
   );
 };
 

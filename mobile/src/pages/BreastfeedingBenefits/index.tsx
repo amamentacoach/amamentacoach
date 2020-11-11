@@ -128,7 +128,7 @@ const BreastfeedingBenefits: React.FC = () => {
 
   function InfoPage({ index, title, image, topics }: IInfoPageProps) {
     return (
-      <PageContainer width={width}>
+      <PageContainer width={width} key={title}>
         <ScrollView>
           <ContentTitleText>{title}</ContentTitleText>
           <ContentWrapper>
@@ -166,7 +166,6 @@ const BreastfeedingBenefits: React.FC = () => {
         data={pages}
         renderItem={({ item, index }) => (
           <InfoPage
-            key={item.title}
             index={index}
             title={item.title}
             image={item.image}

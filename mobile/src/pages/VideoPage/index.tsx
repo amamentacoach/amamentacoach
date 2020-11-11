@@ -2,7 +2,7 @@ import React from 'react';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
-import { Container, ScrollView, VideoContainer } from './styles';
+import { ScrollView, VideoContainer, ContentContainer } from './styles';
 
 type IScreenParams = {
   VideoPage: {
@@ -14,19 +14,19 @@ const VideoPage: React.FC = () => {
   const { videos } = useRoute<RouteProp<IScreenParams, 'VideoPage'>>().params;
 
   return (
-    <Container>
-      <ScrollView>
+    <ScrollView>
+      <ContentContainer>
         {videos.map((id) => (
           <VideoContainer key={id}>
             <YoutubePlayer
-              height={400}
+              height={300}
               videoId={id}
               initialPlayerParams={{ loop: false }}
             />
           </VideoContainer>
         ))}
-      </ScrollView>
-    </Container>
+      </ContentContainer>
+    </ScrollView>
   );
 };
 

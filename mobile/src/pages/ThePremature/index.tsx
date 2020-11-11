@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import OptionsList from '../../components/OptionList';
 
-import { Container, ScrollView } from './styles';
+import ScrollView from './styles';
 
 const ThePremature: React.FC = () => {
   const navigation = useNavigation();
@@ -33,11 +33,9 @@ const ThePremature: React.FC = () => {
   ];
 
   return (
-    <Container>
-      <ScrollView>
-        <OptionsList options={options} />
-      </ScrollView>
-    </Container>
+    <ScrollView>
+      <OptionsList options={options} />
+    </ScrollView>
   );
 };
 

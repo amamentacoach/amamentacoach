@@ -1,16 +1,14 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.SafeAreaView`
-  flex: 1;
-`;
-
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
-}))``;
+}))`
+  padding: 20px 24px 0 24px;
+`;
 
 export const Header = styled.View`
-  margin: 20px 24px;
+  margin-bottom: 20px;
 `;
 
 export const BannerImage = styled.Image`

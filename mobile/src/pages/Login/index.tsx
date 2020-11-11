@@ -11,7 +11,6 @@ import MainButton from '../../components/MainButton';
 import { useAuth } from '../../contexts/auth';
 
 import {
-  Container,
   ScrollView,
   Header,
   HeaderImage,
@@ -67,7 +66,7 @@ const FormLogin: React.FC = () => {
   }
 
   return (
-    <Container>
+    <>
       <Modal
         text="E-mail ou senha incorretos!"
         visible={isSubmitModalVisible}
@@ -130,7 +129,7 @@ const FormLogin: React.FC = () => {
           )}
         </Formik>
       </ScrollView>
-    </Container>
+    </>
   );
 };
 

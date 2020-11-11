@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import {
-  Container,
   ScrollView,
   Header,
   HeaderText,
@@ -76,35 +75,33 @@ const Home: React.FC = () => {
   ];
 
   return (
-    <Container>
-      <ScrollView>
-        <Header>
-          <HeaderBackground>
-            <HeaderText>Início</HeaderText>
-          </HeaderBackground>
-          <BannerImage source={HUBanner}>
-            <HUButton onPress={() => navigation.navigate('HU')}>
-              <HUButtonText>Comece por aqui!</HUButtonText>
-            </HUButton>
-          </BannerImage>
-        </Header>
-        <ContentContainer>
-          <ContentHeader>Conteúdo</ContentHeader>
-          {options.map(({ image, title, subtitle, onPress }, index) => (
-            <Option key={title}>
-              <ContentOption activeOpacity={0.7} onPress={onPress}>
-                <ContentImage source={image} />
-                <ContentTextContainer>
-                  <ContentTitle>{title}</ContentTitle>
-                  <ContentSubtitle>{subtitle}</ContentSubtitle>
-                </ContentTextContainer>
-              </ContentOption>
-              {index < options.length - 1 && <ContentSeparator />}
-            </Option>
-          ))}
-        </ContentContainer>
-      </ScrollView>
-    </Container>
+    <ScrollView>
+      <Header>
+        <HeaderBackground>
+          <HeaderText>Início</HeaderText>
+        </HeaderBackground>
+        <BannerImage source={HUBanner}>
+          <HUButton onPress={() => navigation.navigate('HU')}>
+            <HUButtonText>Comece por aqui!</HUButtonText>
+          </HUButton>
+        </BannerImage>
+      </Header>
+      <ContentContainer>
+        <ContentHeader>Conteúdo</ContentHeader>
+        {options.map(({ image, title, subtitle, onPress }, index) => (
+          <Option key={title}>
+            <ContentOption activeOpacity={0.7} onPress={onPress}>
+              <ContentImage source={image} />
+              <ContentTextContainer>
+                <ContentTitle>{title}</ContentTitle>
+                <ContentSubtitle>{subtitle}</ContentSubtitle>
+              </ContentTextContainer>
+            </ContentOption>
+            {index < options.length - 1 && <ContentSeparator />}
+          </Option>
+        ))}
+      </ContentContainer>
+    </ScrollView>
   );
 };
 

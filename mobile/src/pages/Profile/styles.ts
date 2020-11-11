@@ -8,7 +8,9 @@ export const Container = styled.SafeAreaView`
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
-}))``;
+}))`
+  flex: 1;
+`;
 
 export const OptionButton = styled.TouchableOpacity`
   margin-bottom: 14px;

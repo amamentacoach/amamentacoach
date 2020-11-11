@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import OptionsList from '../../components/OptionList';
 
-import { Container, ScrollView } from './styles';
+import ScrollView from './styles';
 
 const Premature: React.FC = () => {
   const navigation = useNavigation();
@@ -41,11 +41,9 @@ const Premature: React.FC = () => {
   ];
 
   return (
-    <Container>
-      <ScrollView>
-        <OptionsList options={options} />
-      </ScrollView>
-    </Container>
+    <ScrollView>
+      <OptionsList options={options} />
+    </ScrollView>
   );
 };
 

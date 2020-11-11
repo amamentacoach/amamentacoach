@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const ContentContainer = styled.View`
   flex: 1;
-  margin: 0 24px;
+  margin-bottom: 20px;
 `;
 
 export const ContentHeader = styled.Text`
@@ -31,6 +31,7 @@ export const ContentTextContainer = styled.View`
   flex-direction: column;
   justify-content: space-around;
   margin-left: 15px;
+  margin-right: 10px;
 `;
 
 export const ContentTitle = styled.Text`

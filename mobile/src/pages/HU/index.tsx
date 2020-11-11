@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import OptionsList from '../../components/OptionList';
 
-import { Container, ScrollView, Header, BannerImage } from './styles';
+import { ScrollView, Header, BannerImage } from './styles';
 
 import HUBanner from '../../../assets/images/banner_hu.png';
 
@@ -29,14 +29,12 @@ const HU: React.FC = () => {
   ];
 
   return (
-    <Container>
-      <ScrollView>
-        <Header>
-          <BannerImage source={HUBanner} />
-        </Header>
-        <OptionsList label="Vídeos" options={options} displayArrows />
-      </ScrollView>
-    </Container>
+    <ScrollView>
+      <Header>
+        <BannerImage source={HUBanner} />
+      </Header>
+      <OptionsList label="Vídeos" options={options} displayArrows />
+    </ScrollView>
   );
 };
 
