@@ -166,6 +166,7 @@ const BreastfeedingBenefits: React.FC = () => {
         data={pages}
         renderItem={({ item, index }) => (
           <InfoPage
+            key={item.title}
             index={index}
             title={item.title}
             image={item.image}

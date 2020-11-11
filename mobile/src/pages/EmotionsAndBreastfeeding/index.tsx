@@ -1,10 +1,13 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import OptionsList from '../../components/OptionList';
 
 import { Container, ScrollView } from './styles';
 
 const EmotionsAndBreastfeeding: React.FC = () => {
+  const navigation = useNavigation();
+
   const options = [
     {
       image: require('../../../assets/images/emotions_info.png'),
@@ -16,13 +19,17 @@ const EmotionsAndBreastfeeding: React.FC = () => {
       image: require('../../../assets/images/emotions_box.png'),
       title: 'Caixinha da distração',
       subtitle: 'Subtítulo 2',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('Distractions');
+      },
     },
     {
       image: require('../../../assets/images/emotions_jacobson.png'),
       title: 'Técnica de Relaxamento de Jacobson',
       subtitle: 'Subtítulo 3',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('VideoPage', { videos: ['C2hFGeJj48k'] });
+      },
     },
   ];
 

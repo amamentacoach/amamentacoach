@@ -16,12 +16,13 @@ import AdditionalInformation from '../pages/AdditionalInformation';
 import NotWhatIExpected from '../pages/NotWhatIExpected';
 import VideoPage from '../pages/VideoPage';
 import BreastfeedingBenefits from '../pages/BreastfeedingBenefits';
+import ThePremature from '../pages/ThePremature';
+import Distractions from '../pages/Distractions';
 
 import homeIcon from '../../assets/images/icons/ic_home_grey.png';
 import diaryIcon from '../../assets/images/icons/ic_diary_grey.png';
 import surveyIcon from '../../assets/images/icons/ic_survey_grey.png';
 import profileIcon from '../../assets/images/icons/ic_profile_grey.png';
-import ThePremature from '../pages/ThePremature';
 
 const HomeRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -89,6 +90,11 @@ const HomeRoutes: React.FC = () => {
         name="BreastfeedingBenefits"
         component={BreastfeedingBenefits}
         options={{ title: 'Infográfico' }}
+      />
+      <Stack.Screen
+        name="Distractions"
+        component={Distractions}
+        options={{ title: 'Caixinha da distração' }}
       />
     </Stack.Navigator>
   );
