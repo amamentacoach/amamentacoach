@@ -164,13 +164,11 @@ const MotherForm: React.FC = () => {
 
   return (
     <ScrollView>
-      <Header>
-        <HeaderText>Passo 2 de 3</HeaderText>
-        <HeaderSubText>
-          Agora, faremos uma série de perguntas sobre você, mamãe, para trazer o
-          conteúdo mais adequado para a sua realidade:
-        </HeaderSubText>
-      </Header>
+      <HeaderText>Passo 2 de 3</HeaderText>
+      <HeaderSubText>
+        Agora, faremos uma série de perguntas sobre você, mamãe, para trazer o
+        conteúdo mais adequado para a sua realidade:
+      </HeaderSubText>
       <Formik
         initialValues={formInitialValues}
         validationSchema={MotherFormSchema}

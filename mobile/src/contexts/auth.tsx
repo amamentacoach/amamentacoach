@@ -1,7 +1,11 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+// @ts-ignore
+import OneSignal from 'react-native-onesignal';
+
 import * as auth from '../services/auth';
 import api from '../services/api';
+import pushNotificationSubscribe from '../services/pushNotification';
 import SplashScreen from '../pages/SplashScreen';
 
 interface IAuthContextData {
@@ -16,19 +20,36 @@ const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 export const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [oneSignalId, setOneSignalId] = useState('');
+
+  async function initPushNotifications() {
+    const oneSignalIdStorage = await AsyncStorage.getItem(
+      '@AmamentaCoach:oneSignalId',
+    );
+
+    if (!oneSignalIdStorage) {
+      OneSignal.init('8b92a77f-f327-48be-b2c2-d938aad5a0ab');
+      OneSignal.getPermissionSubscriptionState((status: any) => {
+        setOneSignalId(status.userId);
+      });
+      await AsyncStorage.setItem('@AmamentaCoach:oneSignalId', oneSignalId);
+      await pushNotificationSubscribe(oneSignalId);
+    }
+  }
 
   useEffect(() => {
-    async function checkDataInStorage() {
+    async function checkLoginDataInStorage() {
       const storageToken = await AsyncStorage.getItem('@AmamentaCoach:token');
 
       if (storageToken) {
         setToken(storageToken);
         api.defaults.headers.common.Authorization = storageToken;
       }
+      await initPushNotifications();
       setLoading(false);
     }
 
-    checkDataInStorage();
+    checkLoginDataInStorage();
   });
 
   async function signIn(email: string, password: string): Promise<boolean> {
@@ -40,6 +61,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     await AsyncStorage.setItem('@AmamentaCoach:token', userToken);
     setToken(userToken);
     api.defaults.headers.common.Authorization = userToken;
+    await initPushNotifications();
     return true;
   }
 
@@ -47,6 +69,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     await AsyncStorage.removeItem('@AmamentaCoach:token');
     setToken(null);
     api.defaults.headers.common.Authorization = null;
+    setOneSignalId('');
   }
 
   if (loading) {

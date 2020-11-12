@@ -5,10 +5,7 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
   keyboardShouldPersistTaps: 'handled',
 }))`
   flex: 1;
-`;
-
-export const Header = styled.View`
-  padding: 20px;
+  padding: 24px;
 `;
 
 export const HeaderText = styled.Text`
@@ -28,7 +25,7 @@ export const HeaderSubText = styled.Text`
 
 export const FormContainer = styled.View`
   flex: 1;
-  margin: 0 24px;
+  margin-bottom: 20px;
 `;
 
 export const SubOptionsContainer = styled.View`

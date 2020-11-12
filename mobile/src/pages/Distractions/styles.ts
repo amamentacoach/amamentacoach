@@ -4,7 +4,8 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
 }))`
-  padding: 20px 24px 0 24px;
+  flex: 1;
+  padding: 24px;
 `;
 
 export const HeaderText = styled.Text`

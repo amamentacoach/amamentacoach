@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import OptionsList from '../../components/OptionList';
 
-import { ScrollView } from './styles';
+import ScrollView from './styles';
 
 const EmotionsAndBreastfeeding: React.FC = () => {
   const navigation = useNavigation();
