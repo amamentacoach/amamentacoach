@@ -321,7 +321,7 @@ routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadCont
  *
  * 
  * 
- * @apiParamExample {json} Exemplo Request:
+ * @apiSuccessExample {json} Exemplo Request:
  *      [
  *          {
  *              "id": 1,
@@ -392,8 +392,43 @@ routes.get('/perguntas/:categoria',perguntasController.index);
 routes.post('/responder/:pergunta_id',verifyJWT,respostasMaeController.create);
 routes.get('/maes/:mae_id/respostas',verifyJWT,respostasMaeController.index);
 
+ /**
+ * @api {post} /mensagens Enviar Mensagem
+ * @apiDescription Envia uma nova mensagem
+ * @apiGroup Mensagens
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ * 
+ * 
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "conteudo":"Ola mamaes, como estao?" // um array para caso selecione mais de uma opcao
+ *      }
+ *
+ */
 routes.post('/mensagens',verifyJWT,mensagensController.create);
-routes.get('/mensagens',mensagensController.index);
+ /**
+ * @api {get} /mensagens Listar Mensagens
+ * @apiDescription Retorna no maximo 7 mensagens por pagina
+ *  </br>Ordenadas de mais recente para mais antiga
+ *  </br>O header X-Total-Count Retorna a quantidade total de mensagens.
+ * @apiGroup Mensagens
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ * @apiParam {Integer} page Numero da pagina.
+ * 
+ * @apiSuccessExample {json} Exemplo Resposta:
+ *      [
+ *          {
+ *              "nome": "Fulana de Tal",
+ *              "conteudo": "Ola mamaes, como estao?",
+ *              "data": "2020-11-13T11:18:13.069Z"
+ *          }
+ *      ]
+ * 
+ *
+ */
+routes.get('/mensagens',verifyJWT,mensagensController.index);
 
 routes.post('/perguntas',perguntasController.create);
 

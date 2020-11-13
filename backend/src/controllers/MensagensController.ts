@@ -4,11 +4,10 @@ import knex from '../database/connection';
 class MensagensController{
     async create(req:Request, res:Response){
         const {
-            mae_id,
             conteudo
         } = req.body;
 
-        await knex('mensagem').insert({mae_id,conteudo,data:new Date()});
+        await knex('mensagem').insert({mae_id:req.mae_id,conteudo,data:new Date()});
 
         res.sendStatus(200);
     }
@@ -20,7 +19,7 @@ class MensagensController{
         else page = "1"
 
         const [count] = await knex('mensagem').count()
-        //res.header('X-Total-Count', count["count"] )
+        res.header('X-Total-Count', `${count["count"]}` )
 
         const mensagens = await knex('mae')
             .join('mensagem','mae.id','=','mensagem.mae_id')
