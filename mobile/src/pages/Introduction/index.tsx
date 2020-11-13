@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Dimensions, FlatList } from 'react-native';
+import { Dimensions, FlatList, Image } from 'react-native';
 
 import { useIsFirstRun } from '../../contexts/firstRun';
 import MainButton from '../../components/MainButton';
@@ -15,7 +15,6 @@ import {
   LastPageButtonWrapper,
   ListContainer,
   PageContainer,
-  ContentImage,
   ScrollView,
   CurrentPageWrapper,
 } from './styles';
@@ -77,7 +76,7 @@ const Introduction: React.FC = () => {
             </SkipButton>
           </Header>
           <ContentWrapper>
-            <ContentImage source={image} />
+            <Image source={image} />
             <ContentText>{text}</ContentText>
           </ContentWrapper>
           <Footer>

@@ -13,11 +13,15 @@ import StepByStepPremature from '../pages/StepByStepPremature';
 import HowToBreastfeed from '../pages/HowToBreastfeed';
 import EmotionsAndBreastfeeding from '../pages/EmotionsAndBreastfeeding';
 import AdditionalInformation from '../pages/AdditionalInformation';
+import NotWhatIExpected from '../pages/NotWhatIExpected';
+import VideoPage from '../pages/VideoPage';
+import BreastfeedingBenefits from '../pages/BreastfeedingBenefits';
 
 import homeIcon from '../../assets/images/icons/ic_home_grey.png';
 import diaryIcon from '../../assets/images/icons/ic_diary_grey.png';
 import surveyIcon from '../../assets/images/icons/ic_survey_grey.png';
 import profileIcon from '../../assets/images/icons/ic_profile_grey.png';
+import ThePremature from '../pages/ThePremature';
 
 const HomeRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -57,6 +61,34 @@ const HomeRoutes: React.FC = () => {
         name="AdditionalInformation"
         component={AdditionalInformation}
         options={{ title: 'Mais informações' }}
+      />
+      <Stack.Screen
+        name="NotWhatIExpected"
+        component={NotWhatIExpected}
+        options={{
+          title: 'O Prematuro',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: '#7D5CD7',
+            elevation: 0, // Remove a sombra no Android
+            shadowOpacity: 0, // Remove a sombra no iOS
+          },
+        }}
+      />
+      <Stack.Screen
+        name="VideoPage"
+        component={VideoPage}
+        options={{ title: 'Vídeo' }}
+      />
+      <Stack.Screen
+        name="ThePremature"
+        component={ThePremature}
+        options={{ title: 'Sou o Prematuro' }}
+      />
+      <Stack.Screen
+        name="BreastfeedingBenefits"
+        component={BreastfeedingBenefits}
+        options={{ title: 'Infográfico' }}
       />
     </Stack.Navigator>
   );

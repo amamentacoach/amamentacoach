@@ -46,8 +46,6 @@ export const ContentWrapper = styled.View`
   margin: 24px 24px 0 24px;
 `;
 
-export const ContentImage = styled.Image``;
-
 export const ContentText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;

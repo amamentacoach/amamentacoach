@@ -37,6 +37,14 @@ export const ContentWrapper = styled.View`
   margin: 0px 24px;
 `;
 
+export const ContentHeaderText = styled.Text`
+  font-family: 'OpenSans-Regular';
+  font-size: 16px;
+  text-align: center;
+  color: #7d5cd7;
+  margin-top: 20px;
+`;
+
 export const ContentText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
