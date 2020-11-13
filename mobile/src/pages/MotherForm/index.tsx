@@ -12,7 +12,6 @@ import FormPickerInput from '../../components/FormPickerInput';
 
 import {
   ScrollView,
-  Header,
   HeaderText,
   HeaderSubText,
   FormContainer,
@@ -79,7 +78,7 @@ const MotherForm: React.FC = () => {
       .of(
         Yup.object({
           id: Yup.number().required(),
-          value: Yup.string().required('Campo obrigatório'),
+          value: Yup.string(),
         }).required(),
       )
       .defined(),
@@ -104,7 +103,7 @@ const MotherForm: React.FC = () => {
 
     const newBreastFeedingCount = parseInt(fieldValue, 10);
     // Caso o texto não possa ser convertido para inteiro, limpa o formulário.
-    if (!newBreastFeedingCount) {
+    if (!newBreastFeedingCount && newBreastFeedingCount !== 0) {
       setFieldValue('pregnantCount', '');
       setBreastFeedingCount(0);
       setFieldValue('timeSpentBreastFeeding', []);
@@ -199,60 +198,55 @@ const MotherForm: React.FC = () => {
               error={errors.birthday}
             />
 
-            <FormRadioGroupInput
-              label="Você já amamentou antes?"
-              fieldName="alreadyBreastfeed"
-              onChange={(fieldName: string, fieldValue: string) => {
-                setFieldValue(fieldName, fieldValue);
-                if (fieldValue === 'Não') {
-                  setFieldValue('pregnantCount', '0');
-                } else if (fieldValue === 'Sim') {
-                  setFieldValue('pregnantCount', '');
-                }
+            <FormTextInput
+              label="Quantas vezes já esteve grávida? (contando abortos)"
+              value={values.pregnantCount}
+              onChangeText={(text: string) => {
+                handleNewTimeBreastFeeding(
+                  text,
+                  values.timeSpentBreastFeeding,
+                  setFieldValue,
+                );
+                setFieldValue('alreadyBreastfeed', 'Não');
               }}
-              options={['Sim', 'Não']}
-              error={errors.alreadyBreastfeed}
+              placeholder="Insira o número de vezes"
+              keyboardType="numeric"
+              error={errors.pregnantCount}
             />
 
-            {values.alreadyBreastfeed === 'Sim' && (
-              <FormTextInput
-                label="Quantas vezes já esteve grávida? (contando abortos)"
-                value={values.pregnantCount}
-                onChangeText={(text: string) => {
-                  handleNewTimeBreastFeeding(
-                    text,
-                    values.timeSpentBreastFeeding,
-                    setFieldValue,
-                  );
-                }}
-                placeholder="Insira o número de vezes"
-                keyboardType="numeric"
-                error={errors.pregnantCount}
+            {values.pregnantCount !== '0' && values.pregnantCount !== '' && (
+              <FormRadioGroupInput
+                label="Você já amamentou antes?"
+                fieldName="alreadyBreastfeed"
+                onChange={setFieldValue}
+                options={['Sim', 'Não']}
+                error={errors.alreadyBreastfeed}
               />
             )}
 
-            {values.timeSpentBreastFeeding.map((item, index) => (
-              <FormPickerInput
-                key={item.id}
-                label={`Tempo de amamentação (gravidez ${index + 1})`}
-                fieldName={`timeSpentBreastFeeding[${index}].value`}
-                options={[
-                  'Menos de 1 ano',
-                  '1 ano',
-                  '2 anos',
-                  '3 ou mais anos',
-                ]}
-                onChange={setFieldValue}
-                error={
-                  errors?.timeSpentBreastFeeding &&
-                  errors?.timeSpentBreastFeeding[index]
-                    ? (errors?.timeSpentBreastFeeding[index] as {
-                        [key: string]: any;
-                      }).value
-                    : ''
-                }
-              />
-            ))}
+            {values.alreadyBreastfeed === 'Sim' &&
+              values.timeSpentBreastFeeding.map((item, index) => (
+                <FormPickerInput
+                  key={item.id}
+                  label={`Tempo de amamentação (gravidez ${index + 1})`}
+                  fieldName={`timeSpentBreastFeeding[${index}].value`}
+                  options={[
+                    'Menos de 1 ano',
+                    '1 ano',
+                    '2 anos',
+                    '3 ou mais anos',
+                  ]}
+                  onChange={setFieldValue}
+                  error={
+                    errors?.timeSpentBreastFeeding &&
+                    errors?.timeSpentBreastFeeding[index]
+                      ? (errors?.timeSpentBreastFeeding[index] as {
+                          [key: string]: any;
+                        }).value
+                      : ''
+                  }
+                />
+              ))}
 
             <FormRadioGroupInput
               label="Tem companheiro?"

@@ -3,14 +3,13 @@ import AsyncStorage from '@react-native-community/async-storage';
 // @ts-ignore
 import OneSignal from 'react-native-onesignal';
 
-import * as auth from '../services/auth';
 import api from '../services/api';
+import * as auth from '../services/auth';
 import pushNotificationSubscribe from '../services/pushNotification';
 import SplashScreen from '../pages/SplashScreen';
 
 interface IAuthContextData {
   isSigned: boolean;
-  token: string | null;
   signIn(email: string, password: string): Promise<boolean>;
   signOut(): void;
 }
@@ -19,22 +18,16 @@ const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
   const [oneSignalId, setOneSignalId] = useState('');
+  const [loading, setLoading] = useState(true);
 
   async function initPushNotifications() {
-    const oneSignalIdStorage = await AsyncStorage.getItem(
-      '@AmamentaCoach:oneSignalId',
-    );
-
-    if (!oneSignalIdStorage) {
-      OneSignal.init('8b92a77f-f327-48be-b2c2-d938aad5a0ab');
-      OneSignal.getPermissionSubscriptionState((status: any) => {
-        setOneSignalId(status.userId);
-      });
-      await AsyncStorage.setItem('@AmamentaCoach:oneSignalId', oneSignalId);
-      await pushNotificationSubscribe(oneSignalId);
-    }
+    OneSignal.init('8b92a77f-f327-48be-b2c2-d938aad5a0ab');
+    OneSignal.setSubscription(true);
+    OneSignal.getPermissionSubscriptionState((status: any) => {
+      setOneSignalId(status.userId);
+    });
+    await pushNotificationSubscribe(oneSignalId);
   }
 
   useEffect(() => {
@@ -44,8 +37,8 @@ export const AuthProvider: React.FC = ({ children }) => {
       if (storageToken) {
         setToken(storageToken);
         api.defaults.headers.common.Authorization = storageToken;
+        await initPushNotifications();
       }
-      await initPushNotifications();
       setLoading(false);
     }
 
@@ -70,6 +63,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     setToken(null);
     api.defaults.headers.common.Authorization = null;
     setOneSignalId('');
+    OneSignal.setSubscription(false);
   }
 
   if (loading) {
@@ -80,7 +74,6 @@ export const AuthProvider: React.FC = ({ children }) => {
     <AuthContext.Provider
       value={{
         isSigned: !!token,
-        token,
         signIn,
         signOut,
       }}>
