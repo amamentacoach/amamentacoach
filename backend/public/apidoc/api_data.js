@@ -79,7 +79,7 @@ define({ "api": [
     "title": "Listagem de perguntas",
     "description": "<p>Lista todas as perguntas de uma enquete<br/> Categoria das Enquetes:<br/> 1 - Amamentar um prematuro<br/> 2 - DIÁRIO: Sentimentos<br/> 3 - DIÁRIO: Metas<br/> 4 - DIÁRIO: Ajuda<br/> 5 - Participação do pai<br/></p>",
     "group": "Enquetes",
-    "parameter": {
+    "success": {
       "examples": [
         {
           "title": "Exemplo Request:",
@@ -125,6 +125,85 @@ define({ "api": [
     "filename": "./src/routes.ts",
     "groupTitle": "Enquetes",
     "name": "PostResponderPergunta_id"
+  },
+  {
+    "type": "get",
+    "url": "/mensagens",
+    "title": "Listar Mensagens",
+    "description": "<p>Retorna no maximo 7 mensagens por pagina </br>Ordenadas de mais recente para mais antiga </br>O header X-Total-Count Retorna a quantidade total de mensagens.</p>",
+    "group": "Mensagens",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "page",
+            "description": "<p>Numero da pagina.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Exemplo Resposta:",
+          "content": "[\n    {\n        \"nome\": \"Fulana de Tal\",\n        \"conteudo\": \"Ola mamaes, como estao?\",\n        \"data\": \"2020-11-13T11:18:13.069Z\"\n    }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Mensagens",
+    "name": "GetMensagens"
+  },
+  {
+    "type": "post",
+    "url": "/mensagens",
+    "title": "Enviar Mensagem",
+    "description": "<p>Envia uma nova mensagem</p>",
+    "group": "Mensagens",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "{\n    \"conteudo\":\"Ola mamaes, como estao?\" // um array para caso selecione mais de uma opcao\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Mensagens",
+    "name": "PostMensagens"
   },
   {
     "type": "get",
