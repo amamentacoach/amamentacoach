@@ -50,9 +50,9 @@ type IScreenParams = {
 const MotherForm: React.FC = () => {
   const navigation = useNavigation();
   const [breastFeedingCount, setBreastFeedingCount] = useState(0);
-  const { email, password } = useRoute<
-    RouteProp<IScreenParams, 'MotherForm'>
-  >().params;
+  // const { email, password } = useRoute<
+  //   RouteProp<IScreenParams, 'MotherForm'>
+  // >().params;
 
   const formInitialValues: IFormValues = {
     name: '',
