@@ -1,24 +1,34 @@
 import React from 'react';
+import { FlatList } from 'react-native';
 
 import { Container, CircleShape } from './styles';
 
 interface ProgressDotsProps {
   selectedIndex: number;
   length: number;
-  navigateToPage: (page: number) => void;
+  flatlistRef: React.RefObject<FlatList>;
 }
-
 const ProgressDots: React.FC<ProgressDotsProps> = ({
   selectedIndex,
   length,
-  navigateToPage,
+  flatlistRef,
 }) => {
+  function goToPage(page: number) {
+    if (page >= length) {
+      return;
+    }
+    flatlistRef.current?.scrollToIndex({
+      animated: true,
+      index: page,
+    });
+  }
+
   function createCircles() {
     const circles = [];
     for (let i = 0; i < length; i++) {
       circles.push(
         <CircleShape
-          onPress={() => navigateToPage(i)}
+          onPress={() => goToPage(i)}
           key={i}
           selected={i === selectedIndex}
         />,

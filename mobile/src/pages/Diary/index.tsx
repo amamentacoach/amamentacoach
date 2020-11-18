@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Image } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
+import { useIsFirstRun } from '../../contexts/firstRun';
 import OptionsList from '../../components/OptionList';
 
 import {
@@ -17,6 +19,8 @@ import {
 import CalendarIcon from '../../../assets/images/icons/ic_calendar.png';
 
 const HowToBreastFeed: React.FC = () => {
+  const navigation = useNavigation();
+  const { isFirstRun } = useIsFirstRun();
   const [showCalendar, setShowCalendar] = useState(false);
   const [currentDate, setCurrentDate] = useState(moment());
 
@@ -58,10 +62,10 @@ const HowToBreastFeed: React.FC = () => {
   }
 
   function handleDateSelected(selectedDate?: Date) {
+    setShowCalendar(false);
     if (selectedDate) {
       setCurrentDate(moment(selectedDate));
     }
-    setShowCalendar(false);
   }
 
   return (

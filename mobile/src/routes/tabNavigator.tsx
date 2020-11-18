@@ -1,7 +1,8 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { useNavigation } from '@react-navigation/native';
 import Home from '../pages/Home';
 import Diary from '../pages/Diary';
 import Survey from '../pages/Survey';
@@ -11,18 +12,18 @@ import homeIcon from '../../assets/images/icons/ic_home_grey.png';
 import diaryIcon from '../../assets/images/icons/ic_diary_grey.png';
 import surveyIcon from '../../assets/images/icons/ic_survey_grey.png';
 import profileIcon from '../../assets/images/icons/ic_profile_grey.png';
+import { useIsFirstRun } from '../contexts/firstRun';
+import DiaryIntroduction from '../pages/DiaryIntroduction';
 
 const TabNavigator: React.FC = () => {
+  const { isFirstRun } = useIsFirstRun();
   const Tab = createBottomTabNavigator();
+
   return (
     <Tab.Navigator
       tabBarOptions={{
         activeTintColor: '#7D5CD7',
         inactiveTintColor: '#545454',
-        style: {
-          paddingBottom: 6,
-          paddingTop: 6,
-        },
       }}>
       <Tab.Screen
         name="Home"
@@ -43,9 +44,10 @@ const TabNavigator: React.FC = () => {
       />
       <Tab.Screen
         name="Diary"
-        component={Diary}
+        component={isFirstRun.diary ? DiaryIntroduction : Diary}
         options={{
           tabBarLabel: 'Diário',
+          tabBarVisible: !isFirstRun.diary,
           tabBarIcon: ({ color, size }) => {
             return (
               <Image

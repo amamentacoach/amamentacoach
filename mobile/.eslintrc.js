@@ -18,6 +18,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars-experimental': 'error',
     'global-require': 'off',
+    'react/jsx-props-no-spreading': 'off',
   },
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],

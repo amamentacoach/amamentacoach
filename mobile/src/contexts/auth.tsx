@@ -1,12 +1,12 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
+import RNBootSplash from 'react-native-bootsplash';
 // @ts-ignore
 import OneSignal from 'react-native-onesignal';
 
 import api from '../services/api';
 import * as auth from '../services/auth';
 import pushNotificationSubscribe from '../services/pushNotification';
-import SplashScreen from '../pages/SplashScreen';
 
 interface IAuthContextData {
   isSigned: boolean;
@@ -19,7 +19,6 @@ const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 export const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
   const [oneSignalId, setOneSignalId] = useState('');
-  const [loading, setLoading] = useState(true);
 
   async function initPushNotifications() {
     OneSignal.init('8b92a77f-f327-48be-b2c2-d938aad5a0ab');
@@ -37,9 +36,9 @@ export const AuthProvider: React.FC = ({ children }) => {
       if (storageToken) {
         setToken(storageToken);
         api.defaults.headers.common.Authorization = storageToken;
-        await initPushNotifications();
+        initPushNotifications();
       }
-      setLoading(false);
+      RNBootSplash.hide({ duration: 250 });
     }
 
     checkLoginDataInStorage();
@@ -66,9 +65,9 @@ export const AuthProvider: React.FC = ({ children }) => {
     OneSignal.setSubscription(false);
   }
 
-  if (loading) {
-    return <SplashScreen />;
-  }
+  // if (loading) {
+  //   return <SplashScreen />;
+  // }
 
   return (
     <AuthContext.Provider
