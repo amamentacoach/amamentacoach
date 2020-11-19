@@ -26,7 +26,7 @@ const ForgotPassword: React.FC = () => {
   const formInitialValues: IFormValues = {
     email: '',
   };
-  const SignUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const signUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Obrigatório'),
   }).required();
 
@@ -53,7 +53,7 @@ const ForgotPassword: React.FC = () => {
       </HeaderText>
       <Formik
         initialValues={formInitialValues}
-        validationSchema={SignUpSchema}
+        validationSchema={signUpSchema}
         validateOnChange={false}
         onSubmit={(values) => handleForgotPassword(values)}>
         {({ handleChange, handleSubmit, dirty, errors, values }) => (

@@ -17,6 +17,7 @@ interface FormDateProps {
   label: string;
   error?: string | undefined;
   placeholder: string;
+  mode?: string | undefined;
   maxDate?: Date | undefined;
   onChange: (fieldName: string, fieldValue: string) => void;
 }
@@ -26,22 +27,47 @@ const FormDateInput: React.FC<FormDateProps> = ({
   label,
   error,
   placeholder,
+  mode = 'date',
   maxDate = new Date(),
   onChange,
 }) => {
   const [show, setShow] = useState(false);
   const [date, setDate] = useState<Moment | undefined>();
 
+  // Formata a data salva para ser exibida no TextInput do componente.
+  function formatDisplayDate(dateToFormat: Moment | undefined): string {
+    if (!dateToFormat) {
+      return '';
+    }
+    if (mode === 'time') {
+      return dateToFormat.format('kk:mm');
+    }
+    return dateToFormat.format('DD[/]MM[/]YYYY');
+  }
+
+  // Formata a data salva para ser armazenada no useState do componente e valor do formulário.
+  function formatStateDate(dateToFormat: Moment | undefined): string {
+    if (!dateToFormat) {
+      return '';
+    }
+    if (mode === 'time') {
+      return dateToFormat.format('kk:mm');
+    }
+    return dateToFormat.format('YYYY[-]MM[-]DD');
+  }
+
+  // Exibe o seletor.
   function showDatePicker() {
     setShow(true);
   }
 
+  // Esconde o seletor e salva o valor escolhido.
   function handleDateSelected(selectedDate?: Date | undefined) {
     setShow(Platform.OS === 'ios');
     if (selectedDate) {
       const newDate = moment(selectedDate);
       setDate(newDate);
-      onChange(fieldName, newDate.format('YYYY[-]MM[-]DD'));
+      onChange(fieldName, formatStateDate(newDate));
     }
   }
 
@@ -50,7 +76,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
       <LabelText>{label}</LabelText>
       <TouchableOpacity onPress={showDatePicker}>
         <TextInput
-          value={date ? date.format('DD[/]MM[/]YYYY') : ''}
+          value={formatDisplayDate(date)}
           placeholder={placeholder}
           placeholderTextColor="#acaab2"
           editable={false}
@@ -64,8 +90,9 @@ const FormDateInput: React.FC<FormDateProps> = ({
         <DateTimePicker
           testID="dateTimePicker"
           value={date ? date.toDate() : maxDate}
-          mode="date"
-          display="calendar"
+          // @ts-ignore
+          mode={mode}
+          display="default"
           maximumDate={maxDate}
           onChange={(_: Event, selectedDate?: Date | undefined) =>
             handleDateSelected(selectedDate)

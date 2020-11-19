@@ -17,6 +17,7 @@ import TabNavigator from './tabNavigator';
 import ThePremature from '../pages/ThePremature';
 import VideoPage from '../pages/VideoPage';
 import DiaryRegistry from '../pages/DiaryRegistry';
+import NewDiaryRegistry from '../pages/NewDiaryRegistry';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -108,7 +109,12 @@ const AppRoutes: React.FC = () => {
       <Stack.Screen
         name="DiaryRegistry"
         component={DiaryRegistry}
-        options={{ title: 'Mais informações' }}
+        options={{ title: 'Diário' }}
+      />
+      <Stack.Screen
+        name="NewDiaryRegistry"
+        component={NewDiaryRegistry}
+        options={{ title: 'Diário' }}
       />
     </Stack.Navigator>
   );

@@ -9,6 +9,7 @@ import {
   listDiaryRegistries,
   IListDiaryEntry,
 } from '../../services/diaryRegistry';
+import MainButton from '../../components/MainButton';
 
 import {
   DateText,
@@ -20,7 +21,6 @@ import {
   RegistryContent,
   ListContainer,
 } from './styles';
-import MainButton from '../../components/MainButton';
 
 const DiaryRegistry: React.FC = () => {
   const navigation = useNavigation();
@@ -65,7 +65,7 @@ const DiaryRegistry: React.FC = () => {
         <RegistryRow>
           <RegistryTextContainer>
             <RegistryText>Horário: </RegistryText>
-            <RegistryContent>{moment(date).format('hh:mm')}</RegistryContent>
+            <RegistryContent>{moment(date).format('kk:mm')}</RegistryContent>
           </RegistryTextContainer>
           <RegistryTextContainer>
             <RegistryText>Duração: </RegistryText>

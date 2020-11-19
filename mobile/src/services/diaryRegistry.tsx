@@ -1,12 +1,5 @@
 import api from './api';
 
-interface INewDiaryRegistry {
-  babyId: number;
-  breast: string;
-  duration: number;
-  quantity: number;
-}
-
 export interface IListDiaryEntry {
   id: number;
   baby_id: number;
@@ -17,14 +10,19 @@ export interface IListDiaryEntry {
 }
 
 // Cria um registro novo no diário.
-export async function createNewDiaryRegistry({
-  babyId,
-  breast,
-  duration,
-  quantity,
-}: INewDiaryRegistry): Promise<boolean> {
+export async function createNewDiaryRegistry(
+  babyId: number,
+  breast: string,
+  duration: number,
+  quantity: number,
+  time: string,
+): Promise<boolean> {
   try {
-    await api.post(`/bebes/${babyId}`, {
+    console.log(babyId);
+    console.log(breast);
+    console.log(duration);
+    console.log(quantity);
+    await api.post(`/bebes/${babyId}/ordenhas`, {
       qtd_leite: quantity,
       mama: breast,
       duracao: duration,

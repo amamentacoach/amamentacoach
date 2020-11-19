@@ -67,7 +67,7 @@ const MotherForm: React.FC = () => {
     education: '',
     wage: '',
   };
-  const MotherFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const motherFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     name: Yup.string().required('Campo obrigatório'),
     birthday: Yup.string().required('Campo obrigatório'),
     alreadyBreastfeed: Yup.string().required('Campo obrigatório'),
@@ -170,7 +170,7 @@ const MotherForm: React.FC = () => {
       </HeaderSubText>
       <Formik
         initialValues={formInitialValues}
-        validationSchema={MotherFormSchema}
+        validationSchema={motherFormSchema}
         validateOnChange={false}
         onSubmit={(values) => handleFormSubmit(values)}>
         {({

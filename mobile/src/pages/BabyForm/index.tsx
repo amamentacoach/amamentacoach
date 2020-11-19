@@ -50,6 +50,7 @@ interface IBaby {
   apgar2: string;
   birthLocation: string;
 }
+
 interface IFormValues {
   numberOfBabies: string;
   babies: IBaby[];
@@ -73,7 +74,7 @@ const BabyForm: React.FC = () => {
   const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
   const [babyCount, setBabyCount] = useState(0);
 
-  const BabyFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const babyFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     numberOfBabies: Yup.string()
       .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
       .required('Campo obrigatório'),
@@ -242,7 +243,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
           numberOfBabies: '1',
           babies: [newBaby(0)],
         }}
-        validationSchema={BabyFormSchema}
+        validationSchema={babyFormSchema}
         validateOnChange={false}
         onSubmit={handleFormSubmit}>
         {({

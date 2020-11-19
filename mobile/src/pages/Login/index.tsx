@@ -41,7 +41,7 @@ const Login: React.FC = () => {
     email: '',
     password: '',
   };
-  const SignUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const loginSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Obrigatório'),
     password: Yup.string()
       .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
@@ -80,7 +80,7 @@ const Login: React.FC = () => {
         </Header>
         <Formik
           initialValues={formInitialValues}
-          validationSchema={SignUpSchema}
+          validationSchema={loginSchema}
           validateOnChange={false}
           onSubmit={(values) => handleSignIn(values)}>
           {({ handleChange, handleSubmit, dirty, errors, values }) => (
