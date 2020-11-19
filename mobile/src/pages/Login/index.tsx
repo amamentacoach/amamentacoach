@@ -30,7 +30,7 @@ interface IFormValues {
   password: string;
 }
 
-const FormLogin: React.FC = () => {
+const Login: React.FC = () => {
   const navigation = useNavigation();
   const { signIn } = useAuth();
 
@@ -133,4 +133,4 @@ const FormLogin: React.FC = () => {
   );
 };
 
-export default FormLogin;
+export default Login;

@@ -16,6 +16,7 @@ import StepByStepPremature from '../pages/StepByStepPremature';
 import TabNavigator from './tabNavigator';
 import ThePremature from '../pages/ThePremature';
 import VideoPage from '../pages/VideoPage';
+import DiaryRegistry from '../pages/DiaryRegistry';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -102,6 +103,11 @@ const AppRoutes: React.FC = () => {
       <Stack.Screen
         name="AdditionalInformation"
         component={AdditionalInformation}
+        options={{ title: 'Mais informações' }}
+      />
+      <Stack.Screen
+        name="DiaryRegistry"
+        component={DiaryRegistry}
         options={{ title: 'Mais informações' }}
       />
     </Stack.Navigator>

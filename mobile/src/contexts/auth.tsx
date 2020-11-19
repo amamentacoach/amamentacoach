@@ -8,8 +8,14 @@ import api from '../services/api';
 import * as auth from '../services/auth';
 import pushNotificationSubscribe from '../services/pushNotification';
 
+interface IMotherInfo {
+  name: string;
+  babies: { id: number; name: string; birthLocation: string }[];
+}
+
 interface IAuthContextData {
   isSigned: boolean;
+  motherInfo: IMotherInfo;
   signIn(email: string, password: string): Promise<boolean>;
   signOut(): void;
 }
@@ -18,6 +24,7 @@ const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
+  const [motherInfo, setMotherInfo] = useState<IMotherInfo>({});
   const [oneSignalId, setOneSignalId] = useState('');
 
   async function initPushNotifications() {
@@ -29,6 +36,24 @@ export const AuthProvider: React.FC = ({ children }) => {
     await pushNotificationSubscribe(oneSignalId);
   }
 
+  async function initMotherInfo() {
+    const storageMotherInfo = await AsyncStorage.getItem(
+      '@AmamentaCoach:motherInfo',
+    );
+    if (storageMotherInfo) {
+      setMotherInfo(JSON.parse(storageMotherInfo));
+    } else {
+      const apiMotherInfo = await auth.getMotherInfo();
+      if (apiMotherInfo) {
+        setMotherInfo(apiMotherInfo);
+        await AsyncStorage.setItem(
+          '@AmamentaCoach:motherInfo',
+          JSON.stringify(apiMotherInfo),
+        );
+      }
+    }
+  }
+
   useEffect(() => {
     async function checkLoginDataInStorage() {
       const storageToken = await AsyncStorage.getItem('@AmamentaCoach:token');
@@ -36,13 +61,14 @@ export const AuthProvider: React.FC = ({ children }) => {
       if (storageToken) {
         setToken(storageToken);
         api.defaults.headers.common.Authorization = storageToken;
+        await initMotherInfo();
         initPushNotifications();
       }
       RNBootSplash.hide({ duration: 250 });
     }
 
     checkLoginDataInStorage();
-  });
+  }, []);
 
   async function signIn(email: string, password: string): Promise<boolean> {
     const userToken = await auth.signIn(email, password);
@@ -53,7 +79,8 @@ export const AuthProvider: React.FC = ({ children }) => {
     await AsyncStorage.setItem('@AmamentaCoach:token', userToken);
     setToken(userToken);
     api.defaults.headers.common.Authorization = userToken;
-    await initPushNotifications();
+    await initMotherInfo();
+    initPushNotifications();
     return true;
   }
 
@@ -61,18 +88,20 @@ export const AuthProvider: React.FC = ({ children }) => {
     await AsyncStorage.removeItem('@AmamentaCoach:token');
     setToken(null);
     api.defaults.headers.common.Authorization = null;
+    setMotherInfo({
+      name: '',
+      babies: [],
+    });
+    await AsyncStorage.removeItem('@AmamentaCoach:motherInfo');
     setOneSignalId('');
     OneSignal.setSubscription(false);
   }
-
-  // if (loading) {
-  //   return <SplashScreen />;
-  // }
 
   return (
     <AuthContext.Provider
       value={{
         isSigned: !!token,
+        motherInfo,
         signIn,
         signOut,
       }}>

@@ -20,7 +20,6 @@ import FormPickerInput from '../../components/FormPickerInput';
 
 import {
   ScrollView,
-  Header,
   HeaderText,
   HeaderSubText,
   FormContainer,

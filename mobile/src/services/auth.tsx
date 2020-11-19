@@ -27,32 +27,28 @@ interface IBabySignUpInfo {
   difficulties: boolean;
 }
 
-export async function signUpMother({
-  email,
-  password,
-  name,
-  birthday,
-  alreadyBreastfeed,
-  married,
-  liveTogether,
-  education,
-  wage,
-  pregnantCount,
-  timeSpentBreastFeeding,
-}: IMotherSignUpInfo): Promise<string | null> {
+interface IMotherInfo {
+  name: string;
+  babies: { id: number; name: string; birthLocation: string }[];
+}
+
+// Cadastra uma mãe no sistema.
+export async function signUpMother(
+  motherInfo: IMotherSignUpInfo,
+): Promise<string | null> {
   try {
     const request = await api.post('/maes', {
-      email,
-      senha: password,
-      nome: name,
-      data_nascimento: birthday,
-      amamentou_antes: alreadyBreastfeed,
-      companheiro: married,
-      moram_juntos: liveTogether,
-      escolaridade: education,
-      renda: wage,
-      qtd_gravidez: pregnantCount,
-      tempo_amamentacao: timeSpentBreastFeeding,
+      email: motherInfo.email,
+      senha: motherInfo.password,
+      nome: motherInfo.name,
+      data_nascimento: motherInfo.birthday,
+      amamentou_antes: motherInfo.alreadyBreastfeed,
+      companheiro: motherInfo.married,
+      moram_juntos: motherInfo.liveTogether,
+      escolaridade: motherInfo.education,
+      renda: motherInfo.wage,
+      qtd_gravidez: motherInfo.pregnantCount,
+      tempo_amamentacao: motherInfo.timeSpentBreastFeeding,
     });
     return request.data.token;
   } catch (error) {
@@ -60,34 +56,24 @@ export async function signUpMother({
   }
 }
 
+// Cadastra um bebê no sistema.
 export async function signUpBaby(
   token: string,
-  {
-    name,
-    birthday,
-    gestationWeeks,
-    gestationDays,
-    weight,
-    apgar1,
-    apgar2,
-    birthType,
-    birthLocation,
-    difficulties,
-  }: IBabySignUpInfo,
+  babyInfo: IBabySignUpInfo,
 ): Promise<void> {
   await api.post(
     '/bebes',
     {
-      nome: name,
-      data_parto: birthday,
-      semanas_gest: gestationWeeks,
-      dias_gest: gestationDays,
-      peso: weight,
-      apgar1,
-      apgar2,
-      tipo_parto: birthType,
-      local: birthLocation,
-      complicacoes: difficulties,
+      nome: babyInfo.name,
+      data_parto: babyInfo.birthday,
+      semanas_gest: babyInfo.gestationWeeks,
+      dias_gest: babyInfo.gestationDays,
+      peso: babyInfo.weight,
+      apgar1: babyInfo.apgar1,
+      apgar2: babyInfo.apgar2,
+      tipo_parto: babyInfo.birthType,
+      local: babyInfo.birthLocation,
+      complicacoes: babyInfo.difficulties,
     },
     {
       headers: {
@@ -97,6 +83,7 @@ export async function signUpBaby(
   );
 }
 
+// Loga uma mãe no sistema.
 export async function signIn(
   email: string,
   password: string,
@@ -112,6 +99,25 @@ export async function signIn(
   }
 }
 
+// Retorna os dados de uma mãe.
+export async function getMotherInfo(): Promise<IMotherInfo | null> {
+  try {
+    const { data } = await api.get('/maes');
+    const babies = data.bebes.map((baby: any) => ({
+      id: baby.id,
+      name: baby.nome,
+      birthPlace: baby.local,
+    }));
+    return {
+      name: data.nome,
+      babies,
+    };
+  } catch (error) {
+    return null;
+  }
+}
+
+// Envia um email de alteração de senha para a mãe.
 export async function forgotPassword(email: string): Promise<boolean> {
   try {
     await api.post('/esqueceusenha', {
@@ -123,6 +129,7 @@ export async function forgotPassword(email: string): Promise<boolean> {
   }
 }
 
+// Altera a senha de uma mãe.
 export async function newPassword(password: string): Promise<boolean> {
   try {
     await api.post('/alterarsenha', {

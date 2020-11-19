@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Image } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from '@react-navigation/native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-import { useIsFirstRun } from '../../contexts/firstRun';
 import OptionsList from '../../components/OptionList';
 
 import {
@@ -18,9 +17,8 @@ import {
 
 import CalendarIcon from '../../../assets/images/icons/ic_calendar.png';
 
-const HowToBreastFeed: React.FC = () => {
+const Diary: React.FC = () => {
   const navigation = useNavigation();
-  const { isFirstRun } = useIsFirstRun();
   const [showCalendar, setShowCalendar] = useState(false);
   const [currentDate, setCurrentDate] = useState(moment());
 
@@ -28,7 +26,9 @@ const HowToBreastFeed: React.FC = () => {
     {
       image: require('../../../assets/images/premature_breastfeed.png'),
       title: 'Registro de retiradas de leite',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('DiaryRegistry');
+      },
     },
     {
       image: require('../../../assets/images/diary_smile.png'),
@@ -97,4 +97,4 @@ const HowToBreastFeed: React.FC = () => {
   );
 };
 
-export default HowToBreastFeed;
+export default Diary;

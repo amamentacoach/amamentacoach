@@ -19,6 +19,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars-experimental': 'error',
     'global-require': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'react-hooks/exhaustive-deps': 'off',
   },
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
