@@ -38,7 +38,7 @@ const Resilience: React.FC = () => {
       <PageHeader>Você sabe o que é Resiliência?</PageHeader>
       <YoutubePlayer
         height={200}
-        videoId="OodQ5ZBcAT4"
+        videoId="KGedLLSN0FU"
         initialPlayerParams={{ loop: false }}
       />
       <Header>Mamães mais resilientes!</Header>

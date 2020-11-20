@@ -15,7 +15,7 @@ const HU: React.FC = () => {
       title: 'Vídeo AmamentaCoach',
       subtitle: 'Conheça o AmamentaCoach',
       onPress: () => {
-        navigation.navigate('VideoPage', { videos: ['OodQ5ZBcAT4'] });
+        navigation.navigate('VideoPage', { videos: ['z9V26A0Lipg'] });
       },
     },
     {

@@ -13,7 +13,7 @@ const ThePremature: React.FC = () => {
       title: 'Vídeo “Muito prazer, eu sou o prematuro”',
       subtitle: 'Subtítulo 1',
       onPress: () => {
-        navigation.navigate('VideoPage', { videos: ['OodQ5ZBcAT4'] });
+        navigation.navigate('VideoPage', { videos: ['w2rbi3aW-rA'] });
       },
     },
     {
