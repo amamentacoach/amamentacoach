@@ -12,6 +12,7 @@ import RespostasController from './controllers/RespostasController';
 import UploadController from './controllers/UploadController';
 import BebesController from './controllers/BebesController';
 import sendPushNotification from './utils/sendPushNotification';
+import ResultController from './controllers/ResultController';
 
 
 const maesController = new MaesController();
@@ -22,6 +23,7 @@ const perguntasController = new PerguntasController();
 const respostasMaeController = new RespostasMaeController();
 const respostasController = new RespostasController();
 const uploadController = new UploadController()
+const resultController = new ResultController()
 
 const routes = Router()
 const uploadMiddleware = multer(uploadConfig);
@@ -205,7 +207,8 @@ routes.post('/login',maesController.auth);
  *      {
  *          "qtd_leite":100,
  *          "mama":"D",
- *          "duracao":5
+ *          "duracao":5,
+ *          "data_hora":"2020-09-24T17:40:31.501Z"
  *      }
  * 
  *
@@ -493,5 +496,7 @@ routes.get('/testePush',async (req,res)=>{
     await sendPushNotification()
     res.sendStatus(200)
 })
+
+routes.get('/resultados',resultController.generate)
 
 export default routes;
