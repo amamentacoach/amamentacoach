@@ -9,7 +9,6 @@ import MainButton from '../../components/MainButton';
 import Modal from '../../components/Modal';
 
 import {
-  Container,
   ScrollView,
   FormContainer,
   SubmitButtonContainer,
@@ -49,53 +48,51 @@ const NewPassword: React.FC = () => {
   }
 
   return (
-    <Container>
-      <ScrollView>
-        <Modal
-          text="Senha alterada com sucesso!"
-          visible={isSubmitModalVisible}
-          closeModal={() => setIsSubmitModalVisible(false)}
-        />
+    <ScrollView>
+      <Modal
+        text="Senha alterada com sucesso!"
+        visible={isSubmitModalVisible}
+        closeModal={() => setIsSubmitModalVisible(false)}
+      />
 
-        <HeaderText>Insira e confirme a nova senha</HeaderText>
-        <Formik
-          initialValues={formInitialValues}
-          validationSchema={newPasswordSchema}
-          validateOnChange={false}
-          onSubmit={(values) => handleNewPassword(values)}>
-          {({ handleChange, handleSubmit, dirty, errors, values }) => (
-            <FormContainer>
-              <View>
-                <FormTextInput
-                  label="Nova senha"
-                  onChangeText={handleChange('password')}
-                  value={values.password}
-                  placeholder="Inserir nova senha"
-                  error={errors.password}
-                  secureTextEntry
-                />
-                <FormTextInput
-                  label="Confirme nova senha"
-                  onChangeText={handleChange('password_confirmation')}
-                  value={values.password_confirmation}
-                  placeholder="Confirme sua nova senha"
-                  error={errors.password_confirmation}
-                  secureTextEntry
-                />
-              </View>
+      <HeaderText>Insira e confirme a nova senha</HeaderText>
+      <Formik
+        initialValues={formInitialValues}
+        validationSchema={newPasswordSchema}
+        validateOnChange={false}
+        onSubmit={(values) => handleNewPassword(values)}>
+        {({ handleChange, handleSubmit, dirty, errors, values }) => (
+          <FormContainer>
+            <View>
+              <FormTextInput
+                label="Nova senha"
+                onChangeText={handleChange('password')}
+                value={values.password}
+                placeholder="Inserir nova senha"
+                error={errors.password}
+                secureTextEntry
+              />
+              <FormTextInput
+                label="Confirme nova senha"
+                onChangeText={handleChange('password_confirmation')}
+                value={values.password_confirmation}
+                placeholder="Confirme sua nova senha"
+                error={errors.password_confirmation}
+                secureTextEntry
+              />
+            </View>
 
-              <SubmitButtonContainer>
-                <MainButton
-                  buttonText="Salvar"
-                  onPress={handleSubmit}
-                  disabled={!dirty || isSendingForm}
-                />
-              </SubmitButtonContainer>
-            </FormContainer>
-          )}
-        </Formik>
-      </ScrollView>
-    </Container>
+            <SubmitButtonContainer>
+              <MainButton
+                buttonText="Salvar"
+                onPress={handleSubmit}
+                disabled={!dirty || isSendingForm}
+              />
+            </SubmitButtonContainer>
+          </FormContainer>
+        )}
+      </Formik>
+    </ScrollView>
   );
 };
 

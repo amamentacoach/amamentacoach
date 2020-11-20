@@ -1,10 +1,15 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import SplashScreen from '../pages/SplashScreen';
+
+type IIsFirstRun = {
+  introduction: boolean;
+  diary: boolean;
+};
 
 interface IIsFirstRunContextData {
-  isFirstRun: boolean;
-  setNotFirstRun: () => Promise<void>;
+  isFirstRun: IIsFirstRun;
+  setIntroductionNotFirstRun: () => Promise<void>;
+  setDiaryNotFirstRun: () => Promise<void>;
 }
 
 const IsFirstRun = createContext<IIsFirstRunContextData>(
@@ -12,36 +17,45 @@ const IsFirstRun = createContext<IIsFirstRunContextData>(
 );
 
 export const IsFirstRunProvider: React.FC = ({ children }) => {
-  const [isFirstRun, setIsFirstRun] = useState<boolean>(true);
-  const [loading, setLoading] = useState(true);
+  const [isFirstRun, setIsFirstRun] = useState<IIsFirstRun>({
+    introduction: true,
+    diary: true,
+  });
 
   useEffect(() => {
     async function checkDataInStorage() {
       const isFirstRunStorage = await AsyncStorage.getItem(
         '@AmamentaCoach:isFirstRun',
       );
-
-      setIsFirstRun(isFirstRunStorage === null);
-      setLoading(false);
+      if (isFirstRunStorage) {
+        setIsFirstRun(JSON.parse(isFirstRunStorage));
+      }
     }
-
     checkDataInStorage();
-  });
+  }, []);
 
-  async function setNotFirstRun() {
-    await AsyncStorage.setItem('@AmamentaCoach:isFirstRun', 'false');
-    setIsFirstRun(false);
+  async function setIntroductionNotFirstRun() {
+    await AsyncStorage.setItem(
+      '@AmamentaCoach:isFirstRun',
+      JSON.stringify({ ...isFirstRun, introduction: false }),
+    );
+    setIsFirstRun({ ...isFirstRun, introduction: false });
   }
 
-  if (loading) {
-    return <SplashScreen />;
+  async function setDiaryNotFirstRun() {
+    await AsyncStorage.setItem(
+      '@AmamentaCoach:isFirstRun',
+      JSON.stringify({ ...isFirstRun, diary: false }),
+    );
+    setIsFirstRun({ ...isFirstRun, diary: false });
   }
 
   return (
     <IsFirstRun.Provider
       value={{
         isFirstRun,
-        setNotFirstRun,
+        setIntroductionNotFirstRun,
+        setDiaryNotFirstRun,
       }}>
       {children}
     </IsFirstRun.Provider>

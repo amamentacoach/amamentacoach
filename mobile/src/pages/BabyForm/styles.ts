@@ -1,16 +1,11 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.SafeAreaView`
-  flex: 1;
-`;
-
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
-}))``;
-
-export const Header = styled.View`
-  padding: 20px;
+}))`
+  flex: 1;
+  padding: 24px;
 `;
 
 export const HeaderText = styled.Text`
@@ -30,7 +25,7 @@ export const HeaderSubText = styled.Text`
 
 export const FormContainer = styled.View`
   flex: 1;
-  margin: 0 24px;
+  margin-bottom: 20px;
 `;
 
 export const SubOptionsContainer = styled.View`

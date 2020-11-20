@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import OptionsList from '../../components/OptionList';
 
-import { Container, ScrollView, Header, BannerImage } from './styles';
+import { ScrollView, Header, BannerImage } from './styles';
 
 import HUBanner from '../../../assets/images/banner_hu.png';
 
@@ -15,7 +15,7 @@ const HU: React.FC = () => {
       title: 'Vídeo AmamentaCoach',
       subtitle: 'Conheça o AmamentaCoach',
       onPress: () => {
-        navigation.navigate('VideoPage', { videos: ['OodQ5ZBcAT4'] });
+        navigation.navigate('VideoPage', { videos: ['z9V26A0Lipg'] });
       },
     },
     {
@@ -29,14 +29,12 @@ const HU: React.FC = () => {
   ];
 
   return (
-    <Container>
-      <ScrollView>
-        <Header>
-          <BannerImage source={HUBanner} />
-        </Header>
-        <OptionsList label="Vídeos" options={options} displayArrows />
-      </ScrollView>
-    </Container>
+    <ScrollView>
+      <Header>
+        <BannerImage source={HUBanner} />
+      </Header>
+      <OptionsList label="Vídeos" options={options} displayArrows />
+    </ScrollView>
   );
 };
 

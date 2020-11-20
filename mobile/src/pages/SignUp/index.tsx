@@ -7,7 +7,6 @@ import * as Yup from 'yup';
 import FormTextInput from '../../components/FormTextInput';
 
 import {
-  Container,
   ScrollView,
   Header,
   HeaderText,
@@ -30,7 +29,7 @@ const FormSignUp: React.FC = () => {
     password: '',
     password_confirmation: '',
   };
-  const SignUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const signUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Obrigatório'),
     password: Yup.string()
       .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
@@ -46,63 +45,61 @@ const FormSignUp: React.FC = () => {
   }
 
   return (
-    <Container>
-      <ScrollView>
-        <Header>
-          <HeaderText>Passo 1 de 3</HeaderText>
-          <HeaderSubText>
-            Primeiro, precisamos dos seguintes dados para que você possa acessar
-            nossa plataforma:
-          </HeaderSubText>
-        </Header>
-        <Formik
-          initialValues={formInitialValues}
-          validationSchema={SignUpSchema}
-          validateOnChange={false}
-          onSubmit={(values) => handleFormSubmit(values)}>
-          {({ handleChange, handleSubmit, dirty, errors, values }) => (
-            <FormContainer>
-              <View>
-                <FormTextInput
-                  label="Email"
-                  error={errors.email}
-                  onChangeText={handleChange('email')}
-                  value={values.email}
-                  placeholder="Email"
-                  keyboardType="email-address"
-                />
+    <ScrollView>
+      <Header>
+        <HeaderText>Passo 1 de 3</HeaderText>
+        <HeaderSubText>
+          Primeiro, precisamos dos seguintes dados para que você possa acessar
+          nossa plataforma:
+        </HeaderSubText>
+      </Header>
+      <Formik
+        initialValues={formInitialValues}
+        validationSchema={signUpSchema}
+        validateOnChange={false}
+        onSubmit={(values) => handleFormSubmit(values)}>
+        {({ handleChange, handleSubmit, dirty, errors, values }) => (
+          <FormContainer>
+            <View>
+              <FormTextInput
+                label="Email"
+                error={errors.email}
+                onChangeText={handleChange('email')}
+                value={values.email}
+                placeholder="Email"
+                keyboardType="email-address"
+              />
 
-                <FormTextInput
-                  label="Senha"
-                  error={errors.password}
-                  onChangeText={handleChange('password')}
-                  value={values.password}
-                  placeholder="Senha"
-                  secureTextEntry
-                />
+              <FormTextInput
+                label="Senha"
+                error={errors.password}
+                onChangeText={handleChange('password')}
+                value={values.password}
+                placeholder="Senha"
+                secureTextEntry
+              />
 
-                <FormTextInput
-                  label="Confirme sua senha"
-                  error={errors.password_confirmation}
-                  onChangeText={handleChange('password_confirmation')}
-                  value={values.password_confirmation}
-                  placeholder="Confirme sua senha"
-                  secureTextEntry
-                />
-              </View>
+              <FormTextInput
+                label="Confirme sua senha"
+                error={errors.password_confirmation}
+                onChangeText={handleChange('password_confirmation')}
+                value={values.password_confirmation}
+                placeholder="Confirme sua senha"
+                secureTextEntry
+              />
+            </View>
 
-              <SubmitButtonContainer>
-                <MainButton
-                  onPress={handleSubmit}
-                  disabled={!dirty}
-                  buttonText="Próximo"
-                />
-              </SubmitButtonContainer>
-            </FormContainer>
-          )}
-        </Formik>
-      </ScrollView>
-    </Container>
+            <SubmitButtonContainer>
+              <MainButton
+                onPress={handleSubmit}
+                disabled={!dirty}
+                buttonText="Próximo"
+              />
+            </SubmitButtonContainer>
+          </FormContainer>
+        )}
+      </Formik>
+    </ScrollView>
   );
 };
 

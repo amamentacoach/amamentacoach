@@ -11,9 +11,7 @@ import FormDateInput from '../../components/FormDateInput';
 import FormPickerInput from '../../components/FormPickerInput';
 
 import {
-  Container,
   ScrollView,
-  Header,
   HeaderText,
   HeaderSubText,
   FormContainer,
@@ -69,7 +67,7 @@ const MotherForm: React.FC = () => {
     education: '',
     wage: '',
   };
-  const MotherFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const motherFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     name: Yup.string().required('Campo obrigatório'),
     birthday: Yup.string().required('Campo obrigatório'),
     alreadyBreastfeed: Yup.string().required('Campo obrigatório'),
@@ -80,7 +78,7 @@ const MotherForm: React.FC = () => {
       .of(
         Yup.object({
           id: Yup.number().required(),
-          value: Yup.string().required('Campo obrigatório'),
+          value: Yup.string(),
         }).required(),
       )
       .defined(),
@@ -105,7 +103,7 @@ const MotherForm: React.FC = () => {
 
     const newBreastFeedingCount = parseInt(fieldValue, 10);
     // Caso o texto não possa ser convertido para inteiro, limpa o formulário.
-    if (!newBreastFeedingCount) {
+    if (!newBreastFeedingCount && newBreastFeedingCount !== 0) {
       setFieldValue('pregnantCount', '');
       setBreastFeedingCount(0);
       setFieldValue('timeSpentBreastFeeding', []);
@@ -164,78 +162,70 @@ const MotherForm: React.FC = () => {
   }
 
   return (
-    <Container>
-      <ScrollView>
-        <Header>
-          <HeaderText>Passo 2 de 3</HeaderText>
-          <HeaderSubText>
-            Agora, faremos uma série de perguntas sobre você, mamãe, para trazer
-            o conteúdo mais adequado para a sua realidade:
-          </HeaderSubText>
-        </Header>
-        <Formik
-          initialValues={formInitialValues}
-          validationSchema={MotherFormSchema}
-          validateOnChange={false}
-          onSubmit={(values) => handleFormSubmit(values)}>
-          {({
-            handleChange,
-            handleSubmit,
-            setFieldValue,
-            dirty,
-            errors,
-            values,
-          }) => (
-            <FormContainer>
-              <FormTextInput
-                label="Seu Nome"
-                error={errors.name}
-                onChangeText={handleChange('name')}
-                value={values.name}
-                placeholder="Nome"
-              />
+    <ScrollView>
+      <HeaderText>Passo 2 de 3</HeaderText>
+      <HeaderSubText>
+        Agora, faremos uma série de perguntas sobre você, mamãe, para trazer o
+        conteúdo mais adequado para a sua realidade:
+      </HeaderSubText>
+      <Formik
+        initialValues={formInitialValues}
+        validationSchema={motherFormSchema}
+        validateOnChange={false}
+        onSubmit={(values) => handleFormSubmit(values)}>
+        {({
+          handleChange,
+          handleSubmit,
+          setFieldValue,
+          dirty,
+          errors,
+          values,
+        }) => (
+          <FormContainer>
+            <FormTextInput
+              label="Seu Nome"
+              error={errors.name}
+              onChangeText={handleChange('name')}
+              value={values.name}
+              placeholder="Nome"
+            />
 
-              <FormDateInput
-                label="Sua data de nascimento"
-                fieldName="birthday"
-                onChange={setFieldValue}
-                placeholder="Data de nascimento"
-                error={errors.birthday}
-              />
+            <FormDateInput
+              label="Sua data de nascimento"
+              fieldName="birthday"
+              onChange={setFieldValue}
+              placeholder="Data de nascimento"
+              error={errors.birthday}
+            />
 
+            <FormTextInput
+              label="Quantas vezes já esteve grávida? (contando abortos)"
+              value={values.pregnantCount}
+              onChangeText={(text: string) => {
+                handleNewTimeBreastFeeding(
+                  text,
+                  values.timeSpentBreastFeeding,
+                  setFieldValue,
+                );
+                setFieldValue('alreadyBreastfeed', 'Não');
+              }}
+              placeholder="Insira o número de vezes"
+              keyboardType="numeric"
+              error={errors.pregnantCount}
+            />
+
+            {values.pregnantCount !== '0' && values.pregnantCount !== '' && (
               <FormRadioGroupInput
                 label="Você já amamentou antes?"
                 fieldName="alreadyBreastfeed"
-                onChange={(fieldName: string, fieldValue: string) => {
-                  setFieldValue(fieldName, fieldValue);
-                  if (fieldValue === 'Não') {
-                    setFieldValue('pregnantCount', '0');
-                  } else if (fieldValue === 'Sim') {
-                    setFieldValue('pregnantCount', '');
-                  }
-                }}
+                onChange={setFieldValue}
                 options={['Sim', 'Não']}
                 error={errors.alreadyBreastfeed}
               />
+            )}
 
-              {values.alreadyBreastfeed === 'Sim' && (
-                <FormTextInput
-                  label="Quantas vezes já esteve grávida? (contando abortos)"
-                  value={values.pregnantCount}
-                  onChangeText={(text: string) => {
-                    handleNewTimeBreastFeeding(
-                      text,
-                      values.timeSpentBreastFeeding,
-                      setFieldValue,
-                    );
-                  }}
-                  placeholder="Insira o número de vezes"
-                  keyboardType="numeric"
-                  error={errors.pregnantCount}
-                />
-              )}
-
-              {values.timeSpentBreastFeeding.map((item, index) => (
+            {values.alreadyBreastfeed === 'Sim' &&
+              values.timeSpentBreastFeeding.map((item, index) => (
                 <FormPickerInput
                   key={item.id}
                   label={`Tempo de amamentação (gravidez ${index + 1})`}
@@ -258,107 +248,106 @@ const MotherForm: React.FC = () => {
                 />
               ))}
 
-              <FormRadioGroupInput
-                label="Tem companheiro?"
-                fieldName="married"
-                onChange={(fieldName: string, fieldValue: string) => {
-                  setFieldValue(fieldName, fieldValue);
-                  if (fieldValue === 'Não') {
-                    setFieldValue('marriedTime', '0');
-                    setFieldValue('liveTogether', 'Não');
-                  } else if (fieldValue === 'Sim') {
-                    // Reinicia os campos abaixo quando o valor do campo married é 'Sim'.
-                    setFieldValue('marriedTime', '');
-                    setFieldValue('liveTogether', '');
-                  }
-                  setFieldValue('marriedMetric', 'meses');
-                }}
-                options={['Sim', 'Não']}
-                error={errors.married}
-              />
+            <FormRadioGroupInput
+              label="Tem companheiro?"
+              fieldName="married"
+              onChange={(fieldName: string, fieldValue: string) => {
+                setFieldValue(fieldName, fieldValue);
+                if (fieldValue === 'Não') {
+                  setFieldValue('marriedTime', '0');
+                  setFieldValue('liveTogether', 'Não');
+                } else if (fieldValue === 'Sim') {
+                  // Reinicia os campos abaixo quando o valor do campo married é 'Sim'.
+                  setFieldValue('marriedTime', '');
+                  setFieldValue('liveTogether', '');
+                }
+                setFieldValue('marriedMetric', 'meses');
+              }}
+              options={['Sim', 'Não']}
+              error={errors.married}
+            />
 
-              {values.married === 'Sim' && (
-                <>
-                  <FormRadioGroupInput
-                    label="Moram juntos?"
-                    fieldName="liveTogether"
-                    onChange={setFieldValue}
-                    options={['Sim', 'Não']}
-                    error={errors.liveTogether}
-                  />
+            {values.married === 'Sim' && (
+              <>
+                <FormRadioGroupInput
+                  label="Moram juntos?"
+                  fieldName="liveTogether"
+                  onChange={setFieldValue}
+                  options={['Sim', 'Não']}
+                  error={errors.liveTogether}
+                />
 
-                  <MarriedSubOptionsContainer>
-                    <MarriedTimeContainer>
-                      <FormPickerInput
-                        label="Há quanto tempo?"
-                        fieldName="marriedTime"
-                        onChange={setFieldValue}
-                        error={errors.marriedTime}
-                        options={['1 a 3', '4 a 6', '7 a 9', '10 ou mais']}
-                      />
-                    </MarriedTimeContainer>
-                    <MarriedMetricContainer>
-                      <FormPickerInput
-                        label=""
-                        placeholder=""
-                        fieldName="marriedMetric"
-                        onChange={setFieldValue}
-                        error={errors.marriedMetric}
-                        options={['meses', 'anos']}
-                      />
-                    </MarriedMetricContainer>
-                  </MarriedSubOptionsContainer>
-                </>
-              )}
+                <MarriedSubOptionsContainer>
+                  <MarriedTimeContainer>
+                    <FormPickerInput
+                      label="Há quanto tempo?"
+                      fieldName="marriedTime"
+                      onChange={setFieldValue}
+                      error={errors.marriedTime}
+                      options={['1 a 3', '4 a 6', '7 a 9', '10 ou mais']}
+                    />
+                  </MarriedTimeContainer>
+                  <MarriedMetricContainer>
+                    <FormPickerInput
+                      label=""
+                      placeholder=""
+                      fieldName="marriedMetric"
+                      onChange={setFieldValue}
+                      error={errors.marriedMetric}
+                      options={['meses', 'anos']}
+                    />
+                  </MarriedMetricContainer>
+                </MarriedSubOptionsContainer>
+              </>
+            )}
 
-              <FormPickerInput
-                label="Qual sua escolaridade?"
-                fieldName="education"
-                onChange={setFieldValue}
-                error={errors.education}
-                options={[
-                  'Fundamental incompleto',
-                  'Fundamental completo',
-                  'Ensino médio incompleto',
-                  'Ensino médio completo',
-                  'Superior incompleto',
-                  'Superior completo',
-                ]}
-              />
+            <FormPickerInput
+              label="Qual sua escolaridade?"
+              fieldName="education"
+              onChange={setFieldValue}
+              error={errors.education}
+              options={[
+                'Fundamental incompleto',
+                'Fundamental completo',
+                'Ensino médio incompleto',
+                'Ensino médio completo',
+                'Superior incompleto',
+                'Superior completo',
+              ]}
+            />
 
-              <FormPickerInput
-                label="Em qual faixa sua renda familiar se encaixa?"
-                fieldName="wage"
-                onChange={setFieldValue}
-                error={errors.wage}
-                options={[
-                  'Até 1 salário mínimo',
-                  'Entre 1 e 3 salários mínimos',
-                  'Entre 4 e 6 salários mínimos',
-                  'Mais que 6 salários mínimos',
-                ]}
-              />
+            <FormPickerInput
+              label="Em qual faixa sua renda familiar se encaixa?"
+              fieldName="wage"
+              onChange={setFieldValue}
+              error={errors.wage}
+              options={[
+                'Até 1 salário mínimo',
+                'Entre 1 e 3 salários mínimos',
+                'Entre 4 e 6 salários mínimos',
+                'Mais que 6 salários mínimos',
+              ]}
+            />
 
-              <SubmitButtonContainer>
-                <FirstSubOptionContainer>
-                  <SecondaryButton
-                    onPress={() => navigation.goBack()}
-                    buttonText="Voltar"
-                  />
-                </FirstSubOptionContainer>
-                <SecondSubOptionContainer>
-                  <MainButton
-                    onPress={handleSubmit}
-                    disabled={!dirty}
-                    buttonText="Próximo"
-                  />
-                </SecondSubOptionContainer>
-              </SubmitButtonContainer>
-            </FormContainer>
-          )}
-        </Formik>
-      </ScrollView>
-    </Container>
+            <SubmitButtonContainer>
+              <FirstSubOptionContainer>
+                <SecondaryButton
+                  onPress={() => navigation.goBack()}
+                  buttonText="Voltar"
+                />
+              </FirstSubOptionContainer>
+              <SecondSubOptionContainer>
+                <MainButton
+                  onPress={handleSubmit}
+                  disabled={!dirty}
+                  buttonText="Próximo"
+                />
+              </SecondSubOptionContainer>
+            </SubmitButtonContainer>
+          </FormContainer>
+        )}
+      </Formik>
+    </ScrollView>
   );
 };
 

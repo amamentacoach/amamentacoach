@@ -9,7 +9,6 @@ import MainButton from '../../components/MainButton';
 import Modal from '../../components/Modal';
 
 import {
-  Container,
   ScrollView,
   FormContainer,
   SubmitButtonContainer,
@@ -27,7 +26,7 @@ const ForgotPassword: React.FC = () => {
   const formInitialValues: IFormValues = {
     email: '',
   };
-  const SignUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const signUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Obrigatório'),
   }).required();
 
@@ -41,48 +40,46 @@ const ForgotPassword: React.FC = () => {
   }
 
   return (
-    <Container>
-      <ScrollView>
-        <Modal
-          text="Cheque sua caixa de entrada do e-mail e acesse o link que enviamos para a redefinição de sua senha."
-          visible={isSubmitModalVisible}
-          closeModal={() => setIsSubmitModalVisible(false)}
-        />
+    <ScrollView>
+      <Modal
+        text="Cheque sua caixa de entrada do e-mail e acesse o link que enviamos para a redefinição de sua senha."
+        visible={isSubmitModalVisible}
+        closeModal={() => setIsSubmitModalVisible(false)}
+      />
 
-        <HeaderText>
-          Preencha o campo abaixo com o seu e-mail de cadastro para que possamos
-          enviar um link de redefinição de senha.
-        </HeaderText>
-        <Formik
-          initialValues={formInitialValues}
-          validationSchema={SignUpSchema}
-          validateOnChange={false}
-          onSubmit={(values) => handleForgotPassword(values)}>
-          {({ handleChange, handleSubmit, dirty, errors, values }) => (
-            <FormContainer>
-              <View>
-                <FormTextInput
-                  label="Email"
-                  onChangeText={handleChange('email')}
-                  value={values.email}
-                  placeholder="Insira seu email"
-                  keyboardType="email-address"
-                  error={errors.email}
-                />
-              </View>
+      <HeaderText>
+        Preencha o campo abaixo com o seu e-mail de cadastro para que possamos
+        enviar um link de redefinição de senha.
+      </HeaderText>
+      <Formik
+        initialValues={formInitialValues}
+        validationSchema={signUpSchema}
+        validateOnChange={false}
+        onSubmit={(values) => handleForgotPassword(values)}>
+        {({ handleChange, handleSubmit, dirty, errors, values }) => (
+          <FormContainer>
+            <View>
+              <FormTextInput
+                label="Email"
+                onChangeText={handleChange('email')}
+                value={values.email}
+                placeholder="Insira seu email"
+                keyboardType="email-address"
+                error={errors.email}
+              />
+            </View>
 
-              <SubmitButtonContainer>
-                <MainButton
-                  buttonText="Enviar"
-                  onPress={handleSubmit}
-                  disabled={!dirty || isSendingForm}
-                />
-              </SubmitButtonContainer>
-            </FormContainer>
-          )}
-        </Formik>
-      </ScrollView>
-    </Container>
+            <SubmitButtonContainer>
+              <MainButton
+                buttonText="Enviar"
+                onPress={handleSubmit}
+                disabled={!dirty || isSendingForm}
+              />
+            </SubmitButtonContainer>
+          </FormContainer>
+        )}
+      </Formik>
+    </ScrollView>
   );
 };
 

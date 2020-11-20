@@ -74,16 +74,6 @@ const StepByStepPremature: React.FC = () => {
     },
   ];
 
-  function goToPage(page: number) {
-    if (page >= pages.length) {
-      return;
-    }
-    pageFlatListRef.current?.scrollToIndex({
-      animated: true,
-      index: page,
-    });
-  }
-
   function InfoPage({ index, title, text, image }: IInfoPageProps) {
     return (
       <PageContainer width={width}>
@@ -96,7 +86,7 @@ const StepByStepPremature: React.FC = () => {
           <Footer>
             <CurrentPageWrapper>
               <ProgressDots
-                navigateToPage={(page: number) => goToPage(page)}
+                flatlistRef={pageFlatListRef}
                 selectedIndex={index}
                 length={pages.length}
               />

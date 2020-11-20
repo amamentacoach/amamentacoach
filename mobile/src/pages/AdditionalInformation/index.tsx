@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import OptionsList from '../../components/OptionList';
 
-import { Container, ScrollView } from './styles';
+import ScrollView from './styles';
 
 const AdditionalInformation: React.FC = () => {
+  const navigation = useNavigation();
   const options = [
     {
       image: require('../../../assets/images/premature_breastfeed.png'),
@@ -22,7 +24,9 @@ const AdditionalInformation: React.FC = () => {
       image: require('../../../assets/images/diary_smile.png'),
       title: 'Você sabe o que é Resiliência?',
       subtitle: 'Explicamos pra você!',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('Resilience');
+      },
     },
     {
       image: require('../../../assets/images/father.png'),
@@ -39,11 +43,9 @@ const AdditionalInformation: React.FC = () => {
   ];
 
   return (
-    <Container>
-      <ScrollView>
-        <OptionsList options={options} />
-      </ScrollView>
-    </Container>
+    <ScrollView>
+      <OptionsList options={options} />
+    </ScrollView>
   );
 };
 

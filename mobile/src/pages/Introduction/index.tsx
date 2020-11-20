@@ -48,22 +48,12 @@ const pages = [
 ];
 
 const Introduction: React.FC = () => {
-  const { setNotFirstRun } = useIsFirstRun();
+  const { setIntroductionNotFirstRun } = useIsFirstRun();
   const { width } = Dimensions.get('window');
   const pageFlatListRef = useRef<FlatList>(null);
 
   async function handleSkip() {
-    await setNotFirstRun();
-  }
-
-  function goToPage(page: number) {
-    if (page >= pages.length) {
-      return;
-    }
-    pageFlatListRef.current?.scrollToIndex({
-      animated: true,
-      index: page,
-    });
+    await setIntroductionNotFirstRun();
   }
 
   function InfoPage({ index, text, image }: IInfoPageProps) {
@@ -82,7 +72,7 @@ const Introduction: React.FC = () => {
           <Footer>
             <CurrentPageWrapper>
               <ProgressDots
-                navigateToPage={(page: number) => goToPage(page)}
+                flatlistRef={pageFlatListRef}
                 selectedIndex={index}
                 length={pages.length}
               />

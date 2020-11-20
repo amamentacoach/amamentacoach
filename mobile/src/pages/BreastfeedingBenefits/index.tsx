@@ -36,6 +36,7 @@ const BreastfeedingBenefits: React.FC = () => {
 
   const pages = [
     {
+      id: '1',
       image: require('../../../assets/images/info_mother_baby.png'),
       title: 'Benefícios da amamentação para a mãe e o bebê',
       topics: [
@@ -46,6 +47,7 @@ const BreastfeedingBenefits: React.FC = () => {
       ],
     },
     {
+      id: '2',
       image: require('../../../assets/images/info_baby.png'),
       title: 'Benefícios da amamentação para o bebê',
       topics: [
@@ -57,8 +59,9 @@ const BreastfeedingBenefits: React.FC = () => {
       ],
     },
     {
+      id: '3',
       image: require('../../../assets/images/info_baby_tubes.png'),
-      title: 'Benefícios da amamentação para a mãe e o bebê',
+      title: 'Benefícios da amamentação para o bebê',
       topics: [
         {
           header: 'BOCA',
@@ -71,8 +74,9 @@ const BreastfeedingBenefits: React.FC = () => {
       ],
     },
     {
+      id: '4',
       image: require('../../../assets/images/info_father_baby.png'),
-      title: 'Benefícios da amamentação para a mãe e o bebê',
+      title: 'Benefícios da amamentação para o bebê',
       topics: [
         {
           header: 'PROTEÇÃO',
@@ -86,8 +90,9 @@ const BreastfeedingBenefits: React.FC = () => {
       ],
     },
     {
+      id: '5',
       image: require('../../../assets/images/info_supermom.png'),
-      title: 'Benefícios da amamentação para a mãe e o bebê',
+      title: 'Benefícios da amamentação para a mãe',
       topics: [
         {
           header: 'REDUZ O RISCO',
@@ -97,8 +102,9 @@ const BreastfeedingBenefits: React.FC = () => {
       ],
     },
     {
+      id: '6',
       image: require('../../../assets/images/info_nurse_baby.png'),
-      title: 'Benefícios da amamentação para a mãe e o bebê',
+      title: 'Benefícios da amamentação para a mãe',
       topics: [
         {
           header: 'AJUDA',
@@ -116,16 +122,6 @@ const BreastfeedingBenefits: React.FC = () => {
     },
   ];
 
-  function goToPage(page: number) {
-    if (page >= pages.length) {
-      return;
-    }
-    pageFlatListRef.current?.scrollToIndex({
-      animated: true,
-      index: page,
-    });
-  }
-
   function InfoPage({ index, title, image, topics }: IInfoPageProps) {
     return (
       <PageContainer width={width}>
@@ -134,7 +130,7 @@ const BreastfeedingBenefits: React.FC = () => {
           <ContentWrapper>
             <Image source={image} />
             {topics.map(({ header, text }) => (
-              <View key={header}>
+              <View key={text}>
                 <ContentHeaderText>{header}</ContentHeaderText>
                 <ContentText>{text}</ContentText>
               </View>
@@ -143,7 +139,7 @@ const BreastfeedingBenefits: React.FC = () => {
           <Footer>
             <CurrentPageWrapper>
               <ProgressDots
-                navigateToPage={(page: number) => goToPage(page)}
+                flatlistRef={pageFlatListRef}
                 selectedIndex={index}
                 length={pages.length}
               />
@@ -172,7 +168,7 @@ const BreastfeedingBenefits: React.FC = () => {
             topics={item.topics}
           />
         )}
-        keyExtractor={(item) => item.text}
+        keyExtractor={(item) => item.id}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}

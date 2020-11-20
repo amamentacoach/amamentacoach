@@ -11,7 +11,6 @@ import MainButton from '../../components/MainButton';
 import { useAuth } from '../../contexts/auth';
 
 import {
-  Container,
   ScrollView,
   Header,
   HeaderImage,
@@ -31,7 +30,7 @@ interface IFormValues {
   password: string;
 }
 
-const FormLogin: React.FC = () => {
+const Login: React.FC = () => {
   const navigation = useNavigation();
   const { signIn } = useAuth();
 
@@ -42,7 +41,7 @@ const FormLogin: React.FC = () => {
     email: '',
     password: '',
   };
-  const SignUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const loginSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Obrigatório'),
     password: Yup.string()
       .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
@@ -67,7 +66,7 @@ const FormLogin: React.FC = () => {
   }
 
   return (
-    <Container>
+    <>
       <Modal
         text="E-mail ou senha incorretos!"
         visible={isSubmitModalVisible}
@@ -81,7 +80,7 @@ const FormLogin: React.FC = () => {
         </Header>
         <Formik
           initialValues={formInitialValues}
-          validationSchema={SignUpSchema}
+          validationSchema={loginSchema}
           validateOnChange={false}
           onSubmit={(values) => handleSignIn(values)}>
           {({ handleChange, handleSubmit, dirty, errors, values }) => (
@@ -130,8 +129,8 @@ const FormLogin: React.FC = () => {
           )}
         </Formik>
       </ScrollView>
-    </Container>
+    </>
   );
 };
 
-export default FormLogin;
+export default Login;

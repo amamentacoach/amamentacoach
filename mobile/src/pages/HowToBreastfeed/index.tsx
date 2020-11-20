@@ -2,7 +2,7 @@ import React from 'react';
 
 import OptionsList from '../../components/OptionList';
 
-import { Container, HeaderText, ScrollView } from './styles';
+import { HeaderText, ScrollView } from './styles';
 
 const HowToBreastFeed: React.FC = () => {
   const options = [
@@ -29,14 +29,12 @@ const HowToBreastFeed: React.FC = () => {
   ];
 
   return (
-    <Container>
-      <ScrollView>
-        <HeaderText>
-          Tudo o que você precisa saber sobre retirada do leite
-        </HeaderText>
-        <OptionsList options={options} />
-      </ScrollView>
-    </Container>
+    <ScrollView>
+      <HeaderText>
+        Tudo o que você precisa saber sobre retirada do leite
+      </HeaderText>
+      <OptionsList options={options} />
+    </ScrollView>
   );
 };
 
