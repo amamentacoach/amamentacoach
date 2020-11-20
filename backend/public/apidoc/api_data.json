@@ -437,7 +437,7 @@
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"qtd_leite\":100,\n    \"mama\":\"D\",\n    \"duracao\":5\n}",
+          "content": "{\n    \"qtd_leite\":100,\n    \"mama\":\"D\",\n    \"duracao\":5,\n    \"data_hora\":\"2020-09-24T17:40:31.501Z\"\n}",
           "type": "json"
         }
       ]
