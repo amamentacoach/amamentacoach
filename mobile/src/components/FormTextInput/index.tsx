@@ -10,7 +10,7 @@ import {
 } from './styles';
 
 interface FormTextProps extends TextInputProps {
-  label: string;
+  label?: string | undefined;
   error?: string | undefined;
 }
 
@@ -25,7 +25,7 @@ const FormTextInput: React.FC<FormTextProps> = ({
 }) => {
   return (
     <Container>
-      <LabelText>{label}</LabelText>
+      {label !== undefined ? <LabelText>{label}</LabelText> : null}
       <TextInput
         onChangeText={onChangeText}
         value={value}

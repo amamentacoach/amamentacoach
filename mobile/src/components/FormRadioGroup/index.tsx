@@ -14,10 +14,11 @@ import {
 
 interface FormRadioGroupProps {
   fieldName: string;
-  label: string;
+  label?: string | undefined;
+  multipleSelection?: boolean | undefined;
   options: string[];
-  error?: string | undefined;
-  onChange: (fieldName: string, fieldValue: string) => void;
+  error?: string | string[] | undefined;
+  onChange: (fieldName: string, fieldValue: string[]) => void;
 }
 
 const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
@@ -25,31 +26,59 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   label,
   options,
   error,
+  multipleSelection = false,
   onChange,
 }) => {
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  // Inicia todas as opções como não selecionadas
+  const [selectedIndexes, setSelectedIndexes] = useState<{
+    [key: string]: boolean;
+  }>(options.reduce((object, _, index) => ({ ...object, [index]: false }), {}));
 
-  function handleOptionSelected(index: number) {
-    setSelectedIndex(index);
-    onChange(fieldName, options[index]);
+  function handleOptionSelected(selectedIndex: number) {
+    // Inverte a opção pressionada.
+    const newSelectedIndexes: { [key: string]: boolean } = {
+      ...selectedIndexes,
+      [selectedIndex]: !selectedIndexes[selectedIndex],
+    };
+
+    // Caso só uma opção possa ser marcada de cada vez, desmarca todos os elementos que não são o
+    // selecionado.
+    if (!multipleSelection) {
+      Object.keys(newSelectedIndexes).forEach((index) => {
+        if (parseInt(index, 10) !== selectedIndex) {
+          newSelectedIndexes[index] = false;
+        }
+      });
+    }
+
+    setSelectedIndexes(newSelectedIndexes);
+    onChange(
+      fieldName,
+      // Cria um array de strings contendo as opções selecionadas.
+      Object.keys(newSelectedIndexes)
+        .filter((index) => newSelectedIndexes[index])
+        .map((index) => options[parseInt(index, 10)]),
+    );
   }
 
   return (
     <Container>
-      <LabelText>{label}</LabelText>
+      {label !== undefined ? <LabelText>{label}</LabelText> : null}
       <OptionsContainer>
-        {options.map((option, index) => (
-          <OptionButton
-            selected={index === selectedIndex}
-            key={option}
-            activeOpacity={1}
-            onPress={() => handleOptionSelected(index)}>
-            <OuterCircle selected={index === selectedIndex}>
-              <InnerCircle selected={index === selectedIndex} />
-            </OuterCircle>
-            <TextOption>{option}</TextOption>
-          </OptionButton>
-        ))}
+        {options.map((option, index) => {
+          return (
+            <OptionButton
+              selected={selectedIndexes[index]}
+              key={option}
+              activeOpacity={1}
+              onPress={() => handleOptionSelected(index)}>
+              <OuterCircle selected={selectedIndexes[index]}>
+                <InnerCircle selected={selectedIndexes[index]} />
+              </OuterCircle>
+              <TextOption>{option}</TextOption>
+            </OptionButton>
+          );
+        })}
       </OptionsContainer>
       <ErrorContainer>
         {error ? <ErrorText>{error}</ErrorText> : null}

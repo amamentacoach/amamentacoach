@@ -42,7 +42,7 @@ const Login: React.FC = () => {
     password: '',
   };
   const loginSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
-    email: Yup.string().email('Email Inválido').required('Obrigatório'),
+    email: Yup.string().email('Email Inválido').required('Campo obrigatório'),
     password: Yup.string()
       .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
       .required('Campo obrigatório'),

@@ -48,7 +48,9 @@ export const InnerCircle = styled.View<RadioButtonProps>`
 export const TextOption = styled.Text`
   font-family: 'OpenSans-Regular';
   margin-left: 15px;
+  margin-right: 15px;
   font-size: 16px;
+  color: #545454;
 `;
 
 export const ErrorContainer = styled.View`

@@ -14,7 +14,7 @@ import {
 
 interface FormDateProps {
   fieldName: string;
-  label: string;
+  label?: string | undefined;
   error?: string | undefined;
   placeholder: string;
   mode?: string | undefined;
@@ -45,7 +45,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
     return dateToFormat.format('DD[/]MM[/]YYYY');
   }
 
-  // Formata a data salva para ser armazenada no useState do componente e valor do formulário.
+  // Formata a data salva para ser armazenada no useState do componente e valor final do formulário.
   function formatStateDate(dateToFormat: Moment | undefined): string {
     if (!dateToFormat) {
       return '';
@@ -73,7 +73,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
 
   return (
     <Container>
-      <LabelText>{label}</LabelText>
+      {label !== undefined ? <LabelText>{label}</LabelText> : null}
       <TouchableOpacity onPress={showDatePicker}>
         <TextInput
           value={formatDisplayDate(date)}
