@@ -3,6 +3,8 @@ import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import moment from 'moment';
+import 'moment/locale/pt-br';
 
 import { createNewDiaryRegistry } from '../../services/diaryRegistry';
 import { useAuth } from '../../contexts/auth';
@@ -85,7 +87,8 @@ const NewDiaryRegistry: React.FC = () => {
       breast,
       parseFloat(quantity),
       parseInt(duration, 10),
-      time,
+      // Transforma o horário em uma data.
+      moment(time, ['kk:mm']).toDate(),
     );
     navigation.navigate('DiaryRegistry');
   }

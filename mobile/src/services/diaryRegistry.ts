@@ -15,13 +15,14 @@ export async function createNewDiaryRegistry(
   breast: string,
   duration: number,
   quantity: number,
-  time: string,
+  time: Date,
 ): Promise<boolean> {
   try {
     await api.post(`/bebes/${babyId}/ordenhas`, {
       qtd_leite: quantity,
       mama: breast,
       duracao: duration,
+      data_hora: time,
     });
     return true;
   } catch (error) {
