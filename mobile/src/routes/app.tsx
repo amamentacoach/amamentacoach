@@ -18,6 +18,7 @@ import ThePremature from '../pages/ThePremature';
 import VideoPage from '../pages/VideoPage';
 import DiaryRegistry from '../pages/DiaryRegistry';
 import NewDiaryRegistry from '../pages/NewDiaryRegistry';
+import HelpReceived from '../pages/HelpReceived';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -115,6 +116,19 @@ const AppRoutes: React.FC = () => {
         name="NewDiaryRegistry"
         component={NewDiaryRegistry}
         options={{ title: 'Diário' }}
+      />
+      <Stack.Screen
+        name="HelpReceived"
+        component={HelpReceived}
+        options={{
+          title: 'Diário',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: '#7D5CD7',
+            elevation: 0, // Remove a sombra no Android
+            shadowOpacity: 0, // Remove a sombra no iOS
+          },
+        }}
       />
     </Stack.Navigator>
   );

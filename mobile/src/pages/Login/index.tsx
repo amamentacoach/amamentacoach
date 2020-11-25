@@ -115,7 +115,7 @@ const Login: React.FC = () => {
                 <MainButton
                   onPress={handleSubmit}
                   disabled={!dirty || isSendingForm}
-                  buttonText="Entrar"
+                  buttonText={isSendingForm ? 'Entrando...' : 'Entrar'}
                 />
               </SubmitButtonContainer>
 

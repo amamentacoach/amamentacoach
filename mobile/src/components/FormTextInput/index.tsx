@@ -31,8 +31,8 @@ const FormTextInput: React.FC<FormTextProps> = ({
         value={value}
         placeholder={placeholder}
         secureTextEntry={secureTextEntry}
-        placeholderTextColor="#acaab2"
         keyboardType={keyboardType}
+        placeholderTextColor="#acaab2"
       />
       <ErrorContainer>
         {error ? <ErrorText>{error}</ErrorText> : null}

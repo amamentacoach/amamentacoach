@@ -4,6 +4,7 @@ import { FlatList } from 'react-native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
+import dateFormatVerbose from '../../utils/date';
 import { useAuth } from '../../contexts/auth';
 import {
   listDiaryRegistries,
@@ -34,30 +35,17 @@ const DiaryRegistry: React.FC = () => {
         const oldRegistries = await Promise.all(
           motherInfo.babies.map(async ({ id }) => listDiaryRegistries(id)),
         );
-        // Ordena os registros de acordo com suas datas em ordem decrescente.
+        // Combina todos os registros em um array.
         const sortedRegistries = ([] as IListDiaryEntry[]).concat(
           ...oldRegistries,
         );
+        // Ordena os registros de acordo com suas datas em ordem decrescente.
         sortedRegistries.sort((a, b) => (a.date < b.date ? 1 : -1));
         setRegistries(sortedRegistries);
       }
     }
     fetchRegistries();
   }, [motherInfo]);
-
-  function formatCurrentDate() {
-    const day = currentDate.format('DD');
-    const dayName = currentDate.format('dddd');
-    const capitalizedDayName =
-      dayName.charAt(0).toUpperCase() + dayName.slice(1);
-
-    const month = currentDate.format('MMMM').toString();
-    const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1);
-
-    const year = currentDate.format('YYYY');
-
-    return `${capitalizedDayName}, ${day} de ${capitalizedMonth} de ${year}`;
-  }
 
   function InfoPage({ date, breast, duration, quantity }: IListDiaryEntry) {
     return (
@@ -90,7 +78,7 @@ const DiaryRegistry: React.FC = () => {
 
   return (
     <Container>
-      <DateText>{formatCurrentDate()}</DateText>
+      <DateText>{dateFormatVerbose(currentDate)}</DateText>
       <ListContainer>
         <FlatList
           data={registries}

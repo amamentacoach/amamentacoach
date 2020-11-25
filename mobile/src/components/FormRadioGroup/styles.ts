@@ -53,6 +53,10 @@ export const TextOption = styled.Text`
   color: #545454;
 `;
 
+export const OtherInputContainer = styled.View`
+  margin-top: 10px;
+`;
+
 export const ErrorContainer = styled.View`
   flex: 1;
   min-height: 20px;

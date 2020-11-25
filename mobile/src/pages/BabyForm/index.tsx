@@ -76,7 +76,7 @@ const BabyForm: React.FC = () => {
 
   const babyFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     numberOfBabies: Yup.string()
-      .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
+      .matches(new RegExp('^\\d+$'), 'Deve ser um número inteiro positivo')
       .required('Campo obrigatório'),
     babies: Yup.array()
       .of(
@@ -410,7 +410,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                 <MainButton
                   onPress={handleSubmit}
                   disabled={!dirty || isSendingForm}
-                  buttonText="Próximo"
+                  buttonText={isSendingForm ? 'Enviando...' : 'Salvar'}
                 />
               </SecondSubOptionContainer>
             </SubmitButtonContainer>

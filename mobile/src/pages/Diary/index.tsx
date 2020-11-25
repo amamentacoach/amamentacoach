@@ -5,6 +5,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
+import dateFormatVerbose from '../../utils/date';
 import OptionsList from '../../components/OptionList';
 
 import {
@@ -43,23 +44,11 @@ const Diary: React.FC = () => {
     {
       image: require('../../../assets/images/premature_heart.png'),
       title: 'Ajuda recebida',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('HelpReceived');
+      },
     },
   ];
-
-  function formatCurrentDate() {
-    const day = currentDate.format('DD');
-    const dayName = currentDate.format('dddd');
-    const capitalizedDayName =
-      dayName.charAt(0).toUpperCase() + dayName.slice(1);
-
-    const month = currentDate.format('MMMM').toString();
-    const capitalizedMonth = month.charAt(0).toUpperCase() + month.slice(1);
-
-    const year = currentDate.format('YYYY');
-
-    return `${capitalizedDayName}, ${day} de ${capitalizedMonth} de ${year}`;
-  }
 
   function handleDateSelected(selectedDate?: Date) {
     setShowCalendar(false);
@@ -75,7 +64,6 @@ const Diary: React.FC = () => {
           testID="dateTimePicker"
           value={currentDate.toDate()}
           mode="date"
-          display="calendar"
           maximumDate={new Date()}
           onChange={(_: Event, selectedDate?: Date | undefined) =>
             handleDateSelected(selectedDate)
@@ -91,7 +79,7 @@ const Diary: React.FC = () => {
           <Image source={CalendarIcon} />
         </CalendarButton>
       </Header>
-      <DateText>{formatCurrentDate()}</DateText>
+      <DateText>{dateFormatVerbose(currentDate)}</DateText>
       <OptionsList options={options} />
     </ScrollView>
   );

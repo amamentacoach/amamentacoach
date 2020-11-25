@@ -18,10 +18,6 @@ export async function createNewDiaryRegistry(
   time: string,
 ): Promise<boolean> {
   try {
-    console.log(babyId);
-    console.log(breast);
-    console.log(duration);
-    console.log(quantity);
     await api.post(`/bebes/${babyId}/ordenhas`, {
       qtd_leite: quantity,
       mama: breast,

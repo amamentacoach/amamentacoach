@@ -20,16 +20,21 @@ interface IBabySignUpInfo {
   gestationWeeks: number;
   gestationDays: number;
   weight: number;
-  apgar1: number;
-  apgar2: number;
+  apgar1: number | null;
+  apgar2: number | null;
   birthType: boolean;
   birthLocation: string;
   difficulties: boolean;
 }
 
-interface IMotherInfo {
+export interface IMotherInfo {
   name: string;
-  babies: { id: number; name: string; birthLocation: string }[];
+  babiesBirthLocations: {
+    AC: boolean;
+    UCI: boolean;
+    UTI: boolean;
+  };
+  babies: { id: number; name: string }[];
 }
 
 // Cadastra uma mãe no sistema.
@@ -103,13 +108,40 @@ export async function signIn(
 export async function getMotherInfo(): Promise<IMotherInfo | null> {
   try {
     const { data } = await api.get('/maes');
-    const babies = data.bebes.map((baby: any) => ({
-      id: baby.id,
-      name: baby.nome,
-      birthPlace: baby.local,
-    }));
+    // Recebe todos os ids e nome dos bebês.
+    const babies: { id: number; name: string }[] = data.bebes.map(
+      (baby: any) => ({
+        id: baby.id,
+        name: baby.nome,
+      }),
+    );
+    const babiesBirthLocations = {
+      AC: false,
+      UCI: false,
+      UTI: false,
+    };
+    // Recebe todos os locais de nascimento dos bebês e marca como verdadeiro os valores
+    // apropriados.
+    Object.values(data.bebes).forEach((baby: any) => {
+      const babyBirthPlace: string = baby.local.toLowerCase();
+      switch (babyBirthPlace) {
+        case 'alojamento conjunto':
+          babiesBirthLocations.AC = true;
+          break;
+        case 'uci neonatal':
+          babiesBirthLocations.UCI = true;
+          break;
+        case 'uti neonatal':
+          babiesBirthLocations.UTI = true;
+          break;
+        default:
+          break;
+      }
+    });
+
     return {
       name: data.nome,
+      babiesBirthLocations,
       babies,
     };
   } catch (error) {

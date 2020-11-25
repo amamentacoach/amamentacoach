@@ -58,7 +58,9 @@ const NewDiaryRegistry: React.FC = () => {
         'Deve ser um número positivo. Ex: 3.4',
       )
       .required('Campo obrigatório'),
-    duration: Yup.string().required('Campo obrigatório'),
+    duration: Yup.string()
+      .matches(new RegExp('^\\d+$'), 'Deve ser um número inteiro positivo')
+      .required('Campo obrigatório'),
     breast: Yup.string().required('Campo obrigatório'),
   }).required();
 
@@ -81,12 +83,11 @@ const NewDiaryRegistry: React.FC = () => {
     await createNewDiaryRegistry(
       selectedBaby.id,
       breast,
+      parseFloat(quantity),
       parseInt(duration, 10),
-      parseInt(quantity, 10),
       time,
     );
-    setIsSendingForm(false);
-    navigation.navigate('Diary');
+    navigation.navigate('DiaryRegistry');
   }
 
   return (
@@ -171,7 +172,7 @@ const NewDiaryRegistry: React.FC = () => {
               <MainButton
                 onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
-                buttonText="Salvar"
+                buttonText={isSendingForm ? 'Salvando...' : 'Salvar'}
               />
             </SubmitButtonContainer>
           </FormContainer>
