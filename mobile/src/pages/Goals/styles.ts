@@ -1,15 +1,29 @@
 import styled from 'styled-components/native';
 
-interface IContainerProps {
+interface IScrollViewProps {
   width: number;
+}
+
+interface IContainerProps {
+  modalVisible: boolean;
 }
 
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
-}))<IContainerProps>`
-  width: ${(props) => props.width}px;
+}))<IScrollViewProps>`
   flex: 1;
+  width: ${({ width }) => width}px;
+`;
+
+export const ModalContainer = styled.View<IContainerProps>`
+  position: absolute;
+  z-index: 1;
+  height: ${({ modalVisible }) => (modalVisible ? '100%' : '0')};
+  width: ${({ modalVisible }) => (modalVisible ? '100%' : '0')};
+  background-color: ${({ modalVisible }) =>
+    modalVisible ? '#000000' : 'transparent'};
+  opacity: ${({ modalVisible }) => (modalVisible ? 0.4 : 1)};
 `;
 
 export const HeaderBackground = styled.View`

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import DiaryForm, { TInfoPageFunction } from '../../components/DiaryForm';
@@ -17,13 +17,17 @@ import {
   CurrentPageText,
   ErrorContainer,
   ErrorText,
+  ModalContainer,
 } from './styles';
+import Modal from '../../components/Modal';
 
-const HelpReceived: React.FC = () => {
+const Goals: React.FC = () => {
   const navigation = useNavigation();
   const { width } = Dimensions.get('window');
   const [displayError, setDisplayError] = useState(false);
   const [isSendingForm, setIsSendingForm] = useState(false);
+  const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
+  const [isFinishedModalVisible, setIsFinishedModalVisible] = useState(false);
 
   const infoPage: TInfoPageFunction = (
     index,
@@ -50,7 +54,7 @@ const HelpReceived: React.FC = () => {
         // Envia o formulário caso seja a última página
         setIsSendingForm(true);
         handleSubmit();
-        navigation.navigate('Diary');
+        setIsFinishedModalVisible(true);
       } else {
         goToPage(index + 1);
       }
@@ -59,7 +63,7 @@ const HelpReceived: React.FC = () => {
     return (
       <ScrollView width={width}>
         <HeaderBackground />
-        <HeaderText>Minha rede de apoio</HeaderText>
+        <HeaderText>Minhas metas de hoje</HeaderText>
         <ContentContainer>
           <CurrentPageContainer>
             <CurrentPageText>
@@ -93,8 +97,30 @@ const HelpReceived: React.FC = () => {
   };
 
   return (
-    <DiaryForm title="Minha rede de apoio" category={4} infoPage={infoPage} />
+    <>
+      <ModalContainer
+        modalVisible={isIntroModalVisible || isFinishedModalVisible}>
+        <Modal
+          visible={isIntroModalVisible}
+          closeModal={() => setIsIntroModalVisible(false)}>
+          <Image source={require('../../../assets/images/change.png')} />
+        </Modal>
+        <Modal
+          text="Suas metas foram traçadas!"
+          visible={isFinishedModalVisible}
+          closeModal={() => {
+            setIsFinishedModalVisible(false);
+            navigation.navigate('Diary');
+          }}
+        />
+      </ModalContainer>
+      <DiaryForm
+        title="Minhas metas de hoje"
+        category={3}
+        infoPage={infoPage}
+      />
+    </>
   );
 };
 
-export default HelpReceived;
+export default Goals;

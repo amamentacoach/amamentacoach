@@ -39,7 +39,9 @@ const Diary: React.FC = () => {
     {
       image: require('../../../assets/images/diary_star.png'),
       title: 'Metas',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('Goals');
+      },
     },
     {
       image: require('../../../assets/images/premature_heart.png'),
