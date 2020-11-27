@@ -21,6 +21,7 @@ import {
   RegistryTextContainer,
   RegistryContent,
   ListContainer,
+  LoadingIndicator,
 } from './styles';
 
 const DiaryRegistry: React.FC = () => {
@@ -28,6 +29,7 @@ const DiaryRegistry: React.FC = () => {
   const { motherInfo } = useAuth();
   const currentDate = moment();
   const [registries, setRegistries] = useState<IListDiaryEntry[]>();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchRegistries() {
@@ -43,6 +45,7 @@ const DiaryRegistry: React.FC = () => {
         sortedRegistries.sort((a, b) => (a.date < b.date ? 1 : -1));
         setRegistries(sortedRegistries);
       }
+      setLoading(false);
     }
     fetchRegistries();
   }, [motherInfo]);
@@ -84,6 +87,14 @@ const DiaryRegistry: React.FC = () => {
           data={registries}
           renderItem={({ item }) => <InfoPage {...item} />}
           keyExtractor={(item) => item.id.toString()}
+          ListFooterComponent={() => (
+            <LoadingIndicator
+              size="large"
+              color="#7d5cd7"
+              animating={loading}
+            />
+          )}
+          showsVerticalScrollIndicator={false}
         />
       </ListContainer>
       <MainButton
