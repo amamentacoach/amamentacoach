@@ -26,7 +26,7 @@ import {
 const DiaryRegistry: React.FC = () => {
   const navigation = useNavigation();
   const { motherInfo } = useAuth();
-  const [currentDate] = useState(moment());
+  const currentDate = moment();
   const [registries, setRegistries] = useState<IListDiaryEntry[]>();
 
   useEffect(() => {
@@ -87,7 +87,7 @@ const DiaryRegistry: React.FC = () => {
         />
       </ListContainer>
       <MainButton
-        buttonText="Registrar retirada"
+        text="Registrar retirada"
         onPress={() => navigation.navigate('NewDiaryRegistry')}
       />
     </Container>

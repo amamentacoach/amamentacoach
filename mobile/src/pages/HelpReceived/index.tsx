@@ -28,19 +28,16 @@ const HelpReceived: React.FC = () => {
   const infoPage: TInfoPageFunction = (
     index,
     pagesLength,
-    questions,
+    question,
     values,
     setFieldValue,
+    isFormValid,
     handleSubmit,
     goToPage,
   ) => {
     function handleNextPage(pageIndex: number) {
       // Verifica se pelo menos uma resposta foi selecionada
-      if (
-        values[questions.id].length <= 0 ||
-        (questions.displayOther &&
-          values[questions.id].find((option) => option === '') !== undefined)
-      ) {
+      if (isFormValid(values, question)) {
         setDisplayError(true);
         return;
       }
@@ -66,23 +63,23 @@ const HelpReceived: React.FC = () => {
               {index + 1}/{pagesLength}
             </CurrentPageText>
           </CurrentPageContainer>
-          <QuestionText>{questions.description}</QuestionText>
+          <QuestionText>{question.description}</QuestionText>
 
           <ErrorContainer>
             {displayError ? <ErrorText>Pergunta obrigatória</ErrorText> : null}
           </ErrorContainer>
 
           <FormRadioGroupInput
-            fieldName={`${questions.id}`}
-            options={questions.options}
-            multipleSelection={questions.multipleSelection}
-            displayOtherField={questions.displayOther}
+            fieldName={`${question.id}`}
+            options={question.options}
+            multipleSelection={question.multipleSelection}
+            displayOtherField={question.displayOther}
             onChange={setFieldValue}
           />
 
           <Footer>
             <MainButton
-              buttonText={index === pagesLength - 1 ? 'Finalizar' : 'Próximo'}
+              text={index === pagesLength - 1 ? 'Finalizar' : 'Próximo'}
               disabled={isSendingForm}
               onPress={() => handleNextPage(index)}
             />

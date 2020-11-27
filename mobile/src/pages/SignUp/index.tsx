@@ -93,7 +93,7 @@ const FormSignUp: React.FC = () => {
               <MainButton
                 onPress={handleSubmit}
                 disabled={!dirty}
-                buttonText="Próximo"
+                text="Próximo"
               />
             </SubmitButtonContainer>
           </FormContainer>

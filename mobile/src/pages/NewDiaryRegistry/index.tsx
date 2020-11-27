@@ -175,7 +175,7 @@ const NewDiaryRegistry: React.FC = () => {
               <MainButton
                 onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
-                buttonText={isSendingForm ? 'Salvando...' : 'Salvar'}
+                text={isSendingForm ? 'Salvando...' : 'Salvar'}
               />
             </SubmitButtonContainer>
           </FormContainer>

@@ -20,6 +20,7 @@ import DiaryRegistry from '../pages/DiaryRegistry';
 import NewDiaryRegistry from '../pages/NewDiaryRegistry';
 import HelpReceived from '../pages/HelpReceived';
 import Goals from '../pages/Goals';
+import Feelings from '../pages/Feelings';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -134,6 +135,19 @@ const AppRoutes: React.FC = () => {
       <Stack.Screen
         name="Goals"
         component={Goals}
+        options={{
+          title: 'Diário',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: '#7D5CD7',
+            elevation: 0, // Remove a sombra no Android
+            shadowOpacity: 0, // Remove a sombra no iOS
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Feelings"
+        component={Feelings}
         options={{
           title: 'Diário',
           headerTintColor: 'white',

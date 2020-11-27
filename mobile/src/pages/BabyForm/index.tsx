@@ -403,14 +403,14 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
               <FirstSubOptionContainer>
                 <SecondaryButton
                   onPress={() => navigation.goBack()}
-                  buttonText="Voltar"
+                  text="Voltar"
                 />
               </FirstSubOptionContainer>
               <SecondSubOptionContainer>
                 <MainButton
                   onPress={handleSubmit}
                   disabled={!dirty || isSendingForm}
-                  buttonText={isSendingForm ? 'Enviando...' : 'Salvar'}
+                  text={isSendingForm ? 'Enviando...' : 'Salvar'}
                 />
               </SecondSubOptionContainer>
             </SubmitButtonContainer>

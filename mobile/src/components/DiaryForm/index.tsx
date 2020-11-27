@@ -23,14 +23,19 @@ export type TInfoPageFunction = (
   // Número total de página.
   pagesLength: number,
   // Questões que devem ser respondidas pelo usuário.
-  questions: ISurveyQuestion,
+  question: ISurveyQuestion,
   // Valores das respostas do usuário.
   values: { [key: number]: string[] },
-  // Função para definir o valor de uma resposta.
+  // Definir o valor de uma resposta.
   setFieldValue: (field: string, value: any) => void,
+  // Verifica se o formulário foi preenchido corretamente
+  isFormValid: (
+    values: { [key: number]: string[] },
+    question: ISurveyQuestion,
+  ) => boolean,
   // Função do formik para ser executada ao terminar o formulário.
   handleSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void,
-  // Função para ser executada para ir até uma página do formulário.
+  // Permite navegar até uma página do formulário.
   goToPage: (page: number) => void,
 ) => JSX.Element;
 
@@ -94,6 +99,19 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
     fetchQuestions();
   }, []);
 
+  // Verifica se pelo menos uma resposta foi selecionada e caso a opção 'Outro' tenha sido
+  // selecionado o usuário deve preencher um valor no campo de texto.
+  function isFormValid(
+    values: { [key: number]: string[] },
+    question: ISurveyQuestion,
+  ) {
+    return (
+      values[question.id].length <= 0 ||
+      (question.displayOther &&
+        values[question.id].find((option) => option === '') !== undefined)
+    );
+  }
+
   // Navega até uma página especificada.
   function goToPage(page: number) {
     if (page >= pages.length || page < 0) {
@@ -144,6 +162,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
                 item,
                 values,
                 setFieldValue,
+                isFormValid,
                 handleSubmit,
                 goToPage,
               )

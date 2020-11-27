@@ -67,7 +67,7 @@ const DiaryIntroduction: React.FC = () => {
               {index === pages.length - 1 ? (
                 <MainButton
                   onPress={handleEndDiaryIntroduction}
-                  buttonText="Vamos começar!"
+                  text="Vamos começar!"
                 />
               ) : (
                 <ContinueButton

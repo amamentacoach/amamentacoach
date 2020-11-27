@@ -71,7 +71,7 @@ const ForgotPassword: React.FC = () => {
 
             <SubmitButtonContainer>
               <MainButton
-                buttonText="Enviar"
+                text="Enviar"
                 onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
               />

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Dimensions, Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { Dimensions } from 'react-native';
+import { useNavigation, StackActions } from '@react-navigation/native';
+import moment from 'moment';
+import 'moment/locale/pt-br';
 
+import dateFormatVerbose from '../../utils/date';
 import DiaryForm, { TInfoPageFunction } from '../../components/DiaryForm';
 import MainButton from '../../components/MainButton';
+import SecondaryButton from '../../components/SecondaryButton';
 import FormRadioGroupInput from '../../components/FormRadioGroup';
-import Modal from '../../components/Modal';
 
 import {
   ScrollView,
@@ -18,16 +21,16 @@ import {
   CurrentPageText,
   ErrorContainer,
   ErrorText,
-  ModalContainer,
+  SecondFooterButtonContainer,
 } from './styles';
 
-const Goals: React.FC = () => {
+const Feelings: React.FC = () => {
   const navigation = useNavigation();
   const { width } = Dimensions.get('window');
+  const currentDate = dateFormatVerbose(moment());
+
   const [displayError, setDisplayError] = useState(false);
   const [isSendingForm, setIsSendingForm] = useState(false);
-  const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
-  const [isFinishedModalVisible, setIsFinishedModalVisible] = useState(false);
 
   const infoPage: TInfoPageFunction = (
     index,
@@ -39,8 +42,8 @@ const Goals: React.FC = () => {
     handleSubmit,
     goToPage,
   ) => {
+    // Caso seja a última página envia o formulário, caso contrário avança para a próxima página.
     function handleNextPage(pageIndex: number) {
-      // Verifica se pelo menos uma resposta foi selecionada
       if (isFormValid(values, question)) {
         setDisplayError(true);
         return;
@@ -48,19 +51,29 @@ const Goals: React.FC = () => {
 
       setDisplayError(false);
       if (pageIndex === pagesLength - 1) {
-        // Envia o formulário caso seja a última página
         setIsSendingForm(true);
         handleSubmit();
-        setIsFinishedModalVisible(true);
+        navigation.dispatch(StackActions.replace('Goals'));
       } else {
         goToPage(index + 1);
       }
     }
 
+    // Envia o formulário e retorna para o diário.
+    function handleSaveAndExit() {
+      if (isFormValid(values, question)) {
+        setDisplayError(true);
+        return;
+      }
+      setIsSendingForm(true);
+      handleSubmit();
+      navigation.navigate('Diary');
+    }
+
     return (
       <ScrollView width={width}>
         <HeaderBackground />
-        <HeaderText>Minhas metas de hoje</HeaderText>
+        <HeaderText>{currentDate}</HeaderText>
         <ContentContainer>
           <CurrentPageContainer>
             <CurrentPageText>
@@ -83,41 +96,28 @@ const Goals: React.FC = () => {
 
           <Footer>
             <MainButton
-              text={index === pagesLength - 1 ? 'Finalizar' : 'Próximo'}
+              text={
+                index === pagesLength - 1 ? 'Salvar e traçar metas' : 'Próximo'
+              }
               disabled={isSendingForm}
               onPress={() => handleNextPage(index)}
             />
+            {index === pagesLength - 1 ? (
+              <SecondFooterButtonContainer>
+                <SecondaryButton
+                  text="Salvar e sair"
+                  disabled={isSendingForm}
+                  onPress={handleSaveAndExit}
+                />
+              </SecondFooterButtonContainer>
+            ) : null}
           </Footer>
         </ContentContainer>
       </ScrollView>
     );
   };
 
-  return (
-    <>
-      <ModalContainer
-        modalVisible={isIntroModalVisible || isFinishedModalVisible}>
-        <Modal
-          visible={isIntroModalVisible}
-          closeModal={() => setIsIntroModalVisible(false)}>
-          <Image source={require('../../../assets/images/change.png')} />
-        </Modal>
-        <Modal
-          text="Suas metas foram traçadas!"
-          visible={isFinishedModalVisible}
-          closeModal={() => {
-            setIsFinishedModalVisible(false);
-            navigation.navigate('Diary');
-          }}
-        />
-      </ModalContainer>
-      <DiaryForm
-        title="Minhas metas de hoje"
-        category={3}
-        infoPage={infoPage}
-      />
-    </>
-  );
+  return <DiaryForm title={currentDate} category={2} infoPage={infoPage} />;
 };
 
-export default Goals;
+export default Feelings;

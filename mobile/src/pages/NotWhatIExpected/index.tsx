@@ -75,20 +75,17 @@ const NotWhatIExpected: React.FC = () => {
               {index > 0 && (
                 <FirstButtonContainer>
                   <SecondaryButton
-                    buttonText="Voltar"
+                    text="Voltar"
                     onPress={() => goToPage(index - 1)}
                   />
                 </FirstButtonContainer>
               )}
               <SecondButtonContainer>
                 {(index === pages.length - 1 && (
-                  <MainButton
-                    buttonText="Sair"
-                    onPress={() => navigation.goBack()}
-                  />
+                  <MainButton text="Sair" onPress={() => navigation.goBack()} />
                 )) || (
                   <MainButton
-                    buttonText="Próximo"
+                    text="Próximo"
                     onPress={() => goToPage(index + 1)}
                   />
                 )}

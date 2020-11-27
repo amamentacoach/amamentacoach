@@ -34,7 +34,9 @@ const Diary: React.FC = () => {
     {
       image: require('../../../assets/images/diary_smile.png'),
       title: 'Sentimentos',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('Feelings');
+      },
     },
     {
       image: require('../../../assets/images/diary_star.png'),

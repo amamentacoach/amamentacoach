@@ -339,14 +339,14 @@ const MotherForm: React.FC = () => {
               <FirstSubOptionContainer>
                 <SecondaryButton
                   onPress={() => navigation.goBack()}
-                  buttonText="Voltar"
+                  text="Voltar"
                 />
               </FirstSubOptionContainer>
               <SecondSubOptionContainer>
                 <MainButton
                   onPress={handleSubmit}
                   disabled={!dirty}
-                  buttonText="Próximo"
+                  text="Próximo"
                 />
               </SecondSubOptionContainer>
             </SubmitButtonContainer>
