@@ -1,7 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { Button, Text, TouchableOpacity } from 'react-native';
 import AdditionalInformation from '../pages/AdditionalInformation';
 import BreastfeedingBenefits from '../pages/BreastfeedingBenefits';
 import DiaryRegistry from '../pages/DiaryRegistry';
@@ -15,6 +14,7 @@ import HowToBreastfeed from '../pages/HowToBreastfeed';
 import HU from '../pages/HU';
 import Messages from '../pages/Messages';
 import NewDiaryRegistry from '../pages/NewDiaryRegistry';
+import NewMessage from '../pages/NewMessage';
 import NewPassword from '../pages/NewPassword';
 import NotWhatIExpected from '../pages/NotWhatIExpected';
 import Premature from '../pages/Premature';
@@ -111,6 +111,13 @@ const AppRoutes: React.FC = () => {
         component={Messages}
         options={{
           title: 'Mural de mensagens',
+        }}
+      />
+      <Stack.Screen
+        name="NewMessage"
+        component={NewMessage}
+        options={{
+          title: 'Enviar mensagem',
         }}
       />
       <Stack.Screen

@@ -6,6 +6,18 @@ export interface IMessage {
   date: string;
 }
 
+// Envia uma mensagem do usuário.
+export async function createNewMessage(message: string): Promise<boolean> {
+  try {
+    await api.post('/mensagens', {
+      conteudo: message,
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
 // Retorna as mensagens enviadas pelos usuários.
 export async function listMessages(page: number): Promise<IMessage[] | null> {
   try {
