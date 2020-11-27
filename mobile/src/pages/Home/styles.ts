@@ -88,13 +88,6 @@ export const ContentTitle = styled.Text`
   margin-bottom: 3px;
 `;
 
-export const ContentSubtitle = styled.Text`
-  color: #545454;
-  font-family: 'Open-Sans-Regular';
-  font-size: 16px;
-  flex-wrap: wrap;
-`;
-
 export const ContentSeparator = styled.View`
   height: 1px;
   width: 100%;

@@ -1,13 +1,20 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { Button, Text, TouchableOpacity } from 'react-native';
 import AdditionalInformation from '../pages/AdditionalInformation';
 import BreastfeedingBenefits from '../pages/BreastfeedingBenefits';
+import DiaryRegistry from '../pages/DiaryRegistry';
 import Distractions from '../pages/Distractions';
 import EmotionsAndBreastfeeding from '../pages/EmotionsAndBreastfeeding';
+import Feelings from '../pages/Feelings';
+import Goals from '../pages/Goals';
+import HelpReceived from '../pages/HelpReceived';
 import Home from '../pages/Home';
 import HowToBreastfeed from '../pages/HowToBreastfeed';
 import HU from '../pages/HU';
+import Messages from '../pages/Messages';
+import NewDiaryRegistry from '../pages/NewDiaryRegistry';
 import NewPassword from '../pages/NewPassword';
 import NotWhatIExpected from '../pages/NotWhatIExpected';
 import Premature from '../pages/Premature';
@@ -16,11 +23,6 @@ import StepByStepPremature from '../pages/StepByStepPremature';
 import TabNavigator from './tabNavigator';
 import ThePremature from '../pages/ThePremature';
 import VideoPage from '../pages/VideoPage';
-import DiaryRegistry from '../pages/DiaryRegistry';
-import NewDiaryRegistry from '../pages/NewDiaryRegistry';
-import HelpReceived from '../pages/HelpReceived';
-import Goals from '../pages/Goals';
-import Feelings from '../pages/Feelings';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -32,9 +34,9 @@ const AppRoutes: React.FC = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="NewPassword"
-        component={NewPassword}
-        options={{ title: 'Alterar senha' }}
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="StepByStepPremature"
@@ -80,11 +82,6 @@ const AppRoutes: React.FC = () => {
         options={{ title: 'Resiliência' }}
       />
       <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
         name="HU"
         component={HU}
         options={{ title: 'Sinta-se em casa!' }}
@@ -108,6 +105,13 @@ const AppRoutes: React.FC = () => {
         name="AdditionalInformation"
         component={AdditionalInformation}
         options={{ title: 'Mais informações' }}
+      />
+      <Stack.Screen
+        name="Messages"
+        component={Messages}
+        options={{
+          title: 'Mural de mensagens',
+        }}
       />
       <Stack.Screen
         name="DiaryRegistry"
@@ -157,6 +161,11 @@ const AppRoutes: React.FC = () => {
             shadowOpacity: 0, // Remove a sombra no iOS
           },
         }}
+      />
+      <Stack.Screen
+        name="NewPassword"
+        component={NewPassword}
+        options={{ title: 'Alterar senha' }}
       />
     </Stack.Navigator>
   );
