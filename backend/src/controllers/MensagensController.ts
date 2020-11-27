@@ -26,6 +26,7 @@ class MensagensController{
             .distinct()
             .limit(7)
             .offset((parseInt(page)-1)*7)
+            .orderBy('data','desc')
             .select('mae.nome','mensagem.conteudo','mensagem.data');
 
         return res.json(mensagens)
