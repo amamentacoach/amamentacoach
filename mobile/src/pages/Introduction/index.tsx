@@ -79,7 +79,7 @@ const Introduction: React.FC = () => {
             </CurrentPageWrapper>
             <LastPageButtonWrapper opacity={index === pages.length - 1 ? 1 : 0}>
               <MainButton
-                buttonText="Vamos começar!"
+                text="Vamos começar!"
                 onPress={handleSkip}
                 disabled={index !== pages.length - 1}
               />

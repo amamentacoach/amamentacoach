@@ -14,7 +14,6 @@ import {
   BannerImage,
   ContentImage,
   ContentTitle,
-  ContentSubtitle,
   ContentSeparator,
   Option,
   ContentTextContainer,
@@ -29,7 +28,6 @@ const Home: React.FC = () => {
     {
       image: require('../../../assets/images/home_baby.png'),
       title: 'Olá, sou o prematuro',
-      subtitle: 'Subtítulo 1',
       onPress: () => {
         navigation.navigate('Premature');
       },
@@ -37,7 +35,6 @@ const Home: React.FC = () => {
     {
       image: require('../../../assets/images/home_breastfeed.png'),
       title: 'Passo a passo para amamentar o prematuro',
-      subtitle: 'Subtítulo 2',
       onPress: () => {
         navigation.navigate('StepByStepPremature');
       },
@@ -45,7 +42,6 @@ const Home: React.FC = () => {
     {
       image: require('../../../assets/images/home_milk.png'),
       title: 'A retirada do leite',
-      subtitle: 'Subtítulo 3',
       onPress: () => {
         navigation.navigate('HowToBreastfeed');
       },
@@ -53,7 +49,6 @@ const Home: React.FC = () => {
     {
       image: require('../../../assets/images/home_emotions.png'),
       title: 'Emoções e Amamentação ',
-      subtitle: 'Subtítulo 4',
       onPress: () => {
         navigation.navigate('EmotionsAndBreastfeeding');
       },
@@ -61,7 +56,6 @@ const Home: React.FC = () => {
     {
       image: require('../../../assets/images/home_more_information.png'),
       title: 'Mais informações',
-      subtitle: 'Subtítulo 5',
       onPress: () => {
         navigation.navigate('AdditionalInformation');
       },
@@ -69,8 +63,9 @@ const Home: React.FC = () => {
     {
       image: require('../../../assets/images/home_message.png'),
       title: 'Depoimento das mamães',
-      subtitle: 'Subtítulo 6',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('Messages');
+      },
     },
   ];
 
@@ -88,13 +83,12 @@ const Home: React.FC = () => {
       </Header>
       <ContentContainer>
         <ContentHeader>Conteúdo</ContentHeader>
-        {options.map(({ image, title, subtitle, onPress }, index) => (
+        {options.map(({ image, title, onPress }, index) => (
           <Option key={title}>
             <ContentOption activeOpacity={0.7} onPress={onPress}>
               <ContentImage source={image} />
               <ContentTextContainer>
                 <ContentTitle>{title}</ContentTitle>
-                <ContentSubtitle>{subtitle}</ContentSubtitle>
               </ContentTextContainer>
             </ContentOption>
             {index < options.length - 1 && <ContentSeparator />}

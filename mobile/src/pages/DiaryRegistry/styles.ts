@@ -44,3 +44,7 @@ export const RegistryContent = styled.Text`
   font-size: 16px;
   font-family: 'OpenSans-Regular';
 `;
+
+export const LoadingIndicator = styled.ActivityIndicator`
+  margin-bottom: 10px;
+`;

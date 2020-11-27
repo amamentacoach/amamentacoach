@@ -84,9 +84,9 @@ const NewPassword: React.FC = () => {
 
             <SubmitButtonContainer>
               <MainButton
-                buttonText="Salvar"
                 onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
+                text={isSendingForm ? 'Salvando...' : 'Salvar'}
               />
             </SubmitButtonContainer>
           </FormContainer>

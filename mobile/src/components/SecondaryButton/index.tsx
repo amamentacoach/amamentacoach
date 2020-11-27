@@ -4,17 +4,17 @@ import { TouchableOpacityProps } from 'react-native';
 import { TextButton, Button } from './styles';
 
 interface SecondaryButtonProps extends TouchableOpacityProps {
-  buttonText: string;
+  text: string;
 }
 
 const SecondaryButton: React.FC<SecondaryButtonProps> = ({
-  buttonText,
+  text,
   onPress,
   disabled,
 }) => {
   return (
     <Button onPress={onPress} disabled={disabled} activeOpacity={0.7}>
-      <TextButton>{buttonText}</TextButton>
+      <TextButton>{text}</TextButton>
     </Button>
   );
 };

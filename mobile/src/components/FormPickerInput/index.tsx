@@ -12,7 +12,7 @@ import {
 interface FormPickerProps {
   fieldName: string;
   placeholder?: string | undefined;
-  label: string;
+  label?: string | undefined;
   options: string[];
   error?: string | undefined;
   onChange: (fieldName: string, fieldValue: string) => void;
@@ -35,7 +35,7 @@ const FormPickerInput: React.FC<FormPickerProps> = ({
 
   return (
     <Container>
-      <LabelText>{label}</LabelText>
+      {label !== undefined ? <LabelText>{label}</LabelText> : null}
       <PickerContainer>
         <Picker
           selectedValue={selectedItem}

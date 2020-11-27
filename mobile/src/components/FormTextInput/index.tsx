@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInputProps } from 'react-native';
+import { TextInput as ReactTextInput, TextInputProps } from 'react-native';
 
 import {
   Container,
@@ -10,8 +10,9 @@ import {
 } from './styles';
 
 interface FormTextProps extends TextInputProps {
-  label: string;
+  label?: string | undefined;
   error?: string | undefined;
+  textInputRef?: React.RefObject<ReactTextInput> | null | undefined;
 }
 
 const FormTextInput: React.FC<FormTextProps> = ({
@@ -21,18 +22,24 @@ const FormTextInput: React.FC<FormTextProps> = ({
   error,
   secureTextEntry,
   keyboardType,
+  multiline,
+  numberOfLines,
+  maxLength,
   onChangeText,
 }) => {
   return (
     <Container>
-      <LabelText>{label}</LabelText>
+      {label !== undefined ? <LabelText>{label}</LabelText> : null}
       <TextInput
         onChangeText={onChangeText}
         value={value}
         placeholder={placeholder}
-        secureTextEntry={secureTextEntry}
         placeholderTextColor="#acaab2"
+        secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
+        multiline={multiline}
+        numberOfLines={numberOfLines}
+        maxLength={maxLength}
       />
       <ErrorContainer>
         {error ? <ErrorText>{error}</ErrorText> : null}

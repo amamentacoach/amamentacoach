@@ -6,12 +6,8 @@ import OneSignal from 'react-native-onesignal';
 
 import api from '../services/api';
 import * as auth from '../services/auth';
+import { IMotherInfo } from '../services/auth';
 import pushNotificationSubscribe from '../services/pushNotification';
-
-interface IMotherInfo {
-  name: string;
-  babies: { id: number; name: string; birthLocation: string }[];
-}
 
 interface IAuthContextData {
   isSigned: boolean;
@@ -24,7 +20,7 @@ const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
-  const [motherInfo, setMotherInfo] = useState<IMotherInfo>({});
+  const [motherInfo, setMotherInfo] = useState<IMotherInfo>({} as IMotherInfo);
   const [oneSignalId, setOneSignalId] = useState('');
 
   async function initPushNotifications() {
@@ -59,10 +55,10 @@ export const AuthProvider: React.FC = ({ children }) => {
       const storageToken = await AsyncStorage.getItem('@AmamentaCoach:token');
 
       if (storageToken) {
-        setToken(storageToken);
         api.defaults.headers.common.Authorization = storageToken;
         await initMotherInfo();
         initPushNotifications();
+        setToken(storageToken);
       }
       RNBootSplash.hide({ duration: 250 });
     }
@@ -75,11 +71,12 @@ export const AuthProvider: React.FC = ({ children }) => {
     if (userToken === null) {
       return false;
     }
+    api.defaults.headers.common.Authorization = userToken;
+    await initMotherInfo();
 
     await AsyncStorage.setItem('@AmamentaCoach:token', userToken);
     setToken(userToken);
-    api.defaults.headers.common.Authorization = userToken;
-    await initMotherInfo();
+
     initPushNotifications();
     return true;
   }
@@ -88,10 +85,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     await AsyncStorage.removeItem('@AmamentaCoach:token');
     setToken(null);
     api.defaults.headers.common.Authorization = null;
-    setMotherInfo({
-      name: '',
-      babies: [],
-    });
+    setMotherInfo({} as IMotherInfo);
     await AsyncStorage.removeItem('@AmamentaCoach:motherInfo');
     setOneSignalId('');
     OneSignal.setSubscription(false);

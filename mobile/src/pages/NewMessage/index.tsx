@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { forgotPassword } from '../../services/auth';
+import { createNewMessage } from '../../services/messages';
 import FormTextInput from '../../components/FormTextInput';
 import MainButton from '../../components/MainButton';
 import Modal from '../../components/Modal';
@@ -16,64 +16,67 @@ import {
 } from './styles';
 
 interface IFormValues {
-  email: string;
+  message: string;
 }
 
-const ForgotPassword: React.FC = () => {
+const NewMessage: React.FC = () => {
   const [isSubmitModalVisible, setIsSubmitModalVisible] = useState(false);
   const [isSendingForm, setIsSendingForm] = useState(false);
+  const [textInputText, setTextInputText] = useState('');
 
   const formInitialValues: IFormValues = {
-    email: '',
+    message: '',
   };
-  const signUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
-    email: Yup.string().email('Email Inválido').required('Campo obrigatório'),
+  const newPasswordSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+    message: Yup.string().required('Campo obrigatório'),
   }).required();
 
-  async function handleForgotPassword({ email }: IFormValues) {
+  async function handleNewMessage({ message }: IFormValues) {
     setIsSendingForm(true);
-    const successfulRequest = await forgotPassword(email);
+    const successfulRequest = await createNewMessage(message);
     setIsSendingForm(false);
     if (successfulRequest) {
       setIsSubmitModalVisible(true);
+      setTextInputText('');
     }
   }
 
   return (
     <ScrollView>
       <Modal
-        text="Cheque sua caixa de entrada do e-mail e acesse o link que enviamos para a redefinição de sua senha."
+        text="Mensagem enviada!"
         visible={isSubmitModalVisible}
         closeModal={() => setIsSubmitModalVisible(false)}
       />
 
-      <HeaderText>
-        Preencha o campo abaixo com o seu e-mail de cadastro para que possamos
-        enviar um link de redefinição de senha.
-      </HeaderText>
+      <HeaderText>Envie uma mensagem para outras mamães</HeaderText>
       <Formik
         initialValues={formInitialValues}
-        validationSchema={signUpSchema}
+        validationSchema={newPasswordSchema}
         validateOnChange={false}
-        onSubmit={(values) => handleForgotPassword(values)}>
-        {({ handleChange, handleSubmit, dirty, errors, values }) => (
+        onSubmit={(values) => handleNewMessage(values)}>
+        {({ setFieldValue, handleSubmit, dirty, errors }) => (
           <FormContainer>
             <View>
               <FormTextInput
-                label="Email"
-                onChangeText={handleChange('email')}
-                value={values.email}
-                placeholder="Insira seu email"
-                keyboardType="email-address"
-                error={errors.email}
+                onChangeText={(text: string) => {
+                  setFieldValue('message', text);
+                  setTextInputText(text);
+                }}
+                value={textInputText}
+                placeholder="Digite aqui sua mensagem..."
+                error={errors.message}
+                multiline
+                numberOfLines={20}
+                maxLength={255}
               />
             </View>
 
             <SubmitButtonContainer>
               <MainButton
-                text="Enviar"
                 onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
+                text={isSendingForm ? 'Enviando...' : 'Enviar'}
               />
             </SubmitButtonContainer>
           </FormContainer>
@@ -83,4 +86,4 @@ const ForgotPassword: React.FC = () => {
   );
 };
 
-export default ForgotPassword;
+export default NewMessage;

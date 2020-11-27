@@ -18,7 +18,7 @@ export const HeaderText = styled.Text`
 export const HeaderSubText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 14px;
-  margin: 0 auto;
+  margin: 0 auto 15px auto;
   text-align: center;
   padding-top: 20px;
 `;

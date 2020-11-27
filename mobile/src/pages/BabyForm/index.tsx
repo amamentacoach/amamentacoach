@@ -42,13 +42,13 @@ interface IBaby {
   name: string;
   birthday: string;
   weight: string;
-  birthType: string;
-  difficulties: string;
+  birthType: string[];
+  difficulties: string[];
   gestationWeeks: string;
   gestationDays: string;
-  apgar1: string;
-  apgar2: string;
-  birthLocation: string;
+  apgar1: string | undefined;
+  apgar2: string | undefined;
+  birthLocation: string[];
 }
 
 interface IFormValues {
@@ -76,7 +76,7 @@ const BabyForm: React.FC = () => {
 
   const babyFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     numberOfBabies: Yup.string()
-      .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
+      .matches(new RegExp('^\\d+$'), 'Deve ser um número inteiro positivo')
       .required('Campo obrigatório'),
     babies: Yup.array()
       .of(
@@ -90,17 +90,25 @@ const BabyForm: React.FC = () => {
               'Deve ser um número positivo. Ex: 3.4',
             )
             .required('Campo obrigatório'),
-          birthType: Yup.string().required('Campo obrigatório'),
-          difficulties: Yup.string().required('Campo obrigatório'),
+          birthType: Yup.array(Yup.string().required()).required(
+            'Campo obrigatório',
+          ),
+          difficulties: Yup.array(Yup.string().required()).required(
+            'Campo obrigatório',
+          ),
           gestationWeeks: Yup.string().required('Campo obrigatório'),
           gestationDays: Yup.string().required('Campo obrigatório'),
-          apgar1: Yup.string()
-            .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
-            .required('Campo obrigatório'),
-          apgar2: Yup.string()
-            .matches(new RegExp('^\\d+$'), 'Deve ser um número positivo')
-            .required('Campo obrigatório'),
-          birthLocation: Yup.string().required('Campo obrigatório'),
+          apgar1: Yup.string().matches(
+            new RegExp('^\\d+$'),
+            'Deve ser um número inteiro positivo',
+          ),
+          apgar2: Yup.string().matches(
+            new RegExp('^\\d+$'),
+            'Deve ser um número inteiro positivo',
+          ),
+          birthLocation: Yup.array(Yup.string().required()).required(
+            'Campo obrigatório',
+          ),
         }).required(),
       )
       .min(1, 'Pelo menos um bebê deve ser cadastrado!')
@@ -114,13 +122,13 @@ const BabyForm: React.FC = () => {
       name: '',
       birthday: '',
       weight: '',
-      birthType: '',
-      difficulties: '',
+      birthType: [],
+      difficulties: [],
       gestationWeeks: '',
       gestationDays: '',
       apgar1: '',
       apgar2: '',
-      birthLocation: '',
+      birthLocation: [],
     };
   }
 
@@ -189,14 +197,14 @@ const BabyForm: React.FC = () => {
       const babyInfo = {
         name: baby.name,
         birthday: baby.birthday,
-        weight: parseInt(baby.weight, 10),
-        birthType: baby.birthType.toLowerCase() === 'normal',
+        weight: parseFloat(baby.weight),
+        birthType: baby.birthType[0].toLowerCase() === 'cesária',
         gestationWeeks: parseInt(baby.gestationWeeks, 10),
         gestationDays: parseInt(baby.gestationDays, 10),
-        apgar1: parseInt(baby.apgar1, 10),
-        apgar2: parseInt(baby.apgar2, 10),
-        birthLocation: baby.birthLocation,
-        difficulties: baby.difficulties.toLowerCase() === 'sim',
+        apgar1: baby.apgar1 ? parseInt(baby.apgar1, 10) : null,
+        apgar2: baby.apgar2 ? parseInt(baby.apgar2, 10) : null,
+        birthLocation: baby.birthLocation[0],
+        difficulties: baby.difficulties[0].toLowerCase() === 'sim',
       };
       await signUpBaby(token, babyInfo);
     });
@@ -351,7 +359,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                   <FirstSubOptionContainer>
                     <FormTextInput
                       label=""
-                      value={values.babies[index].apgar1.toString()}
+                      value={values.babies[index].apgar1?.toString()}
                       placeholder=""
                       keyboardType="number-pad"
                       onChangeText={handleChange(`babies[${index}].apgar1`)}
@@ -364,7 +372,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                   <SecondSubOptionContainer>
                     <FormTextInput
                       label=""
-                      value={values.babies[index].apgar2.toString()}
+                      value={values.babies[index].apgar2?.toString()}
                       placeholder=""
                       keyboardType="number-pad"
                       onChangeText={handleChange(`babies[${index}].apgar2`)}
@@ -395,14 +403,14 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
               <FirstSubOptionContainer>
                 <SecondaryButton
                   onPress={() => navigation.goBack()}
-                  buttonText="Voltar"
+                  text="Voltar"
                 />
               </FirstSubOptionContainer>
               <SecondSubOptionContainer>
                 <MainButton
                   onPress={handleSubmit}
                   disabled={!dirty || isSendingForm}
-                  buttonText="Próximo"
+                  text={isSendingForm ? 'Enviando...' : 'Salvar'}
                 />
               </SecondSubOptionContainer>
             </SubmitButtonContainer>

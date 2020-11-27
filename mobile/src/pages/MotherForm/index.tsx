@@ -31,9 +31,9 @@ interface IFormValues {
     id: number;
     value: string;
   }[];
-  alreadyBreastfeed: string;
-  married: string;
-  liveTogether: string;
+  alreadyBreastfeed: string[];
+  married: string[];
+  liveTogether: string[];
   marriedTime: string;
   marriedMetric: string;
   education: string;
@@ -59,9 +59,9 @@ const MotherForm: React.FC = () => {
     birthday: '',
     pregnantCount: '',
     timeSpentBreastFeeding: [],
-    alreadyBreastfeed: '',
-    married: '',
-    liveTogether: 'Não',
+    alreadyBreastfeed: [],
+    married: [],
+    liveTogether: ['Não'],
     marriedTime: '0',
     marriedMetric: 'meses',
     education: '',
@@ -70,7 +70,9 @@ const MotherForm: React.FC = () => {
   const motherFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     name: Yup.string().required('Campo obrigatório'),
     birthday: Yup.string().required('Campo obrigatório'),
-    alreadyBreastfeed: Yup.string().required('Campo obrigatório'),
+    alreadyBreastfeed: Yup.array(Yup.string().required()).required(
+      'Campo obrigatório',
+    ),
     pregnantCount: Yup.string()
       .matches(new RegExp('^\\d+$'), 'Deve ser um número inteiro positivo')
       .required('Campo obrigatório'),
@@ -82,8 +84,10 @@ const MotherForm: React.FC = () => {
         }).required(),
       )
       .defined(),
-    married: Yup.string().required('Campo obrigatório'),
-    liveTogether: Yup.string().required('Campo obrigatório'),
+    married: Yup.array(Yup.string().required()).required('Campo obrigatório'),
+    liveTogether: Yup.array(Yup.string().required()).required(
+      'Campo obrigatório',
+    ),
     marriedTime: Yup.string().required('Campo obrigatório'),
     marriedMetric: Yup.string().required('Campo obrigatório'),
     education: Yup.string().required('Campo obrigatório'),
@@ -143,20 +147,22 @@ const MotherForm: React.FC = () => {
     const motherInfo = {
       email,
       password,
-      alreadyBreastfeed: formValues.alreadyBreastfeed.toLowerCase() === 'sim',
-      married: formValues.married.toLowerCase() === 'sim',
+      alreadyBreastfeed:
+        formValues.alreadyBreastfeed[0].toLowerCase() === 'sim',
+      married: formValues.married[0].toLowerCase() === 'sim',
       liveTogether:
-        formValues.married.toLowerCase() === 'sim'
-          ? null
-          : `${formValues.marriedTime} ${formValues.marriedMetric}`,
+        formValues.married[0].toLowerCase() === 'sim'
+          ? `${formValues.marriedTime} ${formValues.marriedMetric}`
+          : null,
       pregnantCount: parseInt(formValues.pregnantCount, 10),
       name: formValues.name,
       birthday: formValues.birthday,
       education: formValues.education,
       wage: formValues.wage,
-      timeSpentBreastFeeding: formValues.timeSpentBreastFeeding.map(
-        (item) => item.value,
-      ),
+      timeSpentBreastFeeding:
+        formValues.alreadyBreastfeed[0].toLowerCase() === 'sim'
+          ? formValues.timeSpentBreastFeeding.map((item) => item.value)
+          : [],
     };
     navigation.navigate('BabyForm', { motherInfo });
   }
@@ -207,7 +213,7 @@ const MotherForm: React.FC = () => {
                   values.timeSpentBreastFeeding,
                   setFieldValue,
                 );
-                setFieldValue('alreadyBreastfeed', 'Não');
+                setFieldValue('alreadyBreastfeed', ['Não']);
               }}
               placeholder="Insira o número de vezes"
               keyboardType="numeric"
@@ -224,7 +230,7 @@ const MotherForm: React.FC = () => {
               />
             )}
 
-            {values.alreadyBreastfeed === 'Sim' &&
+            {values.alreadyBreastfeed[0] === 'Sim' &&
               values.timeSpentBreastFeeding.map((item, index) => (
                 <FormPickerInput
                   key={item.id}
@@ -251,15 +257,15 @@ const MotherForm: React.FC = () => {
             <FormRadioGroupInput
               label="Tem companheiro?"
               fieldName="married"
-              onChange={(fieldName: string, fieldValue: string) => {
+              onChange={(fieldName: string, fieldValue: string[]) => {
                 setFieldValue(fieldName, fieldValue);
-                if (fieldValue === 'Não') {
+                if (fieldValue[0] === 'Não') {
                   setFieldValue('marriedTime', '0');
-                  setFieldValue('liveTogether', 'Não');
-                } else if (fieldValue === 'Sim') {
+                  setFieldValue('liveTogether', ['Não']);
+                } else if (fieldValue[0] === 'Sim') {
                   // Reinicia os campos abaixo quando o valor do campo married é 'Sim'.
                   setFieldValue('marriedTime', '');
-                  setFieldValue('liveTogether', '');
+                  setFieldValue('liveTogether', []);
                 }
                 setFieldValue('marriedMetric', 'meses');
               }}
@@ -267,7 +273,7 @@ const MotherForm: React.FC = () => {
               error={errors.married}
             />
 
-            {values.married === 'Sim' && (
+            {values.married[0] === 'Sim' && (
               <>
                 <FormRadioGroupInput
                   label="Moram juntos?"
@@ -333,14 +339,14 @@ const MotherForm: React.FC = () => {
               <FirstSubOptionContainer>
                 <SecondaryButton
                   onPress={() => navigation.goBack()}
-                  buttonText="Voltar"
+                  text="Voltar"
                 />
               </FirstSubOptionContainer>
               <SecondSubOptionContainer>
                 <MainButton
                   onPress={handleSubmit}
                   disabled={!dirty}
-                  buttonText="Próximo"
+                  text="Próximo"
                 />
               </SecondSubOptionContainer>
             </SubmitButtonContainer>
