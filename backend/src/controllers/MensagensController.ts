@@ -27,7 +27,7 @@ class MensagensController{
             .limit(7)
             .offset((parseInt(page)-1)*7)
             .orderBy('data','desc')
-            .select('mae.nome','mensagem.conteudo','mensagem.data');
+            .select('mae.nome','mensagem.conteudo','mensagem.data','mensagem.id');
 
         return res.json(mensagens)
     }
