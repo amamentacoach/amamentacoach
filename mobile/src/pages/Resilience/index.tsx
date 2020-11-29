@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
+import { ActivityIndicator } from 'react-native';
 import OptionsList from '../../components/OptionList';
 
-import { ScrollView, PageHeader, Header, Text } from './styles';
+import {
+  ScrollView,
+  PageHeader,
+  Header,
+  Text,
+  VideoContainer,
+  LoadingContainer,
+} from './styles';
 
 const Resilience: React.FC = () => {
   const navigation = useNavigation();
+  const [isLoadingVideo, setIsLoadingVideo] = useState(true);
+
   const options = [
     {
       image: require('../../../assets/images/erlenmeyer_primary.png'),
@@ -19,12 +29,16 @@ const Resilience: React.FC = () => {
     {
       image: require('../../../assets/images/erlenmeyer_yellow.png'),
       title: '2. Buscar apoio social e conexão de grupo',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('Messages');
+      },
     },
     {
       image: require('../../../assets/images/erlenmeyer_green.png'),
       title: '3. Desenvolver uma maneira positiva de pensar',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('Diary');
+      },
     },
     {
       image: require('../../../assets/images/erlenmeyer_pink.png'),
@@ -36,11 +50,25 @@ const Resilience: React.FC = () => {
   return (
     <ScrollView>
       <PageHeader>Você sabe o que é Resiliência?</PageHeader>
-      <YoutubePlayer
-        height={200}
-        videoId="KGedLLSN0FU"
-        initialPlayerParams={{ loop: false }}
-      />
+      {isLoadingVideo ? (
+        <LoadingContainer>
+          <ActivityIndicator
+            size="large"
+            color="#7d5cd7"
+            animating={isLoadingVideo}
+          />
+        </LoadingContainer>
+      ) : null}
+      <VideoContainer display={!isLoadingVideo}>
+        <YoutubePlayer
+          height={200}
+          videoId="KGedLLSN0FU"
+          initialPlayerParams={{ loop: false }}
+          onReady={() => {
+            setIsLoadingVideo(false);
+          }}
+        />
+      </VideoContainer>
       <Header>Mamães mais resilientes!</Header>
       <Text>
         Cientistas afirmam que é possível AUMENTAR a RESILIÊNCIA adotando pelo

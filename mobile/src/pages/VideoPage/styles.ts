@@ -1,5 +1,9 @@
 import styled from 'styled-components/native';
 
+interface ContentContainerProps {
+  display: boolean;
+}
+
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
@@ -7,9 +11,16 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
   flex: 1;
 `;
 
-export const ContentContainer = styled.View`
+export const ContentContainer = styled.View<ContentContainerProps>`
   flex: 1;
   justify-content: center;
+  display: ${({ display }) => (display ? 'flex' : 'none')};
+`;
+
+export const LoadingContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const VideoContainer = styled.View`

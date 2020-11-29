@@ -35,5 +35,5 @@ export const Line = styled.View`
 `;
 
 export const LoadingIndicator = styled.ActivityIndicator`
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
