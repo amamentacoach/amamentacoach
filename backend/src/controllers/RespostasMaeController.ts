@@ -19,9 +19,9 @@ class RespostasMaeController{
                     case "Triste":  
                     case "Desanimada":
                     case "Preocupada":
-                        const mae = knex('mae').select('nome').where('id','=',mae_id).first();
+                        const mae:any = knex('mae').select('nome').where('id','=',mae_id).first();
                         res.json({
-                            feedback:`Continue firme, ${mae}! Talvez o conteúdo “Emoções e Amamentação” possa te ajudar hoje.`,
+                            feedback:`Continue firme, ${mae.nome}! Talvez o conteúdo “Emoções e Amamentação” possa te ajudar hoje.`,
                             redirect:"EmotionsAndBreastfeeding"
                         })  
                         break;
