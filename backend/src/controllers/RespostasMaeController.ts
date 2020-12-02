@@ -9,6 +9,26 @@ class RespostasMaeController{
         const {mae_id} = req;
         respostas.map(async (resposta,i)=>{
             await knex('resposta').insert({mae_id,pergunta_id,descricao:resposta,data:new Date()});
+            if(pergunta_id==="4"){
+                switch (resposta) {
+                    case "Feliz":
+                    case "Confiante":
+                    case "Orgulhosa":
+                        break;
+                    case "Ansiosa":
+                    case "Triste":  
+                    case "Desanimada":
+                    case "Preocupada":
+                        const mae = knex('mae').select('nome').where('id','=',mae_id).first();
+                        res.json({
+                            feedback:`Continue firme, ${mae}! Talvez o conteúdo “Emoções e Amamentação” possa te ajudar hoje.`,
+                            redirect:"EmotionsAndBreastfeeding"
+                        })  
+                        break;
+                    default:
+                        break;
+                }
+            }
         })
         
         res.sendStatus(200)
