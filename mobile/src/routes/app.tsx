@@ -23,6 +23,7 @@ import StepByStepPremature from '../pages/StepByStepPremature';
 import TabNavigator from './tabNavigator';
 import ThePremature from '../pages/ThePremature';
 import VideoPage from '../pages/VideoPage';
+import UploadBabyPhoto from '../pages/UploadBabyPhoto';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -90,6 +91,11 @@ const AppRoutes: React.FC = () => {
         name="Premature"
         component={Premature}
         options={{ title: 'O Prematuro' }}
+      />
+      <Stack.Screen
+        name="UploadBabyPhoto"
+        component={UploadBabyPhoto}
+        options={{ title: 'Minha maior motivação' }}
       />
       <Stack.Screen
         name="HowToBreastfeed"

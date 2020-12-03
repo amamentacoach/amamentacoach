@@ -16,7 +16,7 @@ export const ListContainer = styled.SafeAreaView`
 `;
 
 export const PageContainer = styled.View<ContainerProps>`
-  width: ${(props) => props.width}px;
+  width: ${({ width }) => width}px;
   flex: 1;
 `;
 

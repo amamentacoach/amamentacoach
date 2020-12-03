@@ -28,7 +28,9 @@ const Premature: React.FC = () => {
       image: require('../../../assets/images/premature_heart.png'),
       title: 'Minha maior motivação para amamentar',
       subtitle: 'Subtítulo 3',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('UploadBabyPhoto');
+      },
     },
     {
       image: require('../../../assets/images/premature_trophy.png'),
