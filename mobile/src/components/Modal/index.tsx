@@ -1,25 +1,26 @@
 import * as React from 'react';
 import { Modal as ReactNativeModal, TouchableOpacity } from 'react-native';
 
-import { Container, Message, CloseButtonText, Line } from './styles';
+import { Container, Message, CloseButtonText, Line, Image } from './styles';
 
 interface IMainModalProps {
   text?: string | undefined;
+  image?: any | undefined;
   visible: boolean;
   closeModal: () => void;
 }
 
 const Modal: React.FC<IMainModalProps> = ({
   text,
+  image,
   visible,
   closeModal,
-  children,
 }) => {
   return (
     <ReactNativeModal animationType="fade" transparent visible={visible}>
       <Container>
         {text ? <Message>{text}</Message> : null}
-        {children}
+        {image ? <Image source={image} resizeMode="contain" /> : null}
         <Line />
         <TouchableOpacity onPress={() => closeModal()} activeOpacity={0.7}>
           <CloseButtonText>Fechar</CloseButtonText>

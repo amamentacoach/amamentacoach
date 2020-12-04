@@ -21,7 +21,7 @@ export const ListContainer = styled.SafeAreaView`
 `;
 
 export const PageContainer = styled.View<ContainerProps>`
-  width: ${(props) => props.width}px;
+  width: ${({ width }) => width}px;
   flex: 1;
 `;
 
@@ -66,7 +66,7 @@ export const CurrentPageWrapper = styled.View`
 `;
 
 export const LastPageButtonWrapper = styled.View<LastPageButtonWrapperProps>`
-  opacity: ${(props) => props.opacity};
+  opacity: ${({ opacity }) => opacity};
   justify-content: center;
   align-items: center;
 `;

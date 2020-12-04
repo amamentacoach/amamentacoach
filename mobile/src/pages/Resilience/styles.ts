@@ -1,5 +1,9 @@
 import styled from 'styled-components/native';
 
+interface VideoContainerProps {
+  display: boolean;
+}
+
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
@@ -14,6 +18,19 @@ export const PageHeader = styled.Text`
   font-family: 'Open-Sans-Regular';
   font-size: 16px;
   text-align: center;
+`;
+
+export const VideoContainer = styled.View<VideoContainerProps>`
+  flex: 1;
+  justify-content: center;
+  display: ${({ display }) => (display ? 'flex' : 'none')};
+`;
+
+export const LoadingContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 `;
 
 export const Header = styled.Text`

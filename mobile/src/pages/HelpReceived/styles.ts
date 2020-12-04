@@ -8,7 +8,7 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
 }))<IContainerProps>`
-  width: ${(props) => props.width}px;
+  width: ${({ width }) => width}px;
   flex: 1;
 `;
 

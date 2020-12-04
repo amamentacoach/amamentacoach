@@ -20,7 +20,7 @@ export const OptionsContainer = styled.View`
 `;
 
 export const OptionButton = styled.TouchableOpacity<RadioButtonProps>`
-  border: 1.4px solid ${(props) => (props.selected ? '#7D5CD7' : '#C4C4C4')};
+  border: 1.4px solid ${({ selected }) => (selected ? '#7D5CD7' : '#C4C4C4')};
   flex-direction: row;
   padding: 13px;
   border-radius: 3.6px;
@@ -29,7 +29,7 @@ export const OptionButton = styled.TouchableOpacity<RadioButtonProps>`
 `;
 
 export const OuterCircle = styled.View<RadioButtonProps>`
-  border: 1.4px solid ${(props) => (props.selected ? '#7D5CD7' : '#C4C4C4')};
+  border: 1.4px solid ${({ selected }) => (selected ? '#7D5CD7' : '#C4C4C4')};
   background-color: transparent;
   width: 18px;
   height: 18px;
@@ -39,7 +39,7 @@ export const OuterCircle = styled.View<RadioButtonProps>`
 `;
 
 export const InnerCircle = styled.View<RadioButtonProps>`
-  background-color: ${(props) => (props.selected ? '#7D5CD7' : 'transparent')};
+  background-color: ${({ selected }) => (selected ? '#7D5CD7' : 'transparent')};
   width: 10px;
   height: 10px;
   border-radius: 5px;

@@ -23,6 +23,9 @@ import StepByStepPremature from '../pages/StepByStepPremature';
 import TabNavigator from './tabNavigator';
 import ThePremature from '../pages/ThePremature';
 import VideoPage from '../pages/VideoPage';
+import UploadBabyPhoto from '../pages/UploadBabyPhoto';
+import UploadFatherPhoto from '../pages/UploadFatherPhoto';
+import UploadMotherPhoto from '../pages/UploadMotherPhoto';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -92,6 +95,11 @@ const AppRoutes: React.FC = () => {
         options={{ title: 'O Prematuro' }}
       />
       <Stack.Screen
+        name="UploadBabyPhoto"
+        component={UploadBabyPhoto}
+        options={{ title: 'Minha maior motivação' }}
+      />
+      <Stack.Screen
         name="HowToBreastfeed"
         component={HowToBreastfeed}
         options={{ title: 'Retirada do leite' }}
@@ -105,6 +113,11 @@ const AppRoutes: React.FC = () => {
         name="AdditionalInformation"
         component={AdditionalInformation}
         options={{ title: 'Mais informações' }}
+      />
+      <Stack.Screen
+        name="UploadFatherPhoto"
+        component={UploadFatherPhoto}
+        options={{ title: 'O Papai' }}
       />
       <Stack.Screen
         name="Messages"
