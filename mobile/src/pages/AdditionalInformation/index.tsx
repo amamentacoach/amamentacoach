@@ -32,7 +32,9 @@ const AdditionalInformation: React.FC = () => {
       image: require('../../../assets/images/father.png'),
       title: 'Participação do Pai',
       subtitle: 'Registre e acompanhe a participação do papai',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('UploadFatherPhoto');
+      },
     },
     {
       image: require('../../../assets/images/change.png'),

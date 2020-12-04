@@ -24,6 +24,7 @@ import TabNavigator from './tabNavigator';
 import ThePremature from '../pages/ThePremature';
 import VideoPage from '../pages/VideoPage';
 import UploadBabyPhoto from '../pages/UploadBabyPhoto';
+import UploadFatherPhoto from '../pages/UploadFatherPhoto';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -111,6 +112,11 @@ const AppRoutes: React.FC = () => {
         name="AdditionalInformation"
         component={AdditionalInformation}
         options={{ title: 'Mais informações' }}
+      />
+      <Stack.Screen
+        name="UploadFatherPhoto"
+        component={UploadFatherPhoto}
+        options={{ title: 'O Papai' }}
       />
       <Stack.Screen
         name="Messages"
