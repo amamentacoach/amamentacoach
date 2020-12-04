@@ -7,6 +7,8 @@ class RespostasMaeController{
         let respostas: any[];
         respostas = req.body.respostas;
         const {mae_id} = req;
+        let retorno:any;
+
         respostas.map(async (resposta,i)=>{
             await knex('resposta').insert({mae_id,pergunta_id,descricao:resposta,data:new Date()});
             if(pergunta_id==="4"){
@@ -19,19 +21,19 @@ class RespostasMaeController{
                     case "Triste":  
                     case "Desanimada":
                     case "Preocupada":
-                        const mae:any = knex('mae').select('nome').where('id','=',mae_id).first();
-                        res.json({
+                        const mae:any = await  knex('mae').select('nome').where('id','=',mae_id).first();
+                        retorno = {
                             feedback:`Continue firme, ${mae.nome}! Talvez o conteúdo “Emoções e Amamentação” possa te ajudar hoje.`,
                             redirect:"EmotionsAndBreastfeeding"
-                        })  
+                        }
                         break;
                     default:
                         break;
                 }
-            }
+                retorno ? res.json(retorno) : res.sendStatus(200)
+            }else if(i==respostas.length-1)
+                res.sendStatus(200)
         })
-        
-        res.sendStatus(200)
     }
 
     async index(req:Request, res:Response){
