@@ -25,6 +25,7 @@ import ThePremature from '../pages/ThePremature';
 import VideoPage from '../pages/VideoPage';
 import UploadBabyPhoto from '../pages/UploadBabyPhoto';
 import UploadFatherPhoto from '../pages/UploadFatherPhoto';
+import UploadMotherPhoto from '../pages/UploadMotherPhoto';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();

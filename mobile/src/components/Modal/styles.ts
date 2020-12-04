@@ -15,6 +15,12 @@ export const Message = styled.Text`
   text-align: center;
 `;
 
+export const Image = styled.Image`
+  width: 100%;
+  height: 300px;
+  max-height: 300px;
+`;
+
 export const Line = styled.View`
   width: 100%;
   height: 1px;

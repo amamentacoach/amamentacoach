@@ -29,6 +29,19 @@ const Goals: React.FC = () => {
   const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
   const [isFinishedModalVisible, setIsFinishedModalVisible] = useState(false);
 
+  // Retorna uma imagem aleatória para ser exibida no modal.
+  function getRandomMotivationImage() {
+    const images = [
+      require('../../../assets/images/motivation-1.jpeg'),
+      require('../../../assets/images/motivation-2.jpeg'),
+      require('../../../assets/images/motivation-3.png'),
+      require('../../../assets/images/motivation-4.png'),
+      require('../../../assets/images/motivation-5.jpeg'),
+    ];
+    const randomIndex = Math.round(Math.random() * (images.length - 1));
+    return images[randomIndex];
+  }
+
   const infoPage: TInfoPageFunction = (
     index,
     pagesLength,
@@ -98,10 +111,10 @@ const Goals: React.FC = () => {
       <ModalContainer
         modalVisible={isIntroModalVisible || isFinishedModalVisible}>
         <Modal
+          image={getRandomMotivationImage()}
           visible={isIntroModalVisible}
-          closeModal={() => setIsIntroModalVisible(false)}>
-          <Image source={require('../../../assets/images/change.png')} />
-        </Modal>
+          closeModal={() => setIsIntroModalVisible(false)}
+        />
         <Modal
           text="Suas metas foram traçadas!"
           visible={isFinishedModalVisible}
