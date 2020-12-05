@@ -1,6 +1,7 @@
 import api from './api';
 
 export interface IMessage {
+  id: string;
   name: string;
   content: string;
   date: string;
@@ -23,6 +24,7 @@ export async function listMessages(page: number): Promise<IMessage[] | null> {
   try {
     const { data } = await api.get(`/mensagens?page=${page}`);
     const messages = data.map((question: any) => ({
+      id: question.id.toString(),
       name: question.nome,
       content: question.conteudo,
       date: question.data,
