@@ -12,7 +12,9 @@ const Diary: React.FC = () => {
     {
       image: require('../../../assets/images/surveys_one.png'),
       title: 'Amamentar um prematuro',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('SurveyBreastfeed');
+      },
     },
     {
       image: require('../../../assets/images/surveys_two.png'),
@@ -26,7 +28,7 @@ const Diary: React.FC = () => {
     },
     {
       image: require('../../../assets/images/surveys_four.png'),
-      title: 'Sobre a participação do paia',
+      title: 'Sobre a participação do pai',
       onPress: () => {},
     },
   ];
