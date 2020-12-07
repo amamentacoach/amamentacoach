@@ -1,21 +1,44 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-import { ScrollView } from './styles';
+import OptionsList from '../../components/OptionList';
 
-const Survey: React.FC = () => {
+import { Header, HeaderTitle, ScrollView } from './styles';
+
+const Diary: React.FC = () => {
+  const navigation = useNavigation();
+
+  const options = [
+    {
+      image: require('../../../assets/images/surveys_one.png'),
+      title: 'Amamentar um prematuro',
+      onPress: () => {},
+    },
+    {
+      image: require('../../../assets/images/surveys_two.png'),
+      title: 'Motivação',
+      onPress: () => {},
+    },
+    {
+      image: require('../../../assets/images/surveys_three.png'),
+      title: 'Sobre ajuda',
+      onPress: () => {},
+    },
+    {
+      image: require('../../../assets/images/surveys_four.png'),
+      title: 'Sobre a participação do paia',
+      onPress: () => {},
+    },
+  ];
+
   return (
     <ScrollView>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text>Placeholder Enquetes</Text>
-      </View>
+      <Header>
+        <HeaderTitle>Enquetes</HeaderTitle>
+      </Header>
+      <OptionsList options={options} />
     </ScrollView>
   );
 };
 
-export default Survey;
+export default Diary;

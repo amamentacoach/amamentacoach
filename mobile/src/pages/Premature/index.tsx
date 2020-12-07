@@ -11,7 +11,6 @@ const Premature: React.FC = () => {
     {
       image: require('../../../assets/images/premature_birth.png'),
       title: 'Parto prematuro: não era isso que eu esperava',
-      subtitle: 'Subtítulo 1',
       onPress: () => {
         navigation.navigate('NotWhatIExpected');
       },
@@ -19,7 +18,6 @@ const Premature: React.FC = () => {
     {
       image: require('../../../assets/images/premature_baby.png'),
       title: 'Muito prazer, eu sou o Prematuro',
-      subtitle: 'Subtítulo 2',
       onPress: () => {
         navigation.navigate('ThePremature');
       },
@@ -27,7 +25,6 @@ const Premature: React.FC = () => {
     {
       image: require('../../../assets/images/premature_heart.png'),
       title: 'Minha maior motivação para amamentar',
-      subtitle: 'Subtítulo 3',
       onPress: () => {
         navigation.navigate('UploadBabyPhoto');
       },
