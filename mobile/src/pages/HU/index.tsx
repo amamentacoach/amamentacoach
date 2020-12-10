@@ -23,7 +23,7 @@ const HU: React.FC = () => {
       title: 'Video HU Londrina',
       subtitle: 'Conheça o HU',
       onPress: () => {
-        navigation.navigate('VideoPage', { videos: ['OodQ5ZBcAT4'] });
+        navigation.navigate('VideoPage', { videos: ['CLOZL3N_QXs'] });
       },
     },
   ];

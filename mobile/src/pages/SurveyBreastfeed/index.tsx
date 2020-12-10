@@ -50,6 +50,8 @@ const SurveyBreastfeed: React.FC = () => {
         // Envia o formulário caso seja a última página
         setIsSendingForm(true);
         handleSubmit();
+        setIsSendingForm(false);
+        navigation.navigate('SurveyStatistics');
       } else {
         goToPage(index + 1);
       }

@@ -10,6 +10,17 @@ export interface ISurveyQuestion {
   multipleSelection: boolean;
 }
 
+export interface ISurveyStatistics {
+  id: number;
+  question: string;
+  options: [
+    {
+      description: string;
+      value: number;
+    },
+  ];
+}
+
 // Registra a resposta do usuário para uma pergunta.
 export async function answerQuestion(
   questionId: number,
@@ -41,6 +52,27 @@ export async function listQuestions(
       multipleSelection: question.multiplas,
     }));
     return surveyQuestions;
+  } catch (error) {
+    return null;
+  }
+}
+
+// Retorna as estatísticas das respostas da enquete.
+export async function listSurveyStatistics(): Promise<
+  ISurveyStatistics[] | null
+> {
+  try {
+    const { data } = await api.get(`/amamentacao/resultados`);
+    const surveyStatistics = data.map((question: any) => ({
+      id: question.id,
+      question: question.pergunta,
+      options: question.alternativas.map((option: any) => ({
+        description: option.descricao,
+        value: parseInt(option.total, 10),
+      })),
+    }));
+
+    return surveyStatistics;
   } catch (error) {
     return null;
   }

@@ -24,6 +24,7 @@ const Messages: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [noMoreMessages, setNoMoreMessages] = useState(false);
 
+  // Adiciona um botão na parte superior direita da tela, permitindo registrar uma nova mensagem
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (

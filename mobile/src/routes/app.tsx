@@ -25,8 +25,8 @@ import ThePremature from '../pages/ThePremature';
 import VideoPage from '../pages/VideoPage';
 import UploadBabyPhoto from '../pages/UploadBabyPhoto';
 import UploadFatherPhoto from '../pages/UploadFatherPhoto';
-import UploadMotherPhoto from '../pages/UploadMotherPhoto';
 import SurveyBreastfeed from '../pages/SurveyBreastfeed';
+import SurveyStatistics from '../pages/SurveyStatistics';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -186,6 +186,19 @@ const AppRoutes: React.FC = () => {
       <Stack.Screen
         name="SurveyBreastfeed"
         component={SurveyBreastfeed}
+        options={{
+          title: 'Enquete',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: '#7D5CD7',
+            elevation: 0, // Remove a sombra no Android
+            shadowOpacity: 0, // Remove a sombra no iOS
+          },
+        }}
+      />
+      <Stack.Screen
+        name="SurveyStatistics"
+        component={SurveyStatistics}
         options={{
           title: 'Enquete',
           headerTintColor: 'white',
