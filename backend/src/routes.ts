@@ -497,6 +497,8 @@ routes.get('/testePush',async (req,res)=>{
     res.sendStatus(200)
 })
 
-routes.get('/resultados',resultController.generate)
+routes.get('/amamentacao/resultados',respostasController.results)
+
+//routes.get('/resultados',resultController.generate)
 
 export default routes;

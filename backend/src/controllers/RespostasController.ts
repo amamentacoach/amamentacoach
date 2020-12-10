@@ -20,6 +20,19 @@ class RespostasController{
             respostas
         })
     }
+
+    async results(req:Request,res:Response){
+        const perguntas = await knex('pergunta').select('id','descricao as pergunta').where('categoria','=',1)
+
+        for (let index = 0; index < perguntas.length; index++) {
+            perguntas[index]['alternativas'] = await knex('resposta')
+                                                    .select('descricao').count('descricao as total')
+                                                    .where('pergunta_id','=',perguntas[index]['id'])
+                                                    .groupBy('descricao')
+        }
+
+        res.json(perguntas)
+    }
 }
 
 export default RespostasController;
