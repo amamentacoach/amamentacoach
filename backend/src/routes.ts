@@ -497,6 +497,82 @@ routes.get('/testePush',async (req,res)=>{
     res.sendStatus(200)
 })
 
+/**
+ * @api {get} /amamentacao/resultados Resultado da enquete amamentacao
+ * @apiDescription Retorna todas as perguntas, alternativas e total de respostas da enquete
+ * @apiGroup Enquetes
+ * 
+ * @apiSuccessExample {json} Exemplo Resposta:
+ * [
+ *   {
+ *     "id": 1,
+ *     "pergunta": "Pra você, qual é a melhor parte de dedicar-se a amamentar um bebê prematuro?",
+ *     "alternativas": [
+ *       {
+ *         "descricao": "Sentimento de empoderamento (lidar com este desafio me faz acreditar que sou capaz de outras grandes coisas)",
+ *         "total": "1"
+ *       },
+ *       {
+ *         "descricao": "Gratidão pela oportunidade (penso que muitas mulheres, por muitas razões, não conseguem nem tentar)",
+ *         "total": "1"
+ *       },
+ *       {
+ *         "descricao": "Outro",
+ *         "total": "4"
+ *       },
+ *       {
+ *         "descricao": "A formação de um poderoso vínculo ao travar uma batalha em parceria com meu(a) pequeno(a)",
+ *         "total": "4"
+ *       },
+ *       {
+ *         "descricao": "Não consigo identificar nada de bom",
+ *         "total": "13"
+ *       }
+ *     ]
+ *   },
+ *   {
+ *     "id": 2,
+ *     "pergunta": "O que te motiva a continuar tentando amamentar?",
+ *     "alternativas": [
+ *       {
+ *         "descricao": "O incentivo que estou recebendo da minha família",
+ *         "total": "3"
+ *       },
+ *       {
+ *         "descricao": "Outras motivações",
+ *         "total": "9"
+ *       },
+ *       {
+ *         "descricao": "Não estou muito motivada a continuar",
+ *         "total": "10"
+ *       }
+ *     ]
+ *   },
+ *   {
+ *     "id": 3,
+ *     "pergunta": "Você sente que está recebendo toda a ajuda de que precisa para continuar tentando amamentar seu bebê?",
+ *     "alternativas": [
+ *       {
+ *         "descricao": "Parcialmente, tanto dos profissionais quanto da minha família",
+ *         "total": "7"
+ *       },
+ *       {
+ *         "descricao": "Apenas dos profissionais",
+ *         "total": "2"
+ *       },
+ *       {
+ *         "descricao": "Sim, tanto dos profissionais quanto da minha família",
+ *         "total": "1"
+ *       },
+ *       {
+ *         "descricao": "Não estou recebendo ajuda",
+ *         "total": "10"
+ *       }
+ *     ]
+ *   }
+ * ]
+ * 
+ */
 routes.get('/amamentacao/resultados',respostasController.results)
 
 //routes.get('/resultados',resultController.generate)

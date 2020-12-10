@@ -75,6 +75,26 @@
   },
   {
     "type": "get",
+    "url": "/amamentacao/resultados",
+    "title": "Resultado da enquete amamentacao",
+    "description": "<p>Retorna todas as perguntas, alternativas e total de respostas da enquete</p>",
+    "group": "Enquetes",
+    "success": {
+      "examples": [
+        {
+          "title": "Exemplo Resposta:",
+          "content": "[\n  {\n    \"id\": 1,\n    \"pergunta\": \"Pra você, qual é a melhor parte de dedicar-se a amamentar um bebê prematuro?\",\n    \"alternativas\": [\n      {\n        \"descricao\": \"Sentimento de empoderamento (lidar com este desafio me faz acreditar que sou capaz de outras grandes coisas)\",\n        \"total\": \"1\"\n      },\n      {\n        \"descricao\": \"Gratidão pela oportunidade (penso que muitas mulheres, por muitas razões, não conseguem nem tentar)\",\n        \"total\": \"1\"\n      },\n      {\n        \"descricao\": \"Outro\",\n        \"total\": \"4\"\n      },\n      {\n        \"descricao\": \"A formação de um poderoso vínculo ao travar uma batalha em parceria com meu(a) pequeno(a)\",\n        \"total\": \"4\"\n      },\n      {\n        \"descricao\": \"Não consigo identificar nada de bom\",\n        \"total\": \"13\"\n      }\n    ]\n  },\n  {\n    \"id\": 2,\n    \"pergunta\": \"O que te motiva a continuar tentando amamentar?\",\n    \"alternativas\": [\n      {\n        \"descricao\": \"O incentivo que estou recebendo da minha família\",\n        \"total\": \"3\"\n      },\n      {\n        \"descricao\": \"Outras motivações\",\n        \"total\": \"9\"\n      },\n      {\n        \"descricao\": \"Não estou muito motivada a continuar\",\n        \"total\": \"10\"\n      }\n    ]\n  },\n  {\n    \"id\": 3,\n    \"pergunta\": \"Você sente que está recebendo toda a ajuda de que precisa para continuar tentando amamentar seu bebê?\",\n    \"alternativas\": [\n      {\n        \"descricao\": \"Parcialmente, tanto dos profissionais quanto da minha família\",\n        \"total\": \"7\"\n      },\n      {\n        \"descricao\": \"Apenas dos profissionais\",\n        \"total\": \"2\"\n      },\n      {\n        \"descricao\": \"Sim, tanto dos profissionais quanto da minha família\",\n        \"total\": \"1\"\n      },\n      {\n        \"descricao\": \"Não estou recebendo ajuda\",\n        \"total\": \"10\"\n      }\n    ]\n  }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Enquetes",
+    "name": "GetAmamentacaoResultados"
+  },
+  {
+    "type": "get",
     "url": "/perguntas/:categoria",
     "title": "Listagem de perguntas",
     "description": "<p>Lista todas as perguntas de uma enquete<br/> Categoria das Enquetes:<br/> 1 - Amamentar um prematuro<br/> 2 - DIÁRIO: Sentimentos<br/> 3 - DIÁRIO: Metas<br/> 4 - DIÁRIO: Ajuda<br/> 5 - Participação do pai<br/></p>",
