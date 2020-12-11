@@ -9,7 +9,7 @@ interface MainButtonProps extends TouchableOpacityProps {
 
 const MainButton: React.FC<MainButtonProps> = ({ text, onPress, disabled }) => {
   return (
-    <Button onPress={onPress} disabled={disabled} activeOpacity={0.7}>
+    <Button onPress={onPress} disabled={disabled} activeOpacity={0.9}>
       <TextButton>{text}</TextButton>
     </Button>
   );

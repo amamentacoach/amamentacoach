@@ -27,6 +27,7 @@ import UploadBabyPhoto from '../pages/UploadBabyPhoto';
 import UploadFatherPhoto from '../pages/UploadFatherPhoto';
 import SurveyBreastfeed from '../pages/SurveyBreastfeed';
 import SurveyStatistics from '../pages/SurveyStatistics';
+import Expectations from '../pages/Expectations';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -114,6 +115,11 @@ const AppRoutes: React.FC = () => {
         name="AdditionalInformation"
         component={AdditionalInformation}
         options={{ title: 'Mais informações' }}
+      />
+      <Stack.Screen
+        name="Expectations"
+        component={Expectations}
+        options={{ title: 'Expectativas' }}
       />
       <Stack.Screen
         name="UploadFatherPhoto"

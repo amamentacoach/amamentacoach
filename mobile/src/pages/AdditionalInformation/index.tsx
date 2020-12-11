@@ -40,7 +40,9 @@ const AdditionalInformation: React.FC = () => {
       image: require('../../../assets/images/change.png'),
       title: 'Reformulando as expectativas',
       subtitle: 'Troque expectativas que são improváveis por realistas',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('Expectations');
+      },
     },
   ];
 

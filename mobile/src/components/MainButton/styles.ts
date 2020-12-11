@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
 
-interface ButtonProps {
+interface IButtonProps {
   disabled: boolean | null | undefined;
 }
 
-export const Button = styled.TouchableOpacity<ButtonProps>`
+export const Button = styled.TouchableOpacity<IButtonProps>`
   height: 50px;
   width: 100%;
   background-color: ${({ disabled }) => (disabled ? '#c5c2cc' : '#7d5cd7')};
