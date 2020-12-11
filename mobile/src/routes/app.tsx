@@ -28,6 +28,7 @@ import UploadFatherPhoto from '../pages/UploadFatherPhoto';
 import SurveyBreastfeed from '../pages/SurveyBreastfeed';
 import SurveyStatistics from '../pages/SurveyStatistics';
 import Expectations from '../pages/Expectations';
+import UploadMotherPhoto from '../pages/UploadMotherPhoto';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -120,6 +121,11 @@ const AppRoutes: React.FC = () => {
         name="Expectations"
         component={Expectations}
         options={{ title: 'Expectativas' }}
+      />
+      <Stack.Screen
+        name="UploadMotherPhoto"
+        component={UploadMotherPhoto}
+        options={{ title: 'Espelho' }}
       />
       <Stack.Screen
         name="UploadFatherPhoto"

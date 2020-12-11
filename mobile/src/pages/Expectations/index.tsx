@@ -140,7 +140,6 @@ const Expectations: React.FC = () => {
 
     setIsButtonDisabled(true);
     setIsSubmitModalVisible(true);
-    navigation.navigate('UploadMotherPhoto');
   }
 
   async function handleChangeExpectation() {
@@ -153,7 +152,10 @@ const Expectations: React.FC = () => {
       <Modal
         text="Parabéns por trocar essa expectativa improvável pela expectativa realista! Volte amanhã para trocar outras expectativas."
         visible={isSubmitModalVisible}
-        closeModal={() => setIsSubmitModalVisible(false)}
+        closeModal={() => {
+          setIsSubmitModalVisible(false);
+          navigation.navigate('UploadMotherPhoto');
+        }}
       />
       <HeaderTitle>
         Trocar expectativas improváveis por expectativas realistas ajuda na
