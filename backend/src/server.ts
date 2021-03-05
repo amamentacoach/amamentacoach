@@ -2,12 +2,11 @@ import express  from 'express';
 import path from 'path';
 import routes from './routes';
 import dotenv from 'dotenv';
+dotenv.config()
 import * as schedule from "node-schedule";
 import sendPushNotification from './utils/sendPushNotification';
 
 const app = express()
-
-dotenv.config()
 
 const rule = new schedule.RecurrenceRule();
 rule.tz = 'America/Sao_Paulo'
