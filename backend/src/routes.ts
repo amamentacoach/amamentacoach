@@ -13,6 +13,7 @@ import UploadController from './controllers/UploadController';
 import BebesController from './controllers/BebesController';
 import sendPushNotification from './utils/sendPushNotification';
 import ResultController from './controllers/ResultController';
+import MamadasController from './controllers/MamadasController';
 
 
 const maesController = new MaesController();
@@ -22,8 +23,9 @@ const mensagensController = new MensagensController();
 const perguntasController = new PerguntasController();
 const respostasMaeController = new RespostasMaeController();
 const respostasController = new RespostasController();
-const uploadController = new UploadController()
-const resultController = new ResultController()
+const uploadController = new UploadController();
+const resultController = new ResultController();
+const mamadasController = new MamadasController();
 
 const routes = Router()
 const uploadMiddleware = multer(uploadConfig);
@@ -196,8 +198,8 @@ routes.get('/bebes',verifyJWT,bebesController.index);
 routes.post('/login',maesController.auth);
 
 /**
- * @api {post} /bebes/:bebe_id/ordenhas Cadastro
- * @apiDescription Cadastra uma ordenha do bebe de id informado
+ * @api {post} /maes/ordenhas Cadastro
+ * @apiDescription Cadastra uma ordenha da mae logada
  * @apiGroup Ordenhas
  * @apiHeader {String} authorization Token de acesso.
  *
@@ -213,12 +215,12 @@ routes.post('/login',maesController.auth);
  * 
  *
  */
-routes.post('/bebes/:bebe_id/ordenhas',verifyJWT,ordenhasController.create);
+routes.post('/maes/ordenhas',verifyJWT,ordenhasController.create);
 
 
 /**
- * @api {get} /bebes/:bebe_id/ordenhas Listagem
- * @apiDescription Lista uma ordenha do bebe de id informado
+ * @api {get} /maes/ordenhas Listagem
+ * @apiDescription Lista as ordenhas da mãe logada informado
  * @apiGroup Ordenhas
  * @apiHeader {String} authorization Token de acesso.
  *
@@ -226,10 +228,7 @@ routes.post('/bebes/:bebe_id/ordenhas',verifyJWT,ordenhasController.create);
  * 
  * @apiSuccessExample {json} Sucesso: Status 200
  * 
- *        {
- *         "id": 1,
- *         "nome": "Enzo Gabriel",
- *         "ordenhas": [
+ *        [
  *           {
  *             "id": 1,
  *             "data_hora": "2020-09-24T17:40:31.501Z",
@@ -239,10 +238,9 @@ routes.post('/bebes/:bebe_id/ordenhas',verifyJWT,ordenhasController.create);
  *             "bebe_id": 1
  *           }
  *         ]
- *       }
  *
  */
-routes.get('/bebes/:bebe_id/ordenhas',verifyJWT,ordenhasController.show);
+routes.get('/maes/ordenhas',verifyJWT,ordenhasController.show);
 
 routes.get('/bebes/:id', bebesController.show);
 
@@ -576,5 +574,52 @@ routes.get('/testePush',async (req,res)=>{
 routes.get('/amamentacao/resultados',respostasController.results)
 
 //routes.get('/resultados',resultController.generate)
+
+/**
+ * @api {post} /bebes/:bebe_id/mamadas Cadastro
+ * @apiDescription Cadastra uma mamada do bebe de id informado
+ * @apiGroup Mamadas
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ * 
+ * 
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "mama":"D",
+ *          "duracao":5,
+ *          "data_hora":"2020-09-24T17:40:31.501Z"
+ *      }
+ * 
+ *
+ */
+ routes.post('/bebes/:bebe_id/mamadas',verifyJWT,mamadasController.create);
+
+
+ /**
+  * @api {get} /bebes/:bebe_id/mamadas Listagem
+  * @apiDescription Lista as mamadas do bebe de id informado
+  * @apiGroup Mamadas
+  * @apiHeader {String} authorization Token de acesso.
+  *
+  * 
+  * 
+  * @apiSuccessExample {json} Sucesso: Status 200
+  * 
+  *        {
+  *         "id": 1,
+  *         "nome": "Enzo Gabriel",
+  *         "mamadas": [
+  *           {
+  *             "id": 1,
+  *             "data_hora": "2020-09-24T17:40:31.501Z",
+  *             "mama": "D",
+  *             "duracao": 5,
+  *             "bebe_id": 1
+  *           }
+  *         ]
+  *       }
+  *
+  */
+ routes.get('/bebes/:bebe_id/mamadas',verifyJWT,mamadasController.show);
 
 export default routes;

@@ -3,17 +3,13 @@ import knex from '../database/connection';
 
 class OrdenhasController{
     async show(req:Request, res:Response){
-        const {bebe_id} = req.params;
-
-        const {nome} = await knex('bebe').select('nome').where('bebe.id',bebe_id).first();
+        const {mae_id} = req;
 
         const ordenhas = await knex('ordenha')
             .select('*')
-            .where('bebe_id',bebe_id).orderBy('data_hora','desc')
+            .where('mae_id',mae_id).orderBy('data_hora','desc')
 
         return res.json({
-            id:parseInt(bebe_id),
-            nome,
             ordenhas
         })
     }
@@ -26,9 +22,9 @@ class OrdenhasController{
             data_hora
         } = req.body;
 
-        const {bebe_id} = req.params;
+        const {mae_id} = req;
 
-        const ordenha = {bebe_id:parseInt(bebe_id), qtd_leite, mama, duracao, data_hora}
+        const ordenha = {mae_id:parseInt(mae_id), qtd_leite, mama, duracao, data_hora}
         
         await knex('ordenha').insert(ordenha);
 

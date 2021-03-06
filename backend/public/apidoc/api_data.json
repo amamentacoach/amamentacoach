@@ -148,6 +148,72 @@
   },
   {
     "type": "get",
+    "url": "/bebes/:bebe_id/mamadas",
+    "title": "Listagem",
+    "description": "<p>Lista as mamadas do bebe de id informado</p>",
+    "group": "Mamadas",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Sucesso: Status 200",
+          "content": "\n {\n  \"id\": 1,\n  \"nome\": \"Enzo Gabriel\",\n  \"mamadas\": [\n    {\n      \"id\": 1,\n      \"data_hora\": \"2020-09-24T17:40:31.501Z\",\n      \"mama\": \"D\",\n      \"duracao\": 5,\n      \"bebe_id\": 1\n    }\n  ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Mamadas",
+    "name": "GetBebesBebe_idMamadas"
+  },
+  {
+    "type": "post",
+    "url": "/bebes/:bebe_id/mamadas",
+    "title": "Cadastro",
+    "description": "<p>Cadastra uma mamada do bebe de id informado</p>",
+    "group": "Mamadas",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "{\n    \"mama\":\"D\",\n    \"duracao\":5,\n    \"data_hora\":\"2020-09-24T17:40:31.501Z\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Mamadas",
+    "name": "PostBebesBebe_idMamadas"
+  },
+  {
+    "type": "get",
     "url": "/mensagens",
     "title": "Listar Mensagens",
     "description": "<p>Retorna no maximo 7 mensagens por pagina </br>Ordenadas de mais recente para mais antiga </br>O header X-Total-Count Retorna a quantidade total de mensagens.</p>",
@@ -403,9 +469,9 @@
   },
   {
     "type": "get",
-    "url": "/bebes/:bebe_id/ordenhas",
+    "url": "/maes/ordenhas",
     "title": "Listagem",
-    "description": "<p>Lista uma ordenha do bebe de id informado</p>",
+    "description": "<p>Lista as ordenhas da mãe logada informado</p>",
     "group": "Ordenhas",
     "header": {
       "fields": {
@@ -424,7 +490,7 @@
       "examples": [
         {
           "title": "Sucesso: Status 200",
-          "content": "\n {\n  \"id\": 1,\n  \"nome\": \"Enzo Gabriel\",\n  \"ordenhas\": [\n    {\n      \"id\": 1,\n      \"data_hora\": \"2020-09-24T17:40:31.501Z\",\n      \"qtd_leite\": 100,\n      \"mama\": \"D\",\n      \"duracao\": 5,\n      \"bebe_id\": 1\n    }\n  ]\n}",
+          "content": "\n[\n   {\n     \"id\": 1,\n     \"data_hora\": \"2020-09-24T17:40:31.501Z\",\n     \"qtd_leite\": 100,\n     \"mama\": \"D\",\n     \"duracao\": 5,\n     \"bebe_id\": 1\n   }\n ]",
           "type": "json"
         }
       ]
@@ -432,13 +498,13 @@
     "version": "0.0.0",
     "filename": "./src/routes.ts",
     "groupTitle": "Ordenhas",
-    "name": "GetBebesBebe_idOrdenhas"
+    "name": "GetMaesOrdenhas"
   },
   {
     "type": "post",
-    "url": "/bebes/:bebe_id/ordenhas",
+    "url": "/maes/ordenhas",
     "title": "Cadastro",
-    "description": "<p>Cadastra uma ordenha do bebe de id informado</p>",
+    "description": "<p>Cadastra uma ordenha da mae logada</p>",
     "group": "Ordenhas",
     "header": {
       "fields": {
@@ -465,7 +531,7 @@
     "version": "0.0.0",
     "filename": "./src/routes.ts",
     "groupTitle": "Ordenhas",
-    "name": "PostBebesBebe_idOrdenhas"
+    "name": "PostMaesOrdenhas"
   },
   {
     "type": "get",
