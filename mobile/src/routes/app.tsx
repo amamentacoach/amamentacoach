@@ -27,8 +27,9 @@ import UploadBabyPhoto from '../pages/UploadBabyPhoto';
 import UploadFatherPhoto from '../pages/UploadFatherPhoto';
 import SurveyBreastfeed from '../pages/SurveyBreastfeed';
 import SurveyStatistics from '../pages/SurveyStatistics';
-import Expectations from '../pages/Expectations';
+import ManageExpectations from '../pages/ManageExpectations';
 import UploadMotherPhoto from '../pages/UploadMotherPhoto';
+import BabyCup from '../pages/BabyCup';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -118,8 +119,8 @@ const AppRoutes: React.FC = () => {
         options={{ title: 'Mais informações' }}
       />
       <Stack.Screen
-        name="Expectations"
-        component={Expectations}
+        name="ManageExpectations"
+        component={ManageExpectations}
         options={{ title: 'Expectativas' }}
       />
       <Stack.Screen
@@ -131,6 +132,11 @@ const AppRoutes: React.FC = () => {
         name="UploadFatherPhoto"
         component={UploadFatherPhoto}
         options={{ title: 'O Papai' }}
+      />
+      <Stack.Screen
+        name="BabyCup"
+        component={BabyCup}
+        options={{ title: 'Oferta de leite pelo copinho' }}
       />
       <Stack.Screen
         name="Messages"

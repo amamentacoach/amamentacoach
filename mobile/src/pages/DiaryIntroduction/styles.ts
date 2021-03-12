@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-interface ContainerProps {
+interface IContainerProps {
   width: number;
 }
 
@@ -15,7 +15,7 @@ export const ListContainer = styled.SafeAreaView`
   flex: 1;
 `;
 
-export const PageContainer = styled.View<ContainerProps>`
+export const PageContainer = styled.View<IContainerProps>`
   width: ${({ width }) => width}px;
   flex: 1;
 `;
@@ -58,6 +58,6 @@ export const ContinueButton = styled.TouchableOpacity`
 
 export const TextContinueButton = styled.Text`
   color: #545454;
-  font-family: 'Open-Sans-Regular';
+  font-family: 'OpenSans-Regular';
   font-size: 18px;
 `;

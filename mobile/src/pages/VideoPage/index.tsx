@@ -22,7 +22,7 @@ const VideoPage: React.FC = () => {
 
   return (
     <ScrollView>
-      {isLoading ? (
+      {isLoading && (
         <LoadingContainer>
           <ActivityIndicator
             size="large"
@@ -30,7 +30,7 @@ const VideoPage: React.FC = () => {
             animating={isLoading}
           />
         </LoadingContainer>
-      ) : null}
+      )}
       <ContentContainer display={!isLoading}>
         {videos.map((id) => (
           <VideoContainer key={id}>

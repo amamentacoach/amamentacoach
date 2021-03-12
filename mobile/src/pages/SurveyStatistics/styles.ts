@@ -17,7 +17,7 @@ export const HeaderBackground = styled.View`
 export const HeaderText = styled.Text`
   color: #fafafa;
   text-align: center;
-  font-family: 'Open-Sans-Regular';
+  font-family: 'OpenSans-Regular';
   font-size: 18px;
   margin: -150px 24px 10px 24px;
 `;
@@ -33,7 +33,7 @@ export const ContentContainer = styled.View`
 export const ContentHeader = styled.Text`
   color: #161026;
   text-align: center;
-  font-family: 'Open-Sans-Bold';
+  font-family: 'OpenSans-Bold';
   font-size: 16px;
   margin-bottom: 25px;
 `;
@@ -45,7 +45,7 @@ export const QuestionContainer = styled.View`
 export const QuestionIndex = styled.Text`
   color: #161026;
   text-align: center;
-  font-family: 'Open-Sans-Bold';
+  font-family: 'OpenSans-Bold';
   font-size: 16px;
   margin-bottom: 10px;
 `;
@@ -53,7 +53,7 @@ export const QuestionIndex = styled.Text`
 export const Question = styled.Text`
   color: #545454;
   text-align: center;
-  font-family: 'Open-Sans-Normal';
+  font-family: 'OpenSans-Normal';
   font-size: 14px;
   margin-bottom: 12px;
 `;

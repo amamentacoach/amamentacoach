@@ -7,7 +7,9 @@ import AppRoutes from './app';
 const Routes: React.FC = () => {
   const { isSigned } = useAuth();
 
-  return isSigned ? <AppRoutes /> : <AuthRoutes />;
+  // TODO Remover
+  // return isSigned ? <AppRoutes /> : <AuthRoutes />;
+  return <AppRoutes />;
 };
 
 export default Routes;

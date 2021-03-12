@@ -82,7 +82,7 @@ export const ContentTextContainer = styled.View`
 
 export const ContentTitle = styled.Text`
   color: #000000;
-  font-family: 'Open-Sans-Bold';
+  font-family: 'OpenSans-Bold';
   font-size: 16px;
   flex-wrap: wrap;
   margin-bottom: 3px;

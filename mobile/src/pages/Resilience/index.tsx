@@ -43,7 +43,9 @@ const Resilience: React.FC = () => {
     {
       image: require('../../../assets/images/erlenmeyer_pink.png'),
       title: '4. Construir força e autoconfiança',
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('UploadMotherPhoto');
+      },
     },
   ];
 

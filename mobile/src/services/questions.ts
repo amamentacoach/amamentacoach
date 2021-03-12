@@ -36,7 +36,7 @@ export async function answerQuestion(
   }
 }
 
-// Retorna todos as perguntas registros feitos no diário.
+// Retorna todos as perguntas feitas no diário.
 export async function listQuestions(
   questionCategory: number,
 ): Promise<ISurveyQuestion[] | null> {

@@ -31,7 +31,7 @@ export const CalendarButton = styled.TouchableOpacity`
 
 export const DateText = styled.Text`
   color: #737373;
-  font-family: 'Open-Sans-Regular';
+  font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;
   margin-bottom: 25px;

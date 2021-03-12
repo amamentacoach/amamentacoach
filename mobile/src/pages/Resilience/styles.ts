@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-interface VideoContainerProps {
+interface IVideoContainerProps {
   display: boolean;
 }
 
@@ -15,12 +15,12 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 export const PageHeader = styled.Text`
   margin-bottom: 20px;
   color: #737373;
-  font-family: 'Open-Sans-Regular';
+  font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;
 `;
 
-export const VideoContainer = styled.View<VideoContainerProps>`
+export const VideoContainer = styled.View<IVideoContainerProps>`
   flex: 1;
   justify-content: center;
   display: ${({ display }) => (display ? 'flex' : 'none')};
@@ -44,6 +44,6 @@ export const Header = styled.Text`
 export const Text = styled.Text`
   margin-bottom: 30px;
   color: #737373;
-  font-family: 'Open-Sans-Regular';
+  font-family: 'OpenSans-Regular';
   font-size: 16px;
 `;

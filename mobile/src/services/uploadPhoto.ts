@@ -3,7 +3,7 @@ import { ImagePickerResponse } from 'react-native-image-picker';
 
 import api from './api';
 
-// Retorna um objeto formdata contendo a image passada.
+// Retorna um objeto FormData contendo a imagem passada.
 function prepareImageFormData(photo: ImagePickerResponse) {
   const formData = new FormData();
   formData.append('foto', {
@@ -15,7 +15,7 @@ function prepareImageFormData(photo: ImagePickerResponse) {
   return formData;
 }
 
-// Envia uma foto passada para um rota.
+// Envia uma foto do usuário para uma rota especificada.
 async function uploadPhoto(route: string, photo: ImagePickerResponse) {
   const formData = prepareImageFormData(photo);
   try {

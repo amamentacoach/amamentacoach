@@ -36,7 +36,7 @@ export const ContentTextContainer = styled.View`
 
 export const ContentTitle = styled.Text`
   color: #000000;
-  font-family: 'Open-Sans-Bold';
+  font-family: 'OpenSans-Bold';
   font-size: 16px;
   flex-wrap: wrap;
   margin-bottom: 3px;
@@ -44,7 +44,7 @@ export const ContentTitle = styled.Text`
 
 export const ContentSubtitle = styled.Text`
   color: #545454;
-  font-family: 'Open-Sans-Regular';
+  font-family: 'OpenSans-Regular';
   font-size: 16px;
   flex-wrap: wrap;
 `;

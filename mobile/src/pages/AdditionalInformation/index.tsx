@@ -1,4 +1,5 @@
 import React from 'react';
+import { Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import OptionsList from '../../components/OptionList';
@@ -42,6 +43,14 @@ const AdditionalInformation: React.FC = () => {
       subtitle: 'Troque expectativas que são improváveis por realistas',
       onPress: () => {
         navigation.navigate('Expectations');
+      },
+    },
+    {
+      image: require('../../../assets/images/emotions_info.png'),
+      title: 'Oferta de leite pelo copinho',
+      subtitle: 'Vídeo Demonstrativo',
+      onPress: () => {
+        navigation.navigate('BabyCup');
       },
     },
   ];
