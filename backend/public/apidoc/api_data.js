@@ -74,6 +74,39 @@ define({ "api": [
     "name": "PostBebes"
   },
   {
+    "type": "post",
+    "url": "/duvidas",
+    "title": "Cadastro",
+    "description": "<p>A mãe cadastra uma dúvida</p>",
+    "group": "Canal_de_comunicacao",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "{\n    \"descricao\":\"Como informo minhas ordenhas?\",\n    \"whatsapp\":\"(43) 99999-9999\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Canal_de_comunicacao",
+    "name": "PostDuvidas"
+  },
+  {
     "type": "get",
     "url": "/amamentacao/resultados",
     "title": "Resultado da enquete amamentacao",
@@ -314,7 +347,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Sucesso:",
-          "content": "{\n\"id\": 1,\n\"email\": \"fulana@email.com\",\n\"nome\": \"Fulana de Tal\",\n\"ultimo_acesso\": \"2020-09-24T17:32:34.810Z\",\n\"imagem_mae\": null,\n\"imagem_bebe\": null,\n\"imagem_pai\": null,\n\"bebes\": [\n    {\n    \"id\": 1,\n    \"nome\": \"Enzo Gabriel\",\n    \"data_parto\": \"2020-08-28T03:00:00.000Z\",\n    \"semanas_gest\": 35,\n    \"dias_gest\": 5,\n    \"peso\": 2.5,\n    \"imagem_bebe\": null,\n    \"tipo_parto\": true,\n    \"local\": \"UCI\",\n    \"mae_id\": 1,\n    \"ordenhas\": [\n        {\n        \"id\": 1,\n        \"qtd_leite\": 100,\n        \"data_hora\": \"2020-09-24T17:40:31.501Z\",\n        \"mama\": \"D\",\n        \"duracao\": 5\n        }\n    ]\n    }\n]\n}",
+          "content": "{\n\"id\": 1,\n\"email\": \"fulana@email.com\",\n\"nome\": \"Fulana de Tal\",\n\"ultimo_acesso\": \"2021-03-06T20:21:12.824Z\",\n\"imagem_mae\": null,\n\"imagem_bebe\": null,\n\"imagem_pai\": null,\n\"companheiro\": true,\n\"bebes\": [\n    {\n       \"id\": 1,\n       \"nome\": \"Sabrina\",\n       \"data_parto\": \"2020-08-28T03:00:00.000Z\",\n       \"semanas_gest\": 35,\n       \"dias_gest\": 5,\n       \"peso\": 2.5,\n       \"apgar1\": 8,\n       \"apgar2\": 10,\n       \"tipo_parto\": true,\n       \"local\": \"UCI Neonatal\",\n       \"mae_id\": 1,\n       \"complicacoes\": true,\n       \"mamadas\": [\n           {\n           \"id\": 1,\n           \"data_hora\": \"2020-09-24T17:40:31.501Z\",\n           \"mama\": \"D\",\n           \"duracao\": 10\n           }\n       ]\n    }\n],\n\"ordenhas\": [\n    {\n      \"id\": 2,\n      \"data_hora\": \"2020-09-24T17:40:31.501Z\",\n      \"qtd_leite\": 100,\n      \"mama\": \"D\",\n      \"duracao\": 5,\n      \"mae_id\": 1\n    }\n]\n}",
           "type": "json"
         }
       ]
