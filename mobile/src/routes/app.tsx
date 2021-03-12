@@ -5,6 +5,7 @@ import AdditionalInformation from '../pages/AdditionalInformation';
 import BreastfeedingBenefits from '../pages/BreastfeedingBenefits';
 import DiaryRegistry from '../pages/DiaryRegistry';
 import Distractions from '../pages/Distractions';
+import MusicPlaylists from '../pages/MusicPlaylists';
 import EmotionsAndBreastfeeding from '../pages/EmotionsAndBreastfeeding';
 import Feelings from '../pages/Feelings';
 import Goals from '../pages/Goals';
@@ -82,6 +83,11 @@ const AppRoutes: React.FC = () => {
         name="Distractions"
         component={Distractions}
         options={{ title: 'Caixinha da distração' }}
+      />
+      <Stack.Screen
+        name="MusicPlaylists"
+        component={MusicPlaylists}
+        options={{ title: 'Músicas para relaxar' }}
       />
       <Stack.Screen
         name="Resilience"
