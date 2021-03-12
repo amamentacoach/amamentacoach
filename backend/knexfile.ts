@@ -7,8 +7,11 @@ module.exports = {
       host:'localhost',
       user:'postgres',
       password:'postgres',
-      database:'amamentacoach'
+      database:'amamentacoach',
   },
+
+  ssl: { rejectUnauthorized: false },
+
   
   migrations:{
     directory: path.resolve(__dirname,'src','database','migrations')
