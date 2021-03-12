@@ -72,6 +72,7 @@ const BabyForm: React.FC = () => {
   const [isSendingForm, setIsSendingForm] = useState(false);
   const [isApgarModalVisible, setIsApgarModalVisible] = useState(false);
   const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
+  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [babyCount, setBabyCount] = useState(0);
 
   const babyFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
@@ -215,7 +216,7 @@ const BabyForm: React.FC = () => {
     setIsSendingForm(true);
     const token = await registerNewMother();
     if (token === null) {
-      setIsSendingForm(false);
+      setIsErrorModalVisible(true);
       return;
     }
 
@@ -238,6 +239,14 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
         closeModal={async () => {
           setIsSignUpModalVisible(false);
           await signIn(motherInfo.email, motherInfo.password);
+        }}
+      />
+      <Modal
+        text={`Erro ao registrar!\nPor favor tente novamente mais tarde.`}
+        visible={isErrorModalVisible}
+        closeModal={async () => {
+          setIsErrorModalVisible(false);
+          setIsSendingForm(false);
         }}
       />
 
