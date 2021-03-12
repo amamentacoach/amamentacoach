@@ -12,16 +12,18 @@ class MaesController{
         if(id==req.mae_id){
 
             const mae = await knex('mae')
-            .select('mae.id', 'email', 'mae.nome', 'ultimo_acesso', 'imagem_mae', 'imagem_bebe', 'imagem_pai')
+            .select('mae.id', 'email', 'mae.nome', 'ultimo_acesso', 'imagem_mae', 'imagem_bebe', 'imagem_pai', 'companheiro')
             .where('mae.id',id).first()
 
 
             const bebes = await knex('bebe').select('*').where('mae_id',id)
+            const ordenhas = await knex('ordenha').select('*').where('mae_id',id)
 
             for (let index = 0; index < bebes.length; index++)
-                bebes[index].ordenhas = await knex('ordenha').select('id','qtd_leite','data_hora','mama','duracao').where('bebe_id','=',`${bebes[index].id}`)
+                bebes[index].mamadas = await knex('mamada').select('id','data_hora','mama','duracao').where('bebe_id','=',`${bebes[index].id}`)
                 
             mae.bebes=bebes
+            mae.ordenhas=ordenhas
             return res.json(mae);
         }else{
             res.sendStatus(401)
