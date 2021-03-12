@@ -14,6 +14,7 @@ import BebesController from './controllers/BebesController';
 import sendPushNotification from './utils/sendPushNotification';
 import ResultController from './controllers/ResultController';
 import MamadasController from './controllers/MamadasController';
+import DuvidasController from './controllers/DuvidasController';
 
 
 const maesController = new MaesController();
@@ -26,6 +27,7 @@ const respostasController = new RespostasController();
 const uploadController = new UploadController();
 const resultController = new ResultController();
 const mamadasController = new MamadasController();
+const duvidasController = new DuvidasController();
 
 const routes = Router()
 const uploadMiddleware = multer(uploadConfig);
@@ -68,38 +70,50 @@ routes.post('/maes',maesController.create);
  * @apiHeader {String} authorization Token de acesso.
  * 
  * @apiSuccessExample {json} Sucesso:
+ *   {
+ *   "id": 1,
+ *   "email": "fulana@email.com",
+ *   "nome": "Fulana de Tal",
+ *   "ultimo_acesso": "2021-03-06T20:21:12.824Z",
+ *   "imagem_mae": null,
+ *   "imagem_bebe": null,
+ *   "imagem_pai": null,
+ *   "companheiro": true,
+ *   "bebes": [
  *       {
- *       "id": 1,
- *       "email": "fulana@email.com",
- *       "nome": "Fulana de Tal",
- *       "ultimo_acesso": "2020-09-24T17:32:34.810Z",
- *       "imagem_mae": null,
- *       "imagem_bebe": null,
- *       "imagem_pai": null,
- *       "bebes": [
- *           {
- *           "id": 1,
- *           "nome": "Enzo Gabriel",
- *           "data_parto": "2020-08-28T03:00:00.000Z",
- *           "semanas_gest": 35,
- *           "dias_gest": 5,
- *           "peso": 2.5,
- *           "imagem_bebe": null,
- *           "tipo_parto": true,
- *           "local": "UCI",
- *           "mae_id": 1,
- *           "ordenhas": [
- *               {
- *               "id": 1,
- *               "qtd_leite": 100,
- *               "data_hora": "2020-09-24T17:40:31.501Z",
- *               "mama": "D",
- *               "duracao": 5
- *               }
- *           ]
- *           }
- *       ]
+ *          "id": 1,
+ *          "nome": "Sabrina",
+ *          "data_parto": "2020-08-28T03:00:00.000Z",
+ *          "semanas_gest": 35,
+ *          "dias_gest": 5,
+ *          "peso": 2.5,
+ *          "apgar1": 8,
+ *          "apgar2": 10,
+ *          "tipo_parto": true,
+ *          "local": "UCI Neonatal",
+ *          "mae_id": 1,
+ *          "complicacoes": true,
+ *          "mamadas": [
+ *              {
+ *              "id": 1,
+ *              "data_hora": "2020-09-24T17:40:31.501Z",
+ *              "mama": "D",
+ *              "duracao": 10
+ *              }
+ *          ]
  *       }
+ *   ],
+ *   "ordenhas": [
+ *       {
+ *         "id": 2,
+ *         "data_hora": "2020-09-24T17:40:31.501Z",
+ *         "qtd_leite": 100,
+ *         "mama": "D",
+ *         "duracao": 5,
+ *         "mae_id": 1
+ *       }
+ *   ]
+ *   }
  *
  */
 routes.get('/maes', verifyJWT,maesController.show);
@@ -621,5 +635,28 @@ routes.get('/amamentacao/resultados',respostasController.results)
   *
   */
  routes.get('/bebes/:bebe_id/mamadas',verifyJWT,mamadasController.show);
+
+ /**
+ * @api {post} /duvidas Cadastro
+ * @apiDescription A mãe cadastra uma dúvida
+ * @apiGroup Canal de comunicacao
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ * 
+ * 
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "descricao":"Como informo minhas ordenhas?",
+ *          "whatsapp":"(43) 99999-9999"
+ *      }
+ * 
+ *
+ */
+ routes.post('/duvidas', verifyJWT, duvidasController.create);
+
+ routes.get('/duvidas', duvidasController.show)
+
+ routes.post('/duvidas/:id/resolver', duvidasController.resolver)
+
 
 export default routes;
