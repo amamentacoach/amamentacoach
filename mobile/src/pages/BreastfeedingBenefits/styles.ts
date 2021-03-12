@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
 
-interface ContainerProps {
+interface IContainerProps {
   width: number;
 }
 
-interface LastPageButtonWrapperProps {
+interface ILastPageButtonWrapperProps {
   opacity: number;
 }
 
@@ -20,7 +20,7 @@ export const ListContainer = styled.SafeAreaView`
   flex: 1;
 `;
 
-export const PageContainer = styled.View<ContainerProps>`
+export const PageContainer = styled.View<IContainerProps>`
   width: ${({ width }) => width}px;
   flex: 1;
 `;
@@ -65,7 +65,7 @@ export const CurrentPageWrapper = styled.View`
   margin: 30px 0;
 `;
 
-export const LastPageButtonWrapper = styled.View<LastPageButtonWrapperProps>`
+export const LastPageButtonWrapper = styled.View<ILastPageButtonWrapperProps>`
   opacity: ${({ opacity }) => opacity};
   justify-content: center;
   align-items: center;
@@ -80,6 +80,6 @@ export const ContinueButton = styled.TouchableOpacity`
 
 export const TextContinueButton = styled.Text`
   color: #545454;
-  font-family: 'Open-Sans-Regular';
+  font-family: 'OpenSans-Regular';
   font-size: 18px;
 `;

@@ -5,6 +5,7 @@ import AdditionalInformation from '../pages/AdditionalInformation';
 import BreastfeedingBenefits from '../pages/BreastfeedingBenefits';
 import DiaryRegistry from '../pages/DiaryRegistry';
 import Distractions from '../pages/Distractions';
+import MusicPlaylists from '../pages/MusicPlaylists';
 import EmotionsAndBreastfeeding from '../pages/EmotionsAndBreastfeeding';
 import Feelings from '../pages/Feelings';
 import Goals from '../pages/Goals';
@@ -27,8 +28,9 @@ import UploadBabyPhoto from '../pages/UploadBabyPhoto';
 import UploadFatherPhoto from '../pages/UploadFatherPhoto';
 import SurveyBreastfeed from '../pages/SurveyBreastfeed';
 import SurveyStatistics from '../pages/SurveyStatistics';
-import Expectations from '../pages/Expectations';
+import ManageExpectations from '../pages/ManageExpectations';
 import UploadMotherPhoto from '../pages/UploadMotherPhoto';
+import BabyCup from '../pages/BabyCup';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -83,6 +85,11 @@ const AppRoutes: React.FC = () => {
         options={{ title: 'Caixinha da distração' }}
       />
       <Stack.Screen
+        name="MusicPlaylists"
+        component={MusicPlaylists}
+        options={{ title: 'Músicas para relaxar' }}
+      />
+      <Stack.Screen
         name="Resilience"
         component={Resilience}
         options={{ title: 'Resiliência' }}
@@ -118,8 +125,8 @@ const AppRoutes: React.FC = () => {
         options={{ title: 'Mais informações' }}
       />
       <Stack.Screen
-        name="Expectations"
-        component={Expectations}
+        name="ManageExpectations"
+        component={ManageExpectations}
         options={{ title: 'Expectativas' }}
       />
       <Stack.Screen
@@ -131,6 +138,11 @@ const AppRoutes: React.FC = () => {
         name="UploadFatherPhoto"
         component={UploadFatherPhoto}
         options={{ title: 'O Papai' }}
+      />
+      <Stack.Screen
+        name="BabyCup"
+        component={BabyCup}
+        options={{ title: 'Oferta de leite pelo copinho' }}
       />
       <Stack.Screen
         name="Messages"

@@ -14,14 +14,14 @@ export const MessageContainer = styled.View`
 `;
 
 export const Author = styled.Text`
-  font-family: 'Open-Sans-Bold';
+  font-family: 'OpenSans-Bold';
   font-size: 14px;
   color: #7d5cd7;
   margin-bottom: 5px;
 `;
 
 export const Content = styled.Text`
-  font-family: 'Open-Sans-Regular';
+  font-family: 'OpenSans-Regular';
   font-size: 16px;
   color: #545454;
 `;

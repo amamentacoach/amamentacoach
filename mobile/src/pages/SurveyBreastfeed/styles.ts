@@ -22,7 +22,7 @@ export const HeaderBackground = styled.View`
 export const HeaderText = styled.Text`
   color: #fafafa;
   text-align: center;
-  font-family: 'Open-Sans-Regular';
+  font-family: 'OpenSans-Regular';
   font-size: 18px;
   margin: -150px 24px 10px 24px;
 `;
@@ -45,14 +45,14 @@ export const CurrentPageContainer = styled.View`
 
 export const CurrentPageText = styled.Text`
   text-align: center;
-  font-family: 'Open-Sans-Bold';
+  font-family: 'OpenSans-Bold';
   font-size: 16px;
   color: #161026;
 `;
 
 export const QuestionText = styled.Text`
   text-align: center;
-  font-family: 'Open-Sans-Regular';
+  font-family: 'OpenSans-Regular';
   font-size: 16px;
   margin: 15px 0;
   color: #161026;

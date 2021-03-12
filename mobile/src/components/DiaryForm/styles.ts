@@ -14,7 +14,7 @@ export const HeaderBackground = styled.View`
 export const HeaderText = styled.Text`
   color: #fafafa;
   text-align: center;
-  font-family: 'Open-Sans-Regular';
+  font-family: 'OpenSans-Regular';
   font-size: 18px;
   margin: -150px 24px 10px 24px;
 `;

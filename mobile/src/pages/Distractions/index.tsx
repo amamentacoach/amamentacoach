@@ -1,11 +1,13 @@
 import React from 'react';
 import { Linking } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import OptionsList from '../../components/OptionList';
 
 import { ScrollView, HeaderText } from './styles';
 
 const Distractions: React.FC = () => {
+  const navigation = useNavigation();
   const options = [
     {
       image: require('../../../assets/images/puzzle.png'),
@@ -28,11 +30,7 @@ const Distractions: React.FC = () => {
     {
       image: require('../../../assets/images/music.png'),
       title: 'Músicas para relaxar',
-      onPress: async () => {
-        await Linking.openURL(
-          'https://www.youtube.com/results?search_query=m%C3%BAsicas+para+relaxar',
-        );
-      },
+      onPress: () => navigation.navigate('MusicPlaylists'),
     },
   ];
 

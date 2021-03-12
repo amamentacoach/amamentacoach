@@ -34,7 +34,7 @@ export const DescriptionColor = styled.View<IDescriptionColorProps>`
 
 export const DescriptionLabel = styled.Text`
   flex: 1;
-  font-family: 'Open-Sans-Regular';
+  font-family: 'OpenSans-Regular';
   font-size: 14px;
   color: #545454;
 `;
