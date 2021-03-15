@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  api:
+    container_name: amamentacoach-api
+    build: ./backend
+    env_file:
+      - database.config
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    restart: 'always'
+
+  database:
+    container_name: amamentacoach-postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    env_file:
+      - database.config
+    volumes:
+      - "database-data:/var/lib/postgresql/data/"
+
+volumes:
+  database-data:
+
