@@ -194,7 +194,7 @@ const BabyForm: React.FC = () => {
 
   // Registra todos os bebês do formulário.
   async function registerNewBabies(token: string, formValues: IFormValues) {
-    formValues.babies.forEach(async (baby) => {
+    formValues.babies.forEach(async baby => {
       const babyInfo = {
         name: baby.name,
         birthday: baby.birthday,

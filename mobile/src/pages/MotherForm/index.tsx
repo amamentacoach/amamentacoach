@@ -161,7 +161,7 @@ const MotherForm: React.FC = () => {
       wage: formValues.wage,
       timeSpentBreastFeeding:
         formValues.alreadyBreastfeed[0].toLowerCase() === 'sim'
-          ? formValues.timeSpentBreastFeeding.map((item) => item.value)
+          ? formValues.timeSpentBreastFeeding.map(item => item.value)
           : [],
     };
     navigation.navigate('BabyForm', { motherInfo });
@@ -178,7 +178,7 @@ const MotherForm: React.FC = () => {
         initialValues={formInitialValues}
         validationSchema={motherFormSchema}
         validateOnChange={false}
-        onSubmit={(values) => handleFormSubmit(values)}>
+        onSubmit={values => handleFormSubmit(values)}>
         {({
           handleChange,
           handleSubmit,

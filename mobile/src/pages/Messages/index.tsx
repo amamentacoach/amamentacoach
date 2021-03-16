@@ -77,7 +77,7 @@ const Messages: React.FC = () => {
       <FlatList
         data={messages}
         renderItem={({ item }) => <InfoPage {...item} />}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         onEndReached={fetchOlderMessages}
         onEndReachedThreshold={0.1}
         ListFooterComponent={() => (

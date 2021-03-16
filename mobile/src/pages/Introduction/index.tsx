@@ -98,7 +98,7 @@ const Introduction: React.FC = () => {
         renderItem={({ item, index }) => (
           <InfoPage index={index} text={item.text} image={item.image} />
         )}
-        keyExtractor={(item) => item.text}
+        keyExtractor={item => item.text}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}

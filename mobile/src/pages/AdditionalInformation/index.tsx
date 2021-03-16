@@ -1,5 +1,4 @@
 import React from 'react';
-import { Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useAuth } from '../../contexts/auth';

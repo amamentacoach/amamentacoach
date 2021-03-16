@@ -115,7 +115,7 @@ const StepByStepPremature: React.FC = () => {
             image={item.image}
           />
         )}
-        keyExtractor={(item) => item.text}
+        keyExtractor={item => item.text}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}

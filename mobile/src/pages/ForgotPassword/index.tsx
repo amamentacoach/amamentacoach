@@ -55,7 +55,7 @@ const ForgotPassword: React.FC = () => {
         initialValues={formInitialValues}
         validationSchema={signUpSchema}
         validateOnChange={false}
-        onSubmit={(values) => handleForgotPassword(values)}>
+        onSubmit={values => handleForgotPassword(values)}>
         {({ handleChange, handleSubmit, dirty, errors, values }) => (
           <FormContainer>
             <View>

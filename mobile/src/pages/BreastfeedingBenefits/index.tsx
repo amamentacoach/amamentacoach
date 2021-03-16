@@ -168,7 +168,7 @@ const BreastfeedingBenefits: React.FC = () => {
             topics={item.topics}
           />
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}

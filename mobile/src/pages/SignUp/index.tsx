@@ -57,7 +57,7 @@ const FormSignUp: React.FC = () => {
         initialValues={formInitialValues}
         validationSchema={signUpSchema}
         validateOnChange={false}
-        onSubmit={(values) => handleFormSubmit(values)}>
+        onSubmit={values => handleFormSubmit(values)}>
         {({ handleChange, handleSubmit, dirty, errors, values }) => (
           <FormContainer>
             <View>

@@ -110,7 +110,7 @@ const NotWhatIExpected: React.FC = () => {
             image={item.image}
           />
         )}
-        keyExtractor={(item) => item.text}
+        keyExtractor={item => item.text}
         horizontal
         scrollEnabled={false}
         showsHorizontalScrollIndicator={false}

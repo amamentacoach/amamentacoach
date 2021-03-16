@@ -86,7 +86,7 @@ const DiaryRegistry: React.FC = () => {
         <FlatList
           data={registries}
           renderItem={({ item }) => <InfoPage {...item} />}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={item => item.id.toString()}
           ListFooterComponent={() => (
             <LoadingIndicator
               size="large"
