@@ -129,7 +129,7 @@
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"descricao\":\"Como informo minhas ordenhas?\",\n    \"whatsapp\":\"(43) 99999-9999\"\n}",
+          "content": "{\n    \"descricao\":\"Como informo minhas ordenhas?\"\n}",
           "type": "json"
         }
       ]

@@ -19,11 +19,10 @@ function resolver(){
         $.post(`/duvidas/${codDuvida}/resolver`, {}, () => location.reload())
 }
 
-async function login(password){
+async function login(){
+    const password = localStorage.getItem("password")
     const response = await $.post("/administrativo/acesso", { password })
-    if(response){
-        localStorage.setItem("password", password)
-    }else{
-        window.location = "erro.html"
+    if(!response){
+        window.location = "/login"
     }
 }

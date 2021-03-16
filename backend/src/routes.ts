@@ -647,8 +647,7 @@ routes.get('/amamentacao/resultados',respostasController.results)
  * 
  * @apiParamExample {json} Exemplo Request:
  *      {
- *          "descricao":"Como informo minhas ordenhas?",
- *          "whatsapp":"(43) 99999-9999"
+ *          "descricao":"Como informo minhas ordenhas?"
  *      }
  * 
  *
