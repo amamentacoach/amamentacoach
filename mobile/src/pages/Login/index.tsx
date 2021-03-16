@@ -8,6 +8,7 @@ import * as Yup from 'yup';
 import Modal from '../../components/Modal';
 import FormTextInput from '../../components/FormTextInput';
 import MainButton from '../../components/MainButton';
+import { LoginStatus } from '../../services/auth';
 import { useAuth } from '../../contexts/auth';
 
 import {
@@ -34,7 +35,8 @@ const Login: React.FC = () => {
   const navigation = useNavigation();
   const { signIn } = useAuth();
 
-  const [isSubmitModalVisible, setIsSubmitModalVisible] = useState(false);
+  const [isWrongDataModalVisible, setIsWrongDataModalVisible] = useState(false);
+  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [isSendingForm, setIsSendingForm] = useState(false);
 
   const formInitialValues: IFormValues = {
@@ -50,11 +52,13 @@ const Login: React.FC = () => {
 
   async function handleSignIn({ email, password }: IFormValues) {
     setIsSendingForm(true);
-    const validLogin = await signIn(email, password);
-    if (!validLogin) {
-      setIsSubmitModalVisible(true);
-      setIsSendingForm(false);
+    const status = await signIn(email, password);
+    if (status === LoginStatus.FailedToConnect) {
+      setIsErrorModalVisible(true);
+    } else if (status === LoginStatus.IncorrectLogin) {
+      setIsWrongDataModalVisible(true);
     }
+    setIsSendingForm(false);
   }
 
   function handleForgotPassword() {
@@ -69,8 +73,13 @@ const Login: React.FC = () => {
     <>
       <Modal
         text="E-mail ou senha incorretos!"
-        visible={isSubmitModalVisible}
-        closeModal={() => setIsSubmitModalVisible(false)}
+        visible={isWrongDataModalVisible}
+        closeModal={() => setIsWrongDataModalVisible(false)}
+      />
+      <Modal
+        text={`Erro ao realizar login!\nPor favor tente novamente mais tarde.`}
+        visible={isErrorModalVisible}
+        closeModal={() => setIsErrorModalVisible(false)}
       />
 
       <ScrollView>
@@ -82,7 +91,7 @@ const Login: React.FC = () => {
           initialValues={formInitialValues}
           validationSchema={loginSchema}
           validateOnChange={false}
-          onSubmit={(values) => handleSignIn(values)}>
+          onSubmit={values => handleSignIn(values)}>
           {({ handleChange, handleSubmit, dirty, errors, values }) => (
             <FormContainer>
               <View>
