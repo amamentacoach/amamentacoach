@@ -15,9 +15,9 @@ import {
   HeaderText,
   HeaderSubText,
   FormContainer,
-  MarriedSubOptionsContainer,
-  MarriedTimeContainer,
-  MarriedMetricContainer,
+  PartnerSubOptionsContainer,
+  PartnerTimeContainer,
+  PartnerMetricContainer,
   SubmitButtonContainer,
   FirstSubOptionContainer,
   SecondSubOptionContainer,
@@ -32,10 +32,10 @@ interface IFormValues {
     value: string;
   }[];
   alreadyBreastfeed: string[];
-  married: string[];
+  partner: string[];
   liveTogether: string[];
-  marriedTime: string;
-  marriedMetric: string;
+  partnerTime: string;
+  partnerMetric: string;
   education: string;
   wage: string;
 }
@@ -60,10 +60,10 @@ const MotherForm: React.FC = () => {
     pregnantCount: '',
     timeSpentBreastFeeding: [],
     alreadyBreastfeed: [],
-    married: [],
+    partner: [],
     liveTogether: ['Não'],
-    marriedTime: '0',
-    marriedMetric: 'meses',
+    partnerTime: '0',
+    partnerMetric: 'meses',
     education: '',
     wage: '',
   };
@@ -84,12 +84,12 @@ const MotherForm: React.FC = () => {
         }).required(),
       )
       .defined(),
-    married: Yup.array(Yup.string().required()).required('Campo obrigatório'),
+    partner: Yup.array(Yup.string().required()).required('Campo obrigatório'),
     liveTogether: Yup.array(Yup.string().required()).required(
       'Campo obrigatório',
     ),
-    marriedTime: Yup.string().required('Campo obrigatório'),
-    marriedMetric: Yup.string().required('Campo obrigatório'),
+    partnerTime: Yup.string().required('Campo obrigatório'),
+    partnerMetric: Yup.string().required('Campo obrigatório'),
     education: Yup.string().required('Campo obrigatório'),
     wage: Yup.string().required('Campo obrigatório'),
   }).required();
@@ -149,10 +149,10 @@ const MotherForm: React.FC = () => {
       password,
       alreadyBreastfeed:
         formValues.alreadyBreastfeed[0].toLowerCase() === 'sim',
-      married: formValues.married[0].toLowerCase() === 'sim',
+      partner: formValues.partner[0].toLowerCase() === 'sim',
       liveTogether:
-        formValues.married[0].toLowerCase() === 'sim'
-          ? `${formValues.marriedTime} ${formValues.marriedMetric}`
+        formValues.partner[0].toLowerCase() === 'sim'
+          ? `${formValues.partnerTime} ${formValues.partnerMetric}`
           : null,
       pregnantCount: parseInt(formValues.pregnantCount, 10),
       name: formValues.name,
@@ -256,24 +256,24 @@ const MotherForm: React.FC = () => {
 
             <FormRadioGroupInput
               label="Tem companheiro?"
-              fieldName="married"
+              fieldName="partner"
               onChange={(fieldName: string, fieldValue: string[]) => {
                 setFieldValue(fieldName, fieldValue);
                 if (fieldValue[0] === 'Não') {
-                  setFieldValue('marriedTime', '0');
+                  setFieldValue('partnerTime', '0');
                   setFieldValue('liveTogether', ['Não']);
                 } else if (fieldValue[0] === 'Sim') {
-                  // Reinicia os campos abaixo quando o valor do campo married é 'Sim'.
-                  setFieldValue('marriedTime', '');
+                  // Reinicia os campos abaixo quando o valor do campo partner é 'Sim'.
+                  setFieldValue('partnerTime', '');
                   setFieldValue('liveTogether', []);
                 }
-                setFieldValue('marriedMetric', 'meses');
+                setFieldValue('partnerMetric', 'meses');
               }}
               options={['Sim', 'Não']}
-              error={errors.married}
+              error={errors.partner}
             />
 
-            {values.married[0] === 'Sim' && (
+            {values.partner[0] === 'Sim' && (
               <>
                 <FormRadioGroupInput
                   label="Moram juntos?"
@@ -283,27 +283,27 @@ const MotherForm: React.FC = () => {
                   error={errors.liveTogether}
                 />
 
-                <MarriedSubOptionsContainer>
-                  <MarriedTimeContainer>
+                <PartnerSubOptionsContainer>
+                  <PartnerTimeContainer>
                     <FormPickerInput
                       label="Há quanto tempo?"
-                      fieldName="marriedTime"
+                      fieldName="partnerTime"
                       onChange={setFieldValue}
-                      error={errors.marriedTime}
+                      error={errors.partnerTime}
                       options={['1 a 3', '4 a 6', '7 a 9', '10 ou mais']}
                     />
-                  </MarriedTimeContainer>
-                  <MarriedMetricContainer>
+                  </PartnerTimeContainer>
+                  <PartnerMetricContainer>
                     <FormPickerInput
                       label=""
                       placeholder=""
-                      fieldName="marriedMetric"
+                      fieldName="partnerMetric"
                       onChange={setFieldValue}
-                      error={errors.marriedMetric}
+                      error={errors.partnerMetric}
                       options={['meses', 'anos']}
                     />
-                  </MarriedMetricContainer>
-                </MarriedSubOptionsContainer>
+                  </PartnerMetricContainer>
+                </PartnerSubOptionsContainer>
               </>
             )}
 

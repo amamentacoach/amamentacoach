@@ -18,7 +18,6 @@ export const TextInput = styled.TextInput`
   color: #161026;
   padding-left: 20px;
   border-radius: 3.6px;
-  text-align-vertical: top;
 `;
 
 export const ErrorContainer = styled.View`

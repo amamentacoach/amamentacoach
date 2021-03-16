@@ -6,7 +6,7 @@ export interface IMotherSignUpInfo {
   name: string;
   alreadyBreastfeed: boolean;
   birthday: string;
-  married: boolean;
+  partner: boolean;
   liveTogether?: string | null;
   education: string;
   wage: string;
@@ -34,6 +34,7 @@ export interface IMotherInfo {
     UCI: boolean;
     UTI: boolean;
   };
+  partner: boolean;
   babies: { id: number; name: string }[];
 }
 
@@ -48,7 +49,7 @@ export async function signUpMother(
       nome: motherInfo.name,
       data_nascimento: motherInfo.birthday,
       amamentou_antes: motherInfo.alreadyBreastfeed,
-      companheiro: motherInfo.married,
+      companheiro: motherInfo.partner,
       moram_juntos: motherInfo.liveTogether,
       escolaridade: motherInfo.education,
       renda: motherInfo.wage,
@@ -142,6 +143,7 @@ export async function getMotherInfo(): Promise<IMotherInfo | null> {
     return {
       name: data.nome,
       babiesBirthLocations,
+      partner: data.companheiro,
       babies,
     };
   } catch (error) {

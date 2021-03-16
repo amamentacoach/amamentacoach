@@ -28,17 +28,17 @@ export const FormContainer = styled.View`
   margin-bottom: 20px;
 `;
 
-export const MarriedSubOptionsContainer = styled.View`
+export const PartnerSubOptionsContainer = styled.View`
   flex: 1;
   flex-direction: row;
 `;
 
-export const MarriedTimeContainer = styled.View`
+export const PartnerTimeContainer = styled.View`
   flex: 2;
   margin-right: 4px;
 `;
 
-export const MarriedMetricContainer = styled.View`
+export const PartnerMetricContainer = styled.View`
   flex: 1;
 `;
 
