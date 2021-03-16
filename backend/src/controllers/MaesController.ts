@@ -44,6 +44,7 @@ class MaesController{
             escolaridade, 
             renda, 
             qtd_gravidez,
+            whatsapp
         } = req.body;
 
         let t_amamentacao_serializable
@@ -65,6 +66,7 @@ class MaesController{
             escolaridade,
             renda,
             qtd_gravidez,
+            whatsapp,
             ultimo_acesso:new Date(),
         };
         

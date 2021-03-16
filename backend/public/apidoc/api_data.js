@@ -74,6 +74,39 @@ define({ "api": [
     "name": "PostBebes"
   },
   {
+    "type": "get",
+    "url": "/duvidas/frequentes",
+    "title": "Listagem de Dúvidas",
+    "description": "<p>Listagem de duvidas frequentes</p>",
+    "group": "Canal_de_comunicacao",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Sucesso",
+          "content": "HTTP/1.1 200 OK\n[\n  {\n      \"descricao\": \"Como cadastrar minhas ordenhas?\",\n      \"resposta\": \"Basta acessar o diário\"\n  }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Canal_de_comunicacao",
+    "name": "GetDuvidasFrequentes"
+  },
+  {
     "type": "post",
     "url": "/duvidas",
     "title": "Cadastro",
@@ -448,7 +481,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"email\":\"fulana@email.com\",\n    \"senha\":\"abc123\",\n    \"nome\": \"Fulana de Tal\",\n    \"data_nascimento\":\"1990-05-05\",\n    \"amamentou_antes\":false,\n    \"companheiro\":true,\n    \"moram_juntos\":\"2 anos\", // caso nao more junto enviar NULL\n    \"escolaridade\":\"Ensino Medio Completo\",\n    \"renda\":\"Entre 1 e 3 salarios minimos\",\n    \"qtd_gravidez\":2,\n    \"tempo_amamentacao\":[\"Menos de 1 ano\",\"2 anos\"]\n}",
+          "content": "{\n    \"email\":\"fulana@email.com\",\n    \"senha\":\"abc123\",\n    \"nome\": \"Fulana de Tal\",\n    \"data_nascimento\":\"1990-05-05\",\n    \"amamentou_antes\":false,\n    \"companheiro\":true,\n    \"moram_juntos\":\"2 anos\", // caso nao more junto enviar NULL\n    \"escolaridade\":\"Ensino Medio Completo\",\n    \"renda\":\"Entre 1 e 3 salarios minimos\",\n    \"qtd_gravidez\":2,\n    \"tempo_amamentacao\":[\"Menos de 1 ano\",\"2 anos\"],\n    \"whatsapp\":\"(43) 999999999\"\n}",
           "type": "json"
         }
       ]

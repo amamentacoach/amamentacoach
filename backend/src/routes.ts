@@ -49,7 +49,8 @@ const uploadMiddleware = multer(uploadConfig);
  *          "escolaridade":"Ensino Medio Completo",
  *          "renda":"Entre 1 e 3 salarios minimos",
  *          "qtd_gravidez":2,
- *          "tempo_amamentacao":["Menos de 1 ano","2 anos"]
+ *          "tempo_amamentacao":["Menos de 1 ano","2 anos"],
+ *          "whatsapp":"(43) 999999999"
  *      }
  * 
  * @apiSuccessExample {json} Sucesso
@@ -658,5 +659,33 @@ routes.get('/amamentacao/resultados',respostasController.results)
 
  routes.post('/duvidas/:id/resolver', duvidasController.resolver)
 
+/**
+ * @api {get} /duvidas/frequentes Listagem de Dúvidas
+ * @apiDescription Listagem de duvidas frequentes
+ * @apiGroup Canal de comunicacao
+ *
+ * @apiHeader {String} authorization Token de acesso.
+ * 
+ * 
+ * @apiSuccessExample {json} Sucesso
+ *    HTTP/1.1 200 OK
+ *    [
+ *      {
+ *          "descricao": "Como cadastrar minhas ordenhas?",
+ *          "resposta": "Basta acessar o diário"
+ *      }
+ *    ]
+ *
+ */
+
+ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
+
+
+ routes.post('/administrativo/acesso', (req, res) =>{
+    const {password} = req.body
+    res.send(password===process.env.ADMIN_PASSWORD)
+ })
+
+ routes.get('/login', (req,res) => res.render('login'))
 
 export default routes;

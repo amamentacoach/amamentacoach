@@ -18,3 +18,12 @@ function resolver(){
     else
         $.post(`/duvidas/${codDuvida}/resolver`, {}, () => location.reload())
 }
+
+async function login(password){
+    const response = await $.post("/administrativo/acesso", { password })
+    if(response){
+        localStorage.setItem("password", password)
+    }else{
+        window.location = "erro.html"
+    }
+}

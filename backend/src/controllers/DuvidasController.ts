@@ -11,7 +11,7 @@ class DuvidasController{
         const duvidasNaoResolvidas = await knex('duvida')
             .where('resolvido',false)
             .orderBy('data_hora','asc')
-            .select(['mae.nome','duvida.descricao','duvida.whatsapp','duvida.data_hora','duvida.id'])
+            .select(['mae.nome','duvida.descricao','mae.whatsapp','duvida.data_hora','duvida.id'])
             .join('mae','mae.id','=','duvida.mae_id')
         
         const countNaoResolvidas = await knex('duvida')
@@ -23,7 +23,7 @@ class DuvidasController{
             .where('resolvido',true)
             .where('resposta','<>','null')
             .orderBy('data_hora','asc')
-            .select(['mae.nome','duvida.descricao','duvida.whatsapp','duvida.data_hora','duvida.id','duvida.resposta'])
+            .select(['mae.nome','duvida.descricao','mae.whatsapp','duvida.data_hora','duvida.id','duvida.resposta'])
             .join('mae','mae.id','=','duvida.mae_id')    
 
         res.render('duvidas',{duvidasNaoResolvidas,duvidasResolvidas,countNaoResolvidas})
@@ -31,13 +31,12 @@ class DuvidasController{
 
     async create(req:Request,res:Response){
         const {
-            descricao,
-            whatsapp,
+            descricao
         } = req.body;
 
         const {mae_id} = req;
 
-        const duvida = {mae_id, whatsapp, data_hora:new Date(), descricao, resolvido:false}
+        const duvida = {mae_id, data_hora:new Date(), descricao, resolvido:false}
         
         await knex('duvida').insert(duvida);
 
@@ -55,6 +54,16 @@ class DuvidasController{
         await knex('duvida').update(duvida).where({id});
 
         res.sendStatus(200);
+    }
+
+    async list(req:Request,res:Response){
+        const duvidasResolvidas = await knex('duvida')
+            .where('resolvido',true)
+            .where('resposta','<>','null')
+            .orderBy('data_hora','asc')
+            .select(['duvida.descricao','duvida.resposta'])
+            .join('mae','mae.id','=','duvida.mae_id')
+        res.send(duvidasResolvidas)
     }
 }
 
