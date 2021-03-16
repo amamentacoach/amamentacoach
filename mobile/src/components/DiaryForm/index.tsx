@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { FlatList } from 'react-native';
+import { ActivityIndicator, FlatList } from 'react-native';
 import { Formik } from 'formik';
 
 import { useAuth } from '../../contexts/auth';
@@ -68,7 +68,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
       }
 
       // Exibe apenas perguntas de alvo GERAL ou aquelas que se aplicam ao usuário.
-      const filteredQuestions = questions.filter((page) => {
+      const filteredQuestions = questions.filter(page => {
         if (page.target === 'GERAL') {
           return true;
         }
@@ -108,7 +108,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
     return (
       values[question.id].length <= 0 ||
       (question.displayOther &&
-        values[question.id].find((option) => option === '') !== undefined)
+        values[question.id].find(option => option === '') !== undefined)
     );
   }
 
@@ -125,7 +125,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
 
   // Envia as respostas do usuário ao backend.
   async function handleFormSubmit(answers: { [key: string]: string[] }) {
-    Object.keys(answers).forEach(async (questionId) =>
+    Object.keys(answers).forEach(async questionId =>
       answerQuestion(parseInt(questionId, 10), answers[questionId]),
     );
   }
@@ -135,7 +135,13 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
       <>
         <HeaderBackground />
         <HeaderText>{title}</HeaderText>
-        <ContentContainer />
+        <ContentContainer>
+          <ActivityIndicator
+            size="large"
+            color="#7d5cd7"
+            animating={isLoading}
+          />
+        </ContentContainer>
       </>
     );
   }
@@ -144,7 +150,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
     <ListContainer>
       <Formik
         initialValues={formInitialValues}
-        onSubmit={(values) => handleFormSubmit(values)}>
+        onSubmit={values => handleFormSubmit(values)}>
         {({ handleSubmit, setFieldValue, values }) => (
           <FlatList
             ref={pageFlatListRef}
@@ -167,7 +173,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
                 goToPage,
               )
             }
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={item => item.id.toString()}
             horizontal
             scrollEnabled={false}
             showsHorizontalScrollIndicator={false}
