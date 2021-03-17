@@ -7,11 +7,9 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 
 import { createNewDiaryRegistry } from '../../services/diaryRegistry';
-import { useAuth } from '../../contexts/auth';
 import MainButton from '../../components/MainButton';
 import FormTextInput from '../../components/FormTextInput';
 import FormDateInput from '../../components/FormDateInput';
-import FormPickerInput from '../../components/FormPickerInput';
 
 import {
   ScrollView,
@@ -32,7 +30,6 @@ import UncheckedBox from '../../../assets/images/icons/checkbox_unchecked.png';
 import CheckedBox from '../../../assets/images/icons/checkbox_checked.png';
 
 interface IFormValues {
-  babyName: string;
   time: string;
   quantity: string;
   duration: string;
@@ -41,56 +38,45 @@ interface IFormValues {
 
 const NewDiaryRegistry: React.FC = () => {
   const navigation = useNavigation();
-  const { motherInfo } = useAuth();
 
   const [isSendingForm, setIsSendingForm] = useState(false);
   const formInitialValues = {
-    babyName: '',
     time: '',
     quantity: '',
     duration: '',
     breast: '',
   };
-  const newDiaryRegistrySchema: Yup.ObjectSchema<IFormValues> = Yup.object({
-    babyName: Yup.string().required('Campo obrigatório'),
+  const newDiaryRegistrySchema = Yup.object({
     time: Yup.string().required('Campo obrigatório'),
-    quantity: Yup.string()
-      .matches(
-        new RegExp('^(\\d+(\\.\\d\\d*)?)$'),
-        'Deve ser um número positivo. Ex: 3.4',
-      )
+    quantity: Yup.number()
+      .integer('Deve ser um inteiro')
+      .typeError('Deve ser um inteiro')
+      .positive('Deve ser maior que 0')
       .required('Campo obrigatório'),
-    duration: Yup.string()
-      .matches(new RegExp('^\\d+$'), 'Deve ser um número inteiro positivo')
+    duration: Yup.number()
+      .integer('Deve ser um inteiro')
+      .typeError('Deve ser um inteiro')
+      .positive('Deve ser maior que 0')
       .required('Campo obrigatório'),
     breast: Yup.string().required('Campo obrigatório'),
   }).required();
 
   // Cria um novo registro no sistema.
   async function handleFormSubmit({
-    babyName,
     breast,
     duration,
     quantity,
     time,
   }: IFormValues) {
-    const selectedBaby = motherInfo.babies.find(
-      (baby) => baby.name === babyName,
-    );
-    if (!selectedBaby) {
-      return;
-    }
-
     setIsSendingForm(true);
     await createNewDiaryRegistry(
-      selectedBaby.id,
       breast,
       parseFloat(quantity),
       parseInt(duration, 10),
       // Transforma o horário em uma data.
       moment(time, ['kk:mm']).toDate(),
     );
-    navigation.navigate('DiaryRegistry');
+    navigation.navigate('DiaryRegistry', { shouldUpdateRegistries: true });
   }
 
   return (
@@ -111,15 +97,6 @@ const NewDiaryRegistry: React.FC = () => {
         }) => (
           <FormContainer>
             <FormContent>
-              <FormPickerInput
-                label=""
-                fieldName="babyName"
-                options={motherInfo.babies.map((baby) => baby.name.toString())}
-                placeholder="Selecionar bebê"
-                onChange={setFieldValue}
-                error={errors.babyName}
-              />
-
               <FormDateInput
                 label="Horário"
                 fieldName="time"

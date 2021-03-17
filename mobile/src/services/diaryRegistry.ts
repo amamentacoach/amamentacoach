@@ -11,14 +11,13 @@ export interface IListDiaryEntry {
 
 // Cria um registro novo no diário.
 export async function createNewDiaryRegistry(
-  babyId: number,
   breast: string,
   duration: number,
   quantity: number,
   time: Date,
 ): Promise<boolean> {
   try {
-    await api.post(`/bebes/${babyId}/ordenhas`, {
+    await api.post(`/maes/ordenhas`, {
       qtd_leite: quantity,
       mama: breast,
       duracao: duration,
@@ -31,10 +30,8 @@ export async function createNewDiaryRegistry(
 }
 
 // Retorna todos os registros feitos no diário.
-export async function listDiaryRegistries(
-  babyId: number,
-): Promise<IListDiaryEntry[]> {
-  const { data } = await api.get(`/bebes/${babyId}/ordenhas`);
+export async function listDiaryRegistries(): Promise<IListDiaryEntry[]> {
+  const { data } = await api.get(`/maes/ordenhas`);
   return data.ordenhas.map((item: any) => ({
     id: item.id,
     baby_id: item.bebe_id,
