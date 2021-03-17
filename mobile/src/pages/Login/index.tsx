@@ -55,10 +55,11 @@ const Login: React.FC = () => {
     const status = await signIn(email, password);
     if (status === LoginStatus.FailedToConnect) {
       setIsErrorModalVisible(true);
+      setIsSendingForm(false);
     } else if (status === LoginStatus.IncorrectLogin) {
       setIsWrongDataModalVisible(true);
+      setIsSendingForm(false);
     }
-    setIsSendingForm(false);
   }
 
   function handleForgotPassword() {

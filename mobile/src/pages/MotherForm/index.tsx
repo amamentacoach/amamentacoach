@@ -67,14 +67,16 @@ const MotherForm: React.FC = () => {
     education: '',
     wage: '',
   };
-  const motherFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const motherFormSchema = Yup.object({
     name: Yup.string().required('Campo obrigatório'),
     birthday: Yup.string().required('Campo obrigatório'),
     alreadyBreastfeed: Yup.array(Yup.string().required()).required(
       'Campo obrigatório',
     ),
-    pregnantCount: Yup.string()
-      .matches(new RegExp('^\\d+$'), 'Deve ser um número inteiro positivo')
+    pregnantCount: Yup.number()
+      .integer('Deve ser um inteiro')
+      .typeError('Deve ser um inteiro')
+      .min(0, 'Dever ser maior ou igual a zero')
       .required('Campo obrigatório'),
     timeSpentBreastFeeding: Yup.array()
       .of(
@@ -118,7 +120,7 @@ const MotherForm: React.FC = () => {
       return;
     }
 
-    setFieldValue('pregnantCount', fieldValue);
+    setFieldValue('pregnantCount', newBreastFeedingCount.toString());
     let newTimeSpentBreastFeeding = [...timeSpentBreastFeeding];
     for (
       let index = 0;

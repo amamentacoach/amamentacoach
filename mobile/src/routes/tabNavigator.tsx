@@ -1,8 +1,7 @@
 import React from 'react';
-import { Image, TouchableOpacity } from 'react-native';
+import { Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { useNavigation } from '@react-navigation/native';
 import Home from '../pages/Home';
 import Diary from '../pages/Diary';
 import Survey from '../pages/Survey';
