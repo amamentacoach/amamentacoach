@@ -31,6 +31,8 @@ import SurveyStatistics from '../pages/SurveyStatistics';
 import ManageExpectations from '../pages/ManageExpectations';
 import UploadMotherPhoto from '../pages/UploadMotherPhoto';
 import BabyCup from '../pages/BabyCup';
+import DiaryBreastfeed from '../pages/DiaryBreastfeed';
+import NewBreastfeedEntry from '../pages/NewBreastfeedEntry';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -161,12 +163,22 @@ const AppRoutes: React.FC = () => {
       <Stack.Screen
         name="DiaryRegistry"
         component={DiaryRegistry}
-        options={{ title: 'Diário' }}
+        options={{ title: 'Retirada de Leite' }}
       />
       <Stack.Screen
         name="NewDiaryRegistry"
         component={NewDiaryRegistry}
-        options={{ title: 'Diário' }}
+        options={{ title: 'Registrar Retirada de Leite' }}
+      />
+      <Stack.Screen
+        name="DiaryBreastfeed"
+        component={DiaryBreastfeed}
+        options={{ title: 'Amamentação' }}
+      />
+      <Stack.Screen
+        name="NewBreastfeedEntry"
+        component={NewBreastfeedEntry}
+        options={{ title: 'Registrar Amamentação' }}
       />
       <Stack.Screen
         name="HelpReceived"

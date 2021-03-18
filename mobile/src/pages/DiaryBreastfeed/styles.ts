@@ -1,5 +1,12 @@
 import styled from 'styled-components/native';
 
+export const ScrollView = styled.ScrollView.attrs(() => ({
+  contentContainerStyle: { flexGrow: 1 },
+  keyboardShouldPersistTaps: 'handled',
+}))`
+  flex: 1;
+`;
+
 export const Container = styled.View`
   flex: 1;
   padding: 24px;
@@ -16,6 +23,12 @@ export const DateText = styled.Text`
 export const ListContainer = styled.View`
   flex: 1;
   margin-bottom: 20px;
+`;
+
+export const BabyName = styled.Text`
+  color: #7d5cd7;
+  font-family: 'OpenSans-Bold';
+  font-size: 18px;
 `;
 
 export const Registry = styled.View`
@@ -43,8 +56,4 @@ export const RegistryText = styled.Text`
 export const RegistryContent = styled.Text`
   font-size: 16px;
   font-family: 'OpenSans-Regular';
-`;
-
-export const LoadingIndicator = styled.ActivityIndicator`
-  margin-bottom: 10px;
 `;

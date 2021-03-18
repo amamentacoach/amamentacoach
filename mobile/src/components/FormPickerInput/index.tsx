@@ -39,12 +39,10 @@ const FormPickerInput: React.FC<FormPickerProps> = ({
       <PickerContainer>
         <Picker
           selectedValue={selectedItem}
-          onValueChange={(itemValue) =>
-            handleItemSelected(itemValue.toString())
-          }>
+          onValueChange={itemValue => handleItemSelected(itemValue.toString())}>
           {[placeholder, ...options]
-            .filter((option) => option !== '')
-            .map((option) => (
+            .filter(option => option !== '')
+            .map(option => (
               <Picker.Item
                 key={option}
                 label={option}

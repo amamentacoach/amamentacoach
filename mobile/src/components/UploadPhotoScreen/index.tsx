@@ -38,7 +38,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
   }
 
   async function handleSelectPhoto() {
-    ImagePicker.launchImageLibrary({ noData: true }, (response) => {
+    ImagePicker.launchImageLibrary({ noData: true }, response => {
       if (response.uri) {
         setPhoto(response);
       }

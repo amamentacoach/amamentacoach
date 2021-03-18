@@ -26,10 +26,13 @@ const Diary: React.FC = () => {
   const options = [
     {
       image: require('../../../assets/images/premature_breastfeed.png'),
+      title: 'Registro de amamentação',
+      onPress: () => navigation.navigate('DiaryBreastfeed'),
+    },
+    {
+      image: require('../../../assets/images/premature_breastfeed.png'),
       title: 'Registro de retiradas de leite',
-      onPress: () => {
-        navigation.navigate('DiaryRegistry');
-      },
+      onPress: () => navigation.navigate('DiaryRegistry'),
     },
     {
       image: require('../../../assets/images/diary_smile.png'),

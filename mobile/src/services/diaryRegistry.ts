@@ -1,16 +1,28 @@
 import api from './api';
 
-export interface IListDiaryEntry {
+export interface IExtractionEntry {
   id: number;
   baby_id: number;
+  breast: 'D' | 'E';
   date: string;
-  breast: string;
   duration: number;
   quantity: number;
 }
 
-// Cria um registro novo no diário.
-export async function createNewDiaryRegistry(
+export interface IBreastfeedEntry {
+  id: number;
+  name: string;
+  entries: {
+    id: number;
+    baby_id: number;
+    breast: 'D' | 'E';
+    date: string;
+    duration: number;
+  }[];
+}
+
+// Cria um novo registro de ordenha no diário.
+export async function createExtractionEntry(
   breast: string,
   duration: number,
   quantity: number,
@@ -29,8 +41,8 @@ export async function createNewDiaryRegistry(
   }
 }
 
-// Retorna todos os registros feitos no diário.
-export async function listDiaryRegistries(): Promise<IListDiaryEntry[]> {
+// Retorna todas as ordenas realizadas pela mãe.
+export async function listExtractionsEntries(): Promise<IExtractionEntry[]> {
   const { data } = await api.get(`/maes/ordenhas`);
   return data.ordenhas.map((item: any) => ({
     id: item.id,
@@ -40,4 +52,41 @@ export async function listDiaryRegistries(): Promise<IListDiaryEntry[]> {
     duration: item.duracao,
     quantity: item.qtd_leite,
   }));
+}
+
+// Cria um novo registro de amamentação.
+export async function createBreastfeedEntry(
+  babyId: number,
+  breast: string,
+  duration: number,
+  time: Date,
+): Promise<boolean> {
+  try {
+    await api.post(`/bebes/${babyId}/mamadas`, {
+      mama: breast,
+      duracao: duration,
+      data_hora: time,
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+// Retorna todos os registros de amamentação feitos no diário.
+export async function listBreastfeedEntries(
+  babyId: number,
+): Promise<IBreastfeedEntry> {
+  const { data } = await api.get(`/bebes/${babyId}/mamadas`);
+  return {
+    id: data.id,
+    name: data.nome,
+    entries: data.mamadas.map((entry: any) => ({
+      id: entry.id,
+      baby_id: entry.bebe_id,
+      date: entry.data_hora,
+      duration: entry.duracao,
+      breast: entry.mama,
+    })),
+  };
 }
