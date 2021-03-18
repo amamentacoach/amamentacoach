@@ -35,6 +35,7 @@ const FormTextInput: React.FC<FormTextProps> = ({
         value={value}
         placeholder={placeholder}
         placeholderTextColor="#acaab2"
+        textAlignVertical="top"
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
         multiline={multiline}

@@ -30,19 +30,19 @@ const pages = [
   {
     header: 'Parto prematuro:\nNão era isso que eu esperava',
     text:
-      'O nascimento prematuro de um filho é sempre um evento desestabilizador para a família. Em geral, a realidade não tem muito a ver com as expectativas criadas na gravidez...',
+      'O nascimento prematuro é algo que sempre mexe com a estrutura da família. Em geral, a realidade não tem muito a ver com aquilo que foi sonhado durante a gravidez...',
     image: require('../../../assets/images/expectation_vc_reality.png'),
   },
   {
     header: 'Parto prematuro:\nNão era isso que eu esperava',
     text:
-      'Você registrará seus avanços diários e terá acesso a conteúdos exclusivos para te instruir e te motivar!',
+      'Não há nada de errado com você caso esteja sentindo uma mistura de medo, frustração, insegurança, ansiedade, estresse...',
     image: require('../../../assets/images/sad.png'),
   },
   {
     header: 'Parto prematuro:\nNão era isso que eu esperava',
     text:
-      'Quanto mais você usar o AmamentaCoach , mais recursos terá para amamentar seu bebê prematuro!',
+      'Tenha paciência com você mesma! Respire fundo... escolha alguém para se abrir e falar sobre como você está se sentindo... e então, tome posse do seu bebê do jeitinho que ele é. Decida abraçar essa nova situação!',
     image: require('../../../assets/images/mom_premature.png'),
   },
 ];

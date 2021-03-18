@@ -34,19 +34,19 @@ const StepByStepPremature: React.FC = () => {
     {
       title: '6 passos para amamentação do bebê prematuro',
       text:
-        'Com o nascimento prematuro, é comum que o bebê não consiga sugar logo ao nascer e que ele precise ficar internado para receber alguns cuidados.\n\n Apesar dos desafios, saiba que amamentar o bebê prematuro é possível, e que vale cada esforço!\n\n Os passos a seguir resumem a jornada rumo ao sucesso na amamentação do prematuro',
+        'Com o nascimento prematuro, é comum que o bebê não consiga pegar o peito logo ao nascer e que ele precise ficar internado para receber alguns cuidados.\n\n Apesar dos desafios, saiba que amamentar o bebê prematuro é possível, e que vale cada esforço!\n\n Os passos a seguir resumem a jornada rumo ao sucesso na amamentação do prematuro',
     },
     {
       image: require('../../../assets/images/meditation.png'),
       title: '1.  Procure a serenidade',
       text:
-        'Parto prematuro: quebra de expectativas, incertezas, medo...Quem espera por um nascimento antecipado? Recupere-se do susto, respire fundo, processe o inesperado e abrace a nova realidade.',
+        'Parto prematuro: expectativas frustradas, incertezas, medo... quem espera que seu bebê nasça antes da hora?\nRecupere-se do susto, respire fundo, deixe a nova realidade se encaixar na sua cabeça e no seu coração, e então, abrace-a!',
     },
     {
       image: require('../../../assets/images/milk.png'),
       title: '2. Estimule a produção láctea',
       text:
-        'Em condições normais o bebê geralmente mama a cada 3 horas. No caso, enquanto o bebê não puder sugar, ou enquanto não sugar o suficiente, você substituirá seu pequeno na tarefa de manter as glândulas mamárias ativas, retirando o leite a cada 3 horas.',
+        'Enquanto o bebê não puder pegar o peito, ou enquanto ele não mamar o suficiente, você vai precisar substituí-lo na tarefa de manter suas mamas produzindo leite. Para isso, precisa retirar o leite no mínimo a cada 3 horas.',
     },
     {
       image: require('../../../assets/images/heart.png'),
@@ -58,7 +58,7 @@ const StepByStepPremature: React.FC = () => {
       image: require('../../../assets/images/protagonist.png'),
       title: '4. Seja a protagonista',
       text:
-        'Realize cuidados como a higiene dos olhinhos e a boquinha do seu bebê, a troca de fraldas e o banho; observe e aprenda sobre seus hábitos e preferências. Só você pode fazer seu papel de mãe!',
+        'Cuide do seu bebê: faça a limpeza dos olhinhos e da boquinha, troque fraldas, dê banho; observe o jeitinho dele(a) e aprenda sobre seus costumes e preferências. Só você pode fazer seu papel de mãe!',
     },
     {
       image: require('../../../assets/images/community.png'),
