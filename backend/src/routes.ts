@@ -679,11 +679,82 @@ routes.get('/amamentacao/resultados',respostasController.results)
  *
  */
 
-routes.get('/relatorios/diario',verifyJWT, relatorioDiarioController.show)
 
- routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
+routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
 
+/**
+ * @api {get} /relatorios/diario Exibição do relatório diário
+ * @apiDescription Exibição do relatório diário<br>
+ *          Retorna as mamadas, as ordenhas e uma pergunta sobre as ações realizadas no bebe
+ * @apiGroup Relatórios
+ *
+ * @apiHeader {String} authorization Token de acesso.
+ * 
+ * 
+ * @apiSuccessExample {json} Sucesso
+ *    HTTP/1.1 200 OK
+ *      {
+ *        "mamadas": [
+ *          {
+ *            "id": 5,
+ *            "bebe": "Sabrina",
+ *            "mama": "D",
+ *            "duracao": 9,
+ *            "data_hora": "2021-03-19T17:40:31.501Z"
+ *          }
+ *        ],
+ *        "ordenhas": [
+ *          {
+ *            "id": 1,
+ *            "mama": "D",
+ *            "duracao": 5,
+ *            "qtd_leite": 100,
+ *            "data_hora": "2021-03-20T17:40:31.501Z"
+ *          }
+ *        ]
+ *        "perguntas": [ // Retorna a pergunta que deve responder diariamente
+ *          {            // É um array pois podem ser perguntas diferentes para cada Alvo   
+ *            "id": 15,  // Só será retornado caso a mae ainda não tenha respondido
+ *            "categoria": 6,
+ *            "descricao": "Ações realizadas com meu bebê",
+ *            "alternativas": [
+ *              "Fiz canguru com meu bebê",
+ *              "Retirei o leite sempre que precisei",
+ *              "Ofereci meu leite fresco ao meu bebê sempre que precisou de complemento",
+ *              "Realizei os cuidados sentindo-me segura",
+ *              "Tive coragem para pedir ajuda",
+ *              "Tive coragem para afastar pessoas que possam estar atrapalhando de alguma forma"
+ *            ],
+ *            "outro": false,
+ *            "multiplas": true,
+ *            "alvo": "AC"
+ *          },
+ *          {
+ *            "id": 16,
+ *            "categoria": 6,
+ *            "descricao": "Ações realizadas com meu bebê",
+ *            "alternativas": [
+ *              "Fiquei mais tempo na Unidade",
+ *              "Fiz mais canguru",
+ *              "Retirei o leite mais vezes por dia",
+ *              "Trouxe meu leite",
+ *              "Ofereci leite fresco ao meu bebê",
+ *              "Realizei mais cuidados junto ao meu bebê",
+ *              "Tive coragem para pedir ajuda",
+ *              "Procurei me informar + sobre meu bebê"
+ *            ],
+ *            "outro": false,
+ *            "multiplas": true,
+ *            "alvo": "UCI/UTI"
+ *          }
+ *        ]
+ *      }
+ *
+ */
 
+ routes.get('/relatorios/diario',verifyJWT, relatorioDiarioController.show)
+
+ 
  routes.post('/administrativo/acesso', (req, res) =>{
     const {password} = req.body
     res.send(password===process.env.ADMIN_PASSWORD)

@@ -601,6 +601,39 @@
   },
   {
     "type": "get",
+    "url": "/relatorios/diario",
+    "title": "Exibição do relatório diário",
+    "description": "<p>Exibição do relatório diário<br> Retorna as mamadas, as ordenhas e uma pergunta sobre as ações realizadas no bebe</p>",
+    "group": "Relatórios",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Sucesso",
+          "content": "HTTP/1.1 200 OK\n  {\n    \"mamadas\": [\n      {\n        \"id\": 5,\n        \"bebe\": \"Sabrina\",\n        \"mama\": \"D\",\n        \"duracao\": 9,\n        \"data_hora\": \"2021-03-19T17:40:31.501Z\"\n      }\n    ],\n    \"ordenhas\": [\n      {\n        \"id\": 1,\n        \"mama\": \"D\",\n        \"duracao\": 5,\n        \"qtd_leite\": 100,\n        \"data_hora\": \"2021-03-20T17:40:31.501Z\"\n      }\n    ]\n    \"perguntas\": [ // Retorna a pergunta que deve responder diariamente\n      {            // É um array pois podem ser perguntas diferentes para cada Alvo   \n        \"id\": 15,  // Só será retornado caso a mae ainda não tenha respondido\n        \"categoria\": 6,\n        \"descricao\": \"Ações realizadas com meu bebê\",\n        \"alternativas\": [\n          \"Fiz canguru com meu bebê\",\n          \"Retirei o leite sempre que precisei\",\n          \"Ofereci meu leite fresco ao meu bebê sempre que precisou de complemento\",\n          \"Realizei os cuidados sentindo-me segura\",\n          \"Tive coragem para pedir ajuda\",\n          \"Tive coragem para afastar pessoas que possam estar atrapalhando de alguma forma\"\n        ],\n        \"outro\": false,\n        \"multiplas\": true,\n        \"alvo\": \"AC\"\n      },\n      {\n        \"id\": 16,\n        \"categoria\": 6,\n        \"descricao\": \"Ações realizadas com meu bebê\",\n        \"alternativas\": [\n          \"Fiquei mais tempo na Unidade\",\n          \"Fiz mais canguru\",\n          \"Retirei o leite mais vezes por dia\",\n          \"Trouxe meu leite\",\n          \"Ofereci leite fresco ao meu bebê\",\n          \"Realizei mais cuidados junto ao meu bebê\",\n          \"Tive coragem para pedir ajuda\",\n          \"Procurei me informar + sobre meu bebê\"\n        ],\n        \"outro\": false,\n        \"multiplas\": true,\n        \"alvo\": \"UCI/UTI\"\n      }\n    ]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Relatórios",
+    "name": "GetRelatoriosDiario"
+  },
+  {
+    "type": "get",
     "url": "/testePush",
     "title": "Teste de push",
     "description": "<p>Envia notificacao para todas as maes que nao preencheram o diario nesse dia</br> <b>Uso somente para testes!</b></p>",
