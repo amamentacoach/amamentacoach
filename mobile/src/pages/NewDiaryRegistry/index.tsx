@@ -48,13 +48,13 @@ const NewDiaryRegistry: React.FC = () => {
   const newDiaryRegistrySchema = Yup.object({
     time: Yup.string().required('Campo obrigatório'),
     quantity: Yup.number()
-      .integer('Deve ser um inteiro')
-      .typeError('Deve ser um inteiro')
+      .integer('Deve ser um número inteiro')
+      .typeError('Deve ser um número inteiro')
       .positive('Deve ser maior que 0')
       .required('Campo obrigatório'),
     duration: Yup.number()
-      .integer('Deve ser um inteiro')
-      .typeError('Deve ser um inteiro')
+      .integer('Deve ser um número inteiro')
+      .typeError('Deve ser um número inteiro')
       .positive('Deve ser maior que 0')
       .required('Campo obrigatório'),
     breast: Yup.string().required('Campo obrigatório'),

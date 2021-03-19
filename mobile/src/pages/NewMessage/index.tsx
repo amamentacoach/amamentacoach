@@ -69,6 +69,7 @@ const NewMessage: React.FC = () => {
                 multiline
                 numberOfLines={20}
                 maxLength={255}
+                textAlignVertical="top"
               />
             </View>
 

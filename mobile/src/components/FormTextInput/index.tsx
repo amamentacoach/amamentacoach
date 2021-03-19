@@ -12,6 +12,7 @@ import {
 interface FormTextProps extends TextInputProps {
   label?: string | undefined;
   error?: string | undefined;
+  centerText?: boolean | undefined;
   textInputRef?: React.RefObject<ReactTextInput> | null | undefined;
 }
 
@@ -20,11 +21,13 @@ const FormTextInput: React.FC<FormTextProps> = ({
   value,
   placeholder,
   error,
+  textAlignVertical,
   secureTextEntry,
   keyboardType,
   multiline,
   numberOfLines,
   maxLength,
+  centerText = false,
   onChangeText,
 }) => {
   return (
@@ -35,12 +38,13 @@ const FormTextInput: React.FC<FormTextProps> = ({
         value={value}
         placeholder={placeholder}
         placeholderTextColor="#acaab2"
-        textAlignVertical="top"
+        textAlignVertical={textAlignVertical}
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
         multiline={multiline}
         numberOfLines={numberOfLines}
         maxLength={maxLength}
+        centerText={centerText}
       />
       <ErrorContainer>
         {error ? <ErrorText>{error}</ErrorText> : null}

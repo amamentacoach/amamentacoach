@@ -32,11 +32,14 @@ const FormSignUp: React.FC = () => {
   const signUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Campo obrigatório'),
     password: Yup.string()
-      .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
-      .required('Campo obrigatório'),
+      .min(8, 'A senha precisa ter pelo menos 8 caracteres')
+      .required('Campo obrigatório')
+      .matches(
+        new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])'),
+        'Precisa ter letras minúsculas, letras maiúsculas e números',
+      ),
     password_confirmation: Yup.string()
-      .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
-      .oneOf([Yup.ref('password')], 'As senhas precisam ser iguais!')
+      .oneOf([Yup.ref('password')], 'As senhas precisam ser iguais')
       .required('Campo obrigatório'),
   }).required();
 

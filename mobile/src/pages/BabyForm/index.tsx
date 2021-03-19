@@ -9,6 +9,7 @@ import {
   signUpBaby,
   IMotherSignUpInfo,
   signUpMother,
+  IBabySignUpInfo,
 } from '../../services/auth';
 import Modal from '../../components/Modal';
 import MainButton from '../../components/MainButton';
@@ -87,8 +88,8 @@ const BabyForm: React.FC = () => {
             name: Yup.string().required('Campo obrigatório'),
             birthday: Yup.string().required('Campo obrigatório'),
             weight: Yup.number()
-              .integer('Deve ser um inteiro')
-              .typeError('Deve ser um inteiro')
+              .integer('Deve ser um número inteiro')
+              .typeError('Deve ser um número inteiro')
               .min(0, 'Deve ser maior ou igual a 0')
               .required('Campo obrigatório'),
             birthType: Yup.array(Yup.string().required()).required(
@@ -102,23 +103,23 @@ const BabyForm: React.FC = () => {
             apgar1: Yup.number()
               .when('apgar2', {
                 is: undefined,
-                then: Yup.number().typeError('Deve ser um inteiro'),
+                then: Yup.number().typeError('Deve ser um número inteiro'),
                 otherwise: Yup.number()
-                  .typeError('Deve ser um inteiro')
+                  .typeError('Deve ser um número inteiro')
                   .required('Apgar 1 também deve ser fornecido'),
               })
-              .integer('Deve ser um inteiro')
+              .integer('Deve ser um número inteiro')
               .min(0, 'Deve ser maior ou igual a 0')
               .max(10, 'Deve ser menor ou igual a 10'),
             apgar2: Yup.number()
               .when('apgar1', {
                 is: undefined,
-                then: Yup.number().typeError('Deve ser um inteiro'),
+                then: Yup.number().typeError('Deve ser um número inteiro'),
                 otherwise: Yup.number()
-                  .typeError('Deve ser um inteiro')
+                  .typeError('Deve ser um número inteiro')
                   .required('Apgar 2 também deve ser fornecido'),
               })
-              .integer('Deve ser um inteiro')
+              .integer('Deve ser um número inteiro')
               .min(0, 'Deve ser maior ou igual a 0')
               .max(10, 'Deve ser menor ou igual a 10'),
             birthLocation: Yup.array(Yup.string().required()).required(
@@ -211,7 +212,7 @@ const BabyForm: React.FC = () => {
   // Registra todos os bebês do formulário.
   async function registerNewBabies(token: string, formValues: IFormValues) {
     formValues.babies.forEach(async baby => {
-      const babyInfo = {
+      const babyInfo: IBabySignUpInfo = {
         name: baby.name,
         birthday: baby.birthday,
         weight: parseInt(baby.weight, 10),

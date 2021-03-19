@@ -28,7 +28,7 @@ export const FormContainer = styled.View`
   margin-bottom: 20px;
 `;
 
-export const PartnerSubOptionsContainer = styled.View`
+export const SubOptionsContainer = styled.View`
   flex: 1;
   flex-direction: row;
 `;

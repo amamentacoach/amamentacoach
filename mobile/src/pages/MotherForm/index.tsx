@@ -15,13 +15,14 @@ import {
   HeaderText,
   HeaderSubText,
   FormContainer,
-  PartnerSubOptionsContainer,
   PartnerTimeContainer,
   PartnerMetricContainer,
   SubmitButtonContainer,
   FirstSubOptionContainer,
   SecondSubOptionContainer,
 } from './styles';
+import { SubOptionsContainer } from '../BabyForm/styles';
+import { IMotherSignUpInfo } from '../../services/auth';
 
 interface IFormValues {
   name: string;
@@ -49,7 +50,10 @@ type IScreenParams = {
 
 const MotherForm: React.FC = () => {
   const navigation = useNavigation();
-  const [breastFeedingCount, setBreastFeedingCount] = useState(0);
+  const [pregnantCount, setPregnantCount] = useState({
+    previous: 0,
+    current: 0,
+  });
   const { email, password } = useRoute<
     RouteProp<IScreenParams, 'MotherForm'>
   >().params;
@@ -74,15 +78,19 @@ const MotherForm: React.FC = () => {
       'Campo obrigatório',
     ),
     pregnantCount: Yup.number()
-      .integer('Deve ser um inteiro')
-      .typeError('Deve ser um inteiro')
+      .integer('Deve ser um número inteiro')
+      .typeError('Deve ser um número inteiro')
       .min(0, 'Dever ser maior ou igual a zero')
       .required('Campo obrigatório'),
     timeSpentBreastFeeding: Yup.array()
       .of(
         Yup.object({
           id: Yup.number().required(),
-          value: Yup.string(),
+          value: Yup.string().test(
+            'selected',
+            'Campo obrigatório',
+            (value: any) => !!value,
+          ),
         }).required(),
       )
       .defined(),
@@ -96,75 +104,68 @@ const MotherForm: React.FC = () => {
     wage: Yup.string().required('Campo obrigatório'),
   }).required();
 
-  // Adiciona ou remove um bebê de acordo com a entrada do usuário.
-  function handleNewTimeBreastFeeding(
-    fieldValue: string,
-    timeSpentBreastFeeding: { id: number; value: string }[],
-    setFieldValue: (field: string, value: any) => void,
-  ) {
+  function validateBreastFeedingCount(newFieldValue: string): boolean {
     // Caso o texto possua caracteres não numéricos ele é ignorado.
-    if (fieldValue !== '' && !new RegExp('^\\d+$').test(fieldValue)) {
-      return;
+    if (newFieldValue !== '' && !new RegExp('^\\d+$').test(newFieldValue)) {
+      return false;
     }
-
-    const newBreastFeedingCount = parseInt(fieldValue, 10);
-    // Caso o texto não possa ser convertido para inteiro, limpa o formulário.
-    if (!newBreastFeedingCount && newBreastFeedingCount !== 0) {
-      setFieldValue('pregnantCount', '');
-      setBreastFeedingCount(0);
-      setFieldValue('timeSpentBreastFeeding', []);
-      return;
+    const newBreastFeedingCount = parseInt(newFieldValue, 10);
+    // Caso o texto não possa ser convertido para inteiro
+    if (!newBreastFeedingCount) {
+      return false;
     }
     // Limita o formulário a um máximo de 20 bebês.
     if (newBreastFeedingCount > 20) {
-      return;
+      return false;
     }
+    return true;
+  }
 
-    setFieldValue('pregnantCount', newBreastFeedingCount.toString());
+  // Adiciona ou remove um bebê de acordo com a entrada do usuário.
+  function handleNewTimeBreastFeeding(
+    timeSpentBreastFeeding: { id: number; value: string }[],
+    setFieldValue: (field: string, value: any) => void,
+  ) {
+    const { previous, current } = pregnantCount;
+
     let newTimeSpentBreastFeeding = [...timeSpentBreastFeeding];
-    for (
-      let index = 0;
-      index < Math.abs(newBreastFeedingCount - breastFeedingCount);
-      index++
-    ) {
-      if (newBreastFeedingCount > breastFeedingCount) {
+    for (let index = 0; index < Math.abs(current - previous); index++) {
+      if (current > previous) {
         // Caso o novo valor seja maior que o anterior é necessário criar novos objetos e
         // adiciona-los a lista existente.
         newTimeSpentBreastFeeding = [
           ...newTimeSpentBreastFeeding,
-          { id: breastFeedingCount + index + 1, value: '' },
+          { id: previous + index + 1, value: '' },
         ];
-      } else if (newBreastFeedingCount < breastFeedingCount) {
+      } else if (current < previous) {
         // Caso o novo valor seja menor que o anterior é necessário remover os n últimos objetos
         // existentes.
         newTimeSpentBreastFeeding.pop();
       }
     }
     setFieldValue('timeSpentBreastFeeding', newTimeSpentBreastFeeding);
-    setBreastFeedingCount(newBreastFeedingCount);
   }
 
   // Avança para a próxima página passando as informações do usuário.
   function handleFormSubmit(formValues: IFormValues) {
-    const motherInfo = {
+    const motherInfo: IMotherSignUpInfo = {
       email,
       password,
+      name: formValues.name,
+      birthday: formValues.birthday,
       alreadyBreastfeed:
         formValues.alreadyBreastfeed[0].toLowerCase() === 'sim',
+      pregnantCount: parseInt(formValues.pregnantCount, 10),
+      timeSpentBreastFeeding: formValues.timeSpentBreastFeeding.map(
+        item => item.value,
+      ),
       partner: formValues.partner[0].toLowerCase() === 'sim',
       liveTogether:
         formValues.partner[0].toLowerCase() === 'sim'
           ? `${formValues.partnerTime} ${formValues.partnerMetric}`
           : null,
-      pregnantCount: parseInt(formValues.pregnantCount, 10),
-      name: formValues.name,
-      birthday: formValues.birthday,
       education: formValues.education,
       wage: formValues.wage,
-      timeSpentBreastFeeding:
-        formValues.alreadyBreastfeed[0].toLowerCase() === 'sim'
-          ? formValues.timeSpentBreastFeeding.map(item => item.value)
-          : [],
     };
     navigation.navigate('BabyForm', { motherInfo });
   }
@@ -210,12 +211,32 @@ const MotherForm: React.FC = () => {
               label="Quantas vezes já esteve grávida? (contando abortos)"
               value={values.pregnantCount}
               onChangeText={(text: string) => {
-                handleNewTimeBreastFeeding(
-                  text,
-                  values.timeSpentBreastFeeding,
-                  setFieldValue,
-                );
-                setFieldValue('alreadyBreastfeed', ['Não']);
+                if (text === '') {
+                  setFieldValue('pregnantCount', text);
+                  // Limpa os campos de seleção abaixo
+                  setFieldValue('alreadyBreastfeed', ['Não']);
+                  setPregnantCount({
+                    previous: pregnantCount.current,
+                    current: 0,
+                  });
+                  setFieldValue('timeSpentBreastFeeding', []);
+                  return;
+                }
+
+                if (!validateBreastFeedingCount(text)) {
+                  return;
+                }
+
+                setFieldValue('pregnantCount', text);
+                setPregnantCount({
+                  previous: pregnantCount.current,
+                  current: parseInt(text, 10),
+                });
+                if (text !== '0') {
+                  setFieldValue('alreadyBreastfeed', []);
+                } else {
+                  setFieldValue('alreadyBreastfeed', ['Não']);
+                }
               }}
               placeholder="Insira o número de vezes"
               keyboardType="numeric"
@@ -226,7 +247,18 @@ const MotherForm: React.FC = () => {
               <FormRadioGroupInput
                 label="Você já amamentou antes?"
                 fieldName="alreadyBreastfeed"
-                onChange={setFieldValue}
+                onChange={(fieldName, fieldValue) => {
+                  setFieldValue(fieldName, [fieldValue[0]]);
+                  if (fieldValue[0] === 'Não') {
+                    setFieldValue('timeSpentBreastFeeding', []);
+                    return;
+                  }
+
+                  handleNewTimeBreastFeeding(
+                    values.timeSpentBreastFeeding,
+                    setFieldValue,
+                  );
+                }}
                 options={['Sim', 'Não']}
                 error={errors.alreadyBreastfeed}
               />
@@ -285,7 +317,7 @@ const MotherForm: React.FC = () => {
                   error={errors.liveTogether}
                 />
 
-                <PartnerSubOptionsContainer>
+                <SubOptionsContainer>
                   <PartnerTimeContainer>
                     <FormPickerInput
                       label="Há quanto tempo?"
@@ -305,7 +337,7 @@ const MotherForm: React.FC = () => {
                       options={['meses', 'anos']}
                     />
                   </PartnerMetricContainer>
-                </PartnerSubOptionsContainer>
+                </SubOptionsContainer>
               </>
             )}
 
