@@ -89,7 +89,9 @@ const DiaryRegistry: React.FC = () => {
           {!isLoading ? (
             registries.map(registry => (
               <View key={registry.id}>
-                <BabyName>{registry.name}</BabyName>
+                {registry.entries.length > 0 && (
+                  <BabyName>{registry.name}</BabyName>
+                )}
                 {registry.entries.map(({ id, breast, date, duration }) => (
                   <RegistryEntry
                     key={id}

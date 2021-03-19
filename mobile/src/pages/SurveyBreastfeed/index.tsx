@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import DiaryForm, { TInfoPageFunction } from '../../components/DiaryForm';
+import DiaryForm, { IDiaryFormInfoPage } from '../../components/DiaryForm';
 import MainButton from '../../components/MainButton';
 import FormRadioGroupInput from '../../components/FormRadioGroup';
 
@@ -28,17 +28,17 @@ const SurveyBreastfeed: React.FC = () => {
   const [displayError, setDisplayError] = useState(false);
   const [isSendingForm, setIsSendingForm] = useState(false);
 
-  const infoPage: TInfoPageFunction = (
+  const InfoPage: React.FC<IDiaryFormInfoPage> = ({
     index,
     pagesLength,
     question,
     values,
     setFieldValue,
     isFormValid,
-    handleSubmit,
+    submitForm,
     goToPage,
-  ) => {
-    function handleNextPage(pageIndex: number) {
+  }) => {
+    async function handleNextPage(pageIndex: number) {
       // Verifica se pelo menos uma resposta foi selecionada
       if (isFormValid(values, question)) {
         setDisplayError(true);
@@ -49,7 +49,7 @@ const SurveyBreastfeed: React.FC = () => {
       if (pageIndex === pagesLength - 1) {
         // Envia o formulário caso seja a última página
         setIsSendingForm(true);
-        handleSubmit();
+        await submitForm();
         setIsSendingForm(false);
         navigation.navigate('SurveyStatistics');
       } else {
@@ -104,13 +104,11 @@ const SurveyBreastfeed: React.FC = () => {
   };
 
   return (
-    <>
-      <DiaryForm
-        title="Amamentar um prematuro"
-        category={1}
-        infoPage={infoPage}
-      />
-    </>
+    <DiaryForm
+      title="Amamentar um prematuro"
+      category={1}
+      InfoPage={InfoPage}
+    />
   );
 };
 

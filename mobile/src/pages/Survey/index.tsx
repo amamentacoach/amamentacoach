@@ -6,7 +6,7 @@ import OptionsList from '../../components/OptionList';
 
 import { Header, HeaderTitle, ScrollView } from './styles';
 
-const Diary: React.FC = () => {
+const Survey: React.FC = () => {
   const { motherInfo } = useAuth();
   const navigation = useNavigation();
 
@@ -52,4 +52,4 @@ const Diary: React.FC = () => {
   );
 };
 
-export default Diary;
+export default Survey;

@@ -16,7 +16,7 @@ interface PieChartProps {
 }
 
 const PieChart: React.FC<PieChartProps> = ({ label, data }) => {
-  const colors = ['#FA931A', '#85E43A', '#D75C5C', '#E5D43B', '#30D2F5'];
+  const colors = ['#D75C5C', '#85E43A', '#30D2F5', '#E5D43B', '#FA931A'];
 
   return (
     <Container>

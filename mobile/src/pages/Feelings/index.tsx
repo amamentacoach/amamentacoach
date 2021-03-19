@@ -5,7 +5,7 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 
 import dateFormatVerbose from '../../utils/date';
-import DiaryForm, { TInfoPageFunction } from '../../components/DiaryForm';
+import DiaryForm, { IDiaryFormInfoPage } from '../../components/DiaryForm';
 import MainButton from '../../components/MainButton';
 import SecondaryButton from '../../components/SecondaryButton';
 import FormRadioGroupInput from '../../components/FormRadioGroup';
@@ -32,18 +32,18 @@ const Feelings: React.FC = () => {
   const [displayError, setDisplayError] = useState(false);
   const [isSendingForm, setIsSendingForm] = useState(false);
 
-  const infoPage: TInfoPageFunction = (
+  const InfoPage: React.FC<IDiaryFormInfoPage> = ({
     index,
     pagesLength,
     question,
     values,
     setFieldValue,
     isFormValid,
-    handleSubmit,
+    submitForm,
     goToPage,
-  ) => {
+  }) => {
     // Caso seja a última página envia o formulário, caso contrário avança para a próxima página.
-    function handleNextPage(pageIndex: number) {
+    async function handleNextPage(pageIndex: number) {
       if (isFormValid(values, question)) {
         setDisplayError(true);
         return;
@@ -52,7 +52,7 @@ const Feelings: React.FC = () => {
       setDisplayError(false);
       if (pageIndex === pagesLength - 1) {
         setIsSendingForm(true);
-        handleSubmit();
+        await submitForm();
         navigation.dispatch(StackActions.replace('Goals'));
       } else {
         goToPage(index + 1);
@@ -60,13 +60,13 @@ const Feelings: React.FC = () => {
     }
 
     // Envia o formulário e retorna para o diário.
-    function handleSaveAndExit() {
+    async function handleSaveAndExit() {
       if (isFormValid(values, question)) {
         setDisplayError(true);
         return;
       }
       setIsSendingForm(true);
-      handleSubmit();
+      await submitForm();
       navigation.navigate('Diary');
     }
 
@@ -117,7 +117,7 @@ const Feelings: React.FC = () => {
     );
   };
 
-  return <DiaryForm title={currentDate} category={2} infoPage={infoPage} />;
+  return <DiaryForm title={currentDate} category={2} InfoPage={InfoPage} />;
 };
 
 export default Feelings;

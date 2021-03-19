@@ -13,12 +13,10 @@ export interface ISurveyQuestion {
 export interface ISurveyStatistics {
   id: number;
   question: string;
-  options: [
-    {
-      description: string;
-      value: number;
-    },
-  ];
+  options: {
+    description: string;
+    value: number;
+  }[];
 }
 
 // Registra a resposta do usuário para uma pergunta.
@@ -71,7 +69,6 @@ export async function listSurveyStatistics(): Promise<
         value: parseInt(option.total, 10),
       })),
     }));
-
     return surveyStatistics;
   } catch (error) {
     return null;
