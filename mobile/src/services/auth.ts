@@ -4,6 +4,7 @@ export interface IMotherSignUpInfo {
   email: string;
   password: string;
   name: string;
+  phone: string;
   alreadyBreastfeed: boolean;
   birthday: string;
   partner: boolean;
@@ -14,7 +15,7 @@ export interface IMotherSignUpInfo {
   timeSpentBreastFeeding: string[];
 }
 
-interface IBabySignUpInfo {
+export interface IBabySignUpInfo {
   name: string;
   birthday: string;
   gestationWeeks: number;
@@ -54,6 +55,7 @@ export async function signUpMother(
       senha: motherInfo.password,
       nome: motherInfo.name,
       data_nascimento: motherInfo.birthday,
+      whatsapp: motherInfo.phone,
       amamentou_antes: motherInfo.alreadyBreastfeed,
       companheiro: motherInfo.partner,
       moram_juntos: motherInfo.liveTogether,

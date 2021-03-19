@@ -33,6 +33,15 @@ export const SubOptionsContainer = styled.View`
   flex-direction: row;
 `;
 
+export const DDDContainer = styled.View`
+  margin-right: 4px;
+  width: 70px;
+`;
+
+export const PhoneInputContainer = styled.View`
+  flex: 4;
+`;
+
 export const PartnerTimeContainer = styled.View`
   flex: 2;
   margin-right: 4px;

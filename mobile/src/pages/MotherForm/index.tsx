@@ -15,6 +15,8 @@ import {
   HeaderText,
   HeaderSubText,
   FormContainer,
+  PhoneInputContainer,
+  DDDContainer,
   PartnerTimeContainer,
   PartnerMetricContainer,
   SubmitButtonContainer,
@@ -27,6 +29,8 @@ import { IMotherSignUpInfo } from '../../services/auth';
 interface IFormValues {
   name: string;
   birthday: string;
+  ddd: string;
+  phone: string;
   pregnantCount: string;
   timeSpentBreastFeeding: {
     id: number;
@@ -61,6 +65,8 @@ const MotherForm: React.FC = () => {
   const formInitialValues: IFormValues = {
     name: '',
     birthday: '',
+    ddd: '',
+    phone: '',
     pregnantCount: '',
     timeSpentBreastFeeding: [],
     alreadyBreastfeed: [],
@@ -74,6 +80,18 @@ const MotherForm: React.FC = () => {
   const motherFormSchema = Yup.object({
     name: Yup.string().required('Campo obrigatório'),
     birthday: Yup.string().required('Campo obrigatório'),
+    ddd: Yup.number()
+      .integer('Deve ser um número inteiro')
+      .typeError('Deve ser um número inteiro')
+      .min(10, 'Deve ser maior ou igual a 10')
+      .max(99, 'Deve ser menor que 100')
+      .required('Campo obrigatório'),
+    phone: Yup.number()
+      .integer('Deve ser um número inteiro')
+      .typeError('Deve ser um número inteiro')
+      .min(100000000, 'Deve possuir 9 dígitos')
+      .max(999999999, 'Deve possuir 9 dígitos')
+      .required('Campo obrigatório'),
     alreadyBreastfeed: Yup.array(Yup.string().required()).required(
       'Campo obrigatório',
     ),
@@ -153,6 +171,7 @@ const MotherForm: React.FC = () => {
       password,
       name: formValues.name,
       birthday: formValues.birthday,
+      phone: `${formValues.ddd}${formValues.phone}`,
       alreadyBreastfeed:
         formValues.alreadyBreastfeed[0].toLowerCase() === 'sim',
       pregnantCount: parseInt(formValues.pregnantCount, 10),
@@ -206,6 +225,31 @@ const MotherForm: React.FC = () => {
               placeholder="Data de nascimento"
               error={errors.birthday}
             />
+
+            <SubOptionsContainer>
+              <DDDContainer>
+                <FormTextInput
+                  label="DDD"
+                  error={errors.ddd}
+                  onChangeText={handleChange('ddd')}
+                  value={values.ddd}
+                  placeholder="DDD"
+                  keyboardType="number-pad"
+                  centerText
+                />
+              </DDDContainer>
+
+              <PhoneInputContainer>
+                <FormTextInput
+                  label="Telefone"
+                  error={errors.phone}
+                  onChangeText={handleChange('phone')}
+                  value={values.phone}
+                  placeholder="Telefone"
+                  keyboardType="phone-pad"
+                />
+              </PhoneInputContainer>
+            </SubOptionsContainer>
 
             <FormTextInput
               label="Quantas vezes já esteve grávida? (contando abortos)"
