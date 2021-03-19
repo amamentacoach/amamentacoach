@@ -7,7 +7,7 @@ class RelatorioDiarioController{
         const{mae_id} = req
 
         const date = new Date()
-        date.setHours(0,0,0)
+        date.setDate(date.getDate()-1)
         
         const mamadas = await knex('mamada')
             .join('bebe','bebe.id','=','bebe_id')

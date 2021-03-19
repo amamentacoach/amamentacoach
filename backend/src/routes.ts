@@ -16,6 +16,7 @@ import ResultController from './controllers/ResultController';
 import MamadasController from './controllers/MamadasController';
 import DuvidasController from './controllers/DuvidasController';
 import RelatorioDiarioController from './controllers/RelatorioDiarioController';
+import RelatorioSemanalController from './controllers/RelatorioSemanalController';
 
 
 const maesController = new MaesController();
@@ -30,6 +31,7 @@ const resultController = new ResultController();
 const mamadasController = new MamadasController();
 const duvidasController = new DuvidasController();
 const relatorioDiarioController = new RelatorioDiarioController();
+const relatorioSemanalController = new RelatorioSemanalController();
 
 const routes = Router()
 const uploadMiddleware = multer(uploadConfig);
@@ -753,6 +755,52 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
  */
 
  routes.get('/relatorios/diario',verifyJWT, relatorioDiarioController.show)
+
+ /**
+ * @api {get} /relatorios/semanal Exibição do relatório semanal
+ * @apiDescription Exibição do relatório semanal<br>
+ *          Retorna a resposta da mãe sobre algumas perguntas nos ultimos 7 diass
+ * @apiGroup Relatórios
+ *
+ * @apiHeader {String} authorization Token de acesso.
+ * 
+ * 
+ * @apiSuccessExample {json} Sucesso
+ *    HTTP/1.1 200 OK
+ *  [
+ *    {
+ *      "pergunta": "Como me senti:",
+ *      "respostas": [
+ *        "Feliz",
+ *        "Orgulhosa"
+ *      ]
+ *    },
+ *    {
+ *      "pergunta": "Como meu bebê esteve se alimentando:",
+ *      "respostas": []
+ *    },
+ *    {
+ *      "pergunta": "Minhas Metas para Pensamentos e Sentimentos",
+ *      "respostas": []
+ *    },
+ *    {
+ *      "pergunta": "Minhas Metas para Ações",
+ *      "respostas": []
+ *    },
+ *    {
+ *      "pergunta": "Precisei de uma ajuda específica...",
+ *      "respostas": [
+ *        "Sim"
+ *      ]
+ *    },
+ *    {
+ *      "pergunta": "Meu ombro amigo da semana:",
+ *      "respostas": []
+ *    }
+ *  ]
+ *
+ */
+ routes.get('/relatorios/semanal',verifyJWT, relatorioSemanalController.show)
 
  
  routes.post('/administrativo/acesso', (req, res) =>{

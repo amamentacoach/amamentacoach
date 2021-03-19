@@ -634,6 +634,39 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/relatorios/semanal",
+    "title": "Exibição do relatório semanal",
+    "description": "<p>Exibição do relatório semanal<br> Retorna a resposta da mãe sobre algumas perguntas nos ultimos 7 diass</p>",
+    "group": "Relatórios",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Sucesso",
+          "content": "  HTTP/1.1 200 OK\n[\n  {\n    \"pergunta\": \"Como me senti:\",\n    \"respostas\": [\n      \"Feliz\",\n      \"Orgulhosa\"\n    ]\n  },\n  {\n    \"pergunta\": \"Como meu bebê esteve se alimentando:\",\n    \"respostas\": []\n  },\n  {\n    \"pergunta\": \"Minhas Metas para Pensamentos e Sentimentos\",\n    \"respostas\": []\n  },\n  {\n    \"pergunta\": \"Minhas Metas para Ações\",\n    \"respostas\": []\n  },\n  {\n    \"pergunta\": \"Precisei de uma ajuda específica...\",\n    \"respostas\": [\n      \"Sim\"\n    ]\n  },\n  {\n    \"pergunta\": \"Meu ombro amigo da semana:\",\n    \"respostas\": []\n  }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Relatórios",
+    "name": "GetRelatoriosSemanal"
+  },
+  {
+    "type": "get",
     "url": "/testePush",
     "title": "Teste de push",
     "description": "<p>Envia notificacao para todas as maes que nao preencheram o diario nesse dia</br> <b>Uso somente para testes!</b></p>",
