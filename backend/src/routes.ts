@@ -15,6 +15,7 @@ import sendPushNotification from './utils/sendPushNotification';
 import ResultController from './controllers/ResultController';
 import MamadasController from './controllers/MamadasController';
 import DuvidasController from './controllers/DuvidasController';
+import RelatorioDiarioController from './controllers/RelatorioDiarioController';
 
 
 const maesController = new MaesController();
@@ -28,6 +29,7 @@ const uploadController = new UploadController();
 const resultController = new ResultController();
 const mamadasController = new MamadasController();
 const duvidasController = new DuvidasController();
+const relatorioDiarioController = new RelatorioDiarioController();
 
 const routes = Router()
 const uploadMiddleware = multer(uploadConfig);
@@ -676,6 +678,8 @@ routes.get('/amamentacao/resultados',respostasController.results)
  *    ]
  *
  */
+
+routes.get('/relatorios/diario',verifyJWT, relatorioDiarioController.show)
 
  routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
 

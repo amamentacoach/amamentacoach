@@ -213,5 +213,36 @@ export async function seed(knex: Knex): Promise<void> {
             multiplas:true,
             alvo:'AC'
         },
+        // Categoria 6: Ações realizadas com o bebe
+        { 
+            id: 15, 
+            categoria: 6, 
+            descricao:'Ações realizadas com meu bebê',
+            alternativas: 'Fiz canguru com meu bebê|'
+                + 'Retirei o leite sempre que precisei|'
+                + 'Ofereci meu leite fresco ao meu bebê sempre que precisou de complemento|'
+                + 'Realizei os cuidados sentindo-me segura|'
+                + 'Tive coragem para pedir ajuda|'
+                + 'Tive coragem para afastar pessoas que possam estar atrapalhando de alguma forma',
+            outro:false,
+            multiplas:true,
+            alvo:"AC"
+        },
+        { 
+            id: 16, 
+            categoria: 6, 
+            descricao:'Ações realizadas com meu bebê',
+            alternativas: 'Fiquei mais tempo na Unidade|'
+                + 'Fiz mais canguru|'
+                + 'Retirei o leite mais vezes por dia|'
+                + 'Trouxe meu leite|'
+                + 'Ofereci leite fresco ao meu bebê|'
+                + 'Realizei mais cuidados junto ao meu bebê|'
+                + 'Tive coragem para pedir ajuda|'
+                + 'Procurei me informar + sobre meu bebê',
+            outro:false,
+            multiplas:true,
+            alvo:"UCI/UTI"
+        },
     ]);
 };
