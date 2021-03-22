@@ -67,6 +67,13 @@ const Home: React.FC = () => {
         navigation.navigate('Messages');
       },
     },
+    {
+      image: require('../../../assets/images/home_message.png'),
+      title: 'Perguntas',
+      onPress: () => {
+        navigation.navigate('Questions');
+      },
+    },
   ];
 
   return (
