@@ -8,7 +8,7 @@ export interface IMessage {
 }
 
 // Envia uma mensagem do usuário.
-export async function createNewMessage(message: string): Promise<boolean> {
+export async function createMessage(message: string): Promise<boolean> {
   try {
     await api.post('/mensagens', {
       conteudo: message,

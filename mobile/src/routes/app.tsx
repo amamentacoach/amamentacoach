@@ -33,6 +33,8 @@ import UploadMotherPhoto from '../pages/UploadMotherPhoto';
 import BabyCup from '../pages/BabyCup';
 import DiaryBreastfeed from '../pages/DiaryBreastfeed';
 import NewBreastfeedEntry from '../pages/NewBreastfeedEntry';
+import Questions from '../pages/Questions';
+import NewQuestion from '../pages/NewQuestion';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -151,6 +153,20 @@ const AppRoutes: React.FC = () => {
         component={Messages}
         options={{
           title: 'Mural de mensagens',
+        }}
+      />
+      <Stack.Screen
+        name="Questions"
+        component={Questions}
+        options={{
+          title: 'Perguntas',
+        }}
+      />
+      <Stack.Screen
+        name="NewQuestion"
+        component={NewQuestion}
+        options={{
+          title: 'Enviar Pergunta',
         }}
       />
       <Stack.Screen

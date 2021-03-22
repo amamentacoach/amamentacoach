@@ -1,32 +1,16 @@
 import api from './api';
 
-export interface ISurveyQuestion {
+export interface IFAQ {
   id: number;
-  target: string;
-  category: number;
   description: string;
-  options: string[];
-  displayOther: boolean;
-  multipleSelection: boolean;
+  answer: string;
 }
 
-export interface ISurveyStatistics {
-  id: number;
-  question: string;
-  options: {
-    description: string;
-    value: number;
-  }[];
-}
-
-// Registra a resposta do usuário para uma pergunta.
-export async function answerQuestion(
-  questionId: number,
-  answers: string[],
-): Promise<boolean> {
+// Cria uma nova pergunta do usuário.
+export async function createQuestion(question: string): Promise<boolean> {
   try {
-    await api.post(`/responder/${questionId}`, {
-      respostas: answers,
+    await api.post('/duvidas', {
+      descricao: question,
     });
     return true;
   } catch (error) {
@@ -34,42 +18,16 @@ export async function answerQuestion(
   }
 }
 
-// Retorna todos as perguntas feitas no diário.
-export async function listQuestions(
-  questionCategory: number,
-): Promise<ISurveyQuestion[] | null> {
+// Retorna as perguntas frequentes e suas respostas.
+export async function listQuestions(): Promise<IFAQ[] | null> {
   try {
-    const { data } = await api.get(`/perguntas/${questionCategory}`);
-    const surveyQuestions = data.map((question: any) => ({
+    const { data } = await api.get('/duvidas/frequentes');
+    const questions = data.map((question: any) => ({
       id: question.id,
-      target: question.alvo,
-      category: question.categoria,
       description: question.descricao,
-      options: question.alternativas,
-      displayOther: question.outro,
-      multipleSelection: question.multiplas,
+      answer: question.resposta,
     }));
-    return surveyQuestions;
-  } catch (error) {
-    return null;
-  }
-}
-
-// Retorna as estatísticas das respostas da enquete.
-export async function listSurveyStatistics(): Promise<
-  ISurveyStatistics[] | null
-> {
-  try {
-    const { data } = await api.get(`/amamentacao/resultados`);
-    const surveyStatistics = data.map((question: any) => ({
-      id: question.id,
-      question: question.pergunta,
-      options: question.alternativas.map((option: any) => ({
-        description: option.descricao,
-        value: parseInt(option.total, 10),
-      })),
-    }));
-    return surveyStatistics;
+    return questions;
   } catch (error) {
     return null;
   }

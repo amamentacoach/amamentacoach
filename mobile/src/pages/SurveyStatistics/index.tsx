@@ -3,10 +3,7 @@ import { ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { HeaderBackButton } from '@react-navigation/stack';
 
-import {
-  ISurveyStatistics,
-  listSurveyStatistics,
-} from '../../services/questions';
+import { ISurveyStatistics, listSurveyStatistics } from '../../services/survey';
 import PieChart from '../../components/PieChart';
 
 import {

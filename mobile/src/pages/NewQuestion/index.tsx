@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { createMessage } from '../../services/messages';
+import { createQuestion } from '../../services/questions';
 import FormTextInput from '../../components/FormTextInput';
 import MainButton from '../../components/MainButton';
 import Modal from '../../components/Modal';
@@ -16,24 +16,24 @@ import {
 } from './styles';
 
 interface IFormValues {
-  message: string;
+  question: string;
 }
 
-const NewMessage: React.FC = () => {
+const NewQuestion: React.FC = () => {
   const [isSubmitModalVisible, setIsSubmitModalVisible] = useState(false);
   const [isSendingForm, setIsSendingForm] = useState(false);
   const [textInputText, setTextInputText] = useState('');
 
   const formInitialValues: IFormValues = {
-    message: '',
+    question: '',
   };
   const newPasswordSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
-    message: Yup.string().required('Campo obrigatório'),
+    question: Yup.string().required('Campo obrigatório'),
   }).required();
 
-  async function handleNewMessage({ message }: IFormValues) {
+  async function handleNewQuestion({ question }: IFormValues) {
     setIsSendingForm(true);
-    const successfulRequest = await createMessage(message);
+    const successfulRequest = await createQuestion(question);
     setIsSendingForm(false);
     if (successfulRequest) {
       setIsSubmitModalVisible(true);
@@ -44,28 +44,28 @@ const NewMessage: React.FC = () => {
   return (
     <ScrollView>
       <Modal
-        text="Mensagem enviada!"
+        text="Dúvida enviada!"
         visible={isSubmitModalVisible}
         closeModal={() => setIsSubmitModalVisible(false)}
       />
 
-      <HeaderText>Envie uma mensagem para outras mamães</HeaderText>
+      <HeaderText>Envie sua dúvida</HeaderText>
       <Formik
         initialValues={formInitialValues}
         validationSchema={newPasswordSchema}
         validateOnChange={false}
-        onSubmit={values => handleNewMessage(values)}>
+        onSubmit={values => handleNewQuestion(values)}>
         {({ setFieldValue, handleSubmit, dirty, errors }) => (
           <FormContainer>
             <View>
               <FormTextInput
                 onChangeText={(text: string) => {
-                  setFieldValue('message', text);
+                  setFieldValue('question', text);
                   setTextInputText(text);
                 }}
                 value={textInputText}
-                placeholder="Digite aqui sua mensagem..."
-                error={errors.message}
+                placeholder="Digite aqui sua pergunta..."
+                error={errors.question}
                 multiline
                 numberOfLines={20}
                 maxLength={255}
@@ -87,4 +87,4 @@ const NewMessage: React.FC = () => {
   );
 };
 
-export default NewMessage;
+export default NewQuestion;

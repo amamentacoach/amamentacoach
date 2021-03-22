@@ -7,7 +7,7 @@ import {
   ISurveyQuestion,
   listQuestions,
   answerQuestion,
-} from '../../services/questions';
+} from '../../services/survey';
 
 import {
   ListContainer,
