@@ -17,6 +17,7 @@ import MamadasController from './controllers/MamadasController';
 import DuvidasController from './controllers/DuvidasController';
 import RelatorioDiarioController from './controllers/RelatorioDiarioController';
 import RelatorioSemanalController from './controllers/RelatorioSemanalController';
+import AcessosController from './controllers/AcessosController';
 
 
 const maesController = new MaesController();
@@ -32,6 +33,7 @@ const mamadasController = new MamadasController();
 const duvidasController = new DuvidasController();
 const relatorioDiarioController = new RelatorioDiarioController();
 const relatorioSemanalController = new RelatorioSemanalController();
+const acessosController = new AcessosController();
 
 const routes = Router()
 const uploadMiddleware = multer(uploadConfig);
@@ -414,6 +416,12 @@ routes.get('/perguntas/:categoria',perguntasController.index);
  * @apiParamExample {json} Exemplo Request:
  *      {
  *          "respostas":["O incentivo que estou recebendo dos profissionais"] // um array para caso selecione mais de uma opcao
+ *      }
+ * 
+ * @apiSuccessExample {json} Exemplo Resposta quando houver feedback (MOSTRAR POPUP):
+ *      {
+ *          "feedback":"Continue firme, Fulana! Talvez o conteúdo “Emoções e Amamentação” possa te ajudar hoje.",
+ *          "redirect":"EmotionsAndBreastfeeding"
  *      }
  *
  */
@@ -817,5 +825,29 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
  })
 
  routes.get('/login', (req,res) => res.render('login'))
+
+
+/**
+ * @api {post} /acessos/videos Acessos Videos
+ * @apiDescription Informa se mae acessou videos
+ * @apiGroup Controle de Acessos
+ * @apiHeader {String} authorization Token de acesso.
+ */
+
+/**
+ * @api {post} /acessos/app Acessos App
+ * @apiDescription Informa se mae acessou app
+ * @apiGroup Controle de Acessos
+ * @apiHeader {String} authorization Token de acesso.
+ */
+
+/**
+ * @api {post} /acessos/diario Acessos Diario
+ * @apiDescription Informa se mae acessou diario
+ * @apiGroup Controle de Acessos
+ * @apiHeader {String} authorization Token de acesso.
+ */
+
+routes.post('/acessos/:local', verifyJWT, acessosController.create)
 
 export default routes;

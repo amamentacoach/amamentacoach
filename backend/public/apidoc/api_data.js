@@ -140,6 +140,78 @@ define({ "api": [
     "name": "PostDuvidas"
   },
   {
+    "type": "post",
+    "url": "/acessos/app",
+    "title": "Acessos App",
+    "description": "<p>Informa se mae acessou app</p>",
+    "group": "Controle_de_Acessos",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Controle_de_Acessos",
+    "name": "PostAcessosApp"
+  },
+  {
+    "type": "post",
+    "url": "/acessos/diario",
+    "title": "Acessos Diario",
+    "description": "<p>Informa se mae acessou diario</p>",
+    "group": "Controle_de_Acessos",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Controle_de_Acessos",
+    "name": "PostAcessosDiario"
+  },
+  {
+    "type": "post",
+    "url": "/acessos/videos",
+    "title": "Acessos Videos",
+    "description": "<p>Informa se mae acessou videos</p>",
+    "group": "Controle_de_Acessos",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Controle_de_Acessos",
+    "name": "PostAcessosVideos"
+  },
+  {
     "type": "get",
     "url": "/amamentacao/resultados",
     "title": "Resultado da enquete amamentacao",
@@ -203,6 +275,15 @@ define({ "api": [
         {
           "title": "Exemplo Request:",
           "content": "{\n    \"respostas\":[\"O incentivo que estou recebendo dos profissionais\"] // um array para caso selecione mais de uma opcao\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Exemplo Resposta quando houver feedback (MOSTRAR POPUP):",
+          "content": "{\n    \"feedback\":\"Continue firme, Fulana! Talvez o conteúdo “Emoções e Amamentação” possa te ajudar hoje.\",\n    \"redirect\":\"EmotionsAndBreastfeeding\"\n}",
           "type": "json"
         }
       ]

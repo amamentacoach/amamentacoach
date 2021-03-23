@@ -28,6 +28,10 @@ export async function up(knex: Knex): Promise<void> {
         table.boolean('orientacao_prenatal').notNullable();
         table.boolean('ocupacao').notNullable();
         table.boolean('licenca_maternidade').notNullable();
+        table.boolean('acesso_videos').defaultTo(false);
+        table.integer('acessos_app').defaultTo(1)
+        table.integer('acessos_diario').defaultTo(0)
+
         table.unique(['email']);
     });
 }
