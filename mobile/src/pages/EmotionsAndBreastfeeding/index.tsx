@@ -17,16 +17,13 @@ const EmotionsAndBreastfeeding: React.FC = () => {
     {
       image: require('../../../assets/images/emotions_box.png'),
       title: 'Caixinha da distração',
-      onPress: () => {
-        navigation.navigate('Distractions');
-      },
+      onPress: () => navigation.navigate('Distractions'),
     },
     {
       image: require('../../../assets/images/emotions_jacobson.png'),
       title: 'Técnica de Relaxamento de Jacobson',
-      onPress: () => {
-        navigation.navigate('VideoPage', { videos: ['C2hFGeJj48k'] });
-      },
+      onPress: () =>
+        navigation.navigate('VideoPage', { videos: ['C2hFGeJj48k'] }),
     },
   ];
 

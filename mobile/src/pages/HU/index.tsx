@@ -14,17 +14,15 @@ const HU: React.FC = () => {
       image: require('../../../assets/images/ic_video.png'),
       title: 'Vídeo AmamentaCoach',
       subtitle: 'Conheça o AmamentaCoach',
-      onPress: () => {
-        navigation.navigate('VideoPage', { videos: ['z9V26A0Lipg'] });
-      },
+      onPress: () =>
+        navigation.navigate('VideoPage', { videos: ['z9V26A0Lipg'] }),
     },
     {
       image: require('../../../assets/images/ic_video.png'),
       title: 'Video HU Londrina',
       subtitle: 'Conheça o HU',
-      onPress: () => {
-        navigation.navigate('VideoPage', { videos: ['CLOZL3N_QXs'] });
-      },
+      onPress: () =>
+        navigation.navigate('VideoPage', { videos: ['CLOZL3N_QXs'] }),
     },
   ];
 

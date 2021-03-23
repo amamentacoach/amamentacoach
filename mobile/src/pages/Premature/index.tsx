@@ -11,31 +11,23 @@ const Premature: React.FC = () => {
     {
       image: require('../../../assets/images/premature_birth.png'),
       title: 'Parto prematuro: não era isso que eu esperava',
-      onPress: () => {
-        navigation.navigate('NotWhatIExpected');
-      },
+      onPress: () => navigation.navigate('NotWhatIExpected'),
     },
     {
       image: require('../../../assets/images/premature_baby.png'),
       title: 'Muito prazer, eu sou o Prematuro',
-      onPress: () => {
-        navigation.navigate('ThePremature');
-      },
+      onPress: () => navigation.navigate('ThePremature'),
     },
     {
       image: require('../../../assets/images/premature_heart.png'),
       title: 'Minha maior motivação para amamentar',
-      onPress: () => {
-        navigation.navigate('UploadBabyPhoto');
-      },
+      onPress: () => navigation.navigate('UploadBabyPhoto'),
     },
     {
       image: require('../../../assets/images/premature_trophy.png'),
       title: 'Um período de luta, toda uma vida de resultados',
       subtitle: 'Benefícios da amamentação',
-      onPress: () => {
-        navigation.navigate('BreastfeedingBenefits');
-      },
+      onPress: () => navigation.navigate('BreastfeedingBenefits'),
     },
   ];
 

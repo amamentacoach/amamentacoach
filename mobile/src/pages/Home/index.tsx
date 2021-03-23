@@ -28,51 +28,37 @@ const Home: React.FC = () => {
     {
       image: require('../../../assets/images/home_baby.png'),
       title: 'Olá, sou o prematuro',
-      onPress: () => {
-        navigation.navigate('Premature');
-      },
+      onPress: () => navigation.navigate('Premature'),
     },
     {
       image: require('../../../assets/images/home_breastfeed.png'),
       title: 'Passo a passo para amamentar o prematuro',
-      onPress: () => {
-        navigation.navigate('StepByStepPremature');
-      },
+      onPress: () => navigation.navigate('StepByStepPremature'),
     },
     {
       image: require('../../../assets/images/home_milk.png'),
       title: 'A retirada do leite',
-      onPress: () => {
-        navigation.navigate('HowToBreastfeed');
-      },
+      onPress: () => navigation.navigate('HowToBreastfeed'),
     },
     {
       image: require('../../../assets/images/home_emotions.png'),
       title: 'Emoções e Amamentação ',
-      onPress: () => {
-        navigation.navigate('EmotionsAndBreastfeeding');
-      },
+      onPress: () => navigation.navigate('EmotionsAndBreastfeeding'),
     },
     {
       image: require('../../../assets/images/home_more_information.png'),
       title: 'Mais informações',
-      onPress: () => {
-        navigation.navigate('AdditionalInformation');
-      },
+      onPress: () => navigation.navigate('AdditionalInformation'),
     },
     {
       image: require('../../../assets/images/home_message.png'),
       title: 'Depoimento das mamães',
-      onPress: () => {
-        navigation.navigate('Messages');
-      },
+      onPress: () => navigation.navigate('Messages'),
     },
     {
       image: require('../../../assets/images/home_message.png'),
       title: 'Perguntas',
-      onPress: () => {
-        navigation.navigate('Questions');
-      },
+      onPress: () => navigation.navigate('Questions'),
     },
   ];
 
