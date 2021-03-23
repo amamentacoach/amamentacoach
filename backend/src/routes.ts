@@ -49,12 +49,20 @@ const uploadMiddleware = multer(uploadConfig);
  *          "data_nascimento":"1990-05-05",
  *          "amamentou_antes":false,
  *          "companheiro":true,
- *          "moram_juntos":"2 anos", // caso nao more junto enviar NULL
+ *          "moram_juntos":"2,0", // caso nao more junto enviar NULL | Formato ano,meses
  *          "escolaridade":"Ensino Medio Completo",
  *          "renda":"Entre 1 e 3 salarios minimos",
  *          "qtd_gravidez":2,
- *          "tempo_amamentacao":["Menos de 1 ano","2 anos"],
- *          "whatsapp":"(43) 999999999"
+ *          "tempo_amamentacao":"2,3", // tempo de amamentacao total | formato: ano,meses
+ *          "whatsapp":"(43) 999999999",
+ *          "gestacao_planejada": true,
+ *          "primeira_visita": "12h",
+ *          "primeiro_estimulo": true, // Massagem/ordenha = false | Sucção = true
+ *          "tempo_primeiro_estimulo": "7-12h",
+ *          "qtd_filhos_vivos": 3,
+ *          "orientacao_prenatal": true,
+ *          "ocupacao": true, // Em casa (do lar) = false | Fora de casa = true
+ *          "licenca_maternidade": true
  *      }
  * 
  * @apiSuccessExample {json} Sucesso

@@ -44,15 +44,16 @@ class MaesController{
             escolaridade, 
             renda, 
             qtd_gravidez,
-            whatsapp
+            whatsapp,
+            gestacao_planejada,
+            primeira_visita,
+            primeiro_estimulo,
+            tempo_primeiro_estimulo,
+            qtd_filhos_vivos,
+            orientacao_prenatal,
+            ocupacao,
+            licenca_maternidade
         } = req.body;
-
-        let t_amamentacao_serializable
-        if(tempo_amamentacao){
-            t_amamentacao_serializable = tempo_amamentacao.join()
-        }else{
-            t_amamentacao_serializable=null
-        }
 
         const mae = {
             email,
@@ -60,14 +61,23 @@ class MaesController{
             nome,
             data_nascimento,
             amamentou_antes,
-            tempo_amamentacao:t_amamentacao_serializable,
+            tempo_amamentacao,
             companheiro,
             moram_juntos,
             escolaridade,
             renda,
             qtd_gravidez,
             whatsapp,
+            gestacao_planejada,
+            primeira_visita,
+            primeiro_estimulo,
             ultimo_acesso:new Date(),
+            primeiro_acesso: new Date(),
+            tempo_primeiro_estimulo,
+            qtd_filhos_vivos,
+            orientacao_prenatal,
+            ocupacao,
+            licenca_maternidade
         };
         
         const [id] = await knex('mae').insert(mae).returning('id')

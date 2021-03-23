@@ -16,9 +16,18 @@ export async function up(knex: Knex): Promise<void> {
         table.string('renda');
         table.integer('qtd_gravidez').notNullable();
         table.dateTime('ultimo_acesso').notNullable();
+        table.dateTime('primeiro_acesso').notNullable();
         table.string('imagem_mae');
         table.string('imagem_pai');
         table.string('imagem_bebe');
+        table.boolean('gestacao_planejada').notNullable();
+        table.string('primeira_visita').notNullable();
+        table.string('primeiro_estimulo').notNullable();
+        table.string('tempo_primeiro_estimulo').notNullable();
+        table.integer('qtd_filhos_vivos').notNullable();
+        table.boolean('orientacao_prenatal').notNullable();
+        table.boolean('ocupacao').notNullable();
+        table.boolean('licenca_maternidade').notNullable();
         table.unique(['email']);
     });
 }
