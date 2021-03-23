@@ -26,22 +26,27 @@ const SurveyStatistics: React.FC = () => {
   const [statistics, setStatistics] = useState<ISurveyStatistics[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Faz com que o botão de retorno redirecione para a página do diário. Ao contrário do
+  // Faz com que o botão de retorno redirecione para a página de enquetes. Ao contrário do
   // comportamento padrão de voltar a tela anterior.
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
         <HeaderBackButton
           tintColor="#ffffff"
-          onPress={() => {
-            navigation.navigate('Diary');
-          }}
+          onPress={() => navigation.navigate('Survey')}
         />
       ),
     });
   }, [navigation]);
 
   useEffect(() => {
+    // Faz com que o gesto de retorno carregue a página de enquetes.
+    navigation.addListener('beforeRemove', e => {
+      // Impede a ação padrão de retornar a tela anterior.
+      e.preventDefault();
+      navigation.navigate('Survey');
+    });
+
     async function fetchStatistics() {
       const stats = await listSurveyStatistics();
       if (stats) {
@@ -49,7 +54,6 @@ const SurveyStatistics: React.FC = () => {
         setLoading(false);
       }
     }
-
     fetchStatistics();
   }, []);
 

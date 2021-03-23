@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import DiaryForm, { TInfoPageFunction } from '../../components/DiaryForm';
+import DiaryForm, { IDiaryFormInfoPage } from '../../components/DiaryForm';
 import MainButton from '../../components/MainButton';
 import FormRadioGroupInput from '../../components/FormRadioGroup';
 import Modal from '../../components/Modal';
@@ -42,17 +42,17 @@ const Goals: React.FC = () => {
     return images[randomIndex];
   }
 
-  const infoPage: TInfoPageFunction = (
+  const InfoPage: React.FC<IDiaryFormInfoPage> = ({
     index,
     pagesLength,
     question,
     values,
     setFieldValue,
     isFormValid,
-    handleSubmit,
+    submitForm,
     goToPage,
-  ) => {
-    function handleNextPage(pageIndex: number) {
+  }) => {
+    async function handleNextPage(pageIndex: number) {
       // Verifica se pelo menos uma resposta foi selecionada
       if (isFormValid(values, question)) {
         setDisplayError(true);
@@ -63,7 +63,7 @@ const Goals: React.FC = () => {
       if (pageIndex === pagesLength - 1) {
         // Envia o formulário caso seja a última página
         setIsSendingForm(true);
-        handleSubmit();
+        await submitForm();
         setIsFinishedModalVisible(true);
       } else {
         goToPage(index + 1);
@@ -127,7 +127,7 @@ const Goals: React.FC = () => {
       <DiaryForm
         title="Minhas metas de hoje"
         category={3}
-        infoPage={infoPage}
+        InfoPage={InfoPage}
       />
     </>
   );

@@ -1,14 +1,16 @@
 import React from 'react';
-import { Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import { useAuth } from '../../contexts/auth';
 import OptionsList from '../../components/OptionList';
 
 import ScrollView from './styles';
 
 const AdditionalInformation: React.FC = () => {
+  const { motherInfo } = useAuth();
+
   const navigation = useNavigation();
-  const options = [
+  let options = [
     {
       image: require('../../../assets/images/premature_breastfeed.png'),
       title: 'Como meu leite é produzido?',
@@ -30,14 +32,6 @@ const AdditionalInformation: React.FC = () => {
       },
     },
     {
-      image: require('../../../assets/images/father.png'),
-      title: 'Participação do Pai',
-      subtitle: 'Registre e acompanhe a participação do papai',
-      onPress: () => {
-        navigation.navigate('UploadFatherPhoto');
-      },
-    },
-    {
       image: require('../../../assets/images/change.png'),
       title: 'Reformulando as expectativas',
       subtitle: 'Troque expectativas que são improváveis por realistas',
@@ -54,6 +48,21 @@ const AdditionalInformation: React.FC = () => {
       },
     },
   ];
+
+  // Exibe o upload de imagem do pai apenas se a mãe tem um companheiro.
+  if (motherInfo.partner) {
+    options = [
+      ...options,
+      {
+        image: require('../../../assets/images/father.png'),
+        title: 'Participação do Pai',
+        subtitle: 'Registre e acompanhe a participação do papai',
+        onPress: () => {
+          navigation.navigate('UploadFatherPhoto');
+        },
+      },
+    ];
+  }
 
   return (
     <ScrollView>

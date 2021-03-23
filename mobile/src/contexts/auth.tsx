@@ -6,13 +6,13 @@ import OneSignal from 'react-native-onesignal';
 
 import api from '../services/api';
 import * as auth from '../services/auth';
-import { IMotherInfo } from '../services/auth';
+import { IMotherInfo, LoginStatus } from '../services/auth';
 import pushNotificationSubscribe from '../services/pushNotification';
 
 interface IAuthContextData {
   isSigned: boolean;
   motherInfo: IMotherInfo;
-  signIn(email: string, password: string): Promise<boolean>;
+  signIn(email: string, password: string): Promise<LoginStatus>;
   signOut(): void;
 }
 
@@ -66,19 +66,19 @@ export const AuthProvider: React.FC = ({ children }) => {
     checkLoginDataInStorage();
   }, []);
 
-  async function signIn(email: string, password: string): Promise<boolean> {
-    const userToken = await auth.signIn(email, password);
-    if (userToken === null) {
-      return false;
+  async function signIn(email: string, password: string): Promise<LoginStatus> {
+    const login = await auth.signIn(email, password);
+    if (login.status !== LoginStatus.Success) {
+      return login.status;
     }
-    api.defaults.headers.common.Authorization = userToken;
+    api.defaults.headers.common.Authorization = login.token;
     await initMotherInfo();
 
-    await AsyncStorage.setItem('@AmamentaCoach:token', userToken);
-    setToken(userToken);
+    await AsyncStorage.setItem('@AmamentaCoach:token', login.token);
+    setToken(login.token);
 
     initPushNotifications();
-    return true;
+    return login.status;
   }
 
   async function signOut(): Promise<void> {

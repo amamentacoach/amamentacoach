@@ -9,6 +9,7 @@ import {
   signUpBaby,
   IMotherSignUpInfo,
   signUpMother,
+  IBabySignUpInfo,
 } from '../../services/auth';
 import Modal from '../../components/Modal';
 import MainButton from '../../components/MainButton';
@@ -56,7 +57,7 @@ interface IFormValues {
   babies: IBaby[];
 }
 
-type IScreenParams = {
+type ScreenParams = {
   MotherForm: {
     motherInfo: IMotherSignUpInfo;
   };
@@ -66,7 +67,7 @@ const BabyForm: React.FC = () => {
   const { signIn } = useAuth();
   const navigation = useNavigation();
   const { motherInfo } = useRoute<
-    RouteProp<IScreenParams, 'MotherForm'>
+    RouteProp<ScreenParams, 'MotherForm'>
   >().params;
 
   const [isSendingForm, setIsSendingForm] = useState(false);
@@ -75,44 +76,60 @@ const BabyForm: React.FC = () => {
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [babyCount, setBabyCount] = useState(0);
 
-  const babyFormSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
-    numberOfBabies: Yup.string()
-      .matches(new RegExp('^\\d+$'), 'Deve ser um número inteiro positivo')
+  const babyFormSchema = Yup.object({
+    numberOfBabies: Yup.number()
+      .min(0, 'Pelo menos um bebê deve ser registrado')
       .required('Campo obrigatório'),
     babies: Yup.array()
       .of(
-        Yup.object({
-          id: Yup.number(),
-          name: Yup.string().required('Campo obrigatório'),
-          birthday: Yup.string().required('Campo obrigatório'),
-          weight: Yup.string()
-            .matches(
-              new RegExp('^(\\d+(\\.\\d\\d*)?)$'),
-              'Deve ser um número positivo. Ex: 3.4',
-            )
-            .required('Campo obrigatório'),
-          birthType: Yup.array(Yup.string().required()).required(
-            'Campo obrigatório',
-          ),
-          difficulties: Yup.array(Yup.string().required()).required(
-            'Campo obrigatório',
-          ),
-          gestationWeeks: Yup.string().required('Campo obrigatório'),
-          gestationDays: Yup.string().required('Campo obrigatório'),
-          apgar1: Yup.string().matches(
-            new RegExp('^\\d+$'),
-            'Deve ser um número inteiro positivo',
-          ),
-          apgar2: Yup.string().matches(
-            new RegExp('^\\d+$'),
-            'Deve ser um número inteiro positivo',
-          ),
-          birthLocation: Yup.array(Yup.string().required()).required(
-            'Campo obrigatório',
-          ),
-        }).required(),
+        Yup.object().shape(
+          {
+            id: Yup.number(),
+            name: Yup.string().required('Campo obrigatório'),
+            birthday: Yup.string().required('Campo obrigatório'),
+            weight: Yup.number()
+              .integer('Deve ser um número inteiro')
+              .typeError('Deve ser um número inteiro')
+              .min(0, 'Deve ser maior ou igual a 0')
+              .required('Campo obrigatório'),
+            birthType: Yup.array(Yup.string().required()).required(
+              'Campo obrigatório',
+            ),
+            difficulties: Yup.array(Yup.string().required()).required(
+              'Campo obrigatório',
+            ),
+            gestationWeeks: Yup.string().required('Campo obrigatório'),
+            gestationDays: Yup.string().required('Campo obrigatório'),
+            apgar1: Yup.number()
+              .when('apgar2', {
+                is: undefined,
+                then: Yup.number().typeError('Deve ser um número inteiro'),
+                otherwise: Yup.number()
+                  .typeError('Deve ser um número inteiro')
+                  .required('Apgar 1 também deve ser fornecido'),
+              })
+              .integer('Deve ser um número inteiro')
+              .min(0, 'Deve ser maior ou igual a 0')
+              .max(10, 'Deve ser menor ou igual a 10'),
+            apgar2: Yup.number()
+              .when('apgar1', {
+                is: undefined,
+                then: Yup.number().typeError('Deve ser um número inteiro'),
+                otherwise: Yup.number()
+                  .typeError('Deve ser um número inteiro')
+                  .required('Apgar 2 também deve ser fornecido'),
+              })
+              .integer('Deve ser um número inteiro')
+              .min(0, 'Deve ser maior ou igual a 0')
+              .max(10, 'Deve ser menor ou igual a 10'),
+            birthLocation: Yup.array(Yup.string().required()).required(
+              'Campo obrigatório',
+            ),
+          },
+          [['apgar1', 'apgar2']],
+        ),
       )
-      .min(1, 'Pelo menos um bebê deve ser cadastrado!')
+      .min(1, 'Pelo menos um bebê deve ser cadastrado')
       .required(),
   }).required();
 
@@ -194,11 +211,11 @@ const BabyForm: React.FC = () => {
 
   // Registra todos os bebês do formulário.
   async function registerNewBabies(token: string, formValues: IFormValues) {
-    formValues.babies.forEach(async (baby) => {
-      const babyInfo = {
+    formValues.babies.forEach(async baby => {
+      const babyInfo: IBabySignUpInfo = {
         name: baby.name,
         birthday: baby.birthday,
-        weight: parseFloat(baby.weight),
+        weight: parseInt(baby.weight, 10),
         birthType: baby.birthType[0].toLowerCase() === 'cesária',
         gestationWeeks: parseInt(baby.gestationWeeks, 10),
         gestationDays: parseInt(baby.gestationDays, 10),

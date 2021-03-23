@@ -1,14 +1,16 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
+import { useAuth } from '../../contexts/auth';
 import OptionsList from '../../components/OptionList';
 
 import { Header, HeaderTitle, ScrollView } from './styles';
 
-const Diary: React.FC = () => {
+const Survey: React.FC = () => {
+  const { motherInfo } = useAuth();
   const navigation = useNavigation();
 
-  const options = [
+  let options = [
     {
       image: require('../../../assets/images/surveys_one.png'),
       title: 'Amamentar um prematuro',
@@ -26,12 +28,19 @@ const Diary: React.FC = () => {
       title: 'Sobre ajuda',
       onPress: () => {},
     },
-    {
-      image: require('../../../assets/images/surveys_four.png'),
-      title: 'Sobre a participação do pai',
-      onPress: () => {},
-    },
   ];
+
+  // Exibe o formulário de participação do pai apenas se a mãe tem um companheiro.
+  if (motherInfo.partner) {
+    options = [
+      ...options,
+      {
+        image: require('../../../assets/images/surveys_four.png'),
+        title: 'Sobre a participação do pai',
+        onPress: () => {},
+      },
+    ];
+  }
 
   return (
     <ScrollView>
@@ -43,4 +52,4 @@ const Diary: React.FC = () => {
   );
 };
 
-export default Diary;
+export default Survey;

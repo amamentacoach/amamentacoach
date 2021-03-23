@@ -32,7 +32,7 @@ const VideoPage: React.FC = () => {
         </LoadingContainer>
       )}
       <ContentContainer display={!isLoading}>
-        {videos.map((id) => (
+        {videos.map(id => (
           <VideoContainer key={id}>
             <YoutubePlayer
               height={300}

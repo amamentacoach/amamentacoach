@@ -16,7 +16,7 @@ interface PieChartProps {
 }
 
 const PieChart: React.FC<PieChartProps> = ({ label, data }) => {
-  const colors = ['#FA931A', '#85E43A', '#D75C5C', '#E5D43B', '#30D2F5'];
+  const colors = ['#D75C5C', '#85E43A', '#30D2F5', '#E5D43B', '#FA931A'];
 
   return (
     <Container>
@@ -25,9 +25,9 @@ const PieChart: React.FC<PieChartProps> = ({ label, data }) => {
           dataSets: [
             {
               label,
-              values: data.map((answer) => answer.value),
+              values: data.map(answer => answer.value),
               config: {
-                colors: colors.map((color) => processColor(color) as number),
+                colors: colors.map(color => processColor(color) as number),
                 drawValues: true,
                 valueTextSize: 14,
                 valueTextColor: processColor('#161026') as number,

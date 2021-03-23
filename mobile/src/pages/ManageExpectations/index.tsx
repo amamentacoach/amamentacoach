@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import moment from 'moment';
 import AsyncStorage from '@react-native-community/async-storage';
+import moment from 'moment';
 
 import MainButton from '../../components/MainButton';
 import SecondaryButton from '../../components/SecondaryButton';
@@ -23,8 +22,6 @@ interface ISelectedIdsInfo {
 }
 
 const ManageExpectations: React.FC = () => {
-  const navigation = useNavigation();
-
   const [currentExpectation, setCurrentExpectation] = useState<{
     id: number;
     old: string;

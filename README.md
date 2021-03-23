@@ -48,7 +48,7 @@ react-native run-android
 ## Executando com Docker Compose
 1. Clone o repositório
 2. Declare as variáveis de ambiente necessárias no arquivo "**database.config**", seguindo o formato especificado no arquivo "database.config.example". 
-3. Execute
+3. Execute:
 ```
 docker-compose up
 ```

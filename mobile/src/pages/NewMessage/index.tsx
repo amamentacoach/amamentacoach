@@ -54,7 +54,7 @@ const NewMessage: React.FC = () => {
         initialValues={formInitialValues}
         validationSchema={newPasswordSchema}
         validateOnChange={false}
-        onSubmit={(values) => handleNewMessage(values)}>
+        onSubmit={values => handleNewMessage(values)}>
         {({ setFieldValue, handleSubmit, dirty, errors }) => (
           <FormContainer>
             <View>
@@ -69,6 +69,7 @@ const NewMessage: React.FC = () => {
                 multiline
                 numberOfLines={20}
                 maxLength={255}
+                textAlignVertical="top"
               />
             </View>
 

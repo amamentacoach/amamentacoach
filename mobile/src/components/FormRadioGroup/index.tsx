@@ -62,7 +62,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
       .map((selected, index) => {
         return selected ? availableOptions[index] : '';
       })
-      .filter((option) => option);
+      .filter(option => option);
 
     // Caso o campo 'Outro' tenha sido utilizado o valor do ultimo elemento é trocado para o texto
     // digitado pelo usuário.

@@ -42,7 +42,7 @@ const BreastfeedingBenefits: React.FC = () => {
       topics: [
         {
           text:
-            'A amamentação contribui para estabelecer um vínculo afetivo desde muito cedo.\nO leite materno é o mais completo alimento para o bebê e tem muitas outras vantagens.\nÉ desejável que seja feito o aleitamento materno exclusivo durante, pelo menos, os primeiros 6 meses de vida do bebê.',
+            'A amamentação ajuda na formação do vínculo desde muito cedo.\n\nO leite materno é o alimento mais completo para o bebê, além de oferecer muitas outras vantagens.\n\nNão há nada melhor do que amamentar o bebê somente no peito até o 6º mês de vida, e manter o aleitamento junto com alimentos saudáveis até 2 anos ou mais.',
         },
       ],
     },
@@ -69,7 +69,8 @@ const BreastfeedingBenefits: React.FC = () => {
         },
         {
           header: 'INTELIGÊNCIA',
-          text: 'Crianças amamentadas por mais de um ano tem QI maior.',
+          text:
+            'Crianças amamentadas por mais de um ano têm coeficiente de inteligência (QI) maior.',
         },
       ],
     },
@@ -116,7 +117,8 @@ const BreastfeedingBenefits: React.FC = () => {
         },
         {
           header: 'PROMOVE',
-          text: 'A involução uterina.',
+          text:
+            'A involução uterina promove o retorno do útero ao seu tamanho normal.',
         },
       ],
     },
@@ -168,7 +170,7 @@ const BreastfeedingBenefits: React.FC = () => {
             topics={item.topics}
           />
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}

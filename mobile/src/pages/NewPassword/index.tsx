@@ -60,7 +60,7 @@ const NewPassword: React.FC = () => {
         initialValues={formInitialValues}
         validationSchema={newPasswordSchema}
         validateOnChange={false}
-        onSubmit={(values) => handleNewPassword(values)}>
+        onSubmit={values => handleNewPassword(values)}>
         {({ handleChange, handleSubmit, dirty, errors, values }) => (
           <FormContainer>
             <View>

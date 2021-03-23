@@ -4,9 +4,10 @@ export interface IMotherSignUpInfo {
   email: string;
   password: string;
   name: string;
+  phone: string;
   alreadyBreastfeed: boolean;
   birthday: string;
-  married: boolean;
+  partner: boolean;
   liveTogether?: string | null;
   education: string;
   wage: string;
@@ -14,7 +15,7 @@ export interface IMotherSignUpInfo {
   timeSpentBreastFeeding: string[];
 }
 
-interface IBabySignUpInfo {
+export interface IBabySignUpInfo {
   name: string;
   birthday: string;
   gestationWeeks: number;
@@ -34,7 +35,14 @@ export interface IMotherInfo {
     UCI: boolean;
     UTI: boolean;
   };
+  partner: boolean;
   babies: { id: number; name: string }[];
+}
+
+export enum LoginStatus {
+  Success,
+  IncorrectLogin,
+  FailedToConnect,
 }
 
 // Cadastra uma mãe no sistema.
@@ -47,8 +55,9 @@ export async function signUpMother(
       senha: motherInfo.password,
       nome: motherInfo.name,
       data_nascimento: motherInfo.birthday,
+      whatsapp: motherInfo.phone,
       amamentou_antes: motherInfo.alreadyBreastfeed,
-      companheiro: motherInfo.married,
+      companheiro: motherInfo.partner,
       moram_juntos: motherInfo.liveTogether,
       escolaridade: motherInfo.education,
       renda: motherInfo.wage,
@@ -73,12 +82,12 @@ export async function signUpBaby(
       data_parto: babyInfo.birthday,
       semanas_gest: babyInfo.gestationWeeks,
       dias_gest: babyInfo.gestationDays,
+      complicacoes: babyInfo.difficulties,
       peso: babyInfo.weight,
       apgar1: babyInfo.apgar1,
       apgar2: babyInfo.apgar2,
       tipo_parto: babyInfo.birthType,
       local: babyInfo.birthLocation,
-      complicacoes: babyInfo.difficulties,
     },
     {
       headers: {
@@ -92,15 +101,22 @@ export async function signUpBaby(
 export async function signIn(
   email: string,
   password: string,
-): Promise<string | null> {
+): Promise<{ token: string; status: LoginStatus }> {
   try {
     const request = await api.post('/login', {
       email,
       senha: password,
     });
-    return request.data.token;
+    return { token: request.data.token, status: LoginStatus.Success };
   } catch (error) {
-    return null;
+    const login = {
+      token: '',
+      status: LoginStatus.FailedToConnect,
+    };
+    if (error.response) {
+      login.status = LoginStatus.IncorrectLogin;
+    }
+    return login;
   }
 }
 
@@ -142,6 +158,7 @@ export async function getMotherInfo(): Promise<IMotherInfo | null> {
     return {
       name: data.nome,
       babiesBirthLocations,
+      partner: data.companheiro,
       babies,
     };
   } catch (error) {

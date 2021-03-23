@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { FlatList } from 'react-native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-import dateFormatVerbose from '../../utils/date';
-import { useAuth } from '../../contexts/auth';
+import { ActivityIndicator } from 'react-native';
 import {
-  listDiaryRegistries,
-  IListDiaryEntry,
+  IExtractionEntry,
+  listExtractionsEntries,
 } from '../../services/diaryRegistry';
+import dateFormatVerbose from '../../utils/date';
 import MainButton from '../../components/MainButton';
 
 import {
@@ -21,36 +20,40 @@ import {
   RegistryTextContainer,
   RegistryContent,
   ListContainer,
-  LoadingIndicator,
 } from './styles';
+
+interface RegistryEntryProps {
+  date: string;
+  breast: 'E' | 'D';
+  duration: number;
+  quantity: number;
+}
 
 const DiaryRegistry: React.FC = () => {
   const navigation = useNavigation();
-  const { motherInfo } = useAuth();
+  const isFocused = useIsFocused();
   const currentDate = moment();
-  const [registries, setRegistries] = useState<IListDiaryEntry[]>();
-  const [loading, setLoading] = useState(true);
+  const [registries, setRegistries] = useState<IExtractionEntry[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchRegistries() {
-      if (motherInfo.babies) {
-        const oldRegistries = await Promise.all(
-          motherInfo.babies.map(async ({ id }) => listDiaryRegistries(id)),
-        );
-        // Combina todos os registros em um array.
-        const sortedRegistries = ([] as IListDiaryEntry[]).concat(
-          ...oldRegistries,
-        );
-        // Ordena os registros de acordo com suas datas em ordem decrescente.
-        sortedRegistries.sort((a, b) => (a.date < b.date ? 1 : -1));
-        setRegistries(sortedRegistries);
-      }
-      setLoading(false);
+      setIsLoading(true);
+      const oldRegistries = await listExtractionsEntries();
+      setRegistries(oldRegistries);
+      setIsLoading(false);
     }
-    fetchRegistries();
-  }, [motherInfo]);
+    if (isFocused) {
+      fetchRegistries();
+    }
+  }, [isFocused]);
 
-  function InfoPage({ date, breast, duration, quantity }: IListDiaryEntry) {
+  function RegistryItem({
+    breast,
+    date,
+    duration,
+    quantity,
+  }: RegistryEntryProps) {
     return (
       <Registry>
         <RegistryRow>
@@ -65,14 +68,14 @@ const DiaryRegistry: React.FC = () => {
         </RegistryRow>
         <RegistryRow>
           <RegistryTextContainer>
-            <RegistryText>Quantidade: </RegistryText>
-            <RegistryContent>{quantity} ml</RegistryContent>
-          </RegistryTextContainer>
-          <RegistryTextContainer>
             <RegistryText>Mama: </RegistryText>
             <RegistryContent>
               {breast === 'E' ? 'Esquerda' : 'Direita'}
             </RegistryContent>
+          </RegistryTextContainer>
+          <RegistryTextContainer>
+            <RegistryText>Quantidade: </RegistryText>
+            <RegistryContent>{quantity} ml</RegistryContent>
           </RegistryTextContainer>
         </RegistryRow>
       </Registry>
@@ -83,19 +86,23 @@ const DiaryRegistry: React.FC = () => {
     <Container>
       <DateText>{dateFormatVerbose(currentDate)}</DateText>
       <ListContainer>
-        <FlatList
-          data={registries}
-          renderItem={({ item }) => <InfoPage {...item} />}
-          keyExtractor={(item) => item.id.toString()}
-          ListFooterComponent={() => (
-            <LoadingIndicator
-              size="large"
-              color="#7d5cd7"
-              animating={loading}
+        {!isLoading ? (
+          registries.map(({ id, breast, date, duration, quantity }) => (
+            <RegistryItem
+              key={id}
+              breast={breast}
+              date={date}
+              duration={duration}
+              quantity={quantity}
             />
-          )}
-          showsVerticalScrollIndicator={false}
-        />
+          ))
+        ) : (
+          <ActivityIndicator
+            size="large"
+            color="#7d5cd7"
+            animating={isLoading}
+          />
+        )}
       </ListContainer>
       <MainButton
         text="Registrar retirada"
