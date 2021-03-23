@@ -648,6 +648,48 @@
     "name": "GetMaesOrdenhas"
   },
   {
+    "type": "get",
+    "url": "/maes/ordenhas/porData",
+    "title": "Listagem por data",
+    "description": "<p>Lista as ordenhas da data informada</p>",
+    "group": "Ordenhas",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "{\n    \"date\":\"2020-03-20\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Sucesso: Status 200",
+          "content": "\n[\n   {\n     \"id\": 1,\n     \"data_hora\": \"2020-09-24T17:40:31.501Z\",\n     \"qtd_leite\": 100,\n     \"mama\": \"D\",\n     \"duracao\": 5,\n     \"bebe_id\": 1\n   }\n ]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Ordenhas",
+    "name": "GetMaesOrdenhasPordata"
+  },
+  {
     "type": "post",
     "url": "/maes/ordenhas",
     "title": "Cadastro",

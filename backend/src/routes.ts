@@ -248,6 +248,33 @@ routes.post('/maes/ordenhas',verifyJWT,ordenhasController.create);
 
 
 /**
+ * @api {get} /maes/ordenhas/porData Listagem por data
+ * @apiDescription Lista as ordenhas da data informada
+ * @apiGroup Ordenhas
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "date":"2020-03-20"
+ *      }
+ * 
+ * @apiSuccessExample {json} Sucesso: Status 200
+ * 
+ *        [
+ *           {
+ *             "id": 1,
+ *             "data_hora": "2020-09-24T17:40:31.501Z",
+ *             "qtd_leite": 100,
+ *             "mama": "D",
+ *             "duracao": 5,
+ *             "bebe_id": 1
+ *           }
+ *         ]
+ *
+ */
+routes.get('/maes/ordenhas/porData',verifyJWT,ordenhasController.showByDate);
+
+/**
  * @api {get} /maes/ordenhas Listagem
  * @apiDescription Lista as ordenhas da mãe logada informado
  * @apiGroup Ordenhas
@@ -269,7 +296,7 @@ routes.post('/maes/ordenhas',verifyJWT,ordenhasController.create);
  *         ]
  *
  */
-routes.get('/maes/ordenhas',verifyJWT,ordenhasController.show);
+ routes.get('/maes/ordenhas',verifyJWT,ordenhasController.show);
 
 routes.get('/bebes/:id', bebesController.show);
 

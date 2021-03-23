@@ -30,6 +30,22 @@ class OrdenhasController{
 
         res.sendStatus(200);
     }
+
+    async showByDate(req:Request,res:Response){
+        const {mae_id} = req
+        const {date} = req.body
+
+        const dateIni = new Date(date)
+        const dateFim = new Date(date)
+        dateFim.setDate(dateFim.getDate()+1)
+
+        const ordenhas = await knex('ordenha')
+            .select('*')
+            .whereBetween('data_hora',[dateIni, dateFim])
+            .where('mae_id',mae_id).orderBy('data_hora','desc')
+
+        res.send(ordenhas)
+    }
 }
 
 export default OrdenhasController;
