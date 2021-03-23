@@ -132,7 +132,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
     });
   }
 
-  // Envia as respostas do usuário ao backend.
+  // Envia as respostas do usuário.
   async function handleFormSubmit(answers: { [key: string]: string[] }) {
     Object.keys(answers).forEach(async questionId =>
       answerQuestion(parseInt(questionId, 10), answers[questionId]),

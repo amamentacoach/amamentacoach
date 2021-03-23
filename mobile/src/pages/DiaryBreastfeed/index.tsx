@@ -14,24 +14,24 @@ import MainButton from '../../components/MainButton';
 
 import {
   DateText,
-  Registry,
-  RegistryRow,
-  RegistryText,
-  RegistryTextContainer,
-  RegistryContent,
+  Breastfeed,
+  Row,
+  Text,
+  TextContainer,
+  Content,
   ListContainer,
   BabyName,
   ScrollView,
   Container,
 } from './styles';
 
-interface RegistryEntryProps {
+interface BreastfeedEntryProps {
   date: string;
   breast: 'E' | 'D';
   duration: number;
 }
 
-const DiaryRegistry: React.FC = () => {
+const DiaryBreastfeed: React.FC = () => {
   const navigation = useNavigation();
   const { motherInfo } = useAuth();
   const currentDate = moment();
@@ -56,28 +56,26 @@ const DiaryRegistry: React.FC = () => {
     }
   }, [isFocused]);
 
-  function RegistryEntry({ breast, date, duration }: RegistryEntryProps) {
+  function BreastfeedEntry({ breast, date, duration }: BreastfeedEntryProps) {
     return (
-      <Registry>
-        <RegistryRow>
-          <RegistryTextContainer>
-            <RegistryText>Horário: </RegistryText>
-            <RegistryContent>{moment(date).format('kk:mm')}</RegistryContent>
-          </RegistryTextContainer>
-          <RegistryTextContainer>
-            <RegistryText>Duração: </RegistryText>
-            <RegistryContent>{duration} min</RegistryContent>
-          </RegistryTextContainer>
-        </RegistryRow>
-        <RegistryRow>
-          <RegistryTextContainer>
-            <RegistryText>Mama: </RegistryText>
-            <RegistryContent>
-              {breast === 'E' ? 'Esquerda' : 'Direita'}
-            </RegistryContent>
-          </RegistryTextContainer>
-        </RegistryRow>
-      </Registry>
+      <Breastfeed>
+        <Row>
+          <TextContainer>
+            <Text>Horário: </Text>
+            <Content>{moment(date).format('kk:mm')}</Content>
+          </TextContainer>
+          <TextContainer>
+            <Text>Duração: </Text>
+            <Content>{duration} min</Content>
+          </TextContainer>
+        </Row>
+        <Row>
+          <TextContainer>
+            <Text>Mama: </Text>
+            <Content>{breast === 'E' ? 'Esquerda' : 'Direita'}</Content>
+          </TextContainer>
+        </Row>
+      </Breastfeed>
     );
   }
 
@@ -93,7 +91,7 @@ const DiaryRegistry: React.FC = () => {
                   <BabyName>{registry.name}</BabyName>
                 )}
                 {registry.entries.map(({ id, breast, date, duration }) => (
-                  <RegistryEntry
+                  <BreastfeedEntry
                     key={id}
                     breast={breast}
                     date={date}
@@ -119,4 +117,4 @@ const DiaryRegistry: React.FC = () => {
   );
 };
 
-export default DiaryRegistry;
+export default DiaryBreastfeed;

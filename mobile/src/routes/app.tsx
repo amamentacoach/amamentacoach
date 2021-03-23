@@ -35,6 +35,7 @@ import DiaryBreastfeed from '../pages/DiaryBreastfeed';
 import NewBreastfeedEntry from '../pages/NewBreastfeedEntry';
 import Questions from '../pages/Questions';
 import NewQuestion from '../pages/NewQuestion';
+import Report from '../pages/Report';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -197,6 +198,19 @@ const AppRoutes: React.FC = () => {
         options={{ title: 'Registrar Amamentação' }}
       />
       <Stack.Screen
+        name="Goals"
+        component={Goals}
+        options={{
+          title: 'Diário',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: '#7D5CD7',
+            elevation: 0, // Remove a sombra no Android
+            shadowOpacity: 0, // Remove a sombra no iOS
+          },
+        }}
+      />
+      <Stack.Screen
         name="HelpReceived"
         component={HelpReceived}
         options={{
@@ -210,17 +224,9 @@ const AppRoutes: React.FC = () => {
         }}
       />
       <Stack.Screen
-        name="Goals"
-        component={Goals}
-        options={{
-          title: 'Diário',
-          headerTintColor: 'white',
-          headerStyle: {
-            backgroundColor: '#7D5CD7',
-            elevation: 0, // Remove a sombra no Android
-            shadowOpacity: 0, // Remove a sombra no iOS
-          },
-        }}
+        name="Report"
+        component={Report}
+        options={{ title: 'Relatório' }}
       />
       <Stack.Screen
         name="Feelings"

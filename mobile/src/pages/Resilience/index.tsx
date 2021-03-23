@@ -22,30 +22,22 @@ const Resilience: React.FC = () => {
     {
       image: require('../../../assets/images/erlenmeyer_primary.png'),
       title: '1. Manter expectativas realistas',
-      onPress: () => {
-        navigation.navigate('EmotionsAndBreastfeeding');
-      },
+      onPress: () => navigation.navigate('EmotionsAndBreastfeeding'),
     },
     {
       image: require('../../../assets/images/erlenmeyer_yellow.png'),
       title: '2. Buscar apoio social e conexão de grupo',
-      onPress: () => {
-        navigation.navigate('Messages');
-      },
+      onPress: () => navigation.navigate('Messages'),
     },
     {
       image: require('../../../assets/images/erlenmeyer_green.png'),
       title: '3. Desenvolver uma maneira positiva de pensar',
-      onPress: () => {
-        navigation.navigate('Diary');
-      },
+      onPress: () => navigation.navigate('Diary'),
     },
     {
       image: require('../../../assets/images/erlenmeyer_pink.png'),
       title: '4. Construir força e autoconfiança',
-      onPress: () => {
-        navigation.navigate('UploadMotherPhoto');
-      },
+      onPress: () => navigation.navigate('UploadMotherPhoto'),
     },
   ];
 

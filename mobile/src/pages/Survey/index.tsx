@@ -14,9 +14,7 @@ const Survey: React.FC = () => {
     {
       image: require('../../../assets/images/surveys_one.png'),
       title: 'Amamentar um prematuro',
-      onPress: () => {
-        navigation.navigate('SurveyBreastfeed');
-      },
+      onPress: () => navigation.navigate('SurveyBreastfeed'),
     },
     {
       image: require('../../../assets/images/surveys_two.png'),

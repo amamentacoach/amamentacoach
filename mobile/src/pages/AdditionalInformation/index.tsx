@@ -27,25 +27,19 @@ const AdditionalInformation: React.FC = () => {
       image: require('../../../assets/images/diary_smile.png'),
       title: 'Você sabe o que é Resiliência?',
       subtitle: 'Explicamos pra você!',
-      onPress: () => {
-        navigation.navigate('Resilience');
-      },
+      onPress: () => navigation.navigate('Resilience'),
     },
     {
       image: require('../../../assets/images/change.png'),
       title: 'Reformulando as expectativas',
       subtitle: 'Troque expectativas que são improváveis por realistas',
-      onPress: () => {
-        navigation.navigate('Expectations');
-      },
+      onPress: () => navigation.navigate('Expectations'),
     },
     {
       image: require('../../../assets/images/emotions_info.png'),
       title: 'Oferta de leite pelo copinho',
       subtitle: 'Vídeo Demonstrativo',
-      onPress: () => {
-        navigation.navigate('BabyCup');
-      },
+      onPress: () => navigation.navigate('BabyCup'),
     },
   ];
 
@@ -57,9 +51,7 @@ const AdditionalInformation: React.FC = () => {
         image: require('../../../assets/images/father.png'),
         title: 'Participação do Pai',
         subtitle: 'Registre e acompanhe a participação do papai',
-        onPress: () => {
-          navigation.navigate('UploadFatherPhoto');
-        },
+        onPress: () => navigation.navigate('UploadFatherPhoto'),
       },
     ];
   }

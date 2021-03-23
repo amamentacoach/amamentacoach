@@ -15,10 +15,10 @@ import {
   DateText,
   Container,
   Registry,
-  RegistryRow,
-  RegistryText,
-  RegistryTextContainer,
-  RegistryContent,
+  Row,
+  Text,
+  TextContainer,
+  Content,
   ListContainer,
 } from './styles';
 
@@ -48,7 +48,7 @@ const DiaryRegistry: React.FC = () => {
     }
   }, [isFocused]);
 
-  function RegistryItem({
+  function RegistryEntry({
     breast,
     date,
     duration,
@@ -56,28 +56,26 @@ const DiaryRegistry: React.FC = () => {
   }: RegistryEntryProps) {
     return (
       <Registry>
-        <RegistryRow>
-          <RegistryTextContainer>
-            <RegistryText>Horário: </RegistryText>
-            <RegistryContent>{moment(date).format('kk:mm')}</RegistryContent>
-          </RegistryTextContainer>
-          <RegistryTextContainer>
-            <RegistryText>Duração: </RegistryText>
-            <RegistryContent>{duration} min</RegistryContent>
-          </RegistryTextContainer>
-        </RegistryRow>
-        <RegistryRow>
-          <RegistryTextContainer>
-            <RegistryText>Mama: </RegistryText>
-            <RegistryContent>
-              {breast === 'E' ? 'Esquerda' : 'Direita'}
-            </RegistryContent>
-          </RegistryTextContainer>
-          <RegistryTextContainer>
-            <RegistryText>Quantidade: </RegistryText>
-            <RegistryContent>{quantity} ml</RegistryContent>
-          </RegistryTextContainer>
-        </RegistryRow>
+        <Row>
+          <TextContainer>
+            <Text>Horário: </Text>
+            <Content>{moment(date).format('kk:mm')}</Content>
+          </TextContainer>
+          <TextContainer>
+            <Text>Duração: </Text>
+            <Content>{duration} min</Content>
+          </TextContainer>
+        </Row>
+        <Row>
+          <TextContainer>
+            <Text>Mama: </Text>
+            <Content>{breast === 'E' ? 'Esquerda' : 'Direita'}</Content>
+          </TextContainer>
+          <TextContainer>
+            <Text>Quantidade: </Text>
+            <Content>{quantity} ml</Content>
+          </TextContainer>
+        </Row>
       </Registry>
     );
   }
@@ -88,7 +86,7 @@ const DiaryRegistry: React.FC = () => {
       <ListContainer>
         {!isLoading ? (
           registries.map(({ id, breast, date, duration, quantity }) => (
-            <RegistryItem
+            <RegistryEntry
               key={id}
               breast={breast}
               date={date}

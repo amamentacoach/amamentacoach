@@ -29,7 +29,7 @@ export async function createExtractionEntry(
   time: Date,
 ): Promise<boolean> {
   try {
-    await api.post(`/maes/ordenhas`, {
+    await api.post('/maes/ordenhas', {
       qtd_leite: quantity,
       mama: breast,
       duracao: duration,
@@ -41,9 +41,9 @@ export async function createExtractionEntry(
   }
 }
 
-// Retorna todas as ordenas realizadas pela mãe.
+// Retorna todas as ordenhas realizadas pela mãe.
 export async function listExtractionsEntries(): Promise<IExtractionEntry[]> {
-  const { data } = await api.get(`/maes/ordenhas`);
+  const { data } = await api.get('/maes/ordenhas');
   return data.ordenhas.map((item: any) => ({
     id: item.id,
     baby_id: item.bebe_id,
