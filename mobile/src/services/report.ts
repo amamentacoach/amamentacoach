@@ -19,6 +19,11 @@ export interface IDailyReport {
   questions: ISurveyQuestion[];
 }
 
+export interface IWeeklyReport {
+  question: string;
+  answers: string[];
+}
+
 // Retorna o relatório diário da mãe
 export async function getDailyReport(): Promise<IDailyReport> {
   const { data } = await api.get('relatorios/diario');
@@ -27,14 +32,14 @@ export async function getDailyReport(): Promise<IDailyReport> {
     id: item.id,
     baby_name: item.bebe,
     breast: item.mama,
-    duration: item.duration,
+    duration: item.duracao,
     date: item.data_hora,
   }));
   const registryEntries = data.ordenhas.map((item: any) => ({
     id: item.id,
     breast: item.mama,
-    duration: item.duration,
-    quantity: item.quantidade,
+    duration: item.duracao,
+    quantity: item.qtd_leite,
     date: item.data_hora,
   }));
 
@@ -56,4 +61,13 @@ export async function getDailyReport(): Promise<IDailyReport> {
     registryEntries,
     questions,
   };
+}
+
+// Retorna o relatório semanal da mãe
+export async function getWeeklyReport(): Promise<IWeeklyReport[]> {
+  const { data } = await api.get('relatorios/semanal');
+  return data.map((entry: any) => ({
+    question: entry.pergunta,
+    answers: entry.respostas,
+  }));
 }
