@@ -3,6 +3,7 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
+import { IMotherSignUpInfo } from '../../services/auth';
 import MainButton from '../../components/MainButton';
 import SecondaryButton from '../../components/SecondaryButton';
 import FormRadioGroupInput from '../../components/FormRadioGroup';
@@ -17,14 +18,11 @@ import {
   FormContainer,
   PhoneInputContainer,
   DDDContainer,
-  PartnerTimeContainer,
-  PartnerMetricContainer,
   SubmitButtonContainer,
   FirstSubOptionContainer,
   SecondSubOptionContainer,
+  SubOptionsContainer,
 } from './styles';
-import { SubOptionsContainer } from '../BabyForm/styles';
-import { IMotherSignUpInfo } from '../../services/auth';
 
 interface IFormValues {
   name: string;
@@ -39,8 +37,8 @@ interface IFormValues {
   alreadyBreastfeed: string[];
   partner: string[];
   liveTogether: string[];
-  partnerTime: string;
-  partnerMetric: string;
+  partnerYears: string;
+  partnerMonths: string;
   education: string;
   wage: string;
 }
@@ -72,8 +70,8 @@ const MotherForm: React.FC = () => {
     alreadyBreastfeed: [],
     partner: [],
     liveTogether: ['Não'],
-    partnerTime: '0',
-    partnerMetric: 'meses',
+    partnerYears: '0',
+    partnerMonths: '0',
     education: '',
     wage: '',
   };
@@ -116,8 +114,8 @@ const MotherForm: React.FC = () => {
     liveTogether: Yup.array(Yup.string().required()).required(
       'Campo obrigatório',
     ),
-    partnerTime: Yup.string().required('Campo obrigatório'),
-    partnerMetric: Yup.string().required('Campo obrigatório'),
+    partnerYears: Yup.string().required('Campo obrigatório'),
+    partnerMonths: Yup.string().required('Campo obrigatório'),
     education: Yup.string().required('Campo obrigatório'),
     wage: Yup.string().required('Campo obrigatório'),
   }).required();
@@ -158,10 +156,9 @@ const MotherForm: React.FC = () => {
       } else if (current < previous) {
         // Caso o novo valor seja menor que o anterior é necessário remover os n últimos objetos
         // existentes.
-        newTimeSpentBreastFeeding.pop();
       }
+      setFieldValue('timeSpentBreastFeeding', newTimeSpentBreastFeeding);
     }
-    setFieldValue('timeSpentBreastFeeding', newTimeSpentBreastFeeding);
   }
 
   // Avança para a próxima página passando as informações do usuário.
@@ -180,8 +177,8 @@ const MotherForm: React.FC = () => {
       ),
       partner: formValues.partner[0].toLowerCase() === 'sim',
       liveTogether:
-        formValues.partner[0].toLowerCase() === 'sim'
-          ? `${formValues.partnerTime} ${formValues.partnerMetric}`
+        formValues.partnerYears !== '0' && formValues.partnerMonths !== '0'
+          ? `${formValues.partnerYears},${formValues.partnerMonths}`
           : null,
       education: formValues.education,
       wage: formValues.wage,
@@ -339,14 +336,13 @@ const MotherForm: React.FC = () => {
               onChange={(fieldName: string, fieldValue: string[]) => {
                 setFieldValue(fieldName, fieldValue);
                 if (fieldValue[0] === 'Não') {
-                  setFieldValue('partnerTime', '0');
+                  setFieldValue('partnerYears', '0');
                   setFieldValue('liveTogether', ['Não']);
+                  setFieldValue('partnerYears', '0');
+                  setFieldValue('partnerMonths', '0');
                 } else if (fieldValue[0] === 'Sim') {
-                  // Reinicia os campos abaixo quando o valor do campo partner é 'Sim'.
-                  setFieldValue('partnerTime', '');
                   setFieldValue('liveTogether', []);
                 }
-                setFieldValue('partnerMetric', 'meses');
               }}
               options={['Sim', 'Não']}
               error={errors.partner}
@@ -360,11 +356,12 @@ const MotherForm: React.FC = () => {
                   onChange={(fieldName: string, fieldValue: string[]) => {
                     setFieldValue(fieldName, fieldValue);
                     if (fieldValue[0] === 'Não') {
-                      setFieldValue('partnerTime', '0');
+                      setFieldValue('partnerYears', '0');
+                      setFieldValue('partnerMonths', '0');
                     } else if (fieldValue[0] === 'Sim') {
-                      setFieldValue('partnerTime', '');
+                      setFieldValue('partnerYears', '');
+                      setFieldValue('partnerMonths', '');
                     }
-                    setFieldValue('partnerMetric', 'meses');
                   }}
                   options={['Sim', 'Não']}
                   error={errors.liveTogether}
@@ -372,25 +369,48 @@ const MotherForm: React.FC = () => {
 
                 {values.liveTogether[0] === 'Sim' && (
                   <SubOptionsContainer>
-                    <PartnerTimeContainer>
+                    <FirstSubOptionContainer>
                       <FormPickerInput
-                        label="Há quanto tempo?"
-                        fieldName="partnerTime"
+                        label="Há quantos anos?"
+                        fieldName="partnerYears"
                         onChange={setFieldValue}
-                        error={errors.partnerTime}
-                        options={['1 a 3', '4 a 6', '7 a 9', '10 ou mais']}
+                        error={errors.partnerYears}
+                        options={[
+                          '1',
+                          '2',
+                          '3',
+                          '4',
+                          '5',
+                          '6',
+                          '7',
+                          '8',
+                          '9',
+                          '10 ou mais',
+                        ]}
                       />
-                    </PartnerTimeContainer>
-                    <PartnerMetricContainer>
+                    </FirstSubOptionContainer>
+                    <SecondSubOptionContainer>
                       <FormPickerInput
-                        label=""
-                        placeholder=""
-                        fieldName="partnerMetric"
+                        label="Há quantos meses?"
+                        fieldName="partnerMonths"
                         onChange={setFieldValue}
-                        error={errors.partnerMetric}
-                        options={['meses', 'anos']}
+                        error={errors.partnerMonths}
+                        options={[
+                          '1',
+                          '2',
+                          '3',
+                          '4',
+                          '5',
+                          '6',
+                          '7',
+                          '8',
+                          '9',
+                          '10',
+                          '11',
+                          '12',
+                        ]}
                       />
-                    </PartnerMetricContainer>
+                    </SecondSubOptionContainer>
                   </SubOptionsContainer>
                 )}
               </>
