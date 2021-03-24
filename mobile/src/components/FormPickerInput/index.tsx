@@ -12,6 +12,7 @@ import {
 interface FormPickerProps {
   fieldName: string;
   placeholder?: string | undefined;
+  defaultValue?: string | undefined;
   label?: string | undefined;
   options: string[];
   error?: string | undefined;
@@ -21,12 +22,13 @@ interface FormPickerProps {
 const FormPickerInput: React.FC<FormPickerProps> = ({
   fieldName,
   placeholder = 'Selecione uma opção',
+  defaultValue,
   label,
   error,
   options,
   onChange,
 }) => {
-  const [selectedItem, setSelectedItem] = useState('');
+  const [selectedItem, setSelectedItem] = useState(defaultValue || '');
 
   function handleItemSelected(itemValue: string) {
     setSelectedItem(itemValue);
