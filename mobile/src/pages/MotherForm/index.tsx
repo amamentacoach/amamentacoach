@@ -186,6 +186,7 @@ const MotherForm: React.FC = () => {
       education: formValues.education,
       wage: formValues.wage,
     };
+    console.log(motherInfo);
     navigation.navigate('BabyForm', { motherInfo });
   }
 
@@ -356,32 +357,42 @@ const MotherForm: React.FC = () => {
                 <FormRadioGroupInput
                   label="Moram juntos?"
                   fieldName="liveTogether"
-                  onChange={setFieldValue}
+                  onChange={(fieldName: string, fieldValue: string[]) => {
+                    setFieldValue(fieldName, fieldValue);
+                    if (fieldValue[0] === 'Não') {
+                      setFieldValue('partnerTime', '0');
+                    } else if (fieldValue[0] === 'Sim') {
+                      setFieldValue('partnerTime', '');
+                    }
+                    setFieldValue('partnerMetric', 'meses');
+                  }}
                   options={['Sim', 'Não']}
                   error={errors.liveTogether}
                 />
 
-                <SubOptionsContainer>
-                  <PartnerTimeContainer>
-                    <FormPickerInput
-                      label="Há quanto tempo?"
-                      fieldName="partnerTime"
-                      onChange={setFieldValue}
-                      error={errors.partnerTime}
-                      options={['1 a 3', '4 a 6', '7 a 9', '10 ou mais']}
-                    />
-                  </PartnerTimeContainer>
-                  <PartnerMetricContainer>
-                    <FormPickerInput
-                      label=""
-                      placeholder=""
-                      fieldName="partnerMetric"
-                      onChange={setFieldValue}
-                      error={errors.partnerMetric}
-                      options={['meses', 'anos']}
-                    />
-                  </PartnerMetricContainer>
-                </SubOptionsContainer>
+                {values.liveTogether[0] === 'Sim' && (
+                  <SubOptionsContainer>
+                    <PartnerTimeContainer>
+                      <FormPickerInput
+                        label="Há quanto tempo?"
+                        fieldName="partnerTime"
+                        onChange={setFieldValue}
+                        error={errors.partnerTime}
+                        options={['1 a 3', '4 a 6', '7 a 9', '10 ou mais']}
+                      />
+                    </PartnerTimeContainer>
+                    <PartnerMetricContainer>
+                      <FormPickerInput
+                        label=""
+                        placeholder=""
+                        fieldName="partnerMetric"
+                        onChange={setFieldValue}
+                        error={errors.partnerMetric}
+                        options={['meses', 'anos']}
+                      />
+                    </PartnerMetricContainer>
+                  </SubOptionsContainer>
+                )}
               </>
             )}
 
