@@ -42,15 +42,6 @@ export const PhoneInputContainer = styled.View`
   flex: 4;
 `;
 
-export const PartnerTimeContainer = styled.View`
-  flex: 2;
-  margin-right: 4px;
-`;
-
-export const PartnerMetricContainer = styled.View`
-  flex: 1;
-`;
-
 export const FirstSubOptionContainer = styled.View`
   flex: 1;
   margin-right: 4px;
