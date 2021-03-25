@@ -22,6 +22,7 @@ import {
   FirstSubOptionContainer,
   SecondSubOptionContainer,
   SubOptionsContainer,
+  OptionPickerContainer,
 } from './styles';
 
 interface IFormValues {
@@ -358,26 +359,27 @@ const MotherForm: React.FC = () => {
 
             {values.alreadyBreastfeed === 'Sim' &&
               values.timeSpentBreastFeeding.map((item, index) => (
-                <FormPickerInput
-                  key={item.id}
-                  label={`Tempo de amamentação (gravidez ${index + 1})`}
-                  fieldName={`timeSpentBreastFeeding[${index}].value`}
-                  options={[
-                    'Menos de 1 ano',
-                    '1 ano',
-                    '2 anos',
-                    '3 ou mais anos',
-                  ]}
-                  onChange={setFieldValue}
-                  error={
-                    errors?.timeSpentBreastFeeding &&
-                    errors?.timeSpentBreastFeeding[index]
-                      ? (errors?.timeSpentBreastFeeding[index] as {
-                          [key: string]: any;
-                        }).value
-                      : ''
-                  }
-                />
+                <OptionPickerContainer key={item.id}>
+                  <FormPickerInput
+                    label={`Tempo de amamentação (gravidez ${index + 1})`}
+                    fieldName={`timeSpentBreastFeeding[${index}].value`}
+                    options={[
+                      'Menos de 1 ano',
+                      '1 ano',
+                      '2 anos',
+                      '3 ou mais anos',
+                    ]}
+                    onChange={setFieldValue}
+                    error={
+                      errors?.timeSpentBreastFeeding &&
+                      errors?.timeSpentBreastFeeding[index]
+                        ? (errors?.timeSpentBreastFeeding[index] as {
+                            [key: string]: any;
+                          }).value
+                        : ''
+                    }
+                  />
+                </OptionPickerContainer>
               ))}
 
             <FormRadioGroupInput
@@ -386,7 +388,6 @@ const MotherForm: React.FC = () => {
               onChange={(fieldName: string, fieldValue: string[]) => {
                 setFieldValue(fieldName, fieldValue[0]);
                 if (fieldValue[0] === 'Não') {
-                  setFieldValue('partnerYears', '0');
                   setFieldValue('liveTogether', 'Não');
                   setFieldValue('partnerYears', '0');
                   setFieldValue('partnerMonths', '0');
@@ -404,7 +405,7 @@ const MotherForm: React.FC = () => {
                   label="Moram juntos?"
                   fieldName="liveTogether"
                   onChange={(fieldName: string, fieldValue: string[]) => {
-                    setFieldValue(fieldName, fieldValue);
+                    setFieldValue(fieldName, fieldValue[0]);
                     if (fieldValue[0] === 'Não') {
                       setFieldValue('partnerYears', '0');
                       setFieldValue('partnerMonths', '0');
@@ -466,111 +467,133 @@ const MotherForm: React.FC = () => {
               </>
             )}
 
-            <FormPickerInput
-              label="Qual sua escolaridade?"
-              fieldName="education"
-              onChange={setFieldValue}
-              error={errors.education}
-              options={[
-                'Fundamental incompleto',
-                'Fundamental completo',
-                'Ensino médio incompleto',
-                'Ensino médio completo',
-                'Superior incompleto',
-                'Superior completo',
-              ]}
-            />
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Qual sua escolaridade?"
+                fieldName="education"
+                onChange={setFieldValue}
+                error={errors.education}
+                options={[
+                  'Fundamental incompleto',
+                  'Fundamental completo',
+                  'Ensino médio incompleto',
+                  'Ensino médio completo',
+                  'Superior incompleto',
+                  'Superior completo',
+                ]}
+              />
+            </OptionPickerContainer>
 
-            <FormPickerInput
-              label="Em qual faixa sua renda familiar se encaixa?"
-              fieldName="wage"
-              onChange={setFieldValue}
-              error={errors.wage}
-              options={[
-                'Até 1 salário mínimo',
-                'Entre 1 e 3 salários mínimos',
-                'Entre 4 e 6 salários mínimos',
-                'Mais que 6 salários mínimos',
-              ]}
-            />
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Em qual faixa sua renda familiar se encaixa?"
+                fieldName="wage"
+                onChange={setFieldValue}
+                error={errors.wage}
+                options={[
+                  'Até 1 salário mínimo',
+                  'Entre 1 e 3 salários mínimos',
+                  'Entre 4 e 6 salários mínimos',
+                  'Mais que 6 salários mínimos',
+                ]}
+              />
+            </OptionPickerContainer>
 
-            <FormPickerInput
-              label="A gestação foi planejada?"
-              fieldName="plannedPregnancy"
-              onChange={setFieldValue}
-              error={errors.plannedPregnancy}
-              options={['Sim', 'Não']}
-            />
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="A gestação foi planejada?"
+                fieldName="plannedPregnancy"
+                onChange={setFieldValue}
+                error={errors.plannedPregnancy}
+                options={['Sim', 'Não']}
+              />
+            </OptionPickerContainer>
 
-            <FormPickerInput
-              label="Quanto tempo após o parto você fez a primeira visita ao seu bebe?"
-              fieldName="firstVisit"
-              onChange={setFieldValue}
-              error={errors.firstVisit}
-              options={['12h', '13-24h', '2 dias', '3 dias']}
-            />
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Quanto tempo após o parto você fez a primeira visita ao seu bebe?"
+                fieldName="firstVisit"
+                onChange={setFieldValue}
+                error={errors.firstVisit}
+                options={['12h', '13-24h', '2 dias', '3 dias']}
+              />
+            </OptionPickerContainer>
 
-            <FormPickerInput
-              label="Qual foi o primeiro estímulo a ser feito na sua mama?"
-              fieldName="firstStimulus"
-              onChange={setFieldValue}
-              error={errors.firstStimulus}
-              options={['Massagem/Ordenha', 'Sucção']}
-            />
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Qual foi o primeiro estímulo a ser feito na sua mama?"
+                fieldName="firstStimulus"
+                onChange={setFieldValue}
+                error={errors.firstStimulus}
+                options={['Massagem/Ordenha', 'Sucção']}
+              />
+            </OptionPickerContainer>
 
-            <FormPickerInput
-              label="Qual foi o primeiro estímulo a ser feito na sua mama?"
-              fieldName="timeFirstStimulus"
-              onChange={setFieldValue}
-              error={errors.timeFirstStimulus}
-              options={['6h', '7-12h', '13-24h', '2d', '3d']}
-            />
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Qual foi o primeiro estímulo a ser feito na sua mama?"
+                fieldName="timeFirstStimulus"
+                onChange={setFieldValue}
+                error={errors.timeFirstStimulus}
+                options={['6h', '7-12h', '13-24h', '2d', '3d']}
+              />
+            </OptionPickerContainer>
 
-            <FormTextInput
-              label="Você possui quantos filhos vivos?"
-              placeholder="Número de filhos"
-              onChangeText={handleChange('childrenAlive')}
-              value={values.childrenAlive}
-              error={errors.childrenAlive}
-              keyboardType="number-pad"
-            />
-
-            <FormPickerInput
-              label="Você recebeu orientação orientações no pré-natal sobre aleitamento materno?"
-              fieldName="preNatalGuidance"
-              onChange={setFieldValue}
-              error={errors.preNatalGuidance}
-              options={['Sim', 'Não']}
-            />
-
-            <FormPickerInput
-              label="Você trabalha:"
-              fieldName="occupation"
-              onChange={setFieldValue}
-              error={errors.occupation}
-              options={[
-                'Em casa (do lar)',
-                'Fora de casa (alguma outra ocupação)',
-              ]}
-            />
-
-            <FormPickerInput
-              label="Possui licença maternidade:"
-              fieldName="maternityLeave"
-              onChange={setFieldValue}
-              error={errors.maternityLeave}
-              options={['Sim', 'Não']}
-            />
-
-            {values.maternityLeave === 'Sim' && (
+            <OptionPickerContainer>
               <FormTextInput
-                label="Quantos meses?"
-                placeholder="Número de meses"
-                onChangeText={handleChange('maternityLeaveCount')}
-                value={values.maternityLeaveCount}
-                error={errors.maternityLeaveCount}
+                label="Você possui quantos filhos vivos?"
+                placeholder="Número de filhos"
+                onChangeText={handleChange('childrenAlive')}
+                value={values.childrenAlive}
+                error={errors.childrenAlive}
                 keyboardType="number-pad"
               />
+            </OptionPickerContainer>
+
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Você recebeu orientação orientações no pré-natal sobre aleitamento materno?"
+                fieldName="preNatalGuidance"
+                onChange={setFieldValue}
+                error={errors.preNatalGuidance}
+                options={['Sim', 'Não']}
+              />
+            </OptionPickerContainer>
+
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Você trabalha:"
+                fieldName="occupation"
+                onChange={setFieldValue}
+                error={errors.occupation}
+                options={[
+                  'Em casa (do lar)',
+                  'Fora de casa (alguma outra ocupação)',
+                ]}
+              />
+            </OptionPickerContainer>
+
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Possui licença maternidade:"
+                fieldName="maternityLeave"
+                onChange={setFieldValue}
+                error={errors.maternityLeave}
+                options={['Sim', 'Não']}
+              />
+            </OptionPickerContainer>
+
+            {values.maternityLeave === 'Sim' && (
+              <OptionPickerContainer>
+                <FormTextInput
+                  label="Quantos meses?"
+                  placeholder="Número de meses"
+                  onChangeText={handleChange('maternityLeaveCount')}
+                  value={values.maternityLeaveCount}
+                  error={errors.maternityLeaveCount}
+                  keyboardType="number-pad"
+                />
+              </OptionPickerContainer>
             )}
 
             <SubmitButtonContainer>
