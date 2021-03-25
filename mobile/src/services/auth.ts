@@ -5,14 +5,22 @@ export interface IMotherSignUpInfo {
   password: string;
   name: string;
   phone: string;
+  pregnantCount: number;
   alreadyBreastfeed: boolean;
+  timeSpentBreastFeeding: string[];
   birthday: string;
   partner: boolean;
   liveTogether?: string | null;
   education: string;
   wage: string;
-  pregnantCount: number;
-  timeSpentBreastFeeding: string[];
+  plannedPregnancy: boolean;
+  firstVisit: string;
+  firstStimulus: boolean;
+  timeFirstStimulus: string;
+  childrenAlive: number;
+  receivedPreNatalGuidance: boolean;
+  occupation: boolean;
+  maternityLeave: number | null;
 }
 
 export interface IBabySignUpInfo {
@@ -63,6 +71,14 @@ export async function signUpMother(
       renda: motherInfo.wage,
       qtd_gravidez: motherInfo.pregnantCount,
       tempo_amamentacao: motherInfo.timeSpentBreastFeeding,
+      gestacao_planejada: motherInfo.plannedPregnancy,
+      primeira_visita: motherInfo.firstVisit,
+      primeiro_estimulo: motherInfo.firstStimulus,
+      tempo_primeiro_estimulo: motherInfo.timeFirstStimulus,
+      qtd_filhos_vivos: motherInfo.childrenAlive,
+      orientacao_prenatal: motherInfo.receivedPreNatalGuidance,
+      ocupacao: motherInfo.occupation,
+      licenca_maternidade: motherInfo.maternityLeave,
     });
     return request.data.token;
   } catch (error) {
