@@ -28,11 +28,6 @@ export const FormContainer = styled.View`
   margin-bottom: 20px;
 `;
 
-export const SubOptionsContainer = styled.View`
-  flex: 1;
-  flex-direction: row;
-`;
-
 export const DDDContainer = styled.View`
   margin-right: 4px;
   width: 70px;
@@ -42,12 +37,21 @@ export const PhoneInputContainer = styled.View`
   flex: 4;
 `;
 
+export const SubOptionsContainer = styled.View`
+  flex: 1;
+  flex-direction: row;
+`;
+
 export const FirstSubOptionContainer = styled.View`
   flex: 1;
   margin-right: 4px;
 `;
 
 export const SecondSubOptionContainer = styled.View`
+  flex: 1;
+`;
+
+export const OptionPickerContainer = styled.View`
   flex: 1;
 `;
 
