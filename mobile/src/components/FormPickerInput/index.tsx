@@ -53,7 +53,9 @@ const FormPickerInput: React.FC<FormPickerProps> = ({
             ))}
         </Picker>
       </PickerContainer>
-      <ErrorContainer>{error && <ErrorText>{error}</ErrorText>}</ErrorContainer>
+      <ErrorContainer>
+        {!!error && <ErrorText>{error}</ErrorText>}
+      </ErrorContainer>
     </Container>
   );
 };
