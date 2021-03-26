@@ -36,6 +36,7 @@ import NewBreastfeedEntry from '../pages/NewBreastfeedEntry';
 import Questions from '../pages/Questions';
 import NewQuestion from '../pages/NewQuestion';
 import Report from '../pages/Report';
+import SurveyFather from '../pages/SurveyFather';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -244,6 +245,19 @@ const AppRoutes: React.FC = () => {
       <Stack.Screen
         name="SurveyBreastfeed"
         component={SurveyBreastfeed}
+        options={{
+          title: 'Enquete',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: '#7D5CD7',
+            elevation: 0, // Remove a sombra no Android
+            shadowOpacity: 0, // Remove a sombra no iOS
+          },
+        }}
+      />
+      <Stack.Screen
+        name="SurveyFather"
+        component={SurveyFather}
         options={{
           title: 'Enquete',
           headerTintColor: 'white',

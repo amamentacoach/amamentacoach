@@ -48,7 +48,7 @@ const Goals: React.FC = () => {
     isFormValid,
     isSendingForm,
     setFieldValue,
-    handleNextPage,
+    handleChangePage,
   }) => {
     return (
       <ScrollView width={width}>
@@ -79,7 +79,9 @@ const Goals: React.FC = () => {
               text={index === pagesLength - 1 ? 'Finalizar' : 'Próximo'}
               disabled={isSendingForm}
               onPress={() =>
-                handleNextPage(index, () => setIsFinishedModalVisible(true))
+                handleChangePage(index + 1, () =>
+                  setIsFinishedModalVisible(true),
+                )
               }
             />
           </Footer>

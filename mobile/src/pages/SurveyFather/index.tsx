@@ -1,13 +1,9 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
-import { useNavigation, StackActions } from '@react-navigation/native';
-import moment from 'moment';
-import 'moment/locale/pt-br';
+import { useNavigation } from '@react-navigation/native';
 
-import dateFormatVerbose from '../../utils/date';
 import DiaryForm, { IDiaryFormInfoPage } from '../../components/DiaryForm';
 import MainButton from '../../components/MainButton';
-import SecondaryButton from '../../components/SecondaryButton';
 import FormRadioGroupInput from '../../components/FormRadioGroup';
 
 import {
@@ -21,13 +17,14 @@ import {
   CurrentPageText,
   ErrorContainer,
   ErrorText,
-  SecondFooterButtonContainer,
+  FirstSubOptionContainer,
+  SecondSubOptionContainer,
 } from './styles';
+import SecondaryButton from '../../components/SecondaryButton';
 
-const Feelings: React.FC = () => {
+const SurveyFather: React.FC = () => {
   const navigation = useNavigation();
   const { width } = Dimensions.get('window');
-  const currentDate = dateFormatVerbose(moment());
 
   const InfoPage: React.FC<IDiaryFormInfoPage> = ({
     index,
@@ -41,7 +38,7 @@ const Feelings: React.FC = () => {
     return (
       <ScrollView width={width}>
         <HeaderBackground />
-        <HeaderText>{currentDate}</HeaderText>
+        <HeaderText>Participação do Pai</HeaderText>
         <ContentContainer>
           <CurrentPageContainer>
             <CurrentPageText>
@@ -63,37 +60,34 @@ const Feelings: React.FC = () => {
           />
 
           <Footer>
-            <MainButton
-              text={
-                index === pagesLength - 1 ? 'Salvar e traçar metas' : 'Próximo'
-              }
-              disabled={isSendingForm}
-              onPress={() =>
-                handleChangePage(index + 1, () =>
-                  navigation.dispatch(StackActions.replace('Goals')),
-                )
-              }
-            />
-            {index === pagesLength - 1 ? (
-              <SecondFooterButtonContainer>
+            {index > 0 ? (
+              <FirstSubOptionContainer>
                 <SecondaryButton
-                  text="Salvar e sair"
-                  disabled={isSendingForm}
-                  onPress={() =>
-                    handleChangePage(index + 1, () =>
-                      navigation.navigate('Diary'),
-                    )
-                  }
+                  onPress={() => handleChangePage(index - 1)}
+                  text="Voltar"
                 />
-              </SecondFooterButtonContainer>
+              </FirstSubOptionContainer>
             ) : null}
+            <SecondSubOptionContainer>
+              <MainButton
+                text={index === pagesLength - 1 ? 'Finalizar' : 'Próximo'}
+                disabled={isSendingForm}
+                onPress={() =>
+                  handleChangePage(index + 1, () =>
+                    navigation.navigate('Survey'),
+                  )
+                }
+              />
+            </SecondSubOptionContainer>
           </Footer>
         </ContentContainer>
       </ScrollView>
     );
   };
 
-  return <DiaryForm title={currentDate} category={2} InfoPage={InfoPage} />;
+  return (
+    <DiaryForm title="Participação do Pai" category={5} InfoPage={InfoPage} />
+  );
 };
 
-export default Feelings;
+export default SurveyFather;
