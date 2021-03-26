@@ -112,7 +112,9 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
           />
         </OtherInputContainer>
       ) : null}
-      <ErrorContainer>{error && <ErrorText>{error}</ErrorText>}</ErrorContainer>
+      <ErrorContainer>
+        {!!error && <ErrorText>{error}</ErrorText>}
+      </ErrorContainer>
     </Container>
   );
 };

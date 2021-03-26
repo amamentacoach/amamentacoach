@@ -82,7 +82,9 @@ const FormDateInput: React.FC<FormDateProps> = ({
           editable={false}
         />
       </TouchableOpacity>
-      <ErrorContainer>{error && <ErrorText>{error}</ErrorText>}</ErrorContainer>
+      <ErrorContainer>
+        {!!error && <ErrorText>{error}</ErrorText>}
+      </ErrorContainer>
 
       {show && (
         <DateTimePicker

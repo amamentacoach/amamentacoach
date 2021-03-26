@@ -46,7 +46,9 @@ const FormTextInput: React.FC<FormTextProps> = ({
         maxLength={maxLength}
         centerText={centerText}
       />
-      <ErrorContainer>{error && <ErrorText>{error}</ErrorText>}</ErrorContainer>
+      <ErrorContainer>
+        {!!error && <ErrorText>{error}</ErrorText>}
+      </ErrorContainer>
     </Container>
   );
 };
