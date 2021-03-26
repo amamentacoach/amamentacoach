@@ -165,6 +165,24 @@ routes.get('/maes', verifyJWT,maesController.show);
 
 routes.post('/bebes', verifyJWT, bebesController.create);
 
+/**
+ * @api {post} /bebes/:id/alta Alta do bebe
+ * @apiGroup Bebês
+ *
+ * @apiHeader {String} authorization Token de acesso.
+ * 
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "local":"Casa" // locais de alta: "UCI Neonatal", "Alojamento Conjunto" e "Casa"
+ *      }
+ * 
+ * @apiSuccessExample {json} Sucesso
+ *    HTTP/1.1 200 OK
+ *
+ */
+
+ routes.post('/bebes/:id/alta', verifyJWT, bebesController.alta);
+
 
 
 /**
@@ -909,9 +927,40 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
 
 /**
  * @api {post} /acessos/app Acessos App
- * @apiDescription Informa se mae acessou app
+ * @apiDescription Informa se mae acessou app e retorna caso necessite uma acao a ser tomada</br>
+ * **Mostrar um popup para cada bebe**
  * @apiGroup Controle de Acessos
  * @apiHeader {String} authorization Token de acesso.
+ * @apiSuccessExample {json} Retorno com bebe internado
+ * {
+ *  "acao":"RESPONDER_ALTA",
+ *  "internados":[
+ *      {
+ *          "nome": "Enzo",
+ *          "id": 1
+ *      },
+ *      {
+ *          "nome": "Joao",
+ *          "id": 2
+ *      }
+ *  ]
+ * } 
+ * 
+ * @apiSuccessExample {json} Retorno do primeiro acesso
+ * {
+ *  "acao":"RESPONDER_1D",
+ * } 
+ * 
+ * @apiSuccessExample {json} Retorno quando bebe completar 15 dias  
+ * {
+ *  "acao":"RESPONDER_15D",
+ * } 
+ * 
+ * @apiSuccessExample {json} Retorno quando bebe completar 1 mes  
+ * {
+ *  "acao":"RESPONDER_1M",
+ * } 
+ * 
  */
 
 /**

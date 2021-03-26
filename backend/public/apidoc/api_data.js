@@ -74,6 +74,47 @@ define({ "api": [
     "name": "PostBebes"
   },
   {
+    "type": "post",
+    "url": "/bebes/:id/alta",
+    "title": "Alta do bebe",
+    "group": "Bebês",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "{\n    \"local\":\"Casa\" // locais de alta: \"UCI Neonatal\", \"Alojamento Conjunto\" e \"Casa\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Sucesso",
+          "content": "HTTP/1.1 200 OK",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Bebês",
+    "name": "PostBebesIdAlta"
+  },
+  {
     "type": "get",
     "url": "/duvidas/frequentes",
     "title": "Listagem de Dúvidas",
@@ -143,7 +184,7 @@ define({ "api": [
     "type": "post",
     "url": "/acessos/app",
     "title": "Acessos App",
-    "description": "<p>Informa se mae acessou app</p>",
+    "description": "<p>Informa se mae acessou app e retorna caso necessite uma acao a ser tomada</br> <strong>Mostrar um popup para cada bebe</strong></p>",
     "group": "Controle_de_Acessos",
     "header": {
       "fields": {
@@ -157,6 +198,30 @@ define({ "api": [
           }
         ]
       }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Retorno com bebe internado",
+          "content": "{\n \"acao\":\"RESPONDER_ALTA\",\n \"internados\":[\n     {\n         \"nome\": \"Enzo\",\n         \"id\": 1\n     },\n     {\n         \"nome\": \"Joao\",\n         \"id\": 2\n     }\n ]\n}",
+          "type": "json"
+        },
+        {
+          "title": "Retorno do primeiro acesso",
+          "content": "{\n \"acao\":\"RESPONDER_1D\",\n}",
+          "type": "json"
+        },
+        {
+          "title": "Retorno quando bebe completar 15 dias  ",
+          "content": "{\n \"acao\":\"RESPONDER_15D\",\n}",
+          "type": "json"
+        },
+        {
+          "title": "Retorno quando bebe completar 1 mes  ",
+          "content": "{\n \"acao\":\"RESPONDER_1M\",\n}",
+          "type": "json"
+        }
+      ]
     },
     "version": "0.0.0",
     "filename": "./src/routes.ts",

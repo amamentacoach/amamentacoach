@@ -30,7 +30,7 @@ async function sendPushNotification(){
         if(response.status===200)
             console.log("Notificacoes enviadas")
         else{
-            console.log("Erro!")
+            console.log("Erro!", response.data)
         }
     }else{
         console.log("Ninguem foi notificado!")

@@ -52,6 +52,19 @@ class BebesController{
 
 
     }
+
+    async alta(req:Request, res:Response){
+        const {id} = req.params;
+        const {
+            local
+        } = req.body;
+        
+        await knex('bebe').update('local',local).where('id',id)
+
+        return res.sendStatus(200);
+
+
+    }
 }
 
 export default BebesController;

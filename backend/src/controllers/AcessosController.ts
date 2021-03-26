@@ -10,9 +10,28 @@ class AcessosController{
                 await knex('mae').update('acesso_videos',true).where('id',mae_id)
                 return res.sendStatus(200)
             case "app":
-                const acessosAntApp = await knex('mae').select('acessos_app').where('id',mae_id).first()
-                await knex('mae').update('acessos_app',acessosAntApp.acessos_app+1).where('id',mae_id)
-                return res.sendStatus(200)
+                const mae = await knex('mae').select('acessos_app','score_1d','score_15d','score_1m','primeiro_acesso').where('id',mae_id).first()
+                await knex('mae').update('acessos_app',mae.acessos_app+1).where('id',mae_id)
+                const bebes = await knex('bebe').select('nome','id', 'local', 'data_parto').where('mae_id',mae_id)
+                const internados = bebes.filter(bebe => bebe.local !== "Casa")
+                if(internados.length>0)
+                    return res.send({acao:"RESPONDER_ALTA",internados})
+                else{
+                    const bebe = bebes[0]
+                    const timeDiff = Math.abs(new Date().getTime() - bebe.data_parto.getTime())
+                    const diffDays =  Math.ceil(timeDiff/(1000 * 3600 * 24))
+                    console.log(diffDays, mae.score_15d)
+
+                    if(mae.acessos_app > 1 && mae.score_1d == null){
+                        return res.send({acao:"RESPONDER_1D"})
+                    }else if(diffDays >= 15 && mae.score_15d == null){
+                        return res.send({acao:"RESPONDER_15"})
+                    }else if(diffDays >= 30 && mae.score_1m == null){
+                        return res.send({acao:"RESPONDER_1M"})
+                    }else{
+                        return res.sendStatus(200)
+                    }
+                }
             case "diario":
                 const acessosAntDiario = await knex('mae').select('acessos_diario').where('id',mae_id).first()
                 await knex('mae').update('acessos_diario',acessosAntDiario.acessos_diario+1).where('id',mae_id)
