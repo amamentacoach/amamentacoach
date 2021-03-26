@@ -37,7 +37,7 @@ const FormPickerInput: React.FC<FormPickerProps> = ({
 
   return (
     <Container>
-      {label !== undefined ? <LabelText>{label}</LabelText> : null}
+      {label !== undefined && <LabelText>{label}</LabelText>}
       <PickerContainer>
         <Picker
           selectedValue={selectedItem}
@@ -53,9 +53,7 @@ const FormPickerInput: React.FC<FormPickerProps> = ({
             ))}
         </Picker>
       </PickerContainer>
-      <ErrorContainer>
-        {error ? <ErrorText>{error}</ErrorText> : null}
-      </ErrorContainer>
+      <ErrorContainer>{error && <ErrorText>{error}</ErrorText>}</ErrorContainer>
     </Container>
   );
 };

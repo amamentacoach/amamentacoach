@@ -51,7 +51,11 @@ const DailyReport: React.FC<DailyReportProps> = ({
   setIsLoading,
 }) => {
   const { motherInfo } = useAuth();
-  const [dailyReport, setDailyReport] = useState<IDailyReport>();
+  const [dailyReport, setDailyReport] = useState<IDailyReport>({
+    breastfeedEntries: [],
+    registryEntries: [],
+    questions: [],
+  });
   const [formInitialValues, setFormInitialValues] = useState({});
 
   useEffect(() => {
@@ -205,7 +209,9 @@ const DailyReport: React.FC<DailyReportProps> = ({
 
   return (
     <Container>
-      <Header>Amamentações</Header>
+      {dailyReport?.breastfeedEntries.length > 0 && (
+        <Header>Amamentações</Header>
+      )}
       {dailyReport?.breastfeedEntries.map(
         ({ id, baby_name, breast, date, duration }) => (
           <View key={id}>
@@ -219,7 +225,9 @@ const DailyReport: React.FC<DailyReportProps> = ({
           </View>
         ),
       )}
-      <Header>Retiradas de leite</Header>
+      {dailyReport?.registryEntries.length > 0 && (
+        <Header>Retiradas de leite</Header>
+      )}
       {dailyReport?.registryEntries.map(
         ({ id, breast, date, quantity, duration }) => (
           <RegistryEntry
