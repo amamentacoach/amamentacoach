@@ -31,7 +31,7 @@ export interface IDiaryFormInfoPage {
   // Definir o valor de uma resposta.
   setFieldValue: (field: string, value: any) => void;
   // Avança para a próxima página do formulário caso possível.
-  handleNextPage: (
+  handleChangePage: (
     currentPage: number,
     handleFormEnd?: () => void | undefined,
   ) => void;
@@ -129,12 +129,12 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
     });
   }
 
-  async function handleNextPage(
+  async function handleChangePage(
     question: ISurveyQuestion,
     values: {
       [key: number]: string[];
     },
-    currentPage: number,
+    newPage: number,
     submitForm: (() => Promise<void>) & (() => Promise<any>),
     handleFormEnd?: () => void | undefined,
   ) {
@@ -145,7 +145,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
     }
 
     setIsFormValid(true);
-    if (currentPage === pages.length - 1) {
+    if (newPage === pages.length) {
       // Envia o formulário caso seja a última página
       setIsSendingForm(true);
       await submitForm();
@@ -154,7 +154,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
         handleFormEnd();
       }
     } else {
-      goToPage(currentPage + 1);
+      goToPage(newPage);
     }
   }
 
@@ -198,11 +198,11 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
                 setFieldValue={setFieldValue}
                 isFormValid={isFormValid}
                 isSendingForm={isSendingForm}
-                handleNextPage={(currentPage, handleFormEnd) =>
-                  handleNextPage(
+                handleChangePage={(newPage, handleFormEnd) =>
+                  handleChangePage(
                     item,
                     values,
-                    currentPage,
+                    newPage,
                     submitForm,
                     handleFormEnd,
                   )

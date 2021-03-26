@@ -33,7 +33,7 @@ const SurveyBreastfeed: React.FC = () => {
     isFormValid,
     isSendingForm,
     setFieldValue,
-    handleNextPage,
+    handleChangePage,
   }) => {
     return (
       <ScrollView width={width}>
@@ -63,7 +63,7 @@ const SurveyBreastfeed: React.FC = () => {
             {index > 0 ? (
               <FirstSubOptionContainer>
                 <SecondaryButton
-                  onPress={() => handleNextPage(index - 1)}
+                  onPress={() => handleChangePage(index - 1)}
                   text="Voltar"
                 />
               </FirstSubOptionContainer>
@@ -73,7 +73,7 @@ const SurveyBreastfeed: React.FC = () => {
                 text={index === pagesLength - 1 ? 'Finalizar' : 'Próximo'}
                 disabled={isSendingForm}
                 onPress={() =>
-                  handleNextPage(index, () =>
+                  handleChangePage(index + 1, () =>
                     navigation.navigate('SurveyStatistics'),
                   )
                 }

@@ -30,7 +30,7 @@ const HelpReceived: React.FC = () => {
     isFormValid,
     isSendingForm,
     setFieldValue,
-    handleNextPage,
+    handleChangePage,
   }) => {
     return (
       <ScrollView width={width}>
@@ -61,7 +61,7 @@ const HelpReceived: React.FC = () => {
               text={index === pagesLength - 1 ? 'Finalizar' : 'Próximo'}
               disabled={isSendingForm}
               onPress={() =>
-                handleNextPage(index, () => navigation.navigate('Diary'))
+                handleChangePage(index + 1, () => navigation.navigate('Diary'))
               }
             />
           </Footer>

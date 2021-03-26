@@ -35,7 +35,7 @@ const Survey: React.FC = () => {
       {
         image: require('../../../assets/images/surveys_four.png'),
         title: 'Sobre a participação do pai',
-        onPress: () => {},
+        onPress: () => navigation.navigate('SurveyFather'),
       },
     ];
   }
