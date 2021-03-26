@@ -382,8 +382,133 @@ routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadCont
 
 
 /**
- * @api {get} /perguntas/:categoria Listagem de perguntas
- * @apiDescription Lista todas as perguntas de uma enquete<br/>
+ * @api {get} /perguntas/escalaealimentacao Perguntas da escala e da alimentacao
+ * @apiDescription Perguntas da escala e da amamentacao: Responder quandoa acessar o App<br/>
+ * 
+ *      
+ * @apiGroup Enquetes
+ *
+ * 
+ * 
+ * @apiSuccessExample {json} Exemplo Request:
+ * {
+ *  "escala": [
+ *    {
+ *      "id": 17,
+ *      "categoria": 7,
+ *      "descricao": "Eu consigo retirar leite suficiente da mama para o meu bebê.",
+ *      "alternativas": [
+ *        "1",
+ *        "2",
+ *        "3",
+ *        "4",
+ *        "5"
+ *      ],
+ *      "outro": false,
+ *      "multiplas": false,
+ *      "alvo": "GERAL"
+ *    },
+ *    {
+ *      "id": 18,
+ *      "categoria": 7,
+ *      "descricao": "Eu consigo lidar com o fato de que retirar leite da mama e amamentar podem ser demorados.",
+ *      "alternativas": [
+ *        "1",
+ *        "2",
+ *        "3",
+ *        "4",
+ *        "5"
+ *      ],
+ *      "outro": false,
+ *      "multiplas": false,
+ *      "alvo": "GERAL"
+ *    },
+ *    {
+ *      "id": 19,
+ *      "categoria": 7,
+ *      "descricao": "Eu consigo lidar bem com qualquer situação da amamentação (retirada de leite da mama e a amamentação em si) da mesma forma que faço com outras tarefas difíceis.",
+ *      "alternativas": [
+ *        "1",
+ *        "2",
+ *        "3",
+ *        "4",
+ *        "5"
+ *      ],
+ *      "outro": false,
+ *      "multiplas": false,
+ *      "alvo": "GERAL"
+ *    },
+ *    {
+ *      "id": 20,
+ *      "categoria": 7,
+ *      "descricao": "Eu consigo lidar com a amamentação de forma que eu me sinta satisfeita.",
+ *      "alternativas": [
+ *        "1",
+ *        "2",
+ *        "3",
+ *        "4",
+ *        "5"
+ *      ],
+ *      "outro": false,
+ *      "multiplas": false,
+ *      "alvo": "GERAL"
+ *    },
+ *    {
+ *      "id": 21,
+ *      "categoria": 7,
+ *      "descricao": "Eu continuo querendo amamentar",
+ *      "alternativas": [
+ *        "1",
+ *        "2",
+ *        "3",
+ *        "4",
+ *        "5"
+ *      ],
+ *      "outro": false,
+ *      "multiplas": false,
+ *      "alvo": "GERAL"
+ *    },
+ *    {
+ *      "id": 22,
+ *      "categoria": 7,
+ *      "descricao": "Eu estou satisfeita com a minha experiência de amamentar.",
+ *      "alternativas": [
+ *        "1",
+ *        "2",
+ *        "3",
+ *        "4",
+ *        "5"
+ *      ],
+ *      "outro": false,
+ *      "multiplas": false,
+ *      "alvo": "GERAL"
+ *    }
+ *  ],
+ *  "alimentacao": {
+ *    "id": 5,
+ *    "categoria": 2,
+ *    "descricao": "Como meu bebê está se alimentando:",
+ *    "alternativas": [
+ *      "Apenas no meu peito",
+ *      "No meu peito, c/ complemento por copinho",
+ *      "Por relactação/ translactação",
+ *      "Apenas por copinho ",
+ *      "Por chuca",
+ *      "Por sonda"
+ *    ],
+ *    "outro": false,
+ *    "multiplas": false,
+ *    "alvo": "GERAL"
+ *  }
+ *}
+ * 
+ *
+ */
+routes.get('/perguntas/escalaealimentacao',perguntasController.escalaEAlimentacao);
+
+/**
+ * @api {get} /perguntas/:categoria Listagem por categoria
+ * @apiDescription Perguntas quando<br/>
  *  Categoria das Enquetes:<br/>
  *      1 - Amamentar um prematuro<br/>
  *      2 - DIÁRIO: Sentimentos<br/>
@@ -493,6 +618,28 @@ routes.get('/perguntas/:categoria',perguntasController.index);
  */
   routes.post('/responder/escala',verifyJWT,respostasMaeController.responderEscala);
 
+
+   /**
+ * @api {post} /responder/alimentacao Responder Amamentacao
+ * @apiDescription Responde pergunta de amamentacao <br> Parametro "ocasiao" pode conter os seguintes valores</br>
+ *              "ALTA" : Quando o bebe recebeu alta.</br>
+ *              "15D" : Quando completou 15 dias</br>
+ *              "1M" : Quando completou 1 mes
+ *  
+ * @apiGroup Enquetes
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ * 
+ * 
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "ocasiao": "15D", // Esta respondendo a alimentacao quando bebe completou 15 dias
+ *          "descricao":"Por relactação/translactação"
+ *      }
+ * 
+ *
+ */
+routes.post('/responder/alimentacao',verifyJWT,respostasMaeController.responderAlimentacao);
 
  /**
  * @api {post} /responder/:pergunta_id Responder pergunta

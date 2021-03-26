@@ -88,6 +88,44 @@ class RespostasMaeController{
         res.sendStatus(200)
     }
 
+    async responderAlimentacao(req:Request, res:Response){
+        const {mae_id} = req
+        const  {ocasiao } = req.body
+        const {descricao} = req.body
+        
+        await knex.transaction(async trx =>{
+
+            try {
+
+                await trx('resposta').insert({mae_id,pergunta_id:5,descricao,data:new Date()});
+        
+                switch (ocasiao) {
+                    case "ALTA":
+                        await trx('mae').update({alim_alta:descricao}).where({id:mae_id})
+                        break;
+        
+                    case "15D":
+                        await trx('mae').update({alim_15d:descricao}).where({id:mae_id})
+                        break;
+        
+                    case "1M":
+                        await knex('mae').update({alim_1m:descricao}).where({id:mae_id})
+                        break;
+                
+                    default:
+                        res.sendStatus(400)
+                        break;
+                }
+            } catch (error) {
+                res.sendStatus(400)
+            }   
+                     
+        })
+
+       
+        res.sendStatus(200)
+    }
+
     async index(req:Request, res:Response){
         const {mae_id} = req;
 

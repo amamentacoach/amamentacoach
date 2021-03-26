@@ -299,8 +299,8 @@ define({ "api": [
   {
     "type": "get",
     "url": "/perguntas/:categoria",
-    "title": "Listagem de perguntas",
-    "description": "<p>Lista todas as perguntas de uma enquete<br/> Categoria das Enquetes:<br/> 1 - Amamentar um prematuro<br/> 2 - DIÁRIO: Sentimentos<br/> 3 - DIÁRIO: Metas<br/> 4 - DIÁRIO: Ajuda<br/> 5 - Participação do pai<br/> 6 - Acoes Realizadas com o bebe<br/> 7 - Escala</p>",
+    "title": "Listagem por categoria",
+    "description": "<p>Perguntas quando<br/> Categoria das Enquetes:<br/> 1 - Amamentar um prematuro<br/> 2 - DIÁRIO: Sentimentos<br/> 3 - DIÁRIO: Metas<br/> 4 - DIÁRIO: Ajuda<br/> 5 - Participação do pai<br/> 6 - Acoes Realizadas com o bebe<br/> 7 - Escala</p>",
     "group": "Enquetes",
     "success": {
       "examples": [
@@ -315,6 +315,59 @@ define({ "api": [
     "filename": "./src/routes.ts",
     "groupTitle": "Enquetes",
     "name": "GetPerguntasCategoria"
+  },
+  {
+    "type": "get",
+    "url": "/perguntas/escalaealimentacao",
+    "title": "Perguntas da escala e da alimentacao",
+    "description": "<p>Perguntas da escala e da amamentacao: Responder quandoa acessar o App<br/></p>",
+    "group": "Enquetes",
+    "success": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "{\n \"escala\": [\n   {\n     \"id\": 17,\n     \"categoria\": 7,\n     \"descricao\": \"Eu consigo retirar leite suficiente da mama para o meu bebê.\",\n     \"alternativas\": [\n       \"1\",\n       \"2\",\n       \"3\",\n       \"4\",\n       \"5\"\n     ],\n     \"outro\": false,\n     \"multiplas\": false,\n     \"alvo\": \"GERAL\"\n   },\n   {\n     \"id\": 18,\n     \"categoria\": 7,\n     \"descricao\": \"Eu consigo lidar com o fato de que retirar leite da mama e amamentar podem ser demorados.\",\n     \"alternativas\": [\n       \"1\",\n       \"2\",\n       \"3\",\n       \"4\",\n       \"5\"\n     ],\n     \"outro\": false,\n     \"multiplas\": false,\n     \"alvo\": \"GERAL\"\n   },\n   {\n     \"id\": 19,\n     \"categoria\": 7,\n     \"descricao\": \"Eu consigo lidar bem com qualquer situação da amamentação (retirada de leite da mama e a amamentação em si) da mesma forma que faço com outras tarefas difíceis.\",\n     \"alternativas\": [\n       \"1\",\n       \"2\",\n       \"3\",\n       \"4\",\n       \"5\"\n     ],\n     \"outro\": false,\n     \"multiplas\": false,\n     \"alvo\": \"GERAL\"\n   },\n   {\n     \"id\": 20,\n     \"categoria\": 7,\n     \"descricao\": \"Eu consigo lidar com a amamentação de forma que eu me sinta satisfeita.\",\n     \"alternativas\": [\n       \"1\",\n       \"2\",\n       \"3\",\n       \"4\",\n       \"5\"\n     ],\n     \"outro\": false,\n     \"multiplas\": false,\n     \"alvo\": \"GERAL\"\n   },\n   {\n     \"id\": 21,\n     \"categoria\": 7,\n     \"descricao\": \"Eu continuo querendo amamentar\",\n     \"alternativas\": [\n       \"1\",\n       \"2\",\n       \"3\",\n       \"4\",\n       \"5\"\n     ],\n     \"outro\": false,\n     \"multiplas\": false,\n     \"alvo\": \"GERAL\"\n   },\n   {\n     \"id\": 22,\n     \"categoria\": 7,\n     \"descricao\": \"Eu estou satisfeita com a minha experiência de amamentar.\",\n     \"alternativas\": [\n       \"1\",\n       \"2\",\n       \"3\",\n       \"4\",\n       \"5\"\n     ],\n     \"outro\": false,\n     \"multiplas\": false,\n     \"alvo\": \"GERAL\"\n   }\n ],\n \"alimentacao\": {\n   \"id\": 5,\n   \"categoria\": 2,\n   \"descricao\": \"Como meu bebê está se alimentando:\",\n   \"alternativas\": [\n     \"Apenas no meu peito\",\n     \"No meu peito, c/ complemento por copinho\",\n     \"Por relactação/ translactação\",\n     \"Apenas por copinho \",\n     \"Por chuca\",\n     \"Por sonda\"\n   ],\n   \"outro\": false,\n   \"multiplas\": false,\n   \"alvo\": \"GERAL\"\n }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Enquetes",
+    "name": "GetPerguntasEscalaealimentacao"
+  },
+  {
+    "type": "post",
+    "url": "/responder/alimentacao",
+    "title": "Responder Amamentacao",
+    "description": "<p>Responde pergunta de amamentacao <br> Parametro &quot;ocasiao&quot; pode conter os seguintes valores</br> &quot;ALTA&quot; : Quando o bebe recebeu alta.</br> &quot;15D&quot; : Quando completou 15 dias</br> &quot;1M&quot; : Quando completou 1 mes</p>",
+    "group": "Enquetes",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "{\n    \"ocasiao\": \"15D\", // Esta respondendo a alimentacao quando bebe completou 15 dias\n    \"descricao\":\"Por relactação/translactação\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Enquetes",
+    "name": "PostResponderAlimentacao"
   },
   {
     "type": "post",

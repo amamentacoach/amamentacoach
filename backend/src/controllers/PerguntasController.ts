@@ -16,6 +16,16 @@ class PerguntasController{
         })
         res.json(perguntas);
     }
+
+    async escalaEAlimentacao(req:Request, res:Response){
+        const escala = await knex('pergunta').select('*').where('categoria',7);
+        const alimentacao = await knex('pergunta').select('*').where('id',5).first();
+        escala.map((pergunta,i)=>{
+            pergunta["alternativas"]=pergunta.alternativas.split('|')
+        })
+        alimentacao["alternativas"] = alimentacao.alternativas.split('|')
+        res.json({escala, alimentacao});
+    }
 }
 
 export default PerguntasController;
