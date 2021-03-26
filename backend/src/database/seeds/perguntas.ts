@@ -244,5 +244,150 @@ export async function seed(knex: Knex): Promise<void> {
             multiplas:true,
             alvo:"UCI/UTI"
         },
+        // Categoria 7: Escala Auto Confianca para amamentar
+        {
+            id: 17, 
+            categoria: 7, 
+            descricao:'Eu consigo retirar leite suficiente da mama para o meu bebê.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 18, 
+            categoria: 7, 
+            descricao:'Eu consigo lidar com o fato de que retirar leite da mama e amamentar podem ser demorados.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 19, 
+            categoria: 7, 
+            descricao:'Eu consigo lidar bem com qualquer situação da amamentação (retirada de leite da mama e a amamentação em si) da mesma forma que faço com outras tarefas difíceis.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 20, 
+            categoria: 7, 
+            descricao:'Eu consigo lidar com a amamentação de forma que eu me sinta satisfeita.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 21, 
+            categoria: 7, 
+            descricao:'Eu continuo querendo amamentar',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 22, 
+            categoria: 7, 
+            descricao:'Eu estou satisfeita com a minha experiência de amamentar.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 23, 
+            categoria: 7, 
+            descricao:'Eu consigo obter ajuda com a amamentação se eu precisar (ou quando precisar).',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 24, 
+            categoria: 7, 
+            descricao:'Eu serei capaz de saber quando meu bebê precisa ser amamentado.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 25, 
+            categoria: 7, 
+            descricao:'Eu serei capaz de garantir que meu bebê está pegando o meu peito corretamente durante toda a mamada.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 26, 
+            categoria: 7, 
+            descricao:'Eu serei capaz de saber se meu bebê está recebendo leite suficiente no meu peito.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 27, 
+            categoria: 7, 
+            descricao:'Eu serei capaz de amamentar mesmo que meu bebê esteja chorando.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 28, 
+            categoria: 7, 
+            descricao:'Eu serei capaz de amamentar meu bebê sem usar outros tipos de leite como complemento.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 29, 
+            categoria: 7, 
+            descricao:'Eu serei capaz de amamentar confortavelmente na frente de pessoas da minha família.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 30, 
+            categoria: 7, 
+            descricao:'Eu serei capaz de amamentar meu bebê até esvaziar o peito antes de mudar para o outro.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 31, 
+            categoria: 7, 
+            descricao:'Eu serei capaz de amamentar meu bebê em todas as mamadas.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 32, 
+            categoria: 7, 
+            descricao:'Eu serei capaz de atender as necessidades de amamentação do meu bebê.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 33, 
+            categoria: 7, 
+            descricao:'Eu serei capaz de reconhecer quando meu bebê terminou de mamar.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        },
+        {
+            id: 34, 
+            categoria: 7, 
+            descricao:'Eu serei capaz de trocar a retirada do leite das mamas pela amamentação, na maioria das mamadas ou em todas elas.',
+            alternativas: '1|2|3|4|5',
+            outro:false,
+            multiplas:false
+        }
     ]);
 };

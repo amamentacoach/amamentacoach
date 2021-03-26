@@ -1,6 +1,12 @@
 import { Request, Response } from 'express';
 import knex from '../database/connection';
 
+
+interface Resposta{
+    pergunta_id: number,
+    descricao: string
+}
+
 class RespostasMaeController{
     async create(req:Request, res:Response){
         const {pergunta_id} = req.params;
@@ -34,6 +40,52 @@ class RespostasMaeController{
             }else if(i==respostas.length-1)
                 res.sendStatus(200)
         })
+    }
+
+    async responderEscala(req:Request, res:Response){
+        const {mae_id} = req
+        const  {ocasiao } = req.body
+        const respostas:Resposta[] = req.body.respostas
+
+        let score = 0
+        
+        await knex.transaction(async trx =>{
+
+            try {
+                for(const resposta of respostas){
+                    const {pergunta_id, descricao} = resposta
+                    score += parseInt(descricao);
+                    await trx('resposta').insert({mae_id,pergunta_id,descricao,data:new Date()});
+                }
+        
+                switch (ocasiao) {
+                    case "1":
+                        await trx('mae').update({score_1d:score}).where({id:mae_id})
+                        break;
+                    case "ALTA":
+                        await trx('mae').update({score_alta:score}).where({id:mae_id})
+                        break;
+        
+                    case "15D":
+                        await trx('mae').update({score_15d:score}).where({id:mae_id})
+                        break;
+        
+                    case "1M":
+                        await knex('mae').update({score_1m:score}).where({id:mae_id})
+                        break;
+                
+                    default:
+                        res.sendStatus(400)
+                        break;
+                }
+            } catch (error) {
+                res.sendStatus(400)
+            }   
+                     
+        })
+
+       
+        res.sendStatus(200)
     }
 
     async index(req:Request, res:Response){

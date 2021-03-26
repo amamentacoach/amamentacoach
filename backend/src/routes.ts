@@ -372,6 +372,8 @@ routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadCont
  *      3 - DIÁRIO: Metas<br/>
  *      4 - DIÁRIO: Ajuda<br/>
  *      5 - Participação do pai<br/>
+ *      6 - Acoes Realizadas com o bebe
+ *      7 - Escala
  * 
  *      
  * @apiGroup Enquetes
@@ -431,6 +433,48 @@ routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadCont
  */
 routes.get('/perguntas/:categoria',perguntasController.index);
 
+ /**
+ * @api {post} /responder/escala Responder Escala
+ * @apiDescription Responde a escala <br> Parametro "ocasiao" pode conter os seguintes valores</br>
+ *              "1" : Caso esteja respondendo a escala no primeiro uso (primeira vez).</br>
+ *              "ALTA" : Quando o bebe recebeu alta.</br>
+ *              "15D" : Quando completou 15 dias</br>
+ *              "1M" : Quando completou 1 mes
+ *  
+ * @apiGroup Enquetes
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ * 
+ * 
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "ocasiao": "15D", // Esta respondendo a escala quando bebe completou 15 dias
+ *          "respostas":[ // um array com todas as respostas da escala
+ *                {"pergunta_id":17,"descricao":"3"},
+ *                {"pergunta_id":18,"descricao":"4"},
+ *                {"pergunta_id":19,"descricao":"5"},
+ *                {"pergunta_id":20,"descricao":"4"},
+ *                {"pergunta_id":21,"descricao":"3"},
+ *                {"pergunta_id":22,"descricao":"2"},
+ *                {"pergunta_id":23,"descricao":"4"},
+ *                {"pergunta_id":24,"descricao":"4"},
+ *                {"pergunta_id":25,"descricao":"5"},
+ *                {"pergunta_id":26,"descricao":"2"},
+ *                {"pergunta_id":27,"descricao":"3"},
+ *                {"pergunta_id":28,"descricao":"4"},
+ *                {"pergunta_id":29,"descricao":"5"},
+ *                {"pergunta_id":30,"descricao":"3"},
+ *                {"pergunta_id":31,"descricao":"3"},
+ *                {"pergunta_id":32,"descricao":"4"},
+ *                {"pergunta_id":33,"descricao":"4"},
+ *                {"pergunta_id":34,"descricao":"5"}
+ *          ] 
+ *      }
+ * 
+ *
+ */
+  routes.post('/responder/escala',verifyJWT,respostasMaeController.responderEscala);
+
 
  /**
  * @api {post} /responder/:pergunta_id Responder pergunta
@@ -453,6 +497,8 @@ routes.get('/perguntas/:categoria',perguntasController.index);
  *
  */
 routes.post('/responder/:pergunta_id',verifyJWT,respostasMaeController.create);
+
+
 routes.get('/maes/:mae_id/respostas',verifyJWT,respostasMaeController.index);
 
  /**
