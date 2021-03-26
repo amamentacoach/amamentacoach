@@ -235,7 +235,7 @@ define({ "api": [
     "type": "get",
     "url": "/perguntas/:categoria",
     "title": "Listagem de perguntas",
-    "description": "<p>Lista todas as perguntas de uma enquete<br/> Categoria das Enquetes:<br/> 1 - Amamentar um prematuro<br/> 2 - DIÁRIO: Sentimentos<br/> 3 - DIÁRIO: Metas<br/> 4 - DIÁRIO: Ajuda<br/> 5 - Participação do pai<br/> 6 - Acoes Realizadas com o bebe 7 - Escala</p>",
+    "description": "<p>Lista todas as perguntas de uma enquete<br/> Categoria das Enquetes:<br/> 1 - Amamentar um prematuro<br/> 2 - DIÁRIO: Sentimentos<br/> 3 - DIÁRIO: Metas<br/> 4 - DIÁRIO: Ajuda<br/> 5 - Participação do pai<br/> 6 - Acoes Realizadas com o bebe<br/> 7 - Escala</p>",
     "group": "Enquetes",
     "success": {
       "examples": [

@@ -372,7 +372,7 @@ routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadCont
  *      3 - DIÁRIO: Metas<br/>
  *      4 - DIÁRIO: Ajuda<br/>
  *      5 - Participação do pai<br/>
- *      6 - Acoes Realizadas com o bebe
+ *      6 - Acoes Realizadas com o bebe<br/>
  *      7 - Escala
  * 
  *      
