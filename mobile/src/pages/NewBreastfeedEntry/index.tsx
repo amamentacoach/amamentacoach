@@ -145,7 +145,7 @@ const NewDiaryRegistry: React.FC = () => {
                 </SecondOption>
               </MultipleOptionContainer>
               <ErrorContainer>
-                {errors.breast ? <ErrorText>{errors.breast}</ErrorText> : null}
+                {errors.breast && <ErrorText>{errors.breast}</ErrorText>}
               </ErrorContainer>
             </FormContent>
 

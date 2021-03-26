@@ -24,8 +24,7 @@ import {
 const Goals: React.FC = () => {
   const navigation = useNavigation();
   const { width } = Dimensions.get('window');
-  const [displayError, setDisplayError] = useState(false);
-  const [isSendingForm, setIsSendingForm] = useState(false);
+
   const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
   const [isFinishedModalVisible, setIsFinishedModalVisible] = useState(false);
 
@@ -46,30 +45,11 @@ const Goals: React.FC = () => {
     index,
     pagesLength,
     question,
-    values,
-    setFieldValue,
     isFormValid,
-    submitForm,
-    goToPage,
+    isSendingForm,
+    setFieldValue,
+    handleNextPage,
   }) => {
-    async function handleNextPage(pageIndex: number) {
-      // Verifica se pelo menos uma resposta foi selecionada
-      if (isFormValid(values, question)) {
-        setDisplayError(true);
-        return;
-      }
-
-      setDisplayError(false);
-      if (pageIndex === pagesLength - 1) {
-        // Envia o formulário caso seja a última página
-        setIsSendingForm(true);
-        await submitForm();
-        setIsFinishedModalVisible(true);
-      } else {
-        goToPage(index + 1);
-      }
-    }
-
     return (
       <ScrollView width={width}>
         <HeaderBackground />
@@ -83,7 +63,7 @@ const Goals: React.FC = () => {
           <QuestionText>{question.description}</QuestionText>
 
           <ErrorContainer>
-            {displayError ? <ErrorText>Pergunta obrigatória</ErrorText> : null}
+            {!isFormValid && <ErrorText>Pergunta obrigatória</ErrorText>}
           </ErrorContainer>
 
           <FormRadioGroupInput
@@ -98,7 +78,9 @@ const Goals: React.FC = () => {
             <MainButton
               text={index === pagesLength - 1 ? 'Finalizar' : 'Próximo'}
               disabled={isSendingForm}
-              onPress={() => handleNextPage(index)}
+              onPress={() =>
+                handleNextPage(index, () => setIsFinishedModalVisible(true))
+              }
             />
           </Footer>
         </ContentContainer>

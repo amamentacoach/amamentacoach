@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Dimensions } from 'react-native';
 import { useNavigation, StackActions } from '@react-navigation/native';
 import moment from 'moment';
@@ -29,47 +29,15 @@ const Feelings: React.FC = () => {
   const { width } = Dimensions.get('window');
   const currentDate = dateFormatVerbose(moment());
 
-  const [displayError, setDisplayError] = useState(false);
-  const [isSendingForm, setIsSendingForm] = useState(false);
-
   const InfoPage: React.FC<IDiaryFormInfoPage> = ({
     index,
     pagesLength,
     question,
-    values,
-    setFieldValue,
     isFormValid,
-    submitForm,
-    goToPage,
+    isSendingForm,
+    setFieldValue,
+    handleNextPage,
   }) => {
-    // Caso seja a última página envia o formulário, caso contrário avança para a próxima página.
-    async function handleNextPage(pageIndex: number) {
-      if (isFormValid(values, question)) {
-        setDisplayError(true);
-        return;
-      }
-
-      setDisplayError(false);
-      if (pageIndex === pagesLength - 1) {
-        setIsSendingForm(true);
-        await submitForm();
-        navigation.dispatch(StackActions.replace('Goals'));
-      } else {
-        goToPage(index + 1);
-      }
-    }
-
-    // Envia o formulário e retorna para o diário.
-    async function handleSaveAndExit() {
-      if (isFormValid(values, question)) {
-        setDisplayError(true);
-        return;
-      }
-      setIsSendingForm(true);
-      await submitForm();
-      navigation.navigate('Diary');
-    }
-
     return (
       <ScrollView width={width}>
         <HeaderBackground />
@@ -83,7 +51,7 @@ const Feelings: React.FC = () => {
           <QuestionText>{question.description}</QuestionText>
 
           <ErrorContainer>
-            {displayError ? <ErrorText>Pergunta obrigatória</ErrorText> : null}
+            {!isFormValid && <ErrorText>Pergunta obrigatória</ErrorText>}
           </ErrorContainer>
 
           <FormRadioGroupInput
@@ -100,14 +68,20 @@ const Feelings: React.FC = () => {
                 index === pagesLength - 1 ? 'Salvar e traçar metas' : 'Próximo'
               }
               disabled={isSendingForm}
-              onPress={() => handleNextPage(index)}
+              onPress={() =>
+                handleNextPage(index, () =>
+                  navigation.dispatch(StackActions.replace('Goals')),
+                )
+              }
             />
             {index === pagesLength - 1 ? (
               <SecondFooterButtonContainer>
                 <SecondaryButton
                   text="Salvar e sair"
                   disabled={isSendingForm}
-                  onPress={handleSaveAndExit}
+                  onPress={() =>
+                    handleNextPage(index, () => navigation.navigate('Diary'))
+                  }
                 />
               </SecondFooterButtonContainer>
             ) : null}

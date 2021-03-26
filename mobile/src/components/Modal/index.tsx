@@ -19,8 +19,8 @@ const Modal: React.FC<IMainModalProps> = ({
   return (
     <ReactNativeModal animationType="fade" transparent visible={visible}>
       <Container>
-        {text ? <Message>{text}</Message> : null}
-        {image ? <Image source={image} resizeMode="contain" /> : null}
+        {text && <Message>{text}</Message>}
+        {image && <Image source={image} resizeMode="contain" />}
         <Line />
         <TouchableOpacity onPress={() => closeModal()} activeOpacity={0.7}>
           <CloseButtonText>Fechar</CloseButtonText>
