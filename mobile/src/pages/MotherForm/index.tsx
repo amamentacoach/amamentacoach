@@ -531,7 +531,7 @@ const MotherForm: React.FC = () => {
 
             <OptionPickerContainer>
               <FormPickerInput
-                label="Qual foi o primeiro estímulo a ser feito na sua mama?"
+                label="Quanto tempo após o nascimento do bebê foi realizado o primeiro estímulo?"
                 fieldName="timeFirstStimulus"
                 onChange={setFieldValue}
                 error={errors.timeFirstStimulus}
