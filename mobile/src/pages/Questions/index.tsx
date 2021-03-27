@@ -5,16 +5,22 @@ import { FlatList, Image } from 'react-native';
 import { IFAQ, listQuestions } from '../../services/questions';
 
 import {
-  AddMessageButton,
-  Author,
-  Content,
+  AddQuestionButton,
+  Answer,
   FlatlistContainer,
   Line,
-  MessageContainer,
+  QuestionContainer,
   LoadingIndicator,
+  Question,
 } from './styles';
 
 import AddIcon from '../../../assets/images/icons/ic_add.png';
+
+interface MessageEntryProps {
+  question: string;
+  answer: string;
+  index: number;
+}
 
 const Questions: React.FC = () => {
   const navigation = useNavigation();
@@ -26,9 +32,9 @@ const Questions: React.FC = () => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <AddMessageButton onPress={() => navigation.navigate('NewQuestion')}>
+        <AddQuestionButton onPress={() => navigation.navigate('NewQuestion')}>
           <Image source={AddIcon} />
-        </AddMessageButton>
+        </AddQuestionButton>
       ),
     });
   }, [navigation]);
@@ -45,13 +51,13 @@ const Questions: React.FC = () => {
     fetchQuestions();
   }, []);
 
-  const InfoPage: React.FC<IFAQ> = ({ description, answer }) => {
+  const Entry: React.FC<MessageEntryProps> = ({ question, answer, index }) => {
     return (
-      <MessageContainer>
-        <Author>{description}</Author>
-        <Content>{answer}</Content>
-        <Line />
-      </MessageContainer>
+      <QuestionContainer>
+        <Question>{question}</Question>
+        <Answer>{answer}</Answer>
+        {index < questions.length - 1 && <Line />}
+      </QuestionContainer>
     );
   };
 
@@ -59,14 +65,10 @@ const Questions: React.FC = () => {
     <FlatlistContainer>
       <FlatList
         data={questions}
-        renderItem={({ item }) => (
-          <InfoPage
-            id={item.id}
-            description={item.description}
-            answer={item.answer}
-          />
+        renderItem={({ item, index }) => (
+          <Entry question={item.question} answer={item.answer} index={index} />
         )}
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={item => item.question}
         ListFooterComponent={() => (
           <LoadingIndicator size="large" color="#7d5cd7" animating={loading} />
         )}

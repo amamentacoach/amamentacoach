@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const AddMessageButton = styled.TouchableOpacity`
+export const AddQuestionButton = styled.TouchableOpacity`
   margin-right: 18px;
 `;
 
@@ -9,18 +9,18 @@ export const FlatlistContainer = styled.View`
   margin: 24px 24px 0px 24px;
 `;
 
-export const MessageContainer = styled.View`
+export const QuestionContainer = styled.View`
   flex: 1;
 `;
 
-export const Author = styled.Text`
+export const Question = styled.Text`
   font-family: 'OpenSans-Bold';
-  font-size: 14px;
+  font-size: 18px;
   color: #7d5cd7;
   margin-bottom: 5px;
 `;
 
-export const Content = styled.Text`
+export const Answer = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   color: #545454;
