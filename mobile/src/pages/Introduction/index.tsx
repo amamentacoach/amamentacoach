@@ -62,7 +62,9 @@ const Introduction: React.FC = () => {
         <ScrollView>
           <Header>
             <SkipButton onPress={handleSkip}>
-              <SkipButtonText>Pular</SkipButtonText>
+              {index < pages.length - 1 && (
+                <SkipButtonText>Pular</SkipButtonText>
+              )}
             </SkipButton>
           </Header>
           <ContentWrapper>
