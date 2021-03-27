@@ -17,7 +17,7 @@ const Report: React.FC = () => {
   const [selectedReport, setSelectedReport] = useState(Reports.Daily);
 
   function handleChangeReport(value: string) {
-    if (value === '') {
+    if (!value) {
       return;
     }
     if (value === 'Semanal') {
@@ -39,18 +39,18 @@ const Report: React.FC = () => {
             onChange={(_, fieldValue) => handleChangeReport(fieldValue)}
           />
         </View>
-        {selectedReport === Reports.Daily && (
-          <DailyReport isLoading={isLoading} setIsLoading={setIsLoading} />
-        )}
-        {selectedReport === Reports.Weekly && (
-          <WeeklyReport isLoading={isLoading} setIsLoading={setIsLoading} />
-        )}
         {isLoading && (
           <ActivityIndicator
             size="large"
             color="#7d5cd7"
             animating={isLoading}
           />
+        )}
+        {selectedReport === Reports.Daily && (
+          <DailyReport isLoading={isLoading} setIsLoading={setIsLoading} />
+        )}
+        {selectedReport === Reports.Weekly && (
+          <WeeklyReport isLoading={isLoading} setIsLoading={setIsLoading} />
         )}
       </Container>
     </ScrollView>

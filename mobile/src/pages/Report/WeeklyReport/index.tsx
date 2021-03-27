@@ -36,16 +36,12 @@ const WeeklyReport: React.FC<WeeklyReportProps> = ({
     return (
       <>
         <Question>{question}</Question>
-        {answers.length === 0 ? (
-          <AnswerHeader>Não respondida</AnswerHeader>
-        ) : (
-          <>
-            <AnswerHeader>Suas respostas:</AnswerHeader>
-            {answers.map(answer => (
-              <Answer key={answer}>{answer}</Answer>
-            ))}
-          </>
-        )}
+        {answers.length === 0 && <AnswerHeader>Não respondida</AnswerHeader>}
+        {answers.length === 1 && <AnswerHeader>Sua resposta:</AnswerHeader>}
+        {answers.length > 1 && <AnswerHeader>Suas respostas:</AnswerHeader>}
+        {answers.map(answer => (
+          <Answer key={answer}>{answer}</Answer>
+        ))}
       </>
     );
   }
@@ -61,7 +57,7 @@ const WeeklyReport: React.FC<WeeklyReportProps> = ({
         return (
           <EntryContainer key={entry.question}>
             <ReportEntry question={entry.question} answers={entry.answers} />
-            {index !== weeklyReport.length - 1 && <Line />}
+            {index < weeklyReport.length - 1 && <Line />}
           </EntryContainer>
         );
       })}
