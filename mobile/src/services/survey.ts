@@ -19,18 +19,20 @@ export interface ISurveyStatistics {
   }[];
 }
 
+export interface IAnswerFeedback {
+  feedback: string;
+  redirect: string;
+}
+
 // Registra a resposta do usuário para uma pergunta.
-export async function answerQuestion(
-  questionId: number,
-  answers: string[],
-): Promise<boolean> {
+export async function answerQuestion(questionId: number, answers: string[]) {
   try {
-    await api.post(`/responder/${questionId}`, {
+    const { data } = await api.post(`/responder/${questionId}`, {
       respostas: answers,
     });
-    return true;
+    return data !== 'OK' ? data : undefined;
   } catch (error) {
-    return false;
+    return null;
   }
 }
 

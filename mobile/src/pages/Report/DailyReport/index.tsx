@@ -160,17 +160,16 @@ const DailyReport: React.FC<DailyReportProps> = ({
                   displayOther,
                   multipleSelection,
                 }) => (
-                  <>
-                    <QuestionText>{description} </QuestionText>
+                  <View key={id}>
+                    <QuestionText>{description}</QuestionText>
                     <FormRadioGroupInput
-                      key={id}
                       fieldName={`${id}`}
                       options={options}
                       multipleSelection={multipleSelection}
                       displayOtherField={displayOther}
                       onChange={setFieldValue}
                     />
-                  </>
+                  </View>
                 ),
               )}
               <SubmitButtonContainer>
