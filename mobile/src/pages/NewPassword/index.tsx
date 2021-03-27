@@ -50,9 +50,15 @@ const NewPassword: React.FC = () => {
   return (
     <ScrollView>
       <Modal
-        text="Senha alterada com sucesso!"
+        content="Senha alterada com sucesso!"
         visible={isSubmitModalVisible}
-        closeModal={() => setIsSubmitModalVisible(false)}
+        options={[
+          {
+            text: 'Fechar',
+            isBold: true,
+            onPress: () => setIsSubmitModalVisible(false),
+          },
+        ]}
       />
 
       <HeaderText>Insira e confirme a nova senha</HeaderText>

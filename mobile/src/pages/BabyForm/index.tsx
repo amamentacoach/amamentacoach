@@ -244,26 +244,44 @@ const BabyForm: React.FC = () => {
   return (
     <ScrollView>
       <Modal
-        text="Apgar é a nota, de 0 a 10, que o bebê recebe de acordo com o estado em que ele se apresenta no momento de nascimento e consta no cartão da criança.
+        content="Apgar é a nota, de 0 a 10, que o bebê recebe de acordo com o estado em que ele se apresenta no momento de nascimento e consta no cartão da criança.
 Se não souber, tudo bem, continue seu cadastro normalmente!"
+        options={[
+          {
+            text: 'Fechar',
+            isBold: true,
+            onPress: () => setIsApgarModalVisible(false),
+          },
+        ]}
         visible={isApgarModalVisible}
-        closeModal={() => setIsApgarModalVisible(false)}
       />
       <Modal
-        text="Conta criada com sucesso! Seja muito bem-vinda ao AmamentaCoach!"
+        content="Conta criada com sucesso! Seja muito bem-vinda ao AmamentaCoach!"
+        options={[
+          {
+            text: 'Fechar',
+            isBold: true,
+            onPress: async () => {
+              setIsSignUpModalVisible(false);
+              await signIn(motherInfo.email, motherInfo.password);
+            },
+          },
+        ]}
         visible={isSignUpModalVisible}
-        closeModal={async () => {
-          setIsSignUpModalVisible(false);
-          await signIn(motherInfo.email, motherInfo.password);
-        }}
       />
       <Modal
-        text={`Erro ao registrar!\nPor favor tente novamente mais tarde.`}
+        content={'Erro ao registrar.\nPor favor tente novamente mais tarde.'}
+        options={[
+          {
+            text: 'Fechar',
+            isBold: true,
+            onPress: async () => {
+              setIsErrorModalVisible(false);
+              setIsSendingForm(false);
+            },
+          },
+        ]}
         visible={isErrorModalVisible}
-        closeModal={async () => {
-          setIsErrorModalVisible(false);
-          setIsSendingForm(false);
-        }}
       />
 
       <HeaderText>Passo 3 de 3</HeaderText>

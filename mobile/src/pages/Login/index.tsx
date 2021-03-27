@@ -73,14 +73,28 @@ const Login: React.FC = () => {
   return (
     <>
       <Modal
-        text="E-mail ou senha incorretos!"
+        content="E-mail ou senha incorretos!"
         visible={isWrongDataModalVisible}
-        closeModal={() => setIsWrongDataModalVisible(false)}
+        options={[
+          {
+            text: 'Fechar',
+            isBold: true,
+            onPress: () => setIsWrongDataModalVisible(false),
+          },
+        ]}
       />
       <Modal
-        text={`Erro ao realizar login!\nPor favor tente novamente mais tarde.`}
+        content={
+          'Erro ao realizar login.\nPor favor tente novamente mais tarde.'
+        }
         visible={isErrorModalVisible}
-        closeModal={() => setIsErrorModalVisible(false)}
+        options={[
+          {
+            text: 'Fechar',
+            isBold: true,
+            onPress: () => setIsErrorModalVisible(false),
+          },
+        ]}
       />
 
       <ScrollView>

@@ -42,9 +42,15 @@ const ForgotPassword: React.FC = () => {
   return (
     <ScrollView>
       <Modal
-        text="Cheque sua caixa de entrada do e-mail e acesse o link que enviamos para a redefinição de sua senha."
+        content="Cheque sua caixa de entrada do e-mail e acesse o link que enviamos para a redefinição de sua senha."
+        options={[
+          {
+            text: 'Fechar',
+            isBold: true,
+            onPress: () => setIsSubmitModalVisible(false),
+          },
+        ]}
         visible={isSubmitModalVisible}
-        closeModal={() => setIsSubmitModalVisible(false)}
       />
 
       <HeaderText>

@@ -44,9 +44,15 @@ const NewMessage: React.FC = () => {
   return (
     <ScrollView>
       <Modal
-        text="Mensagem enviada!"
+        content="Mensagem enviada!"
         visible={isSubmitModalVisible}
-        closeModal={() => setIsSubmitModalVisible(false)}
+        options={[
+          {
+            text: 'Fechar',
+            isBold: true,
+            onPress: () => setIsSubmitModalVisible(false),
+          },
+        ]}
       />
 
       <HeaderText>Envie uma mensagem para outras mamães</HeaderText>

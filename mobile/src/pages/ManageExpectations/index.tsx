@@ -147,9 +147,15 @@ const ManageExpectations: React.FC = () => {
   return (
     <ScrollView>
       <Modal
-        text="Parabéns por trocar essa expectativa improvável pela expectativa realista! Volte amanhã para trocar outras expectativas."
+        content="Parabéns por trocar essa expectativa improvável pela expectativa realista! Volte amanhã para trocar outras expectativas."
         visible={isSubmitModalVisible}
-        closeModal={() => setIsSubmitModalVisible(false)}
+        options={[
+          {
+            text: 'Fechar',
+            isBold: true,
+            onPress: () => setIsSubmitModalVisible(false),
+          },
+        ]}
       />
       <HeaderTitle>
         Trocar expectativas improváveis por expectativas realistas ajuda na

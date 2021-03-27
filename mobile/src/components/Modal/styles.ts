@@ -1,5 +1,9 @@
 import styled from 'styled-components/native';
 
+interface IOptionTextProps {
+  isBold: boolean;
+}
+
 export const Container = styled.View`
   margin: auto 50px;
   padding: 15px;
@@ -9,7 +13,7 @@ export const Container = styled.View`
   border-radius: 3.6px;
 `;
 
-export const Message = styled.Text`
+export const Content = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;
@@ -30,9 +34,18 @@ export const Line = styled.View`
   opacity: 0.2;
 `;
 
-export const CloseButtonText = styled.Text`
-  font-family: 'OpenSans-Bold';
+export const OptionsContainer = styled.View`
+  flex-direction: row;
+`;
+
+export const Option = styled.TouchableOpacity`
+  flex: 1;
+`;
+
+export const OptionText = styled.Text<IOptionTextProps>`
   font-size: 16px;
   text-align: center;
   color: #7d5cd7;
+  font-family: ${({ isBold }) =>
+    isBold ? 'OpenSans-Bold' : 'OpenSans-Regular'};
 `;

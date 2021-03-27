@@ -3,13 +3,14 @@ import { useRoute, RouteProp } from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
+import { setUserVideoSeen } from '../../services/videoAccess';
+
 import {
   ScrollView,
   VideoContainer,
   ContentContainer,
   LoadingContainer,
 } from './styles';
-import setUserVideoSeen from '../../services/videoAccess';
 
 type IScreenParams = {
   VideoPage: {

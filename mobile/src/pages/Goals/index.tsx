@@ -96,16 +96,28 @@ const Goals: React.FC = () => {
         modalVisible={isIntroModalVisible || isFinishedModalVisible}>
         <Modal
           image={getRandomMotivationImage()}
+          options={[
+            {
+              text: 'Fechar',
+              isBold: true,
+              onPress: () => setIsIntroModalVisible(false),
+            },
+          ]}
           visible={isIntroModalVisible}
-          closeModal={() => setIsIntroModalVisible(false)}
         />
         <Modal
-          text="Suas metas foram traçadas!"
+          content="Suas metas foram traçadas!"
+          options={[
+            {
+              text: 'Fechar',
+              isBold: true,
+              onPress: () => {
+                setIsFinishedModalVisible(false);
+                navigation.navigate('Diary');
+              },
+            },
+          ]}
           visible={isFinishedModalVisible}
-          closeModal={() => {
-            setIsFinishedModalVisible(false);
-            navigation.navigate('Diary');
-          }}
         />
       </ModalContainer>
       <DiaryForm
