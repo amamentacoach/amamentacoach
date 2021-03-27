@@ -42,19 +42,15 @@ export async function getDailyReport(): Promise<IDailyReport> {
     quantity: item.qtd_leite,
     date: item.data_hora,
   }));
-
-  let questions = [];
-  if (data.questions) {
-    questions = data.perguntas.map((question: any) => ({
-      id: question.id,
-      target: question.alvo,
-      category: question.categoria,
-      description: question.descricao,
-      options: question.alternativas,
-      displayOther: question.outro,
-      multipleSelection: question.multiplas,
-    }));
-  }
+  const questions = data.perguntas.map((question: any) => ({
+    id: question.id,
+    target: question.alvo,
+    category: question.categoria,
+    description: question.descricao,
+    options: question.alternativas,
+    displayOther: question.outro,
+    multipleSelection: question.multiplas,
+  }));
 
   return {
     breastfeedEntries,
