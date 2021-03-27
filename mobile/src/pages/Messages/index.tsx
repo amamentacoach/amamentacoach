@@ -42,9 +42,6 @@ const Messages: React.FC = () => {
       if (newMessages.length === 0) {
         setNoMoreMessages(true);
       }
-
-      // Ordena as mensagens de acordo com suas datas em ordem decrescente.
-      newMessages.sort((a, b) => (a.date < b.date ? 1 : -1));
       setMessages([...messages, ...newMessages]);
     }
     setLoading(false);

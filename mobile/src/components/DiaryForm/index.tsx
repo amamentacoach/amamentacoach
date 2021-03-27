@@ -68,26 +68,8 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
         return;
       }
 
-      // Exibe apenas perguntas de alvo GERAL ou aquelas que se aplicam ao usuário.
-      const filteredQuestions = questions.filter(page => {
-        if (page.target === 'GERAL') {
-          return true;
-        }
-        if (page.target === 'AC' && motherInfo.babiesBirthLocations.AC) {
-          return true;
-        }
-        if (
-          page.target === 'UCI/UTI' &&
-          (motherInfo.babiesBirthLocations.UCI ||
-            motherInfo.babiesBirthLocations.UTI)
-        ) {
-          return true;
-        }
-        return false;
-      });
-
       // Inicia todas as respostas vazias.
-      const initialValues = filteredQuestions.reduce(
+      const initialValues = questions.reduce(
         (object, page) => ({
           ...object,
           [page.id]: [],
@@ -96,7 +78,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
       );
 
       setFormInitialValues(initialValues);
-      setPages(filteredQuestions);
+      setPages(questions);
       setIsLoading(false);
     }
 

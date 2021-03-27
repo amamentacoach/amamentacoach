@@ -4,7 +4,6 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 
 import { Formik } from 'formik';
-import { useAuth } from '../../../contexts/auth';
 import { getDailyReport, IDailyReport } from '../../../services/report';
 import MainButton from '../../../components/MainButton';
 
@@ -50,7 +49,6 @@ const DailyReport: React.FC<DailyReportProps> = ({
   isLoading,
   setIsLoading,
 }) => {
-  const { motherInfo } = useAuth();
   const [dailyReport, setDailyReport] = useState<IDailyReport>({
     breastfeedEntries: [],
     registryEntries: [],
@@ -62,26 +60,8 @@ const DailyReport: React.FC<DailyReportProps> = ({
     async function fetchRegistries() {
       const data = await getDailyReport();
 
-      // Exibe apenas perguntas de alvo GERAL ou aquelas que se aplicam ao usuário.
-      const filteredQuestions = data.questions.filter(page => {
-        if (page.target === 'GERAL') {
-          return true;
-        }
-        if (page.target === 'AC' && motherInfo.babiesBirthLocations.AC) {
-          return true;
-        }
-        if (
-          page.target === 'UCI/UTI' &&
-          (motherInfo.babiesBirthLocations.UCI ||
-            motherInfo.babiesBirthLocations.UTI)
-        ) {
-          return true;
-        }
-        return false;
-      });
-
       // Inicia todas as respostas vazias.
-      const initialValues = filteredQuestions.reduce(
+      const initialValues = data.questions.reduce(
         (object: any, page: any) => ({
           ...object,
           [page.id]: [],
