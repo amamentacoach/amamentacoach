@@ -33,6 +33,39 @@
     "name": "GetBebes"
   },
   {
+    "type": "get",
+    "url": "/bebes",
+    "title": "Listagem Bebes Podem Receber Alta",
+    "description": "<p>Retorna a lista de bebes que podem receber alta</p>",
+    "group": "Bebês",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Sucesso",
+          "content": "HTTP/1.1 200 OK\n[\n  {\n      \"id_bebe\":7,\n      \"nome\":\"Enzo Gabriel\",\n      \"data_parto\":\"2020-08-28\",\n      \"semanas_gest\": 35,\n      \"dias_gest\":5,\n      \"peso\":2.5,\n      \"tipo_parto\":true, // false: parto normal | true: cesaria\n      \"local\":\"UCI\",\n  },\n  {\n      \"id_bebe\":8,\n      \"nome\":\"Valentina\",\n      \"data_parto\":\"2020-08-28\",\n      \"semanas_gest\": 35,\n      \"dias_gest\":5,\n      \"peso\":2.7,\n      \"tipo_parto\":true, // false: parto normal | true: cesaria\n      \"local\":\"UCI\"\n  }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Bebês",
+    "name": "GetBebes"
+  },
+  {
     "type": "post",
     "url": "/bebes",
     "title": "Cadastro",
@@ -76,7 +109,7 @@
   {
     "type": "post",
     "url": "/bebes/:id/alta",
-    "title": "Alta do bebe",
+    "title": "Informar Alta do bebe",
     "group": "Bebês",
     "header": {
       "fields": {
@@ -302,6 +335,19 @@
     "title": "Listagem por categoria",
     "description": "<p>Perguntas quando<br/> Categoria das Enquetes:<br/> 1 - Amamentar um prematuro<br/> 2 - DIÁRIO: Sentimentos<br/> 3 - DIÁRIO: Metas<br/> 4 - DIÁRIO: Ajuda<br/> 5 - Participação do pai<br/> 6 - Acoes Realizadas com o bebe<br/> 7 - Escala</p>",
     "group": "Enquetes",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "examples": [
         {
@@ -322,6 +368,19 @@
     "title": "Perguntas da escala e da alimentacao",
     "description": "<p>Perguntas da escala e da amamentacao: Responder quandoa acessar o App<br/></p>",
     "group": "Enquetes",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
     "success": {
       "examples": [
         {

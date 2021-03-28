@@ -168,7 +168,7 @@ routes.get('/maes', verifyJWT,maesController.show);
 routes.post('/bebes', verifyJWT, bebesController.create);
 
 /**
- * @api {post} /bebes/:id/alta Alta do bebe
+ * @api {post} /bebes/:id/alta Informar Alta do bebe
  * @apiGroup Bebês
  *
  * @apiHeader {String} authorization Token de acesso.
