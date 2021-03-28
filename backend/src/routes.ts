@@ -236,24 +236,10 @@ routes.get('/bebes',verifyJWT,bebesController.index);
  *    HTTP/1.1 200 OK
  *    [
  *      {
- *          "id_bebe":7,
- *          "nome":"Enzo Gabriel",
- *          "data_parto":"2020-08-28",
- *          "semanas_gest": 35,
- *          "dias_gest":5,
- *          "peso":2.5,
- *          "tipo_parto":true, // false: parto normal | true: cesaria
- *          "local":"UCI",
- *      },
- *      {
- *          "id_bebe":8,
- *          "nome":"Valentina",
- *          "data_parto":"2020-08-28",
- *          "semanas_gest": 35,
- *          "dias_gest":5,
- *          "peso":2.7,
- *          "tipo_parto":true, // false: parto normal | true: cesaria
- *          "local":"UCI"
+ *          "nome": "Joao",
+ *          "id": 5,
+ *          "local": "UTI Neonatal",
+ *          "data_parto": "2020-08-28T03:00:00.000Z"
  *      }
  *    ]
  *
