@@ -225,7 +225,7 @@ routes.post('/bebes', verifyJWT, bebesController.create);
 routes.get('/bebes',verifyJWT,bebesController.index);
 
 /**
- * @api {get} /bebes Listagem Bebes Podem Receber Alta
+ * @api {get} /bebes Listagem_Bebes Podem Receber Alta
  * @apiDescription Retorna a lista de bebes que podem receber alta
  * @apiGroup Bebês
  *
@@ -1114,23 +1114,8 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
 /**
  * @api {post} /acessos/app Acessos App
  * @apiDescription Informa se mae acessou app e retorna caso necessite uma acao a ser tomada</br>
- * **Mostrar um popup para cada bebe**
  * @apiGroup Controle de Acessos
  * @apiHeader {String} authorization Token de acesso.
- * @apiSuccessExample {json} Retorno com bebe internado
- * {
- *  "acao":"RESPONDER_ALTA",
- *  "internados":[
- *      {
- *          "nome": "Enzo",
- *          "id": 1
- *      },
- *      {
- *          "nome": "Joao",
- *          "id": 2
- *      }
- *  ]
- * } 
  * 
  * @apiSuccessExample {json} Retorno do primeiro acesso
  * {

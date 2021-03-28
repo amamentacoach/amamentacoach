@@ -35,7 +35,7 @@ define({ "api": [
   {
     "type": "get",
     "url": "/bebes",
-    "title": "Listagem Bebes Podem Receber Alta",
+    "title": "Listagem_Bebes Podem Receber Alta",
     "description": "<p>Retorna a lista de bebes que podem receber alta</p>",
     "group": "Bebês",
     "header": {
@@ -217,7 +217,7 @@ define({ "api": [
     "type": "post",
     "url": "/acessos/app",
     "title": "Acessos App",
-    "description": "<p>Informa se mae acessou app e retorna caso necessite uma acao a ser tomada</br> <strong>Mostrar um popup para cada bebe</strong></p>",
+    "description": "<p>Informa se mae acessou app e retorna caso necessite uma acao a ser tomada</br></p>",
     "group": "Controle_de_Acessos",
     "header": {
       "fields": {
@@ -234,11 +234,6 @@ define({ "api": [
     },
     "success": {
       "examples": [
-        {
-          "title": "Retorno com bebe internado",
-          "content": "{\n \"acao\":\"RESPONDER_ALTA\",\n \"internados\":[\n     {\n         \"nome\": \"Enzo\",\n         \"id\": 1\n     },\n     {\n         \"nome\": \"Joao\",\n         \"id\": 2\n     }\n ]\n}",
-          "type": "json"
-        },
         {
           "title": "Retorno do primeiro acesso",
           "content": "{\n \"acao\":\"RESPONDER_1D\",\n}",
