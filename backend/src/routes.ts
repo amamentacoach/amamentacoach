@@ -387,7 +387,7 @@ routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadCont
  * 
  *      
  * @apiGroup Enquetes
- *
+ * @apiHeader {String} authorization Token de acesso.
  * 
  * 
  * @apiSuccessExample {json} Exemplo Request:
@@ -504,7 +504,7 @@ routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadCont
  * 
  *
  */
-routes.get('/perguntas/escalaealimentacao',perguntasController.escalaEAlimentacao);
+routes.get('/perguntas/escalaealimentacao',verifyJWT,perguntasController.escalaEAlimentacao);
 
 /**
  * @api {get} /perguntas/:categoria Listagem por categoria
@@ -520,7 +520,7 @@ routes.get('/perguntas/escalaealimentacao',perguntasController.escalaEAlimentaca
  * 
  *      
  * @apiGroup Enquetes
- *
+ * @apiHeader {String} authorization Token de acesso.
  * 
  * 
  * @apiSuccessExample {json} Exemplo Request:
@@ -574,7 +574,7 @@ routes.get('/perguntas/escalaealimentacao',perguntasController.escalaEAlimentaca
  * 
  *
  */
-routes.get('/perguntas/:categoria',perguntasController.index);
+routes.get('/perguntas/:categoria',verifyJWT,perguntasController.index);
 
  /**
  * @api {post} /responder/escala Responder Escala

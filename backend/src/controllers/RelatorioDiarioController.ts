@@ -2,6 +2,12 @@ import { Request, Response } from 'express';
 import knex from '../database/connection';
 
 
+const alvosMap = new Map<string, string>();
+alvosMap.set("Alojamento Conjunto","AC")
+alvosMap.set("Casa", "UCI/UTI")
+alvosMap.set("UCI Neonatal", "UCI/UTI")
+alvosMap.set("UTI Neonatal", "UCI/UTI")
+
 class RelatorioDiarioController{
     async show(req:Request, res:Response){
         const{mae_id} = req
@@ -30,7 +36,9 @@ class RelatorioDiarioController{
 
             
         if(jaRespondeu[0].count==0){
-            const perguntas = await knex('pergunta').where('categoria',6).select('*')
+            const bebe = await knex('bebe').select('local').where('mae_id',mae_id).first()
+            const alvo = alvosMap.get(bebe.local)
+            const perguntas = await knex('pergunta').where('categoria',6).select('*').where('alvo','GERAL').orWhere('alvo',alvo).orderBy('id');
             perguntas.map((pergunta,i)=>{
                 pergunta["alternativas"]=pergunta.alternativas.split('|')
             })
