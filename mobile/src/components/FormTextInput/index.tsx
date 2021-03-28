@@ -32,7 +32,7 @@ const FormTextInput: React.FC<FormTextProps> = ({
 }) => {
   return (
     <Container>
-      {label !== undefined ? <LabelText>{label}</LabelText> : null}
+      {label !== undefined && <LabelText>{label}</LabelText>}
       <TextInput
         onChangeText={onChangeText}
         value={value}
@@ -47,7 +47,7 @@ const FormTextInput: React.FC<FormTextProps> = ({
         centerText={centerText}
       />
       <ErrorContainer>
-        {error ? <ErrorText>{error}</ErrorText> : null}
+        {!!error && <ErrorText>{error}</ErrorText>}
       </ErrorContainer>
     </Container>
   );

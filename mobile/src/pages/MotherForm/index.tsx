@@ -3,6 +3,7 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
+import { IMotherSignUpInfo } from '../../services/auth';
 import MainButton from '../../components/MainButton';
 import SecondaryButton from '../../components/SecondaryButton';
 import FormRadioGroupInput from '../../components/FormRadioGroup';
@@ -17,14 +18,12 @@ import {
   FormContainer,
   PhoneInputContainer,
   DDDContainer,
-  PartnerTimeContainer,
-  PartnerMetricContainer,
   SubmitButtonContainer,
   FirstSubOptionContainer,
   SecondSubOptionContainer,
+  SubOptionsContainer,
+  OptionPickerContainer,
 } from './styles';
-import { SubOptionsContainer } from '../BabyForm/styles';
-import { IMotherSignUpInfo } from '../../services/auth';
 
 interface IFormValues {
   name: string;
@@ -36,13 +35,22 @@ interface IFormValues {
     id: number;
     value: string;
   }[];
-  alreadyBreastfeed: string[];
-  partner: string[];
-  liveTogether: string[];
-  partnerTime: string;
-  partnerMetric: string;
+  alreadyBreastfeed: string;
+  partner: string;
+  liveTogether: string;
+  partnerYears: string;
+  partnerMonths: string;
   education: string;
   wage: string;
+  plannedPregnancy: string;
+  firstVisit: string;
+  firstStimulus: string;
+  timeFirstStimulus: string;
+  childrenAlive: string;
+  preNatalGuidance: string;
+  occupation: string;
+  maternityLeave: string;
+  maternityLeaveCount: string;
 }
 
 type IScreenParams = {
@@ -69,14 +77,24 @@ const MotherForm: React.FC = () => {
     phone: '',
     pregnantCount: '',
     timeSpentBreastFeeding: [],
-    alreadyBreastfeed: [],
-    partner: [],
-    liveTogether: ['Não'],
-    partnerTime: '0',
-    partnerMetric: 'meses',
+    alreadyBreastfeed: '',
+    partner: '',
+    liveTogether: 'Não',
+    partnerYears: '0',
+    partnerMonths: '0',
     education: '',
     wage: '',
+    plannedPregnancy: '',
+    firstVisit: '',
+    firstStimulus: '',
+    timeFirstStimulus: '',
+    childrenAlive: '',
+    preNatalGuidance: '',
+    occupation: '',
+    maternityLeave: '',
+    maternityLeaveCount: '',
   };
+
   const motherFormSchema = Yup.object({
     name: Yup.string().required('Campo obrigatório'),
     birthday: Yup.string().required('Campo obrigatório'),
@@ -92,9 +110,7 @@ const MotherForm: React.FC = () => {
       .min(100000000, 'Deve possuir 9 dígitos')
       .max(999999999, 'Deve possuir 9 dígitos')
       .required('Campo obrigatório'),
-    alreadyBreastfeed: Yup.array(Yup.string().required()).required(
-      'Campo obrigatório',
-    ),
+    alreadyBreastfeed: Yup.string().required('Campo obrigatório'),
     pregnantCount: Yup.number()
       .integer('Deve ser um número inteiro')
       .typeError('Deve ser um número inteiro')
@@ -112,14 +128,34 @@ const MotherForm: React.FC = () => {
         }).required(),
       )
       .defined(),
-    partner: Yup.array(Yup.string().required()).required('Campo obrigatório'),
-    liveTogether: Yup.array(Yup.string().required()).required(
-      'Campo obrigatório',
-    ),
-    partnerTime: Yup.string().required('Campo obrigatório'),
-    partnerMetric: Yup.string().required('Campo obrigatório'),
+    partner: Yup.string().required('Campo obrigatório'),
+    liveTogether: Yup.string().required('Campo obrigatório'),
+    partnerYears: Yup.string().required('Campo obrigatório'),
+    partnerMonths: Yup.string().required('Campo obrigatório'),
     education: Yup.string().required('Campo obrigatório'),
     wage: Yup.string().required('Campo obrigatório'),
+    plannedPregnancy: Yup.string().required('Campo obrigatório'),
+    firstVisit: Yup.string().required('Campo obrigatório'),
+    firstStimulus: Yup.string().required('Campo obrigatório'),
+    timeFirstStimulus: Yup.string().required('Campo obrigatório'),
+    childrenAlive: Yup.number()
+      .integer('Deve ser um número inteiro')
+      .typeError('Deve ser um número inteiro')
+      .min(0, 'Deve ser maior ou igual a zero')
+      .max(100, 'Deve ser menor ou igual a 100')
+      .required('Campo obrigatório'),
+    preNatalGuidance: Yup.string().required('Campo obrigatório'),
+    occupation: Yup.string().required('Campo obrigatório'),
+    maternityLeave: Yup.string().required('Campo obrigatório'),
+    maternityLeaveCount: Yup.number()
+      .when('maternityLeave', {
+        is: 'Não',
+        then: Yup.number(),
+        otherwise: Yup.number().required('Campo obrigatório'),
+      })
+      .integer('Deve ser um número inteiro')
+      .typeError('Deve ser um número inteiro')
+      .min(0, 'Deve ser maior ou igual a zero'),
   }).required();
 
   function validateBreastFeedingCount(newFieldValue: string): boolean {
@@ -172,19 +208,32 @@ const MotherForm: React.FC = () => {
       name: formValues.name,
       birthday: formValues.birthday,
       phone: `${formValues.ddd}${formValues.phone}`,
-      alreadyBreastfeed:
-        formValues.alreadyBreastfeed[0].toLowerCase() === 'sim',
+      alreadyBreastfeed: formValues.alreadyBreastfeed.toLowerCase() === 'sim',
       pregnantCount: parseInt(formValues.pregnantCount, 10),
       timeSpentBreastFeeding: formValues.timeSpentBreastFeeding.map(
         item => item.value,
       ),
-      partner: formValues.partner[0].toLowerCase() === 'sim',
+      partner: formValues.partner.toLowerCase() === 'sim',
       liveTogether:
-        formValues.partner[0].toLowerCase() === 'sim'
-          ? `${formValues.partnerTime} ${formValues.partnerMetric}`
+        formValues.partnerYears !== '0' && formValues.partnerMonths !== '0'
+          ? `${formValues.partnerYears},${formValues.partnerMonths}`
           : null,
       education: formValues.education,
       wage: formValues.wage,
+      plannedPregnancy: formValues.plannedPregnancy.toLowerCase() === 'sim',
+      firstVisit: formValues.firstVisit,
+      firstStimulus: formValues.firstStimulus.toLowerCase() === 'sucção',
+      timeFirstStimulus: formValues.timeFirstStimulus,
+      childrenAlive: parseInt(formValues.childrenAlive, 10),
+      receivedPreNatalGuidance:
+        formValues.preNatalGuidance.toLowerCase() === 'sim',
+      occupation:
+        formValues.occupation.toLowerCase() ===
+        'fora de casa (alguma outra ocupação)',
+      maternityLeave:
+        formValues.maternityLeave.toLowerCase() === 'sim'
+          ? parseInt(formValues.maternityLeaveCount, 10)
+          : null,
     };
     navigation.navigate('BabyForm', { motherInfo });
   }
@@ -258,7 +307,7 @@ const MotherForm: React.FC = () => {
                 if (text === '') {
                   setFieldValue('pregnantCount', text);
                   // Limpa os campos de seleção abaixo
-                  setFieldValue('alreadyBreastfeed', ['Não']);
+                  setFieldValue('alreadyBreastfeed', 'Não');
                   setPregnantCount({
                     previous: pregnantCount.current,
                     current: 0,
@@ -277,9 +326,9 @@ const MotherForm: React.FC = () => {
                   current: parseInt(text, 10),
                 });
                 if (text !== '0') {
-                  setFieldValue('alreadyBreastfeed', []);
+                  setFieldValue('alreadyBreastfeed', '');
                 } else {
-                  setFieldValue('alreadyBreastfeed', ['Não']);
+                  setFieldValue('alreadyBreastfeed', 'Não');
                 }
               }}
               placeholder="Insira o número de vezes"
@@ -292,7 +341,7 @@ const MotherForm: React.FC = () => {
                 label="Você já amamentou antes?"
                 fieldName="alreadyBreastfeed"
                 onChange={(fieldName, fieldValue) => {
-                  setFieldValue(fieldName, [fieldValue[0]]);
+                  setFieldValue(fieldName, fieldValue[0]);
                   if (fieldValue[0] === 'Não') {
                     setFieldValue('timeSpentBreastFeeding', []);
                     return;
@@ -308,110 +357,244 @@ const MotherForm: React.FC = () => {
               />
             )}
 
-            {values.alreadyBreastfeed[0] === 'Sim' &&
+            {values.alreadyBreastfeed === 'Sim' &&
               values.timeSpentBreastFeeding.map((item, index) => (
-                <FormPickerInput
-                  key={item.id}
-                  label={`Tempo de amamentação (gravidez ${index + 1})`}
-                  fieldName={`timeSpentBreastFeeding[${index}].value`}
-                  options={[
-                    'Menos de 1 ano',
-                    '1 ano',
-                    '2 anos',
-                    '3 ou mais anos',
-                  ]}
-                  onChange={setFieldValue}
-                  error={
-                    errors?.timeSpentBreastFeeding &&
-                    errors?.timeSpentBreastFeeding[index]
-                      ? (errors?.timeSpentBreastFeeding[index] as {
-                          [key: string]: any;
-                        }).value
-                      : ''
-                  }
-                />
+                <OptionPickerContainer key={item.id}>
+                  <FormPickerInput
+                    label={`Tempo de amamentação (gravidez ${index + 1})`}
+                    fieldName={`timeSpentBreastFeeding[${index}].value`}
+                    options={[
+                      'Menos de 1 ano',
+                      '1 ano',
+                      '2 anos',
+                      '3 ou mais anos',
+                    ]}
+                    onChange={setFieldValue}
+                    error={
+                      errors?.timeSpentBreastFeeding &&
+                      errors?.timeSpentBreastFeeding[index]
+                        ? (errors?.timeSpentBreastFeeding[index] as {
+                            [key: string]: any;
+                          }).value
+                        : ''
+                    }
+                  />
+                </OptionPickerContainer>
               ))}
 
             <FormRadioGroupInput
               label="Tem companheiro?"
               fieldName="partner"
               onChange={(fieldName: string, fieldValue: string[]) => {
-                setFieldValue(fieldName, fieldValue);
+                setFieldValue(fieldName, fieldValue[0]);
                 if (fieldValue[0] === 'Não') {
-                  setFieldValue('partnerTime', '0');
-                  setFieldValue('liveTogether', ['Não']);
+                  setFieldValue('liveTogether', 'Não');
+                  setFieldValue('partnerYears', '0');
+                  setFieldValue('partnerMonths', '0');
                 } else if (fieldValue[0] === 'Sim') {
-                  // Reinicia os campos abaixo quando o valor do campo partner é 'Sim'.
-                  setFieldValue('partnerTime', '');
-                  setFieldValue('liveTogether', []);
+                  setFieldValue('liveTogether', '');
                 }
-                setFieldValue('partnerMetric', 'meses');
               }}
               options={['Sim', 'Não']}
               error={errors.partner}
             />
 
-            {values.partner[0] === 'Sim' && (
+            {values.partner === 'Sim' && (
               <>
                 <FormRadioGroupInput
                   label="Moram juntos?"
                   fieldName="liveTogether"
-                  onChange={setFieldValue}
+                  onChange={(fieldName: string, fieldValue: string[]) => {
+                    setFieldValue(fieldName, fieldValue[0]);
+                    if (fieldValue[0] === 'Não') {
+                      setFieldValue('partnerYears', '0');
+                      setFieldValue('partnerMonths', '0');
+                    } else if (fieldValue[0] === 'Sim') {
+                      setFieldValue('partnerYears', '');
+                      setFieldValue('partnerMonths', '');
+                    }
+                  }}
                   options={['Sim', 'Não']}
                   error={errors.liveTogether}
                 />
 
-                <SubOptionsContainer>
-                  <PartnerTimeContainer>
-                    <FormPickerInput
-                      label="Há quanto tempo?"
-                      fieldName="partnerTime"
-                      onChange={setFieldValue}
-                      error={errors.partnerTime}
-                      options={['1 a 3', '4 a 6', '7 a 9', '10 ou mais']}
-                    />
-                  </PartnerTimeContainer>
-                  <PartnerMetricContainer>
-                    <FormPickerInput
-                      label=""
-                      placeholder=""
-                      fieldName="partnerMetric"
-                      onChange={setFieldValue}
-                      error={errors.partnerMetric}
-                      options={['meses', 'anos']}
-                    />
-                  </PartnerMetricContainer>
-                </SubOptionsContainer>
+                {values.liveTogether === 'Sim' && (
+                  <SubOptionsContainer>
+                    <FirstSubOptionContainer>
+                      <FormPickerInput
+                        label="Há quantos anos?"
+                        fieldName="partnerYears"
+                        onChange={setFieldValue}
+                        error={errors.partnerYears}
+                        options={[
+                          '1',
+                          '2',
+                          '3',
+                          '4',
+                          '5',
+                          '6',
+                          '7',
+                          '8',
+                          '9',
+                          '10 ou mais',
+                        ]}
+                      />
+                    </FirstSubOptionContainer>
+                    <SecondSubOptionContainer>
+                      <FormPickerInput
+                        label="Há quantos meses?"
+                        fieldName="partnerMonths"
+                        onChange={setFieldValue}
+                        error={errors.partnerMonths}
+                        options={[
+                          '1',
+                          '2',
+                          '3',
+                          '4',
+                          '5',
+                          '6',
+                          '7',
+                          '8',
+                          '9',
+                          '10',
+                          '11',
+                          '12',
+                        ]}
+                      />
+                    </SecondSubOptionContainer>
+                  </SubOptionsContainer>
+                )}
               </>
             )}
 
-            <FormPickerInput
-              label="Qual sua escolaridade?"
-              fieldName="education"
-              onChange={setFieldValue}
-              error={errors.education}
-              options={[
-                'Fundamental incompleto',
-                'Fundamental completo',
-                'Ensino médio incompleto',
-                'Ensino médio completo',
-                'Superior incompleto',
-                'Superior completo',
-              ]}
-            />
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Qual sua escolaridade?"
+                fieldName="education"
+                onChange={setFieldValue}
+                error={errors.education}
+                options={[
+                  'Fundamental incompleto',
+                  'Fundamental completo',
+                  'Ensino médio incompleto',
+                  'Ensino médio completo',
+                  'Superior incompleto',
+                  'Superior completo',
+                ]}
+              />
+            </OptionPickerContainer>
 
-            <FormPickerInput
-              label="Em qual faixa sua renda familiar se encaixa?"
-              fieldName="wage"
-              onChange={setFieldValue}
-              error={errors.wage}
-              options={[
-                'Até 1 salário mínimo',
-                'Entre 1 e 3 salários mínimos',
-                'Entre 4 e 6 salários mínimos',
-                'Mais que 6 salários mínimos',
-              ]}
-            />
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Em qual faixa sua renda familiar se encaixa?"
+                fieldName="wage"
+                onChange={setFieldValue}
+                error={errors.wage}
+                options={[
+                  'Até 1 salário mínimo',
+                  'Entre 1 e 3 salários mínimos',
+                  'Entre 4 e 6 salários mínimos',
+                  'Mais que 6 salários mínimos',
+                ]}
+              />
+            </OptionPickerContainer>
+
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="A gestação foi planejada?"
+                fieldName="plannedPregnancy"
+                onChange={setFieldValue}
+                error={errors.plannedPregnancy}
+                options={['Sim', 'Não']}
+              />
+            </OptionPickerContainer>
+
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Quanto tempo após o parto você fez a primeira visita ao seu bebe?"
+                fieldName="firstVisit"
+                onChange={setFieldValue}
+                error={errors.firstVisit}
+                options={['12h', '13-24h', '2 dias', '3 dias']}
+              />
+            </OptionPickerContainer>
+
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Qual foi o primeiro estímulo a ser feito na sua mama?"
+                fieldName="firstStimulus"
+                onChange={setFieldValue}
+                error={errors.firstStimulus}
+                options={['Massagem/Ordenha', 'Sucção']}
+              />
+            </OptionPickerContainer>
+
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Qual foi o primeiro estímulo a ser feito na sua mama?"
+                fieldName="timeFirstStimulus"
+                onChange={setFieldValue}
+                error={errors.timeFirstStimulus}
+                options={['6h', '7-12h', '13-24h', '2d', '3d']}
+              />
+            </OptionPickerContainer>
+
+            <OptionPickerContainer>
+              <FormTextInput
+                label="Você possui quantos filhos vivos?"
+                placeholder="Número de filhos"
+                onChangeText={handleChange('childrenAlive')}
+                value={values.childrenAlive}
+                error={errors.childrenAlive}
+                keyboardType="number-pad"
+              />
+            </OptionPickerContainer>
+
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Você recebeu orientação orientações no pré-natal sobre aleitamento materno?"
+                fieldName="preNatalGuidance"
+                onChange={setFieldValue}
+                error={errors.preNatalGuidance}
+                options={['Sim', 'Não']}
+              />
+            </OptionPickerContainer>
+
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Você trabalha:"
+                fieldName="occupation"
+                onChange={setFieldValue}
+                error={errors.occupation}
+                options={[
+                  'Em casa (do lar)',
+                  'Fora de casa (alguma outra ocupação)',
+                ]}
+              />
+            </OptionPickerContainer>
+
+            <OptionPickerContainer>
+              <FormPickerInput
+                label="Possui licença maternidade:"
+                fieldName="maternityLeave"
+                onChange={setFieldValue}
+                error={errors.maternityLeave}
+                options={['Sim', 'Não']}
+              />
+            </OptionPickerContainer>
+
+            {values.maternityLeave === 'Sim' && (
+              <OptionPickerContainer>
+                <FormTextInput
+                  label="Quantos meses?"
+                  placeholder="Número de meses"
+                  onChangeText={handleChange('maternityLeaveCount')}
+                  value={values.maternityLeaveCount}
+                  error={errors.maternityLeaveCount}
+                  keyboardType="number-pad"
+                />
+              </OptionPickerContainer>
+            )}
 
             <SubmitButtonContainer>
               <FirstSubOptionContainer>

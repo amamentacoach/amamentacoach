@@ -75,7 +75,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
 
   return (
     <Container>
-      {label !== undefined ? <LabelText>{label}</LabelText> : null}
+      {label !== undefined && <LabelText>{label}</LabelText>}
       <OptionsContainer>
         {availableOptions.map((option, index) => {
           return (
@@ -113,7 +113,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
         </OtherInputContainer>
       ) : null}
       <ErrorContainer>
-        {error ? <ErrorText>{error}</ErrorText> : null}
+        {!!error && <ErrorText>{error}</ErrorText>}
       </ErrorContainer>
     </Container>
   );

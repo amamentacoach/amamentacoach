@@ -33,6 +33,10 @@ import UploadMotherPhoto from '../pages/UploadMotherPhoto';
 import BabyCup from '../pages/BabyCup';
 import DiaryBreastfeed from '../pages/DiaryBreastfeed';
 import NewBreastfeedEntry from '../pages/NewBreastfeedEntry';
+import Questions from '../pages/Questions';
+import NewQuestion from '../pages/NewQuestion';
+import Report from '../pages/Report';
+import SurveyFather from '../pages/SurveyFather';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -154,6 +158,20 @@ const AppRoutes: React.FC = () => {
         }}
       />
       <Stack.Screen
+        name="Questions"
+        component={Questions}
+        options={{
+          title: 'Perguntas',
+        }}
+      />
+      <Stack.Screen
+        name="NewQuestion"
+        component={NewQuestion}
+        options={{
+          title: 'Enviar Pergunta',
+        }}
+      />
+      <Stack.Screen
         name="NewMessage"
         component={NewMessage}
         options={{
@@ -181,6 +199,19 @@ const AppRoutes: React.FC = () => {
         options={{ title: 'Registrar Amamentação' }}
       />
       <Stack.Screen
+        name="Goals"
+        component={Goals}
+        options={{
+          title: 'Diário',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: '#7D5CD7',
+            elevation: 0, // Remove a sombra no Android
+            shadowOpacity: 0, // Remove a sombra no iOS
+          },
+        }}
+      />
+      <Stack.Screen
         name="HelpReceived"
         component={HelpReceived}
         options={{
@@ -194,17 +225,9 @@ const AppRoutes: React.FC = () => {
         }}
       />
       <Stack.Screen
-        name="Goals"
-        component={Goals}
-        options={{
-          title: 'Diário',
-          headerTintColor: 'white',
-          headerStyle: {
-            backgroundColor: '#7D5CD7',
-            elevation: 0, // Remove a sombra no Android
-            shadowOpacity: 0, // Remove a sombra no iOS
-          },
-        }}
+        name="Report"
+        component={Report}
+        options={{ title: 'Relatório' }}
       />
       <Stack.Screen
         name="Feelings"
@@ -222,6 +245,19 @@ const AppRoutes: React.FC = () => {
       <Stack.Screen
         name="SurveyBreastfeed"
         component={SurveyBreastfeed}
+        options={{
+          title: 'Enquete',
+          headerTintColor: 'white',
+          headerStyle: {
+            backgroundColor: '#7D5CD7',
+            elevation: 0, // Remove a sombra no Android
+            shadowOpacity: 0, // Remove a sombra no iOS
+          },
+        }}
+      />
+      <Stack.Screen
+        name="SurveyFather"
+        component={SurveyFather}
         options={{
           title: 'Enquete',
           headerTintColor: 'white',

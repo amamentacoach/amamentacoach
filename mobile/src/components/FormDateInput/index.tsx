@@ -73,7 +73,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
 
   return (
     <Container>
-      {label !== undefined ? <LabelText>{label}</LabelText> : null}
+      {label !== undefined && <LabelText>{label}</LabelText>}
       <TouchableOpacity onPress={showDatePicker} activeOpacity={1}>
         <TextInput
           value={formatDisplayDate(date)}
@@ -83,7 +83,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
         />
       </TouchableOpacity>
       <ErrorContainer>
-        {error ? <ErrorText>{error}</ErrorText> : null}
+        {!!error && <ErrorText>{error}</ErrorText>}
       </ErrorContainer>
 
       {show && (

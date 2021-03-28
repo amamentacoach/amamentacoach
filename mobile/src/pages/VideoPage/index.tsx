@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
@@ -9,6 +9,7 @@ import {
   ContentContainer,
   LoadingContainer,
 } from './styles';
+import setUserVideoSeen from '../../services/videoAccess';
 
 type IScreenParams = {
   VideoPage: {
@@ -19,6 +20,13 @@ type IScreenParams = {
 const VideoPage: React.FC = () => {
   const { videos } = useRoute<RouteProp<IScreenParams, 'VideoPage'>>().params;
   const [isLoading, setIsLoading] = useState(true);
+
+  // Ao final do vídeo é registrado que o usuário viu o vídeo inteiro.
+  const onStateChange = useCallback(state => {
+    if (state === 'ended') {
+      setUserVideoSeen();
+    }
+  }, []);
 
   return (
     <ScrollView>
@@ -41,6 +49,7 @@ const VideoPage: React.FC = () => {
               onReady={() => {
                 setIsLoading(false);
               }}
+              onChangeState={onStateChange}
             />
           </VideoContainer>
         ))}

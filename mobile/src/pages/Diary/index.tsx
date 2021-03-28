@@ -37,23 +37,22 @@ const Diary: React.FC = () => {
     {
       image: require('../../../assets/images/diary_smile.png'),
       title: 'Sentimentos',
-      onPress: () => {
-        navigation.navigate('Feelings');
-      },
+      onPress: () => navigation.navigate('Feelings'),
     },
     {
       image: require('../../../assets/images/diary_star.png'),
       title: 'Metas',
-      onPress: () => {
-        navigation.navigate('Goals');
-      },
+      onPress: () => navigation.navigate('Goals'),
     },
     {
       image: require('../../../assets/images/premature_heart.png'),
       title: 'Ajuda recebida',
-      onPress: () => {
-        navigation.navigate('HelpReceived');
-      },
+      onPress: () => navigation.navigate('HelpReceived'),
+    },
+    {
+      image: require('../../../assets/images/emotions_info.png'),
+      title: 'Relatório',
+      onPress: () => navigation.navigate('Report'),
     },
   ];
 

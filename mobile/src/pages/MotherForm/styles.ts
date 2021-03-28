@@ -28,11 +28,6 @@ export const FormContainer = styled.View`
   margin-bottom: 20px;
 `;
 
-export const SubOptionsContainer = styled.View`
-  flex: 1;
-  flex-direction: row;
-`;
-
 export const DDDContainer = styled.View`
   margin-right: 4px;
   width: 70px;
@@ -42,13 +37,9 @@ export const PhoneInputContainer = styled.View`
   flex: 4;
 `;
 
-export const PartnerTimeContainer = styled.View`
-  flex: 2;
-  margin-right: 4px;
-`;
-
-export const PartnerMetricContainer = styled.View`
+export const SubOptionsContainer = styled.View`
   flex: 1;
+  flex-direction: row;
 `;
 
 export const FirstSubOptionContainer = styled.View`
@@ -57,6 +48,10 @@ export const FirstSubOptionContainer = styled.View`
 `;
 
 export const SecondSubOptionContainer = styled.View`
+  flex: 1;
+`;
+
+export const OptionPickerContainer = styled.View`
   flex: 1;
 `;
 

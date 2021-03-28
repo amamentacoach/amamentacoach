@@ -88,8 +88,7 @@ const BabyForm: React.FC = () => {
             name: Yup.string().required('Campo obrigatório'),
             birthday: Yup.string().required('Campo obrigatório'),
             weight: Yup.number()
-              .integer('Deve ser um número inteiro')
-              .typeError('Deve ser um número inteiro')
+              .typeError('Deve ser um número')
               .min(0, 'Deve ser maior ou igual a 0')
               .required('Campo obrigatório'),
             birthType: Yup.array(Yup.string().required()).required(
@@ -215,7 +214,7 @@ const BabyForm: React.FC = () => {
       const babyInfo: IBabySignUpInfo = {
         name: baby.name,
         birthday: baby.birthday,
-        weight: parseInt(baby.weight, 10),
+        weight: parseFloat(baby.weight),
         birthType: baby.birthType[0].toLowerCase() === 'cesária',
         gestationWeeks: parseInt(baby.gestationWeeks, 10),
         gestationDays: parseInt(baby.gestationDays, 10),
