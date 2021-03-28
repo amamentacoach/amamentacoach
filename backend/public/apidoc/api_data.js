@@ -34,7 +34,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/bebes",
+    "url": "/bebes/alta",
     "title": "Buscar bebes que podem receber alta",
     "description": "<p>Retorna a lista de bebes da mae que podem receber alta</p>",
     "group": "Bebês",
@@ -63,7 +63,7 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "./src/routes.ts",
     "groupTitle": "Bebês",
-    "name": "GetBebes"
+    "name": "GetBebesAlta"
   },
   {
     "type": "post",

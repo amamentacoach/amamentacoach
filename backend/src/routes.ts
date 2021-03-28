@@ -225,7 +225,7 @@ routes.post('/bebes', verifyJWT, bebesController.create);
 routes.get('/bebes',verifyJWT,bebesController.index);
 
 /**
- * @api {get} /bebes Buscar bebes que podem receber alta
+ * @api {get} /bebes/alta Buscar bebes que podem receber alta
  * @apiDescription Retorna a lista de bebes da mae que podem receber alta
  * @apiGroup Bebês
  *
