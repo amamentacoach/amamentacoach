@@ -35,8 +35,8 @@
   {
     "type": "get",
     "url": "/bebes",
-    "title": "Listagem_Bebes Podem Receber Alta",
-    "description": "<p>Retorna a lista de bebes que podem receber alta</p>",
+    "title": "Buscar bebes que podem receber alta",
+    "description": "<p>Retorna a lista de bebes da mae que podem receber alta</p>",
     "group": "Bebês",
     "header": {
       "fields": {
@@ -55,7 +55,7 @@
       "examples": [
         {
           "title": "Sucesso",
-          "content": "HTTP/1.1 200 OK\n[\n  {\n      \"id_bebe\":7,\n      \"nome\":\"Enzo Gabriel\",\n      \"data_parto\":\"2020-08-28\",\n      \"semanas_gest\": 35,\n      \"dias_gest\":5,\n      \"peso\":2.5,\n      \"tipo_parto\":true, // false: parto normal | true: cesaria\n      \"local\":\"UCI\",\n  },\n  {\n      \"id_bebe\":8,\n      \"nome\":\"Valentina\",\n      \"data_parto\":\"2020-08-28\",\n      \"semanas_gest\": 35,\n      \"dias_gest\":5,\n      \"peso\":2.7,\n      \"tipo_parto\":true, // false: parto normal | true: cesaria\n      \"local\":\"UCI\"\n  }\n]",
+          "content": "HTTP/1.1 200 OK\n[\n  {\n      \"nome\": \"Joao\",\n      \"id\": 5,\n      \"local\": \"UTI Neonatal\",\n      \"data_parto\": \"2020-08-28T03:00:00.000Z\"\n  }\n]",
           "type": "json"
         }
       ]
