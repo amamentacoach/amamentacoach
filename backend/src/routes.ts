@@ -18,6 +18,7 @@ import DuvidasController from './controllers/DuvidasController';
 import RelatorioDiarioController from './controllers/RelatorioDiarioController';
 import RelatorioSemanalController from './controllers/RelatorioSemanalController';
 import AcessosController from './controllers/AcessosController';
+import AltaController from './controllers/AltaController';
 
 
 const maesController = new MaesController();
@@ -34,6 +35,7 @@ const duvidasController = new DuvidasController();
 const relatorioDiarioController = new RelatorioDiarioController();
 const relatorioSemanalController = new RelatorioSemanalController();
 const acessosController = new AcessosController();
+const altaController = new AltaController();
 
 const routes = Router()
 const uploadMiddleware = multer(uploadConfig);
@@ -181,7 +183,7 @@ routes.post('/bebes', verifyJWT, bebesController.create);
  *
  */
 
- routes.post('/bebes/:id/alta', verifyJWT, bebesController.alta);
+ routes.post('/bebes/:id/alta', verifyJWT, altaController.create);
 
 
 
@@ -221,6 +223,43 @@ routes.post('/bebes', verifyJWT, bebesController.create);
  */
 
 routes.get('/bebes',verifyJWT,bebesController.index);
+
+/**
+ * @api {get} /bebes Listagem Bebes Podem Receber Alta
+ * @apiDescription Retorna a lista de bebes que podem receber alta
+ * @apiGroup Bebês
+ *
+ * @apiHeader {String} authorization Token de acesso.
+ * 
+ * 
+ * @apiSuccessExample {json} Sucesso
+ *    HTTP/1.1 200 OK
+ *    [
+ *      {
+ *          "id_bebe":7,
+ *          "nome":"Enzo Gabriel",
+ *          "data_parto":"2020-08-28",
+ *          "semanas_gest": 35,
+ *          "dias_gest":5,
+ *          "peso":2.5,
+ *          "tipo_parto":true, // false: parto normal | true: cesaria
+ *          "local":"UCI",
+ *      },
+ *      {
+ *          "id_bebe":8,
+ *          "nome":"Valentina",
+ *          "data_parto":"2020-08-28",
+ *          "semanas_gest": 35,
+ *          "dias_gest":5,
+ *          "peso":2.7,
+ *          "tipo_parto":true, // false: parto normal | true: cesaria
+ *          "local":"UCI"
+ *      }
+ *    ]
+ *
+ */
+
+ routes.get('/bebes/alta',verifyJWT,altaController.show);
 
 /**
  * @api {post} /login Login
