@@ -226,7 +226,7 @@ routes.get('/bebes',verifyJWT,bebesController.index);
 
 /**
  * @api {get} /bebes/alta Buscar bebes que podem receber alta
- * @apiDescription Retorna a lista de bebes da mae que podem receber alta
+ * @apiDescription Retorna a list“Motivacao”a de bebes da mae que podem receber alta
  * @apiGroup Bebês
  *
  * @apiHeader {String} authorization Token de acesso.
@@ -541,7 +541,9 @@ routes.get('/perguntas/escalaealimentacao',verifyJWT,perguntasController.escalaE
  *      4 - DIÁRIO: Ajuda<br/>
  *      5 - Participação do pai<br/>
  *      6 - Acoes Realizadas com o bebe<br/>
- *      7 - Escala
+ *      7 - Escala<br/>
+ *      8 - Enquete Motivacao<br/>
+ *      9 - Enquete Sobre ajuda<br/>
  * 
  *      
  * @apiGroup Enquetes

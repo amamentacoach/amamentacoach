@@ -36,7 +36,7 @@ define({ "api": [
     "type": "get",
     "url": "/bebes/alta",
     "title": "Buscar bebes que podem receber alta",
-    "description": "<p>Retorna a lista de bebes da mae que podem receber alta</p>",
+    "description": "<p>Retorna a list“Motivacao”a de bebes da mae que podem receber alta</p>",
     "group": "Bebês",
     "header": {
       "fields": {
@@ -328,7 +328,7 @@ define({ "api": [
     "type": "get",
     "url": "/perguntas/:categoria",
     "title": "Listagem por categoria",
-    "description": "<p>Perguntas quando<br/> Categoria das Enquetes:<br/> 1 - Amamentar um prematuro<br/> 2 - DIÁRIO: Sentimentos<br/> 3 - DIÁRIO: Metas<br/> 4 - DIÁRIO: Ajuda<br/> 5 - Participação do pai<br/> 6 - Acoes Realizadas com o bebe<br/> 7 - Escala</p>",
+    "description": "<p>Perguntas quando<br/> Categoria das Enquetes:<br/> 1 - Amamentar um prematuro<br/> 2 - DIÁRIO: Sentimentos<br/> 3 - DIÁRIO: Metas<br/> 4 - DIÁRIO: Ajuda<br/> 5 - Participação do pai<br/> 6 - Acoes Realizadas com o bebe<br/> 7 - Escala<br/> 8 - Enquete Motivacao<br/> 9 - Enquete Sobre ajuda<br/></p>",
     "group": "Enquetes",
     "header": {
       "fields": {

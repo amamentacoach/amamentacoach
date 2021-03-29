@@ -18,9 +18,9 @@ export async function seed(knex: Knex): Promise<void> {
             outro:true,
             multiplas:true,
         },
-        { 
+        { // Categoria 8: Enquete “Motivacao”
             id: 2, 
-            categoria: 1, 
+            categoria: 8, 
             descricao:'O que te motiva a continuar tentando amamentar?',
             alternativas: 'Pensar que é o melhor para o meu bebê|'
                 + 'O incentivo que estou recebendo dos profissionais|'
@@ -32,8 +32,8 @@ export async function seed(knex: Knex): Promise<void> {
             multiplas:true,
         },
         { 
-            id: 3, 
-            categoria: 1, 
+            id: 3, // Categoria 9: Enquete “Sobre ajuda”
+            categoria: 9, 
             descricao:'Você sente que está recebendo toda a ajuda de que precisa para continuar tentando amamentar seu bebê?',
             alternativas: 'Sim, tanto dos profissionais quanto da minha família|'
                 + 'Apenas da minha família|'
