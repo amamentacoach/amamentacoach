@@ -19,7 +19,11 @@ class PerguntasController{
         const {mae_id} = req;
         const bebe = await knex('bebe').select('local').where('mae_id',mae_id).first()
         const alvo = alvosMap.get(bebe.local)
-        const perguntas = await knex('pergunta').select('*').where('categoria',categoria).where('alvo','GERAL').orWhere('alvo',alvo).orderBy('id');
+        const perguntas = await knex('pergunta').select('*').where('categoria',categoria)
+            .where(bd =>{
+                bd.orWhere('alvo','GERAL')
+                bd.orWhere('alvo',alvo)
+            }).orderBy('id');
         perguntas.map((pergunta,i)=>{
             pergunta["alternativas"]=pergunta.alternativas.split('|')
         })
@@ -30,7 +34,11 @@ class PerguntasController{
         const {mae_id} = req;
         const bebe = await knex('bebe').select('local').where('mae_id',mae_id).first()
         const alvo = alvosMap.get(bebe.local)
-        const escala = await knex('pergunta').select('*').where('categoria',7).where('alvo','GERAL').orWhere('alvo',alvo).orderBy('id');
+        const escala = await knex('pergunta').select('*').where('categoria',7)
+            .where(bd =>{
+                bd.orWhere('alvo','GERAL')
+                bd.orWhere('alvo',alvo)
+            }).orderBy('id');
         const alimentacao = await knex('pergunta').select('*').where('id',5).first();
         escala.map((pergunta,i)=>{
             pergunta["alternativas"]=pergunta.alternativas.split('|')
