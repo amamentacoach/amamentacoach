@@ -51,36 +51,32 @@ class RespostasMaeController{
         
         await knex.transaction(async trx =>{
 
-            try {
-                for(const resposta of respostas){
-                    const {pergunta_id, descricao} = resposta
-                    score += parseInt(descricao);
-                    await trx('resposta').insert({mae_id,pergunta_id,descricao,data:new Date()});
-                }
-        
-                switch (ocasiao) {
-                    case "1":
-                        await trx('mae').update({score_1d:score}).where({id:mae_id})
-                        break;
-                    case "ALTA":
-                        await trx('mae').update({score_alta:score}).where({id:mae_id})
-                        break;
-        
-                    case "15D":
-                        await trx('mae').update({score_15d:score}).where({id:mae_id})
-                        break;
-        
-                    case "1M":
-                        await knex('mae').update({score_1m:score}).where({id:mae_id})
-                        break;
-                
-                    default:
-                        res.sendStatus(400)
-                        break;
-                }
-            } catch (error) {
-                res.sendStatus(400)
-            }   
+            for(const resposta of respostas){
+                const {pergunta_id, descricao} = resposta
+                score += parseInt(descricao);
+                await trx('resposta').insert({mae_id,pergunta_id,descricao,data:new Date()});
+            }
+    
+            switch (ocasiao) {
+                case "1":
+                    await trx('mae').update({score_1d:score}).where({id:mae_id})
+                    break;
+                case "ALTA":
+                    await trx('mae').update({score_alta:score}).where({id:mae_id})
+                    break;
+    
+                case "15D":
+                    await trx('mae').update({score_15d:score}).where({id:mae_id})
+                    break;
+    
+                case "1M":
+                    await knex('mae').update({score_1m:score}).where({id:mae_id})
+                    break;
+            
+                default:
+                    res.sendStatus(400)
+                    break;
+            }  
                      
         })
 
@@ -95,30 +91,25 @@ class RespostasMaeController{
         
         await knex.transaction(async trx =>{
 
-            try {
-
-                await trx('resposta').insert({mae_id,pergunta_id:5,descricao,data:new Date()});
-        
-                switch (ocasiao) {
-                    case "ALTA":
-                        await trx('mae').update({alim_alta:descricao}).where({id:mae_id})
-                        break;
-        
-                    case "15D":
-                        await trx('mae').update({alim_15d:descricao}).where({id:mae_id})
-                        break;
-        
-                    case "1M":
-                        await knex('mae').update({alim_1m:descricao}).where({id:mae_id})
-                        break;
-                
-                    default:
-                        res.sendStatus(400)
-                        break;
-                }
-            } catch (error) {
-                res.sendStatus(400)
-            }   
+            await trx('resposta').insert({mae_id,pergunta_id:5,descricao,data:new Date()});
+    
+            switch (ocasiao) {
+                case "ALTA":
+                    await trx('mae').update({alim_alta:descricao}).where({id:mae_id})
+                    break;
+    
+                case "15D":
+                    await trx('mae').update({alim_15d:descricao}).where({id:mae_id})
+                    break;
+    
+                case "1M":
+                    await knex('mae').update({alim_1m:descricao}).where({id:mae_id})
+                    break;
+            
+                default:
+                    res.sendStatus(400)
+                    break;
+            }  
                      
         })
 
