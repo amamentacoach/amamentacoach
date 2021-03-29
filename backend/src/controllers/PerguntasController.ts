@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import knex from '../database/connection';
 
 const alvosMap = new Map<string, string>();
-alvosMap.set("Alojamento Conjunto","AC")
-alvosMap.set("Casa", "UCI/UTI")
+alvosMap.set("Alojamento conjunto","AC")
+alvosMap.set("Casa", "AC")
 alvosMap.set("UCI Neonatal", "UCI/UTI")
 alvosMap.set("UTI Neonatal", "UCI/UTI")
 
