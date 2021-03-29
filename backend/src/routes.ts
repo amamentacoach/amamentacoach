@@ -647,8 +647,8 @@ routes.get('/perguntas/:categoria',verifyJWT,perguntasController.index);
 
 
    /**
- * @api {post} /responder/alimentacao Responder Amamentacao
- * @apiDescription Responde pergunta de amamentacao <br> Parametro "ocasiao" pode conter os seguintes valores</br>
+ * @api {post} /responder/alimentacao Responder Alimentacao
+ * @apiDescription Responde pergunta de alimentação <br> Parametro "ocasiao" pode conter os seguintes valores</br>
  *              "ALTA" : Quando o bebe recebeu alta.</br>
  *              "15D" : Quando completou 15 dias</br>
  *              "1M" : Quando completou 1 mes

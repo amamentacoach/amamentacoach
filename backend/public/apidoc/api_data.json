@@ -393,8 +393,8 @@
   {
     "type": "post",
     "url": "/responder/alimentacao",
-    "title": "Responder Amamentacao",
-    "description": "<p>Responde pergunta de amamentacao <br> Parametro &quot;ocasiao&quot; pode conter os seguintes valores</br> &quot;ALTA&quot; : Quando o bebe recebeu alta.</br> &quot;15D&quot; : Quando completou 15 dias</br> &quot;1M&quot; : Quando completou 1 mes</p>",
+    "title": "Responder Alimentacao",
+    "description": "<p>Responde pergunta de alimentação <br> Parametro &quot;ocasiao&quot; pode conter os seguintes valores</br> &quot;ALTA&quot; : Quando o bebe recebeu alta.</br> &quot;15D&quot; : Quando completou 15 dias</br> &quot;1M&quot; : Quando completou 1 mes</p>",
     "group": "Enquetes",
     "header": {
       "fields": {
