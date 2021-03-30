@@ -50,6 +50,8 @@ const Goals: React.FC = () => {
     setFieldValue,
     handleChangePage,
   }) => {
+    const onFormEnd = () => setIsFinishedModalVisible(true);
+
     return (
       <ScrollView width={width}>
         <HeaderBackground />
@@ -78,11 +80,7 @@ const Goals: React.FC = () => {
             <MainButton
               text={index === pagesLength - 1 ? 'Finalizar' : 'Próximo'}
               disabled={isSendingForm}
-              onPress={() =>
-                handleChangePage(index + 1, () =>
-                  setIsFinishedModalVisible(true),
-                )
-              }
+              onPress={() => handleChangePage(index + 1, onFormEnd)}
             />
           </Footer>
         </ContentContainer>

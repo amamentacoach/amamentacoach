@@ -32,8 +32,8 @@ export interface IDiaryFormInfoPage {
   isSendingForm: boolean;
   // Definir o valor de uma resposta.
   setFieldValue: (field: string, value: any) => void;
-  // Avança para a próxima página do formulário caso possível.
-  handleChangePage: (currentPage: number, handleFormEnd: () => void) => void;
+  // Altera a página do formulário.
+  handleChangePage: (newPage: number, handleFormEnd: () => void) => void;
 }
 
 interface IDiaryFormProps {

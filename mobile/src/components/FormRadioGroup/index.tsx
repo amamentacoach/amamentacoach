@@ -93,7 +93,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
         })}
       </OptionsContainer>
 
-      {displayOtherField && selectedIndexes[selectedIndexes.length - 1] ? (
+      {displayOtherField && selectedIndexes[selectedIndexes.length - 1] && (
         <OtherInputContainer>
           <FormTextInput
             placeholder="Resposta para outro "
@@ -111,7 +111,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
             }}
           />
         </OtherInputContainer>
-      ) : null}
+      )}
       <ErrorContainer>
         {!!error && <ErrorText>{error}</ErrorText>}
       </ErrorContainer>

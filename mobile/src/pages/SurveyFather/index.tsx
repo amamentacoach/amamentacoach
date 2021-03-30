@@ -35,6 +35,8 @@ const SurveyFather: React.FC = () => {
     setFieldValue,
     handleChangePage,
   }) => {
+    const onFormEnd = () => navigation.navigate('Survey');
+
     return (
       <ScrollView width={width}>
         <HeaderBackground />
@@ -60,23 +62,19 @@ const SurveyFather: React.FC = () => {
           />
 
           <Footer>
-            {index > 0 ? (
+            {index > 0 && (
               <FirstSubOptionContainer>
                 <SecondaryButton
-                  onPress={() => handleChangePage(index - 1)}
+                  onPress={() => handleChangePage(index - 1, onFormEnd)}
                   text="Voltar"
                 />
               </FirstSubOptionContainer>
-            ) : null}
+            )}
             <SecondSubOptionContainer>
               <MainButton
                 text={index === pagesLength - 1 ? 'Finalizar' : 'Próximo'}
                 disabled={isSendingForm}
-                onPress={() =>
-                  handleChangePage(index + 1, () =>
-                    navigation.navigate('Survey'),
-                  )
-                }
+                onPress={() => handleChangePage(index + 1, onFormEnd)}
               />
             </SecondSubOptionContainer>
           </Footer>

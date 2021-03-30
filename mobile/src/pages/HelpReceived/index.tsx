@@ -32,6 +32,8 @@ const HelpReceived: React.FC = () => {
     setFieldValue,
     handleChangePage,
   }) => {
+    const onFormEnd = () => navigation.navigate('Diary');
+
     return (
       <ScrollView width={width}>
         <HeaderBackground />
@@ -60,9 +62,7 @@ const HelpReceived: React.FC = () => {
             <MainButton
               text={index === pagesLength - 1 ? 'Finalizar' : 'Próximo'}
               disabled={isSendingForm}
-              onPress={() =>
-                handleChangePage(index + 1, () => navigation.navigate('Diary'))
-              }
+              onPress={() => handleChangePage(index + 1, onFormEnd)}
             />
           </Footer>
         </ContentContainer>

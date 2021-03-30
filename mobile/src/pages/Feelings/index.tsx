@@ -38,6 +38,10 @@ const Feelings: React.FC = () => {
     setFieldValue,
     handleChangePage,
   }) => {
+    const onFormEndGoals = () =>
+      navigation.dispatch(StackActions.replace('Goals'));
+    const onFormEndDiary = () => navigation.navigate('Diary');
+
     return (
       <ScrollView width={width}>
         <HeaderBackground />
@@ -68,25 +72,17 @@ const Feelings: React.FC = () => {
                 index === pagesLength - 1 ? 'Salvar e traçar metas' : 'Próximo'
               }
               disabled={isSendingForm}
-              onPress={() =>
-                handleChangePage(index + 1, () =>
-                  navigation.dispatch(StackActions.replace('Goals')),
-                )
-              }
+              onPress={() => handleChangePage(index + 1, onFormEndGoals)}
             />
-            {index === pagesLength - 1 ? (
+            {index === pagesLength - 1 && (
               <SecondFooterButtonContainer>
                 <SecondaryButton
                   text="Salvar e sair"
                   disabled={isSendingForm}
-                  onPress={() =>
-                    handleChangePage(index + 1, () =>
-                      navigation.navigate('Diary'),
-                    )
-                  }
+                  onPress={() => handleChangePage(index + 1, onFormEndDiary)}
                 />
               </SecondFooterButtonContainer>
-            ) : null}
+            )}
           </Footer>
         </ContentContainer>
       </ScrollView>

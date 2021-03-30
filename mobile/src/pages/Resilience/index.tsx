@@ -44,7 +44,7 @@ const Resilience: React.FC = () => {
   return (
     <ScrollView>
       <PageHeader>Você sabe o que é Resiliência?</PageHeader>
-      {isLoadingVideo ? (
+      {isLoadingVideo && (
         <LoadingContainer>
           <ActivityIndicator
             size="large"
@@ -52,7 +52,7 @@ const Resilience: React.FC = () => {
             animating={isLoadingVideo}
           />
         </LoadingContainer>
-      ) : null}
+      )}
       <VideoContainer display={!isLoadingVideo}>
         <YoutubePlayer
           height={200}
