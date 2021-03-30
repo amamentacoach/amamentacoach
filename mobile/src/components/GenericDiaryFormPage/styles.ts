@@ -1,15 +1,15 @@
 import styled from 'styled-components/native';
 
-interface IContainerProps {
+interface IScrollViewProps {
   width: number;
 }
 
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
-}))<IContainerProps>`
-  width: ${({ width }) => width}px;
+}))<IScrollViewProps>`
   flex: 1;
+  width: ${({ width }) => width}px;
 `;
 
 export const HeaderBackground = styled.View`
