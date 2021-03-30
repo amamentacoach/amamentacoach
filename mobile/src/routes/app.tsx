@@ -1,290 +1,33 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import AdditionalInformation from '../pages/AdditionalInformation';
-import BreastfeedingBenefits from '../pages/BreastfeedingBenefits';
-import DiaryRegistry from '../pages/DiaryRegistry';
-import Distractions from '../pages/Distractions';
-import MusicPlaylists from '../pages/MusicPlaylists';
-import EmotionsAndBreastfeeding from '../pages/EmotionsAndBreastfeeding';
-import Feelings from '../pages/Feelings';
-import Goals from '../pages/Goals';
-import HelpReceived from '../pages/HelpReceived';
-import Home from '../pages/Home';
-import HowToBreastfeed from '../pages/HowToBreastfeed';
-import HU from '../pages/HU';
-import Messages from '../pages/Messages';
-import NewDiaryRegistry from '../pages/NewDiaryRegistry';
-import NewMessage from '../pages/NewMessage';
-import NewPassword from '../pages/NewPassword';
-import NotWhatIExpected from '../pages/NotWhatIExpected';
-import Premature from '../pages/Premature';
-import Resilience from '../pages/Resilience';
-import StepByStepPremature from '../pages/StepByStepPremature';
+import createDiaryRoutes from './app/diary';
+import createSurveyRoutes from './app/survey';
+import createHomeRoutes from './app/home';
+import createProfileRoutes from './app/profile';
+import VideoPage from '../pages/Generic/VideoPage';
 import TabNavigator from './tabNavigator';
-import ThePremature from '../pages/ThePremature';
-import VideoPage from '../pages/VideoPage';
-import UploadBabyPhoto from '../pages/UploadBabyPhoto';
-import UploadFatherPhoto from '../pages/UploadFatherPhoto';
-import SurveyBreastfeed from '../pages/SurveyBreastfeed';
-import SurveyStatistics from '../pages/SurveyStatistics';
-import ManageExpectations from '../pages/ManageExpectations';
-import UploadMotherPhoto from '../pages/UploadMotherPhoto';
-import BabyCup from '../pages/BabyCup';
-import DiaryBreastfeed from '../pages/DiaryBreastfeed';
-import NewBreastfeedEntry from '../pages/NewBreastfeedEntry';
-import Questions from '../pages/Questions';
-import NewQuestion from '../pages/NewQuestion';
-import Report from '../pages/Report';
-import SurveyFather from '../pages/SurveyFather';
 
 const AppRoutes: React.FC = () => {
   const Stack = createStackNavigator();
+
   return (
     <Stack.Navigator screenOptions={{ headerTitleAlign: 'center' }}>
       <Stack.Screen
+        key="TabNavigator"
         name="TabNavigator"
         component={TabNavigator}
         options={{ headerShown: false }}
       />
+      {createHomeRoutes(Stack)}
+      {createDiaryRoutes(Stack)}
+      {createSurveyRoutes(Stack)}
+      {createProfileRoutes(Stack)}
       <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="StepByStepPremature"
-        component={StepByStepPremature}
-        options={{ title: 'Infográfico' }}
-      />
-      <Stack.Screen
-        name="NotWhatIExpected"
-        component={NotWhatIExpected}
-        options={{
-          title: 'O Prematuro',
-          headerTintColor: 'white',
-          headerStyle: {
-            backgroundColor: '#7D5CD7',
-            elevation: 0, // Remove a sombra no Android
-            shadowOpacity: 0, // Remove a sombra no iOS
-          },
-        }}
-      />
-      <Stack.Screen
-        name="ThePremature"
-        component={ThePremature}
-        options={{ title: 'Sou o Prematuro' }}
-      />
-      <Stack.Screen
+        key="VideoPage"
         name="VideoPage"
         component={VideoPage}
         options={{ title: 'Vídeo' }}
-      />
-      <Stack.Screen
-        name="BreastfeedingBenefits"
-        component={BreastfeedingBenefits}
-        options={{ title: 'Infográfico' }}
-      />
-      <Stack.Screen
-        name="Distractions"
-        component={Distractions}
-        options={{ title: 'Caixinha da distração' }}
-      />
-      <Stack.Screen
-        name="MusicPlaylists"
-        component={MusicPlaylists}
-        options={{ title: 'Músicas para relaxar' }}
-      />
-      <Stack.Screen
-        name="Resilience"
-        component={Resilience}
-        options={{ title: 'Resiliência' }}
-      />
-      <Stack.Screen
-        name="HU"
-        component={HU}
-        options={{ title: 'Sinta-se em casa!' }}
-      />
-      <Stack.Screen
-        name="Premature"
-        component={Premature}
-        options={{ title: 'O Prematuro' }}
-      />
-      <Stack.Screen
-        name="UploadBabyPhoto"
-        component={UploadBabyPhoto}
-        options={{ title: 'Minha maior motivação' }}
-      />
-      <Stack.Screen
-        name="HowToBreastfeed"
-        component={HowToBreastfeed}
-        options={{ title: 'Retirada do leite' }}
-      />
-      <Stack.Screen
-        name="EmotionsAndBreastfeeding"
-        component={EmotionsAndBreastfeeding}
-        options={{ title: 'Emoções e amamentação' }}
-      />
-      <Stack.Screen
-        name="AdditionalInformation"
-        component={AdditionalInformation}
-        options={{ title: 'Mais informações' }}
-      />
-      <Stack.Screen
-        name="ManageExpectations"
-        component={ManageExpectations}
-        options={{ title: 'Expectativas' }}
-      />
-      <Stack.Screen
-        name="UploadMotherPhoto"
-        component={UploadMotherPhoto}
-        options={{ title: 'Espelho' }}
-      />
-      <Stack.Screen
-        name="UploadFatherPhoto"
-        component={UploadFatherPhoto}
-        options={{ title: 'O Papai' }}
-      />
-      <Stack.Screen
-        name="BabyCup"
-        component={BabyCup}
-        options={{ title: 'Oferta de leite pelo copinho' }}
-      />
-      <Stack.Screen
-        name="Messages"
-        component={Messages}
-        options={{
-          title: 'Mural de mensagens',
-        }}
-      />
-      <Stack.Screen
-        name="Questions"
-        component={Questions}
-        options={{
-          title: 'Perguntas',
-        }}
-      />
-      <Stack.Screen
-        name="NewQuestion"
-        component={NewQuestion}
-        options={{
-          title: 'Enviar Pergunta',
-        }}
-      />
-      <Stack.Screen
-        name="NewMessage"
-        component={NewMessage}
-        options={{
-          title: 'Enviar mensagem',
-        }}
-      />
-      <Stack.Screen
-        name="DiaryRegistry"
-        component={DiaryRegistry}
-        options={{ title: 'Retirada de Leite' }}
-      />
-      <Stack.Screen
-        name="NewDiaryRegistry"
-        component={NewDiaryRegistry}
-        options={{ title: 'Registrar Retirada de Leite' }}
-      />
-      <Stack.Screen
-        name="DiaryBreastfeed"
-        component={DiaryBreastfeed}
-        options={{ title: 'Amamentação' }}
-      />
-      <Stack.Screen
-        name="NewBreastfeedEntry"
-        component={NewBreastfeedEntry}
-        options={{ title: 'Registrar Amamentação' }}
-      />
-      <Stack.Screen
-        name="Goals"
-        component={Goals}
-        options={{
-          title: 'Diário',
-          headerTintColor: 'white',
-          headerStyle: {
-            backgroundColor: '#7D5CD7',
-            elevation: 0, // Remove a sombra no Android
-            shadowOpacity: 0, // Remove a sombra no iOS
-          },
-        }}
-      />
-      <Stack.Screen
-        name="HelpReceived"
-        component={HelpReceived}
-        options={{
-          title: 'Diário',
-          headerTintColor: 'white',
-          headerStyle: {
-            backgroundColor: '#7D5CD7',
-            elevation: 0, // Remove a sombra no Android
-            shadowOpacity: 0, // Remove a sombra no iOS
-          },
-        }}
-      />
-      <Stack.Screen
-        name="Report"
-        component={Report}
-        options={{ title: 'Relatório' }}
-      />
-      <Stack.Screen
-        name="Feelings"
-        component={Feelings}
-        options={{
-          title: 'Diário',
-          headerTintColor: 'white',
-          headerStyle: {
-            backgroundColor: '#7D5CD7',
-            elevation: 0, // Remove a sombra no Android
-            shadowOpacity: 0, // Remove a sombra no iOS
-          },
-        }}
-      />
-      <Stack.Screen
-        name="SurveyBreastfeed"
-        component={SurveyBreastfeed}
-        options={{
-          title: 'Enquete',
-          headerTintColor: 'white',
-          headerStyle: {
-            backgroundColor: '#7D5CD7',
-            elevation: 0, // Remove a sombra no Android
-            shadowOpacity: 0, // Remove a sombra no iOS
-          },
-        }}
-      />
-      <Stack.Screen
-        name="SurveyFather"
-        component={SurveyFather}
-        options={{
-          title: 'Enquete',
-          headerTintColor: 'white',
-          headerStyle: {
-            backgroundColor: '#7D5CD7',
-            elevation: 0, // Remove a sombra no Android
-            shadowOpacity: 0, // Remove a sombra no iOS
-          },
-        }}
-      />
-      <Stack.Screen
-        name="SurveyStatistics"
-        component={SurveyStatistics}
-        options={{
-          title: 'Enquete',
-          headerTintColor: 'white',
-          headerStyle: {
-            backgroundColor: '#7D5CD7',
-            elevation: 0, // Remove a sombra no Android
-            shadowOpacity: 0, // Remove a sombra no iOS
-          },
-        }}
-      />
-      <Stack.Screen
-        name="NewPassword"
-        component={NewPassword}
-        options={{ title: 'Alterar senha' }}
       />
     </Stack.Navigator>
   );
