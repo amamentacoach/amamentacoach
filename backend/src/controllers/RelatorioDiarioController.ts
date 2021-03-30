@@ -3,7 +3,7 @@ import knex from '../database/connection';
 
 
 const alvosMap = new Map<string, string>();
-alvosMap.set("Alojamento Conjunto","AC")
+alvosMap.set("Alojamento conjunto","AC")
 alvosMap.set("Casa", "AC")
 alvosMap.set("UCI Neonatal", "UCI/UTI")
 alvosMap.set("UTI Neonatal", "UCI/UTI")
@@ -38,6 +38,7 @@ class RelatorioDiarioController{
         if(jaRespondeu[0].count==0){
             const bebe = await knex('bebe').select('local').where('mae_id',mae_id).first()
             const alvo = alvosMap.get(bebe.local)
+            console.log(alvo)
             const perguntas = await knex('pergunta').where('categoria',6).select('*')
                 .where(bd =>{
                     bd.orWhere('alvo','GERAL')
