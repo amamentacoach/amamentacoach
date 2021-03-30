@@ -19,12 +19,12 @@ const SurveyMenu: React.FC = () => {
     {
       image: require('../../../../assets/images/surveys_two.png'),
       title: 'Motivação',
-      onPress: () => {},
+      onPress: () => navigation.navigate('SurveyMotivation'),
     },
     {
       image: require('../../../../assets/images/surveys_three.png'),
       title: 'Sobre ajuda',
-      onPress: () => {},
+      onPress: () => navigation.navigate('SurveyHelp'),
     },
   ];
 

@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { ActivityIndicator, FlatList } from 'react-native';
+import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 import { StackActions, useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 
@@ -12,27 +12,27 @@ import {
 import Modal from '../Modal';
 
 import {
-  ListContainer,
   HeaderBackground,
   ContentContainer,
   HeaderText,
+  ScrollView,
 } from './styles';
 
-// Tipo de uma função que pode ser utilizada para gerar uma página do formulário.
+// Tipo de um componente que pode ser utilizado para gerar uma página do formulário.
 export interface IDiaryFormInfoPage {
-  // Index da página no vetor.
+  // Index da página.
   index: number;
-  // Número total de página.
+  // Número total de páginas.
   pagesLength: number;
   // Questões que devem ser respondidas pelo usuário.
   question: ISurveyQuestion;
   // Verifica se formulário foi preenchido corretamente ao tentar avançar a página
   isFormValid: boolean;
-  // Verifica se formulário foi está sendo enviado ao servidor.
+  // Verifica se formulário está sendo enviado ao servidor.
   isSendingForm: boolean;
-  // Definir o valor de uma resposta.
+  // Define o valor de uma resposta.
   setFieldValue: (field: string, value: any) => void;
-  // Altera a página do formulário.
+  // Altera a página do formulário. Caso seja a última página executa a função handleFormEnd.
   handleChangePage: (newPage: number, handleFormEnd: () => void) => void;
 }
 
@@ -56,6 +56,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
   category,
   InfoPage,
 }) => {
+  const { width } = Dimensions.get('window');
   const navigation = useNavigation();
   const pageFlatListRef = useRef<FlatList>(null);
 
@@ -221,7 +222,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
   }
 
   return (
-    <ListContainer>
+    <>
       <Modal
         content={
           'Erro ao enviar suas respostas.\nPor favor tente novamente mais tarde.'
@@ -270,23 +271,29 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
             ref={pageFlatListRef}
             data={pages}
             renderItem={({ item, index }) => (
-              <InfoPage
-                index={index}
-                pagesLength={pages.length}
-                question={item}
-                setFieldValue={setFieldValue}
-                isFormValid={isFormValid}
-                isSendingForm={isSendingForm}
-                handleChangePage={(newPage, handleFormEnd) =>
-                  handleChangePage(
-                    item,
-                    values,
-                    newPage,
-                    submitForm,
-                    handleFormEnd,
-                  )
-                }
-              />
+              <ScrollView width={width}>
+                <HeaderBackground />
+                <HeaderText>{title}</HeaderText>
+                <ContentContainer>
+                  <InfoPage
+                    index={index}
+                    pagesLength={pages.length}
+                    question={item}
+                    setFieldValue={setFieldValue}
+                    isFormValid={isFormValid}
+                    isSendingForm={isSendingForm}
+                    handleChangePage={(newPage, handleFormEnd) =>
+                      handleChangePage(
+                        item,
+                        values,
+                        newPage,
+                        submitForm,
+                        handleFormEnd,
+                      )
+                    }
+                  />
+                </ContentContainer>
+              </ScrollView>
             )}
             keyExtractor={item => item.id.toString()}
             horizontal
@@ -296,7 +303,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
           />
         )}
       </Formik>
-    </ListContainer>
+    </>
   );
 };
 
