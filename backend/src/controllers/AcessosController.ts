@@ -29,6 +29,14 @@ class AcessosController{
                 const acessosAntDiario = await knex('mae').select('acessos_diario').where('id',mae_id).first()
                 await knex('mae').update('acessos_diario',acessosAntDiario.acessos_diario+1).where('id',mae_id)
                 return res.sendStatus(200)
+            case "mensagens":
+                const acessosAntMsg = await knex('mae').select('acessos_msg').where('id',mae_id).first()
+                await knex('mae').update('acessos_msg',acessosAntMsg.acessos_msg+1).where('id',mae_id)
+                return res.sendStatus(200)
+            case "ordenha":
+                const acessosAntOrdenha = await knex('mae').select('acessos_ordenha').where('id',mae_id).first()
+                await knex('mae').update('acessos_ordenha',acessosAntOrdenha.acessos_ordenha+1).where('id',mae_id)
+                return res.sendStatus(200)
             default:
                 return res.sendStatus(404)
         }

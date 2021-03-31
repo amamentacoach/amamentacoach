@@ -282,6 +282,54 @@
   },
   {
     "type": "post",
+    "url": "/acessos/mensagens",
+    "title": "Acessos Mensagens",
+    "description": "<p>Informa se mae acessou as mensagens</p>",
+    "group": "Controle_de_Acessos",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Controle_de_Acessos",
+    "name": "PostAcessosMensagens"
+  },
+  {
+    "type": "post",
+    "url": "/acessos/ordenha",
+    "title": "Acessos Ordenha",
+    "description": "<p>Informa se mae acessou a ordenha</p>",
+    "group": "Controle_de_Acessos",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Controle_de_Acessos",
+    "name": "PostAcessosOrdenha"
+  },
+  {
+    "type": "post",
     "url": "/acessos/videos",
     "title": "Acessos Videos",
     "description": "<p>Informa se mae acessou videos</p>",

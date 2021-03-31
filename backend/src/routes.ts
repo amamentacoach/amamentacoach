@@ -1129,6 +1129,20 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
  * @apiHeader {String} authorization Token de acesso.
  */
 
+/**
+ * @api {post} /acessos/ordenha Acessos Ordenha
+ * @apiDescription Informa se mae acessou a ordenha
+ * @apiGroup Controle de Acessos
+ * @apiHeader {String} authorization Token de acesso.
+ */
+
+/**
+ * @api {post} /acessos/mensagens Acessos Mensagens
+ * @apiDescription Informa se mae acessou as mensagens
+ * @apiGroup Controle de Acessos
+ * @apiHeader {String} authorization Token de acesso.
+ */
+
 routes.post('/acessos/:local', verifyJWT, acessosController.create)
 
 export default routes;
