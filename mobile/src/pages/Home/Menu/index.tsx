@@ -6,7 +6,7 @@ import 'moment/locale/pt-br';
 
 import {
   checkBabiesLocation,
-  IBabyLocation,
+  IBabyStatus,
 } from '../../../services/babyLocation';
 import Modal from '../../../components/Modal';
 
@@ -26,14 +26,15 @@ import {
   ContentSeparator,
   Option,
   ContentTextContainer,
+  TextModal,
 } from './styles';
 
 import HUBanner from '../../../../assets/images/banner_hu.png';
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
-  const [babiesData, setBabiesData] = useState<IBabyLocation[]>([]);
-  const [modalsVisibility, setModalsVisibility] = useState<boolean[]>([]);
+  const [babiesData, setBabiesData] = useState<IBabyStatus[]>([]);
+  const [modalVisibility, setModalVisibility] = useState<boolean>(false);
 
   const options = [
     {
@@ -79,7 +80,7 @@ const Home: React.FC = () => {
       const babiesToCheck = await checkBabiesLocation();
       if (babiesToCheck) {
         setBabiesData(babiesToCheck);
-        setModalsVisibility(babiesToCheck.map(_ => true));
+        setModalVisibility(true);
       }
     }
 
@@ -102,40 +103,38 @@ const Home: React.FC = () => {
           currentDate.format('YYYY-MM-DD'),
         );
       }
+      await AsyncStorage.removeItem('@AmamentaCoach:lastOpenedDate');
     }
 
     checkOneDayPassed();
   }, []);
 
-  // Fecha o modal de index especificado.
-  function closeCurrentModal(index: number) {
-    const copy = [...modalsVisibility];
-    copy[index] = !copy[index];
-    setModalsVisibility(copy);
-  }
-
   return (
     <>
-      {babiesData.map((baby, index) => (
+      {babiesData && (
         <Modal
-          key={baby.id}
-          content={`O bebê ${baby.name} já teve alta?`}
-          visible={modalsVisibility[index]}
+          visible={modalVisibility}
           options={[
             {
               text: 'Sim',
               onPress: () => {
-                closeCurrentModal(index);
-                navigation.navigate('BabyLocationForm');
+                setModalVisibility(false);
+                navigation.navigate('StatusForm', {
+                  situation: 'ALTA',
+                });
               },
             },
             {
               text: 'Não',
-              onPress: () => closeCurrentModal(index),
+              onPress: () => setModalVisibility(false),
             },
-          ]}
-        />
-      ))}
+          ]}>
+          <TextModal>Algum dos bebês abaixo já tiveram alta?</TextModal>
+          {babiesData.map(baby => (
+            <TextModal key={baby.id}>{baby.name}</TextModal>
+          ))}
+        </Modal>
+      )}
 
       <ScrollView>
         <Header>

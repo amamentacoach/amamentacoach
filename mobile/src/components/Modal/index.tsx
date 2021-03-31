@@ -34,12 +34,14 @@ const Modal: React.FC<IMainModalProps> = ({
   image,
   visible,
   options,
+  children,
 }) => {
   return (
     <ReactNativeModal animationType="fade" transparent visible={visible}>
       <Container>
         {content && <Content>{content}</Content>}
         {image && <Image source={image} resizeMode="contain" />}
+        {children}
         <Line />
         <OptionsContainer>
           {options.map(({ text, isBold = false, onPress }) => (

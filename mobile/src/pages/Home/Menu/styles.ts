@@ -12,6 +12,13 @@ export const Header = styled.View`
   height: 274px;
 `;
 
+export const TextModal = styled.Text`
+  color: #161026;
+  text-align: left;
+  font-family: 'OpenSans-Regular';
+  font-size: 16px;
+`;
+
 export const HeaderBackground = styled.View`
   background-color: #7d5cd7;
   align-items: center;

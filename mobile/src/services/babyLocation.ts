@@ -1,6 +1,6 @@
 import api from './api';
 
-export interface IBabyLocation {
+export interface IBabyStatus {
   id: string;
   name: string;
   location: 'alojamento conjunto' | 'uci neonatal' | 'uti neonatal';
@@ -8,7 +8,7 @@ export interface IBabyLocation {
 }
 
 // Lista os bebês que podem receber alta.
-export async function checkBabiesLocation(): Promise<IBabyLocation[] | null> {
+export async function checkBabiesLocation(): Promise<IBabyStatus[] | null> {
   try {
     const { data } = await api.get('/bebes/alta');
     const babies = data.map((baby: any) => ({
