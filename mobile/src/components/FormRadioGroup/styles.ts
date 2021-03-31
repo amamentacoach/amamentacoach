@@ -5,7 +5,6 @@ interface RadioButtonProps {
 }
 
 export const Container = styled.View`
-  flex: 1;
   width: 100%;
 `;
 
@@ -60,6 +59,7 @@ export const OtherInputContainer = styled.View`
 export const ErrorContainer = styled.View`
   flex: 1;
   min-height: 20px;
+  margin-top: 5px;
 `;
 
 export const ErrorText = styled.Text`

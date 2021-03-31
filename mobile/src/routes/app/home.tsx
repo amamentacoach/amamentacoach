@@ -4,10 +4,10 @@ import purpleHeader from '../config/purpleHeader';
 
 import AdditionalInformation from '../../pages/Home/AdditionalInformation';
 import BabyCup from '../../pages/Home/BabyCup';
+import StatusForm from '../../pages/Home/StatusForm';
 import BreastfeedingBenefits from '../../pages/Home/BreastfeedingBenefits';
 import Distractions from '../../pages/Home/Distractions';
 import EmotionsAndBreastfeeding from '../../pages/Home/EmotionsAndBreastfeeding';
-import HomeMenu from '../../pages/Home/Menu';
 import HowToBreastfeed from '../../pages/Home/HowToBreastfeed';
 import HU from '../../pages/Home/HU';
 import ManageExpectations from '../../pages/Home/ManageExpectations';
@@ -40,6 +40,12 @@ const createHomeRoutes = (Stack: any) => {
       options={{ title: 'Oferta de leite pelo copinho' }}
     />,
     <Stack.Screen
+      key="StatusForm"
+      name="StatusForm"
+      component={StatusForm}
+      options={{ title: 'Formulário de Escala', ...purpleHeader }}
+    />,
+    <Stack.Screen
       key="BreastfeedingBenefits"
       name="BreastfeedingBenefits"
       component={BreastfeedingBenefits}
@@ -56,12 +62,6 @@ const createHomeRoutes = (Stack: any) => {
       name="EmotionsAndBreastfeeding"
       component={EmotionsAndBreastfeeding}
       options={{ title: 'Emoções e amamentação' }}
-    />,
-    <Stack.Screen
-      key="Home"
-      name="Home"
-      component={HomeMenu}
-      options={{ headerShown: false }}
     />,
     <Stack.Screen
       key="HowToBreastfeed"

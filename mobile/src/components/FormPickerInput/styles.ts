@@ -25,6 +25,7 @@ export const TextOption = styled.Text`
 export const ErrorContainer = styled.View`
   flex: 1;
   min-height: 20px;
+  margin-top: 5px;
 `;
 
 export const ErrorText = styled.Text`

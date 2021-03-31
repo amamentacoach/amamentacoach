@@ -27,16 +27,6 @@ export const QuestionText = styled.Text`
   color: #161026;
 `;
 
-export const ErrorContainer = styled.View`
-  min-height: 20px;
-`;
-
-export const ErrorText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  color: #ea3c3c;
-  font-size: 14px;
-`;
-
 export const Footer = styled.View`
   flex: 1;
   flex-direction: column;

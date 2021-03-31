@@ -552,7 +552,7 @@ const MotherForm: React.FC = () => {
 
             <OptionPickerContainer>
               <FormPickerInput
-                label="Você recebeu orientação orientações no pré-natal sobre aleitamento materno?"
+                label="Você recebeu orientações no pré-natal sobre aleitamento materno?"
                 fieldName="preNatalGuidance"
                 onChange={setFieldValue}
                 error={errors.preNatalGuidance}

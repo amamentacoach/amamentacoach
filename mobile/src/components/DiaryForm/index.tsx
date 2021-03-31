@@ -161,15 +161,13 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
       return;
     }
 
-    // Mostra o modal de feedback caso o formulário tenha um.
     if (feedback) {
-      if (handleFormEnd) {
-        setFeedbackModalData({
-          content: feedback.feedback,
-          redirect: feedback.redirect,
-          onExit: () => handleFormEnd(),
-        });
-      }
+      // Mostra o modal de feedback caso o formulário tenha um.
+      setFeedbackModalData({
+        content: feedback.feedback,
+        redirect: feedback.redirect,
+        onExit: handleFormEnd,
+      });
       setIsFeedbackModalVisible(true);
     } else {
       // Função executada ao fim do formulário, normalmente apenas redireciona o usuário para uma
@@ -242,7 +240,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
           options={[
             {
               text: 'Mais tarde',
-              onPress: async () => {
+              onPress: () => {
                 setIsFeedbackModalVisible(false);
                 feedbackModalData.onExit();
               },

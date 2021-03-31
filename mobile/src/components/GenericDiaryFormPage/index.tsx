@@ -9,8 +9,6 @@ import {
   QuestionText,
   CurrentPageContainer,
   CurrentPageText,
-  ErrorContainer,
-  ErrorText,
   Container,
 } from './styles';
 
@@ -35,21 +33,18 @@ const createGenericDiaryFormPage = (onFormEnd: () => void) => {
         </CurrentPageContainer>
         <QuestionText>{question.description}</QuestionText>
 
-        <ErrorContainer>
-          {!isFormValid && <ErrorText>Pergunta obrigatória</ErrorText>}
-        </ErrorContainer>
-
         <FormRadioGroupInput
           fieldName={`${question.id}`}
           options={question.options}
           multipleSelection={question.multipleSelection}
           displayOtherField={question.displayOther}
+          error={isFormValid ? '' : 'Pergunta obrigatória'}
           onChange={setFieldValue}
         />
 
         <Footer>
           <MainButton
-            text={index === pagesLength - 1 ? 'Finalizar' : 'Próximo'}
+            text={index >= pagesLength - 1 ? 'Finalizar' : 'Próximo'}
             disabled={isSendingForm}
             onPress={() => handleChangePage(index + 1, onFormEnd)}
           />

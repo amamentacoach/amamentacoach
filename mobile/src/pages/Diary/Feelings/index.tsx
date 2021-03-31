@@ -15,8 +15,6 @@ import {
   QuestionText,
   CurrentPageContainer,
   CurrentPageText,
-  ErrorContainer,
-  ErrorText,
   SecondFooterButtonContainer,
 } from './styles';
 
@@ -46,15 +44,12 @@ const Feelings: React.FC = () => {
         </CurrentPageContainer>
         <QuestionText>{question.description}</QuestionText>
 
-        <ErrorContainer>
-          {!isFormValid && <ErrorText>Pergunta obrigatória</ErrorText>}
-        </ErrorContainer>
-
         <FormRadioGroupInput
           fieldName={`${question.id}`}
           options={question.options}
           multipleSelection={question.multipleSelection}
           displayOtherField={question.displayOther}
+          error={isFormValid ? '' : 'Pergunta obrigatória'}
           onChange={setFieldValue}
         />
 
