@@ -16,11 +16,13 @@ import FormTextInput from '../FormTextInput';
 
 interface FormRadioGroupProps {
   fieldName: string;
-  label?: string | undefined;
-  multipleSelection?: boolean | undefined;
-  displayOtherField?: boolean | undefined;
+  label?: string;
+  multipleSelection?: boolean;
+  displayOtherField?: boolean;
   options: string[];
-  error?: string | string[] | undefined;
+  error?: string | string[];
+  // Define se as opções são apresentadas horizontalmente ou verticalmente.
+  horizontal?: boolean;
   onChange: (fieldName: string, fieldValue: string[]) => void;
 }
 
@@ -29,8 +31,9 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   label,
   options,
   error,
-  multipleSelection = false,
-  displayOtherField = false,
+  horizontal,
+  multipleSelection,
+  displayOtherField,
   onChange,
 }) => {
   const availableOptions = displayOtherField ? [...options, 'Outro'] : options;
@@ -76,21 +79,27 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   return (
     <Container>
       {label !== undefined && <LabelText>{label}</LabelText>}
-      <OptionsContainer>
-        {availableOptions.map((option, index) => {
-          return (
-            <OptionButton
-              selected={selectedIndexes[index]}
-              key={option}
-              activeOpacity={1}
-              onPress={() => handleOptionSelected(index)}>
+      <OptionsContainer horizontal={horizontal}>
+        {availableOptions.map((option, index) => (
+          <OptionButton
+            key={option}
+            selected={selectedIndexes[index]}
+            activeOpacity={1}
+            horizontal={horizontal}
+            onPress={() => handleOptionSelected(index)}>
+            {!horizontal && (
               <OuterCircle selected={selectedIndexes[index]}>
                 <InnerCircle selected={selectedIndexes[index]} />
               </OuterCircle>
-              <TextOption>{option}</TextOption>
-            </OptionButton>
-          );
-        })}
+            )}
+
+            <TextOption
+              selected={selectedIndexes[index]}
+              horizontal={horizontal}>
+              {option}
+            </TextOption>
+          </OptionButton>
+        ))}
       </OptionsContainer>
 
       {displayOtherField && selectedIndexes[selectedIndexes.length - 1] && (
