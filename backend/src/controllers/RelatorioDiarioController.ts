@@ -14,17 +14,16 @@ class RelatorioDiarioController{
 
         const date = new Date()
         date.setDate(date.getDate()-1)
-        
-        const mamadas = await knex('mamada')
-            .join('bebe','bebe.id','=','bebe_id')
-            .where('bebe.mae_id', mae_id)
-            .where('mamada.data_hora','>=',date)
-            .select('mamada.id','bebe.nome as bebe','mamada.mama','mamada.duracao','mamada.data_hora')
-            .orderBy('mamada.data_hora')
+
+        const bebes = await knex('bebe').select('nome','id').where('mae_id',mae_id);
+
+        bebes.forEach(async bebe =>{
+            bebe.mamadas = await knex('mamada').select('*').where('bebe_id',bebe.id).where('mamada.data_hora','>=',date).orderBy('data_hora')
+        })
 
         const ordenhas = await knex('ordenha')
             .where('data_hora','>=',date)
-            .select('ordenha.id','ordenha.mama','ordenha.duracao','ordenha.qtd_leite','ordenha.data_hora')
+            .select('*')
             .orderBy('ordenha.data_hora')
         
         
@@ -46,10 +45,10 @@ class RelatorioDiarioController{
             perguntas.map((pergunta,i)=>{
                 pergunta["alternativas"]=pergunta.alternativas.split('|')
             })
-            return res.send({mamadas, ordenhas, perguntas});
+            return res.send({bebes, ordenhas, perguntas});
         }
 
-        return res.send({mamadas, ordenhas});
+        return res.send({bebes, ordenhas, perguntas:[]});
 
     }
 }

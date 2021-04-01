@@ -977,60 +977,23 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
  * @apiSuccessExample {json} Sucesso
  *    HTTP/1.1 200 OK
  *      {
- *        "mamadas": [
+ *        "bebes": [
  *          {
+ *            "nome": "Joao",
  *            "id": 5,
- *            "bebe": "Sabrina",
- *            "mama": "D",
- *            "duracao": 9,
- *            "data_hora": "2021-03-19T17:40:31.501Z"
+ *            "mamadas": [
+ *              {
+ *                "id": 3,
+ *                "data_hora": "2021-04-01T00:00:00.000Z",
+ *                "mama": "D",
+ *                "duracao": 9,
+ *                "bebe_id": 5
+ *              }
+ *            ]
  *          }
  *        ],
- *        "ordenhas": [
- *          {
- *            "id": 1,
- *            "mama": "D",
- *            "duracao": 5,
- *            "qtd_leite": 100,
- *            "data_hora": "2021-03-20T17:40:31.501Z"
- *          }
- *        ]
- *        "perguntas": [ // Retorna a pergunta que deve responder diariamente
- *          {            // É um array pois podem ser perguntas diferentes para cada Alvo   
- *            "id": 15,  // Só será retornado caso a mae ainda não tenha respondido
- *            "categoria": 6,
- *            "descricao": "Ações realizadas com meu bebê",
- *            "alternativas": [
- *              "Fiz canguru com meu bebê",
- *              "Retirei o leite sempre que precisei",
- *              "Ofereci meu leite fresco ao meu bebê sempre que precisou de complemento",
- *              "Realizei os cuidados sentindo-me segura",
- *              "Tive coragem para pedir ajuda",
- *              "Tive coragem para afastar pessoas que possam estar atrapalhando de alguma forma"
- *            ],
- *            "outro": false,
- *            "multiplas": true,
- *            "alvo": "AC"
- *          },
- *          {
- *            "id": 16,
- *            "categoria": 6,
- *            "descricao": "Ações realizadas com meu bebê",
- *            "alternativas": [
- *              "Fiquei mais tempo na Unidade",
- *              "Fiz mais canguru",
- *              "Retirei o leite mais vezes por dia",
- *              "Trouxe meu leite",
- *              "Ofereci leite fresco ao meu bebê",
- *              "Realizei mais cuidados junto ao meu bebê",
- *              "Tive coragem para pedir ajuda",
- *              "Procurei me informar + sobre meu bebê"
- *            ],
- *            "outro": false,
- *            "multiplas": true,
- *            "alvo": "UCI/UTI"
- *          }
- *        ]
+ *        "ordenhas": [],
+ *        "perguntas": []
  *      }
  *
  */
