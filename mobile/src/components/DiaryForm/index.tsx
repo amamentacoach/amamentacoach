@@ -1,40 +1,39 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { ActivityIndicator, FlatList } from 'react-native';
+import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
+import { StackActions, useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 
-import { useAuth } from '../../contexts/auth';
 import {
   ISurveyQuestion,
   listQuestions,
   answerQuestion,
+  IAnswerFeedback,
 } from '../../services/survey';
+import Modal from '../Modal';
 
 import {
-  ListContainer,
   HeaderBackground,
   ContentContainer,
   HeaderText,
+  ScrollView,
 } from './styles';
 
-// Tipo de uma função que pode ser utilizada para gerar uma página do formulário.
+// Tipo de um componente que pode ser utilizado para gerar uma página do formulário.
 export interface IDiaryFormInfoPage {
-  // Index da página no vetor.
+  // Index da página.
   index: number;
-  // Número total de página.
+  // Número total de páginas.
   pagesLength: number;
   // Questões que devem ser respondidas pelo usuário.
   question: ISurveyQuestion;
   // Verifica se formulário foi preenchido corretamente ao tentar avançar a página
   isFormValid: boolean;
-  // Verifica se formulário foi está sendo enviado ao servidor.
+  // Verifica se formulário está sendo enviado ao servidor.
   isSendingForm: boolean;
-  // Definir o valor de uma resposta.
+  // Define o valor de uma resposta.
   setFieldValue: (field: string, value: any) => void;
-  // Avança para a próxima página do formulário caso possível.
-  handleChangePage: (
-    currentPage: number,
-    handleFormEnd?: () => void | undefined,
-  ) => void;
+  // Altera a página do formulário. Caso seja a última página executa a função handleFormEnd.
+  handleChangePage: (newPage: number, handleFormEnd: () => void) => void;
 }
 
 interface IDiaryFormProps {
@@ -46,12 +45,19 @@ interface IDiaryFormProps {
   InfoPage: React.FC<IDiaryFormInfoPage>;
 }
 
+interface IFeedbackModalProps {
+  content: string;
+  redirect: string;
+  onExit: () => void;
+}
+
 const DiaryForm: React.FC<IDiaryFormProps> = ({
   title,
   category,
   InfoPage,
 }) => {
-  const { motherInfo } = useAuth();
+  const { width } = Dimensions.get('window');
+  const navigation = useNavigation();
   const pageFlatListRef = useRef<FlatList>(null);
 
   const [pages, setPages] = useState<ISurveyQuestion[]>([]);
@@ -61,6 +67,14 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
   const [isFormValid, setIsFormValid] = useState(true);
   const [isSendingForm, setIsSendingForm] = useState(false);
 
+  const [
+    feedbackModalData,
+    setFeedbackModalData,
+  ] = useState<IFeedbackModalProps | null>(null);
+  const [isFeedbackModalVisible, setIsFeedbackModalVisible] = useState(false);
+
+  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
+
   useEffect(() => {
     async function fetchQuestions() {
       const questions = await listQuestions(category);
@@ -68,26 +82,8 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
         return;
       }
 
-      // Exibe apenas perguntas de alvo GERAL ou aquelas que se aplicam ao usuário.
-      const filteredQuestions = questions.filter(page => {
-        if (page.target === 'GERAL') {
-          return true;
-        }
-        if (page.target === 'AC' && motherInfo.babiesBirthLocations.AC) {
-          return true;
-        }
-        if (
-          page.target === 'UCI/UTI' &&
-          (motherInfo.babiesBirthLocations.UCI ||
-            motherInfo.babiesBirthLocations.UTI)
-        ) {
-          return true;
-        }
-        return false;
-      });
-
       // Inicia todas as respostas vazias.
-      const initialValues = filteredQuestions.reduce(
+      const initialValues = questions.reduce(
         (object, page) => ({
           ...object,
           [page.id]: [],
@@ -96,7 +92,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
       );
 
       setFormInitialValues(initialValues);
-      setPages(filteredQuestions);
+      setPages(questions);
       setIsLoading(false);
     }
 
@@ -111,11 +107,11 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
     },
     question: ISurveyQuestion,
   ) {
-    return (
-      values[question.id].length <= 0 ||
-      (question.displayOther &&
-        values[question.id].find(option => option === '') !== undefined)
-    );
+    const atLeastOneSelected = values[question.id].length > 0;
+    const otherFieldValid =
+      values[question.id].find(option => option === '') === undefined;
+
+    return atLeastOneSelected && otherFieldValid;
   }
 
   // Navega até uma página especificada.
@@ -129,40 +125,82 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
     });
   }
 
+  // Envia as respostas do usuário ao backend.
+  async function handleFormSubmit(answers: {
+    [key: string]: string[];
+  }): Promise<IAnswerFeedback | undefined | null> {
+    // Responde todas as perguntas do formulário e coleta a resposta do servidor para cada questão.
+    const responses = await Promise.all(
+      Object.keys(answers).map(async questionId =>
+        answerQuestion(parseInt(questionId, 10), answers[questionId]),
+      ),
+    );
+    // Caso uma ou mais respostas possuam null elas falharam.
+    if (responses.find(response => response === null) !== undefined) {
+      return null;
+    }
+
+    // Remove as respostas sem feedback.
+    const feedbacks = responses.filter(response => !!response);
+    // Se o formulário possuir feedback retorna ele
+    return feedbacks.length > 0 ? feedbacks[0] : undefined;
+  }
+
+  // Envia as respostas do formulário ao servidor e chama o argumento handleFormEnd.
+  async function handleLastPage(
+    submitForm: () => Promise<IAnswerFeedback | undefined | null>,
+    handleFormEnd: () => void,
+  ) {
+    setIsSendingForm(true);
+    const feedback = await submitForm();
+    setIsSendingForm(false);
+
+    // Envio do formulário falhou.
+    if (feedback === null) {
+      setIsErrorModalVisible(true);
+      return;
+    }
+
+    if (feedback) {
+      // Mostra o modal de feedback caso o formulário tenha um.
+      setFeedbackModalData({
+        content: feedback.feedback,
+        redirect: feedback.redirect,
+        onExit: handleFormEnd,
+      });
+      setIsFeedbackModalVisible(true);
+    } else {
+      // Função executada ao fim do formulário, normalmente apenas redireciona o usuário para uma
+      // outra página do app.
+      handleFormEnd();
+    }
+  }
+
+  // Altera a página atual do formulário, entretanto a mudança de página só é possível se os campos
+  // dá pagina atual estiverem preenchidos.
+  // Caso a próxima página seja a última a função handleLastPage é chamada.
   async function handleChangePage(
     question: ISurveyQuestion,
     values: {
       [key: number]: string[];
     },
     newPage: number,
-    submitForm: (() => Promise<void>) & (() => Promise<any>),
-    handleFormEnd?: () => void | undefined,
+    submitForm: () => Promise<IAnswerFeedback | undefined | null>,
+    handleFormEnd: () => void,
   ) {
     // Verifica se pelo menos uma resposta foi selecionada
-    if (validateForm(values, question)) {
+    if (!validateForm(values, question)) {
       setIsFormValid(false);
       return;
     }
 
     setIsFormValid(true);
+    // Envia o formulário caso seja a última página
     if (newPage === pages.length) {
-      // Envia o formulário caso seja a última página
-      setIsSendingForm(true);
-      await submitForm();
-      setIsSendingForm(false);
-      if (handleFormEnd) {
-        handleFormEnd();
-      }
+      await handleLastPage(submitForm, handleFormEnd);
     } else {
       goToPage(newPage);
     }
-  }
-
-  // Envia as respostas do usuário ao backend.
-  async function handleFormSubmit(answers: { [key: string]: string[] }) {
-    Object.keys(answers).forEach(async questionId =>
-      answerQuestion(parseInt(questionId, 10), answers[questionId]),
-    );
   }
 
   if (isLoading) {
@@ -182,7 +220,47 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
   }
 
   return (
-    <ListContainer>
+    <>
+      <Modal
+        content={
+          'Erro ao enviar suas respostas.\nPor favor tente novamente mais tarde.'
+        }
+        options={[
+          {
+            text: 'Fechar',
+            isBold: true,
+            onPress: () => setIsErrorModalVisible(false),
+          },
+        ]}
+        visible={isErrorModalVisible}
+      />
+      {feedbackModalData !== null && (
+        <Modal
+          content={feedbackModalData.content}
+          options={[
+            {
+              text: 'Mais tarde',
+              onPress: () => {
+                setIsFeedbackModalVisible(false);
+                feedbackModalData.onExit();
+              },
+            },
+            {
+              text: 'Ver conteúdo',
+              isBold: true,
+              onPress: () => {
+                setIsFeedbackModalVisible(false);
+                // Reinicia a stack de navegação.
+                navigation.dispatch(
+                  StackActions.replace(feedbackModalData.redirect),
+                );
+              },
+            },
+          ]}
+          visible={isFeedbackModalVisible}
+        />
+      )}
+
       <Formik
         initialValues={formInitialValues}
         onSubmit={async values => handleFormSubmit(values)}>
@@ -191,23 +269,29 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
             ref={pageFlatListRef}
             data={pages}
             renderItem={({ item, index }) => (
-              <InfoPage
-                index={index}
-                pagesLength={pages.length}
-                question={item}
-                setFieldValue={setFieldValue}
-                isFormValid={isFormValid}
-                isSendingForm={isSendingForm}
-                handleChangePage={(newPage, handleFormEnd) =>
-                  handleChangePage(
-                    item,
-                    values,
-                    newPage,
-                    submitForm,
-                    handleFormEnd,
-                  )
-                }
-              />
+              <ScrollView width={width}>
+                <HeaderBackground />
+                <HeaderText>{title}</HeaderText>
+                <ContentContainer>
+                  <InfoPage
+                    index={index}
+                    pagesLength={pages.length}
+                    question={item}
+                    setFieldValue={setFieldValue}
+                    isFormValid={isFormValid}
+                    isSendingForm={isSendingForm}
+                    handleChangePage={(newPage, handleFormEnd) =>
+                      handleChangePage(
+                        item,
+                        values,
+                        newPage,
+                        submitForm,
+                        handleFormEnd,
+                      )
+                    }
+                  />
+                </ContentContainer>
+              </ScrollView>
             )}
             keyExtractor={item => item.id.toString()}
             horizontal
@@ -217,7 +301,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
           />
         )}
       </Formik>
-    </ListContainer>
+    </>
   );
 };
 

@@ -2,12 +2,12 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { useIsFirstRun } from '../contexts/firstRun';
-import Login from '../pages/Login';
-import ForgotPassword from '../pages/ForgotPassword';
-import SignUp from '../pages/SignUp';
-import MotherForm from '../pages/MotherForm';
-import BabyForm from '../pages/BabyForm';
-import Introduction from '../pages/Introduction';
+import Login from '../pages/Auth/Login';
+import ForgotPassword from '../pages/Auth/ForgotPassword';
+import SignUp from '../pages/Auth/SignUp';
+import MotherForm from '../pages/Auth/MotherForm';
+import BabyForm from '../pages/Auth/BabyForm';
+import Introduction from '../pages/Auth/Introduction';
 
 const AuthRoutes: React.FC = () => {
   const Stack = createStackNavigator();

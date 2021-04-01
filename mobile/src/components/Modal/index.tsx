@@ -1,30 +1,55 @@
 import * as React from 'react';
-import { Modal as ReactNativeModal, TouchableOpacity } from 'react-native';
+import { Modal as ReactNativeModal } from 'react-native';
 
-import { Container, Message, CloseButtonText, Line, Image } from './styles';
+import {
+  Container,
+  Content,
+  Line,
+  Image,
+  OptionText,
+  OptionsContainer,
+  Option,
+} from './styles';
 
 interface IMainModalProps {
-  text?: string | undefined;
+  // Conteúdo do modal.
+  content?: string | undefined;
+  // Imagem a ser exibida dentro do modal. A imagem precisa ter sido carregar utilizando require().
   image?: any | undefined;
+  // Controla a visibilidade do modal.
   visible: boolean;
-  closeModal: () => void;
+  // Botões exibidos na parte de baixo do modal.
+  options: {
+    // Texto da opção.
+    text: string;
+    // Controla se a opção deve ser escrita em negrito.
+    isBold?: boolean | undefined;
+    // Função executado ao pressionar o botão.
+    onPress: () => void;
+  }[];
 }
 
 const Modal: React.FC<IMainModalProps> = ({
-  text,
+  content,
   image,
   visible,
-  closeModal,
+  options,
+  children,
 }) => {
   return (
     <ReactNativeModal animationType="fade" transparent visible={visible}>
       <Container>
-        {text && <Message>{text}</Message>}
+        {content && <Content>{content}</Content>}
         {image && <Image source={image} resizeMode="contain" />}
+        {children}
         <Line />
-        <TouchableOpacity onPress={() => closeModal()} activeOpacity={0.7}>
-          <CloseButtonText>Fechar</CloseButtonText>
-        </TouchableOpacity>
+        <OptionsContainer>
+          {options.map(({ text, isBold = false, onPress }) => (
+            <Option key={text} onPress={onPress} activeOpacity={0.7}>
+              <OptionText isBold={isBold}>{text}</OptionText>
+            </Option>
+          ))}
+        </OptionsContainer>
       </Container>
     </ReactNativeModal>
   );

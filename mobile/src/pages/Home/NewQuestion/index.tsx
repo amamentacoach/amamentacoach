@@ -1,0 +1,90 @@
+import React, { useState } from 'react';
+import { View } from 'react-native';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+import { createQuestion } from '../../../services/questions';
+import FormTextInput from '../../../components/FormTextInput';
+import MainButton from '../../../components/MainButton';
+import Modal from '../../../components/Modal';
+
+import {
+  ScrollView,
+  FormContainer,
+  SubmitButtonContainer,
+  HeaderText,
+} from './styles';
+
+interface IFormValues {
+  question: string;
+}
+
+const NewQuestion: React.FC = () => {
+  const [isSubmitModalVisible, setIsSubmitModalVisible] = useState(false);
+  const [isSendingForm, setIsSendingForm] = useState(false);
+  const [textInputText, setTextInputText] = useState('');
+
+  const formInitialValues: IFormValues = {
+    question: '',
+  };
+  const newPasswordSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+    question: Yup.string().required('Campo obrigatório'),
+  }).required();
+
+  async function handleNewQuestion({ question }: IFormValues) {
+    setIsSendingForm(true);
+    const successfulRequest = await createQuestion(question);
+    setIsSendingForm(false);
+    if (successfulRequest) {
+      setIsSubmitModalVisible(true);
+      setTextInputText('');
+    }
+  }
+
+  return (
+    <ScrollView>
+      <Modal
+        text="Dúvida enviada!"
+        visible={isSubmitModalVisible}
+        closeModal={() => setIsSubmitModalVisible(false)}
+      />
+
+      <HeaderText>Envie sua dúvida</HeaderText>
+      <Formik
+        initialValues={formInitialValues}
+        validationSchema={newPasswordSchema}
+        validateOnChange={false}
+        onSubmit={values => handleNewQuestion(values)}>
+        {({ setFieldValue, handleSubmit, dirty, errors }) => (
+          <FormContainer>
+            <View>
+              <FormTextInput
+                onChangeText={(text: string) => {
+                  setFieldValue('question', text);
+                  setTextInputText(text);
+                }}
+                value={textInputText}
+                placeholder="Digite aqui sua pergunta..."
+                error={errors.question}
+                multiline
+                numberOfLines={20}
+                maxLength={255}
+                textAlignVertical="top"
+              />
+            </View>
+
+            <SubmitButtonContainer>
+              <MainButton
+                onPress={handleSubmit}
+                disabled={!dirty || isSendingForm}
+                text={isSendingForm ? 'Enviando...' : 'Enviar'}
+              />
+            </SubmitButtonContainer>
+          </FormContainer>
+        )}
+      </Formik>
+    </ScrollView>
+  );
+};
+
+export default NewQuestion;

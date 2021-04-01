@@ -1,8 +1,7 @@
 import api from './api';
 
 export interface IFAQ {
-  id: number;
-  description: string;
+  question: string;
   answer: string;
 }
 
@@ -23,8 +22,7 @@ export async function listQuestions(): Promise<IFAQ[] | null> {
   try {
     const { data } = await api.get('/duvidas/frequentes');
     const questions = data.map((question: any) => ({
-      id: question.id,
-      description: question.descricao,
+      question: question.descricao,
       answer: question.resposta,
     }));
     return questions;

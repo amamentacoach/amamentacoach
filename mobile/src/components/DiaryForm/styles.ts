@@ -1,7 +1,15 @@
 import styled from 'styled-components/native';
 
-export const ListContainer = styled.SafeAreaView`
+interface IScrollViewProps {
+  width: number;
+}
+
+export const ScrollView = styled.ScrollView.attrs(() => ({
+  contentContainerStyle: { flexGrow: 1 },
+  keyboardShouldPersistTaps: 'handled',
+}))<IScrollViewProps>`
   flex: 1;
+  width: ${({ width }) => width}px;
 `;
 
 export const HeaderBackground = styled.View`
