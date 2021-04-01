@@ -86,6 +86,7 @@ const ManageExpectations: React.FC = () => {
       const selectedIdsInfo: ISelectedIdsInfo = JSON.parse(selectedIdsStorage);
 
       const lastRunDate = moment(selectedIdsInfo.lastRunDate);
+      // Desativa caso já tenha sido utilizado uma vez no dia.
       if (lastRunDate.isSame(new Date(), 'day')) {
         setIsButtonDisabled(true);
         return;
@@ -131,7 +132,7 @@ const ManageExpectations: React.FC = () => {
       '@AmamentaCoach:alreadySelectedExpectations',
       JSON.stringify({
         lastRunDate: new Date(),
-        newAlreadySelected,
+        alreadySelectedIds: newAlreadySelected,
       }),
     );
 
