@@ -23,4 +23,19 @@ export async function checkBabiesLocation(): Promise<IBabyStatus[] | null> {
   }
 }
 
+// Atualiza a localização de um bebê.
+export async function updateBabyLocation(
+  id: string,
+  newLocation: string,
+): Promise<boolean> {
+  try {
+    await api.post(`/bebes/${id}/alta`, {
+      local: newLocation,
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
 export default checkBabiesLocation;

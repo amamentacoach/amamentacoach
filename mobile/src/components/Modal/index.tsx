@@ -24,6 +24,8 @@ interface IMainModalProps {
     text: string;
     // Controla se a opção deve ser escrita em negrito.
     isBold?: boolean;
+    // Controla se a opção está desativada.
+    disabled?: boolean;
     // Função executado ao pressionar o botão.
     onPress: () => void;
   }[];
@@ -44,9 +46,15 @@ const Modal: React.FC<IMainModalProps> = ({
         {children}
         <Line />
         <OptionsContainer>
-          {options.map(({ text, isBold = false, onPress }) => (
-            <Option key={text} onPress={onPress} activeOpacity={0.7}>
-              <OptionText isBold={isBold}>{text}</OptionText>
+          {options.map(({ text, isBold, disabled, onPress }) => (
+            <Option
+              key={text}
+              onPress={onPress}
+              disabled={disabled}
+              activeOpacity={0.7}>
+              <OptionText isBold={isBold} disabled={disabled}>
+                {text}
+              </OptionText>
             </Option>
           ))}
         </OptionsContainer>

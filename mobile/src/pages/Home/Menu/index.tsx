@@ -4,9 +4,11 @@ import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
+import { View } from 'react-native';
 import {
   checkBabiesLocation,
   IBabyStatus,
+  updateBabyLocation,
 } from '../../../services/babyLocation';
 import Modal from '../../../components/Modal';
 
@@ -27,13 +29,24 @@ import {
   Option,
   ContentTextContainer,
   TextModal,
+  InnerCircle,
+  OuterCircle,
+  ModalOption,
+  LocationContainer,
 } from './styles';
 
 import HUBanner from '../../../../assets/images/banner_hu.png';
+import FormPickerInput from '../../../components/FormPickerInput';
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
   const [babiesData, setBabiesData] = useState<IBabyStatus[]>([]);
+  const [selectedModalOptions, setSelectedModalOptions] = useState<
+    {
+      newLocation: string;
+      selected: boolean;
+    }[]
+  >([]);
   const [modalVisibility, setModalVisibility] = useState<boolean>(false);
 
   const options = [
@@ -79,6 +92,12 @@ const Home: React.FC = () => {
     async function checkBabies() {
       const babiesToCheck = await checkBabiesLocation();
       if (babiesToCheck) {
+        setSelectedModalOptions(
+          babiesToCheck.map(() => ({
+            selected: false,
+            newLocation: '',
+          })),
+        );
         setBabiesData(babiesToCheck);
         setModalVisibility(true);
       }
@@ -109,30 +128,92 @@ const Home: React.FC = () => {
     checkOneDayPassed();
   }, []);
 
+  // Fecha o modal, marca que os bebês selecionados tiveram alta e navega para o formulário.
+  function handleUpdateBabyLocation() {
+    setModalVisibility(false);
+    babiesData.forEach(async (baby, index) => {
+      await updateBabyLocation(
+        baby.id,
+        selectedModalOptions[index].newLocation,
+      );
+    });
+    navigation.navigate('StatusForm', {
+      situation: 'ALTA',
+    });
+  }
+
+  // Seleciona um bebê no modal.
+  function handleBabySelected(index: number) {
+    const selected = [...selectedModalOptions];
+    selected[index].selected = !selected[index].selected;
+    if (!selected[index].selected) {
+      selected[index].newLocation = '';
+    }
+    setSelectedModalOptions(selected);
+  }
+
+  // Atualiza o valor da localização de um bebê selecionado.
+  function handleBabyLocationSelected(index: number, value: string) {
+    const values = [...selectedModalOptions];
+    values[index].newLocation = value;
+    setSelectedModalOptions(values);
+  }
+
+  // Checa se pelo menos um bebê foi selecionado e sua nova localização fornecida.
+  function validateModalFields() {
+    const atLeastOneSelected = selectedModalOptions.some(op => op.selected);
+    const selectedAreValid = selectedModalOptions.every(op =>
+      op.selected ? op.newLocation : !op.selected,
+    );
+    return atLeastOneSelected && selectedAreValid;
+  }
+
   return (
     <>
-      {babiesData && (
+      {babiesData.length > 0 && (
         <Modal
           visible={modalVisibility}
           options={[
             {
               text: 'Sim',
-              onPress: () => {
-                setModalVisibility(false);
-                navigation.navigate('StatusForm', {
-                  situation: 'ALTA',
-                });
-              },
+              disabled: !validateModalFields(),
+              onPress: handleUpdateBabyLocation,
             },
             {
               text: 'Não',
               onPress: () => setModalVisibility(false),
             },
           ]}>
-          <TextModal>Algum dos bebês abaixo já tiveram alta?</TextModal>
-          {babiesData.map(baby => (
-            <TextModal key={baby.id}>{baby.name}</TextModal>
-          ))}
+          <View>
+            <TextModal>Algum dos(as) seus(as) bebês já recebeu alta?</TextModal>
+            {babiesData.map((baby, index) => (
+              <View key={baby.id}>
+                <ModalOption
+                  onPress={() => handleBabySelected(index)}
+                  activeOpacity={0.7}>
+                  <OuterCircle selected={selectedModalOptions[index].selected}>
+                    <InnerCircle
+                      selected={selectedModalOptions[index].selected}
+                    />
+                  </OuterCircle>
+                  <TextModal key={baby.id}>{baby.name}</TextModal>
+                </ModalOption>
+
+                {selectedModalOptions[index].selected && (
+                  <LocationContainer>
+                    <FormPickerInput
+                      fieldName=""
+                      placeholder="Onde se encontra agora?"
+                      options={['Alojamento Conjunto', 'Casa', 'UCI Neonatal']}
+                      onChange={(_, value) =>
+                        handleBabyLocationSelected(index, value)
+                      }
+                    />
+                  </LocationContainer>
+                )}
+              </View>
+            ))}
+          </View>
         </Modal>
       )}
 

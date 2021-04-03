@@ -92,6 +92,19 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
     onChange(fieldName, newSelectedOptions);
   }
 
+  function handleOtherFieldChange(text: string) {
+    const newValues = selectedOptions;
+    if (!selectedIndexes[selectedIndexes.length - 1] && text !== '') {
+      // Caso o valor do campo ainda não tenha sido adicionado, coloca o novo valor no
+      // array
+      newValues.push(text);
+    } else if (selectedIndexes[selectedIndexes.length - 1]) {
+      newValues[newValues.length - 1] = text;
+    }
+    onChange(fieldName, newValues);
+    setOtherValue(text);
+  }
+
   return (
     <Container>
       {label !== undefined && <LabelText>{label}</LabelText>}
@@ -122,18 +135,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
         <OtherInputContainer>
           <FormTextInput
             placeholder="Resposta para outro "
-            onChangeText={(text: string) => {
-              const newValues = selectedOptions;
-              if (!selectedIndexes[selectedIndexes.length - 1] && text !== '') {
-                // Caso o valor do campo ainda não tenha sido adicionado, coloca o novo valor no
-                // array
-                newValues.push(text);
-              } else if (selectedIndexes[selectedIndexes.length - 1]) {
-                newValues[newValues.length - 1] = text;
-              }
-              onChange(fieldName, newValues);
-              setOtherValue(text);
-            }}
+            onChangeText={handleOtherFieldChange}
           />
         </OtherInputContainer>
       )}
