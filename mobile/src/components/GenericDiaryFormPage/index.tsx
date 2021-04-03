@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IDiaryFormInfoPage } from '../DiaryForm';
+import { IDiaryFormPage } from '../DiaryForm';
 import MainButton from '../MainButton';
 import FormRadioGroupInput from '../FormRadioGroup';
 
@@ -12,10 +12,10 @@ import {
   Container,
 } from './styles';
 
-// Retorna uma InfoPage genérica que pode ser fornecida a um componente DiaryForm.
+// Retorna uma página genérica que pode ser fornecida a um componente DiaryForm.
 // Ao final do formulário a função onFormEnd é executada.
 const createGenericDiaryFormPage = (onFormEnd: () => void) => {
-  const InfoPage: React.FC<IDiaryFormInfoPage> = ({
+  const Page: React.FC<IDiaryFormPage> = ({
     index,
     pagesLength,
     question,
@@ -53,7 +53,7 @@ const createGenericDiaryFormPage = (onFormEnd: () => void) => {
     );
   };
 
-  return InfoPage;
+  return Page;
 };
 
 export default createGenericDiaryFormPage;

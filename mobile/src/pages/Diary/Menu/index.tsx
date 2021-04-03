@@ -71,7 +71,7 @@ const DiaryMenu: React.FC = () => {
           value={currentDate.toDate()}
           mode="date"
           maximumDate={new Date()}
-          onChange={(_: Event, selectedDate?: Date | undefined) =>
+          onChange={(_: Event, selectedDate?: Date) =>
             handleDateSelected(selectedDate)
           }
         />

@@ -32,7 +32,9 @@ const Questions: React.FC = () => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <AddQuestionButton onPress={() => navigation.navigate('NewQuestion')}>
+        <AddQuestionButton
+          onPress={() => navigation.navigate('NewQuestion')}
+          activeOpacity={0.7}>
           <Image source={AddIcon} />
         </AddQuestionButton>
       ),

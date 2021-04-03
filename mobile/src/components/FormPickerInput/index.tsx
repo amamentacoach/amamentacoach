@@ -11,11 +11,11 @@ import {
 
 interface FormPickerProps {
   fieldName: string;
-  placeholder?: string | undefined;
-  defaultValue?: string | undefined;
-  label?: string | undefined;
   options: string[];
-  error?: string | undefined;
+  placeholder?: string;
+  defaultValue?: string;
+  label?: string;
+  error?: string;
   onChange: (fieldName: string, fieldValue: string) => void;
 }
 

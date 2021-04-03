@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Container,
@@ -16,10 +16,12 @@ import FormTextInput from '../FormTextInput';
 
 interface FormRadioGroupProps {
   fieldName: string;
+  options: string[];
   label?: string;
   multipleSelection?: boolean;
   displayOtherField?: boolean;
-  options: string[];
+  // Elementos selecionados inicialmente. Devem estar presentes em options.
+  initialValues?: string[];
   error?: string | string[];
   // Define se as opções são apresentadas horizontalmente ou verticalmente.
   horizontal?: boolean;
@@ -34,6 +36,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   horizontal,
   multipleSelection,
   displayOtherField,
+  initialValues,
   onChange,
 }) => {
   const availableOptions = displayOtherField ? [...options, 'Outro'] : options;
@@ -42,8 +45,21 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   const [selectedIndexes, setSelectedIndexes] = useState<boolean[]>(
     availableOptions.map(() => false),
   );
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(
+    initialValues || [],
+  );
   const [otherValue, setOtherValue] = useState('');
+
+  useEffect(() => {
+    if (initialValues) {
+      initialValues?.forEach(value => {
+        const index = options.findIndex(element => element === value);
+        const selected = [...selectedIndexes];
+        selected[index] = true;
+        setSelectedIndexes(selected);
+      });
+    }
+  }, []);
 
   function handleOptionSelected(selectedIndex: number) {
     const newSelectedIndexes = selectedIndexes;

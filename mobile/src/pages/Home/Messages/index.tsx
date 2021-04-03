@@ -28,7 +28,9 @@ const Messages: React.FC = () => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <AddMessageButton onPress={() => navigation.navigate('NewMessage')}>
+        <AddMessageButton
+          onPress={() => navigation.navigate('NewMessage')}
+          activeOpacity={0.7}>
           <Image source={AddIcon} />
         </AddMessageButton>
       ),

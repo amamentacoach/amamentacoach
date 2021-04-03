@@ -1,10 +1,41 @@
 import styled from 'styled-components/native';
 
-export const FormScrollView = styled.ScrollView.attrs(() => ({
+interface IScrollViewProps {
+  width: number;
+}
+
+export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
-}))`
+}))<IScrollViewProps>`
   flex: 1;
+  width: ${({ width }) => width}px;
+`;
+
+export const HeaderInfoModal = styled.Text`
+  color: #7d5cd7;
+  text-align: center;
+  font-family: 'OpenSans-Regular';
+  font-size: 18px;
+  margin-bottom: 10px;
+`;
+
+export const TextInfoModal = styled.Text`
+  color: black;
+  text-align: center;
+  font-family: 'OpenSans-Regular';
+  font-size: 16px;
+`;
+
+export const ColoredText = styled.Text`
+  color: #7d5cd7;
+  text-align: center;
+  font-family: 'OpenSans-Regular';
+  font-size: 16px;
+`;
+
+export const InfoButton = styled.TouchableOpacity`
+  margin-right: 20px;
 `;
 
 export const HeaderBackground = styled.View`
@@ -22,16 +53,31 @@ export const HeaderText = styled.Text`
   margin: -150px 24px 10px 24px;
 `;
 
-export const QuestionContainer = styled.View`
-  min-height: 20px;
-`;
-
 export const ContentContainer = styled.View`
   flex: 1;
   margin: 0px 24px;
   background-color: white;
   border-radius: 5px;
   padding: 24px;
+`;
+
+export const CurrentPageContainer = styled.View`
+  background-color: #c1acfc;
+  border-radius: 3.6px;
+  padding: 10px;
+  margin-top: 6px;
+  align-self: center;
+`;
+
+export const CurrentPageText = styled.Text`
+  text-align: center;
+  font-family: 'OpenSans-Bold';
+  font-size: 16px;
+  color: #161026;
+`;
+
+export const QuestionContainer = styled.View`
+  flex: 1;
 `;
 
 export const QuestionText = styled.Text`
@@ -43,8 +89,16 @@ export const QuestionText = styled.Text`
 `;
 
 export const Footer = styled.View`
-  flex: 1;
   flex-direction: row;
   align-items: flex-end;
-  margin-top: 20px;
+  margin-top: 10px;
+`;
+
+export const FirstButtonContainer = styled.View`
+  flex: 1;
+  margin-right: 15px;
+`;
+
+export const SecondButtonContainer = styled.View`
+  flex: 1;
 `;

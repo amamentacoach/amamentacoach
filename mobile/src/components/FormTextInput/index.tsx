@@ -10,10 +10,10 @@ import {
 } from './styles';
 
 interface FormTextProps extends TextInputProps {
-  label?: string | undefined;
-  error?: string | undefined;
-  centerText?: boolean | undefined;
-  textInputRef?: React.RefObject<ReactTextInput> | null | undefined;
+  label?: string;
+  error?: string;
+  centerText?: boolean;
+  textInputRef?: React.RefObject<ReactTextInput> | null;
 }
 
 const FormTextInput: React.FC<FormTextProps> = ({

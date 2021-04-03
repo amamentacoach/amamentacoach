@@ -12,18 +12,18 @@ import {
 } from './styles';
 
 interface IMainModalProps {
-  // Conteúdo do modal.
-  content?: string | undefined;
-  // Imagem a ser exibida dentro do modal. A imagem precisa ter sido carregar utilizando require().
-  image?: any | undefined;
   // Controla a visibilidade do modal.
   visible: boolean;
+  // Conteúdo do modal.
+  content?: string;
+  // Imagem a ser exibida dentro do modal. A imagem precisa ter sido carregar utilizando require().
+  image?: any;
   // Botões exibidos na parte de baixo do modal.
   options: {
     // Texto da opção.
     text: string;
     // Controla se a opção deve ser escrita em negrito.
-    isBold?: boolean | undefined;
+    isBold?: boolean;
     // Função executado ao pressionar o botão.
     onPress: () => void;
   }[];
