@@ -25,30 +25,25 @@ export const PageContainer = styled.View<IContainerProps>`
 `;
 
 export const Header = styled.View`
-  flex-direction: row;
   align-items: center;
-  justify-content: flex-end;
-  min-height: 22px;
+  justify-content: center;
   margin-top: 30px;
-`;
-
-export const SkipButton = styled.TouchableOpacity`
-  margin: 0px 30px 0 0;
-`;
-
-export const SkipButtonText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
 `;
 
 export const ContentWrapper = styled.View`
   flex: 1;
   align-items: center;
-  justify-content: flex-start;
-  margin: 24px 24px 0 24px;
+  justify-content: center;
+  margin: 24px;
+`;
+
+export const ImageContainer = styled.View`
+  align-items: center;
+  margin: 70px 0;
 `;
 
 export const ContentText = styled.Text`
+  flex: 1;
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;
@@ -61,7 +56,31 @@ export const Footer = styled.View`
 `;
 
 export const CurrentPageWrapper = styled.View`
-  margin: 30px 0;
+  margin: 40px 0;
+`;
+
+export const LastPageBox = styled.View`
+  flex: 1;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #7d5cd7;
+  border-radius: 3.6px;
+`;
+
+export const HeaderLastPageBox = styled.Text`
+  color: #7d5cd7;
+  text-align: center;
+  font-family: 'OpenSans-Bold';
+  font-size: 16px;
+  margin: 10px 0;
+`;
+
+export const ColoredText = styled.Text`
+  color: #7d5cd7;
+  text-align: center;
+  font-family: 'OpenSans-Bold';
+  font-size: 16px;
 `;
 
 export const LastPageButtonWrapper = styled.View<ILastPageButtonWrapperProps>`

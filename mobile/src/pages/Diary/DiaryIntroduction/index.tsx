@@ -25,7 +25,7 @@ interface IInfoPageProps {
 }
 
 const DiaryIntroduction: React.FC = () => {
-  const { setDiaryNotFirstRun } = useIsFirstRun();
+  const { setNotFirstRun } = useIsFirstRun();
   const { width } = Dimensions.get('window');
   const pageFlatListRef = useRef<FlatList>(null);
 
@@ -44,7 +44,7 @@ const DiaryIntroduction: React.FC = () => {
   ];
 
   async function handleEndDiaryIntroduction() {
-    await setDiaryNotFirstRun();
+    await setNotFirstRun('diary');
   }
 
   function InfoPage({ index, text, image }: IInfoPageProps) {

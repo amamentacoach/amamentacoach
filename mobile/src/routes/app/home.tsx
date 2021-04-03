@@ -1,15 +1,16 @@
 import React from 'react';
 
+import { useIsFirstRun } from '../../contexts/firstRun';
 import purpleHeader from '../config/purpleHeader';
 
 import AdditionalInformation from '../../pages/Home/AdditionalInformation';
 import BabyCup from '../../pages/Home/BabyCup';
-import StatusForm from '../../pages/Home/StatusForm';
 import BreastfeedingBenefits from '../../pages/Home/BreastfeedingBenefits';
 import Distractions from '../../pages/Home/Distractions';
 import EmotionsAndBreastfeeding from '../../pages/Home/EmotionsAndBreastfeeding';
 import HowToBreastfeed from '../../pages/Home/HowToBreastfeed';
 import HU from '../../pages/Home/HU';
+import IntroductionStatusForm from '../../pages/Home/IntroductionStatusForm';
 import ManageExpectations from '../../pages/Home/ManageExpectations';
 import Messages from '../../pages/Home/Messages';
 import MusicPlaylists from '../../pages/Home/MusicPlaylists';
@@ -19,13 +20,16 @@ import NotWhatIExpected from '../../pages/Home/NotWhatIExpected';
 import Premature from '../../pages/Home/Premature';
 import Questions from '../../pages/Home/Questions';
 import Resilience from '../../pages/Home/Resilience';
+import StatusForm from '../../pages/Home/StatusForm';
 import StepByStepPremature from '../../pages/Home/StepByStepPremature';
 import ThePremature from '../../pages/Home/ThePremature';
 import UploadBabyPhoto from '../../pages/Home/UploadBabyPhoto';
 import UploadFatherPhoto from '../../pages/Home/UploadFatherPhoto';
 import UploadMotherPhoto from '../../pages/Home/UploadMotherPhoto';
 
-const createHomeRoutes = (Stack: any) => {
+const CreateHomeRoutes = (Stack: any) => {
+  const { isFirstRun } = useIsFirstRun();
+
   return [
     <Stack.Screen
       key="AdditionalInformation"
@@ -38,12 +42,6 @@ const createHomeRoutes = (Stack: any) => {
       name="BabyCup"
       component={BabyCup}
       options={{ title: 'Oferta de leite pelo copinho' }}
-    />,
-    <Stack.Screen
-      key="StatusForm"
-      name="StatusForm"
-      component={StatusForm}
-      options={{ title: 'Formulário de Escala', ...purpleHeader }}
     />,
     <Stack.Screen
       key="BreastfeedingBenefits"
@@ -130,6 +128,16 @@ const createHomeRoutes = (Stack: any) => {
       options={{ title: 'Resiliência' }}
     />,
     <Stack.Screen
+      key="StatusForm"
+      name="StatusForm"
+      component={isFirstRun.statusForm ? IntroductionStatusForm : StatusForm}
+      options={
+        isFirstRun.statusForm
+          ? { title: 'Enquete' }
+          : { title: 'Enquete', ...purpleHeader }
+      }
+    />,
+    <Stack.Screen
       key="StepByStepPremature"
       name="StepByStepPremature"
       component={StepByStepPremature}
@@ -162,4 +170,4 @@ const createHomeRoutes = (Stack: any) => {
   ];
 };
 
-export default createHomeRoutes;
+export default CreateHomeRoutes;

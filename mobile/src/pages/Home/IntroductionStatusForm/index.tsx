@@ -7,8 +7,6 @@ import ProgressDots from '../../../components/ProgressDots';
 
 import {
   Header,
-  SkipButton,
-  SkipButtonText,
   ContentWrapper,
   ContentText,
   Footer,
@@ -17,6 +15,10 @@ import {
   PageContainer,
   ScrollView,
   CurrentPageWrapper,
+  ImageContainer,
+  LastPageBox,
+  ColoredText,
+  HeaderLastPageBox,
 } from './styles';
 
 interface IInfoPageProps {
@@ -28,32 +30,27 @@ interface IInfoPageProps {
 const pages = [
   {
     text:
-      'Bem vinda! O AmamentaCoach foi pensado para te auxiliar na desafiadora jornada de amamentar um bebê prematuro.',
-    image: require('../../../../assets/images/intro_mother.png'),
+      'Como você se sente com relação à sua autoconfiança para amamentar?\n\nPara cada uma das afirmações a seguir, por favor, escolha a resposta que melhor descreve sua autoconfiança em amamentar seu bebê.',
+    image: require('../../../../assets/images/icons/survey_primary.png'),
   },
   {
     text:
-      'Você registrará seus avanços diários e terá acesso a conteúdos exclusivos para te instruir e te motivar!',
-    image: require('../../../../assets/images/intro_diary_diary.png'),
+      'Por favor, marque sua resposta circulando o número que melhor descreve como você se sente. Não há respostas certas ou erradas.',
+    image: require('../../../../assets/images/icons/survey_primary.png'),
   },
   {
-    text:
-      'Quanto mais você usar o AmamentaCoach , mais recursos terá para amamentar seu bebê prematuro!',
-    image: require('../../../../assets/images/intro_chart.png'),
-  },
-  {
-    text: 'Explore cada ícone e faça do App seu grande aliado! ',
-    image: require('../../../../assets/images/intro_mobile.png'),
+    text: '',
+    image: require('../../../../assets/images/icons/survey_primary.png'),
   },
 ];
 
-const Introduction: React.FC = () => {
+const IntroductionStatusForm: React.FC = () => {
   const { setNotFirstRun } = useIsFirstRun();
   const { width } = Dimensions.get('window');
   const pageFlatListRef = useRef<FlatList>(null);
 
-  async function handleSkip() {
-    await setNotFirstRun('introduction');
+  async function handleEndIntroduction() {
+    await setNotFirstRun('statusForm');
   }
 
   function InfoPage({ index, text, image }: IInfoPageProps) {
@@ -61,15 +58,34 @@ const Introduction: React.FC = () => {
       <PageContainer width={width}>
         <ScrollView>
           <Header>
-            <SkipButton onPress={handleSkip}>
-              {index < pages.length - 1 && (
-                <SkipButtonText>Pular</SkipButtonText>
-              )}
-            </SkipButton>
+            <ContentText>Autoconfiança para amamentar</ContentText>
           </Header>
           <ContentWrapper>
-            <Image source={image} />
-            <ContentText>{text}</ContentText>
+            <ImageContainer>
+              <Image source={image} />
+            </ImageContainer>
+            {index === pages.length - 1 ? (
+              <LastPageBox>
+                <HeaderLastPageBox>Escala</HeaderLastPageBox>
+                <ContentText>
+                  <ColoredText>1</ColoredText> = nada confiante
+                </ContentText>
+                <ContentText>
+                  <ColoredText>2</ColoredText> = muito pouco confiante
+                </ContentText>
+                <ContentText>
+                  <ColoredText>3</ColoredText> = às vezes confiante
+                </ContentText>
+                <ContentText>
+                  <ColoredText>4</ColoredText> = confiante
+                </ContentText>
+                <ContentText>
+                  <ColoredText>5</ColoredText> = muito confiante
+                </ContentText>
+              </LastPageBox>
+            ) : (
+              <ContentText>{text}</ContentText>
+            )}
           </ContentWrapper>
           <Footer>
             <CurrentPageWrapper>
@@ -82,7 +98,7 @@ const Introduction: React.FC = () => {
             <LastPageButtonWrapper opacity={index === pages.length - 1 ? 1 : 0}>
               <MainButton
                 text="Vamos começar!"
-                onPress={handleSkip}
+                onPress={handleEndIntroduction}
                 disabled={index !== pages.length - 1}
               />
             </LastPageButtonWrapper>
@@ -109,4 +125,4 @@ const Introduction: React.FC = () => {
   );
 };
 
-export default Introduction;
+export default IntroductionStatusForm;

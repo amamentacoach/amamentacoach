@@ -15,8 +15,8 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 export const HeaderInfoModal = styled.Text`
   color: #7d5cd7;
   text-align: center;
-  font-family: 'OpenSans-Regular';
-  font-size: 18px;
+  font-family: 'OpenSans-Bold';
+  font-size: 16px;
   margin-bottom: 10px;
 `;
 
@@ -30,7 +30,7 @@ export const TextInfoModal = styled.Text`
 export const ColoredText = styled.Text`
   color: #7d5cd7;
   text-align: center;
-  font-family: 'OpenSans-Regular';
+  font-family: 'OpenSans-Bold';
   font-size: 16px;
 `;
 
