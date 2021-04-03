@@ -12,7 +12,7 @@ const SurveyHelp: React.FC = () => {
     <DiaryForm
       title="Sobre ajuda"
       category={9}
-      InfoPage={createGenericDiaryFormPage(onFormEnd)}
+      Page={createGenericDiaryFormPage(onFormEnd)}
     />
   );
 };

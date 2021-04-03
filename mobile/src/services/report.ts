@@ -1,21 +1,10 @@
 import api from './api';
+import { IBreastfeedEntry, IExtractionEntry } from './diaryRegistry';
 import { ISurveyQuestion } from './survey';
 
 export interface IDailyReport {
-  breastfeedEntries: {
-    id: number;
-    baby_name: string;
-    breast: 'E' | 'D';
-    duration: number;
-    date: string;
-  }[];
-  registryEntries: {
-    id: number;
-    breast: 'E' | 'D';
-    duration: number;
-    quantity: number;
-    date: string;
-  }[];
+  breastfeedEntries: IBreastfeedEntry[];
+  registryEntries: IExtractionEntry[];
   questions: ISurveyQuestion[];
 }
 
@@ -28,12 +17,16 @@ export interface IWeeklyReport {
 export async function getDailyReport(): Promise<IDailyReport> {
   const { data } = await api.get('relatorios/diario');
 
-  const breastfeedEntries = data.mamadas.map((item: any) => ({
-    id: item.id,
-    baby_name: item.bebe,
-    breast: item.mama,
-    duration: item.duracao,
-    date: item.data_hora,
+  const breastfeedEntries = data.bebes.map((baby: any) => ({
+    id: baby.id,
+    name: baby.nome,
+    entries: baby.mamadas.map((entry: any) => ({
+      id: entry.id,
+      baby_id: entry.bebe_id,
+      date: entry.data_hora,
+      duration: entry.duracao,
+      breast: entry.mama,
+    })),
   }));
   const registryEntries = data.ordenhas.map((item: any) => ({
     id: item.id,

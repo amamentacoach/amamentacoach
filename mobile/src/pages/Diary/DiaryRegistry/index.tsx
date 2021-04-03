@@ -10,24 +10,9 @@ import {
 } from '../../../services/diaryRegistry';
 import dateFormatVerbose from '../../../utils/date';
 import MainButton from '../../../components/MainButton';
+import DiaryRegistryEntry from '../../../components/DiaryRegistryEntry';
 
-import {
-  DateText,
-  Container,
-  Registry,
-  Row,
-  Text,
-  TextContainer,
-  Content,
-  ListContainer,
-} from './styles';
-
-interface RegistryEntryProps {
-  date: string;
-  breast: 'E' | 'D';
-  duration: number;
-  quantity: number;
-}
+import { DateText, Container, ListContainer } from './styles';
 
 const DiaryRegistry: React.FC = () => {
   const navigation = useNavigation();
@@ -48,58 +33,20 @@ const DiaryRegistry: React.FC = () => {
     }
   }, [isFocused]);
 
-  function RegistryEntry({
-    breast,
-    date,
-    duration,
-    quantity,
-  }: RegistryEntryProps) {
-    return (
-      <Registry>
-        <Row>
-          <TextContainer>
-            <Text>Horário: </Text>
-            <Content>{moment(date).format('kk:mm')}</Content>
-          </TextContainer>
-          <TextContainer>
-            <Text>Duração: </Text>
-            <Content>{duration} min</Content>
-          </TextContainer>
-        </Row>
-        <Row>
-          <TextContainer>
-            <Text>Mama: </Text>
-            <Content>{breast === 'E' ? 'Esquerda' : 'Direita'}</Content>
-          </TextContainer>
-          <TextContainer>
-            <Text>Quantidade: </Text>
-            <Content>{quantity} ml</Content>
-          </TextContainer>
-        </Row>
-      </Registry>
-    );
-  }
-
   return (
     <Container>
       <DateText>{dateFormatVerbose(currentDate)}</DateText>
       <ListContainer>
-        {!isLoading ? (
-          registries.map(({ id, breast, date, duration, quantity }) => (
-            <RegistryEntry
-              key={id}
-              breast={breast}
-              date={date}
-              duration={duration}
-              quantity={quantity}
-            />
-          ))
-        ) : (
+        {isLoading ? (
           <ActivityIndicator
             size="large"
             color="#7d5cd7"
             animating={isLoading}
           />
+        ) : (
+          registries.map(entry => (
+            <DiaryRegistryEntry key={entry.id} {...entry} />
+          ))
         )}
       </ListContainer>
       <MainButton

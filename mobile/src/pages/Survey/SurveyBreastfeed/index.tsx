@@ -12,7 +12,7 @@ const SurveyBreastfeed: React.FC = () => {
     <DiaryForm
       title="Amamentar um prematuro"
       category={1}
-      InfoPage={createGenericDiaryFormPage(onFormEnd)}
+      Page={createGenericDiaryFormPage(onFormEnd)}
     />
   );
 };

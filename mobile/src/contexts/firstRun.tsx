@@ -31,7 +31,6 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
         '@AmamentaCoach:isFirstRun',
       );
 
-      await AsyncStorage.removeItem('@AmamentaCoach:isFirstRun');
       if (isFirstRunStorage) {
         setIsFirstRun({ ...isFirstRun, ...JSON.parse(isFirstRunStorage) });
       }

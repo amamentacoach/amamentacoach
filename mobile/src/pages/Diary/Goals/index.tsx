@@ -60,7 +60,7 @@ const Goals: React.FC = () => {
       <DiaryForm
         title="Minhas metas de hoje"
         category={3}
-        InfoPage={createGenericDiaryFormPage(onFormEnd)}
+        Page={createGenericDiaryFormPage(onFormEnd)}
       />
     </>
   );

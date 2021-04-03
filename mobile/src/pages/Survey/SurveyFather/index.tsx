@@ -12,7 +12,7 @@ const SurveyFather: React.FC = () => {
     <DiaryForm
       title="Participação do Pai"
       category={5}
-      InfoPage={createGenericDiaryFormPage(onFormEnd)}
+      Page={createGenericDiaryFormPage(onFormEnd)}
     />
   );
 };

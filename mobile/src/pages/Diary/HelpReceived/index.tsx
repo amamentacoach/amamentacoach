@@ -12,7 +12,7 @@ const HelpReceived: React.FC = () => {
     <DiaryForm
       title="Minha rede de apoio"
       category={4}
-      InfoPage={createGenericDiaryFormPage(onFormEnd)}
+      Page={createGenericDiaryFormPage(onFormEnd)}
     />
   );
 };

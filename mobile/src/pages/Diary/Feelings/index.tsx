@@ -4,7 +4,7 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 
 import dateFormatVerbose from '../../../utils/date';
-import DiaryForm, { IDiaryFormInfoPage } from '../../../components/DiaryForm';
+import DiaryForm, { IDiaryFormPage } from '../../../components/DiaryForm';
 import MainButton from '../../../components/MainButton';
 import SecondaryButton from '../../../components/SecondaryButton';
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
@@ -22,7 +22,7 @@ const Feelings: React.FC = () => {
   const navigation = useNavigation();
   const currentDate = dateFormatVerbose(moment());
 
-  const InfoPage: React.FC<IDiaryFormInfoPage> = ({
+  const InfoPage: React.FC<IDiaryFormPage> = ({
     index,
     pagesLength,
     question,
@@ -75,7 +75,7 @@ const Feelings: React.FC = () => {
     );
   };
 
-  return <DiaryForm title={currentDate} category={2} InfoPage={InfoPage} />;
+  return <DiaryForm title={currentDate} category={2} Page={InfoPage} />;
 };
 
 export default Feelings;
