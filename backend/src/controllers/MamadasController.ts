@@ -42,12 +42,18 @@ class MamadasController{
         const dateFim = new Date(date)
         dateFim.setDate(dateFim.getDate()+1)
 
+        const {nome} = await knex('bebe').select('nome').where('bebe.id',bebe_id).first();
+
         const mamadas = await knex('mamada')
             .select('*')
             .whereBetween('data_hora',[dateIni, dateFim])
             .where('bebe_id',bebe_id).orderBy('data_hora','desc')
 
-        res.send(mamadas)
+        return res.json({
+            id:parseInt(bebe_id),
+            nome,
+            mamadas
+        })
     }
 }
 
