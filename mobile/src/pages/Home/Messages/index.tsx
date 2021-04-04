@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { FlatList, Image } from 'react-native';
 
-import { IMessage, listMessages } from '../../../services/messages';
 import { useIsFirstRun } from '../../../contexts/firstRun';
+import { setMessagesPageOpened } from '../../../services/telemetry';
+import { IMessage, listMessages } from '../../../services/messages';
 
 import {
   AddMessageButton,
@@ -16,7 +17,6 @@ import {
 } from './styles';
 
 import AddIcon from '../../../../assets/images/icons/ic_add.png';
-import { setMessagesOpened } from '../../../services/telemetry';
 
 const Messages: React.FC = () => {
   const navigation = useNavigation();
@@ -55,7 +55,7 @@ const Messages: React.FC = () => {
   useEffect(() => {
     fetchMessages(1);
     if (isFirstRun.temporary.diary) {
-      setMessagesOpened();
+      setMessagesPageOpened();
       setTemporaryNotFirstRun('diary');
     }
   }, []);

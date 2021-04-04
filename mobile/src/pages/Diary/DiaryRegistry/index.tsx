@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { ActivityIndicator } from 'react-native';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-import { ActivityIndicator } from 'react-native';
+import { useIsFirstRun } from '../../../contexts/firstRun';
+import { setExtractionPageOpened } from '../../../services/telemetry';
 import {
   IExtractionEntry,
   listExtractionsEntries,
@@ -16,6 +18,7 @@ import { DateText, Container, ListContainer } from './styles';
 
 const DiaryRegistry: React.FC = () => {
   const navigation = useNavigation();
+  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
   const isFocused = useIsFocused();
   const currentDate = moment();
   const [registries, setRegistries] = useState<IExtractionEntry[]>([]);
@@ -30,6 +33,11 @@ const DiaryRegistry: React.FC = () => {
     }
     if (isFocused) {
       fetchRegistries();
+    }
+
+    if (isFirstRun.temporary.extraction) {
+      setExtractionPageOpened();
+      setTemporaryNotFirstRun('extraction');
     }
   }, [isFocused]);
 

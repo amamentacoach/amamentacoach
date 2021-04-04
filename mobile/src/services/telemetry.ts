@@ -10,9 +10,20 @@ export async function setUserVideoSeen(): Promise<boolean> {
   }
 }
 
-export async function setMessagesOpened(): Promise<boolean> {
+// Marca que o usuário acessou a página de mensagens.
+export async function setMessagesPageOpened(): Promise<boolean> {
   try {
     await api.post('/acessos/mensagens');
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
+// Marca que o usuário acessou a página de extração de leite.
+export async function setExtractionPageOpened(): Promise<boolean> {
+  try {
+    await api.post('/acessos/ordenha');
     return true;
   } catch (error) {
     return false;
