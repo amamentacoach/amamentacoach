@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
+import {
+  RouteProp,
+  useIsFocused,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
@@ -16,18 +21,25 @@ import DiaryRegistryEntry from '../../../components/DiaryRegistryEntry';
 
 import { DateText, Container, ListContainer } from './styles';
 
+type ScreenParams = {
+  DiaryRegistry: {
+    date: string;
+  };
+};
+
 const DiaryRegistry: React.FC = () => {
+  const { date } = useRoute<RouteProp<ScreenParams, 'DiaryRegistry'>>().params;
+
   const navigation = useNavigation();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
   const isFocused = useIsFocused();
-  const currentDate = moment();
   const [registries, setRegistries] = useState<IExtractionEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchRegistries() {
       setIsLoading(true);
-      const oldRegistries = await listExtractionsEntries();
+      const oldRegistries = await listExtractionsEntries(moment(date));
       setRegistries(oldRegistries);
       setIsLoading(false);
     }
@@ -43,7 +55,7 @@ const DiaryRegistry: React.FC = () => {
 
   return (
     <Container>
-      <DateText>{dateFormatVerbose(currentDate)}</DateText>
+      <DateText>{dateFormatVerbose(moment(date))}</DateText>
       <ListContainer>
         {isLoading ? (
           <ActivityIndicator
