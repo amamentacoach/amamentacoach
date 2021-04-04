@@ -1,5 +1,15 @@
 import api from './api';
 
+// Enviar que o usuário começou a assistir um vídeo.
+export async function setUserVideoStarted(): Promise<boolean> {
+  try {
+    await api.post('/acessos/videos-inicio');
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+
 // Enviar que o usuário assistiu um vídeo inteiro.
 export async function setUserVideoSeen(): Promise<boolean> {
   try {
