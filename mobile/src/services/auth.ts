@@ -38,6 +38,11 @@ export interface IBabySignUpInfo {
 
 export interface IMotherInfo {
   name: string;
+  images: {
+    mother: string | null;
+    baby: string | null;
+    father: string | null;
+  };
   babiesBirthLocations: {
     AC: boolean;
     UCI: boolean;
@@ -147,6 +152,7 @@ export async function getMotherInfo(): Promise<IMotherInfo | null> {
         name: baby.nome,
       }),
     );
+
     const babiesBirthLocations = {
       AC: false,
       UCI: false,
@@ -173,8 +179,13 @@ export async function getMotherInfo(): Promise<IMotherInfo | null> {
 
     return {
       name: data.nome,
-      babiesBirthLocations,
       partner: data.companheiro,
+      images: {
+        mother: data.imagem_mae,
+        baby: data.imagem_bebe,
+        father: data.imagem_pai,
+      },
+      babiesBirthLocations,
       babies,
     };
   } catch (error) {

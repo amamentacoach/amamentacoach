@@ -16,37 +16,34 @@ function prepareImageFormData(photo: ImagePickerResponse) {
 }
 
 // Envia uma foto do usuário para uma rota especificada.
-async function uploadPhoto(route: string, photo: ImagePickerResponse) {
+async function uploadPhoto(
+  route: string,
+  photo: ImagePickerResponse,
+): Promise<string | null> {
   const formData = prepareImageFormData(photo);
   try {
-    await api.post(`/upload/${route}`, formData, {
+    const { data } = await api.post(`/upload/${route}`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-    return true;
+    return data.filename;
   } catch (error) {
-    return false;
+    return null;
   }
 }
 
 // Envia a foto da mãe para a api.
-export async function uploadMotherPhoto(
-  photo: ImagePickerResponse,
-): Promise<boolean> {
+export async function uploadMotherPhoto(photo: ImagePickerResponse) {
   return uploadPhoto('mae', photo);
 }
 
 // Envia a foto do pai para a api.
-export async function uploadFatherPhoto(
-  photo: ImagePickerResponse,
-): Promise<boolean> {
+export async function uploadFatherPhoto(photo: ImagePickerResponse) {
   return uploadPhoto('pai', photo);
 }
 
 // Envia a foto do bebê para a api.
-export async function uploadBabyPhoto(
-  photo: ImagePickerResponse,
-): Promise<boolean> {
+export async function uploadBabyPhoto(photo: ImagePickerResponse) {
   return uploadPhoto('bebe', photo);
 }
