@@ -6,6 +6,9 @@ class AcessosController{
         const {local} = req.params
         const {mae_id} = req
         switch (local) {
+            case "videos-inicio":
+                await knex('mae').update('acesso_inicio_videos',true).where('id',mae_id)
+                return res.sendStatus(200)
             case "videos":
                 await knex('mae').update('acesso_videos',true).where('id',mae_id)
                 return res.sendStatus(200)

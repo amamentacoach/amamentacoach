@@ -1070,6 +1070,12 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
 
  routes.get('/login', (req,res) => res.render('login'))
 
+ /**
+ * @api {post} /acessos/videos-inicio Acessos Inicio dos Videos
+ * @apiDescription Informa se mae acessou o inicio dos videos
+ * @apiGroup Controle de Acessos
+ * @apiHeader {String} authorization Token de acesso.
+ */
 
 /**
  * @api {post} /acessos/videos Acessos Videos
