@@ -26,6 +26,7 @@ import ThePremature from '../../pages/Home/ThePremature';
 import UploadBabyPhoto from '../../pages/Home/UploadBabyPhoto';
 import UploadFatherPhoto from '../../pages/Home/UploadFatherPhoto';
 import UploadMotherPhoto from '../../pages/Home/UploadMotherPhoto';
+import WhyBreastfeed from '../../pages/Home/WhyBreastfeed';
 
 const CreateHomeRoutes = (Stack: any) => {
   const { isFirstRun } = useIsFirstRun();
@@ -170,6 +171,12 @@ const CreateHomeRoutes = (Stack: any) => {
       name="UploadMotherPhoto"
       component={UploadMotherPhoto}
       options={{ title: 'Espelho' }}
+    />,
+    <Stack.Screen
+      key="WhyBreastfeed"
+      name="WhyBreastfeed"
+      component={WhyBreastfeed}
+      options={{ title: 'Retirada do leite' }}
     />,
   ];
 };
