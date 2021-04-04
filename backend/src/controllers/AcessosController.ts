@@ -17,11 +17,11 @@ class AcessosController{
                 const diffDays =  Math.ceil(timeDiff/(1000 * 3600 * 24))
 
                 if(mae.acessos_app > 1 && mae.score_1d == null){
-                    return res.send({acao:"RESPONDER_1D"})
+                    return res.send({acao:"1D"})
                 }else if(diffDays >= 15 && mae.score_15d == null){
-                    return res.send({acao:"RESPONDER_15D"})
+                    return res.send({acao:"15D"})
                 }else if(diffDays >= 30 && mae.score_1m == null){
-                    return res.send({acao:"RESPONDER_1M"})
+                    return res.send({acao:"1M"})
                 }else{
                     return res.sendStatus(200)
                 }

@@ -58,7 +58,7 @@ class RespostasMaeController{
             }
     
             switch (ocasiao) {
-                case "1":
+                case "1D":
                     await trx('mae').update({score_1d:score}).where({id:mae_id})
                     break;
                 case "ALTA":
