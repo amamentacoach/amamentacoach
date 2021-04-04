@@ -236,17 +236,17 @@ define({ "api": [
       "examples": [
         {
           "title": "Retorno do primeiro acesso",
-          "content": "{\n \"acao\":\"RESPONDER_1D\",\n}",
+          "content": "{\n \"acao\":\"1D\",\n}",
           "type": "json"
         },
         {
           "title": "Retorno quando bebe completar 15 dias  ",
-          "content": "{\n \"acao\":\"RESPONDER_15D\",\n}",
+          "content": "{\n \"acao\":\"15D\",\n}",
           "type": "json"
         },
         {
           "title": "Retorno quando bebe completar 1 mes  ",
-          "content": "{\n \"acao\":\"RESPONDER_1M\",\n}",
+          "content": "{\n \"acao\":\"1M\",\n}",
           "type": "json"
         }
       ]
@@ -351,6 +351,30 @@ define({ "api": [
     "filename": "./src/routes.ts",
     "groupTitle": "Controle_de_Acessos",
     "name": "PostAcessosVideos"
+  },
+  {
+    "type": "post",
+    "url": "/acessos/videos-inicio",
+    "title": "Acessos Inicio dos Videos",
+    "description": "<p>Informa se mae acessou o inicio dos videos</p>",
+    "group": "Controle_de_Acessos",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Controle_de_Acessos",
+    "name": "PostAcessosVideosInicio"
   },
   {
     "type": "get",
