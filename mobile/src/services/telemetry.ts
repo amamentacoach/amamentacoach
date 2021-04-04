@@ -10,4 +10,11 @@ export async function setUserVideoSeen(): Promise<boolean> {
   }
 }
 
-export default setUserVideoSeen;
+export async function setMessagesOpened(): Promise<boolean> {
+  try {
+    await api.post('/acessos/mensagens');
+    return true;
+  } catch (error) {
+    return false;
+  }
+}

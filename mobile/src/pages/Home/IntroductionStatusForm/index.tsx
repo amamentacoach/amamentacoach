@@ -45,12 +45,12 @@ const pages = [
 ];
 
 const IntroductionStatusForm: React.FC = () => {
-  const { setNotFirstRun } = useIsFirstRun();
+  const { setPersistentNotFirstRun } = useIsFirstRun();
   const { width } = Dimensions.get('window');
   const pageFlatListRef = useRef<FlatList>(null);
 
   async function handleEndIntroduction() {
-    await setNotFirstRun('statusForm');
+    await setPersistentNotFirstRun('statusFormIntroduction');
   }
 
   function InfoPage({ index, text, image }: IInfoPageProps) {

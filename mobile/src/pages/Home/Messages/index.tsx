@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { FlatList, Image } from 'react-native';
 
 import { IMessage, listMessages } from '../../../services/messages';
+import { useIsFirstRun } from '../../../contexts/firstRun';
 
 import {
   AddMessageButton,
@@ -15,9 +16,11 @@ import {
 } from './styles';
 
 import AddIcon from '../../../../assets/images/icons/ic_add.png';
+import { setMessagesOpened } from '../../../services/telemetry';
 
 const Messages: React.FC = () => {
   const navigation = useNavigation();
+  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
 
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [page, setPage] = useState(1);
@@ -51,6 +54,10 @@ const Messages: React.FC = () => {
 
   useEffect(() => {
     fetchMessages(1);
+    if (isFirstRun.temporary.diary) {
+      setMessagesOpened();
+      setTemporaryNotFirstRun('diary');
+    }
   }, []);
 
   async function fetchOlderMessages() {
