@@ -2,15 +2,21 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 type IIsFirstRun = {
-  introduction: boolean;
-  diary: boolean;
-  statusForm: boolean;
+  persistent: {
+    appIntroduction: boolean;
+    diaryIntroduction: boolean;
+    statusFormIntroduction: boolean;
+  };
+  temporary: { extraction: boolean; diary: boolean; messages: boolean };
 };
 
 interface IIsFirstRunContextData {
   isFirstRun: IIsFirstRun;
-  setNotFirstRun: (
-    field: 'introduction' | 'diary' | 'statusForm',
+  // Marca um campo como executado até o aplicativo ser aberto novamente.
+  setTemporaryNotFirstRun: (field: 'extraction' | 'diary' | 'messages') => void;
+  // Marca um campo como executado permanentemente.
+  setPersistentNotFirstRun: (
+    field: 'diaryIntroduction' | 'appIntroduction' | 'statusFormIntroduction',
   ) => Promise<void>;
 }
 
@@ -20,9 +26,12 @@ const IsFirstRun = createContext<IIsFirstRunContextData>(
 
 export const IsFirstRunProvider: React.FC = ({ children }) => {
   const [isFirstRun, setIsFirstRun] = useState<IIsFirstRun>({
-    introduction: true,
-    diary: true,
-    statusForm: true,
+    persistent: {
+      appIntroduction: true,
+      diaryIntroduction: true,
+      statusFormIntroduction: true,
+    },
+    temporary: { extraction: true, diary: true, messages: true },
   });
 
   useEffect(() => {
@@ -32,21 +41,33 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
       );
 
       if (isFirstRunStorage) {
-        setIsFirstRun({ ...isFirstRun, ...JSON.parse(isFirstRunStorage) });
+        const firstRun = { ...isFirstRun };
+        firstRun.persistent = {
+          ...firstRun.persistent,
+          ...JSON.parse(isFirstRunStorage),
+        };
+        setIsFirstRun(firstRun);
       }
     }
     checkDataInStorage();
   }, []);
 
-  // Marca um campo como já executado.
-  async function setNotFirstRun(
-    field: 'introduction' | 'diary' | 'statusForm',
+  // Marca um campo como já executado até o aplicativo ser iniciado novamente.
+  function setTemporaryNotFirstRun(field: 'extraction' | 'diary' | 'messages') {
+    const copy = { ...isFirstRun };
+    copy.temporary[field] = false;
+    setIsFirstRun(copy);
+  }
+
+  // Marca um campo como já executado permanentemente.
+  async function setPersistentNotFirstRun(
+    field: 'diaryIntroduction' | 'appIntroduction' | 'statusFormIntroduction',
   ) {
     const copy = { ...isFirstRun };
-    copy[field] = false;
+    copy.persistent[field] = false;
     await AsyncStorage.setItem(
       '@AmamentaCoach:isFirstRun',
-      JSON.stringify(copy),
+      JSON.stringify(copy.persistent),
     );
     setIsFirstRun(copy);
   }
@@ -55,7 +76,8 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
     <IsFirstRun.Provider
       value={{
         isFirstRun,
-        setNotFirstRun,
+        setTemporaryNotFirstRun,
+        setPersistentNotFirstRun,
       }}>
       {children}
     </IsFirstRun.Provider>

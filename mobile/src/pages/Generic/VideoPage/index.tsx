@@ -3,7 +3,7 @@ import { useRoute, RouteProp } from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
-import { setUserVideoSeen } from '../../../services/videoAccess';
+import { setUserVideoSeen } from '../../../services/telemetry';
 
 import {
   ScrollView,

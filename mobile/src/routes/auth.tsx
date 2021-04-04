@@ -15,7 +15,7 @@ const AuthRoutes: React.FC = () => {
 
   return (
     <Stack.Navigator screenOptions={{ headerTitleAlign: 'center' }}>
-      {isFirstRun.introduction && (
+      {isFirstRun.persistent.appIntroduction && (
         <Stack.Screen
           name="Introduction"
           component={Introduction}

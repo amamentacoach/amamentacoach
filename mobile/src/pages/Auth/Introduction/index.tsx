@@ -48,12 +48,12 @@ const pages = [
 ];
 
 const Introduction: React.FC = () => {
-  const { setNotFirstRun } = useIsFirstRun();
+  const { setPersistentNotFirstRun } = useIsFirstRun();
   const { width } = Dimensions.get('window');
   const pageFlatListRef = useRef<FlatList>(null);
 
   async function handleSkip() {
-    await setNotFirstRun('introduction');
+    await setPersistentNotFirstRun('appIntroduction');
   }
 
   function InfoPage({ index, text, image }: IInfoPageProps) {

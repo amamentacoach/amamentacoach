@@ -130,9 +130,13 @@ const CreateHomeRoutes = (Stack: any) => {
     <Stack.Screen
       key="StatusForm"
       name="StatusForm"
-      component={isFirstRun.statusForm ? IntroductionStatusForm : StatusForm}
+      component={
+        isFirstRun.persistent.statusFormIntroduction
+          ? IntroductionStatusForm
+          : StatusForm
+      }
       options={
-        isFirstRun.statusForm
+        isFirstRun.persistent.statusFormIntroduction
           ? { title: 'Enquete' }
           : { title: 'Enquete', ...purpleHeader }
       }
