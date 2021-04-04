@@ -12,6 +12,7 @@ import pushNotificationSubscribe from '../services/pushNotification';
 interface IAuthContextData {
   isSigned: boolean;
   motherInfo: IMotherInfo;
+  updateMotherInfo: () => Promise<void>;
   signIn(email: string, password: string): Promise<LoginStatus>;
   signOut(): void;
 }
@@ -48,6 +49,14 @@ export const AuthProvider: React.FC = ({ children }) => {
         );
       }
     }
+  }
+
+  // Atualiza o valor the motherInfo armazenado no AsyncStorage com o valor atual.
+  async function updateMotherInfo() {
+    await AsyncStorage.setItem(
+      '@AmamentaCoach:motherInfo',
+      JSON.stringify(motherInfo),
+    );
   }
 
   useEffect(() => {
@@ -96,6 +105,7 @@ export const AuthProvider: React.FC = ({ children }) => {
       value={{
         isSigned: !!token,
         motherInfo,
+        updateMotherInfo,
         signIn,
         signOut,
       }}>

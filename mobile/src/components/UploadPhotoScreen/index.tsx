@@ -10,8 +10,11 @@ import {
   SubmitButtonContainer,
   Text,
   SelectedImage,
+  SendButtonContainer,
+  SelectButtonContainer,
 } from './styles';
 import { useAuth } from '../../contexts/auth';
+import SecondaryButton from '../SecondaryButton';
 
 interface UploadPhotoScreenProps {
   target: 'mother' | 'baby' | 'father';
@@ -27,21 +30,20 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
   uploadFunction,
 }) => {
   const { width } = Dimensions.get('window');
-  const {
-    motherInfo: { images },
-  } = useAuth();
+  const { motherInfo, updateMotherInfo } = useAuth();
   const [photo, setPhoto] = useState<ImagePickerResponse | null>(null);
 
   const [isSendingForm, setIsSendingForm] = useState(false);
-  const [isPhotoUploaded, setIsPhotoUploaded] = useState(false);
+  const [formSent, setFormSent] = useState(false);
 
   async function handleSubmitNewPhoto() {
     if (photo) {
       setIsSendingForm(true);
       const filename = await uploadFunction(photo);
-      images[target] = filename;
+      motherInfo.images[target] = filename;
+      await updateMotherInfo();
       setIsSendingForm(false);
-      setIsPhotoUploaded(true);
+      setFormSent(true);
     }
   }
 
@@ -49,32 +51,26 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
     ImagePicker.launchImageLibrary({ noData: true }, response => {
       if (response.uri) {
         setPhoto(response);
+        setFormSent(false);
       }
     });
-  }
-
-  function getSubmitButtonText() {
-    if (isPhotoUploaded && !isSendingForm) {
-      return 'Reenviar foto';
-    }
-    return isSendingForm ? 'Enviando...' : 'Enviar';
   }
 
   return (
     <ScrollView>
       <FormContainer>
         {/* Usuário já fez o upload the uma foto */}
-        {images[target] && (
+        {!photo && !formSent && motherInfo.images[target] && (
           <SelectedImage
             source={{
-              uri: `https://amamentacoach.herokuapp.com/uploads/${images[target]}`,
+              uri: `https://amamentacoach.herokuapp.com/uploads/${motherInfo.images[target]}`,
             }}
             width={width}
             resizeMode="contain"
           />
         )}
         {/* Usuário selecionou uma nova foto */}
-        {photo && !images[target] && (
+        {photo && (
           <SelectedImage
             source={{ uri: photo.uri }}
             width={width}
@@ -82,7 +78,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
           />
         )}
         {/* Usuário ainda não enviou uma foto e não selecionou nenhuma para ser enviada */}
-        {!photo && !images[target] && (
+        {!photo && !motherInfo.images[target] && (
           <>
             <Image source={image} />
             <Text>{text}</Text>
@@ -90,11 +86,20 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
         )}
       </FormContainer>
       <SubmitButtonContainer>
-        <MainButton
-          onPress={photo ? handleSubmitNewPhoto : handleSelectPhoto}
-          disabled={isSendingForm}
-          text={getSubmitButtonText()}
-        />
+        <SelectButtonContainer>
+          <SecondaryButton
+            onPress={handleSelectPhoto}
+            disabled={isSendingForm}
+            text="Selecionar foto"
+          />
+        </SelectButtonContainer>
+        <SendButtonContainer>
+          <MainButton
+            onPress={handleSubmitNewPhoto}
+            disabled={formSent || isSendingForm}
+            text={isSendingForm ? 'Enviando...' : 'Enviar'}
+          />
+        </SendButtonContainer>
       </SubmitButtonContainer>
     </ScrollView>
   );
