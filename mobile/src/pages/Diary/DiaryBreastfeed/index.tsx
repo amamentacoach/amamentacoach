@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
+import {
+  RouteProp,
+  useIsFocused,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
@@ -15,10 +20,19 @@ import MainButton from '../../../components/MainButton';
 
 import { DateText, ListContainer, ScrollView, Container } from './styles';
 
+type ScreenParams = {
+  DiaryBreastfeed: {
+    date: string;
+  };
+};
+
 const DiaryBreastfeed: React.FC = () => {
+  const { date } = useRoute<
+    RouteProp<ScreenParams, 'DiaryBreastfeed'>
+  >().params;
+
   const navigation = useNavigation();
   const { motherInfo } = useAuth();
-  const currentDate = moment();
   const isFocused = useIsFocused();
   const [registries, setRegistries] = useState<IBreastfeedEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -29,7 +43,9 @@ const DiaryBreastfeed: React.FC = () => {
         setIsLoading(true);
         // Recebe os registros de todos os bebês da mãe.
         const oldRegistries = await Promise.all(
-          motherInfo.babies.map(async ({ id }) => listBreastfeedEntries(id)),
+          motherInfo.babies.map(async ({ id }) =>
+            listBreastfeedEntries(id, moment(date)),
+          ),
         );
         setRegistries(oldRegistries);
       }
@@ -43,7 +59,7 @@ const DiaryBreastfeed: React.FC = () => {
   return (
     <ScrollView>
       <Container>
-        <DateText>{dateFormatVerbose(currentDate)}</DateText>
+        <DateText>{dateFormatVerbose(moment(date))}</DateText>
         <ListContainer>
           {isLoading ? (
             <ActivityIndicator

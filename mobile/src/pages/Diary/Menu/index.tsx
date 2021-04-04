@@ -30,7 +30,10 @@ const DiaryMenu: React.FC = () => {
     {
       image: require('../../../../assets/images/premature_breastfeed.png'),
       title: 'Registro de amamentação',
-      onPress: () => navigation.navigate('DiaryBreastfeed'),
+      onPress: () =>
+        navigation.navigate('DiaryBreastfeed', {
+          date: selectedDate.toISOString(),
+        }),
     },
     {
       image: require('../../../../assets/images/premature_breastfeed.png'),
