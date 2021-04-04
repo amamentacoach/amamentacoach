@@ -96,7 +96,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
         <SendButtonContainer>
           <MainButton
             onPress={handleSubmitNewPhoto}
-            disabled={formSent || isSendingForm}
+            disabled={!photo || formSent || isSendingForm}
             text={isSendingForm ? 'Enviando...' : 'Enviar'}
           />
         </SendButtonContainer>

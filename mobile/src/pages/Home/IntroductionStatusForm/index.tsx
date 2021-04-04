@@ -1,9 +1,12 @@
-import React, { useRef } from 'react';
-import { Dimensions, FlatList, Image } from 'react-native';
+import React from 'react';
+import { Image } from 'react-native';
 
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import MainButton from '../../../components/MainButton';
 import ProgressDots from '../../../components/ProgressDots';
+import InformationPages, {
+  IInfoPageProps,
+} from '../../../components/InformationPages';
 
 import {
   Header,
@@ -11,9 +14,6 @@ import {
   ContentText,
   Footer,
   LastPageButtonWrapper,
-  ListContainer,
-  PageContainer,
-  ScrollView,
   CurrentPageWrapper,
   ImageContainer,
   LastPageBox,
@@ -21,108 +21,103 @@ import {
   HeaderLastPageBox,
 } from './styles';
 
-interface IInfoPageProps {
-  index: number;
-  text: string;
-  image: any;
-}
-
 const pages = [
   {
-    text:
-      'Como você se sente com relação à sua autoconfiança para amamentar?\n\nPara cada uma das afirmações a seguir, por favor, escolha a resposta que melhor descreve sua autoconfiança em amamentar seu bebê.',
+    id: 1,
     image: require('../../../../assets/images/icons/survey_primary.png'),
+    content: [
+      {
+        text:
+          'Como você se sente com relação à sua autoconfiança para amamentar?\n\nPara cada uma das afirmações a seguir, por favor, escolha a resposta que melhor descreve sua autoconfiança em amamentar seu bebê.',
+      },
+    ],
   },
   {
-    text:
-      'Por favor, marque sua resposta circulando o número que melhor descreve como você se sente. Não há respostas certas ou erradas.',
+    id: 2,
     image: require('../../../../assets/images/icons/survey_primary.png'),
+    content: [
+      {
+        text:
+          'Por favor, marque sua resposta circulando o número que melhor descreve como você se sente. Não há respostas certas ou erradas.',
+      },
+    ],
   },
   {
-    text: '',
+    id: 3,
     image: require('../../../../assets/images/icons/survey_primary.png'),
+    content: [],
   },
 ];
 
 const IntroductionStatusForm: React.FC = () => {
   const { setPersistentNotFirstRun } = useIsFirstRun();
-  const { width } = Dimensions.get('window');
-  const pageFlatListRef = useRef<FlatList>(null);
 
   async function handleEndIntroduction() {
     await setPersistentNotFirstRun('statusFormIntroduction');
   }
 
-  function InfoPage({ index, text, image }: IInfoPageProps) {
-    return (
-      <PageContainer width={width}>
-        <ScrollView>
-          <Header>
-            <ContentText>Autoconfiança para amamentar</ContentText>
-          </Header>
-          <ContentWrapper>
-            <ImageContainer>
-              <Image source={image} />
-            </ImageContainer>
-            {index === pages.length - 1 ? (
-              <LastPageBox>
-                <HeaderLastPageBox>Escala</HeaderLastPageBox>
-                <ContentText>
-                  <ColoredText>1</ColoredText> = nada confiante
-                </ContentText>
-                <ContentText>
-                  <ColoredText>2</ColoredText> = muito pouco confiante
-                </ContentText>
-                <ContentText>
-                  <ColoredText>3</ColoredText> = às vezes confiante
-                </ContentText>
-                <ContentText>
-                  <ColoredText>4</ColoredText> = confiante
-                </ContentText>
-                <ContentText>
-                  <ColoredText>5</ColoredText> = muito confiante
-                </ContentText>
-              </LastPageBox>
-            ) : (
-              <ContentText>{text}</ContentText>
-            )}
-          </ContentWrapper>
-          <Footer>
-            <CurrentPageWrapper>
-              <ProgressDots
-                flatlistRef={pageFlatListRef}
-                selectedIndex={index}
-                length={pages.length}
-              />
-            </CurrentPageWrapper>
-            <LastPageButtonWrapper opacity={index === pages.length - 1 ? 1 : 0}>
-              <MainButton
-                text="Vamos começar!"
-                onPress={handleEndIntroduction}
-                disabled={index !== pages.length - 1}
-              />
-            </LastPageButtonWrapper>
-          </Footer>
-        </ScrollView>
-      </PageContainer>
-    );
-  }
-
-  return (
-    <ListContainer>
-      <FlatList
-        ref={pageFlatListRef}
-        data={pages}
-        renderItem={({ item, index }) => (
-          <InfoPage index={index} text={item.text} image={item.image} />
+  const InfoPage: React.FC<IInfoPageProps> = ({
+    flatListRef,
+    pagesLength,
+    index,
+    image,
+    content,
+  }) => (
+    <>
+      <Header>
+        <ContentText>Autoconfiança para amamentar</ContentText>
+      </Header>
+      <ContentWrapper>
+        <ImageContainer>
+          <Image source={image} />
+        </ImageContainer>
+        {index === pagesLength - 1 ? (
+          <LastPageBox>
+            <HeaderLastPageBox>Escala</HeaderLastPageBox>
+            <ContentText>
+              <ColoredText>1</ColoredText> = nada confiante
+            </ContentText>
+            <ContentText>
+              <ColoredText>2</ColoredText> = muito pouco confiante
+            </ContentText>
+            <ContentText>
+              <ColoredText>3</ColoredText> = às vezes confiante
+            </ContentText>
+            <ContentText>
+              <ColoredText>4</ColoredText> = confiante
+            </ContentText>
+            <ContentText>
+              <ColoredText>5</ColoredText> = muito confiante
+            </ContentText>
+          </LastPageBox>
+        ) : (
+          <>
+            {content.map(({ text }) => (
+              <ContentText key={text}>{text}</ContentText>
+            ))}
+          </>
         )}
-        keyExtractor={item => item.text}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-      />
-    </ListContainer>
+      </ContentWrapper>
+      <Footer>
+        <CurrentPageWrapper>
+          <ProgressDots
+            flatlistRef={flatListRef}
+            selectedIndex={index}
+            length={pagesLength}
+          />
+        </CurrentPageWrapper>
+        <LastPageButtonWrapper opacity={index === pagesLength - 1 ? 1 : 0}>
+          <MainButton
+            text="Vamos começar!"
+            onPress={handleEndIntroduction}
+            disabled={index !== pagesLength - 1}
+          />
+        </LastPageButtonWrapper>
+      </Footer>
+    </>
   );
+
+  return <InformationPages pages={pages} PageModel={InfoPage} />;
 };
 
 export default IntroductionStatusForm;

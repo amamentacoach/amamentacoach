@@ -68,21 +68,19 @@ const Messages: React.FC = () => {
     setPage(page + 1);
   }
 
-  function InfoPage({ name, content }: IMessage) {
-    return (
-      <MessageContainer>
-        <Author>{name}</Author>
-        <Content>{content}</Content>
-        <Line />
-      </MessageContainer>
-    );
-  }
+  const Message: React.FC<IMessage> = ({ name, content }) => (
+    <MessageContainer>
+      <Author>{name}</Author>
+      <Content>{content}</Content>
+      <Line />
+    </MessageContainer>
+  );
 
   return (
     <FlatlistContainer>
       <FlatList
         data={messages}
-        renderItem={({ item }) => <InfoPage {...item} />}
+        renderItem={({ item }) => <Message {...item} />}
         keyExtractor={item => item.id}
         onEndReached={fetchOlderMessages}
         onEndReachedThreshold={0.1}

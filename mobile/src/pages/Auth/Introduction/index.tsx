@@ -1,9 +1,12 @@
-import React, { useRef } from 'react';
-import { Dimensions, FlatList, Image } from 'react-native';
+import React from 'react';
+import { Image } from 'react-native';
 
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import MainButton from '../../../components/MainButton';
 import ProgressDots from '../../../components/ProgressDots';
+import InformationPages, {
+  IInfoPageProps,
+} from '../../../components/InformationPages';
 
 import {
   Header,
@@ -13,100 +16,97 @@ import {
   ContentText,
   Footer,
   LastPageButtonWrapper,
-  ListContainer,
-  PageContainer,
-  ScrollView,
   CurrentPageWrapper,
 } from './styles';
 
-interface IInfoPageProps {
-  index: number;
-  text: string;
-  image: any;
-}
-
 const pages = [
   {
-    text:
-      'Bem vinda! O AmamentaCoach foi pensado para te auxiliar na desafiadora jornada de amamentar um bebê prematuro.',
+    id: 1,
     image: require('../../../../assets/images/intro_mother.png'),
+    content: [
+      {
+        text:
+          'Bem vinda! O AmamentaCoach foi pensado para te auxiliar na desafiadora jornada de amamentar um bebê prematuro.',
+      },
+    ],
   },
   {
-    text:
-      'Você registrará seus avanços diários e terá acesso a conteúdos exclusivos para te instruir e te motivar!',
+    id: 2,
     image: require('../../../../assets/images/intro_diary_diary.png'),
+    content: [
+      {
+        text: 'Explore cada ícone e faça do App seu grande aliado! ',
+      },
+    ],
   },
   {
-    text:
-      'Quanto mais você usar o AmamentaCoach , mais recursos terá para amamentar seu bebê prematuro!',
+    id: 3,
     image: require('../../../../assets/images/intro_chart.png'),
+    content: [
+      {
+        text:
+          'Quanto mais você usar o AmamentaCoach , mais recursos terá para amamentar seu bebê prematuro!',
+      },
+    ],
   },
   {
-    text: 'Explore cada ícone e faça do App seu grande aliado! ',
+    id: 4,
     image: require('../../../../assets/images/intro_mobile.png'),
+    content: [
+      {
+        text:
+          'Você registrará seus avanços diários e terá acesso a conteúdos exclusivos para te instruir e te motivar!',
+      },
+    ],
   },
 ];
 
 const Introduction: React.FC = () => {
   const { setPersistentNotFirstRun } = useIsFirstRun();
-  const { width } = Dimensions.get('window');
-  const pageFlatListRef = useRef<FlatList>(null);
 
   async function handleSkip() {
     await setPersistentNotFirstRun('appIntroduction');
   }
 
-  function InfoPage({ index, text, image }: IInfoPageProps) {
-    return (
-      <PageContainer width={width}>
-        <ScrollView>
-          <Header>
-            <SkipButton onPress={handleSkip}>
-              {index < pages.length - 1 && (
-                <SkipButtonText>Pular</SkipButtonText>
-              )}
-            </SkipButton>
-          </Header>
-          <ContentWrapper>
-            <Image source={image} />
-            <ContentText>{text}</ContentText>
-          </ContentWrapper>
-          <Footer>
-            <CurrentPageWrapper>
-              <ProgressDots
-                flatlistRef={pageFlatListRef}
-                selectedIndex={index}
-                length={pages.length}
-              />
-            </CurrentPageWrapper>
-            <LastPageButtonWrapper opacity={index === pages.length - 1 ? 1 : 0}>
-              <MainButton
-                text="Vamos começar!"
-                onPress={handleSkip}
-                disabled={index !== pages.length - 1}
-              />
-            </LastPageButtonWrapper>
-          </Footer>
-        </ScrollView>
-      </PageContainer>
-    );
-  }
-
-  return (
-    <ListContainer>
-      <FlatList
-        ref={pageFlatListRef}
-        data={pages}
-        renderItem={({ item, index }) => (
-          <InfoPage index={index} text={item.text} image={item.image} />
-        )}
-        keyExtractor={item => item.text}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-      />
-    </ListContainer>
+  const InfoPage: React.FC<IInfoPageProps> = ({
+    flatListRef,
+    index,
+    pagesLength,
+    image,
+    content,
+  }) => (
+    <>
+      <Header>
+        <SkipButton onPress={handleSkip}>
+          {index < pagesLength - 1 && <SkipButtonText>Pular</SkipButtonText>}
+        </SkipButton>
+      </Header>
+      <ContentWrapper>
+        <Image source={image} />
+        {content.map(({ text }) => (
+          <ContentText key={text}>{text}</ContentText>
+        ))}
+      </ContentWrapper>
+      <Footer>
+        <CurrentPageWrapper>
+          <ProgressDots
+            flatlistRef={flatListRef}
+            selectedIndex={index}
+            length={pagesLength}
+          />
+        </CurrentPageWrapper>
+        <LastPageButtonWrapper opacity={index === pagesLength - 1 ? 1 : 0}>
+          <MainButton
+            text="Vamos começar!"
+            onPress={handleSkip}
+            disabled={index !== pagesLength - 1}
+          />
+        </LastPageButtonWrapper>
+      </Footer>
+    </>
   );
+
+  return <InformationPages pages={pages} PageModel={InfoPage} />;
 };
 
 export default Introduction;
