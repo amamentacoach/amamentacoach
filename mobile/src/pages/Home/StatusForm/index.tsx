@@ -52,7 +52,7 @@ interface PageProps {
 
 type ScreenParams = {
   StatusForm: {
-    situation: 'ALTA' | '1' | '15D' | '1M';
+    situation: 'ALTA' | '1D' | '15D' | '1M';
   };
 };
 
@@ -64,7 +64,7 @@ const StatusForm: React.FC = () => {
   >().params;
 
   // Não exibe o formulário de alimentação se for a primeira vez do usuário respondendo a escala.
-  const displayFeedingForm = situation !== '1';
+  const displayFeedingForm = situation !== '1D';
 
   const [pageQuestions, setPageQuestions] = useState<ISurveyQuestion[][]>([]);
   const [feedingQuestion, setFeedingQuestion] = useState<ISurveyQuestion>();

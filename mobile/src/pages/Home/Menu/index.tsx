@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-import { View } from 'react-native';
+import { useIsFirstRun } from '../../../contexts/firstRun';
+import FormPickerInput from '../../../components/FormPickerInput';
+import { setHomePageOpened } from '../../../services/telemetry';
 import {
   checkBabiesLocation,
   IBabyStatus,
@@ -36,18 +39,28 @@ import {
 } from './styles';
 
 import HUBanner from '../../../../assets/images/banner_hu.png';
-import FormPickerInput from '../../../components/FormPickerInput';
+
+interface BabyModalOption {
+  newLocation: string;
+  selected: boolean;
+}
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
+  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
+
   const [babiesData, setBabiesData] = useState<IBabyStatus[]>([]);
+  const [babyModalVisibility, setBabyModalVisibility] = useState<boolean>(
+    false,
+  );
   const [selectedModalOptions, setSelectedModalOptions] = useState<
-    {
-      newLocation: string;
-      selected: boolean;
-    }[]
+    BabyModalOption[]
   >([]);
-  const [modalVisibility, setModalVisibility] = useState<boolean>(false);
+
+  const [formModalVisibility, setFormModalVisibility] = useState<boolean>(
+    false,
+  );
+  const [formAction, setFormAction] = useState<string>('');
 
   const options = [
     {
@@ -99,7 +112,17 @@ const Home: React.FC = () => {
           })),
         );
         setBabiesData(babiesToCheck);
-        setModalVisibility(true);
+        setBabyModalVisibility(true);
+      }
+    }
+
+    // Envia uma mensagem de telemetria que o usuário abriu o aplicativo e verifica se algum
+    // formulário deve ser preenchido.
+    async function checkForms() {
+      const action = await setHomePageOpened();
+      if (action) {
+        setFormAction(action);
+        setFormModalVisibility(true);
       }
     }
 
@@ -111,26 +134,36 @@ const Home: React.FC = () => {
       );
       const currentDate = moment();
 
+      // Menos de um dia se passou.
       if (
-        !lastDateStorage ||
-        (!!lastDateStorage &&
-          currentDate.diff(moment(lastDateStorage, 'YYYY-MM-DD'), 'days') >= 1)
+        !!lastDateStorage &&
+        currentDate.diff(moment(lastDateStorage, 'YYYY-MM-DD'), 'days') < 1
       ) {
-        await checkBabies();
-        await AsyncStorage.setItem(
-          '@AmamentaCoach:lastOpenedDate',
-          currentDate.format('YYYY-MM-DD'),
-        );
+        return;
       }
-      await AsyncStorage.removeItem('@AmamentaCoach:lastOpenedDate');
+
+      // Verifica se algum formulário deve ser respondido
+      await checkForms();
+      // Verifica se algum bebê pode receber alta.
+      await checkBabies();
+
+      await AsyncStorage.setItem(
+        '@AmamentaCoach:lastOpenedDate',
+        currentDate.format('YYYY-MM-DD'),
+      );
     }
 
-    checkOneDayPassed();
+    // Executa pela primeira vez ao abrir o aplicativo
+    if (isFirstRun.temporary.home) {
+      checkOneDayPassed();
+      setTemporaryNotFirstRun('home');
+    }
   }, []);
 
   // Fecha o modal, marca que os bebês selecionados tiveram alta e navega para o formulário.
   function handleUpdateBabyLocation() {
-    setModalVisibility(false);
+    setFormModalVisibility(false);
+    setBabyModalVisibility(false);
     babiesData.forEach(async (baby, index) => {
       await updateBabyLocation(
         baby.id,
@@ -170,9 +203,29 @@ const Home: React.FC = () => {
 
   return (
     <>
+      <Modal
+        content="Chegou o momento de avaliar novamente sua pontuação na escala de confiança materna para amamentar! Vamos lá?"
+        options={[
+          {
+            text: 'Sim',
+            onPress: () => {
+              setFormModalVisibility(false);
+              setBabyModalVisibility(false);
+              navigation.navigate('StatusForm', {
+                situation: formAction,
+              });
+            },
+          },
+          {
+            text: 'Não',
+            onPress: () => setFormModalVisibility(false),
+          },
+        ]}
+        visible={formModalVisibility}
+      />
       {babiesData.length > 0 && (
         <Modal
-          visible={modalVisibility}
+          visible={babyModalVisibility}
           options={[
             {
               text: 'Sim',
@@ -181,7 +234,7 @@ const Home: React.FC = () => {
             },
             {
               text: 'Não',
-              onPress: () => setModalVisibility(false),
+              onPress: () => setBabyModalVisibility(false),
             },
           ]}>
           <View>

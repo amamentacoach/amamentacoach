@@ -10,6 +10,16 @@ export async function setUserVideoSeen(): Promise<boolean> {
   }
 }
 
+// Marca que o usuário abriu o aplicativo.
+export async function setHomePageOpened(): Promise<'1D' | '15D' | '1M' | null> {
+  try {
+    const { data } = await api.post('/acessos/app');
+    return data.acao ? data.acao : null;
+  } catch (error) {
+    return null;
+  }
+}
+
 // Marca que o usuário acessou a página de mensagens.
 export async function setMessagesPageOpened(): Promise<boolean> {
   try {

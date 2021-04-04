@@ -115,7 +115,7 @@ export async function listStatusFormQuestions(): Promise<IStatusForm | null> {
 
 // Envia as resposta do usuário para o formulário de escala.
 export async function answerStatusForm(
-  situation: 'ALTA' | '1' | '15D' | '1M',
+  situation: 'ALTA' | '1D' | '15D' | '1M',
   answers: { id: number; content: string }[],
 ): Promise<boolean> {
   try {
@@ -126,7 +126,6 @@ export async function answerStatusForm(
         descricao: question.content,
       })),
     });
-
     return true;
   } catch (error) {
     return false;

@@ -7,13 +7,20 @@ type IIsFirstRun = {
     diaryIntroduction: boolean;
     statusFormIntroduction: boolean;
   };
-  temporary: { extraction: boolean; diary: boolean; messages: boolean };
+  temporary: {
+    home: boolean;
+    extraction: boolean;
+    diary: boolean;
+    messages: boolean;
+  };
 };
 
 interface IIsFirstRunContextData {
   isFirstRun: IIsFirstRun;
   // Marca um campo como executado até o aplicativo ser aberto novamente.
-  setTemporaryNotFirstRun: (field: 'extraction' | 'diary' | 'messages') => void;
+  setTemporaryNotFirstRun: (
+    field: 'diary' | 'extraction' | 'home' | 'messages',
+  ) => void;
   // Marca um campo como executado permanentemente.
   setPersistentNotFirstRun: (
     field: 'diaryIntroduction' | 'appIntroduction' | 'statusFormIntroduction',
@@ -31,7 +38,7 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
       diaryIntroduction: true,
       statusFormIntroduction: true,
     },
-    temporary: { extraction: true, diary: true, messages: true },
+    temporary: { home: true, extraction: true, diary: true, messages: true },
   });
 
   useEffect(() => {
@@ -53,7 +60,9 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
   }, []);
 
   // Marca um campo como já executado até o aplicativo ser iniciado novamente.
-  function setTemporaryNotFirstRun(field: 'extraction' | 'diary' | 'messages') {
+  function setTemporaryNotFirstRun(
+    field: 'diary' | 'extraction' | 'home' | 'messages',
+  ) {
     const copy = { ...isFirstRun };
     copy.temporary[field] = false;
     setIsFirstRun(copy);
