@@ -580,6 +580,39 @@ define({ "api": [
     "name": "GetBebesBebe_idMamadas"
   },
   {
+    "type": "get",
+    "url": "/bebes/:bebe_id/mamadas/:date",
+    "title": "Listagem por data",
+    "description": "<p>Passar data no formato yyyy-mm-dd</p>",
+    "group": "Mamadas",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Sucesso: Status 200",
+          "content": "\n[\n   {\n     \"id\": 1,\n     \"data_hora\": \"2020-09-24T17:40:31.501Z\",\n     \"mama\": \"D\",\n     \"duracao\": 5,\n     \"bebe_id\": 1\n   }\n ]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Mamadas",
+    "name": "GetBebesBebe_idMamadasDate"
+  },
+  {
     "type": "post",
     "url": "/bebes/:bebe_id/mamadas",
     "title": "Cadastro",
@@ -902,9 +935,9 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/maes/ordenhas/porData",
+    "url": "/maes/ordenhas/:date",
     "title": "Listagem por data",
-    "description": "<p>Lista as ordenhas da data informada</p>",
+    "description": "<p>Passar data no formato yyyy-mm-dd</p>",
     "group": "Ordenhas",
     "header": {
       "fields": {
@@ -919,15 +952,6 @@ define({ "api": [
         ]
       }
     },
-    "parameter": {
-      "examples": [
-        {
-          "title": "Exemplo Request:",
-          "content": "{\n    \"date\":\"2020-03-20\"\n}",
-          "type": "json"
-        }
-      ]
-    },
     "success": {
       "examples": [
         {
@@ -940,7 +964,7 @@ define({ "api": [
     "version": "0.0.0",
     "filename": "./src/routes.ts",
     "groupTitle": "Ordenhas",
-    "name": "GetMaesOrdenhasPordata"
+    "name": "GetMaesOrdenhasDate"
   },
   {
     "type": "post",

@@ -33,7 +33,7 @@ class OrdenhasController{
 
     async showByDate(req:Request,res:Response){
         const {mae_id} = req
-        const {date} = req.body
+        const {date} = req.params
 
         const dateIni = new Date(date)
         const dateFim = new Date(date)

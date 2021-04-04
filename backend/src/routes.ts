@@ -291,15 +291,10 @@ routes.post('/maes/ordenhas',verifyJWT,ordenhasController.create);
 
 
 /**
- * @api {get} /maes/ordenhas/porData Listagem por data
- * @apiDescription Lista as ordenhas da data informada
+ * @api {get} /maes/ordenhas/:date Listagem por data
+ * @apiDescription Passar data no formato yyyy-mm-dd
  * @apiGroup Ordenhas
  * @apiHeader {String} authorization Token de acesso.
- *
- * @apiParamExample {json} Exemplo Request:
- *      {
- *          "date":"2020-03-20"
- *      }
  * 
  * @apiSuccessExample {json} Sucesso: Status 200
  * 
@@ -315,7 +310,7 @@ routes.post('/maes/ordenhas',verifyJWT,ordenhasController.create);
  *         ]
  *
  */
-routes.get('/maes/ordenhas/porData',verifyJWT,ordenhasController.showByDate);
+routes.get('/maes/ordenhas/:date',verifyJWT,ordenhasController.showByDate);
 
 /**
  * @api {get} /maes/ordenhas Listagem
@@ -874,6 +869,27 @@ routes.get('/testePush',async (req,res)=>{
 routes.get('/amamentacao/resultados',respostasController.results)
 
 //routes.get('/resultados',resultController.generate)
+
+/**
+ * @api {get} /bebes/:bebe_id/mamadas/:date Listagem por data
+ * @apiDescription Passar data no formato yyyy-mm-dd
+ * @apiGroup Mamadas
+ * @apiHeader {String} authorization Token de acesso.
+ * 
+ * @apiSuccessExample {json} Sucesso: Status 200
+ * 
+ *        [
+ *           {
+ *             "id": 1,
+ *             "data_hora": "2020-09-24T17:40:31.501Z",
+ *             "mama": "D",
+ *             "duracao": 5,
+ *             "bebe_id": 1
+ *           }
+ *         ]
+ *
+ */
+ routes.get('/bebes/:bebe_id/mamadas/:date',verifyJWT,mamadasController.showByDate);
 
 /**
  * @api {post} /bebes/:bebe_id/mamadas Cadastro

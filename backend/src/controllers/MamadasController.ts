@@ -33,6 +33,22 @@ class MamadasController{
 
         res.sendStatus(200);
     }
+
+    async showByDate(req:Request,res:Response){
+        const {bebe_id} = req.params
+        const {date} = req.params
+
+        const dateIni = new Date(date)
+        const dateFim = new Date(date)
+        dateFim.setDate(dateFim.getDate()+1)
+
+        const mamadas = await knex('mamada')
+            .select('*')
+            .whereBetween('data_hora',[dateIni, dateFim])
+            .where('bebe_id',bebe_id).orderBy('data_hora','desc')
+
+        res.send(mamadas)
+    }
 }
 
 export default MamadasController;
