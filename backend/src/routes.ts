@@ -1092,17 +1092,17 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
  * 
  * @apiSuccessExample {json} Retorno do primeiro acesso
  * {
- *  "acao":"RESPONDER_1D",
+ *  "acao":"1D",
  * } 
  * 
  * @apiSuccessExample {json} Retorno quando bebe completar 15 dias  
  * {
- *  "acao":"RESPONDER_15D",
+ *  "acao":"15D",
  * } 
  * 
  * @apiSuccessExample {json} Retorno quando bebe completar 1 mes  
  * {
- *  "acao":"RESPONDER_1M",
+ *  "acao":"1M",
  * } 
  * 
  */
