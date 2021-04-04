@@ -876,17 +876,21 @@ routes.get('/amamentacao/resultados',respostasController.results)
  * @apiGroup Mamadas
  * @apiHeader {String} authorization Token de acesso.
  * 
- * @apiSuccessExample {json} Sucesso: Status 200
- * 
- *        [
- *           {
- *             "id": 1,
- *             "data_hora": "2020-09-24T17:40:31.501Z",
- *             "mama": "D",
- *             "duracao": 5,
- *             "bebe_id": 1
- *           }
- *         ]
+  * @apiSuccessExample {json} Sucesso: Status 200
+  * 
+  *        {
+  *         "id": 1,
+  *         "nome": "Enzo Gabriel",
+  *         "mamadas": [
+  *           {
+  *             "id": 1,
+  *             "data_hora": "2020-09-24T17:40:31.501Z",
+  *             "mama": "D",
+  *             "duracao": 5,
+  *             "bebe_id": 1
+  *           }
+  *         ]
+  *       }
  *
  */
  routes.get('/bebes/:bebe_id/mamadas/:date',verifyJWT,mamadasController.showByDate);
