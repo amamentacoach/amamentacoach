@@ -29,3 +29,13 @@ export async function setExtractionPageOpened(): Promise<boolean> {
     return false;
   }
 }
+
+// Marca que o usuário acessou a página do diário.
+export async function setDiaryPageOpened(): Promise<boolean> {
+  try {
+    await api.post('/acessos/diario');
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
