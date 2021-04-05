@@ -76,7 +76,7 @@ const Home: React.FC = () => {
     {
       image: require('../../../../assets/images/home_milk.png'),
       title: 'A retirada do leite',
-      onPress: () => navigation.navigate('HowToBreastfeed'),
+      onPress: () => navigation.navigate('Breastfeeding'),
     },
     {
       image: require('../../../../assets/images/home_emotions.png'),

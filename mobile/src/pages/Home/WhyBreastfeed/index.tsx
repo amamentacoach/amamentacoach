@@ -26,14 +26,25 @@ const pages = [
     title: 'Por que fazer a retirada do leite?',
     image: require('../../../../assets/images/why_milk_withdrawal_one.png'),
     content: [
-      <ContentText>
-        Sabe aqueles inúmeros benefícios do leite materno pro bebê prematuro?
-      </ContentText>,
-      <ContentText>
-        A retirada frequente do leite é o caminho para
-        <ColoredContentText> evitar que o leite seque </ColoredContentText>
-        enquanto o bebê não suga.
-      </ContentText>,
+      {
+        idText: 1,
+        text: (
+          <ContentText>
+            Sabe aqueles inúmeros benefícios do leite materno pro bebê
+            prematuro?
+          </ContentText>
+        ),
+      },
+      {
+        idText: 2,
+        text: (
+          <ContentText>
+            A retirada frequente do leite é o caminho para
+            <ColoredContentText> evitar que o leite seque </ColoredContentText>
+            enquanto o bebê não suga.
+          </ContentText>
+        ),
+      },
     ],
   },
   {
@@ -41,9 +52,15 @@ const pages = [
     title: 'Por que fazer a retirada do leite?',
     image: require('../../../../assets/images/why_milk_withdrawal_two.png'),
     content: [
-      <ContentText>
-        Leite parado na mama faz o corpo entender que não precisa produzir mais!
-      </ContentText>,
+      {
+        idText: 1,
+        text: (
+          <ContentText>
+            Leite parado na mama faz o corpo entender que não precisa produzir
+            mais!
+          </ContentText>
+        ),
+      },
     ],
   },
   {
@@ -51,13 +68,19 @@ const pages = [
     title: 'Por que fazer a retirada do leite?',
     image: require('../../../../assets/images/why_milk_withdrawal_two.png'),
     content: [
-      <ContentText>
-        Então, ao contrário...{' '}
-        <ColoredContentText>
-          quanto mais você esvazia sua mama
-        </ColoredContentText>
-        , mais ela produz! Pois ela entende que o leite está sendo necessário!
-      </ContentText>,
+      {
+        idText: 1,
+        text: (
+          <ContentText>
+            Então, ao contrário...
+            <ColoredContentText>
+              quanto mais você esvazia sua mama
+            </ColoredContentText>
+            , mais ela produz! Pois ela entende que o leite está sendo
+            necessário!
+          </ContentText>
+        ),
+      },
     ],
   },
 ];
@@ -66,7 +89,10 @@ interface PageProps {
   index: number;
   title: string;
   image: any;
-  content: JSX.Element[];
+  content: {
+    idText: number;
+    text: JSX.Element;
+  }[];
 }
 
 const WhyBreastfeed: React.FC = () => {
@@ -79,8 +105,8 @@ const WhyBreastfeed: React.FC = () => {
       <ContentTitleText>{title}</ContentTitleText>
       <ContentWrapper>
         <Image source={image} resizeMode="contain" />
-        {content.map(text => (
-          <TextContainer>{text}</TextContainer>
+        {content.map(({ idText, text }) => (
+          <TextContainer key={idText}>{text}</TextContainer>
         ))}
       </ContentWrapper>
       <Footer>
