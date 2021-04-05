@@ -15,13 +15,13 @@ const AdditionalInformation: React.FC = () => {
       image: require('../../../../assets/images/premature_breastfeed.png'),
       title: 'Como meu leite é produzido?',
       subtitle: 'Saiba como seu corpo produz o leite',
-      onPress: () => {},
+      onPress: () => navigation.navigate('MilkAdditionalInformation'),
     },
     {
       image: require('../../../../assets/images/premature_baby.png'),
       title: 'Benefícios do Canguru',
       subtitle: 'Como o canguru pode ajudar',
-      onPress: () => {},
+      onPress: () => navigation.navigate('BabySling'),
     },
     {
       image: require('../../../../assets/images/diary_smile.png'),

@@ -5,6 +5,7 @@ import purpleHeader from '../config/purpleHeader';
 
 import AdditionalInformation from '../../pages/Home/AdditionalInformation';
 import BabyCup from '../../pages/Home/BabyCup';
+import BabySling from '../../pages/Home/BabySling';
 import Breastfeeding from '../../pages/Home/Breastfeeding';
 import BreastfeedingBenefits from '../../pages/Home/BreastfeedingBenefits';
 import Distractions from '../../pages/Home/Distractions';
@@ -46,6 +47,12 @@ const CreateHomeRoutes = (Stack: any) => {
       name="BabyCup"
       component={BabyCup}
       options={{ title: 'Oferta de leite pelo copinho' }}
+    />,
+    <Stack.Screen
+      key="BabySling"
+      name="BabySling"
+      component={BabySling}
+      options={{ title: 'Benefícios do canguru' }}
     />,
     <Stack.Screen
       key="Breastfeeding"
