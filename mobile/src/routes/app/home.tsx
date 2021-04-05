@@ -16,6 +16,7 @@ import HU from '../../pages/Home/HU';
 import IntroductionStatusForm from '../../pages/Home/IntroductionStatusForm';
 import ManageExpectations from '../../pages/Home/ManageExpectations';
 import Messages from '../../pages/Home/Messages';
+import MilkAdditionalInformation from '../../pages/Home/MilkAdditionalInformation';
 import MusicPlaylists from '../../pages/Home/MusicPlaylists';
 import NewMessage from '../../pages/Home/NewMessage';
 import NewQuestion from '../../pages/Home/NewQuestion';
@@ -107,6 +108,12 @@ const CreateHomeRoutes = (Stack: any) => {
       name="Messages"
       component={Messages}
       options={{ title: 'Mural de mensagens' }}
+    />,
+    <Stack.Screen
+      key="MilkAdditionalInformation"
+      name="MilkAdditionalInformation"
+      component={MilkAdditionalInformation}
+      options={{ title: 'Produção de leite' }}
     />,
     <Stack.Screen
       key="MusicPlaylists"

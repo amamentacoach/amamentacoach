@@ -11,25 +11,24 @@ import Banner from '../../../../assets/images/banner_canguru.png';
 const BabySling: React.FC = () => {
   const navigation = useNavigation();
 
-  // TODO Adicionar links corretos.
   const options = [
     {
       image: require('../../../../assets/images/ic_video.png'),
       title: 'Video 1',
       onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['CLOZL3N_QXs'] }),
+        navigation.navigate('VideoPage', { videos: ['IhKyaqGX_MQ'] }),
     },
     {
       image: require('../../../../assets/images/ic_video.png'),
       title: 'Video 2',
       onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['CLOZL3N_QXs'] }),
+        navigation.navigate('VideoPage', { videos: ['rdTTyKGrq_s'] }),
     },
     {
       image: require('../../../../assets/images/ic_video.png'),
       title: 'Video 3',
       onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['CLOZL3N_QXs'] }),
+        navigation.navigate('VideoPage', { videos: ['wx1ofoCZw9w'] }),
     },
   ];
 
