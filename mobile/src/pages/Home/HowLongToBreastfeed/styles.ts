@@ -27,6 +27,7 @@ export const ContentText = styled.Text`
   font-size: 16px;
   text-align: center;
   color: #545454;
+  margin: 30px 0;
 `;
 
 export const ColoredText = styled.Text`

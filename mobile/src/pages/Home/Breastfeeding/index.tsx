@@ -27,7 +27,7 @@ const Breastfeeding: React.FC = () => {
     {
       image: require('../../../../assets/images/withdrawal_clock.png'),
       title: 'Por quanto tempo fazer?',
-      onPress: () => {},
+      onPress: () => navigation.navigate('HowLongToBreastfeed'),
     },
   ];
 

@@ -9,6 +9,7 @@ import Breastfeeding from '../../pages/Home/Breastfeeding';
 import BreastfeedingBenefits from '../../pages/Home/BreastfeedingBenefits';
 import Distractions from '../../pages/Home/Distractions';
 import EmotionsAndBreastfeeding from '../../pages/Home/EmotionsAndBreastfeeding';
+import HowLongToBreastfeed from '../../pages/Home/HowLongToBreastfeed';
 import HowToBreastfeed from '../../pages/Home/HowToBreastfeed';
 import HU from '../../pages/Home/HU';
 import IntroductionStatusForm from '../../pages/Home/IntroductionStatusForm';
@@ -69,6 +70,12 @@ const CreateHomeRoutes = (Stack: any) => {
       name="EmotionsAndBreastfeeding"
       component={EmotionsAndBreastfeeding}
       options={{ title: 'Emoções e amamentação' }}
+    />,
+    <Stack.Screen
+      key="HowLongToBreastfeed"
+      name="HowLongToBreastfeed"
+      component={HowLongToBreastfeed}
+      options={{ title: 'Retirada do leite' }}
     />,
     <Stack.Screen
       key="HowToBreastfeed"

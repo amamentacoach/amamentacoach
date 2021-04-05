@@ -6,13 +6,14 @@ import {
   ContentText,
   ContentTitleText,
   ColoredText,
+  ScrollView,
 } from './styles';
 
 import WithdrawalWhen from '../../../../assets/images/withdrawal_when.png';
 
 const WhenToBreastfeed: React.FC = () => {
   return (
-    <>
+    <ScrollView>
       <ContentTitleText>Quando retirar o leite?</ContentTitleText>
       <ContentWrapper>
         <Image source={WithdrawalWhen} />
@@ -24,7 +25,7 @@ const WhenToBreastfeed: React.FC = () => {
           sempre vazias.
         </ContentText>
       </ContentWrapper>
-    </>
+    </ScrollView>
   );
 };
 
