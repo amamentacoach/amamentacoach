@@ -22,7 +22,7 @@ const Breastfeeding: React.FC = () => {
     {
       image: require('../../../../assets/images/withdrawal_calendar.png'),
       title: 'Quando fazer?',
-      onPress: () => {},
+      onPress: () => navigation.navigate('WhenToBreastfeed'),
     },
     {
       image: require('../../../../assets/images/withdrawal_clock.png'),

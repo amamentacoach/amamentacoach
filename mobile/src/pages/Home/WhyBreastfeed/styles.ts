@@ -50,7 +50,7 @@ export const ContentText = styled.Text`
 `;
 
 export const ColoredContentText = styled.Text`
-  font-family: 'OpenSans-Regular';
+  font-family: 'OpenSans-Bold';
   font-size: 16px;
   text-align: center;
   color: #7d5cd7;
