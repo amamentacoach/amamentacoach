@@ -688,6 +688,8 @@ routes.post('/responder/:pergunta_id',verifyJWT,respostasMaeController.create);
 
 routes.get('/maes/:mae_id/respostas',verifyJWT,respostasMaeController.index);
 
+routes.post('/maes/:id/:acao',maesController.aprovar);
+
  /**
  * @api {post} /mensagens Enviar Mensagem
  * @apiDescription Envia uma nova mensagem
@@ -1133,5 +1135,7 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
  */
 
 routes.post('/acessos/:local', verifyJWT, acessosController.create)
+
+routes.get('/aprovar',maesController.esperandoAprovacao);
 
 export default routes;

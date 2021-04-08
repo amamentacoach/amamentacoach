@@ -1,5 +1,3 @@
-let codDuvida;
-
 function showAnswer(){
     if($('#postar').is(':checked')){
         $('#resposta').prop('disabled',false)
@@ -9,14 +7,12 @@ function showAnswer(){
     } 
 }
 
-function resolver(){
-    let resposta = null;
-    console.log($('#resposta').val().length)
-    if($('#resposta').val().length > 0){
-        $.post(`/duvidas/${codDuvida}/resolver`, { resposta:$('#resposta').val() }, () => location.reload())
-    }
-    else
-        $.post(`/duvidas/${codDuvida}/resolver`, {}, () => location.reload())
+function aprovar(idMae){
+    $.post(`/maes/${idMae}/aprovar`, {}, () => location.reload())
+}
+
+function reprovar(idMae){
+    $.post(`/maes/${idMae}/reprovar`, {}, () => location.reload())
 }
 
 async function login(){

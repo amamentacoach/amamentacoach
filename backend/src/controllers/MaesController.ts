@@ -84,16 +84,15 @@ class MaesController{
 
         const secret = process.env.SECRET
         const token = jwt.sign({id},secret?secret:"segredo",{
-            expiresIn:2592000
+            expiresIn:3600
         })
         res.json({token})
-
 
     }
 
     async auth(req:Request,res:Response){
         const {email,senha} = req.body;
-        const mae = await knex('mae').select('*').where('email','=',email).first()
+        const mae = await knex('mae').select('*').where('email','=',email).where('status',1).first()
 
         if(mae && await bcrypt.compare(senha,mae.senha)){
             const secret = process.env.SECRET
@@ -162,6 +161,23 @@ class MaesController{
         const {userId} = req.body;
         await knex('mae').update({user_id:userId}).where('id',req.mae_id);
         return res.sendStatus(200)
+    }
+
+    async esperandoAprovacao(req:Request,res:Response){
+        const maes = await knex('mae').select('id','nome','email').where('status',0)
+        return res.render('aprovar',{maes})
+    }
+
+    async aprovar(req:Request,res:Response){
+        const {id, acao} = req.params
+        if(acao==="aprovar"){
+            await knex('mae').update('status',1).where({id})
+            return res.sendStatus(200)
+        }else if(acao==="reprovar"){
+            await knex('mae').update('status',-1).where({id})
+            return res.sendStatus(200)
+        }
+        return res.sendStatus(404)
     }
 }
 
