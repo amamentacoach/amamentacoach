@@ -34,4 +34,14 @@ export const FormContainer = styled.View`
 export const SubmitButtonContainer = styled.View`
   margin-bottom: 15px;
   justify-content: flex-end;
+  flex-direction: row;
+`;
+
+export const SelectButtonContainer = styled.View`
+  margin-right: 5px;
+  flex: 1;
+`;
+
+export const SendButtonContainer = styled.View`
+  flex: 1;
 `;

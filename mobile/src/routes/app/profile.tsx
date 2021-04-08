@@ -2,7 +2,7 @@ import React from 'react';
 
 import NewPassword from '../../pages/Profile/NewPassword';
 
-const createProfileRoutes = (Stack: any) => {
+const CreateProfileRoutes = (Stack: any) => {
   return [
     <Stack.Screen
       key="NewPassword"
@@ -13,4 +13,4 @@ const createProfileRoutes = (Stack: any) => {
   ];
 };
 
-export default createProfileRoutes;
+export default CreateProfileRoutes;

@@ -1,3 +1,4 @@
+import { Moment } from 'moment';
 import api from './api';
 
 export interface IExtractionEntry {
@@ -41,10 +42,12 @@ export async function createExtractionEntry(
   }
 }
 
-// Retorna todas as ordenhas realizadas pela mãe.
-export async function listExtractionsEntries(): Promise<IExtractionEntry[]> {
-  const { data } = await api.get('/maes/ordenhas');
-  return data.ordenhas.map((item: any) => ({
+// Retorna todas as ordenhas realizadas pela mãe em uma data.
+export async function listExtractionsEntries(
+  date: Moment,
+): Promise<IExtractionEntry[]> {
+  const { data } = await api.get(`/maes/ordenhas/${date.format('YYYY-MM-DD')}`);
+  return data.map((item: any) => ({
     id: item.id,
     baby_id: item.bebe_id,
     breast: item.mama,
@@ -73,11 +76,14 @@ export async function createBreastfeedEntry(
   }
 }
 
-// Retorna todos os registros de amamentação feitos no diário.
+// Retorna todos os registros de amamentação feitos no diário em uma data.
 export async function listBreastfeedEntries(
   babyId: number,
+  date: Moment,
 ): Promise<IBreastfeedEntry> {
-  const { data } = await api.get(`/bebes/${babyId}/mamadas`);
+  const { data } = await api.get(
+    `/bebes/${babyId}/mamadas/${date.format('YYYY-MM-DD')}`,
+  );
   return {
     id: data.id,
     name: data.nome,

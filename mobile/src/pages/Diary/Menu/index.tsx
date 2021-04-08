@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
+import { useIsFirstRun } from '../../../contexts/firstRun';
+import { setDiaryPageOpened } from '../../../services/telemetry';
 import dateFormatVerbose from '../../../utils/date';
 import OptionsList from '../../../components/OptionList';
 
@@ -20,19 +22,26 @@ import CalendarIcon from '../../../../assets/images/icons/ic_calendar.png';
 
 const DiaryMenu: React.FC = () => {
   const navigation = useNavigation();
+  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
   const [showCalendar, setShowCalendar] = useState(false);
-  const [currentDate, setCurrentDate] = useState(moment());
+  const [selectedDate, setSelectedDate] = useState(moment());
 
   const options = [
     {
       image: require('../../../../assets/images/premature_breastfeed.png'),
       title: 'Registro de amamentação',
-      onPress: () => navigation.navigate('DiaryBreastfeed'),
+      onPress: () =>
+        navigation.navigate('DiaryBreastfeed', {
+          date: selectedDate.toISOString(),
+        }),
     },
     {
       image: require('../../../../assets/images/premature_breastfeed.png'),
       title: 'Registro de retiradas de leite',
-      onPress: () => navigation.navigate('DiaryRegistry'),
+      onPress: () =>
+        navigation.navigate('DiaryRegistry', {
+          date: selectedDate.toISOString(),
+        }),
     },
     {
       image: require('../../../../assets/images/diary_smile.png'),
@@ -56,10 +65,17 @@ const DiaryMenu: React.FC = () => {
     },
   ];
 
-  function handleDateSelected(selectedDate?: Date) {
+  useEffect(() => {
+    if (isFirstRun.temporary.diary) {
+      setDiaryPageOpened();
+      setTemporaryNotFirstRun('diary');
+    }
+  }, []);
+
+  function handleDateSelected(date?: Date) {
     setShowCalendar(false);
-    if (selectedDate) {
-      setCurrentDate(moment(selectedDate));
+    if (date) {
+      setSelectedDate(moment(date));
     }
   }
 
@@ -68,12 +84,10 @@ const DiaryMenu: React.FC = () => {
       {showCalendar && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={currentDate.toDate()}
+          value={selectedDate.toDate()}
           mode="date"
           maximumDate={new Date()}
-          onChange={(_: Event, selectedDate?: Date | undefined) =>
-            handleDateSelected(selectedDate)
-          }
+          onChange={(_: Event, date?: Date) => handleDateSelected(date)}
         />
       )}
 
@@ -85,7 +99,7 @@ const DiaryMenu: React.FC = () => {
           <Image source={CalendarIcon} />
         </CalendarButton>
       </Header>
-      <DateText>{dateFormatVerbose(currentDate)}</DateText>
+      <DateText>{dateFormatVerbose(selectedDate)}</DateText>
       <OptionsList options={options} />
     </ScrollView>
   );

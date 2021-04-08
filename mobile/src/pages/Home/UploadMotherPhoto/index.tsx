@@ -30,11 +30,17 @@ const UploadMotherPhoto: React.FC = () => {
   return (
     <>
       <Modal
-        text="VOCÊ é a melhor mãe do mundo para o seu bebê! Isso simplesmente porque VOCÊ deu a vida a ele, o que ninguém mais poderia fazer! O SEU LEITE é o melhor alimento que ele pode receber! "
+        content="VOCÊ é a melhor mãe do mundo para o seu bebê! Isso simplesmente porque VOCÊ deu a vida a ele, o que ninguém mais poderia fazer! O SEU LEITE é o melhor alimento que ele pode receber! "
         visible={isSubmitModalVisible}
-        closeModal={() => setIsSubmitModalVisible(false)}
+        options={[
+          {
+            text: 'Fechar',
+            onPress: () => setIsSubmitModalVisible(false),
+          },
+        ]}
       />
       <UploadPhotoScreen
+        target="mother"
         image={Mirror}
         text={
           'Espelho, espelho meu... existe alguém mais capaz de amamentar do que eu?”\nClique no botão abaixo e faça o upload de uma foto sua!'

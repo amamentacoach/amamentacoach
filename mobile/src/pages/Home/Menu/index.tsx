@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
+import { useIsFirstRun } from '../../../contexts/firstRun';
+import FormPickerInput from '../../../components/FormPickerInput';
+import { setHomePageOpened } from '../../../services/telemetry';
 import {
   checkBabiesLocation,
   IBabyStatus,
+  updateBabyLocation,
 } from '../../../services/babyLocation';
 import Modal from '../../../components/Modal';
 
@@ -27,14 +32,35 @@ import {
   Option,
   ContentTextContainer,
   TextModal,
+  InnerCircle,
+  OuterCircle,
+  ModalOption,
+  LocationContainer,
 } from './styles';
 
 import HUBanner from '../../../../assets/images/banner_hu.png';
 
+interface BabyModalOption {
+  newLocation: string;
+  selected: boolean;
+}
+
 const Home: React.FC = () => {
   const navigation = useNavigation();
+  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
+
   const [babiesData, setBabiesData] = useState<IBabyStatus[]>([]);
-  const [modalVisibility, setModalVisibility] = useState<boolean>(false);
+  const [babyModalVisibility, setBabyModalVisibility] = useState<boolean>(
+    false,
+  );
+  const [selectedModalOptions, setSelectedModalOptions] = useState<
+    BabyModalOption[]
+  >([]);
+
+  const [formModalVisibility, setFormModalVisibility] = useState<boolean>(
+    false,
+  );
+  const [formAction, setFormAction] = useState<string>('');
 
   const options = [
     {
@@ -50,7 +76,7 @@ const Home: React.FC = () => {
     {
       image: require('../../../../assets/images/home_milk.png'),
       title: 'A retirada do leite',
-      onPress: () => navigation.navigate('HowToBreastfeed'),
+      onPress: () => navigation.navigate('Breastfeeding'),
     },
     {
       image: require('../../../../assets/images/home_emotions.png'),
@@ -79,8 +105,24 @@ const Home: React.FC = () => {
     async function checkBabies() {
       const babiesToCheck = await checkBabiesLocation();
       if (babiesToCheck) {
+        setSelectedModalOptions(
+          babiesToCheck.map(() => ({
+            selected: false,
+            newLocation: '',
+          })),
+        );
         setBabiesData(babiesToCheck);
-        setModalVisibility(true);
+        setBabyModalVisibility(true);
+      }
+    }
+
+    // Envia uma mensagem de telemetria que o usuário abriu o aplicativo e verifica se algum
+    // formulário deve ser preenchido.
+    async function checkForms() {
+      const action = await setHomePageOpened();
+      if (action) {
+        setFormAction(action);
+        setFormModalVisibility(true);
       }
     }
 
@@ -92,47 +134,139 @@ const Home: React.FC = () => {
       );
       const currentDate = moment();
 
+      // Menos de um dia se passou.
       if (
-        !lastDateStorage ||
-        (!!lastDateStorage &&
-          currentDate.diff(moment(lastDateStorage, 'YYYY-MM-DD'), 'days') >= 1)
+        !!lastDateStorage &&
+        currentDate.diff(moment(lastDateStorage, 'YYYY-MM-DD'), 'days') < 1
       ) {
-        await checkBabies();
-        await AsyncStorage.setItem(
-          '@AmamentaCoach:lastOpenedDate',
-          currentDate.format('YYYY-MM-DD'),
-        );
+        return;
       }
-      await AsyncStorage.removeItem('@AmamentaCoach:lastOpenedDate');
+
+      // Verifica se algum formulário deve ser respondido
+      await checkForms();
+      // Verifica se algum bebê pode receber alta.
+      await checkBabies();
+
+      await AsyncStorage.setItem(
+        '@AmamentaCoach:lastOpenedDate',
+        currentDate.format('YYYY-MM-DD'),
+      );
     }
 
-    checkOneDayPassed();
+    // Executa pela primeira vez ao abrir o aplicativo
+    if (isFirstRun.temporary.home) {
+      checkOneDayPassed();
+      setTemporaryNotFirstRun('home');
+    }
   }, []);
+
+  // Fecha o modal, marca que os bebês selecionados tiveram alta e navega para o formulário.
+  function handleUpdateBabyLocation() {
+    setFormModalVisibility(false);
+    setBabyModalVisibility(false);
+    babiesData.forEach(async (baby, index) => {
+      await updateBabyLocation(
+        baby.id,
+        selectedModalOptions[index].newLocation,
+      );
+    });
+    navigation.navigate('StatusForm', {
+      situation: 'ALTA',
+    });
+  }
+
+  // Seleciona um bebê no modal.
+  function handleBabySelected(index: number) {
+    const selected = [...selectedModalOptions];
+    selected[index].selected = !selected[index].selected;
+    if (!selected[index].selected) {
+      selected[index].newLocation = '';
+    }
+    setSelectedModalOptions(selected);
+  }
+
+  // Atualiza o valor da localização de um bebê selecionado.
+  function handleBabyLocationSelected(index: number, value: string) {
+    const values = [...selectedModalOptions];
+    values[index].newLocation = value;
+    setSelectedModalOptions(values);
+  }
+
+  // Checa se pelo menos um bebê foi selecionado e sua nova localização fornecida.
+  function validateModalFields() {
+    const atLeastOneSelected = selectedModalOptions.some(op => op.selected);
+    const selectedAreValid = selectedModalOptions.every(op =>
+      op.selected ? op.newLocation : !op.selected,
+    );
+    return atLeastOneSelected && selectedAreValid;
+  }
 
   return (
     <>
-      {babiesData && (
+      <Modal
+        content="Chegou o momento de avaliar novamente sua pontuação na escala de confiança materna para amamentar! Vamos lá?"
+        options={[
+          {
+            text: 'Sim',
+            onPress: () => {
+              setFormModalVisibility(false);
+              setBabyModalVisibility(false);
+              navigation.navigate('StatusForm', {
+                situation: formAction,
+              });
+            },
+          },
+          {
+            text: 'Não',
+            onPress: () => setFormModalVisibility(false),
+          },
+        ]}
+        visible={formModalVisibility}
+      />
+      {babiesData.length > 0 && (
         <Modal
-          visible={modalVisibility}
+          visible={babyModalVisibility}
           options={[
             {
               text: 'Sim',
-              onPress: () => {
-                setModalVisibility(false);
-                navigation.navigate('StatusForm', {
-                  situation: 'ALTA',
-                });
-              },
+              disabled: !validateModalFields(),
+              onPress: handleUpdateBabyLocation,
             },
             {
               text: 'Não',
-              onPress: () => setModalVisibility(false),
+              onPress: () => setBabyModalVisibility(false),
             },
           ]}>
-          <TextModal>Algum dos bebês abaixo já tiveram alta?</TextModal>
-          {babiesData.map(baby => (
-            <TextModal key={baby.id}>{baby.name}</TextModal>
-          ))}
+          <View>
+            <TextModal>Algum dos(as) seus(as) bebês já recebeu alta?</TextModal>
+            {babiesData.map((baby, index) => (
+              <View key={baby.id}>
+                <ModalOption
+                  onPress={() => handleBabySelected(index)}
+                  activeOpacity={0.7}>
+                  <OuterCircle selected={selectedModalOptions[index].selected}>
+                    <InnerCircle
+                      selected={selectedModalOptions[index].selected}
+                    />
+                  </OuterCircle>
+                  <TextModal key={baby.id}>{baby.name}</TextModal>
+                </ModalOption>
+
+                {selectedModalOptions[index].selected && (
+                  <LocationContainer>
+                    <FormPickerInput
+                      fieldName=""
+                      placeholder="Onde se encontra agora?"
+                      options={['Alojamento Conjunto', 'Casa', 'UCI Neonatal']}
+                      onChange={(_, value) =>
+                        handleBabyLocationSelected(index, value)
+                      }
+                    />
+                  </LocationContainer>
+                )}
+              </View>
+            ))}
+          </View>
         </Modal>
       )}
 

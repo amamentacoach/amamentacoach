@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { FlatList, Image } from 'react-native';
 
+import { useIsFirstRun } from '../../../contexts/firstRun';
+import { setMessagesPageOpened } from '../../../services/telemetry';
 import { IMessage, listMessages } from '../../../services/messages';
 
 import {
@@ -18,6 +20,7 @@ import AddIcon from '../../../../assets/images/icons/ic_add.png';
 
 const Messages: React.FC = () => {
   const navigation = useNavigation();
+  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
 
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [page, setPage] = useState(1);
@@ -28,7 +31,9 @@ const Messages: React.FC = () => {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <AddMessageButton onPress={() => navigation.navigate('NewMessage')}>
+        <AddMessageButton
+          onPress={() => navigation.navigate('NewMessage')}
+          activeOpacity={0.7}>
           <Image source={AddIcon} />
         </AddMessageButton>
       ),
@@ -49,6 +54,10 @@ const Messages: React.FC = () => {
 
   useEffect(() => {
     fetchMessages(1);
+    if (isFirstRun.temporary.diary) {
+      setMessagesPageOpened();
+      setTemporaryNotFirstRun('diary');
+    }
   }, []);
 
   async function fetchOlderMessages() {
@@ -59,21 +68,19 @@ const Messages: React.FC = () => {
     setPage(page + 1);
   }
 
-  function InfoPage({ name, content }: IMessage) {
-    return (
-      <MessageContainer>
-        <Author>{name}</Author>
-        <Content>{content}</Content>
-        <Line />
-      </MessageContainer>
-    );
-  }
+  const Message: React.FC<IMessage> = ({ name, content }) => (
+    <MessageContainer>
+      <Author>{name}</Author>
+      <Content>{content}</Content>
+      <Line />
+    </MessageContainer>
+  );
 
   return (
     <FlatlistContainer>
       <FlatList
         data={messages}
-        renderItem={({ item }) => <InfoPage {...item} />}
+        renderItem={({ item }) => <Message {...item} />}
         keyExtractor={item => item.id}
         onEndReached={fetchOlderMessages}
         onEndReachedThreshold={0.1}

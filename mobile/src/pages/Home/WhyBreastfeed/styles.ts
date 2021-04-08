@@ -23,7 +23,6 @@ export const PageContainer = styled.View<IContainerProps>`
   width: ${({ width }) => width}px;
   flex: 1;
 `;
-
 export const ContentTitleText = styled.Text`
   font-family: 'OpenSans-Regular';
   color: #000000;
@@ -39,11 +38,22 @@ export const ContentWrapper = styled.View`
   margin: 0px 24px;
 `;
 
+export const TextContainer = styled.View`
+  margin-top: 20px;
+`;
+
 export const ContentText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;
   color: #545454;
+`;
+
+export const ColoredContentText = styled.Text`
+  font-family: 'OpenSans-Bold';
+  font-size: 16px;
+  text-align: center;
+  color: #7d5cd7;
 `;
 
 export const Footer = styled.View`

@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 interface IButtonProps {
-  disabled: boolean | null | undefined;
+  disabled?: boolean | null;
 }
 
 export const Button = styled.TouchableOpacity<IButtonProps>`

@@ -2,14 +2,29 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 type IIsFirstRun = {
-  introduction: boolean;
-  diary: boolean;
+  persistent: {
+    appIntroduction: boolean;
+    diaryIntroduction: boolean;
+    statusFormIntroduction: boolean;
+  };
+  temporary: {
+    home: boolean;
+    extraction: boolean;
+    diary: boolean;
+    messages: boolean;
+  };
 };
 
 interface IIsFirstRunContextData {
   isFirstRun: IIsFirstRun;
-  setIntroductionNotFirstRun: () => Promise<void>;
-  setDiaryNotFirstRun: () => Promise<void>;
+  // Marca um campo como executado até o aplicativo ser aberto novamente.
+  setTemporaryNotFirstRun: (
+    field: 'diary' | 'extraction' | 'home' | 'messages',
+  ) => void;
+  // Marca um campo como executado permanentemente.
+  setPersistentNotFirstRun: (
+    field: 'diaryIntroduction' | 'appIntroduction' | 'statusFormIntroduction',
+  ) => Promise<void>;
 }
 
 const IsFirstRun = createContext<IIsFirstRunContextData>(
@@ -18,8 +33,12 @@ const IsFirstRun = createContext<IIsFirstRunContextData>(
 
 export const IsFirstRunProvider: React.FC = ({ children }) => {
   const [isFirstRun, setIsFirstRun] = useState<IIsFirstRun>({
-    introduction: true,
-    diary: true,
+    persistent: {
+      appIntroduction: true,
+      diaryIntroduction: true,
+      statusFormIntroduction: true,
+    },
+    temporary: { home: true, extraction: true, diary: true, messages: true },
   });
 
   useEffect(() => {
@@ -27,35 +46,47 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
       const isFirstRunStorage = await AsyncStorage.getItem(
         '@AmamentaCoach:isFirstRun',
       );
+
       if (isFirstRunStorage) {
-        setIsFirstRun(JSON.parse(isFirstRunStorage));
+        const firstRun = { ...isFirstRun };
+        firstRun.persistent = {
+          ...firstRun.persistent,
+          ...JSON.parse(isFirstRunStorage),
+        };
+        setIsFirstRun(firstRun);
       }
     }
     checkDataInStorage();
   }, []);
 
-  async function setIntroductionNotFirstRun() {
-    await AsyncStorage.setItem(
-      '@AmamentaCoach:isFirstRun',
-      JSON.stringify({ ...isFirstRun, introduction: false }),
-    );
-    setIsFirstRun({ ...isFirstRun, introduction: false });
+  // Marca um campo como já executado até o aplicativo ser iniciado novamente.
+  function setTemporaryNotFirstRun(
+    field: 'diary' | 'extraction' | 'home' | 'messages',
+  ) {
+    const copy = { ...isFirstRun };
+    copy.temporary[field] = false;
+    setIsFirstRun(copy);
   }
 
-  async function setDiaryNotFirstRun() {
+  // Marca um campo como já executado permanentemente.
+  async function setPersistentNotFirstRun(
+    field: 'diaryIntroduction' | 'appIntroduction' | 'statusFormIntroduction',
+  ) {
+    const copy = { ...isFirstRun };
+    copy.persistent[field] = false;
     await AsyncStorage.setItem(
       '@AmamentaCoach:isFirstRun',
-      JSON.stringify({ ...isFirstRun, diary: false }),
+      JSON.stringify(copy.persistent),
     );
-    setIsFirstRun({ ...isFirstRun, diary: false });
+    setIsFirstRun(copy);
   }
 
   return (
     <IsFirstRun.Provider
       value={{
         isFirstRun,
-        setIntroductionNotFirstRun,
-        setDiaryNotFirstRun,
+        setTemporaryNotFirstRun,
+        setPersistentNotFirstRun,
       }}>
       {children}
     </IsFirstRun.Provider>

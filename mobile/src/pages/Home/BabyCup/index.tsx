@@ -1,5 +1,6 @@
-import React from 'react';
-import { Linking, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { ActivityIndicator } from 'react-native';
+import YoutubePlayer from 'react-native-youtube-iframe';
 
 import {
   Step,
@@ -7,9 +8,13 @@ import {
   Instruction,
   InstructionContainer,
   VideoLink,
+  VideoContainer,
+  LoadingContainer,
 } from './styles';
 
 const BabyCup: React.FC = () => {
+  const [isLoadingVideo, setIsLoadingVideo] = useState(true);
+
   const steps = [
     'Despertar o bebê, massagear os pés e a face. Não deixar que o bebê esteja agitado de fome ou outro desconforto, pois dificulta a manobra.',
     'Acomodar o bebê na posição sentada ou semi-sentada em seu colo, sendo que a cabeça forme um ângulo de 90º com o pescoço.',
@@ -19,14 +24,26 @@ const BabyCup: React.FC = () => {
 
   return (
     <ScrollView>
-      <TouchableOpacity
-        onPress={async () => {
-          await Linking.openURL(
-            'https://www.facebook.com/bancodeleitehumanodemaringa/videos/1023462897842307/',
-          );
-        }}>
-        <VideoLink>Demonstração</VideoLink>
-      </TouchableOpacity>
+      <VideoLink>Demonstração</VideoLink>
+      {isLoadingVideo && (
+        <LoadingContainer>
+          <ActivityIndicator
+            size="large"
+            color="#7d5cd7"
+            animating={isLoadingVideo}
+          />
+        </LoadingContainer>
+      )}
+      <VideoContainer display={!isLoadingVideo}>
+        <YoutubePlayer
+          height={200}
+          videoId="-VBk8v8TOrE"
+          initialPlayerParams={{ loop: false }}
+          onReady={() => {
+            setIsLoadingVideo(false);
+          }}
+        />
+      </VideoContainer>
       {steps.map((step, index) => (
         <InstructionContainer key={step}>
           <Step>{index + 1}.</Step>

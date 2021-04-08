@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
 
 interface IOptionTextProps {
-  isBold: boolean;
+  isBold?: boolean;
+  disabled?: boolean;
 }
 
 export const Container = styled.View`
@@ -45,7 +46,7 @@ export const Option = styled.TouchableOpacity`
 export const OptionText = styled.Text<IOptionTextProps>`
   font-size: 16px;
   text-align: center;
-  color: #7d5cd7;
+  color: ${({ disabled }) => (disabled ? '#737373' : '#7d5cd7')};
   font-family: ${({ isBold }) =>
     isBold ? 'OpenSans-Bold' : 'OpenSans-Regular'};
 `;

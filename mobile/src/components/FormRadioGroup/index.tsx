@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Container,
@@ -16,11 +16,15 @@ import FormTextInput from '../FormTextInput';
 
 interface FormRadioGroupProps {
   fieldName: string;
-  label?: string | undefined;
-  multipleSelection?: boolean | undefined;
-  displayOtherField?: boolean | undefined;
   options: string[];
-  error?: string | string[] | undefined;
+  label?: string;
+  multipleSelection?: boolean;
+  displayOtherField?: boolean;
+  // Elementos selecionados inicialmente. Devem estar presentes em options.
+  initialValues?: string[];
+  error?: string | string[];
+  // Define se as opções são apresentadas horizontalmente ou verticalmente.
+  horizontal?: boolean;
   onChange: (fieldName: string, fieldValue: string[]) => void;
 }
 
@@ -29,8 +33,10 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   label,
   options,
   error,
-  multipleSelection = false,
-  displayOtherField = false,
+  horizontal,
+  multipleSelection,
+  displayOtherField,
+  initialValues,
   onChange,
 }) => {
   const availableOptions = displayOtherField ? [...options, 'Outro'] : options;
@@ -39,8 +45,21 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   const [selectedIndexes, setSelectedIndexes] = useState<boolean[]>(
     availableOptions.map(() => false),
   );
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(
+    initialValues || [],
+  );
   const [otherValue, setOtherValue] = useState('');
+
+  useEffect(() => {
+    if (initialValues) {
+      initialValues?.forEach(value => {
+        const index = options.findIndex(element => element === value);
+        const selected = [...selectedIndexes];
+        selected[index] = true;
+        setSelectedIndexes(selected);
+      });
+    }
+  }, []);
 
   function handleOptionSelected(selectedIndex: number) {
     const newSelectedIndexes = selectedIndexes;
@@ -73,42 +92,50 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
     onChange(fieldName, newSelectedOptions);
   }
 
+  function handleOtherFieldChange(text: string) {
+    const newValues = selectedOptions;
+    if (!selectedIndexes[selectedIndexes.length - 1] && text !== '') {
+      // Caso o valor do campo ainda não tenha sido adicionado, coloca o novo valor no
+      // array
+      newValues.push(text);
+    } else if (selectedIndexes[selectedIndexes.length - 1]) {
+      newValues[newValues.length - 1] = text;
+    }
+    onChange(fieldName, newValues);
+    setOtherValue(text);
+  }
+
   return (
     <Container>
       {label !== undefined && <LabelText>{label}</LabelText>}
-      <OptionsContainer>
-        {availableOptions.map((option, index) => {
-          return (
-            <OptionButton
-              selected={selectedIndexes[index]}
-              key={option}
-              activeOpacity={1}
-              onPress={() => handleOptionSelected(index)}>
+      <OptionsContainer horizontal={horizontal}>
+        {availableOptions.map((option, index) => (
+          <OptionButton
+            key={option}
+            selected={selectedIndexes[index]}
+            activeOpacity={1}
+            horizontal={horizontal}
+            onPress={() => handleOptionSelected(index)}>
+            {!horizontal && (
               <OuterCircle selected={selectedIndexes[index]}>
                 <InnerCircle selected={selectedIndexes[index]} />
               </OuterCircle>
-              <TextOption>{option}</TextOption>
-            </OptionButton>
-          );
-        })}
+            )}
+
+            <TextOption
+              selected={selectedIndexes[index]}
+              horizontal={horizontal}>
+              {option}
+            </TextOption>
+          </OptionButton>
+        ))}
       </OptionsContainer>
 
       {displayOtherField && selectedIndexes[selectedIndexes.length - 1] && (
         <OtherInputContainer>
           <FormTextInput
             placeholder="Resposta para outro "
-            onChangeText={(text: string) => {
-              const newValues = selectedOptions;
-              if (!selectedIndexes[selectedIndexes.length - 1] && text !== '') {
-                // Caso o valor do campo ainda não tenha sido adicionado, coloca o novo valor no
-                // array
-                newValues.push(text);
-              } else if (selectedIndexes[selectedIndexes.length - 1]) {
-                newValues[newValues.length - 1] = text;
-              }
-              onChange(fieldName, newValues);
-              setOtherValue(text);
-            }}
+            onChangeText={handleOtherFieldChange}
           />
         </OtherInputContainer>
       )}

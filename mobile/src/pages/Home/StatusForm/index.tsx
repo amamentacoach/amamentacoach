@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { ActivityIndicator, ScrollView } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { ActivityIndicator, Dimensions, FlatList, Image } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 
 import {
   listStatusFormQuestions,
-  IStatusForm,
   answerStatusForm,
   answerFeedingForm,
+  ISurveyQuestion,
 } from '../../../services/survey';
 import Modal from '../../../components/Modal';
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
@@ -18,52 +17,78 @@ import {
   HeaderBackground,
   ContentContainer,
   HeaderText,
-  FormScrollView,
+  ScrollView,
   QuestionContainer,
   QuestionText,
   Footer,
+  InfoButton,
+  HeaderInfoModal,
+  TextInfoModal,
+  ColoredText,
+  CurrentPageContainer,
+  CurrentPageText,
+  SecondButtonContainer,
+  FirstButtonContainer,
 } from './styles';
+
+import QuestionIcon from '../../../../assets/images/icons/ic_question_white.png';
+import SecondaryButton from '../../../components/SecondaryButton';
+
+// Página do formulário.
+interface PageProps {
+  pageIndex: number;
+  questions: ISurveyQuestion[];
+  values: {
+    [key: string]: string[];
+  };
+  errors: {
+    [key: string]: string;
+  };
+  setFieldError: (field: string, message: string) => void;
+  // Define o valor de uma resposta.
+  setFieldValue: (field: string, value: any) => void;
+  submitForm: () => Promise<boolean>;
+}
 
 type ScreenParams = {
   StatusForm: {
-    situation: 'ALTA' | '1' | '15D' | '1M';
+    situation: 'ALTA' | '1D' | '15D' | '1M';
   };
 };
 
 const StatusForm: React.FC = () => {
+  const { width } = Dimensions.get('window');
   const navigation = useNavigation();
   const { situation } = useRoute<
     RouteProp<ScreenParams, 'StatusForm'>
   >().params;
-  const scrollViewRef = useRef<ScrollView>(null);
 
-  const [questions, setQuestions] = useState<IStatusForm>();
+  // Não exibe o formulário de alimentação se for a primeira vez do usuário respondendo a escala.
+  const displayFeedingForm = situation !== '1D';
+
+  const [pageQuestions, setPageQuestions] = useState<ISurveyQuestion[][]>([]);
+  const [feedingQuestion, setFeedingQuestion] = useState<ISurveyQuestion>();
+
+  const pageFlatListRef = useRef<FlatList>(null);
   const [formInitialValues, setFormInitialValues] = useState({});
-  const [formYupSchema, setFormYupSchema] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const inputsPositions = useRef({} as { [key: string]: number });
-
   const [isSendingForm, setIsSendingForm] = useState(false);
-
+  const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
+  const [isEndModalVisible, setIsEndModalVisible] = useState(false);
 
-  // Espera os elementos aparecerem e coleta suas posições y.
-  const onLayout = useCallback((y, questionId) => {
-    // Inclui a posição do elemento atual em inputsPositions.
-    const copy = { ...inputsPositions.current };
-    copy[questionId] = y;
-    inputsPositions.current = copy;
-  }, []);
-
-  // Cria um schema do Yup que marca todas as perguntas como obrigatórias.
-  function createYupSchema(questionsIds: string[]) {
-    const schema: { [k: string]: any } = {};
-    const validator = Yup.string().required('Campo obrigatório');
-    questionsIds.forEach(id => {
-      schema[id] = validator;
+  // Adiciona um botão na parte superior direita da tela para exibir um popup de ajuda.
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <InfoButton
+          onPress={() => setIsInfoModalVisible(true)}
+          activeOpacity={0.7}>
+          <Image source={QuestionIcon} />
+        </InfoButton>
+      ),
     });
-    return schema;
-  }
+  }, [navigation]);
 
   useEffect(() => {
     async function fetchQuestions() {
@@ -81,32 +106,25 @@ const StatusForm: React.FC = () => {
         {},
       );
 
-      let ids = form.statusQuestions.map(question => question.id.toString());
-      if (situation !== '1') {
-        ids = [...ids, 'feeding'];
+      if (displayFeedingForm) {
         initialValues = { ...initialValues, feeding: '' };
+        setFeedingQuestion(form.feedingQuestion);
       }
-      const yupSchema = createYupSchema(ids);
+
+      const pages = [];
+      // Separa 3 perguntas por página.
+      for (let i = 0; i < form.statusQuestions.length; i += 3)
+        pages.push(form.statusQuestions.slice(i, i + 3));
+      setPageQuestions(pages);
 
       setFormInitialValues(initialValues);
-      setFormYupSchema(Yup.object().shape(yupSchema));
-      setQuestions(form);
       setIsLoading(false);
     }
 
     fetchQuestions();
   }, []);
 
-  // Move a tela até o primeiro campo com erro.
-  async function scrollToError(errors: { [key: string]: string }) {
-    const firstErrorId = Object.keys(errors)[0];
-    scrollViewRef.current?.scrollTo({
-      x: 0,
-      y: inputsPositions.current[firstErrorId],
-      animated: true,
-    });
-  }
-
+  // Envia as respostas do usuário.
   async function handleFormSubmit(values: { [key: string]: string[] }) {
     const { feeding, ...answers } = values;
 
@@ -114,21 +132,187 @@ const StatusForm: React.FC = () => {
       id: parseInt(key, 10),
       content: values[key][0],
     }));
-    setIsSendingForm(true);
-    await answerStatusForm(situation, statusAnswers);
+    const statusFormSuccess = await answerStatusForm(situation, statusAnswers);
 
-    if (situation !== '1') {
-      await answerFeedingForm(situation, feeding[0]);
+    if (displayFeedingForm) {
+      // @ts-ignore
+      const feedingFormSuccess = await answerFeedingForm(situation, feeding[0]);
+      return statusFormSuccess && feedingFormSuccess;
     }
-    setIsSendingForm(false);
-    navigation.navigate('Home');
+    return statusFormSuccess;
   }
+
+  // Verifica se pelo menos uma opção foi selecionada para cada pergunta da página.
+  function validateForm(
+    currentPageIndex: number,
+    questions: ISurveyQuestion[],
+    values: {
+      [key: string]: string[];
+    },
+    setFieldError: (field: string, message: string) => void,
+  ) {
+    let isValid = true;
+    questions.forEach(question => {
+      if (values[question.id].length <= 0) {
+        setFieldError(question.id.toString(), 'Pergunta obrigatória');
+        isValid = false;
+      } else {
+        setFieldError(question.id.toString(), '');
+      }
+    });
+
+    if (currentPageIndex === pageQuestions.length - 1 && displayFeedingForm) {
+      if (values.feeding.length <= 0) {
+        setFieldError('feeding', 'Pergunta obrigatória');
+        isValid = false;
+      } else {
+        setFieldError('feeding', '');
+      }
+    }
+    return isValid;
+  }
+
+  // Altera a página atual do formulário, entretanto a mudança de página só é possível se os campos
+  // dá pagina atual estiverem preenchidos.
+  // Caso a página atual seja a última o formulário é enviado.
+  async function handleChangePage(
+    currentPage: number,
+    newPage: number,
+    questions: ISurveyQuestion[],
+    values: {
+      [key: string]: string[];
+    },
+    setFieldError: (field: string, message: string) => void,
+    submitForm: () => Promise<boolean>,
+  ) {
+    // Verifica se pelo menos uma resposta foi selecionada ao avançar a página.
+    if (
+      newPage > currentPage &&
+      !validateForm(currentPage, questions, values, setFieldError)
+    ) {
+      return;
+    }
+
+    // Envia o formulário caso seja a última página
+    if (newPage === pageQuestions.length) {
+      setIsSendingForm(true);
+      const status = await submitForm();
+      setIsSendingForm(false);
+      if (status) {
+        setIsEndModalVisible(true);
+      } else {
+        setIsErrorModalVisible(true);
+      }
+    } else {
+      pageFlatListRef.current?.scrollToIndex({
+        animated: true,
+        index: newPage,
+      });
+    }
+  }
+
+  // Página do formulário.
+  const Page: React.FC<PageProps> = ({
+    pageIndex,
+    questions,
+    values,
+    errors,
+    setFieldValue,
+    setFieldError,
+    submitForm,
+  }) => {
+    return (
+      <ContentContainer>
+        <CurrentPageContainer>
+          <CurrentPageText>
+            {pageIndex + 1}/{pageQuestions.length}
+          </CurrentPageText>
+        </CurrentPageContainer>
+
+        {questions.map((question, questionIndex) => (
+          <QuestionContainer key={question.id}>
+            <QuestionText>
+              {pageIndex * 3 + questionIndex + 1} - {question.description}
+            </QuestionText>
+
+            <FormRadioGroupInput
+              fieldName={`${question.id}`}
+              options={question.options}
+              multipleSelection={question.multipleSelection}
+              displayOtherField={question.displayOther}
+              error={errors[question.id]}
+              initialValues={values[question.id]}
+              onChange={setFieldValue}
+              horizontal
+            />
+          </QuestionContainer>
+        ))}
+
+        {feedingQuestion && pageIndex >= pageQuestions.length - 1 && (
+          <QuestionContainer key={feedingQuestion.id}>
+            <QuestionText>
+              {pageQuestions.length * 3 + 1} - {feedingQuestion.description}
+            </QuestionText>
+
+            <FormRadioGroupInput
+              fieldName="feeding"
+              options={feedingQuestion.options}
+              multipleSelection={feedingQuestion.multipleSelection}
+              displayOtherField={feedingQuestion.displayOther}
+              error={(errors as { [k: string]: string }).feeding}
+              initialValues={values.feeding}
+              onChange={setFieldValue}
+            />
+          </QuestionContainer>
+        )}
+
+        <Footer>
+          {pageIndex > 0 && (
+            <FirstButtonContainer>
+              <SecondaryButton
+                text="Voltar"
+                disabled={isSendingForm}
+                onPress={() =>
+                  handleChangePage(
+                    pageIndex,
+                    pageIndex - 1,
+                    questions,
+                    values,
+                    setFieldError,
+                    submitForm,
+                  )
+                }
+              />
+            </FirstButtonContainer>
+          )}
+          <SecondButtonContainer>
+            <MainButton
+              text={
+                pageIndex >= pageQuestions.length - 1 ? 'Finalizar' : 'Próximo'
+              }
+              disabled={isSendingForm}
+              onPress={() =>
+                handleChangePage(
+                  pageIndex,
+                  pageIndex + 1,
+                  questions,
+                  values,
+                  setFieldError,
+                  submitForm,
+                )
+              }
+            />
+          </SecondButtonContainer>
+        </Footer>
+      </ContentContainer>
+    );
+  };
 
   if (isLoading) {
     return (
       <>
         <HeaderBackground />
-        <HeaderText>Escala</HeaderText>
+        <HeaderText>Autoconfiança para amamentar</HeaderText>
         <ContentContainer>
           <ActivityIndicator
             size="large"
@@ -143,6 +327,17 @@ const StatusForm: React.FC = () => {
   return (
     <>
       <Modal
+        content={`Obrigada por responder.\nSua resposta foi enviada!`}
+        options={[
+          {
+            text: 'Fechar',
+            isBold: true,
+            onPress: () => navigation.navigate('Home'),
+          },
+        ]}
+        visible={isEndModalVisible}
+      />
+      <Modal
         content={
           'Erro ao enviar suas respostas.\nPor favor tente novamente mais tarde.'
         }
@@ -155,75 +350,62 @@ const StatusForm: React.FC = () => {
         ]}
         visible={isErrorModalVisible}
       />
+      <Modal
+        options={[
+          {
+            text: 'Fechar',
+            isBold: true,
+            onPress: () => setIsInfoModalVisible(false),
+          },
+        ]}
+        visible={isInfoModalVisible}>
+        <HeaderInfoModal>Escala</HeaderInfoModal>
+        <TextInfoModal>
+          <ColoredText>1</ColoredText> = nada confiante
+        </TextInfoModal>
+        <TextInfoModal>
+          <ColoredText>2</ColoredText> = muito pouco confiante
+        </TextInfoModal>
+        <TextInfoModal>
+          <ColoredText>3</ColoredText> = às vezes confiante
+        </TextInfoModal>
+        <TextInfoModal>
+          <ColoredText>4</ColoredText> = confiante
+        </TextInfoModal>
+        <TextInfoModal>
+          <ColoredText>5</ColoredText> = muito confiante
+        </TextInfoModal>
+      </Modal>
 
       <Formik
         initialValues={formInitialValues}
-        validationSchema={formYupSchema}
         validateOnChange={false}
         onSubmit={values => handleFormSubmit(values)}>
-        {({ submitForm, setFieldValue, validateForm, errors }) => (
-          <FormScrollView ref={scrollViewRef as any}>
-            <HeaderBackground />
-            <HeaderText>Escala</HeaderText>
-            <ContentContainer>
-              {questions?.statusQuestions.map(question => (
-                <QuestionContainer
-                  key={question.id}
-                  onLayout={event =>
-                    onLayout(event.nativeEvent.layout.y, question.id.toString())
-                  }>
-                  <QuestionText>{question.description}</QuestionText>
-
-                  <FormRadioGroupInput
-                    fieldName={`${question.id}`}
-                    options={question.options}
-                    multipleSelection={question.multipleSelection}
-                    displayOtherField={question.displayOther}
-                    error={(errors as { [k: string]: string })[question.id]}
-                    onChange={setFieldValue}
-                  />
-                </QuestionContainer>
-              ))}
-
-              {situation !== '1' && questions?.feedingQuestion && (
-                <QuestionContainer
-                  key={questions?.feedingQuestion.id}
-                  onLayout={event =>
-                    onLayout(event.nativeEvent.layout.y, 'feeding')
-                  }>
-                  <QuestionText>
-                    {questions?.feedingQuestion.description}
-                  </QuestionText>
-
-                  <FormRadioGroupInput
-                    fieldName="feeding"
-                    options={questions?.feedingQuestion.options}
-                    multipleSelection={
-                      questions?.feedingQuestion.multipleSelection
-                    }
-                    displayOtherField={questions?.feedingQuestion.displayOther}
-                    error={(errors as { [k: string]: string }).feeding}
-                    onChange={setFieldValue}
-                  />
-                </QuestionContainer>
-              )}
-
-              <Footer>
-                <MainButton
-                  text="Enviar"
-                  disabled={isSendingForm}
-                  onPress={async () => {
-                    const newErrors = await validateForm();
-                    if (Object.keys(newErrors).length > 0) {
-                      scrollToError(newErrors);
-                    } else {
-                      submitForm();
-                    }
-                  }}
+        {({ values, errors, setFieldError, submitForm, setFieldValue }) => (
+          <FlatList
+            ref={pageFlatListRef}
+            data={pageQuestions}
+            renderItem={({ item, index }) => (
+              <ScrollView width={width}>
+                <HeaderBackground />
+                <HeaderText>Autoconfiança para amamentar</HeaderText>
+                <Page
+                  pageIndex={index}
+                  questions={item}
+                  values={values}
+                  errors={errors}
+                  setFieldValue={setFieldValue}
+                  setFieldError={setFieldError}
+                  submitForm={submitForm}
                 />
-              </Footer>
-            </ContentContainer>
-          </FormScrollView>
+              </ScrollView>
+            )}
+            keyExtractor={item => item[0].id.toString()}
+            horizontal
+            scrollEnabled={false}
+            showsHorizontalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+          />
         )}
       </Formik>
     </>

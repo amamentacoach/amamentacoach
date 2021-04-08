@@ -11,7 +11,7 @@ import NewBreastfeedEntry from '../../pages/Diary/NewBreastfeedEntry';
 import NewDiaryRegistry from '../../pages/Diary/NewDiaryRegistry';
 import Report from '../../pages/Diary/Report';
 
-const createDiaryRoutes = (Stack: any) => {
+const CreateDiaryRoutes = (Stack: any) => {
   return [
     <Stack.Screen
       key="DiaryBreastfeed"
@@ -64,4 +64,4 @@ const createDiaryRoutes = (Stack: any) => {
   ];
 };
 
-export default createDiaryRoutes;
+export default CreateDiaryRoutes;

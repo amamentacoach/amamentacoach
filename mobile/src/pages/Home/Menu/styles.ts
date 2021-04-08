@@ -1,5 +1,9 @@
 import styled from 'styled-components/native';
 
+interface OptionProps {
+  selected: boolean;
+}
+
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
@@ -12,11 +16,39 @@ export const Header = styled.View`
   height: 274px;
 `;
 
+export const ModalOption = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 15px;
+`;
+
 export const TextModal = styled.Text`
   color: #161026;
   text-align: left;
   font-family: 'OpenSans-Regular';
   font-size: 16px;
+`;
+
+export const OuterCircle = styled.View<OptionProps>`
+  border: 1.4px solid ${({ selected }) => (selected ? '#7D5CD7' : '#C4C4C4')};
+  background-color: transparent;
+  width: 18px;
+  height: 18px;
+  border-radius: 9px;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+`;
+
+export const InnerCircle = styled.View<OptionProps>`
+  background-color: ${({ selected }) => (selected ? '#7D5CD7' : 'transparent')};
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+`;
+
+export const LocationContainer = styled.View`
+  margin-top: 10px;
 `;
 
 export const HeaderBackground = styled.View`

@@ -1,28 +1,8 @@
 import styled from 'styled-components/native';
 
-interface IContainerProps {
-  width: number;
-}
-
 interface ILastPageButtonWrapperProps {
   opacity: number;
 }
-
-export const ScrollView = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: { flexGrow: 1 },
-  keyboardShouldPersistTaps: 'handled',
-}))`
-  flex: 1;
-`;
-
-export const ListContainer = styled.SafeAreaView`
-  flex: 1;
-`;
-
-export const PageContainer = styled.View<IContainerProps>`
-  width: ${({ width }) => width}px;
-  flex: 1;
-`;
 
 export const Header = styled.View`
   flex-direction: row;
@@ -57,8 +37,7 @@ export const ContentText = styled.Text`
 
 export const Footer = styled.View`
   flex-direction: column;
-  margin: 0 24px;
-  margin-bottom: 30px;
+  margin: 0 24px 30px 24px;
 `;
 
 export const CurrentPageWrapper = styled.View`

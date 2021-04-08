@@ -43,10 +43,14 @@ const TabNavigator: React.FC = () => {
       />
       <Tab.Screen
         name="Diary"
-        component={isFirstRun.diary ? DiaryIntroduction : DiaryMenu}
+        component={
+          isFirstRun.persistent.diaryIntroduction
+            ? DiaryIntroduction
+            : DiaryMenu
+        }
         options={{
           tabBarLabel: 'Diário',
-          tabBarVisible: !isFirstRun.diary,
+          tabBarVisible: !isFirstRun.persistent.diaryIntroduction,
           tabBarIcon: ({ color, size }) => {
             return (
               <Image

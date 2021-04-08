@@ -19,7 +19,7 @@ import {
 } from './styles';
 
 // Tipo de um componente que pode ser utilizado para gerar uma página do formulário.
-export interface IDiaryFormInfoPage {
+export interface IDiaryFormPage {
   // Index da página.
   index: number;
   // Número total de páginas.
@@ -42,7 +42,7 @@ interface IDiaryFormProps {
   // Categoria que deve ser utilizada ao buscar as perguntas no backend.
   category: number;
   // Função para gerar as páginas do formulário.
-  InfoPage: React.FC<IDiaryFormInfoPage>;
+  Page: React.FC<IDiaryFormPage>;
 }
 
 interface IFeedbackModalProps {
@@ -51,11 +51,7 @@ interface IFeedbackModalProps {
   onExit: () => void;
 }
 
-const DiaryForm: React.FC<IDiaryFormProps> = ({
-  title,
-  category,
-  InfoPage,
-}) => {
+const DiaryForm: React.FC<IDiaryFormProps> = ({ title, category, Page }) => {
   const { width } = Dimensions.get('window');
   const navigation = useNavigation();
   const pageFlatListRef = useRef<FlatList>(null);
@@ -102,10 +98,10 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
   // Verifica se pelo menos uma resposta foi selecionada e caso a opção 'Outro' tenha sido
   // selecionado o usuário deve preencher um valor no campo de texto.
   function validateForm(
+    question: ISurveyQuestion,
     values: {
       [key: number]: string[];
     },
-    question: ISurveyQuestion,
   ) {
     const atLeastOneSelected = values[question.id].length > 0;
     const otherFieldValid =
@@ -178,18 +174,18 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
 
   // Altera a página atual do formulário, entretanto a mudança de página só é possível se os campos
   // dá pagina atual estiverem preenchidos.
-  // Caso a próxima página seja a última a função handleLastPage é chamada.
+  // Caso a página atual seja a última a função handleLastPage é chamada.
   async function handleChangePage(
+    newPage: number,
     question: ISurveyQuestion,
     values: {
       [key: number]: string[];
     },
-    newPage: number,
     submitForm: () => Promise<IAnswerFeedback | undefined | null>,
     handleFormEnd: () => void,
   ) {
     // Verifica se pelo menos uma resposta foi selecionada
-    if (!validateForm(values, question)) {
+    if (!validateForm(question, values)) {
       setIsFormValid(false);
       return;
     }
@@ -273,18 +269,18 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
                 <HeaderBackground />
                 <HeaderText>{title}</HeaderText>
                 <ContentContainer>
-                  <InfoPage
+                  <Page
                     index={index}
                     pagesLength={pages.length}
                     question={item}
-                    setFieldValue={setFieldValue}
                     isFormValid={isFormValid}
                     isSendingForm={isSendingForm}
+                    setFieldValue={setFieldValue}
                     handleChangePage={(newPage, handleFormEnd) =>
                       handleChangePage(
+                        newPage,
                         item,
                         values,
-                        newPage,
                         submitForm,
                         handleFormEnd,
                       )

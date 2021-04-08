@@ -8,7 +8,7 @@ import SurveyHelp from '../../pages/Survey/SurveyHelp';
 import SurveyMotivation from '../../pages/Survey/SurveyMotivation';
 import SurveyStatistics from '../../pages/Survey/SurveyStatistics';
 
-const createSurveyRoutes = (Stack: any) => {
+const CreateSurveyRoutes = (Stack: any) => {
   return [
     <Stack.Screen
       key="SurveyBreastfeed"
@@ -43,4 +43,4 @@ const createSurveyRoutes = (Stack: any) => {
   ];
 };
 
-export default createSurveyRoutes;
+export default CreateSurveyRoutes;

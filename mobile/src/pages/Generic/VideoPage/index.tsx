@@ -1,9 +1,12 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { ActivityIndicator } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
-import { setUserVideoSeen } from '../../../services/videoAccess';
+import {
+  setUserVideoSeen,
+  setUserVideoStarted,
+} from '../../../services/telemetry';
 
 import {
   ScrollView,
@@ -22,9 +25,16 @@ const VideoPage: React.FC = () => {
   const { videos } = useRoute<RouteProp<IScreenParams, 'VideoPage'>>().params;
   const [isLoading, setIsLoading] = useState(true);
 
+  const playedOnce = useRef(false);
+  const endedOnce = useRef(false);
+
   // Ao final do vídeo é registrado que o usuário viu o vídeo inteiro.
   const onStateChange = useCallback(state => {
-    if (state === 'ended') {
+    if (state === 'playing' && !playedOnce.current) {
+      playedOnce.current = true;
+      setUserVideoStarted();
+    } else if (state === 'ended' && !endedOnce.current) {
+      endedOnce.current = true;
       setUserVideoSeen();
     }
   }, []);
@@ -47,9 +57,7 @@ const VideoPage: React.FC = () => {
               height={300}
               videoId={id}
               initialPlayerParams={{ loop: false }}
-              onReady={() => {
-                setIsLoading(false);
-              }}
+              onReady={() => setIsLoading(false)}
               onChangeState={onStateChange}
             />
           </VideoContainer>

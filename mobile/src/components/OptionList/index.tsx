@@ -19,11 +19,11 @@ interface IOptionListProps {
   options: {
     image: any;
     title: string;
-    subtitle?: string | undefined;
+    subtitle?: string;
     onPress: () => void;
   }[];
-  label?: string | undefined;
-  displayArrows?: boolean | undefined;
+  label?: string;
+  displayArrows?: boolean;
 }
 
 const OptionsList: React.FC<IOptionListProps> = ({

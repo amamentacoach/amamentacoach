@@ -1,17 +1,22 @@
 import React from 'react';
 
+import { useIsFirstRun } from '../../contexts/firstRun';
 import purpleHeader from '../config/purpleHeader';
 
 import AdditionalInformation from '../../pages/Home/AdditionalInformation';
 import BabyCup from '../../pages/Home/BabyCup';
-import StatusForm from '../../pages/Home/StatusForm';
+import BabySling from '../../pages/Home/BabySling';
+import Breastfeeding from '../../pages/Home/Breastfeeding';
 import BreastfeedingBenefits from '../../pages/Home/BreastfeedingBenefits';
 import Distractions from '../../pages/Home/Distractions';
 import EmotionsAndBreastfeeding from '../../pages/Home/EmotionsAndBreastfeeding';
+import HowLongToBreastfeed from '../../pages/Home/HowLongToBreastfeed';
 import HowToBreastfeed from '../../pages/Home/HowToBreastfeed';
 import HU from '../../pages/Home/HU';
+import IntroductionStatusForm from '../../pages/Home/IntroductionStatusForm';
 import ManageExpectations from '../../pages/Home/ManageExpectations';
 import Messages from '../../pages/Home/Messages';
+import MilkAdditionalInformation from '../../pages/Home/MilkAdditionalInformation';
 import MusicPlaylists from '../../pages/Home/MusicPlaylists';
 import NewMessage from '../../pages/Home/NewMessage';
 import NewQuestion from '../../pages/Home/NewQuestion';
@@ -19,13 +24,18 @@ import NotWhatIExpected from '../../pages/Home/NotWhatIExpected';
 import Premature from '../../pages/Home/Premature';
 import Questions from '../../pages/Home/Questions';
 import Resilience from '../../pages/Home/Resilience';
+import StatusForm from '../../pages/Home/StatusForm';
 import StepByStepPremature from '../../pages/Home/StepByStepPremature';
 import ThePremature from '../../pages/Home/ThePremature';
 import UploadBabyPhoto from '../../pages/Home/UploadBabyPhoto';
 import UploadFatherPhoto from '../../pages/Home/UploadFatherPhoto';
 import UploadMotherPhoto from '../../pages/Home/UploadMotherPhoto';
+import WhenToBreastfeed from '../../pages/Home/WhenToBreastfeed';
+import WhyBreastfeed from '../../pages/Home/WhyBreastfeed';
 
-const createHomeRoutes = (Stack: any) => {
+const CreateHomeRoutes = (Stack: any) => {
+  const { isFirstRun } = useIsFirstRun();
+
   return [
     <Stack.Screen
       key="AdditionalInformation"
@@ -40,10 +50,16 @@ const createHomeRoutes = (Stack: any) => {
       options={{ title: 'Oferta de leite pelo copinho' }}
     />,
     <Stack.Screen
-      key="StatusForm"
-      name="StatusForm"
-      component={StatusForm}
-      options={{ title: 'Formulário de Escala', ...purpleHeader }}
+      key="BabySling"
+      name="BabySling"
+      component={BabySling}
+      options={{ title: 'Benefícios do canguru' }}
+    />,
+    <Stack.Screen
+      key="Breastfeeding"
+      name="Breastfeeding"
+      component={Breastfeeding}
+      options={{ title: 'Retirada do leite' }}
     />,
     <Stack.Screen
       key="BreastfeedingBenefits"
@@ -62,6 +78,12 @@ const createHomeRoutes = (Stack: any) => {
       name="EmotionsAndBreastfeeding"
       component={EmotionsAndBreastfeeding}
       options={{ title: 'Emoções e amamentação' }}
+    />,
+    <Stack.Screen
+      key="HowLongToBreastfeed"
+      name="HowLongToBreastfeed"
+      component={HowLongToBreastfeed}
+      options={{ title: 'Retirada do leite' }}
     />,
     <Stack.Screen
       key="HowToBreastfeed"
@@ -86,6 +108,12 @@ const createHomeRoutes = (Stack: any) => {
       name="Messages"
       component={Messages}
       options={{ title: 'Mural de mensagens' }}
+    />,
+    <Stack.Screen
+      key="MilkAdditionalInformation"
+      name="MilkAdditionalInformation"
+      component={MilkAdditionalInformation}
+      options={{ title: 'Produção de leite' }}
     />,
     <Stack.Screen
       key="MusicPlaylists"
@@ -130,6 +158,20 @@ const createHomeRoutes = (Stack: any) => {
       options={{ title: 'Resiliência' }}
     />,
     <Stack.Screen
+      key="StatusForm"
+      name="StatusForm"
+      component={
+        isFirstRun.persistent.statusFormIntroduction
+          ? IntroductionStatusForm
+          : StatusForm
+      }
+      options={
+        isFirstRun.persistent.statusFormIntroduction
+          ? { title: 'Enquete' }
+          : { title: 'Enquete', ...purpleHeader }
+      }
+    />,
+    <Stack.Screen
       key="StepByStepPremature"
       name="StepByStepPremature"
       component={StepByStepPremature}
@@ -159,7 +201,19 @@ const createHomeRoutes = (Stack: any) => {
       component={UploadMotherPhoto}
       options={{ title: 'Espelho' }}
     />,
+    <Stack.Screen
+      key="WhenToBreastfeed"
+      name="WhenToBreastfeed"
+      component={WhenToBreastfeed}
+      options={{ title: 'Retirada do leite' }}
+    />,
+    <Stack.Screen
+      key="WhyBreastfeed"
+      name="WhyBreastfeed"
+      component={WhyBreastfeed}
+      options={{ title: 'Retirada do leite' }}
+    />,
   ];
 };
 
-export default createHomeRoutes;
+export default CreateHomeRoutes;

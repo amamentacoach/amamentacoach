@@ -14,11 +14,11 @@ import {
 
 interface FormDateProps {
   fieldName: string;
-  label?: string | undefined;
-  error?: string | undefined;
   placeholder: string;
-  mode?: string | undefined;
-  maxDate?: Date | undefined;
+  label?: string;
+  error?: string;
+  mode?: string;
+  maxDate?: Date;
   onChange: (fieldName: string, fieldValue: string) => void;
 }
 
@@ -35,7 +35,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
   const [date, setDate] = useState<Moment | undefined>();
 
   // Formata a data salva para ser exibida no TextInput do componente.
-  function formatDisplayDate(dateToFormat: Moment | undefined): string {
+  function formatDisplayDate(dateToFormat?: Moment): string {
     if (!dateToFormat) {
       return '';
     }
@@ -46,7 +46,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
   }
 
   // Formata a data salva para ser armazenada no useState do componente e valor final do formulário.
-  function formatStateDate(dateToFormat: Moment | undefined): string {
+  function formatStateDate(dateToFormat?: Moment): string {
     if (!dateToFormat) {
       return '';
     }
@@ -62,7 +62,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
   }
 
   // Esconde o seletor e salva o valor escolhido.
-  function handleDateSelected(selectedDate?: Date | undefined) {
+  function handleDateSelected(selectedDate?: Date) {
     setShow(Platform.OS === 'ios');
     if (selectedDate) {
       const newDate = moment(selectedDate);
@@ -94,7 +94,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
           mode={mode}
           display="default"
           maximumDate={maxDate}
-          onChange={(_: Event, selectedDate?: Date | undefined) =>
+          onChange={(_: Event, selectedDate?: Date) =>
             handleDateSelected(selectedDate)
           }
         />

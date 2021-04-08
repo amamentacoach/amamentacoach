@@ -1,105 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { ActivityIndicator } from 'react-native';
+import {
+  RouteProp,
+  useIsFocused,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-import { ActivityIndicator } from 'react-native';
+import { useIsFirstRun } from '../../../contexts/firstRun';
+import { setExtractionPageOpened } from '../../../services/telemetry';
 import {
   IExtractionEntry,
   listExtractionsEntries,
 } from '../../../services/diaryRegistry';
 import dateFormatVerbose from '../../../utils/date';
 import MainButton from '../../../components/MainButton';
+import DiaryRegistryEntry from '../../../components/DiaryRegistryEntry';
 
-import {
-  DateText,
-  Container,
-  Registry,
-  Row,
-  Text,
-  TextContainer,
-  Content,
-  ListContainer,
-} from './styles';
+import { DateText, Container, ListContainer } from './styles';
 
-interface RegistryEntryProps {
-  date: string;
-  breast: 'E' | 'D';
-  duration: number;
-  quantity: number;
-}
+type ScreenParams = {
+  DiaryRegistry: {
+    date: string;
+  };
+};
 
 const DiaryRegistry: React.FC = () => {
+  const { date } = useRoute<RouteProp<ScreenParams, 'DiaryRegistry'>>().params;
+
   const navigation = useNavigation();
+  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
   const isFocused = useIsFocused();
-  const currentDate = moment();
   const [registries, setRegistries] = useState<IExtractionEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchRegistries() {
       setIsLoading(true);
-      const oldRegistries = await listExtractionsEntries();
+      const oldRegistries = await listExtractionsEntries(moment(date));
       setRegistries(oldRegistries);
       setIsLoading(false);
     }
     if (isFocused) {
       fetchRegistries();
     }
-  }, [isFocused]);
 
-  function RegistryEntry({
-    breast,
-    date,
-    duration,
-    quantity,
-  }: RegistryEntryProps) {
-    return (
-      <Registry>
-        <Row>
-          <TextContainer>
-            <Text>Horário: </Text>
-            <Content>{moment(date).format('kk:mm')}</Content>
-          </TextContainer>
-          <TextContainer>
-            <Text>Duração: </Text>
-            <Content>{duration} min</Content>
-          </TextContainer>
-        </Row>
-        <Row>
-          <TextContainer>
-            <Text>Mama: </Text>
-            <Content>{breast === 'E' ? 'Esquerda' : 'Direita'}</Content>
-          </TextContainer>
-          <TextContainer>
-            <Text>Quantidade: </Text>
-            <Content>{quantity} ml</Content>
-          </TextContainer>
-        </Row>
-      </Registry>
-    );
-  }
+    if (isFirstRun.temporary.extraction) {
+      setExtractionPageOpened();
+      setTemporaryNotFirstRun('extraction');
+    }
+  }, [isFocused]);
 
   return (
     <Container>
-      <DateText>{dateFormatVerbose(currentDate)}</DateText>
+      <DateText>{dateFormatVerbose(moment(date))}</DateText>
       <ListContainer>
-        {!isLoading ? (
-          registries.map(({ id, breast, date, duration, quantity }) => (
-            <RegistryEntry
-              key={id}
-              breast={breast}
-              date={date}
-              duration={duration}
-              quantity={quantity}
-            />
-          ))
-        ) : (
+        {isLoading ? (
           <ActivityIndicator
             size="large"
             color="#7d5cd7"
             animating={isLoading}
           />
+        ) : (
+          registries.map(entry => (
+            <DiaryRegistryEntry key={entry.id} {...entry} />
+          ))
         )}
       </ListContainer>
       <MainButton

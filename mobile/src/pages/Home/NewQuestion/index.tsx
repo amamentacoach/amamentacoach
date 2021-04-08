@@ -44,9 +44,15 @@ const NewQuestion: React.FC = () => {
   return (
     <ScrollView>
       <Modal
-        text="Dúvida enviada!"
+        content="Dúvida enviada!"
         visible={isSubmitModalVisible}
-        closeModal={() => setIsSubmitModalVisible(false)}
+        options={[
+          {
+            text: 'Fechar',
+            isBold: true,
+            onPress: () => setIsSubmitModalVisible(false),
+          },
+        ]}
       />
 
       <HeaderText>Envie sua dúvida</HeaderText>

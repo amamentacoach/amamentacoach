@@ -164,10 +164,6 @@ const MotherForm: React.FC = () => {
       return false;
     }
     const newBreastFeedingCount = parseInt(newFieldValue, 10);
-    // Caso o texto não possa ser convertido para inteiro
-    if (!newBreastFeedingCount) {
-      return false;
-    }
     // Limita o formulário a um máximo de 20 bebês.
     if (newBreastFeedingCount > 20) {
       return false;

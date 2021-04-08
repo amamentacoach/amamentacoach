@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
-import { ActivityIndicator, View } from 'react-native';
+import {
+  RouteProp,
+  useIsFocused,
+  useNavigation,
+  useRoute,
+} from '@react-navigation/native';
+import { ActivityIndicator } from 'react-native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
@@ -10,31 +15,24 @@ import {
   IBreastfeedEntry,
   listBreastfeedEntries,
 } from '../../../services/diaryRegistry';
+import DiaryBreastfeedEntry from '../../../components/DiaryBreastfeedEntry';
 import MainButton from '../../../components/MainButton';
 
-import {
-  DateText,
-  Breastfeed,
-  Row,
-  Text,
-  TextContainer,
-  Content,
-  ListContainer,
-  BabyName,
-  ScrollView,
-  Container,
-} from './styles';
+import { DateText, ListContainer, ScrollView, Container } from './styles';
 
-interface BreastfeedEntryProps {
-  date: string;
-  breast: 'E' | 'D';
-  duration: number;
-}
+type ScreenParams = {
+  DiaryBreastfeed: {
+    date: string;
+  };
+};
 
 const DiaryBreastfeed: React.FC = () => {
+  const { date } = useRoute<
+    RouteProp<ScreenParams, 'DiaryBreastfeed'>
+  >().params;
+
   const navigation = useNavigation();
   const { motherInfo } = useAuth();
-  const currentDate = moment();
   const isFocused = useIsFocused();
   const [registries, setRegistries] = useState<IBreastfeedEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +43,9 @@ const DiaryBreastfeed: React.FC = () => {
         setIsLoading(true);
         // Recebe os registros de todos os bebês da mãe.
         const oldRegistries = await Promise.all(
-          motherInfo.babies.map(async ({ id }) => listBreastfeedEntries(id)),
+          motherInfo.babies.map(async ({ id }) =>
+            listBreastfeedEntries(id, moment(date)),
+          ),
         );
         setRegistries(oldRegistries);
       }
@@ -56,56 +56,21 @@ const DiaryBreastfeed: React.FC = () => {
     }
   }, [isFocused]);
 
-  function BreastfeedEntry({ breast, date, duration }: BreastfeedEntryProps) {
-    return (
-      <Breastfeed>
-        <Row>
-          <TextContainer>
-            <Text>Horário: </Text>
-            <Content>{moment(date).format('kk:mm')}</Content>
-          </TextContainer>
-          <TextContainer>
-            <Text>Duração: </Text>
-            <Content>{duration} min</Content>
-          </TextContainer>
-        </Row>
-        <Row>
-          <TextContainer>
-            <Text>Mama: </Text>
-            <Content>{breast === 'E' ? 'Esquerda' : 'Direita'}</Content>
-          </TextContainer>
-        </Row>
-      </Breastfeed>
-    );
-  }
-
   return (
     <ScrollView>
       <Container>
-        <DateText>{dateFormatVerbose(currentDate)}</DateText>
+        <DateText>{dateFormatVerbose(moment(date))}</DateText>
         <ListContainer>
-          {!isLoading ? (
-            registries.map(registry => (
-              <View key={registry.id}>
-                {registry.entries.length > 0 && (
-                  <BabyName>{registry.name}</BabyName>
-                )}
-                {registry.entries.map(({ id, breast, date, duration }) => (
-                  <BreastfeedEntry
-                    key={id}
-                    breast={breast}
-                    date={date}
-                    duration={duration}
-                  />
-                ))}
-              </View>
-            ))
-          ) : (
+          {isLoading ? (
             <ActivityIndicator
               size="large"
               color="#7d5cd7"
               animating={isLoading}
             />
+          ) : (
+            registries.map(entry => (
+              <DiaryBreastfeedEntry key={entry.id} {...entry} />
+            ))
           )}
         </ListContainer>
         <MainButton
