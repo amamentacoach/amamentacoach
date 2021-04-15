@@ -18,7 +18,7 @@ import {
   ScrollView,
 } from './styles';
 
-// Tipo de um componente que pode ser utilizado para gerar uma página do formulário.
+// Props de um componente que pode ser utilizado para gerar uma página do formulário.
 export interface IDiaryFormPage {
   // Index da página.
   index: number;
