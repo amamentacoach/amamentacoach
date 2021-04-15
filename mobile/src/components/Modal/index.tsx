@@ -16,9 +16,9 @@ interface IMainModalProps {
   visible: boolean;
   // Conteúdo do modal.
   content?: string;
-  // Imagem a ser exibida dentro do modal. A imagem precisa ter sido carregar utilizando require().
+  // Imagem a ser exibida dentro do modal. Precisa ser fornecida utilizando a função require().
   image?: any;
-  // Botões exibidos na parte de baixo do modal.
+  // Botões exibidos na parte debaixo do modal.
   options: {
     // Texto da opção.
     text: string;

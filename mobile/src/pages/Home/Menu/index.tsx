@@ -276,7 +276,9 @@ const Home: React.FC = () => {
             <HeaderText>Início</HeaderText>
           </HeaderBackground>
           <BannerImage source={HUBanner}>
-            <HUButton onPress={() => navigation.navigate('HU')}>
+            <HUButton
+              onPress={() => navigation.navigate('HU')}
+              activeOpacity={0.7}>
               <HUButtonText>Comece por aqui!</HUButtonText>
             </HUButton>
           </BannerImage>
