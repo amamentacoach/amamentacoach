@@ -5,6 +5,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
+import { useAuth } from '../../../contexts/auth';
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import { setDiaryPageOpened } from '../../../services/telemetry';
 import { checkOneDayPassed, dateFormatVerbose } from '../../../utils/date';
@@ -22,6 +23,7 @@ import CalendarIcon from '../../../../assets/images/icons/ic_calendar.png';
 import Modal from '../../../components/Modal';
 
 const DiaryMenu: React.FC = () => {
+  const { motherInfo } = useAuth();
   const navigation = useNavigation();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
 
@@ -83,6 +85,17 @@ const DiaryMenu: React.FC = () => {
       onPress: () => navigation.navigate('Report'),
     },
   ];
+
+  // Exibe o upload de imagem do pai apenas se a mãe tem um companheiro.
+  if (motherInfo.partner) {
+    options.splice(5, 0, {
+      image: require('../../../../assets/images/father.png'),
+      title: 'Participação do Pai',
+      // @ts-ignore
+      subtitle: 'Registre e acompanhe a participação do papai',
+      onPress: () => navigation.navigate('UploadFatherPhoto'),
+    });
+  }
 
   useEffect(() => {
     if (isFirstRun.temporary.diary) {

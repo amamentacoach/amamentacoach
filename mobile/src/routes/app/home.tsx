@@ -41,7 +41,7 @@ const CreateHomeRoutes = (Stack: any) => {
       key="AdditionalInformation"
       name="AdditionalInformation"
       component={AdditionalInformation}
-      options={{ title: 'Mais informações' }}
+      options={{ title: 'Você sabia?' }}
     />,
     <Stack.Screen
       key="BabyCup"
