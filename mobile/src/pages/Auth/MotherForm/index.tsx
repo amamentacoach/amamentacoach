@@ -531,7 +531,7 @@ const MotherForm: React.FC = () => {
                 fieldName="timeFirstStimulus"
                 onChange={setFieldValue}
                 error={errors.timeFirstStimulus}
-                options={['6h', '7-12h', '13-24h', '2d', '3d']}
+                options={['em até 1h', '1-6h', '7-12h', '13-24h', '2d', '3d']}
               />
             </OptionPickerContainer>
 
