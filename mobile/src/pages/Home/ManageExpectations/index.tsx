@@ -83,16 +83,25 @@ const ManageExpectations: React.FC = () => {
         return;
       }
 
-      const selectedIdsInfo: ISelectedIdsInfo = JSON.parse(selectedIdsStorage);
+      const { lastRunDate, alreadySelectedIds }: ISelectedIdsInfo = JSON.parse(
+        selectedIdsStorage,
+      );
 
-      const lastRunDate = moment(selectedIdsInfo.lastRunDate);
-      // Desativa caso já tenha sido utilizado uma vez no dia.
-      if (lastRunDate.isSame(new Date(), 'day')) {
+      // Desativa caso já tenha sido utilizado uma vez no dia e exibe a opção selecionada
+      // anteriormente.
+      if (moment(lastRunDate).isSame(new Date(), 'day')) {
+        const lastSelectExpectationId =
+          alreadySelectedIds[alreadySelectedIds.length - 1];
+        setCurrentExpectation({
+          id: lastSelectExpectationId,
+          old: expectations[lastSelectExpectationId].old,
+          new: expectations[lastSelectExpectationId].new,
+        });
+        setIsCorrectAnswerSelected(true);
         setIsButtonDisabled(true);
         return;
       }
 
-      const { alreadySelectedIds } = selectedIdsInfo;
       // Caso todas as expectativas já tenham sido escolhidas limpa o registro e escolhe uma opção
       // aleatória.
       if (alreadySelectedIds.length === expectations.length) {
@@ -107,7 +116,6 @@ const ManageExpectations: React.FC = () => {
       const availableExpectations = expectations.filter(
         ({ id }) => !alreadySelectedIds.includes(id),
       );
-
       if (availableExpectations) {
         setCurrentExpectation(selectRandomArrayElement(availableExpectations));
       }
