@@ -86,7 +86,7 @@ const Home: React.FC = () => {
     },
     {
       image: require('../../../../assets/images/home_more_information.png'),
-      title: 'Mais informações',
+      title: 'Você sabia?',
       onPress: () => navigation.navigate('AdditionalInformation'),
     },
     {
