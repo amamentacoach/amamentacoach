@@ -1,4 +1,5 @@
-import { Moment } from 'moment';
+import AsyncStorage from '@react-native-community/async-storage';
+import moment, { Moment } from 'moment';
 import 'moment/locale/pt-br';
 
 // Formata uma data no formato Quarta-Feira, 01 de Janeiro de 2020
@@ -15,4 +16,17 @@ function dateFormatVerbose(date: Moment) {
   return `${capitalizedDayName}, ${day} de ${capitalizedMonth} de ${year}`;
 }
 
-export default dateFormatVerbose;
+// Verifica se a diferença entra a data atual e uma data armazenada no AsyncStorage é maior ou igual
+// a 1 dia.
+async function checkOneDayPassed(storageId: string) {
+  const currentDate = moment();
+  const storageString = await AsyncStorage.getItem(storageId);
+  if (!storageString) {
+    return true;
+  }
+
+  const storageDate = moment(storageString, 'YYYY-MM-DD');
+  return currentDate.diff(storageDate, 'days') >= 1;
+}
+
+export { dateFormatVerbose, checkOneDayPassed };

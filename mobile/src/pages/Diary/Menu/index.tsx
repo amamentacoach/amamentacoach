@@ -7,7 +7,7 @@ import 'moment/locale/pt-br';
 
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import { setDiaryPageOpened } from '../../../services/telemetry';
-import dateFormatVerbose from '../../../utils/date';
+import { checkOneDayPassed, dateFormatVerbose } from '../../../utils/date';
 import OptionsList from '../../../components/OptionList';
 
 import {
@@ -19,10 +19,13 @@ import {
 } from './styles';
 
 import CalendarIcon from '../../../../assets/images/icons/ic_calendar.png';
+import Modal from '../../../components/Modal';
 
 const DiaryMenu: React.FC = () => {
   const navigation = useNavigation();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(moment());
 
@@ -46,7 +49,14 @@ const DiaryMenu: React.FC = () => {
     {
       image: require('../../../../assets/images/diary_smile.png'),
       title: 'Sentimentos',
-      onPress: () => navigation.navigate('Feelings'),
+      onPress: async () => {
+        // Checa se o usuário já respondeu o formulário no dia.
+        if (await checkOneDayPassed('@AmamentaCoach:DiaryFeelingsLastDate')) {
+          navigation.navigate('Feelings');
+        } else {
+          setIsModalVisible(true);
+        }
+      },
     },
     {
       image: require('../../../../assets/images/diary_star.png'),
@@ -56,7 +66,16 @@ const DiaryMenu: React.FC = () => {
     {
       image: require('../../../../assets/images/premature_heart.png'),
       title: 'Ajuda recebida',
-      onPress: () => navigation.navigate('HelpReceived'),
+      onPress: async () => {
+        // Checa se o usuário já respondeu o formulário no dia.
+        if (
+          await checkOneDayPassed('@AmamentaCoach:DiaryHelpReceivedLastDate')
+        ) {
+          navigation.navigate('HelpReceived');
+        } else {
+          setIsModalVisible(true);
+        }
+      },
     },
     {
       image: require('../../../../assets/images/emotions_info.png'),
@@ -80,28 +99,40 @@ const DiaryMenu: React.FC = () => {
   }
 
   return (
-    <ScrollView>
-      {showCalendar && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={selectedDate.toDate()}
-          mode="date"
-          maximumDate={new Date()}
-          onChange={(_: Event, date?: Date) => handleDateSelected(date)}
-        />
-      )}
+    <>
+      <Modal
+        content="Ops! Você já respondeu a enquete hoje. Volte novamente amanhã."
+        options={[
+          {
+            text: 'Fechar',
+            onPress: () => setIsModalVisible(false),
+          },
+        ]}
+        visible={isModalVisible}
+      />
+      <ScrollView>
+        {showCalendar && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={selectedDate.toDate()}
+            mode="date"
+            maximumDate={new Date()}
+            onChange={(_: Event, date?: Date) => handleDateSelected(date)}
+          />
+        )}
 
-      <Header>
-        <HeaderTitle>Diário</HeaderTitle>
-        <CalendarButton
-          onPress={() => setShowCalendar(true)}
-          activeOpacity={0.7}>
-          <Image source={CalendarIcon} />
-        </CalendarButton>
-      </Header>
-      <DateText>{dateFormatVerbose(selectedDate)}</DateText>
-      <OptionsList options={options} />
-    </ScrollView>
+        <Header>
+          <HeaderTitle>Diário</HeaderTitle>
+          <CalendarButton
+            onPress={() => setShowCalendar(true)}
+            activeOpacity={0.7}>
+            <Image source={CalendarIcon} />
+          </CalendarButton>
+        </Header>
+        <DateText>{dateFormatVerbose(selectedDate)}</DateText>
+        <OptionsList options={options} />
+      </ScrollView>
+    </>
   );
 };
 

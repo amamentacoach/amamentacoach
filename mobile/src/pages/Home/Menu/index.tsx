@@ -39,6 +39,7 @@ import {
 } from './styles';
 
 import HUBanner from '../../../../assets/images/banner_hu.png';
+import { checkOneDayPassed } from '../../../utils/date';
 
 interface BabyModalOption {
   newLocation: string;
@@ -128,17 +129,9 @@ const Home: React.FC = () => {
 
     // Verifica a última data que o aplicativo foi aberto. Se um dia tiver passado ou é a primeira
     // vez abrindo o app é buscado os bebês que podem receber alta.
-    async function checkOneDayPassed() {
-      const lastDateStorage = await AsyncStorage.getItem(
-        '@AmamentaCoach:lastOpenedDate',
-      );
-      const currentDate = moment();
-
+    async function checkUserActions() {
       // Menos de um dia se passou.
-      if (
-        !!lastDateStorage &&
-        currentDate.diff(moment(lastDateStorage, 'YYYY-MM-DD'), 'days') < 1
-      ) {
+      if (!checkOneDayPassed('@AmamentaCoach:lastOpenedDate')) {
         return;
       }
 
@@ -149,18 +142,18 @@ const Home: React.FC = () => {
 
       await AsyncStorage.setItem(
         '@AmamentaCoach:lastOpenedDate',
-        currentDate.format('YYYY-MM-DD'),
+        moment().format('YYYY-MM-DD'),
       );
+      setTemporaryNotFirstRun('home');
     }
 
     // Executa pela primeira vez ao abrir o aplicativo
     if (isFirstRun.temporary.home) {
-      checkOneDayPassed();
-      setTemporaryNotFirstRun('home');
+      checkUserActions();
     }
   }, []);
 
-  // Fecha o modal, marca que os bebês selecionados tiveram alta e navega para o formulário.
+  // Fecha os modais, marca que os bebês selecionados tiveram alta e navega para o formulário.
   function handleUpdateBabyLocation() {
     setFormModalVisibility(false);
     setBabyModalVisibility(false);
@@ -225,7 +218,6 @@ const Home: React.FC = () => {
       />
       {babiesData.length > 0 && (
         <Modal
-          visible={babyModalVisibility}
           options={[
             {
               text: 'Sim',
@@ -236,7 +228,8 @@ const Home: React.FC = () => {
               text: 'Não',
               onPress: () => setBabyModalVisibility(false),
             },
-          ]}>
+          ]}
+          visible={babyModalVisibility && !formModalVisibility}>
           <View>
             <TextModal>Algum dos(as) seus(as) bebês já recebeu alta?</TextModal>
             {babiesData.map((baby, index) => (

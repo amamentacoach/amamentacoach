@@ -12,7 +12,10 @@ const Goals: React.FC = () => {
 
   const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
   const [isFinishedModalVisible, setIsFinishedModalVisible] = useState(false);
-  const onFormEnd = () => setIsFinishedModalVisible(true);
+
+  function onFormEnd() {
+    setIsFinishedModalVisible(true);
+  }
 
   // Retorna uma imagem aleatória para ser exibida no modal.
   function getRandomMotivationImage() {

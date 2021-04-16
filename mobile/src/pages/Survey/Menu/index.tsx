@@ -1,30 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { useAuth } from '../../../contexts/auth';
 import OptionsList from '../../../components/OptionList';
 
 import { Header, HeaderTitle, ScrollView } from './styles';
+import Modal from '../../../components/Modal';
+import { checkOneDayPassed } from '../../../utils/date';
 
 const SurveyMenu: React.FC = () => {
   const { motherInfo } = useAuth();
   const navigation = useNavigation();
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   let options = [
     {
       image: require('../../../../assets/images/surveys_one.png'),
       title: 'Amamentar um prematuro',
-      onPress: () => navigation.navigate('SurveyBreastfeed'),
+      onPress: async () => {
+        // Checa se o usuário já respondeu o formulário no dia.
+        if (
+          await checkOneDayPassed(
+            '@AmamentaCoach:DiarySurveyBreastfeedLastDate',
+          )
+        ) {
+          navigation.navigate('SurveyBreastfeed');
+        } else {
+          setIsModalVisible(true);
+        }
+      },
     },
     {
       image: require('../../../../assets/images/surveys_two.png'),
       title: 'Motivação',
-      onPress: () => navigation.navigate('SurveyMotivation'),
+      onPress: async () => {
+        // Checa se o usuário já respondeu o formulário no dia.
+        if (
+          await checkOneDayPassed(
+            '@AmamentaCoach:DiarySurveyMotivationLastDate',
+          )
+        ) {
+          navigation.navigate('SurveyMotivation');
+        } else {
+          setIsModalVisible(true);
+        }
+      },
     },
     {
       image: require('../../../../assets/images/surveys_three.png'),
       title: 'Sobre ajuda',
-      onPress: () => navigation.navigate('SurveyHelp'),
+      onPress: async () => {
+        // Checa se o usuário já respondeu o formulário no dia.
+        if (await checkOneDayPassed('@AmamentaCoach:DiarySurveyHelpLastDate')) {
+          navigation.navigate('SurveyHelp');
+        } else {
+          setIsModalVisible(true);
+        }
+      },
     },
   ];
 
@@ -35,18 +68,39 @@ const SurveyMenu: React.FC = () => {
       {
         image: require('../../../../assets/images/surveys_four.png'),
         title: 'Sobre a participação do pai',
-        onPress: () => navigation.navigate('SurveyFather'),
+        onPress: async () => {
+          // Checa se o usuário já respondeu o formulário no dia.
+          if (
+            await checkOneDayPassed('@AmamentaCoach:DiarySurveyFatherLastDate')
+          ) {
+            navigation.navigate('SurveyFather');
+          } else {
+            setIsModalVisible(true);
+          }
+        },
       },
     ];
   }
 
   return (
-    <ScrollView>
-      <Header>
-        <HeaderTitle>Enquetes</HeaderTitle>
-      </Header>
-      <OptionsList options={options} />
-    </ScrollView>
+    <>
+      <Modal
+        content="Ops! Você já respondeu a enquete hoje. Volte novamente amanhã."
+        options={[
+          {
+            text: 'Fechar',
+            onPress: () => setIsModalVisible(false),
+          },
+        ]}
+        visible={isModalVisible}
+      />
+      <ScrollView>
+        <Header>
+          <HeaderTitle>Enquetes</HeaderTitle>
+        </Header>
+        <OptionsList options={options} />
+      </ScrollView>
+    </>
   );
 };
 
