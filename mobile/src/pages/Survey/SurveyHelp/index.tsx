@@ -1,8 +1,6 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
-import moment from 'moment';
-import 'moment/locale/pt-br';
 
 import DiaryForm from '../../../components/DiaryForm';
 import createGenericDiaryFormPage from '../../../components/GenericDiaryFormPage';
@@ -14,7 +12,7 @@ const SurveyHelp: React.FC = () => {
   async function setFormSent() {
     await AsyncStorage.setItem(
       '@AmamentaCoach:DiarySurveyHelpLastDate',
-      moment().format('YYYY-MM-DD'),
+      new Date().toISOString(),
     );
   }
 

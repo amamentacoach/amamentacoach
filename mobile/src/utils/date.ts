@@ -25,7 +25,7 @@ async function checkOneDayPassed(storageId: string) {
     return true;
   }
 
-  const storageDate = moment(storageString, 'YYYY-MM-DD');
+  const storageDate = moment(storageString);
   return currentDate.diff(storageDate, 'days') >= 1;
 }
 

@@ -27,7 +27,7 @@ const Feelings: React.FC = () => {
   async function setFormSent() {
     await AsyncStorage.setItem(
       '@AmamentaCoach:DiaryFeelingsLastDate',
-      moment().format('YYYY-MM-DD'),
+      new Date().toISOString(),
     );
   }
 
