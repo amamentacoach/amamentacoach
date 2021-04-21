@@ -539,6 +539,7 @@ routes.get('/perguntas/escalaealimentacao',verifyJWT,perguntasController.escalaE
  *      7 - Escala<br/>
  *      8 - Enquete Motivacao<br/>
  *      9 - Enquete Sobre ajuda<br/>
+ *      10 - Enquete Meu bebe hoje<br/>
  * 
  *      
  * @apiGroup Enquetes
@@ -870,7 +871,7 @@ routes.get('/testePush',async (req,res)=>{
  */
 routes.get('/amamentacao/resultados',respostasController.results)
 
-//routes.get('/resultados',resultController.generate)
+routes.get('/resultados',resultController.dadosMaes)
 
 /**
  * @api {get} /bebes/:bebe_id/mamadas/:date Listagem por data

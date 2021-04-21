@@ -59,9 +59,21 @@ export async function seed(knex: Knex): Promise<void> {
             outro:true,
             multiplas:false,
         },
+
+        // Categoria 10: Enquete Meu bebe hoje
         { 
             id: 5, 
-            categoria: 2, 
+            categoria: 10, 
+            descricao:'Como meu bebê está:',
+            alternativas: 'Continua como estava|'
+                + 'Piorou|'
+                + 'Melhorou',
+            outro:false,
+            multiplas:false,
+        },
+        { 
+            id: 6, 
+            categoria: 10, 
             descricao:'Como meu bebê está se alimentando:',
             alternativas: 'Apenas no meu peito|'
                 + 'No meu peito, c/ complemento por copinho|'
@@ -73,18 +85,8 @@ export async function seed(knex: Knex): Promise<void> {
             multiplas:false,
         },
         { 
-            id: 6, 
-            categoria: 2, 
-            descricao:'Como meu bebê está:',
-            alternativas: 'Continua como estava|'
-                + 'Piorou|'
-                + 'Melhorou',
-            outro:false,
-            multiplas:false,
-        },
-        { 
             id: 7, 
-            categoria: 2, 
+            categoria: 10, 
             descricao:'O que eu consegui fazer pelo meu bebê:',
             alternativas: 'Fiquei na Unidade quase 1 hora|'
                 + 'Fiquei na Unidade entre 1 e 3 horas|'
