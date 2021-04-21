@@ -280,7 +280,7 @@ routes.post('/login',maesController.auth);
  * @apiParamExample {json} Exemplo Request:
  *      {
  *          "qtd_leite":100,
- *          "mama":"D",
+ *          "mama":"D", // Caso seja nas duas mamas passar no formato "D,E"
  *          "duracao":5,
  *          "data_hora":"2020-09-24T17:40:31.501Z"
  *      }
@@ -888,7 +888,7 @@ routes.get('/resultados',resultController.dadosMaes)
   *           {
   *             "id": 1,
   *             "data_hora": "2020-09-24T17:40:31.501Z",
-  *             "mama": "D",
+  *             "mama": "D", // Caso seja nas duas mamas passar no formato "D,E"
   *             "duracao": 5,
   *             "bebe_id": 1
   *           }
