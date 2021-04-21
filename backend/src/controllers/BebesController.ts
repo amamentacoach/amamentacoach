@@ -39,6 +39,7 @@ class BebesController{
             apgar2,
             tipo_parto,
             local,
+            local_cadastro:local,
             complicacoes:complicacoes || false,
             mae_id:id_mae
         };
