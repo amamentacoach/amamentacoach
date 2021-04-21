@@ -3,7 +3,8 @@ import { useNavigation, StackActions } from '@react-navigation/native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-import dateFormatVerbose from '../../../utils/date';
+import AsyncStorage from '@react-native-community/async-storage';
+import { dateFormatVerbose } from '../../../utils/date';
 import DiaryForm, { IDiaryFormPage } from '../../../components/DiaryForm';
 import MainButton from '../../../components/MainButton';
 import SecondaryButton from '../../../components/SecondaryButton';
@@ -22,6 +23,26 @@ const Feelings: React.FC = () => {
   const navigation = useNavigation();
   const currentDate = dateFormatVerbose(moment());
 
+  // Marca o formulário como enviado no dia.
+  async function setFormSent() {
+    await AsyncStorage.setItem(
+      '@AmamentaCoach:DiaryFeelingsLastDate',
+      new Date().toISOString(),
+    );
+  }
+
+  // Executada caso o usuário decida traçar suas metas.
+  const onFormEndGoals = async () => {
+    await setFormSent();
+    navigation.dispatch(StackActions.replace('Goals'));
+  };
+
+  // Executada se o usuário decidir não traçar suas metas.
+  const onFormEndDiary = async () => {
+    await setFormSent();
+    navigation.navigate('Diary');
+  };
+
   const InfoPage: React.FC<IDiaryFormPage> = ({
     index,
     pagesLength,
@@ -31,10 +52,6 @@ const Feelings: React.FC = () => {
     setFieldValue,
     handleChangePage,
   }) => {
-    const onFormEndGoals = () =>
-      navigation.dispatch(StackActions.replace('Goals'));
-    const onFormEndDiary = () => navigation.navigate('Diary');
-
     return (
       <Container>
         <CurrentPageContainer>
@@ -75,7 +92,14 @@ const Feelings: React.FC = () => {
     );
   };
 
-  return <DiaryForm title={currentDate} category={2} Page={InfoPage} />;
+  return (
+    <DiaryForm
+      title={currentDate}
+      category={2}
+      Page={InfoPage}
+      onFeedbackAccepted={setFormSent}
+    />
+  );
 };
 
 export default Feelings;

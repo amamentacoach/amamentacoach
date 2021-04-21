@@ -15,7 +15,7 @@ import {
   IExtractionEntry,
   listExtractionsEntries,
 } from '../../../services/diaryRegistry';
-import dateFormatVerbose from '../../../utils/date';
+import { dateFormatVerbose } from '../../../utils/date';
 import MainButton from '../../../components/MainButton';
 import DiaryRegistryEntry from '../../../components/DiaryRegistryEntry';
 

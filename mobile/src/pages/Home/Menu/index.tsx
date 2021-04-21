@@ -39,6 +39,7 @@ import {
 } from './styles';
 
 import HUBanner from '../../../../assets/images/banner_hu.png';
+import { checkOneDayPassed } from '../../../utils/date';
 
 interface BabyModalOption {
   newLocation: string;
@@ -61,6 +62,11 @@ const Home: React.FC = () => {
     false,
   );
   const [formAction, setFormAction] = useState<string>('');
+
+  const [
+    expectationsModalVisibility,
+    setExpectationsModalVisibility,
+  ] = useState<Boolean>(false);
 
   const options = [
     {
@@ -85,7 +91,7 @@ const Home: React.FC = () => {
     },
     {
       image: require('../../../../assets/images/home_more_information.png'),
-      title: 'Mais informações',
+      title: 'Você sabia?',
       onPress: () => navigation.navigate('AdditionalInformation'),
     },
     {
@@ -111,8 +117,8 @@ const Home: React.FC = () => {
             newLocation: '',
           })),
         );
-        setBabiesData(babiesToCheck);
         setBabyModalVisibility(true);
+        setBabiesData(babiesToCheck);
       }
     }
 
@@ -126,19 +132,27 @@ const Home: React.FC = () => {
       }
     }
 
+    // Verifica se o usuário acessou a tela de expectativas hoje.
+    async function checkExpectations() {
+      const expectationsStorage = await AsyncStorage.getItem(
+        '@AmamentaCoach:alreadySelectedExpectations',
+      );
+      if (!expectationsStorage) {
+        setExpectationsModalVisibility(true);
+        return;
+      }
+
+      const { lastRunDate } = JSON.parse(expectationsStorage);
+      if (moment().diff(moment(lastRunDate), 'days') >= 1) {
+        setExpectationsModalVisibility(true);
+      }
+    }
+
     // Verifica a última data que o aplicativo foi aberto. Se um dia tiver passado ou é a primeira
     // vez abrindo o app é buscado os bebês que podem receber alta.
-    async function checkOneDayPassed() {
-      const lastDateStorage = await AsyncStorage.getItem(
-        '@AmamentaCoach:lastOpenedDate',
-      );
-      const currentDate = moment();
-
+    async function checkUserActions() {
       // Menos de um dia se passou.
-      if (
-        !!lastDateStorage &&
-        currentDate.diff(moment(lastDateStorage, 'YYYY-MM-DD'), 'days') < 1
-      ) {
+      if (!checkOneDayPassed('@AmamentaCoach:lastOpenedDate')) {
         return;
       }
 
@@ -146,24 +160,32 @@ const Home: React.FC = () => {
       await checkForms();
       // Verifica se algum bebê pode receber alta.
       await checkBabies();
+      // Verifica se o usuário já abriu as expectativas hoje.
+      await checkExpectations();
 
       await AsyncStorage.setItem(
         '@AmamentaCoach:lastOpenedDate',
-        currentDate.format('YYYY-MM-DD'),
+        new Date().toISOString(),
       );
+      setTemporaryNotFirstRun('home');
     }
 
     // Executa pela primeira vez ao abrir o aplicativo
     if (isFirstRun.temporary.home) {
-      checkOneDayPassed();
-      setTemporaryNotFirstRun('home');
+      checkUserActions();
     }
   }, []);
 
-  // Fecha o modal, marca que os bebês selecionados tiveram alta e navega para o formulário.
-  function handleUpdateBabyLocation() {
-    setFormModalVisibility(false);
+  // Fecha todos os modais.
+  function hideAllModals() {
     setBabyModalVisibility(false);
+    setExpectationsModalVisibility(false);
+    setFormModalVisibility(false);
+  }
+
+  // Fecha os modais, marca que os bebês selecionados tiveram alta e navega para o formulário.
+  function handleUpdateBabyLocation() {
+    hideAllModals();
     babiesData.forEach(async (baby, index) => {
       await updateBabyLocation(
         baby.id,
@@ -204,13 +226,33 @@ const Home: React.FC = () => {
   return (
     <>
       <Modal
+        content="Você gostaria de visitar as expectativas hoje?"
+        options={[
+          {
+            text: 'Sim',
+            onPress: () => {
+              hideAllModals();
+              navigation.navigate('ManageExpectations');
+            },
+          },
+          {
+            text: 'Não',
+            onPress: () => setExpectationsModalVisibility(false),
+          },
+        ]}
+        visible={
+          expectationsModalVisibility &&
+          !babyModalVisibility &&
+          !formModalVisibility
+        }
+      />
+      <Modal
         content="Chegou o momento de avaliar novamente sua pontuação na escala de confiança materna para amamentar! Vamos lá?"
         options={[
           {
             text: 'Sim',
             onPress: () => {
-              setFormModalVisibility(false);
-              setBabyModalVisibility(false);
+              hideAllModals();
               navigation.navigate('StatusForm', {
                 situation: formAction,
               });
@@ -225,7 +267,6 @@ const Home: React.FC = () => {
       />
       {babiesData.length > 0 && (
         <Modal
-          visible={babyModalVisibility}
           options={[
             {
               text: 'Sim',
@@ -236,7 +277,8 @@ const Home: React.FC = () => {
               text: 'Não',
               onPress: () => setBabyModalVisibility(false),
             },
-          ]}>
+          ]}
+          visible={babyModalVisibility && !formModalVisibility}>
           <View>
             <TextModal>Algum dos(as) seus(as) bebês já recebeu alta?</TextModal>
             {babiesData.map((baby, index) => (
@@ -276,7 +318,9 @@ const Home: React.FC = () => {
             <HeaderText>Início</HeaderText>
           </HeaderBackground>
           <BannerImage source={HUBanner}>
-            <HUButton onPress={() => navigation.navigate('HU')}>
+            <HUButton
+              onPress={() => navigation.navigate('HU')}
+              activeOpacity={0.7}>
               <HUButtonText>Comece por aqui!</HUButtonText>
             </HUButton>
           </BannerImage>

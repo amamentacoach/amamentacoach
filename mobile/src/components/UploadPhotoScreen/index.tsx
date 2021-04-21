@@ -59,7 +59,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
   return (
     <ScrollView>
       <FormContainer>
-        {/* Usuário já fez o upload the uma foto */}
+        {/* Usuário já fez o upload de uma foto */}
         {!photo && !formSent && motherInfo.images[target] && (
           <SelectedImage
             source={{

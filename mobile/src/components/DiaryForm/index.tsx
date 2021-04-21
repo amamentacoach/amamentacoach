@@ -18,7 +18,7 @@ import {
   ScrollView,
 } from './styles';
 
-// Tipo de um componente que pode ser utilizado para gerar uma página do formulário.
+// Props de um componente que pode ser utilizado para gerar uma página do formulário.
 export interface IDiaryFormPage {
   // Index da página.
   index: number;
@@ -41,8 +41,10 @@ interface IDiaryFormProps {
   title: string;
   // Categoria que deve ser utilizada ao buscar as perguntas no backend.
   category: number;
-  // Função para gerar as páginas do formulário.
+  // Componente para gerar as páginas do formulário.
   Page: React.FC<IDiaryFormPage>;
+  // Função executada ao aceitar o feedback recebido com base nas respostas selecionadas.
+  onFeedbackAccepted?: () => void;
 }
 
 interface IFeedbackModalProps {
@@ -51,7 +53,12 @@ interface IFeedbackModalProps {
   onExit: () => void;
 }
 
-const DiaryForm: React.FC<IDiaryFormProps> = ({ title, category, Page }) => {
+const DiaryForm: React.FC<IDiaryFormProps> = ({
+  title,
+  category,
+  Page,
+  onFeedbackAccepted,
+}) => {
   const { width } = Dimensions.get('window');
   const navigation = useNavigation();
   const pageFlatListRef = useRef<FlatList>(null);
@@ -246,6 +253,10 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({ title, category, Page }) => {
               isBold: true,
               onPress: () => {
                 setIsFeedbackModalVisible(false);
+                // Executa a função fornecida caso exista.
+                if (onFeedbackAccepted) {
+                  onFeedbackAccepted();
+                }
                 // Reinicia a stack de navegação.
                 navigation.dispatch(
                   StackActions.replace(feedbackModalData.redirect),

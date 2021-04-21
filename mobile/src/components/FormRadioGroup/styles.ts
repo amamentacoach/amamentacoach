@@ -25,7 +25,7 @@ const horizontalRadioButtonStyle = `
   flex: 1;
   justify-content: center;
   min-height: 50px;
-  margin: 0 8px 0 8px;
+  margin-left: 5px;
 `;
 
 // Regras que são aplicadas caso a opção deve ser apresentada verticalmente.

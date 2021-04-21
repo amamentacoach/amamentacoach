@@ -108,7 +108,7 @@ const pages = [
   {
     id: 9,
     title: 'Como fazer a retirada do leite?',
-    image: require('../../../../assets/images/milk_withdrawal_one.png'),
+    image: require('../../../../assets/images/milk_withdrawal_nine.png'),
     content: [
       {
         text:

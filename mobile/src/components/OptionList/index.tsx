@@ -38,10 +38,12 @@ const OptionsList: React.FC<IOptionListProps> = ({
         <Option key={title}>
           <ContentOptionButton activeOpacity={0.7} onPress={onPress}>
             <ContentImage source={image} />
+
             <ContentTextContainer>
               <ContentTitle>{title}</ContentTitle>
               {subtitle && <ContentSubtitle>{subtitle}</ContentSubtitle>}
             </ContentTextContainer>
+
             {displayArrows && (
               <OpenIconImage source={NextIcon} resizeMode="contain" />
             )}

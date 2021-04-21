@@ -10,11 +10,6 @@ const EmotionsAndBreastfeeding: React.FC = () => {
 
   const options = [
     {
-      image: require('../../../../assets/images/emotions_info.png'),
-      title: 'Informação: emoções X amamentação',
-      onPress: () => {},
-    },
-    {
       image: require('../../../../assets/images/emotions_box.png'),
       title: 'Caixinha da distração',
       onPress: () => navigation.navigate('Distractions'),

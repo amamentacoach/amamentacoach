@@ -4,7 +4,6 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Formik, FormikErrors } from 'formik';
 import * as Yup from 'yup';
 
-import { useAuth } from '../../../contexts/auth';
 import {
   signUpBaby,
   IMotherSignUpInfo,
@@ -64,7 +63,6 @@ type ScreenParams = {
 };
 
 const BabyForm: React.FC = () => {
-  const { signIn } = useAuth();
   const navigation = useNavigation();
   const { motherInfo } = useRoute<
     RouteProp<ScreenParams, 'MotherForm'>
@@ -263,7 +261,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
             isBold: true,
             onPress: async () => {
               setIsSignUpModalVisible(false);
-              await signIn(motherInfo.email, motherInfo.password);
+              navigation.navigate('Login');
             },
           },
         ]}

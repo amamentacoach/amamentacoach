@@ -11,7 +11,7 @@ const pages = [
     content: [
       {
         text:
-          'Com o nascimento prematuro, é comum que o bebê não consiga pegar o peito logo ao nascer e que ele precise ficar internado para receber alguns cuidados.\n\n Apesar dos desafios, saiba que amamentar o bebê prematuro é possível, e que vale cada esforço!\n\n Os passos a seguir resumem a jornada rumo ao sucesso na amamentação do prematuro',
+          'Com o nascimento prematuro, é comum que o bebê não consiga pegar o peito logo ao nascer e que ele precise ficar internado para receber alguns cuidados.\n\nApesar dos desafios, saiba que amamentar o bebê prematuro é possível, e que vale cada esforço!\n\n Os passos a seguir resumem a jornada rumo ao sucesso na amamentação do prematuro',
       },
     ],
   },
@@ -22,7 +22,7 @@ const pages = [
     content: [
       {
         text:
-          'Parto prematuro: expectativas frustradas, incertezas, medo... quem espera que seu bebê nasça antes da hora?\nRecupere-se do susto, respire fundo, deixe a nova realidade se encaixar na sua cabeça e no seu coração, e então, abrace-a!',
+          'Parto prematuro: expectativas frustradas, incertezas, medo... quem espera que seu bebê nasça antes da hora?\nRecupere-se do susto, respire fundo, deixe a nova realidade se encaixar na sua cabeça e no seu coração, e então, abrace\u2011a!',
       },
     ],
   },

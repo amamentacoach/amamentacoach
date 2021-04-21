@@ -22,7 +22,7 @@ const Resilience: React.FC = () => {
     {
       image: require('../../../../assets/images/erlenmeyer_primary.png'),
       title: '1. Manter expectativas realistas',
-      onPress: () => navigation.navigate('EmotionsAndBreastfeeding'),
+      onPress: () => navigation.navigate('ManageExpectations'),
     },
     {
       image: require('../../../../assets/images/erlenmeyer_yellow.png'),

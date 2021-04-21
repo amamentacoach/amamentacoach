@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { StackActions, useNavigation } from '@react-navigation/native';
 
 import DiaryForm from '../../../components/DiaryForm';
 import createGenericDiaryFormPage from '../../../components/GenericDiaryFormPage';
@@ -12,7 +12,10 @@ const Goals: React.FC = () => {
 
   const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
   const [isFinishedModalVisible, setIsFinishedModalVisible] = useState(false);
-  const onFormEnd = () => setIsFinishedModalVisible(true);
+
+  function onFormEnd() {
+    setIsFinishedModalVisible(true);
+  }
 
   // Retorna uma imagem aleatória para ser exibida no modal.
   function getRandomMotivationImage() {
@@ -43,14 +46,22 @@ const Goals: React.FC = () => {
           visible={isIntroModalVisible}
         />
         <Modal
-          content="Suas metas foram traçadas!"
+          content={`Suas metas foram traçadas!\nGostaria de ver o relatório com suas respostas?`}
           options={[
             {
-              text: 'Fechar',
-              isBold: true,
+              text: 'Mais Tarde',
               onPress: () => {
                 setIsFinishedModalVisible(false);
                 navigation.navigate('Diary');
+              },
+            },
+            {
+              text: 'Ver relatório',
+              isBold: true,
+              onPress: () => {
+                setIsFinishedModalVisible(false);
+                // Reinicia a stack de navegação.
+                navigation.dispatch(StackActions.replace('Report'));
               },
             },
           ]}

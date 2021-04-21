@@ -9,7 +9,7 @@ import { ActivityIndicator } from 'react-native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-import dateFormatVerbose from '../../../utils/date';
+import { dateFormatVerbose } from '../../../utils/date';
 import { useAuth } from '../../../contexts/auth';
 import {
   IBreastfeedEntry,
