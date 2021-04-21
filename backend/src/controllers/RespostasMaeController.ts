@@ -103,7 +103,7 @@ class RespostasMaeController{
                     break;
     
                 case "1M":
-                    await knex('mae').update({alim_1m:descricao}).where({id:mae_id})
+                    await trx('mae').update({alim_1m:descricao}).where({id:mae_id})
                     break;
             
                 default:

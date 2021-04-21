@@ -1,3 +1,2 @@
-Nome,Email,Dat. Nascimento,Escolaridade,Teste
-joao,joao_alex@hotmail.com,02/04/2000,123,testando
-Fulana de Tal,joaoa@email.com,05/05/1990,Ensino Medio Completo,testando
+Usuária,Grupo,AlocaçãoBB1,AlocaçãoBB2,IdadeMãe,Gestação Planejada,Complicações na Gestação,DataParto,TipoParto,IG,Gemelar,PesoBB1,PesoBB2,Apgar1BB1,Apgar5BB1,Apgar1BB2,Apgar5BB2,Primeira visita,Tipo1ºEstimulo,DiasInternadosBB1,DiasInternadosBB2,NºFilhosVivos,Orientada no PN sobre AM,AM antes,TempoTotalAM,Companheiro,Mora,TempoJuntos,Escolaridade,Ocupação,Licença maternidade,Renda,BSES1,BSESAlta,BSES15d,BSES1m,AlimAlta,Alim15d,Alim1m
+Fulana de Tal,1,2,,30,1,1,28/08/2020,1,35,1,2.5,,8,10,,,12h,true,236,,3,1,0,"1,2",1,1,2 anos,Ensino Medio Completo,1,3,Entre 1 e 3 salarios minimos,70,81,65,85,,,
