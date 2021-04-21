@@ -626,7 +626,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Sucesso: Status 200",
-          "content": "\n {\n  \"id\": 1,\n  \"nome\": \"Enzo Gabriel\",\n  \"mamadas\": [\n    {\n      \"id\": 1,\n      \"data_hora\": \"2020-09-24T17:40:31.501Z\",\n      \"mama\": \"D\", // Caso seja nas duas mamas passar no formato \"D,E\"\n      \"duracao\": 5,\n      \"bebe_id\": 1\n    }\n  ]\n}",
+          "content": "\n {\n  \"id\": 1,\n  \"nome\": \"Enzo Gabriel\",\n  \"mamadas\": [\n    {\n      \"id\": 1,\n      \"data_hora\": \"2020-09-24T17:40:31.501Z\",\n      \"mama\": \"D\",\n      \"duracao\": 5,\n      \"bebe_id\": 1\n    }\n  ]\n}",
           "type": "json"
         }
       ]
@@ -659,7 +659,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"mama\":\"D\",\n    \"duracao\":5,\n    \"data_hora\":\"2020-09-24T17:40:31.501Z\"\n}",
+          "content": "{\n    \"mama\":\"D\", // Caso seja nas duas mamas passar no formato \"D,E\"\n    \"duracao\":5,\n    \"data_hora\":\"2020-09-24T17:40:31.501Z\"\n}",
           "type": "json"
         }
       ]

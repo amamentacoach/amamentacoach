@@ -888,7 +888,7 @@ routes.get('/resultados',resultController.dadosMaes)
   *           {
   *             "id": 1,
   *             "data_hora": "2020-09-24T17:40:31.501Z",
-  *             "mama": "D", // Caso seja nas duas mamas passar no formato "D,E"
+  *             "mama": "D",
   *             "duracao": 5,
   *             "bebe_id": 1
   *           }
@@ -908,7 +908,7 @@ routes.get('/resultados',resultController.dadosMaes)
  * 
  * @apiParamExample {json} Exemplo Request:
  *      {
- *          "mama":"D",
+ *          "mama":"D", // Caso seja nas duas mamas passar no formato "D,E"
  *          "duracao":5,
  *          "data_hora":"2020-09-24T17:40:31.501Z"
  *      }
