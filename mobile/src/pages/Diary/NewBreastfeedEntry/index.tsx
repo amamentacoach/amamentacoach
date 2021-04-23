@@ -34,7 +34,8 @@ interface IFormValues {
   babyName: string;
   time: string;
   duration: string;
-  breast: string;
+  breastLeft: string;
+  breastRight: string;
 }
 
 const NewDiaryRegistry: React.FC = () => {
@@ -46,29 +47,57 @@ const NewDiaryRegistry: React.FC = () => {
     babyName: '',
     time: '',
     duration: '',
-    breast: '',
+    breastLeft: '',
+    breastRight: '',
   };
-  const newDiaryRegistrySchema = Yup.object({
-    babyName: Yup.string().required('Campo obrigatório'),
-    time: Yup.string().required('Campo obrigatório'),
-    duration: Yup.number()
-      .integer('Deve ser um número inteiro')
-      .typeError('Deve ser um número inteiro')
-      .positive('Deve ser maior que 0')
-      .required('Campo obrigatório'),
-    breast: Yup.string().required('Campo obrigatório'),
-  }).required();
+  const newDiaryRegistrySchema = Yup.object()
+    .shape(
+      {
+        babyName: Yup.string().required('Campo obrigatório'),
+        time: Yup.string().required('Campo obrigatório'),
+        duration: Yup.number()
+          .integer('Deve ser um número inteiro')
+          .typeError('Deve ser um número inteiro')
+          .positive('Deve ser maior que 0')
+          .required('Campo obrigatório'),
+        breastLeft: Yup.string().when('breastRight', {
+          is: undefined,
+          then: Yup.string().required(
+            'Pelo menos uma opção deve ser selecionada',
+          ),
+          otherwise: Yup.string(),
+        }),
+        breastRight: Yup.string().when('breastLeft', {
+          is: undefined,
+          then: Yup.string().required(
+            'Pelo menos uma opção deve ser selecionada',
+          ),
+          otherwise: Yup.string(),
+        }),
+      },
+      [['breastLeft', 'breastRight']],
+    )
+    .required();
 
   // Cria um novo registro no sistema.
   async function handleFormSubmit({
     babyName,
-    breast,
+    breastRight,
+    breastLeft,
     duration,
     time,
   }: IFormValues) {
     const selectedBaby = motherInfo.babies.find(baby => baby.name === babyName);
     if (!selectedBaby) {
       return;
+    }
+    let breast = '';
+    if (breastLeft && breastRight) {
+      breast = `${breastRight},${breastLeft}`;
+    } else if (breastLeft) {
+      breast = breastLeft;
+    } else {
+      breast = breastRight;
     }
 
     setIsSendingForm(true);
@@ -129,23 +158,39 @@ const NewDiaryRegistry: React.FC = () => {
               <MultipleOptionContainer>
                 <FirstOption
                   activeOpacity={1}
-                  onPress={() => setFieldValue('breast', 'E')}>
+                  onPress={() => {
+                    if (values.breastLeft) {
+                      setFieldValue('breastLeft', '');
+                    } else {
+                      setFieldValue('breastLeft', 'E');
+                    }
+                  }}>
                   <Image
-                    source={values.breast === 'E' ? CheckedBox : UncheckedBox}
+                    source={values.breastLeft ? CheckedBox : UncheckedBox}
                   />
                   <OptionText>Esquerda</OptionText>
                 </FirstOption>
                 <SecondOption
                   activeOpacity={1}
-                  onPress={() => setFieldValue('breast', 'D')}>
+                  onPress={() => {
+                    if (values.breastRight) {
+                      setFieldValue('breastRight', '');
+                    } else {
+                      setFieldValue('breastRight', 'D');
+                    }
+                  }}>
                   <Image
-                    source={values.breast === 'D' ? CheckedBox : UncheckedBox}
+                    source={values.breastRight ? CheckedBox : UncheckedBox}
                   />
                   <OptionText>Direita</OptionText>
                 </SecondOption>
               </MultipleOptionContainer>
               <ErrorContainer>
-                {errors.breast && <ErrorText>{errors.breast}</ErrorText>}
+                {(errors.breastLeft || errors.breastRight) && (
+                  <ErrorText>
+                    {errors.breastLeft ? errors.breastLeft : errors.breastRight}
+                  </ErrorText>
+                )}
               </ErrorContainer>
             </FormContent>
 

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { ActivityIndicator } from 'react-native';
 import {
   RouteProp,
   useIsFocused,
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
-import { ActivityIndicator } from 'react-native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
