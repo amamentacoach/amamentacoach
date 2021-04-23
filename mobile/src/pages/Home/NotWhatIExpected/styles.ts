@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const HeaderBackground = styled.View`
-  background-color: ${props => props.theme.primary};
+  background-color: ${props => props.theme.babyGreen};
   align-items: center;
   width: 100%;
   height: 170px;

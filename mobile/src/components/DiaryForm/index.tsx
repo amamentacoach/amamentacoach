@@ -28,6 +28,8 @@ export interface IDiaryFormPage {
   question: ISurveyQuestion;
   // Verifica se formulário foi preenchido corretamente ao tentar avançar a página
   isFormValid: boolean;
+  // Verifica se pelo menos uma opção do formulário foi selecionada.
+  isDirty: boolean;
   // Verifica se formulário está sendo enviado ao servidor.
   isSendingForm: boolean;
   // Define o valor de uma resposta.
@@ -39,6 +41,8 @@ export interface IDiaryFormPage {
 interface IDiaryFormProps {
   // Título da página.
   title: string;
+  // Cor da página.
+  color: string;
   // Categoria que deve ser utilizada ao buscar as perguntas no backend.
   category: number;
   // Componente para gerar as páginas do formulário.
@@ -54,8 +58,9 @@ interface IFeedbackModalProps {
 }
 
 const DiaryForm: React.FC<IDiaryFormProps> = ({
-  title,
+  color,
   category,
+  title,
   Page,
   onFeedbackAccepted,
 }) => {
@@ -209,14 +214,10 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
   if (isLoading) {
     return (
       <>
-        <HeaderBackground />
+        <HeaderBackground color={color} />
         <HeaderText>{title}</HeaderText>
         <ContentContainer>
-          <ActivityIndicator
-            size="large"
-            color="#7d5cd7"
-            animating={isLoading}
-          />
+          <ActivityIndicator size="large" color={color} animating={isLoading} />
         </ContentContainer>
       </>
     );
@@ -271,13 +272,13 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
       <Formik
         initialValues={formInitialValues}
         onSubmit={async values => handleFormSubmit(values)}>
-        {({ submitForm, setFieldValue, values }) => (
+        {({ values, dirty, submitForm, setFieldValue }) => (
           <FlatList
             ref={pageFlatListRef}
             data={pages}
             renderItem={({ item, index }) => (
               <ScrollView width={width}>
-                <HeaderBackground />
+                <HeaderBackground color={color} />
                 <HeaderText>{title}</HeaderText>
                 <ContentContainer>
                   <Page
@@ -286,6 +287,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
                     question={item}
                     isFormValid={isFormValid}
                     isSendingForm={isSendingForm}
+                    isDirty={dirty}
                     setFieldValue={setFieldValue}
                     handleChangePage={(newPage, handleFormEnd) =>
                       handleChangePage(

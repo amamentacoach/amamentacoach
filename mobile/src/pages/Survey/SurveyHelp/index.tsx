@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import DiaryForm from '../../../components/DiaryForm';
 import createGenericDiaryFormPage from '../../../components/GenericDiaryFormPage';
+import theme from '../../../config/theme';
 
 const SurveyHelp: React.FC = () => {
   const navigation = useNavigation();
@@ -24,8 +25,9 @@ const SurveyHelp: React.FC = () => {
   return (
     <DiaryForm
       title="Sobre ajuda"
+      color={theme.babyBlue}
       category={9}
-      Page={createGenericDiaryFormPage(onFormEnd)}
+      Page={createGenericDiaryFormPage(theme.babyBlue, onFormEnd)}
       onFeedbackAccepted={setFormSent}
     />
   );

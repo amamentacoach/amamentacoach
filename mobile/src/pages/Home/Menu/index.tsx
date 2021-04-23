@@ -40,6 +40,7 @@ import {
 
 import HUBanner from '../../../../assets/images/banner_hu.png';
 import { checkOneDayPassed } from '../../../utils/date';
+import theme from '../../../config/theme';
 
 interface BabyModalOption {
   newLocation: string;
@@ -226,6 +227,7 @@ const Home: React.FC = () => {
   return (
     <>
       <Modal
+        color={theme.babyPink}
         content="Você gostaria de visitar as expectativas hoje?"
         options={[
           {
@@ -247,6 +249,7 @@ const Home: React.FC = () => {
         }
       />
       <Modal
+        color={theme.babyPink}
         content="Chegou o momento de avaliar novamente sua pontuação na escala de confiança materna para amamentar! Vamos lá?"
         options={[
           {
@@ -267,6 +270,7 @@ const Home: React.FC = () => {
       />
       {babiesData.length > 0 && (
         <Modal
+          color={theme.babyPink}
           options={[
             {
               text: 'Sim',

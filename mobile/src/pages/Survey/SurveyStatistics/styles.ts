@@ -8,14 +8,14 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 `;
 
 export const HeaderBackground = styled.View`
-  background-color: ${props => props.theme.primary};
+  background-color: ${props => props.theme.babyBlue};
   align-items: center;
   width: 100%;
   height: 170px;
 `;
 
 export const HeaderText = styled.Text`
-  color: ${props => props.theme.white};
+  color: ${props => props.theme.black};
   text-align: center;
   font-family: 'OpenSans-Regular';
   font-size: 18px;

@@ -1,11 +1,15 @@
 import styled from 'styled-components/native';
 
+interface CurrentPageContainerProps {
+  color: string;
+}
+
 export const Container = styled.View`
   flex: 1;
 `;
 
-export const CurrentPageContainer = styled.View`
-  background-color: ${props => props.theme.babyPurple};
+export const CurrentPageContainer = styled.View<CurrentPageContainerProps>`
+  background-color: ${({ color }) => color};
   border-radius: 3.6px;
   padding: 10px;
   margin-top: 6px;

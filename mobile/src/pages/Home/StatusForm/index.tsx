@@ -3,6 +3,7 @@ import { ActivityIndicator, Dimensions, FlatList, Image } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 
+import theme from '../../../config/theme';
 import {
   listStatusFormQuestions,
   answerStatusForm,
@@ -25,11 +26,13 @@ import {
   HeaderInfoModal,
   TextInfoModal,
   ColoredText,
-  CurrentPageContainer,
-  CurrentPageText,
   SecondButtonContainer,
   FirstButtonContainer,
 } from './styles';
+import {
+  CurrentPageContainer,
+  CurrentPageText,
+} from '../../../components/GenericDiaryFormPage/styles';
 
 import QuestionIcon from '../../../../assets/images/icons/ic_question_white.png';
 import SecondaryButton from '../../../components/SecondaryButton';
@@ -223,7 +226,7 @@ const StatusForm: React.FC = () => {
   }) => {
     return (
       <ContentContainer>
-        <CurrentPageContainer>
+        <CurrentPageContainer color={theme.babyBlue}>
           <CurrentPageText>
             {pageIndex + 1}/{pageQuestions.length}
           </CurrentPageText>
@@ -236,6 +239,7 @@ const StatusForm: React.FC = () => {
             </QuestionText>
 
             <FormRadioGroupInput
+              color={theme.babyBlue}
               fieldName={`${question.id}`}
               options={question.options}
               multipleSelection={question.multipleSelection}
@@ -255,6 +259,7 @@ const StatusForm: React.FC = () => {
             </QuestionText>
 
             <FormRadioGroupInput
+              color={theme.babyBlue}
               fieldName="feeding"
               options={feedingQuestion.options}
               multipleSelection={feedingQuestion.multipleSelection}
@@ -270,6 +275,7 @@ const StatusForm: React.FC = () => {
           {pageIndex > 0 && (
             <FirstButtonContainer>
               <SecondaryButton
+                color={theme.babyBlue}
                 text="Voltar"
                 disabled={isSendingForm}
                 onPress={() =>
@@ -287,6 +293,7 @@ const StatusForm: React.FC = () => {
           )}
           <SecondButtonContainer>
             <MainButton
+              color={theme.babyBlue}
               text={
                 pageIndex >= pageQuestions.length - 1 ? 'Finalizar' : 'Próximo'
               }
@@ -316,7 +323,7 @@ const StatusForm: React.FC = () => {
         <ContentContainer>
           <ActivityIndicator
             size="large"
-            color="#7d5cd7"
+            color={theme.babyBlue}
             animating={isLoading}
           />
         </ContentContainer>

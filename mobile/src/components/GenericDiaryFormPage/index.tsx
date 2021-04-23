@@ -14,18 +14,19 @@ import {
 
 // Retorna uma página genérica que pode ser fornecida a um componente DiaryForm.
 // Ao final do formulário a função onFormEnd é executada.
-const createGenericDiaryFormPage = (onFormEnd: () => void) => {
+const createGenericDiaryFormPage = (color: string, onFormEnd: () => void) => {
   const Page: React.FC<IDiaryFormPage> = ({
     index,
     pagesLength,
     question,
     isFormValid,
+    isDirty,
     isSendingForm,
     setFieldValue,
     handleChangePage,
   }) => (
     <Container>
-      <CurrentPageContainer>
+      <CurrentPageContainer color={color}>
         <CurrentPageText>
           {index + 1}/{pagesLength}
         </CurrentPageText>
@@ -33,6 +34,7 @@ const createGenericDiaryFormPage = (onFormEnd: () => void) => {
       <QuestionText>{question.description}</QuestionText>
 
       <FormRadioGroupInput
+        color={color}
         fieldName={`${question.id}`}
         options={question.options}
         multipleSelection={question.multipleSelection}
@@ -43,8 +45,9 @@ const createGenericDiaryFormPage = (onFormEnd: () => void) => {
 
       <Footer>
         <MainButton
+          color={color}
           text={index >= pagesLength - 1 ? 'Finalizar' : 'Próximo'}
-          disabled={isSendingForm}
+          disabled={!isDirty || isSendingForm}
           onPress={() => handleChangePage(index + 1, onFormEnd)}
         />
       </Footer>

@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 interface OptionProps {
+  color?: string;
   selected?: boolean;
   horizontal?: boolean;
 }
@@ -35,7 +36,13 @@ const verticalRadioButtonStyle = `
 
 export const OptionButton = styled.TouchableOpacity<OptionProps>`
   border: 1.4px solid
-    ${({ theme, selected }) => (selected ? theme.primary : theme.brightGrey)};
+    ${({ theme, color, selected }) => {
+      if (!selected) {
+        return theme.brightGrey;
+      }
+      return color || theme.primary;
+    }};
+
   flex-direction: row;
   border-radius: 3.6px;
   align-items: center;
@@ -49,7 +56,13 @@ export const OptionButton = styled.TouchableOpacity<OptionProps>`
 
 export const OuterCircle = styled.View<OptionProps>`
   border: 1.4px solid
-    ${({ theme, selected }) => (selected ? theme.primary : theme.brightGrey)};
+    ${({ theme, color, selected }) => {
+      if (!selected) {
+        return theme.brightGrey;
+      }
+      return color || theme.primary;
+    }};
+
   background-color: transparent;
   width: 18px;
   height: 18px;
@@ -59,16 +72,26 @@ export const OuterCircle = styled.View<OptionProps>`
 `;
 
 export const InnerCircle = styled.View<OptionProps>`
-  background-color: ${({ theme, selected }) =>
-    selected ? theme.primary : 'transparent'};
+  background-color: ${({ theme, color, selected }) => {
+    if (!selected) {
+      return 'transparent';
+    }
+    return color || theme.primary;
+  }};
+
   width: 10px;
   height: 10px;
   border-radius: 5px;
 `;
 
 export const TextOption = styled.Text<OptionProps>`
-  color: ${({ theme, selected, horizontal }) =>
-    selected && horizontal ? theme.primary : theme.grey};
+  color: ${({ theme, color, horizontal, selected }) => {
+    if (!selected || !horizontal) {
+      return theme.grey;
+    }
+    return color || theme.primary;
+  }};
+
   font-family: 'OpenSans-Regular';
   margin-left: 15px;
   margin-right: 15px;

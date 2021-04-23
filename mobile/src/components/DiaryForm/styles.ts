@@ -4,6 +4,10 @@ interface IScrollViewProps {
   width: number;
 }
 
+interface HeaderProps {
+  color: string;
+}
+
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
@@ -12,15 +16,15 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
   width: ${({ width }) => width}px;
 `;
 
-export const HeaderBackground = styled.View`
-  background-color: ${props => props.theme.primary};
+export const HeaderBackground = styled.View<HeaderProps>`
+  background-color: ${({ color }) => color};
   align-items: center;
   width: 100%;
   height: 170px;
 `;
 
 export const HeaderText = styled.Text`
-  color: ${props => props.theme.white};
+  color: ${props => props.theme.black};
   text-align: center;
   font-family: 'OpenSans-Regular';
   font-size: 18px;

@@ -13,7 +13,7 @@ export const LabelText = styled.Text`
 
 export const TextInput = styled.TextInput`
   font-family: 'OpenSans-Regular';
-  background-color: ${props => props.theme.brightGrey};
+  background-color: ${props => props.theme.white};
   color: ${props => props.theme.black};
   padding-left: 20px;
   border-radius: 3.6px;

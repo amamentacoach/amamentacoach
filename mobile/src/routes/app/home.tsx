@@ -1,7 +1,8 @@
 import React from 'react';
 
+import createColorHeader from '../config/colorHeader';
+import theme from '../../config/theme';
 import { useIsFirstRun } from '../../contexts/firstRun';
-import purpleHeader from '../config/purpleHeader';
 
 import AdditionalInformation from '../../pages/Home/AdditionalInformation';
 import BabyCup from '../../pages/Home/BabyCup';
@@ -35,6 +36,8 @@ import WhyBreastfeed from '../../pages/Home/WhyBreastfeed';
 
 const CreateHomeRoutes = (Stack: any) => {
   const { isFirstRun } = useIsFirstRun();
+  const headerBabyBlue = createColorHeader(theme.babyBlue, 'black');
+  const headerBabyGreen = createColorHeader(theme.babyGreen);
 
   return [
     <Stack.Screen
@@ -137,7 +140,7 @@ const CreateHomeRoutes = (Stack: any) => {
       key="NotWhatIExpected"
       name="NotWhatIExpected"
       component={NotWhatIExpected}
-      options={{ title: 'O Prematuro', ...purpleHeader }}
+      options={{ title: 'O Prematuro', ...headerBabyGreen }}
     />,
     <Stack.Screen
       key="Premature"
@@ -168,7 +171,7 @@ const CreateHomeRoutes = (Stack: any) => {
       options={
         isFirstRun.persistent.statusFormIntroduction
           ? { title: 'Enquete' }
-          : { title: 'Enquete', ...purpleHeader }
+          : { title: 'Enquete', ...headerBabyBlue }
       }
     />,
     <Stack.Screen

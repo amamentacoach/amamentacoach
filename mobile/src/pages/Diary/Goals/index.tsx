@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StackActions, useNavigation } from '@react-navigation/native';
 
+import theme from '../../../config/theme';
 import DiaryForm from '../../../components/DiaryForm';
 import createGenericDiaryFormPage from '../../../components/GenericDiaryFormPage';
 import Modal from '../../../components/Modal';
@@ -70,8 +71,9 @@ const Goals: React.FC = () => {
       </ModalContainer>
       <DiaryForm
         title="Minhas metas de hoje"
+        color={theme.babyPurple}
         category={3}
-        Page={createGenericDiaryFormPage(onFormEnd)}
+        Page={createGenericDiaryFormPage(theme.babyPurple, onFormEnd)}
       />
     </>
   );

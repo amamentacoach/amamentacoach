@@ -18,7 +18,7 @@ export const LabelText = styled.Text`
 
 export const TextInput = styled.TextInput<TextInputProps>`
   font-family: 'OpenSans-Regular';
-  background-color: ${props => props.theme.brightGrey};
+  background-color: ${props => props.theme.white};
   color: ${props => props.theme.black};
   border-radius: 3.6px;
   padding-left: ${({ centerText }) => (centerText ? 0 : 20)}px;
