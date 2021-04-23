@@ -2,6 +2,7 @@ import React from 'react';
 
 import purpleHeader from '../config/purpleHeader';
 
+import SurveyBaby from '../../pages/Survey/SurveyBaby';
 import SurveyBreastfeed from '../../pages/Survey/SurveyBreastfeed';
 import SurveyFather from '../../pages/Survey/SurveyFather';
 import SurveyHelp from '../../pages/Survey/SurveyHelp';
@@ -10,6 +11,12 @@ import SurveyStatistics from '../../pages/Survey/SurveyStatistics';
 
 const CreateSurveyRoutes = (Stack: any) => {
   return [
+    <Stack.Screen
+      key="SurveyBaby"
+      name="SurveyBaby"
+      component={SurveyBaby}
+      options={{ title: 'Meu Bebê Hoje', ...purpleHeader }}
+    />,
     <Stack.Screen
       key="SurveyBreastfeed"
       name="SurveyBreastfeed"

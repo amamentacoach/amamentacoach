@@ -46,7 +46,7 @@ const Goals: React.FC = () => {
           visible={isIntroModalVisible}
         />
         <Modal
-          content={`Suas metas foram traçadas!\nGostaria de ver o relatório com suas respostas?`}
+          content={`Suas metas foram traçadas!\nGostaria de ver o seu desempenho?`}
           options={[
             {
               text: 'Mais Tarde',

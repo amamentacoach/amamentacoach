@@ -4,9 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../../../contexts/auth';
 import OptionsList from '../../../components/OptionList';
 
-import { Header, HeaderTitle, ScrollView } from './styles';
 import Modal from '../../../components/Modal';
 import { checkOneDayPassed } from '../../../utils/date';
+
+import { Header, HeaderTitle, ScrollView } from './styles';
 
 const SurveyMenu: React.FC = () => {
   const { motherInfo } = useAuth();
@@ -26,6 +27,18 @@ const SurveyMenu: React.FC = () => {
           )
         ) {
           navigation.navigate('SurveyBreastfeed');
+        } else {
+          setIsModalVisible(true);
+        }
+      },
+    },
+    {
+      image: require('../../../../assets/images/surveys_one.png'),
+      title: 'Meu Bebê Hoje',
+      onPress: async () => {
+        // Checa se o usuário já respondeu o formulário no dia.
+        if (await checkOneDayPassed('@AmamentaCoach:DiarySurveyBabyLastDate')) {
+          navigation.navigate('SurveyBaby');
         } else {
           setIsModalVisible(true);
         }
