@@ -11,7 +11,7 @@ export const Container = styled.View`
 
 export const LabelText = styled.Text`
   font-family: 'OpenSans-Regular';
-  color: #161026;
+  color: ${props => props.theme.black};
   font-size: 14px;
 `;
 
@@ -34,7 +34,8 @@ const verticalRadioButtonStyle = `
 `;
 
 export const OptionButton = styled.TouchableOpacity<OptionProps>`
-  border: 1.4px solid ${({ selected }) => (selected ? '#7D5CD7' : '#C4C4C4')};
+  border: 1.4px solid
+    ${({ theme, selected }) => (selected ? theme.primary : theme.brightGrey)};
   flex-direction: row;
   border-radius: 3.6px;
   align-items: center;
@@ -47,7 +48,8 @@ export const OptionButton = styled.TouchableOpacity<OptionProps>`
 `;
 
 export const OuterCircle = styled.View<OptionProps>`
-  border: 1.4px solid ${({ selected }) => (selected ? '#7D5CD7' : '#C4C4C4')};
+  border: 1.4px solid
+    ${({ theme, selected }) => (selected ? theme.primary : theme.brightGrey)};
   background-color: transparent;
   width: 18px;
   height: 18px;
@@ -57,15 +59,16 @@ export const OuterCircle = styled.View<OptionProps>`
 `;
 
 export const InnerCircle = styled.View<OptionProps>`
-  background-color: ${({ selected }) => (selected ? '#7D5CD7' : 'transparent')};
+  background-color: ${({ theme, selected }) =>
+    selected ? theme.primary : 'transparent'};
   width: 10px;
   height: 10px;
   border-radius: 5px;
 `;
 
 export const TextOption = styled.Text<OptionProps>`
-  color: ${({ selected, horizontal }) =>
-    selected && horizontal ? '#7D5CD7' : '#545454'};
+  color: ${({ theme, selected, horizontal }) =>
+    selected && horizontal ? theme.primary : theme.grey};
   font-family: 'OpenSans-Regular';
   margin-left: 15px;
   margin-right: 15px;
@@ -84,6 +87,6 @@ export const ErrorContainer = styled.View`
 
 export const ErrorText = styled.Text`
   font-family: 'OpenSans-Regular';
-  color: #ea3c3c;
+  color: ${props => props.theme.error};
   font-size: 14px;
 `;

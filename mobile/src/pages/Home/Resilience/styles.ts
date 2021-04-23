@@ -14,7 +14,7 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 
 export const PageHeader = styled.Text`
   margin-bottom: 20px;
-  color: #737373;
+  color: ${props => props.theme.grey};
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;
@@ -36,14 +36,14 @@ export const LoadingContainer = styled.View`
 export const Header = styled.Text`
   margin-top: 26px;
   margin-bottom: 6px;
-  color: #161026;
+  color: ${props => props.theme.black};
   font-family: 'Manjari-Bold';
   font-size: 18px;
 `;
 
 export const Text = styled.Text`
   margin-bottom: 30px;
-  color: #737373;
+  color: ${props => props.theme.grey};
   font-family: 'OpenSans-Regular';
   font-size: 16px;
 `;

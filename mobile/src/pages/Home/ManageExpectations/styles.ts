@@ -13,7 +13,7 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 `;
 
 export const HeaderTitle = styled.Text`
-  color: #545454;
+  color: ${props => props.theme.grey};
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;
@@ -22,14 +22,15 @@ export const HeaderTitle = styled.Text`
 
 export const Card = styled.View`
   flex: 1;
-  background-color: white;
+  background-color: ${props => props.theme.white};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
 export const InnerBorder = styled.View<IInnerBorderProps>`
   flex: 1;
   border: 4px solid
-    ${({ correctAnswer }) => (correctAnswer ? '#66D25D' : '#EA3C3C')};
+    ${({ theme, correctAnswer }) =>
+      correctAnswer ? theme.success : theme.error};
   align-items: center;
   justify-content: center;
   margin: 10px;
@@ -37,7 +38,7 @@ export const InnerBorder = styled.View<IInnerBorderProps>`
 `;
 
 export const CardText = styled.Text`
-  color: #161026;
+  color: ${props => props.theme.black};
   font-family: 'Manjari-Bold';
   font-size: 24px;
   text-align: center;

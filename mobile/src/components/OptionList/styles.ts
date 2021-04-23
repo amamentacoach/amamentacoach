@@ -35,7 +35,7 @@ export const ContentTextContainer = styled.View`
 `;
 
 export const ContentTitle = styled.Text`
-  color: #000000;
+  color: ${props => props.theme.black};
   font-family: 'OpenSans-Bold';
   font-size: 16px;
   flex-wrap: wrap;
@@ -43,7 +43,7 @@ export const ContentTitle = styled.Text`
 `;
 
 export const ContentSubtitle = styled.Text`
-  color: #545454;
+  color: ${props => props.theme.grey};
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   flex-wrap: wrap;
@@ -52,7 +52,7 @@ export const ContentSubtitle = styled.Text`
 export const ContentSeparator = styled.View`
   height: 1px;
   width: 100%;
-  background-color: #979797;
+  background-color: ${props => props.theme.grey};
   opacity: 0.25;
   margin-top: 20px;
 `;

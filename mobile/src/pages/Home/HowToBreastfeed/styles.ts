@@ -13,7 +13,7 @@ export const Header = styled.View`
 `;
 
 export const CurrentPageContainer = styled.View`
-  background-color: #c1acfc;
+  background-color: ${props => props.theme.babyPurple};
   border-radius: 3.6px;
   padding: 10px;
   margin-top: 20px;
@@ -25,12 +25,12 @@ export const CurrentPageText = styled.Text`
   text-align: center;
   font-family: 'OpenSans-Bold';
   font-size: 16px;
-  color: #161026;
+  color: ${props => props.theme.black};
 `;
 
 export const ContentTitleText = styled.Text`
   font-family: 'OpenSans-Regular';
-  color: #000000;
+  color: ${props => props.theme.black};
   font-size: 18px;
   text-align: center;
   margin: 20px 24px 0 24px;
@@ -47,7 +47,7 @@ export const ContentText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;
-  color: #545454;
+  color: ${props => props.theme.grey};
 `;
 
 export const CurrentPageWrapper = styled.View`
@@ -73,7 +73,7 @@ export const ContinueButton = styled.TouchableOpacity`
 `;
 
 export const TextContinueButton = styled.Text`
-  color: #545454;
+  color: ${props => props.theme.grey};
   font-family: 'OpenSans-Regular';
   font-size: 18px;
 `;

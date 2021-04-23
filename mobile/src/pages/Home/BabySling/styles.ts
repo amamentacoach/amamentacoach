@@ -14,7 +14,7 @@ export const Container = styled.View`
 
 export const Text = styled.Text`
   margin-bottom: 30px;
-  color: #737373;
+  color: ${props => props.theme.grey};
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;

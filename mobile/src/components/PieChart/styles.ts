@@ -36,5 +36,5 @@ export const DescriptionLabel = styled.Text`
   flex: 1;
   font-family: 'OpenSans-Regular';
   font-size: 14px;
-  color: #545454;
+  color: ${props => props.theme.grey};
 `;

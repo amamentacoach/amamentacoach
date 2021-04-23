@@ -11,7 +11,7 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 export const HeaderText = styled.Text`
   font-family: 'OpenSans-Bold';
   font-size: 18px;
-  color: #7d5cd7;
+  color: ${props => props.theme.primary};
   text-align: center;
 `;
 

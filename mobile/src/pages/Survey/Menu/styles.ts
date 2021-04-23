@@ -16,7 +16,7 @@ export const Header = styled.View`
 `;
 
 export const HeaderTitle = styled.Text`
-  color: #161026;
+  color: ${props => props.theme.black};
   font-family: 'Manjari-Bold';
   font-size: 18px;
   text-align: center;

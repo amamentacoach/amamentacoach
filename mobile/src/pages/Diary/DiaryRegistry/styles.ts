@@ -6,7 +6,7 @@ export const Container = styled.View`
 `;
 
 export const DateText = styled.Text`
-  color: #737373;
+  color: ${props => props.theme.grey};
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;

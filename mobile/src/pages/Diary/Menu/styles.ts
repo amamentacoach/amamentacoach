@@ -16,7 +16,7 @@ export const Header = styled.View`
 `;
 
 export const HeaderTitle = styled.Text`
-  color: #161026;
+  color: ${props => props.theme.black};
   font-family: 'Manjari-Bold';
   font-size: 18px;
   text-align: center;
@@ -30,7 +30,7 @@ export const CalendarButton = styled.TouchableOpacity`
 `;
 
 export const DateText = styled.Text`
-  color: #737373;
+  color: ${props => props.theme.grey};
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;

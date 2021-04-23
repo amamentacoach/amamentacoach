@@ -18,5 +18,5 @@ export const QuestionText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   margin: 15px 0;
-  color: #161026;
+  color: ${props => props.theme.black};
 `;

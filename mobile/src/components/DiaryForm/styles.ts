@@ -13,14 +13,14 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 `;
 
 export const HeaderBackground = styled.View`
-  background-color: #7d5cd7;
+  background-color: ${props => props.theme.primary};
   align-items: center;
   width: 100%;
   height: 170px;
 `;
 
 export const HeaderText = styled.Text`
-  color: #fafafa;
+  color: ${props => props.theme.white};
   text-align: center;
   font-family: 'OpenSans-Regular';
   font-size: 18px;
@@ -30,7 +30,7 @@ export const HeaderText = styled.Text`
 export const ContentContainer = styled.View`
   flex: 1;
   margin: 0px 24px;
-  background-color: white;
+  background-color: ${props => props.theme.white};
   border-radius: 5px;
   padding: 24px;
 `;

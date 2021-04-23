@@ -1,7 +1,9 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { ThemeProvider } from 'styled-components/native';
 
+import theme from './config/theme';
 import { AuthProvider } from './contexts/auth';
 import { IsFirstRunProvider } from './contexts/firstRun';
 import Routes from './routes/routes';
@@ -11,11 +13,13 @@ const App: React.FC = () => {
     <>
       <StatusBar barStyle="light-content" />
       <NavigationContainer>
-        <AuthProvider>
-          <IsFirstRunProvider>
-            <Routes />
-          </IsFirstRunProvider>
-        </AuthProvider>
+        <ThemeProvider theme={theme}>
+          <AuthProvider>
+            <IsFirstRunProvider>
+              <Routes />
+            </IsFirstRunProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </NavigationContainer>
     </>
   );

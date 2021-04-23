@@ -6,13 +6,13 @@ export const Container = styled.View`
 
 export const LabelText = styled.Text`
   font-family: 'OpenSans-Regular';
-  color: #161026;
+  color: ${props => props.theme.black};
   font-size: 14px;
   margin-bottom: 5px;
 `;
 
 export const PickerContainer = styled.View`
-  border: 1px solid #545454;
+  border: 1px solid ${props => props.theme.grey};
   margin-bottom: 5px;
 `;
 
@@ -30,6 +30,6 @@ export const ErrorContainer = styled.View`
 
 export const ErrorText = styled.Text`
   font-family: 'OpenSans-Regular';
-  color: #ea3c3c;
+  color: ${props => props.theme.error};
   font-size: 14px;
 `;

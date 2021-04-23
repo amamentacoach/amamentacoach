@@ -24,7 +24,7 @@ export const HeaderText = styled.Text`
   font-family: 'Manjari-Bold';
   font-size: 24px;
   margin: -20px auto auto auto;
-  color: #7d5cd7;
+  color: ${props => props.theme.primary};
   width: 180px;
   text-align: center;
 `;
@@ -38,7 +38,7 @@ export const ForgotPasswordText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 14px;
   margin: auto 0 40px auto;
-  color: #545454;
+  color: ${props => props.theme.grey};
   text-align: center;
 `;
 
@@ -53,13 +53,13 @@ export const SignUpContainer = styled.View`
 export const NoAccountText = styled.Text`
   font-family: 'OpenSans-Bold';
   font-size: 16px;
-  color: #545454;
+  color: ${props => props.theme.grey};
   margin: 0 auto;
 `;
 
 export const SignUpText = styled.Text`
   font-family: 'OpenSans-Bold';
   font-size: 16px;
-  color: #7d5cd7;
+  color: ${props => props.theme.primary};
   margin: 0 auto;
 `;

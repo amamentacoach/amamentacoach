@@ -16,21 +16,21 @@ export const MessageContainer = styled.View`
 export const Author = styled.Text`
   font-family: 'OpenSans-Bold';
   font-size: 14px;
-  color: #7d5cd7;
+  color: ${props => props.theme.primary};
   margin-bottom: 5px;
 `;
 
 export const Content = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
-  color: #545454;
+  color: ${props => props.theme.grey};
 `;
 
 export const Line = styled.View`
   width: 100%;
   height: 1px;
   margin: 20px 0;
-  background-color: #737373;
+  background-color: ${props => props.theme.grey};
   opacity: 0.2;
 `;
 
