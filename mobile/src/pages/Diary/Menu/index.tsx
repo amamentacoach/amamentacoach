@@ -81,7 +81,7 @@ const DiaryMenu: React.FC = () => {
     },
     {
       image: require('../../../../assets/images/emotions_info.png'),
-      title: 'Relatório',
+      title: 'Meu Desempenho',
       onPress: () => navigation.navigate('Report'),
     },
   ];

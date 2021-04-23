@@ -33,7 +33,7 @@ const Report: React.FC = () => {
         <View>
           <FormPickerInput
             fieldName="reportSelected"
-            label="Relatório desejado:"
+            label="Período desejado:"
             defaultValue="Diário"
             options={['Diário', 'Semanal']}
             onChange={(_, fieldValue) => handleChangeReport(fieldValue)}

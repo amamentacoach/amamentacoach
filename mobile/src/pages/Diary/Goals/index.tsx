@@ -56,7 +56,7 @@ const Goals: React.FC = () => {
               },
             },
             {
-              text: 'Ver relatório',
+              text: 'Ver desempenho',
               isBold: true,
               onPress: () => {
                 setIsFinishedModalVisible(false);

@@ -59,7 +59,7 @@ const CreateDiaryRoutes = (Stack: any) => {
       key="Report"
       name="Report"
       component={Report}
-      options={{ title: 'Relatório' }}
+      options={{ title: 'Meu Desempenho' }}
     />,
   ];
 };
