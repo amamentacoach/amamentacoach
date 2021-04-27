@@ -782,13 +782,12 @@ routes.get('/recuperar/:token',(req,res)=>{
 routes.post('/recuperar/:token',verifyJWT,maesController.recuperarSenha)
 
 /**
- * @api {get} /testePush Teste de push
+ * @api {get} /enviarNotificacoes Teste de push
  * @apiDescription Envia notificacao para todas as maes que nao preencheram o diario nesse dia</br>
- *                  <b>Uso somente para testes!</b>
- * @apiGroup Testes
+ * @apiGroup Notificação
  * 
  */
-routes.get('/testePush',async (req,res)=>{
+routes.get('/enviarNotificacoes',async (req,res)=>{
     await sendPushNotification()
     res.sendStatus(200)
 })

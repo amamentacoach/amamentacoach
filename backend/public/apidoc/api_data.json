@@ -926,6 +926,17 @@
   },
   {
     "type": "get",
+    "url": "/enviarNotificacoes",
+    "title": "Teste de push",
+    "description": "<p>Envia notificacao para todas as maes que nao preencheram o diario nesse dia</br></p>",
+    "group": "Notificação",
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Notificação",
+    "name": "GetEnviarnotificacoes"
+  },
+  {
+    "type": "get",
     "url": "/maes/ordenhas",
     "title": "Listagem",
     "description": "<p>Lista as ordenhas da mãe logada informado</p>",
@@ -1088,17 +1099,6 @@
     "filename": "./src/routes.ts",
     "groupTitle": "Relatórios",
     "name": "GetRelatoriosSemanal"
-  },
-  {
-    "type": "get",
-    "url": "/testePush",
-    "title": "Teste de push",
-    "description": "<p>Envia notificacao para todas as maes que nao preencheram o diario nesse dia</br> <b>Uso somente para testes!</b></p>",
-    "group": "Testes",
-    "version": "0.0.0",
-    "filename": "./src/routes.ts",
-    "groupTitle": "Testes",
-    "name": "GetTestepush"
   },
   {
     "type": "post",
