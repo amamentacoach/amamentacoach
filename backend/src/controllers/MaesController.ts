@@ -160,7 +160,7 @@ class MaesController{
     async subscribe(req:Request,res:Response){
         const {userId} = req.body;
         const mae = await knex('mae').select('user_id').where('id',req.mae_id).first()
-        if(mae.user_id == null)
+        if(mae.user_id == null && userId.length>1)
             await knex('mae').update({user_id:userId}).where('id',req.mae_id);
         return res.sendStatus(200)
     }
