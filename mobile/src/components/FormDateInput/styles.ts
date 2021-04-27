@@ -6,15 +6,15 @@ export const Container = styled.View`
 
 export const LabelText = styled.Text`
   font-family: 'OpenSans-Regular';
-  color: #161026;
+  color: ${props => props.theme.black};
   font-size: 14px;
   margin-bottom: 5px;
 `;
 
 export const TextInput = styled.TextInput`
   font-family: 'OpenSans-Regular';
-  background-color: #e7e7e7;
-  color: #161026;
+  background-color: ${props => props.theme.white};
+  color: ${props => props.theme.black};
   padding-left: 20px;
   border-radius: 3.6px;
 `;
@@ -27,6 +27,6 @@ export const ErrorContainer = styled.View`
 
 export const ErrorText = styled.Text`
   font-family: 'OpenSans-Regular';
-  color: #ea3c3c;
+  color: ${props => props.theme.error};
   font-size: 14px;
 `;

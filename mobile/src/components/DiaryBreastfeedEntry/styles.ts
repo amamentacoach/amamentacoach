@@ -1,14 +1,14 @@
 import styled from 'styled-components/native';
 
 export const Breastfeed = styled.View`
-  border: 2px #c5c2cc solid;
+  border: 2px ${props => props.theme.brightGrey} solid;
   border-radius: 3.6px;
   padding: 15px;
   margin-bottom: 10px;
 `;
 
 export const BabyName = styled.Text`
-  color: #7d5cd7;
+  color: ${props => props.theme.primary};
   font-family: 'OpenSans-Bold';
   font-size: 18px;
 `;
@@ -23,7 +23,7 @@ export const TextContainer = styled.View`
 `;
 
 export const Text = styled.Text`
-  color: #7d5cd7;
+  color: ${props => props.theme.primary};
   font-size: 16px;
   font-family: 'OpenSans-Regular';
 `;

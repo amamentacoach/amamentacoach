@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 
+import theme from '../../../config/theme';
 import DiaryForm from '../../../components/DiaryForm';
 import createGenericDiaryFormPage from '../../../components/GenericDiaryFormPage';
 
@@ -24,8 +25,9 @@ const SurveyFather: React.FC = () => {
   return (
     <DiaryForm
       title="Participação do Pai"
+      color={theme.babyBlue}
       category={5}
-      Page={createGenericDiaryFormPage(onFormEnd)}
+      Page={createGenericDiaryFormPage(theme.babyBlue, onFormEnd)}
       onFeedbackAccepted={setFormSent}
     />
   );

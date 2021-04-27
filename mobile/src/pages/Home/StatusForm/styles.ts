@@ -13,7 +13,7 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 `;
 
 export const HeaderInfoModal = styled.Text`
-  color: #7d5cd7;
+  color: ${props => props.theme.babyBlue};
   text-align: center;
   font-family: 'OpenSans-Bold';
   font-size: 16px;
@@ -28,7 +28,7 @@ export const TextInfoModal = styled.Text`
 `;
 
 export const ColoredText = styled.Text`
-  color: #7d5cd7;
+  color: ${props => props.theme.babyBlue};
   text-align: center;
   font-family: 'OpenSans-Bold';
   font-size: 16px;
@@ -39,14 +39,14 @@ export const InfoButton = styled.TouchableOpacity`
 `;
 
 export const HeaderBackground = styled.View`
-  background-color: #7d5cd7;
+  background-color: ${props => props.theme.babyBlue};
   align-items: center;
   width: 100%;
   height: 170px;
 `;
 
 export const HeaderText = styled.Text`
-  color: #fafafa;
+  color: ${props => props.theme.black};
   text-align: center;
   font-family: 'OpenSans-Regular';
   font-size: 18px;
@@ -56,24 +56,9 @@ export const HeaderText = styled.Text`
 export const ContentContainer = styled.View`
   flex: 1;
   margin: 0px 24px;
-  background-color: white;
+  background-color: ${props => props.theme.white};
   border-radius: 5px;
   padding: 24px;
-`;
-
-export const CurrentPageContainer = styled.View`
-  background-color: #c1acfc;
-  border-radius: 3.6px;
-  padding: 10px;
-  margin-top: 6px;
-  align-self: center;
-`;
-
-export const CurrentPageText = styled.Text`
-  text-align: center;
-  font-family: 'OpenSans-Bold';
-  font-size: 16px;
-  color: #161026;
 `;
 
 export const QuestionContainer = styled.View`
@@ -85,7 +70,7 @@ export const QuestionText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   margin: 15px 0;
-  color: #161026;
+  color: ${props => props.theme.black};
 `;
 
 export const Footer = styled.View`

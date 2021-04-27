@@ -9,7 +9,7 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 
 export const ContentTitleText = styled.Text`
   font-family: 'OpenSans-Regular';
-  color: #000000;
+  color: ${props => props.theme.black};
   font-size: 18px;
   text-align: center;
   margin: 20px 24px 0 24px;
@@ -26,7 +26,7 @@ export const ContentText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;
-  color: #545454;
+  color: ${props => props.theme.grey};
   margin: 30px 0;
 `;
 
@@ -34,5 +34,5 @@ export const ColoredText = styled.Text`
   font-family: 'OpenSans-Bold';
   font-size: 16px;
   text-align: center;
-  color: #7d5cd7;
+  color: ${props => props.theme.primary};
 `;

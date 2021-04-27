@@ -13,7 +13,7 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 `;
 
 export const VideoLink = styled.Text`
-  color: #7d5cd7;
+  color: ${props => props.theme.primary};
   font-family: 'OpenSans-Bold';
   font-size: 18px;
   align-self: center;
@@ -40,14 +40,14 @@ export const InstructionContainer = styled.View`
 `;
 
 export const Step = styled.Text`
-  color: #7d5cd7;
+  color: ${props => props.theme.primary};
   font-family: 'OpenSans-Bold';
   font-size: 18px;
   margin-right: 5px;
 `;
 
 export const Instruction = styled.Text`
-  color: #737373;
+  color: ${props => props.theme.grey};
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: justify;

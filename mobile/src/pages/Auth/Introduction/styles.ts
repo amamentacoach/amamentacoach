@@ -32,7 +32,7 @@ export const ContentText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;
-  color: #545454;
+  color: ${props => props.theme.grey};
 `;
 
 export const Footer = styled.View`

@@ -17,12 +17,12 @@ export const EntryContainer = styled.View`
 
 export const Line = styled.View`
   margin-top: 20px;
-  background-color: #cacaca;
+  background-color: ${props => props.theme.brightGrey};
   height: 1px;
 `;
 
 export const Question = styled.Text`
-  color: #7d5cd7;
+  color: ${props => props.theme.primary};
   font-size: 18px;
   font-family: 'OpenSans-Regular';
   margin-bottom: 5px;

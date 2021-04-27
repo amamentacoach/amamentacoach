@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const HeaderBackground = styled.View`
-  background-color: #7d5cd7;
+  background-color: ${props => props.theme.babyGreen};
   align-items: center;
   width: 100%;
   height: 170px;
@@ -11,7 +11,7 @@ export const ContentContainer = styled.View`
   flex: 1;
   align-items: center;
   margin: -140px 24px 0 24px;
-  background-color: white;
+  background-color: ${props => props.theme.white};
   border-radius: 5px;
 `;
 
@@ -31,7 +31,7 @@ export const ContentText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 14px;
   text-align: center;
-  color: #545454;
+  color: ${props => props.theme.grey};
   margin: 20px;
 `;
 

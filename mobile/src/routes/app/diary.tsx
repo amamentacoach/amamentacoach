@@ -1,6 +1,7 @@
 import React from 'react';
 
-import purpleHeader from '../config/purpleHeader';
+import createColorHeader from '../config/colorHeader';
+import theme from '../../config/theme';
 
 import DiaryBreastfeed from '../../pages/Diary/DiaryBreastfeed';
 import DiaryRegistry from '../../pages/Diary/DiaryRegistry';
@@ -12,6 +13,8 @@ import NewDiaryRegistry from '../../pages/Diary/NewDiaryRegistry';
 import Report from '../../pages/Diary/Report';
 
 const CreateDiaryRoutes = (Stack: any) => {
+  const headerBabyPurple = createColorHeader(theme.babyPurple);
+
   return [
     <Stack.Screen
       key="DiaryBreastfeed"
@@ -29,19 +32,19 @@ const CreateDiaryRoutes = (Stack: any) => {
       key="Feelings"
       name="Feelings"
       component={Feelings}
-      options={{ title: 'Diário', ...purpleHeader }}
+      options={{ title: 'Diário', ...headerBabyPurple }}
     />,
     <Stack.Screen
       key="Goals"
       name="Goals"
       component={Goals}
-      options={{ title: 'Diário', ...purpleHeader }}
+      options={{ title: 'Diário', ...headerBabyPurple }}
     />,
     <Stack.Screen
       key="HelpReceived"
       name="HelpReceived"
       component={HelpReceived}
-      options={{ title: 'Diário', ...purpleHeader }}
+      options={{ title: 'Diário', ...headerBabyPurple }}
     />,
     <Stack.Screen
       key="NewBreastfeedEntry"
@@ -59,7 +62,7 @@ const CreateDiaryRoutes = (Stack: any) => {
       key="Report"
       name="Report"
       component={Report}
-      options={{ title: 'Relatório' }}
+      options={{ title: 'Meu Desempenho' }}
     />,
   ];
 };

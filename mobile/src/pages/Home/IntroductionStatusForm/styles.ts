@@ -27,7 +27,7 @@ export const ContentText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;
-  color: #545454;
+  color: ${props => props.theme.grey};
 `;
 
 export const Footer = styled.View`
@@ -44,12 +44,12 @@ export const LastPageBox = styled.View`
   width: 100%;
   align-items: center;
   justify-content: center;
-  border: 2px solid #7d5cd7;
+  border: 2px solid ${props => props.theme.primary};
   border-radius: 3.6px;
 `;
 
 export const HeaderLastPageBox = styled.Text`
-  color: #7d5cd7;
+  color: ${props => props.theme.primary};
   text-align: center;
   font-family: 'OpenSans-Bold';
   font-size: 16px;
@@ -57,7 +57,7 @@ export const HeaderLastPageBox = styled.Text`
 `;
 
 export const ColoredText = styled.Text`
-  color: #7d5cd7;
+  color: ${props => props.theme.primary};
   text-align: center;
   font-family: 'OpenSans-Bold';
   font-size: 16px;

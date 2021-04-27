@@ -25,6 +25,7 @@ interface FormRadioGroupProps {
   error?: string | string[];
   // Define se as opções são apresentadas horizontalmente ou verticalmente.
   horizontal?: boolean;
+  color?: string;
   onChange: (fieldName: string, fieldValue: string[]) => void;
 }
 
@@ -34,6 +35,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   options,
   error,
   horizontal,
+  color,
   multipleSelection,
   displayOtherField,
   initialValues,
@@ -112,13 +114,14 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
         {availableOptions.map((option, index) => (
           <OptionButton
             key={option}
+            color={color}
             selected={selectedIndexes[index]}
             activeOpacity={1}
             horizontal={horizontal}
             onPress={() => handleOptionSelected(index)}>
             {!horizontal && (
-              <OuterCircle selected={selectedIndexes[index]}>
-                <InnerCircle selected={selectedIndexes[index]} />
+              <OuterCircle color={color} selected={selectedIndexes[index]}>
+                <InnerCircle color={color} selected={selectedIndexes[index]} />
               </OuterCircle>
             )}
 

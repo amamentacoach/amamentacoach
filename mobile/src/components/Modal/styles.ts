@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 interface IOptionTextProps {
+  color?: string;
   isBold?: boolean;
   disabled?: boolean;
 }
@@ -8,7 +9,7 @@ interface IOptionTextProps {
 export const Container = styled.View`
   margin: auto 50px;
   padding: 15px;
-  background-color: white;
+  background-color: ${props => props.theme.white};
   align-items: center;
   justify-content: center;
   border-radius: 3.6px;
@@ -31,7 +32,7 @@ export const Line = styled.View`
   height: 1px;
   margin-top: 20px;
   margin-bottom: 10px;
-  background-color: #737373;
+  background-color: ${props => props.theme.grey};
   opacity: 0.2;
 `;
 
@@ -46,7 +47,12 @@ export const Option = styled.TouchableOpacity`
 export const OptionText = styled.Text<IOptionTextProps>`
   font-size: 16px;
   text-align: center;
-  color: ${({ disabled }) => (disabled ? '#737373' : '#7d5cd7')};
+  color: ${({ theme, color, disabled }) => {
+    if (disabled) {
+      return theme.brightGrey;
+    }
+    return color || theme.primary;
+  }};
   font-family: ${({ isBold }) =>
     isBold ? 'OpenSans-Bold' : 'OpenSans-Regular'};
 `;

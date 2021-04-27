@@ -6,7 +6,7 @@ interface ILastPageButtonWrapperProps {
 
 export const ContentTitleText = styled.Text`
   font-family: 'OpenSans-Regular';
-  color: #000000;
+  color: ${props => props.theme.black};
   font-size: 18px;
   text-align: center;
   margin: 20px 24px 0 24px;
@@ -23,7 +23,7 @@ export const ContentHeaderText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;
-  color: #7d5cd7;
+  color: ${props => props.theme.primary};
   margin-top: 20px;
 `;
 
@@ -31,7 +31,7 @@ export const ContentText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   text-align: center;
-  color: #545454;
+  color: ${props => props.theme.grey};
 `;
 
 export const Footer = styled.View`
@@ -58,7 +58,7 @@ export const ContinueButton = styled.TouchableOpacity`
 `;
 
 export const TextContinueButton = styled.Text`
-  color: #545454;
+  color: ${props => props.theme.grey};
   font-family: 'OpenSans-Regular';
   font-size: 18px;
 `;

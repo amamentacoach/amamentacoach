@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StackActions, useNavigation } from '@react-navigation/native';
 
+import theme from '../../../config/theme';
 import DiaryForm from '../../../components/DiaryForm';
 import createGenericDiaryFormPage from '../../../components/GenericDiaryFormPage';
 import Modal from '../../../components/Modal';
@@ -46,7 +47,7 @@ const Goals: React.FC = () => {
           visible={isIntroModalVisible}
         />
         <Modal
-          content={`Suas metas foram traçadas!\nGostaria de ver o relatório com suas respostas?`}
+          content={`Suas metas foram traçadas!\nGostaria de ver o seu desempenho?`}
           options={[
             {
               text: 'Mais Tarde',
@@ -56,7 +57,7 @@ const Goals: React.FC = () => {
               },
             },
             {
-              text: 'Ver relatório',
+              text: 'Ver desempenho',
               isBold: true,
               onPress: () => {
                 setIsFinishedModalVisible(false);
@@ -70,8 +71,9 @@ const Goals: React.FC = () => {
       </ModalContainer>
       <DiaryForm
         title="Minhas metas de hoje"
+        color={theme.babyPurple}
         category={3}
-        Page={createGenericDiaryFormPage(onFormEnd)}
+        Page={createGenericDiaryFormPage(theme.babyPurple, onFormEnd)}
       />
     </>
   );

@@ -37,7 +37,7 @@ const DiaryMenu: React.FC = () => {
       title: 'Registro de amamentação',
       onPress: () =>
         navigation.navigate('DiaryBreastfeed', {
-          date: selectedDate.toISOString,
+          date: selectedDate.toISOString(),
         }),
     },
     {
@@ -45,7 +45,7 @@ const DiaryMenu: React.FC = () => {
       title: 'Registro de retiradas de leite',
       onPress: () =>
         navigation.navigate('DiaryRegistry', {
-          date: selectedDate.toISOString,
+          date: selectedDate.toISOString(),
         }),
     },
     {
@@ -81,7 +81,7 @@ const DiaryMenu: React.FC = () => {
     },
     {
       image: require('../../../../assets/images/emotions_info.png'),
-      title: 'Relatório',
+      title: 'Meu Desempenho',
       onPress: () => navigation.navigate('Report'),
     },
   ];

@@ -29,6 +29,7 @@ interface IMainModalProps {
     // Função executado ao pressionar o botão.
     onPress: () => void;
   }[];
+  color?: string;
 }
 
 const Modal: React.FC<IMainModalProps> = ({
@@ -36,6 +37,7 @@ const Modal: React.FC<IMainModalProps> = ({
   image,
   visible,
   options,
+  color,
   children,
 }) => {
   return (
@@ -52,7 +54,7 @@ const Modal: React.FC<IMainModalProps> = ({
               onPress={onPress}
               disabled={disabled}
               activeOpacity={0.7}>
-              <OptionText isBold={isBold} disabled={disabled}>
+              <OptionText color={color} isBold={isBold} disabled={disabled}>
                 {text}
               </OptionText>
             </Option>

@@ -38,14 +38,14 @@ export const SecondOption = styled.TouchableOpacity`
 export const OptionHeader = styled.Text`
   font-family: 'OpenSans-Bold';
   font-size: 16px;
-  color: #545454;
+  color: ${props => props.theme.grey};
   margin-bottom: 15px;
 `;
 
 export const OptionText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
-  color: #545454;
+  color: ${props => props.theme.grey};
   margin-left: 15px;
 `;
 
@@ -56,6 +56,6 @@ export const ErrorContainer = styled.View`
 
 export const ErrorText = styled.Text`
   font-family: 'OpenSans-Regular';
-  color: #ea3c3c;
+  color: ${props => props.theme.error};
   font-size: 14px;
 `;

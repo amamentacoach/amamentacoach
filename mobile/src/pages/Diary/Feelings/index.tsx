@@ -1,23 +1,22 @@
 import React from 'react';
 import { useNavigation, StackActions } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-import AsyncStorage from '@react-native-community/async-storage';
+import theme from '../../../config/theme';
 import { dateFormatVerbose } from '../../../utils/date';
 import DiaryForm, { IDiaryFormPage } from '../../../components/DiaryForm';
 import MainButton from '../../../components/MainButton';
 import SecondaryButton from '../../../components/SecondaryButton';
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
 
+import { Container, Footer, SecondFooterButtonContainer } from './styles';
 import {
-  Container,
-  Footer,
-  QuestionText,
   CurrentPageContainer,
   CurrentPageText,
-  SecondFooterButtonContainer,
-} from './styles';
+  QuestionText,
+} from '../../../components/GenericDiaryFormPage/styles';
 
 const Feelings: React.FC = () => {
   const navigation = useNavigation();
@@ -48,53 +47,54 @@ const Feelings: React.FC = () => {
     pagesLength,
     question,
     isFormValid,
+    isDirty,
     isSendingForm,
     setFieldValue,
     handleChangePage,
-  }) => {
-    return (
-      <Container>
-        <CurrentPageContainer>
-          <CurrentPageText>
-            {index + 1}/{pagesLength}
-          </CurrentPageText>
-        </CurrentPageContainer>
-        <QuestionText>{question.description}</QuestionText>
+  }) => (
+    <Container>
+      <CurrentPageContainer color={theme.babyPurple}>
+        <CurrentPageText>
+          {index + 1}/{pagesLength}
+        </CurrentPageText>
+      </CurrentPageContainer>
+      <QuestionText>{question.description}</QuestionText>
 
-        <FormRadioGroupInput
-          fieldName={`${question.id}`}
-          options={question.options}
-          multipleSelection={question.multipleSelection}
-          displayOtherField={question.displayOther}
-          error={isFormValid ? '' : 'Pergunta obrigatória'}
-          onChange={setFieldValue}
+      <FormRadioGroupInput
+        color={theme.babyPurple}
+        fieldName={`${question.id}`}
+        options={question.options}
+        multipleSelection={question.multipleSelection}
+        displayOtherField={question.displayOther}
+        error={isFormValid ? '' : 'Pergunta obrigatória'}
+        onChange={setFieldValue}
+      />
+
+      <Footer>
+        <MainButton
+          color={theme.babyPurple}
+          text={index === pagesLength - 1 ? 'Salvar e traçar metas' : 'Próximo'}
+          disabled={!isDirty || isSendingForm}
+          onPress={() => handleChangePage(index + 1, onFormEndGoals)}
         />
-
-        <Footer>
-          <MainButton
-            text={
-              index === pagesLength - 1 ? 'Salvar e traçar metas' : 'Próximo'
-            }
-            disabled={isSendingForm}
-            onPress={() => handleChangePage(index + 1, onFormEndGoals)}
-          />
-          {index === pagesLength - 1 && (
-            <SecondFooterButtonContainer>
-              <SecondaryButton
-                text="Salvar e sair"
-                disabled={isSendingForm}
-                onPress={() => handleChangePage(index + 1, onFormEndDiary)}
-              />
-            </SecondFooterButtonContainer>
-          )}
-        </Footer>
-      </Container>
-    );
-  };
+        {index === pagesLength - 1 && (
+          <SecondFooterButtonContainer>
+            <SecondaryButton
+              color={theme.babyPurple}
+              text="Salvar e sair"
+              disabled={!isDirty || isSendingForm}
+              onPress={() => handleChangePage(index + 1, onFormEndDiary)}
+            />
+          </SecondFooterButtonContainer>
+        )}
+      </Footer>
+    </Container>
+  );
 
   return (
     <DiaryForm
       title={currentDate}
+      color={theme.babyPurple}
       category={2}
       Page={InfoPage}
       onFeedbackAccepted={setFormSent}

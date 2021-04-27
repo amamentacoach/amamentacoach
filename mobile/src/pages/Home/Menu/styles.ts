@@ -23,14 +23,15 @@ export const ModalOption = styled.TouchableOpacity`
 `;
 
 export const TextModal = styled.Text`
-  color: #161026;
+  color: ${props => props.theme.black};
   text-align: left;
   font-family: 'OpenSans-Regular';
   font-size: 16px;
 `;
 
 export const OuterCircle = styled.View<OptionProps>`
-  border: 1.4px solid ${({ selected }) => (selected ? '#7D5CD7' : '#C4C4C4')};
+  border: 1.4px solid
+    ${({ theme, selected }) => (selected ? theme.babyPink : theme.brightGrey)};
   background-color: transparent;
   width: 18px;
   height: 18px;
@@ -41,7 +42,8 @@ export const OuterCircle = styled.View<OptionProps>`
 `;
 
 export const InnerCircle = styled.View<OptionProps>`
-  background-color: ${({ selected }) => (selected ? '#7D5CD7' : 'transparent')};
+  background-color: ${({ theme, selected }) =>
+    selected ? theme.babyPink : 'transparent'};
   width: 10px;
   height: 10px;
   border-radius: 5px;
@@ -52,7 +54,7 @@ export const LocationContainer = styled.View`
 `;
 
 export const HeaderBackground = styled.View`
-  background-color: #7d5cd7;
+  background-color: ${props => props.theme.babyPink};
   align-items: center;
   width: 100%;
   height: 70%;
@@ -61,7 +63,7 @@ export const HeaderBackground = styled.View`
 export const HeaderText = styled.Text`
   font-family: 'Manjari-Bold';
   font-size: 24px;
-  color: #fafafa;
+  color: ${props => props.theme.white};
   margin-top: 30px;
 `;
 
@@ -73,7 +75,7 @@ export const BannerImage = styled.ImageBackground`
 `;
 
 export const HUButton = styled.TouchableOpacity`
-  background-color: #30d2f5;
+  background-color: ${props => props.theme.accent};
   height: 30px;
   width: 185px;
   margin-bottom: 21px;
@@ -84,7 +86,7 @@ export const HUButton = styled.TouchableOpacity`
 export const HUButtonText = styled.Text`
   font-family: 'Manjari-Bold';
   font-size: 14px;
-  color: #fafafa;
+  color: ${props => props.theme.white};
 `;
 
 export const ContentContainer = styled.View`
@@ -120,7 +122,7 @@ export const ContentTextContainer = styled.View`
 `;
 
 export const ContentTitle = styled.Text`
-  color: #000000;
+  color: ${props => props.theme.black};
   font-family: 'OpenSans-Bold';
   font-size: 16px;
   flex-wrap: wrap;
@@ -130,7 +132,7 @@ export const ContentTitle = styled.Text`
 export const ContentSeparator = styled.View`
   height: 1px;
   width: 100%;
-  background-color: #979797;
+  background-color: ${props => props.theme.brightGrey};
   opacity: 0.25;
   margin-top: 20px;
 `;

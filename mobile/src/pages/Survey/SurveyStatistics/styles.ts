@@ -8,14 +8,14 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 `;
 
 export const HeaderBackground = styled.View`
-  background-color: #7d5cd7;
+  background-color: ${props => props.theme.babyBlue};
   align-items: center;
   width: 100%;
   height: 170px;
 `;
 
 export const HeaderText = styled.Text`
-  color: #fafafa;
+  color: ${props => props.theme.black};
   text-align: center;
   font-family: 'OpenSans-Regular';
   font-size: 18px;
@@ -23,7 +23,7 @@ export const HeaderText = styled.Text`
 `;
 
 export const ContentContainer = styled.View`
-  background-color: white;
+  background-color: ${props => props.theme.white};
   border-radius: 5px;
   margin: 0px 24px;
   padding: 24px 15px;
@@ -31,7 +31,7 @@ export const ContentContainer = styled.View`
 `;
 
 export const ContentHeader = styled.Text`
-  color: #161026;
+  color: ${props => props.theme.black};
   text-align: center;
   font-family: 'OpenSans-Bold';
   font-size: 16px;
@@ -43,7 +43,7 @@ export const QuestionContainer = styled.View`
 `;
 
 export const QuestionIndex = styled.Text`
-  color: #161026;
+  color: ${props => props.theme.black};
   text-align: center;
   font-family: 'OpenSans-Bold';
   font-size: 16px;
@@ -51,7 +51,7 @@ export const QuestionIndex = styled.Text`
 `;
 
 export const Question = styled.Text`
-  color: #545454;
+  color: ${props => props.theme.grey};
   text-align: center;
   font-family: 'OpenSans-Normal';
   font-size: 14px;
@@ -61,7 +61,7 @@ export const Question = styled.Text`
 export const ContentSeparator = styled.View`
   height: 1px;
   width: 100%;
-  background-color: #979797;
+  background-color: ${props => props.theme.grey};
   opacity: 0.25;
   margin: 40px 0;
 `;

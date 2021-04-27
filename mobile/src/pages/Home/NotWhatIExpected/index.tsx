@@ -17,6 +17,7 @@ import {
   FirstButtonContainer,
   SecondButtonContainer,
 } from './styles';
+import theme from '../../../config/theme';
 
 const pages = [
   {
@@ -77,17 +78,22 @@ const NotWhatIExpected: React.FC = () => {
           {index > 0 && (
             <FirstButtonContainer>
               <SecondaryButton
+                color={theme.black}
                 text="Voltar"
                 onPress={() => goToPage(index - 1)}
               />
             </FirstButtonContainer>
           )}
           <SecondButtonContainer>
-            {(index === pagesLength - 1 && (
-              <MainButton text="Sair" onPress={() => navigation.goBack()} />
-            )) || (
-              <MainButton text="Próximo" onPress={() => goToPage(index + 1)} />
-            )}
+            <MainButton
+              color={theme.babyGreen}
+              text={index === pagesLength - 1 ? 'Sair' : 'Próximo'}
+              onPress={() =>
+                index === pagesLength - 1
+                  ? navigation.goBack()
+                  : goToPage(index + 1)
+              }
+            />
           </SecondButtonContainer>
         </Footer>
       </ContentContainer>
