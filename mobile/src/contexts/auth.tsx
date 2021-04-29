@@ -1,7 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import RNBootSplash from 'react-native-bootsplash';
-// @ts-ignore
 import OneSignal from 'react-native-onesignal';
 
 import api from '../services/api';
@@ -22,15 +20,12 @@ const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
 export const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
   const [motherInfo, setMotherInfo] = useState<IMotherInfo>({} as IMotherInfo);
-  const [oneSignalId, setOneSignalId] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   async function initPushNotifications() {
-    OneSignal.init('8b92a77f-f327-48be-b2c2-d938aad5a0ab');
-    OneSignal.setSubscription(true);
-    OneSignal.getPermissionSubscriptionState((status: any) => {
-      setOneSignalId(status.userId);
-    });
-    await pushNotificationSubscribe(oneSignalId);
+    const { userId } = await OneSignal.getDeviceState();
+    await pushNotificationSubscribe(userId);
+    OneSignal.disablePush(false);
   }
 
   async function initMotherInfo() {
@@ -66,38 +61,41 @@ export const AuthProvider: React.FC = ({ children }) => {
       if (storageToken) {
         api.defaults.headers.common.Authorization = storageToken;
         await initMotherInfo();
-        initPushNotifications();
         setToken(storageToken);
       }
-      RNBootSplash.hide({ duration: 250 });
+
+      setIsLoading(false);
     }
 
+    OneSignal.setAppId('8b92a77f-f327-48be-b2c2-d938aad5a0ab');
     checkLoginDataInStorage();
   }, []);
 
   async function signIn(email: string, password: string): Promise<LoginStatus> {
-    const login = await auth.signIn(email, password);
-    if (login.status !== LoginStatus.Success) {
-      return login.status;
+    const { token: newToken, status } = await auth.signIn(email, password);
+    if (status !== LoginStatus.Success) {
+      return status;
     }
-    api.defaults.headers.common.Authorization = login.token;
+    api.defaults.headers.common.Authorization = newToken;
     await initMotherInfo();
 
-    await AsyncStorage.setItem('@AmamentaCoach:token', login.token);
-    setToken(login.token);
+    await initPushNotifications();
 
-    initPushNotifications();
-    return login.status;
+    await AsyncStorage.setItem('@AmamentaCoach:token', newToken);
+    setToken(newToken);
+
+    return status;
   }
 
   async function signOut(): Promise<void> {
-    await AsyncStorage.removeItem('@AmamentaCoach:token');
-    setToken(null);
-    api.defaults.headers.common.Authorization = null;
-    setMotherInfo({} as IMotherInfo);
+    OneSignal.disablePush(true);
+
     await AsyncStorage.removeItem('@AmamentaCoach:motherInfo');
-    setOneSignalId('');
-    OneSignal.setSubscription(false);
+    setMotherInfo({} as IMotherInfo);
+
+    await AsyncStorage.removeItem('@AmamentaCoach:token');
+    api.defaults.headers.common.Authorization = null;
+    setToken(null);
   }
 
   return (
@@ -109,7 +107,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         signIn,
         signOut,
       }}>
-      {children}
+      {!isLoading && children}
     </AuthContext.Provider>
   );
 };

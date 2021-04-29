@@ -6785,10 +6785,10 @@ react-native-iphone-x-helper@^1.2.1:
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
 
-react-native-onesignal@^3.9.2:
-  version "3.9.2"
-  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-3.9.2.tgz#d53fa6aa19b8c73bc8f2fd627423d0a9f9f0975a"
-  integrity sha512-tir7cDYzB7lGvy9f3iLTuVOC53fQzOexdLOei6oGuklVTJbwni3rrB9JP/Jw23TbbfgDDpTaTkPhvyZL4A6b5A==
+react-native-onesignal@^4.0.7:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-4.0.7.tgz#bbeb8a44b7f0f15c744eeff91c8ea7cf9c905f22"
+  integrity sha512-f9UCTIVRxCs+g3muFwIkdhnjnAy5Olc+U9DJj87iL4yE/2UeKNXuLkrQPKujy8c//IB4MoqOynlymPZd5DCulw==
   dependencies:
     invariant "^2.2.2"
 
