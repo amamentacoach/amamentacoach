@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import RNBootSplash from 'react-native-bootsplash';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
@@ -175,6 +176,7 @@ const Home: React.FC = () => {
     if (isFirstRun.temporary.home) {
       checkUserActions();
     }
+    RNBootSplash.hide({ duration: 250 });
   }, []);
 
   // Fecha todos os modais.

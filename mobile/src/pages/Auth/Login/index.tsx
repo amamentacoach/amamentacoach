@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import RNBootSplash from 'react-native-bootsplash';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -49,6 +50,10 @@ const Login: React.FC = () => {
       .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
       .required('Campo obrigatório'),
   }).required();
+
+  useEffect(() => {
+    RNBootSplash.hide({ duration: 250 });
+  }, []);
 
   async function handleSignIn({ email, password }: IFormValues) {
     setIsSendingForm(true);

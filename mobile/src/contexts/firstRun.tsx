@@ -40,6 +40,7 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
     },
     temporary: { home: true, extraction: true, diary: true, messages: true },
   });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function checkDataInStorage() {
@@ -55,6 +56,7 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
         };
         setIsFirstRun(firstRun);
       }
+      setIsLoading(false);
     }
     checkDataInStorage();
   }, []);
@@ -88,7 +90,7 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
         setTemporaryNotFirstRun,
         setPersistentNotFirstRun,
       }}>
-      {children}
+      {!isLoading && children}
     </IsFirstRun.Provider>
   );
 };

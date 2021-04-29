@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Image } from 'react-native';
+import RNBootSplash from 'react-native-bootsplash';
 
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import MainButton from '../../../components/MainButton';
@@ -63,6 +64,10 @@ const pages = [
 
 const Introduction: React.FC = () => {
   const { setPersistentNotFirstRun } = useIsFirstRun();
+
+  useEffect(() => {
+    RNBootSplash.hide({ duration: 250 });
+  }, []);
 
   async function handleSkip() {
     await setPersistentNotFirstRun('appIntroduction');

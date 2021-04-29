@@ -25,9 +25,9 @@ export const TextButton = styled.Text<IButtonProps>`
   font-size: 16px;
   font-family: 'OpenSans-Bold';
   color: ${({ theme, color, disabled }) => {
-    if (disabled || !color) {
+    if (disabled || color) {
       return theme.white;
     }
-    return theme.black;
+    return theme.primary;
   }};
 `;

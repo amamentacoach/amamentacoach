@@ -12,15 +12,15 @@ const App: React.FC = () => {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <NavigationContainer>
-        <ThemeProvider theme={theme}>
-          <AuthProvider>
-            <IsFirstRunProvider>
+      <IsFirstRunProvider>
+        <AuthProvider>
+          <NavigationContainer>
+            <ThemeProvider theme={theme}>
               <Routes />
-            </IsFirstRunProvider>
-          </AuthProvider>
-        </ThemeProvider>
-      </NavigationContainer>
+            </ThemeProvider>
+          </NavigationContainer>
+        </AuthProvider>
+      </IsFirstRunProvider>
     </>
   );
 };
