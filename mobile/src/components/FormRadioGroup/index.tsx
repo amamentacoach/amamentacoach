@@ -127,7 +127,8 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
 
             <TextOption
               selected={selectedIndexes[index]}
-              horizontal={horizontal}>
+              horizontal={horizontal}
+              color={color}>
               {option}
             </TextOption>
           </OptionButton>

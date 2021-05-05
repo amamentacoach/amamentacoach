@@ -1,13 +1,13 @@
 import styled from 'styled-components/native';
 
-interface IScrollViewProps {
+interface ScrollViewProps {
   width: number;
 }
 
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
-}))<IScrollViewProps>`
+}))<ScrollViewProps>`
   flex: 1;
   width: ${({ width }) => width}px;
 `;

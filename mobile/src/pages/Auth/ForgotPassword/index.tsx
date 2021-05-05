@@ -15,7 +15,7 @@ import {
   HeaderText,
 } from './styles';
 
-interface IFormValues {
+interface FormValues {
   email: string;
 }
 
@@ -23,14 +23,14 @@ const ForgotPassword: React.FC = () => {
   const [isSubmitModalVisible, setIsSubmitModalVisible] = useState(false);
   const [isSendingForm, setIsSendingForm] = useState(false);
 
-  const formInitialValues: IFormValues = {
+  const formInitialValues: FormValues = {
     email: '',
   };
-  const signUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const signUpSchema: Yup.ObjectSchema<FormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Campo obrigatório'),
   }).required();
 
-  async function handleForgotPassword({ email }: IFormValues) {
+  async function handleForgotPassword({ email }: FormValues) {
     setIsSendingForm(true);
     const successfulRequest = await forgotPassword(email);
     setIsSendingForm(false);

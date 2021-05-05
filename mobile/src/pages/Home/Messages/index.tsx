@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { FlatList, Image } from 'react-native';
+import { FlatList } from 'react-native';
 
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import { setMessagesPageOpened } from '../../../services/telemetry';
@@ -16,7 +16,7 @@ import {
   LoadingIndicator,
 } from './styles';
 
-import AddIcon from '../../../../assets/images/icons/ic_add.png';
+import AddIcon from '../../../../assets/images/icons/ic_add.svg';
 
 const Messages: React.FC = () => {
   const navigation = useNavigation();
@@ -34,7 +34,7 @@ const Messages: React.FC = () => {
         <AddMessageButton
           onPress={() => navigation.navigate('NewMessage')}
           activeOpacity={0.7}>
-          <Image source={AddIcon} />
+          <AddIcon />
         </AddMessageButton>
       ),
     });

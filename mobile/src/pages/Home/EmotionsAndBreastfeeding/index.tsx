@@ -1,21 +1,24 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import OptionsList from '../../../components/OptionList';
+import OptionsList, { OptionList } from '../../../components/OptionList';
 
 import ScrollView from './styles';
+
+import EmotionsBox from '../../../../assets/images/emotions_box.svg';
+import EmotionsJacobson from '../../../../assets/images/emotions_jacobson.svg';
 
 const EmotionsAndBreastfeeding: React.FC = () => {
   const navigation = useNavigation();
 
-  const options = [
+  const options: OptionList[] = [
     {
-      image: require('../../../../assets/images/emotions_box.png'),
+      Image: EmotionsBox,
       title: 'Caixinha da distração',
       onPress: () => navigation.navigate('Distractions'),
     },
     {
-      image: require('../../../../assets/images/emotions_jacobson.png'),
+      Image: EmotionsJacobson,
       title: 'Técnica de Relaxamento de Jacobson',
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['C2hFGeJj48k'] }),

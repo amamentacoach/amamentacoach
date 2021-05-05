@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { useAuth } from '../../../contexts/auth';
-import OptionsList from '../../../components/OptionList';
-
+import OptionsList, { OptionList } from '../../../components/OptionList';
 import Modal from '../../../components/Modal';
 import { checkOneDayPassed } from '../../../utils/date';
 
 import { Header, HeaderTitle, ScrollView } from './styles';
+
+import SurveysOne from '../../../../assets/images/surveys_one.svg';
+import SurveysTwo from '../../../../assets/images/surveys_two.svg';
+import SurveysThree from '../../../../assets/images/surveys_three.svg';
+import SurveysFour from '../../../../assets/images/surveys_four.svg';
+import SurveysFive from '../../../../assets/images/surveys_five.svg';
 
 const SurveyMenu: React.FC = () => {
   const { motherInfo } = useAuth();
@@ -15,9 +20,9 @@ const SurveyMenu: React.FC = () => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  let options = [
+  let options: OptionList[] = [
     {
-      image: require('../../../../assets/images/surveys_one.png'),
+      Image: SurveysOne,
       title: 'Amamentar um prematuro',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -33,7 +38,7 @@ const SurveyMenu: React.FC = () => {
       },
     },
     {
-      image: require('../../../../assets/images/surveys_one.png'),
+      Image: SurveysTwo,
       title: 'Meu Bebê Hoje',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -45,7 +50,7 @@ const SurveyMenu: React.FC = () => {
       },
     },
     {
-      image: require('../../../../assets/images/surveys_two.png'),
+      Image: SurveysThree,
       title: 'Motivação',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -61,7 +66,7 @@ const SurveyMenu: React.FC = () => {
       },
     },
     {
-      image: require('../../../../assets/images/surveys_three.png'),
+      Image: SurveysFour,
       title: 'Sobre ajuda',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -79,7 +84,7 @@ const SurveyMenu: React.FC = () => {
     options = [
       ...options,
       {
-        image: require('../../../../assets/images/surveys_four.png'),
+        Image: SurveysFive,
         title: 'Sobre a participação do pai',
         onPress: async () => {
           // Checa se o usuário já respondeu o formulário no dia.

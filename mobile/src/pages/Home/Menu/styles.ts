@@ -76,9 +76,9 @@ export const BannerImage = styled.ImageBackground`
 
 export const HUButton = styled.TouchableOpacity`
   background-color: ${props => props.theme.accent};
-  height: 30px;
-  width: 185px;
-  margin-bottom: 21px;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 8px;
   justify-content: center;
   align-items: center;
 `;
@@ -108,11 +108,6 @@ export const ContentOption = styled.TouchableOpacity`
   width: 100%;
   flex-direction: row;
   align-items: center;
-`;
-
-export const ContentImage = styled.Image`
-  height: 100px;
-  width: 100px;
 `;
 
 export const ContentTextContainer = styled.View`

@@ -1,17 +1,16 @@
 import React from 'react';
-import { Image } from 'react-native';
 
 import { ContentWrapper, ContentText, ScrollView } from './styles';
 
-import MilkAdditionalInfoOne from '../../../../assets/images/milk_additional_info_one.png';
-import MilkAdditionalInfoTwo from '../../../../assets/images/milk_additional_info_two.png';
-import MilkAdditionalInfoThree from '../../../../assets/images/milk_additional_info_three.png';
+import MilkAdditionalInfoOne from '../../../../assets/images/milk_additional_info_one.svg';
+import MilkAdditionalInfoTwo from '../../../../assets/images/milk_additional_info_two.svg';
+import MilkAdditionalInfoThree from '../../../../assets/images/milk_additional_info_three.svg';
 
 const MilkAdditionalInformation: React.FC = () => {
   return (
     <ScrollView>
       <ContentWrapper>
-        <Image source={MilkAdditionalInfoOne} />
+        <MilkAdditionalInfoOne />
         <ContentText>
           Quando o bebê nasce e a placenta sai, acontecem alterações importantes
           no corpo que ajudam a dar início na produção de leite. Os hormônios
@@ -24,7 +23,7 @@ const MilkAdditionalInformation: React.FC = () => {
         </ContentText>
       </ContentWrapper>
       <ContentWrapper>
-        <Image source={MilkAdditionalInfoTwo} />
+        <MilkAdditionalInfoTwo />
         <ContentText>
           Conforme o bebê suga o peito, ou conforme o leite é retirado, o
           cérebro produz mais e mais hormônio ocitocina. Dentro da mama, a
@@ -34,7 +33,7 @@ const MilkAdditionalInformation: React.FC = () => {
         </ContentText>
       </ContentWrapper>
       <ContentWrapper>
-        <Image source={MilkAdditionalInfoThree} />
+        <MilkAdditionalInfoThree />
         <ContentText>
           A ocitocina é produzida e liberada com mais facilidade quando a mulher
           sente-se bem, está calma e confiante. Também quando vê o bebê, toca

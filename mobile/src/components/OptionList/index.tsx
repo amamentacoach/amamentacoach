@@ -1,32 +1,34 @@
 import React from 'react';
+import { Image as ReactImage } from 'react-native';
+import { SvgProps } from 'react-native-svg';
 
 import {
   ContentContainer,
   ContentHeader,
   ContentOptionButton,
-  ContentImage,
   ContentTitle,
   ContentSubtitle,
   ContentSeparator,
   Option,
   ContentTextContainer,
-  OpenIconImage,
 } from './styles';
 
-import NextIcon from '../../../assets/images/icons/ic_next.png';
+import NextIcon from '../../../assets/images/icons/ic_next.svg';
 
-interface IOptionListProps {
-  options: {
-    image: any;
-    title: string;
-    subtitle?: string;
-    onPress: () => void;
-  }[];
+export interface OptionList {
+  Image?: number | React.FC<SvgProps>;
+  title: string;
+  subtitle?: string;
+  onPress: () => void;
+}
+
+interface OptionListProps {
+  options: OptionList[];
   label?: string;
   displayArrows?: boolean;
 }
 
-const OptionsList: React.FC<IOptionListProps> = ({
+const OptionsList: React.FC<OptionListProps> = ({
   options,
   label = null,
   displayArrows = false,
@@ -34,19 +36,22 @@ const OptionsList: React.FC<IOptionListProps> = ({
   return (
     <ContentContainer>
       {label && <ContentHeader>{label}</ContentHeader>}
-      {options.map(({ image, title, subtitle, onPress }, index) => (
+      {options.map(({ Image, title, subtitle, onPress }, index) => (
         <Option key={title}>
           <ContentOptionButton activeOpacity={0.7} onPress={onPress}>
-            <ContentImage source={image} />
+            {Image &&
+              (typeof Image === 'number' ? (
+                <ReactImage source={Image} width={70} height={70} />
+              ) : (
+                <Image width={70} height={70} />
+              ))}
 
             <ContentTextContainer>
               <ContentTitle>{title}</ContentTitle>
               {subtitle && <ContentSubtitle>{subtitle}</ContentSubtitle>}
             </ContentTextContainer>
 
-            {displayArrows && (
-              <OpenIconImage source={NextIcon} resizeMode="contain" />
-            )}
+            {displayArrows && <NextIcon height={15} width={20} />}
           </ContentOptionButton>
           {index < options.length - 1 && <ContentSeparator />}
         </Option>

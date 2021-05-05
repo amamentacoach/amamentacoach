@@ -3,7 +3,7 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { IMotherSignUpInfo } from '../../../services/auth';
+import { MotherSignUpInfo } from '../../../services/auth';
 import MainButton from '../../../components/MainButton';
 import SecondaryButton from '../../../components/SecondaryButton';
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
@@ -25,7 +25,7 @@ import {
   OptionPickerContainer,
 } from './styles';
 
-interface IFormValues {
+interface FormValues {
   name: string;
   birthday: string;
   ddd: string;
@@ -70,7 +70,7 @@ const MotherForm: React.FC = () => {
     RouteProp<IScreenParams, 'MotherForm'>
   >().params;
 
-  const formInitialValues: IFormValues = {
+  const formInitialValues: FormValues = {
     name: '',
     birthday: '',
     ddd: '',
@@ -197,8 +197,8 @@ const MotherForm: React.FC = () => {
   }
 
   // Avança para a próxima página passando as informações do usuário.
-  function handleFormSubmit(formValues: IFormValues) {
-    const motherInfo: IMotherSignUpInfo = {
+  function handleFormSubmit(formValues: FormValues) {
+    const motherInfo: MotherSignUpInfo = {
       email,
       password,
       name: formValues.name,

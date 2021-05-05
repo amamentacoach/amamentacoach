@@ -1,8 +1,8 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { Image as ReactImage, View } from 'react-native';
 
 import ProgressDots from '../ProgressDots';
-import { IInfoPageProps } from '../InformationPages';
+import { InfoModelProps } from '../InformationPages';
 
 import {
   ContinueButton,
@@ -18,18 +18,23 @@ import {
 
 // Página genérica que pode ser passada a um componente InformationPages.
 const createGenericInfoPage = (onEnd: () => void) => {
-  const InfoPage: React.FC<IInfoPageProps> = ({
+  const InfoModel: React.FC<InfoModelProps> = ({
     index,
     pagesLength,
     title,
     content,
-    image,
+    Image,
     flatListRef,
   }) => (
     <>
       <ContentTitleText>{title}</ContentTitleText>
       <ContentWrapper>
-        <Image source={image} />
+        {Image &&
+          (typeof Image === 'number' ? (
+            <ReactImage source={Image} />
+          ) : (
+            <Image />
+          ))}
         {content.map(({ sectionHeader, text }) => (
           <View key={text}>
             {sectionHeader && (
@@ -56,7 +61,7 @@ const createGenericInfoPage = (onEnd: () => void) => {
     </>
   );
 
-  return InfoPage;
+  return InfoModel;
 };
 
 export default createGenericInfoPage;

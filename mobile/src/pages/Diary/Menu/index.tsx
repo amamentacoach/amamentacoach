@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
@@ -9,7 +8,8 @@ import { useAuth } from '../../../contexts/auth';
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import { setDiaryPageOpened } from '../../../services/telemetry';
 import { checkOneDayPassed, dateFormatVerbose } from '../../../utils/date';
-import OptionsList from '../../../components/OptionList';
+import OptionsList, { OptionList } from '../../../components/OptionList';
+import Modal from '../../../components/Modal';
 
 import {
   ScrollView,
@@ -19,8 +19,13 @@ import {
   DateText,
 } from './styles';
 
-import CalendarIcon from '../../../../assets/images/icons/ic_calendar.png';
-import Modal from '../../../components/Modal';
+import CalendarIcon from '../../../../assets/images/icons/ic_calendar.svg';
+import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
+import DiarySmile from '../../../../assets/images/diary_smile.svg';
+import DiaryStar from '../../../../assets/images/diary_star.svg';
+import PrematureHeart from '../../../../assets/images/premature_heart.svg';
+import EmotionsInfo from '../../../../assets/images/emotions_info.svg';
+import Father from '../../../../assets/images/father.svg';
 
 const DiaryMenu: React.FC = () => {
   const { motherInfo } = useAuth();
@@ -31,9 +36,9 @@ const DiaryMenu: React.FC = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(moment());
 
-  const options = [
+  const options: OptionList[] = [
     {
-      image: require('../../../../assets/images/premature_breastfeed.png'),
+      Image: PrematureBreastfeed,
       title: 'Registro de amamentação',
       onPress: () =>
         navigation.navigate('DiaryBreastfeed', {
@@ -41,7 +46,7 @@ const DiaryMenu: React.FC = () => {
         }),
     },
     {
-      image: require('../../../../assets/images/premature_breastfeed.png'),
+      Image: PrematureBreastfeed,
       title: 'Registro de retiradas de leite',
       onPress: () =>
         navigation.navigate('DiaryRegistry', {
@@ -49,7 +54,7 @@ const DiaryMenu: React.FC = () => {
         }),
     },
     {
-      image: require('../../../../assets/images/diary_smile.png'),
+      Image: DiarySmile,
       title: 'Sentimentos',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -61,12 +66,12 @@ const DiaryMenu: React.FC = () => {
       },
     },
     {
-      image: require('../../../../assets/images/diary_star.png'),
+      Image: DiaryStar,
       title: 'Metas',
       onPress: () => navigation.navigate('Goals'),
     },
     {
-      image: require('../../../../assets/images/premature_heart.png'),
+      Image: PrematureHeart,
       title: 'Ajuda recebida',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -80,7 +85,7 @@ const DiaryMenu: React.FC = () => {
       },
     },
     {
-      image: require('../../../../assets/images/emotions_info.png'),
+      Image: EmotionsInfo,
       title: 'Meu Desempenho',
       onPress: () => navigation.navigate('Report'),
     },
@@ -89,7 +94,7 @@ const DiaryMenu: React.FC = () => {
   // Exibe o upload de imagem do pai apenas se a mãe tem um companheiro.
   if (motherInfo.partner) {
     options.splice(5, 0, {
-      image: require('../../../../assets/images/father.png'),
+      Image: Father,
       title: 'Participação do Pai',
       // @ts-ignore
       subtitle: 'Registre e acompanhe a participação do papai',
@@ -139,7 +144,7 @@ const DiaryMenu: React.FC = () => {
           <CalendarButton
             onPress={() => setShowCalendar(true)}
             activeOpacity={0.7}>
-            <Image source={CalendarIcon} />
+            <CalendarIcon />
           </CalendarButton>
         </Header>
         <DateText>{dateFormatVerbose(selectedDate)}</DateText>

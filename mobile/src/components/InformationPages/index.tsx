@@ -1,14 +1,15 @@
 import React, { useRef } from 'react';
 import { Dimensions, FlatList } from 'react-native';
+import { SvgProps } from 'react-native-svg';
 
 import { ListContainer, PageContainer, ScrollView } from './styles';
 
-export interface IInfoPageProps {
+export interface InfoModelProps {
   flatListRef: React.RefObject<FlatList<any>>;
   index: number;
   pagesLength: number;
   title?: string;
-  image?: any;
+  Image?: number | React.FC<SvgProps>;
   content: {
     sectionHeader?: string;
     text: string;
@@ -16,21 +17,23 @@ export interface IInfoPageProps {
   goToPage: (page: number) => void;
 }
 
-interface IInformationPagesProps {
-  PageModel: React.FC<IInfoPageProps>;
-  pages: {
-    id: number;
-    title?: string;
-    image?: any;
-    content: {
-      sectionHeader?: string;
-      text: string;
-    }[];
+export interface InfoPage {
+  id: number;
+  title?: string;
+  Image?: number | React.FC<SvgProps>;
+  content: {
+    sectionHeader?: string;
+    text: string;
   }[];
+}
+
+interface InformationPagesProps {
+  PageModel: React.FC<InfoModelProps>;
+  pages: InfoPage[];
   scrollEnabled?: boolean;
 }
 
-const InformationPages: React.FC<IInformationPagesProps> = ({
+const InformationPages: React.FC<InformationPagesProps> = ({
   pages,
   PageModel,
   scrollEnabled,
@@ -61,7 +64,7 @@ const InformationPages: React.FC<IInformationPagesProps> = ({
                 pagesLength={pages.length}
                 title={item.title}
                 content={item.content}
-                image={item.image}
+                Image={item.Image}
                 flatListRef={flatListRef}
                 goToPage={goToPage}
               />

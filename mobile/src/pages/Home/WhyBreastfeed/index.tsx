@@ -20,11 +20,24 @@ import {
   ColoredContentText,
 } from './styles';
 
+import MilkWithdrawalSeven from '../../../../assets/images/milk_withdrawal_seven.png';
+import WhyMilkWithdrawalTwo from '../../../../assets/images/why_milk_withdrawal_two.png';
+
+interface PageProps {
+  index: number;
+  title: string;
+  image: any;
+  content: {
+    idText: number;
+    text: JSX.Element;
+  }[];
+}
+
 const pages = [
   {
     id: 1,
     title: 'Por que fazer a retirada do leite?',
-    image: require('../../../../assets/images/why_milk_withdrawal_one.png'),
+    image: MilkWithdrawalSeven,
     content: [
       {
         idText: 1,
@@ -50,7 +63,7 @@ const pages = [
   {
     id: 2,
     title: 'Por que fazer a retirada do leite?',
-    image: require('../../../../assets/images/why_milk_withdrawal_two.png'),
+    image: WhyMilkWithdrawalTwo,
     content: [
       {
         idText: 1,
@@ -66,7 +79,7 @@ const pages = [
   {
     id: 3,
     title: 'Por que fazer a retirada do leite?',
-    image: require('../../../../assets/images/why_milk_withdrawal_two.png'),
+    image: WhyMilkWithdrawalTwo,
     content: [
       {
         idText: 1,
@@ -85,22 +98,12 @@ const pages = [
   },
 ];
 
-interface PageProps {
-  index: number;
-  title: string;
-  image: any;
-  content: {
-    idText: number;
-    text: JSX.Element;
-  }[];
-}
-
 const WhyBreastfeed: React.FC = () => {
   const navigation = useNavigation();
   const { width } = Dimensions.get('window');
   const flatListRef = useRef<FlatList>(null);
 
-  const InfoPage: React.FC<PageProps> = ({ index, title, image, content }) => (
+  const InfoModel: React.FC<PageProps> = ({ index, title, image, content }) => (
     <>
       <ContentTitleText>{title}</ContentTitleText>
       <ContentWrapper>
@@ -134,7 +137,7 @@ const WhyBreastfeed: React.FC = () => {
         renderItem={({ item, index }) => (
           <PageContainer width={width}>
             <ScrollView>
-              <InfoPage
+              <InfoModel
                 index={index}
                 title={item.title}
                 content={item.content}

@@ -4,10 +4,10 @@ import { StackActions, useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 
 import {
-  ISurveyQuestion,
+  SurveyQuestion,
   listQuestions,
   answerQuestion,
-  IAnswerFeedback,
+  AnswerFeedback,
 } from '../../services/survey';
 import Modal from '../Modal';
 
@@ -19,13 +19,13 @@ import {
 } from './styles';
 
 // Props de um componente que pode ser utilizado para gerar uma página do formulário.
-export interface IDiaryFormPage {
+export interface DiaryFormPage {
   // Index da página.
   index: number;
   // Número total de páginas.
   pagesLength: number;
   // Questões que devem ser respondidas pelo usuário.
-  question: ISurveyQuestion;
+  question: SurveyQuestion;
   // Verifica se formulário foi preenchido corretamente ao tentar avançar a página
   isFormValid: boolean;
   // Verifica se pelo menos uma opção do formulário foi selecionada.
@@ -38,7 +38,7 @@ export interface IDiaryFormPage {
   handleChangePage: (newPage: number, handleFormEnd: () => void) => void;
 }
 
-interface IDiaryFormProps {
+interface DiaryFormProps {
   // Título da página.
   title: string;
   // Cor da página.
@@ -46,18 +46,18 @@ interface IDiaryFormProps {
   // Categoria que deve ser utilizada ao buscar as perguntas no backend.
   category: number;
   // Componente para gerar as páginas do formulário.
-  Page: React.FC<IDiaryFormPage>;
+  Page: React.FC<DiaryFormPage>;
   // Função executada ao aceitar o feedback recebido com base nas respostas selecionadas.
   onFeedbackAccepted?: () => void;
 }
 
-interface IFeedbackModalProps {
+interface FeedbackModalProps {
   content: string;
   redirect: string;
   onExit: () => void;
 }
 
-const DiaryForm: React.FC<IDiaryFormProps> = ({
+const DiaryForm: React.FC<DiaryFormProps> = ({
   color,
   category,
   title,
@@ -68,7 +68,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
   const navigation = useNavigation();
   const pageFlatListRef = useRef<FlatList>(null);
 
-  const [pages, setPages] = useState<ISurveyQuestion[]>([]);
+  const [pages, setPages] = useState<SurveyQuestion[]>([]);
   const [formInitialValues, setFormInitialValues] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -78,7 +78,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
   const [
     feedbackModalData,
     setFeedbackModalData,
-  ] = useState<IFeedbackModalProps | null>(null);
+  ] = useState<FeedbackModalProps | null>(null);
   const [isFeedbackModalVisible, setIsFeedbackModalVisible] = useState(false);
 
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
@@ -110,7 +110,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
   // Verifica se pelo menos uma resposta foi selecionada e caso a opção 'Outro' tenha sido
   // selecionado o usuário deve preencher um valor no campo de texto.
   function validateForm(
-    question: ISurveyQuestion,
+    question: SurveyQuestion,
     values: {
       [key: number]: string[];
     },
@@ -136,7 +136,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
   // Envia as respostas do usuário ao backend.
   async function handleFormSubmit(answers: {
     [key: string]: string[];
-  }): Promise<IAnswerFeedback | undefined | null> {
+  }): Promise<AnswerFeedback | undefined | null> {
     // Responde todas as perguntas do formulário e coleta a resposta do servidor para cada questão.
     const responses = await Promise.all(
       Object.keys(answers).map(async questionId =>
@@ -156,7 +156,7 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
 
   // Envia as respostas do formulário ao servidor e chama o argumento handleFormEnd.
   async function handleLastPage(
-    submitForm: () => Promise<IAnswerFeedback | undefined | null>,
+    submitForm: () => Promise<AnswerFeedback | undefined | null>,
     handleFormEnd: () => void,
   ) {
     setIsSendingForm(true);
@@ -189,11 +189,11 @@ const DiaryForm: React.FC<IDiaryFormProps> = ({
   // Caso a página atual seja a última a função handleLastPage é chamada.
   async function handleChangePage(
     newPage: number,
-    question: ISurveyQuestion,
+    question: SurveyQuestion,
     values: {
       [key: number]: string[];
     },
-    submitForm: () => Promise<IAnswerFeedback | undefined | null>,
+    submitForm: () => Promise<AnswerFeedback | undefined | null>,
     handleFormEnd: () => void,
   ) {
     // Verifica se pelo menos uma resposta foi selecionada

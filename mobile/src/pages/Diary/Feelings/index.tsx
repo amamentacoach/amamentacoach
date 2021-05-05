@@ -6,7 +6,7 @@ import 'moment/locale/pt-br';
 
 import theme from '../../../config/theme';
 import { dateFormatVerbose } from '../../../utils/date';
-import DiaryForm, { IDiaryFormPage } from '../../../components/DiaryForm';
+import DiaryForm, { DiaryFormPage } from '../../../components/DiaryForm';
 import MainButton from '../../../components/MainButton';
 import SecondaryButton from '../../../components/SecondaryButton';
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
@@ -42,7 +42,7 @@ const Feelings: React.FC = () => {
     navigation.navigate('Diary');
   };
 
-  const InfoPage: React.FC<IDiaryFormPage> = ({
+  const FormPage: React.FC<DiaryFormPage> = ({
     index,
     pagesLength,
     question,
@@ -96,7 +96,7 @@ const Feelings: React.FC = () => {
       title={currentDate}
       color={theme.babyPurple}
       category={2}
-      Page={InfoPage}
+      Page={FormPage}
       onFeedbackAccepted={setFormSent}
     />
   );

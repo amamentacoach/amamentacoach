@@ -1,11 +1,11 @@
 import styled from 'styled-components/native';
 
-interface IButtonProps {
+interface ButtonProps {
   color?: string;
   disabled?: boolean | null;
 }
 
-export const Button = styled.TouchableOpacity<IButtonProps>`
+export const Button = styled.TouchableOpacity<ButtonProps>`
   height: 50px;
   width: 100%;
   background-color: transparent;
@@ -21,13 +21,13 @@ export const Button = styled.TouchableOpacity<IButtonProps>`
   border-radius: 3.6px;
 `;
 
-export const TextButton = styled.Text<IButtonProps>`
+export const TextButton = styled.Text<ButtonProps>`
   font-size: 16px;
   font-family: 'OpenSans-Bold';
   color: ${({ theme, color, disabled }) => {
-    if (disabled || color) {
+    if (disabled && !color) {
       return theme.white;
     }
-    return theme.primary;
+    return color || theme.primary;
   }};
 `;

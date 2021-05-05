@@ -4,22 +4,22 @@ import OneSignal from 'react-native-onesignal';
 
 import api from '../services/api';
 import * as auth from '../services/auth';
-import { IMotherInfo, LoginStatus } from '../services/auth';
+import { MotherInfo, LoginStatus } from '../services/auth';
 import pushNotificationSubscribe from '../services/pushNotification';
 
-interface IAuthContextData {
+interface AuthContextData {
   isSigned: boolean;
-  motherInfo: IMotherInfo;
+  motherInfo: MotherInfo;
   updateMotherInfo: () => Promise<void>;
   signIn(email: string, password: string): Promise<LoginStatus>;
   signOut(): void;
 }
 
-const AuthContext = createContext<IAuthContextData>({} as IAuthContextData);
+const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
-  const [motherInfo, setMotherInfo] = useState<IMotherInfo>({} as IMotherInfo);
+  const [motherInfo, setMotherInfo] = useState<MotherInfo>({} as MotherInfo);
   const [isLoading, setIsLoading] = useState(true);
 
   async function initPushNotifications() {
@@ -91,7 +91,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     OneSignal.disablePush(true);
 
     await AsyncStorage.removeItem('@AmamentaCoach:motherInfo');
-    setMotherInfo({} as IMotherInfo);
+    setMotherInfo({} as MotherInfo);
 
     await AsyncStorage.removeItem('@AmamentaCoach:token');
     api.defaults.headers.common.Authorization = null;

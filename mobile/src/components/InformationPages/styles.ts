@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-interface IContainerProps {
+interface ContainerProps {
   width: number;
 }
 
@@ -15,7 +15,7 @@ export const ListContainer = styled.SafeAreaView`
   flex: 1;
 `;
 
-export const PageContainer = styled.View<IContainerProps>`
+export const PageContainer = styled.View<ContainerProps>`
   width: ${({ width }) => width}px;
   flex: 1;
 `;

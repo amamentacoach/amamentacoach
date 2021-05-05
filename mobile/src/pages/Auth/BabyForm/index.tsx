@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Formik, FormikErrors } from 'formik';
 import * as Yup from 'yup';
 
 import {
   signUpBaby,
-  IMotherSignUpInfo,
+  MotherSignUpInfo,
   signUpMother,
-  IBabySignUpInfo,
+  BabySignUpInfo,
 } from '../../../services/auth';
 import Modal from '../../../components/Modal';
 import MainButton from '../../../components/MainButton';
@@ -35,9 +35,9 @@ import {
   ApgarHelpButton,
 } from './styles';
 
-import helpIcon from '../../../../assets/images/icons/ic_question.png';
+import HelpIcon from '../../../../assets/images/icons/ic_question.svg';
 
-interface IBaby {
+interface Baby {
   id: number;
   name: string;
   birthday: string;
@@ -51,14 +51,14 @@ interface IBaby {
   birthLocation: string[];
 }
 
-interface IFormValues {
+interface FormValues {
   numberOfBabies: string;
-  babies: IBaby[];
+  babies: Baby[];
 }
 
 type ScreenParams = {
   MotherForm: {
-    motherInfo: IMotherSignUpInfo;
+    motherInfo: MotherSignUpInfo;
   };
 };
 
@@ -131,7 +131,7 @@ const BabyForm: React.FC = () => {
   }).required();
 
   // Retorna um novo objeto Baby com um id especificado.
-  function newBaby(babyId: number): IBaby {
+  function newBaby(babyId: number): Baby {
     return {
       id: babyId,
       name: '',
@@ -149,7 +149,7 @@ const BabyForm: React.FC = () => {
 
   // Retorna a mensagem de erro um bebê caso exista.
   function getBabyError(
-    errors: FormikErrors<IFormValues>,
+    errors: FormikErrors<FormValues>,
     index: number,
     field: string,
   ) {
@@ -162,7 +162,7 @@ const BabyForm: React.FC = () => {
   // Adiciona ou remove um bebê de acordo com a entrada do usuário.
   function handleNewBaby(
     fieldValue: string,
-    babies: IBaby[],
+    babies: Baby[],
     setFieldValue: (field: string, value: any) => void,
   ) {
     // Caso o texto possua caracteres não numéricos ele é ignorado.
@@ -187,7 +187,7 @@ const BabyForm: React.FC = () => {
     for (let index = 0; index < Math.abs(newBabyCount - babyCount); index++) {
       if (newBabyCount > babyCount) {
         // Caso o novo valor seja maior que o anterior é necessário criar novos objetos do tipo
-        // IBaby e adiciona-los a lista existente.
+        // Baby e adiciona-los a lista existente.
         newBabies = [...newBabies, newBaby(babyCount + index + 1)];
       } else if (newBabyCount < babyCount) {
         // Caso o novo valor seja menor que o anterior é necessário remover os n últimos objetos
@@ -207,9 +207,9 @@ const BabyForm: React.FC = () => {
   }
 
   // Registra todos os bebês do formulário.
-  async function registerNewBabies(token: string, formValues: IFormValues) {
+  async function registerNewBabies(token: string, formValues: FormValues) {
     formValues.babies.forEach(async baby => {
-      const babyInfo: IBabySignUpInfo = {
+      const babyInfo: BabySignUpInfo = {
         name: baby.name,
         birthday: baby.birthday,
         weight: parseFloat(baby.weight),
@@ -226,7 +226,7 @@ const BabyForm: React.FC = () => {
   }
 
   // Registra a mãe e os bebês.
-  async function handleFormSubmit(formValues: IFormValues) {
+  async function handleFormSubmit(formValues: FormValues) {
     setIsSendingForm(true);
     const token = await registerNewMother();
     if (token === null) {
@@ -423,7 +423,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                   <ApgarHelpButton
                     onPress={() => setIsApgarModalVisible(true)}
                     activeOpacity={0.8}>
-                    <Image source={helpIcon} height={22} width={22} />
+                    <HelpIcon height={22} width={22} />
                   </ApgarHelpButton>
                 </SubOptionsContainer>
                 <FormRadioGroupInput

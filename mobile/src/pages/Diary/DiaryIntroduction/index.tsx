@@ -1,11 +1,11 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image as ReactImage } from 'react-native';
 
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import ProgressDots from '../../../components/ProgressDots';
 import MainButton from '../../../components/MainButton';
 import InformationPages, {
-  IInfoPageProps,
+  InfoModelProps,
 } from '../../../components/InformationPages';
 
 import {
@@ -18,10 +18,13 @@ import {
   CurrentPageWrapper,
 } from './styles';
 
+import IntroDiary from '../../../../assets/images/intro_diary.svg';
+import IntroDiaryCalendar from '../../../../assets/images/intro_diary_calendar.svg';
+
 const pages = [
   {
     id: 1,
-    image: require('../../../../assets/images/intro_diary_diary.png'),
+    Image: IntroDiary,
     content: [
       {
         text:
@@ -32,7 +35,7 @@ const pages = [
   {
     id: 2,
     title: '1.  Procure a serenidade',
-    image: require('../../../../assets/images/intro_diary_calendar.png'),
+    Image: IntroDiaryCalendar,
     content: [
       {
         text:
@@ -49,16 +52,21 @@ const DiaryIntroduction: React.FC = () => {
     await setPersistentNotFirstRun('diaryIntroduction');
   }
 
-  const InfoPage: React.FC<IInfoPageProps> = ({
+  const InfoModel: React.FC<InfoModelProps> = ({
     flatListRef,
     index,
     pagesLength,
     content,
-    image,
+    Image,
   }) => (
     <>
       <ContentWrapper>
-        <Image source={image} />
+        {Image &&
+          (typeof Image === 'number' ? (
+            <ReactImage source={Image} />
+          ) : (
+            <Image />
+          ))}
         {content.map(({ text }) => (
           <ContentText key={text}>{text}</ContentText>
         ))}
@@ -89,7 +97,7 @@ const DiaryIntroduction: React.FC = () => {
     </>
   );
 
-  return <InformationPages pages={pages} PageModel={InfoPage} />;
+  return <InformationPages pages={pages} PageModel={InfoModel} />;
 };
 
 export default DiaryIntroduction;

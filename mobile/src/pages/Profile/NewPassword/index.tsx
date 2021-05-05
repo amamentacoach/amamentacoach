@@ -15,7 +15,7 @@ import {
   HeaderText,
 } from './styles';
 
-interface IFormValues {
+interface FormValues {
   password: string;
   password_confirmation: string;
 }
@@ -24,11 +24,11 @@ const NewPassword: React.FC = () => {
   const [isSubmitModalVisible, setIsSubmitModalVisible] = useState(false);
   const [isSendingForm, setIsSendingForm] = useState(false);
 
-  const formInitialValues: IFormValues = {
+  const formInitialValues: FormValues = {
     password: '',
     password_confirmation: '',
   };
-  const newPasswordSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const newPasswordSchema: Yup.ObjectSchema<FormValues> = Yup.object({
     password: Yup.string()
       .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
       .required('Campo obrigatório'),
@@ -38,7 +38,7 @@ const NewPassword: React.FC = () => {
       .required('Campo obrigatório'),
   }).required();
 
-  async function handleNewPassword({ password }: IFormValues) {
+  async function handleNewPassword({ password }: FormValues) {
     setIsSendingForm(true);
     const successfulRequest = await newPassword(password);
     setIsSendingForm(false);

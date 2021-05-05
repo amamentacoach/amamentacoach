@@ -1,31 +1,36 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import OptionsList from '../../../components/OptionList';
+import OptionsList, { OptionList } from '../../../components/OptionList';
 
 import { HeaderText, ScrollView } from './styles';
+
+import WithdrawalQuestion from '../../../../assets/images/withdrawal_question.svg';
+import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
+import WithdrawalCalendar from '../../../../assets/images/withdrawal_calendar.svg';
+import WithdrawalClock from '../../../../assets/images/withdrawal_clock.svg';
 
 const Breastfeeding: React.FC = () => {
   const navigation = useNavigation();
 
-  const options = [
+  const options: OptionList[] = [
     {
-      image: require('../../../../assets/images/withdrawal_question.png'),
+      Image: WithdrawalQuestion,
       title: 'Por que fazer?',
       onPress: () => navigation.navigate('WhyBreastfeed'),
     },
     {
-      image: require('../../../../assets/images/premature_breastfeed.png'),
+      Image: PrematureBreastfeed,
       title: 'Como fazer?',
       onPress: () => navigation.navigate('HowToBreastfeed'),
     },
     {
-      image: require('../../../../assets/images/withdrawal_calendar.png'),
+      Image: WithdrawalCalendar,
       title: 'Quando fazer?',
       onPress: () => navigation.navigate('WhenToBreastfeed'),
     },
     {
-      image: require('../../../../assets/images/withdrawal_clock.png'),
+      Image: WithdrawalClock,
       title: 'Por quanto tempo fazer?',
       onPress: () => navigation.navigate('HowLongToBreastfeed'),
     },

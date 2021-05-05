@@ -1,20 +1,20 @@
 import api from './api';
-import { IBreastfeedEntry, IExtractionEntry } from './diaryRegistry';
-import { ISurveyQuestion } from './survey';
+import { BreastfeedEntry, ExtractionEntry } from './diaryRegistry';
+import { SurveyQuestion } from './survey';
 
-export interface IDailyReport {
-  breastfeedEntries: IBreastfeedEntry[];
-  registryEntries: IExtractionEntry[];
-  questions: ISurveyQuestion[];
+export interface DailyReport {
+  breastfeedEntries: BreastfeedEntry[];
+  registryEntries: ExtractionEntry[];
+  questions: SurveyQuestion[];
 }
 
-export interface IWeeklyReport {
+export interface WeeklyReport {
   question: string;
   answers: string[];
 }
 
 // Retorna o relatório diário da mãe
-export async function getDailyReport(): Promise<IDailyReport> {
+export async function getDailyReport(): Promise<DailyReport> {
   const { data } = await api.get('relatorios/diario');
 
   const breastfeedEntries = data.bebes.map((baby: any) => ({
@@ -53,7 +53,7 @@ export async function getDailyReport(): Promise<IDailyReport> {
 }
 
 // Retorna o relatório semanal da mãe
-export async function getWeeklyReport(): Promise<IWeeklyReport[]> {
+export async function getWeeklyReport(): Promise<WeeklyReport[]> {
   const { data } = await api.get('relatorios/semanal');
   return data.map((entry: any) => ({
     question: entry.pergunta,

@@ -1,30 +1,35 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import OptionsList from '../../../components/OptionList';
+import OptionsList, { OptionList } from '../../../components/OptionList';
 
 import ScrollView from './styles';
 
+import PrematureBirth from '../../../../assets/images/premature_birth.svg';
+import PrematureBaby from '../../../../assets/images/premature_baby.svg';
+import PrematureHeart from '../../../../assets/images/premature_heart.svg';
+import PrematureTrophy from '../../../../assets/images/premature_trophy.svg';
+
 const Premature: React.FC = () => {
   const navigation = useNavigation();
-  const options = [
+  const options: OptionList[] = [
     {
-      image: require('../../../../assets/images/premature_birth.png'),
+      Image: PrematureBirth,
       title: 'Parto prematuro: não era isso que eu esperava',
       onPress: () => navigation.navigate('NotWhatIExpected'),
     },
     {
-      image: require('../../../../assets/images/premature_baby.png'),
+      Image: PrematureBaby,
       title: 'Muito prazer, eu sou o Prematuro',
       onPress: () => navigation.navigate('ThePremature'),
     },
     {
-      image: require('../../../../assets/images/premature_heart.png'),
+      Image: PrematureHeart,
       title: 'Minha maior motivação para amamentar',
       onPress: () => navigation.navigate('UploadBabyPhoto'),
     },
     {
-      image: require('../../../../assets/images/premature_trophy.png'),
+      Image: PrematureTrophy,
       title: 'Um período de luta, toda uma vida de resultados',
       subtitle: 'Benefícios da amamentação',
       onPress: () => navigation.navigate('BreastfeedingBenefits'),

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ActivityIndicator, Dimensions, FlatList, Image } from 'react-native';
+import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 
@@ -13,6 +13,7 @@ import {
 import Modal from '../../../components/Modal';
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
 import MainButton from '../../../components/MainButton';
+import SecondaryButton from '../../../components/SecondaryButton';
 
 import {
   HeaderBackground,
@@ -34,8 +35,7 @@ import {
   CurrentPageText,
 } from '../../../components/GenericDiaryFormPage/styles';
 
-import QuestionIcon from '../../../../assets/images/icons/ic_question_white.png';
-import SecondaryButton from '../../../components/SecondaryButton';
+import QuestionIcon from '../../../../assets/images/icons/ic_question_white.svg';
 
 // Página do formulário.
 interface PageProps {
@@ -87,7 +87,7 @@ const StatusForm: React.FC = () => {
         <InfoButton
           onPress={() => setIsInfoModalVisible(true)}
           activeOpacity={0.7}>
-          <Image source={QuestionIcon} />
+          <QuestionIcon />
         </InfoButton>
       ),
     });
@@ -335,6 +335,7 @@ const StatusForm: React.FC = () => {
     <>
       <Modal
         content={`Obrigada por responder.\nSua resposta foi enviada!`}
+        color={theme.babyBlue}
         options={[
           {
             text: 'Fechar',
@@ -345,6 +346,7 @@ const StatusForm: React.FC = () => {
         visible={isEndModalVisible}
       />
       <Modal
+        color={theme.babyBlue}
         content={
           'Erro ao enviar suas respostas.\nPor favor tente novamente mais tarde.'
         }
@@ -358,6 +360,7 @@ const StatusForm: React.FC = () => {
         visible={isErrorModalVisible}
       />
       <Modal
+        color={theme.babyBlue}
         options={[
           {
             text: 'Fechar',

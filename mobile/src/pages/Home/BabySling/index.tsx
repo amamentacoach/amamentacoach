@@ -1,31 +1,31 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import { Image } from 'react-native';
-import OptionsList from '../../../components/OptionList';
+import OptionsList, { OptionList } from '../../../components/OptionList';
 
 import { ScrollView, Text, Container } from './styles';
 
-import Banner from '../../../../assets/images/banner_canguru.png';
+import Banner from '../../../../assets/images/banner_canguru.svg';
+import IcVideo from '../../../../assets/images/ic_video.svg';
 
 const BabySling: React.FC = () => {
   const navigation = useNavigation();
 
-  const options = [
+  const options: OptionList[] = [
     {
-      image: require('../../../../assets/images/ic_video.png'),
+      Image: IcVideo,
       title: 'Video 1',
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['IhKyaqGX_MQ'] }),
     },
     {
-      image: require('../../../../assets/images/ic_video.png'),
+      Image: IcVideo,
       title: 'Video 2',
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['rdTTyKGrq_s'] }),
     },
     {
-      image: require('../../../../assets/images/ic_video.png'),
+      Image: IcVideo,
       title: 'Video 3',
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['wx1ofoCZw9w'] }),
@@ -35,7 +35,7 @@ const BabySling: React.FC = () => {
   return (
     <ScrollView>
       <Container>
-        <Image source={Banner} resizeMode="contain" />
+        <Banner />
         <Text>
           Use e abuse do Canguru! Informe-se e inspire-se nos vídeos abaixo:
         </Text>

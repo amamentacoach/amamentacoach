@@ -16,7 +16,7 @@ import {
 } from './styles';
 import MainButton from '../../../components/MainButton';
 
-interface IFormValues {
+interface FormValues {
   email: string;
   password: string;
   password_confirmation: string;
@@ -24,12 +24,12 @@ interface IFormValues {
 
 const FormSignUp: React.FC = () => {
   const navigation = useNavigation();
-  const formInitialValues: IFormValues = {
+  const formInitialValues: FormValues = {
     email: '',
     password: '',
     password_confirmation: '',
   };
-  const signUpSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const signUpSchema: Yup.ObjectSchema<FormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Campo obrigatório'),
     password: Yup.string()
       .min(8, 'A senha precisa ter pelo menos 8 caracteres')
@@ -43,7 +43,7 @@ const FormSignUp: React.FC = () => {
       .required('Campo obrigatório'),
   }).required();
 
-  function handleFormSubmit({ email, password }: IFormValues) {
+  function handleFormSubmit({ email, password }: FormValues) {
     navigation.navigate('MotherForm', { email, password });
   }
 

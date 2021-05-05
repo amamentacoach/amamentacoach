@@ -6,11 +6,15 @@ import OptionsList from '../../../components/OptionList';
 
 import { ScrollView, HeaderText } from './styles';
 
+import Puzzle from '../../../../assets/images/puzzle.svg';
+import Crosswords from '../../../../assets/images/crosswords.svg';
+import Music from '../../../../assets/images/music.svg';
+
 const Distractions: React.FC = () => {
   const navigation = useNavigation();
-  const options = [
+  const options: OptionList[] = [
     {
-      image: require('../../../../assets/images/puzzle.png'),
+      Image: Puzzle,
       title: 'Quebra-cabeça',
       onPress: async () => {
         await Linking.openURL(
@@ -19,7 +23,7 @@ const Distractions: React.FC = () => {
       },
     },
     {
-      image: require('../../../../assets/images/crosswords.png'),
+      Image: Crosswords,
       title: 'Palavras Cruzadas',
       onPress: async () => {
         await Linking.openURL(
@@ -28,7 +32,7 @@ const Distractions: React.FC = () => {
       },
     },
     {
-      image: require('../../../../assets/images/music.png'),
+      Image: Music,
       title: 'Músicas para relaxar',
       onPress: () => navigation.navigate('MusicPlaylists'),
     },

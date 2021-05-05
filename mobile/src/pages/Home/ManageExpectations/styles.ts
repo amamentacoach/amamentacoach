@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-interface IInnerBorderProps {
+interface InnerBorderProps {
   correctAnswer: boolean;
 }
 
@@ -26,7 +26,7 @@ export const Card = styled.View`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 `;
 
-export const InnerBorder = styled.View<IInnerBorderProps>`
+export const InnerBorder = styled.View<InnerBorderProps>`
   flex: 1;
   border: 4px solid
     ${({ theme, correctAnswer }) =>

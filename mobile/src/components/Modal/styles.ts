@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-interface IOptionTextProps {
+interface OptionTextProps {
   color?: string;
   isBold?: boolean;
   disabled?: boolean;
@@ -44,7 +44,7 @@ export const Option = styled.TouchableOpacity`
   flex: 1;
 `;
 
-export const OptionText = styled.Text<IOptionTextProps>`
+export const OptionText = styled.Text<OptionTextProps>`
   font-size: 16px;
   text-align: center;
   color: ${({ theme, color, disabled }) => {

@@ -1,6 +1,6 @@
 import api from './api';
 
-export interface IFAQ {
+export interface FAQ {
   question: string;
   answer: string;
 }
@@ -18,7 +18,7 @@ export async function createQuestion(question: string): Promise<boolean> {
 }
 
 // Retorna as perguntas frequentes e suas respostas.
-export async function listQuestions(): Promise<IFAQ[] | null> {
+export async function listQuestions(): Promise<FAQ[] | null> {
   try {
     const { data } = await api.get('/duvidas/frequentes');
     const questions = data.map((question: any) => ({

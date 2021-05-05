@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
-import { Image } from 'react-native';
 import RNBootSplash from 'react-native-bootsplash';
 
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import MainButton from '../../../components/MainButton';
 import ProgressDots from '../../../components/ProgressDots';
 import InformationPages, {
-  IInfoPageProps,
+  InfoModelProps,
 } from '../../../components/InformationPages';
 
 import {
@@ -20,10 +19,15 @@ import {
   CurrentPageWrapper,
 } from './styles';
 
+import IntroMother from '../../../../assets/images/intro_mother.svg';
+import IntroDiaryHeart from '../../../../assets/images/intro_diary_pencil.svg';
+import IntroChart from '../../../../assets/images/intro_chart.svg';
+import IntroMobile from '../../../../assets/images/intro_mobile.svg';
+
 const pages = [
   {
     id: 1,
-    image: require('../../../../assets/images/intro_mother.png'),
+    Image: IntroMother,
     content: [
       {
         text:
@@ -33,7 +37,7 @@ const pages = [
   },
   {
     id: 2,
-    image: require('../../../../assets/images/intro_diary_diary.png'),
+    Image: IntroDiaryHeart,
     content: [
       {
         text: 'Explore cada ícone e faça do App seu grande aliado! ',
@@ -42,7 +46,7 @@ const pages = [
   },
   {
     id: 3,
-    image: require('../../../../assets/images/intro_chart.png'),
+    Image: IntroChart,
     content: [
       {
         text:
@@ -52,7 +56,7 @@ const pages = [
   },
   {
     id: 4,
-    image: require('../../../../assets/images/intro_mobile.png'),
+    Image: IntroMobile,
     content: [
       {
         text:
@@ -73,11 +77,11 @@ const Introduction: React.FC = () => {
     await setPersistentNotFirstRun('appIntroduction');
   }
 
-  const InfoPage: React.FC<IInfoPageProps> = ({
+  const InfoModel: React.FC<InfoModelProps> = ({
     flatListRef,
     index,
     pagesLength,
-    image,
+    Image,
     content,
   }) => (
     <>
@@ -87,7 +91,7 @@ const Introduction: React.FC = () => {
         </SkipButton>
       </Header>
       <ContentWrapper>
-        <Image source={image} />
+        {Image && <Image />}
         {content.map(({ text }) => (
           <ContentText key={text}>{text}</ContentText>
         ))}
@@ -111,7 +115,7 @@ const Introduction: React.FC = () => {
     </>
   );
 
-  return <InformationPages pages={pages} PageModel={InfoPage} />;
+  return <InformationPages pages={pages} PageModel={InfoModel} />;
 };
 
 export default Introduction;

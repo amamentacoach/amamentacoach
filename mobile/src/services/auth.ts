@@ -1,6 +1,6 @@
 import api from './api';
 
-export interface IMotherSignUpInfo {
+export interface MotherSignUpInfo {
   email: string;
   password: string;
   name: string;
@@ -23,7 +23,7 @@ export interface IMotherSignUpInfo {
   maternityLeave: number | null;
 }
 
-export interface IBabySignUpInfo {
+export interface BabySignUpInfo {
   name: string;
   birthday: string;
   gestationWeeks: number;
@@ -36,7 +36,7 @@ export interface IBabySignUpInfo {
   difficulties: boolean;
 }
 
-export interface IMotherInfo {
+export interface MotherInfo {
   name: string;
   images: {
     mother: string | null;
@@ -60,7 +60,7 @@ export enum LoginStatus {
 
 // Cadastra uma mãe no sistema.
 export async function signUpMother(
-  motherInfo: IMotherSignUpInfo,
+  motherInfo: MotherSignUpInfo,
 ): Promise<string | null> {
   try {
     const request = await api.post('/maes', {
@@ -94,7 +94,7 @@ export async function signUpMother(
 // Cadastra um bebê no sistema.
 export async function signUpBaby(
   token: string,
-  babyInfo: IBabySignUpInfo,
+  babyInfo: BabySignUpInfo,
 ): Promise<void> {
   await api.post(
     '/bebes',
@@ -142,7 +142,7 @@ export async function signIn(
 }
 
 // Retorna os dados de uma mãe.
-export async function getMotherInfo(): Promise<IMotherInfo | null> {
+export async function getMotherInfo(): Promise<MotherInfo | null> {
   try {
     const { data } = await api.get('/maes');
     // Recebe todos os ids e nome dos bebês.

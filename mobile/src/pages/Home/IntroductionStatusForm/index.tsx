@@ -1,11 +1,10 @@
 import React from 'react';
-import { Image } from 'react-native';
 
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import MainButton from '../../../components/MainButton';
 import ProgressDots from '../../../components/ProgressDots';
 import InformationPages, {
-  IInfoPageProps,
+  InfoModelProps,
 } from '../../../components/InformationPages';
 
 import {
@@ -21,10 +20,12 @@ import {
   HeaderLastPageBox,
 } from './styles';
 
+import SurveyPrimary from '../../../../assets/images/icons/survey_primary.svg';
+
 const pages = [
   {
     id: 1,
-    image: require('../../../../assets/images/icons/survey_primary.png'),
+    Image: SurveyPrimary,
     content: [
       {
         text:
@@ -34,7 +35,7 @@ const pages = [
   },
   {
     id: 2,
-    image: require('../../../../assets/images/icons/survey_primary.png'),
+    Image: SurveyPrimary,
     content: [
       {
         text:
@@ -44,7 +45,7 @@ const pages = [
   },
   {
     id: 3,
-    image: require('../../../../assets/images/icons/survey_primary.png'),
+    Image: SurveyPrimary,
     content: [],
   },
 ];
@@ -56,21 +57,19 @@ const IntroductionStatusForm: React.FC = () => {
     await setPersistentNotFirstRun('statusFormIntroduction');
   }
 
-  const InfoPage: React.FC<IInfoPageProps> = ({
+  const InfoModel: React.FC<InfoModelProps> = ({
     flatListRef,
     pagesLength,
     index,
-    image,
     content,
+    Image,
   }) => (
     <>
       <Header>
         <ContentText>Autoconfiança para amamentar</ContentText>
       </Header>
       <ContentWrapper>
-        <ImageContainer>
-          <Image source={image} />
-        </ImageContainer>
+        <ImageContainer>{Image && <Image />}</ImageContainer>
         {index === pagesLength - 1 ? (
           <LastPageBox>
             <HeaderLastPageBox>Escala</HeaderLastPageBox>
@@ -117,7 +116,7 @@ const IntroductionStatusForm: React.FC = () => {
     </>
   );
 
-  return <InformationPages pages={pages} PageModel={InfoPage} />;
+  return <InformationPages pages={pages} PageModel={InfoModel} />;
 };
 
 export default IntroductionStatusForm;

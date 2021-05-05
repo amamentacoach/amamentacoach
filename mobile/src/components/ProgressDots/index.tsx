@@ -8,6 +8,7 @@ interface ProgressDotsProps {
   length: number;
   flatlistRef: React.RefObject<FlatList>;
 }
+
 const ProgressDots: React.FC<ProgressDotsProps> = ({
   selectedIndex,
   length,

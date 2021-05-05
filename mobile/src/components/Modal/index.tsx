@@ -11,13 +11,12 @@ import {
   Option,
 } from './styles';
 
-interface IMainModalProps {
+interface MainModalProps {
   // Controla a visibilidade do modal.
   visible: boolean;
   // Conteúdo do modal.
   content?: string;
-  // Imagem a ser exibida dentro do modal. Precisa ser fornecida utilizando a função require().
-  image?: any;
+  image?: number;
   // Botões exibidos na parte debaixo do modal.
   options: {
     // Texto da opção.
@@ -32,7 +31,7 @@ interface IMainModalProps {
   color?: string;
 }
 
-const Modal: React.FC<IMainModalProps> = ({
+const Modal: React.FC<MainModalProps> = ({
   content,
   image,
   visible,

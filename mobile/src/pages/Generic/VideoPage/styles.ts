@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-interface IContentContainerProps {
+interface ContentContainerProps {
   display: boolean;
 }
 
@@ -11,7 +11,7 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
   flex: 1;
 `;
 
-export const ContentContainer = styled.View<IContentContainerProps>`
+export const ContentContainer = styled.View<ContentContainerProps>`
   flex: 1;
   justify-content: center;
   display: ${({ display }) => (display ? 'flex' : 'none')};

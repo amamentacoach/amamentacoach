@@ -16,6 +16,12 @@ export const CurrentPageContainer = styled.View<CurrentPageContainerProps>`
   align-self: center;
 `;
 
+export const ImageContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0 0 0;
+`;
+
 export const CurrentPageText = styled.Text`
   text-align: center;
   font-family: 'OpenSans-Bold';

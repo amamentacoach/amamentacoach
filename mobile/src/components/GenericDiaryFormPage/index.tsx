@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { IDiaryFormPage } from '../DiaryForm';
+import { SvgProps } from 'react-native-svg';
+import { DiaryFormPage } from '../DiaryForm';
 import MainButton from '../MainButton';
 import FormRadioGroupInput from '../FormRadioGroup';
 
@@ -10,12 +11,17 @@ import {
   CurrentPageContainer,
   CurrentPageText,
   Container,
+  ImageContainer,
 } from './styles';
 
 // Retorna uma página genérica que pode ser fornecida a um componente DiaryForm.
 // Ao final do formulário a função onFormEnd é executada.
-const createGenericDiaryFormPage = (color: string, onFormEnd: () => void) => {
-  const Page: React.FC<IDiaryFormPage> = ({
+const createGenericDiaryFormPage = (
+  color: string,
+  onFormEnd: () => void,
+  Images?: React.FC<SvgProps>[],
+) => {
+  const Page: React.FC<DiaryFormPage> = ({
     index,
     pagesLength,
     question,
@@ -24,35 +30,44 @@ const createGenericDiaryFormPage = (color: string, onFormEnd: () => void) => {
     isSendingForm,
     setFieldValue,
     handleChangePage,
-  }) => (
-    <Container>
-      <CurrentPageContainer color={color}>
-        <CurrentPageText>
-          {index + 1}/{pagesLength}
-        </CurrentPageText>
-      </CurrentPageContainer>
-      <QuestionText>{question.description}</QuestionText>
+  }) => {
+    const Image = Images ? Images[index] : undefined;
 
-      <FormRadioGroupInput
-        color={color}
-        fieldName={`${question.id}`}
-        options={question.options}
-        multipleSelection={question.multipleSelection}
-        displayOtherField={question.displayOther}
-        error={isFormValid ? '' : 'Pergunta obrigatória'}
-        onChange={setFieldValue}
-      />
+    return (
+      <Container>
+        <CurrentPageContainer color={color}>
+          <CurrentPageText>
+            {index + 1}/{pagesLength}
+          </CurrentPageText>
+        </CurrentPageContainer>
+        {Image && (
+          <ImageContainer>
+            <Image />
+          </ImageContainer>
+        )}
+        <QuestionText>{question.description}</QuestionText>
 
-      <Footer>
-        <MainButton
+        <FormRadioGroupInput
           color={color}
-          text={index >= pagesLength - 1 ? 'Finalizar' : 'Próximo'}
-          disabled={!isDirty || isSendingForm}
-          onPress={() => handleChangePage(index + 1, onFormEnd)}
+          fieldName={`${question.id}`}
+          options={question.options}
+          multipleSelection={question.multipleSelection}
+          displayOtherField={question.displayOther}
+          error={isFormValid ? '' : 'Pergunta obrigatória'}
+          onChange={setFieldValue}
         />
-      </Footer>
-    </Container>
-  );
+
+        <Footer>
+          <MainButton
+            color={color}
+            text={index >= pagesLength - 1 ? 'Finalizar' : 'Próximo'}
+            disabled={!isDirty || isSendingForm}
+            onPress={() => handleChangePage(index + 1, onFormEnd)}
+          />
+        </Footer>
+      </Container>
+    );
+  };
 
   return Page;
 };

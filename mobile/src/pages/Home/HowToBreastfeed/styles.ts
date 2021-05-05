@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-interface ILastPageButtonWrapperProps {
+interface LastPageButtonWrapperProps {
   opacity: number;
 }
 
@@ -59,7 +59,7 @@ export const Footer = styled.View`
   margin: 0 24px 30px 24px;
 `;
 
-export const LastPageButtonWrapper = styled.View<ILastPageButtonWrapperProps>`
+export const LastPageButtonWrapper = styled.View<LastPageButtonWrapperProps>`
   opacity: ${({ opacity }) => opacity};
   justify-content: center;
   align-items: center;

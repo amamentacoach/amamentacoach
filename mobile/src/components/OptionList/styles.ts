@@ -21,11 +21,6 @@ export const ContentOptionButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const ContentImage = styled.Image`
-  height: 70px;
-  width: 70px;
-`;
-
 export const ContentTextContainer = styled.View`
   flex: 1;
   flex-direction: column;
@@ -55,9 +50,4 @@ export const ContentSeparator = styled.View`
   background-color: ${props => props.theme.grey};
   opacity: 0.25;
   margin-top: 20px;
-`;
-
-export const OpenIconImage = styled.Image`
-  height: 15px;
-  width: 20px;
 `;

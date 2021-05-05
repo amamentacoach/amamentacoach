@@ -15,7 +15,7 @@ type IIsFirstRun = {
   };
 };
 
-interface IIsFirstRunContextData {
+interface IsFirstRunContextData {
   isFirstRun: IIsFirstRun;
   // Marca um campo como executado até o aplicativo ser aberto novamente.
   setTemporaryNotFirstRun: (
@@ -27,8 +27,8 @@ interface IIsFirstRunContextData {
   ) => Promise<void>;
 }
 
-const IsFirstRun = createContext<IIsFirstRunContextData>(
-  {} as IIsFirstRunContextData,
+const IsFirstRun = createContext<IsFirstRunContextData>(
+  {} as IsFirstRunContextData,
 );
 
 export const IsFirstRunProvider: React.FC = ({ children }) => {

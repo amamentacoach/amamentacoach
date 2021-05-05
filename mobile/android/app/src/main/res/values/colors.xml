@@ -2,4 +2,6 @@
 <resources>
   <color name="primary">#7D5CD7</color>
   <color name="bootsplash_background">#C1ACFC</color>
+  <color name="gradient_start">#C1ACFC</color>
+  <color name="gradient_end">#7D00FF</color>
 </resources>

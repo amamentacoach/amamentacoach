@@ -1,6 +1,6 @@
 import api from './api';
 
-export interface ISurveyQuestion {
+export interface SurveyQuestion {
   id: number;
   target: string;
   category: number;
@@ -10,7 +10,7 @@ export interface ISurveyQuestion {
   multipleSelection: boolean;
 }
 
-export interface ISurveyStatistics {
+export interface SurveyStatistics {
   id: number;
   question: string;
   options: {
@@ -19,14 +19,14 @@ export interface ISurveyStatistics {
   }[];
 }
 
-export interface IAnswerFeedback {
+export interface AnswerFeedback {
   feedback: string;
   redirect: string;
 }
 
-export interface IStatusForm {
-  statusQuestions: ISurveyQuestion[];
-  feedingQuestion: ISurveyQuestion;
+export interface StatusForm {
+  statusQuestions: SurveyQuestion[];
+  feedingQuestion: SurveyQuestion;
 }
 
 // Registra a resposta do usuário para uma pergunta.
@@ -44,7 +44,7 @@ export async function answerQuestion(questionId: number, answers: string[]) {
 // Retorna todos as perguntas feitas no diário.
 export async function listQuestions(
   questionCategory: number,
-): Promise<ISurveyQuestion[] | null> {
+): Promise<SurveyQuestion[] | null> {
   try {
     const { data } = await api.get(`/perguntas/${questionCategory}`);
     const surveyQuestions = data.map((question: any) => ({
@@ -64,7 +64,7 @@ export async function listQuestions(
 
 // Retorna as estatísticas das respostas da enquete.
 export async function listSurveyStatistics(): Promise<
-  ISurveyStatistics[] | null
+  SurveyStatistics[] | null
 > {
   try {
     const { data } = await api.get(`/amamentacao/resultados`);
@@ -83,7 +83,7 @@ export async function listSurveyStatistics(): Promise<
 }
 
 // Retorna todos as perguntas da escala e alimentação.
-export async function listStatusFormQuestions(): Promise<IStatusForm | null> {
+export async function listStatusFormQuestions(): Promise<StatusForm | null> {
   try {
     const { data } = await api.get('/perguntas/escalaealimentacao');
     const statusQuestions = data.escala.map((field: any) => ({

@@ -1,14 +1,16 @@
 import React from 'react';
 import { Linking } from 'react-native';
 
-import OptionsList from '../../../components/OptionList';
+import OptionsList, { OptionList } from '../../../components/OptionList';
 
 import ScrollView from './styles';
 
+import Music from '../../../../assets/images/music.svg';
+
 const MusicPlaylists: React.FC = () => {
-  const options = [
+  const options: OptionList[] = [
     {
-      image: require('../../../../assets/images/music.png'),
+      Image: Music,
       title: 'Pop Instrumental',
       onPress: async () => {
         await Linking.openURL(
@@ -17,7 +19,7 @@ const MusicPlaylists: React.FC = () => {
       },
     },
     {
-      image: require('../../../../assets/images/music.png'),
+      Image: Music,
       title: 'Calma',
       onPress: async () => {
         await Linking.openURL(
@@ -26,7 +28,7 @@ const MusicPlaylists: React.FC = () => {
       },
     },
     {
-      image: require('../../../../assets/images/music.png'),
+      Image: Music,
       title: 'Sertanejo',
       onPress: async () => {
         await Linking.openURL(
@@ -35,7 +37,7 @@ const MusicPlaylists: React.FC = () => {
       },
     },
     {
-      image: require('../../../../assets/images/music.png'),
+      Image: Music,
       title: 'Funk',
       onPress: async () => {
         await Linking.openURL(

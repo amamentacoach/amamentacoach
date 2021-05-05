@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
 
-interface IContainerProps {
+interface ContainerProps {
   width: number;
 }
 
-interface ILastPageButtonWrapperProps {
+interface LastPageButtonWrapperProps {
   opacity: number;
 }
 
@@ -19,7 +19,7 @@ export const ListContainer = styled.SafeAreaView`
   flex: 1;
 `;
 
-export const PageContainer = styled.View<IContainerProps>`
+export const PageContainer = styled.View<ContainerProps>`
   width: ${({ width }) => width}px;
   flex: 1;
 `;
@@ -66,7 +66,7 @@ export const CurrentPageWrapper = styled.View`
   margin: 30px 0;
 `;
 
-export const LastPageButtonWrapper = styled.View<ILastPageButtonWrapperProps>`
+export const LastPageButtonWrapper = styled.View<LastPageButtonWrapperProps>`
   opacity: ${({ opacity }) => opacity};
   justify-content: center;
   align-items: center;

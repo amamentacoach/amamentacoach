@@ -15,7 +15,7 @@ import {
   HeaderText,
 } from './styles';
 
-interface IFormValues {
+interface FormValues {
   question: string;
 }
 
@@ -24,14 +24,14 @@ const NewQuestion: React.FC = () => {
   const [isSendingForm, setIsSendingForm] = useState(false);
   const [textInputText, setTextInputText] = useState('');
 
-  const formInitialValues: IFormValues = {
+  const formInitialValues: FormValues = {
     question: '',
   };
-  const newPasswordSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const newPasswordSchema: Yup.ObjectSchema<FormValues> = Yup.object({
     question: Yup.string().required('Campo obrigatório'),
   }).required();
 
-  async function handleNewQuestion({ question }: IFormValues) {
+  async function handleNewQuestion({ question }: FormValues) {
     setIsSendingForm(true);
     const successfulRequest = await createQuestion(question);
     setIsSendingForm(false);

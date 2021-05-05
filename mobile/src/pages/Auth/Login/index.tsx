@@ -15,19 +15,17 @@ import { useAuth } from '../../../contexts/auth';
 import {
   ScrollView,
   Header,
-  HeaderImage,
   FormContainer,
   SubmitButtonContainer,
-  HeaderText,
   ForgotPasswordText,
   NoAccountText,
   SignUpText,
   SignUpContainer,
 } from './styles';
 
-import logo from '../../../../assets/images/logo_primary.png';
+import Logo from '../../../../assets/images/logo_primary.svg';
 
-interface IFormValues {
+interface FormValues {
   email: string;
   password: string;
 }
@@ -40,11 +38,11 @@ const Login: React.FC = () => {
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [isSendingForm, setIsSendingForm] = useState(false);
 
-  const formInitialValues: IFormValues = {
+  const formInitialValues: FormValues = {
     email: '',
     password: '',
   };
-  const loginSchema: Yup.ObjectSchema<IFormValues> = Yup.object({
+  const loginSchema: Yup.ObjectSchema<FormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Campo obrigatório'),
     password: Yup.string()
       .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
@@ -55,7 +53,7 @@ const Login: React.FC = () => {
     RNBootSplash.hide({ duration: 250 });
   }, []);
 
-  async function handleSignIn({ email, password }: IFormValues) {
+  async function handleSignIn({ email, password }: FormValues) {
     setIsSendingForm(true);
     const status = await signIn(email, password);
     if (status === LoginStatus.FailedToConnect) {
@@ -104,8 +102,7 @@ const Login: React.FC = () => {
 
       <ScrollView>
         <Header>
-          <HeaderImage source={logo} />
-          <HeaderText>Amamenta Coach</HeaderText>
+          <Logo />
         </Header>
         <Formik
           initialValues={formInitialValues}

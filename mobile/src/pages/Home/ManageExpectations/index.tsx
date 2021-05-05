@@ -16,10 +16,43 @@ import {
   CardText,
 } from './styles';
 
-interface ISelectedIdsInfo {
+interface SelectedIdsInfo {
   lastRunDate: Date;
   alreadySelectedIds: number[];
 }
+
+const expectations = [
+  {
+    id: 1,
+    old: 'Dormir como antes',
+    new: 'Aproveitar cada oportunidade de cochilo',
+  },
+  {
+    id: 2,
+    old: 'Dar conta de tudo',
+    new: 'Fazer o que estiver ao meu alcance, com amor',
+  },
+  {
+    id: 3,
+    old: 'Ter um bebê saudável, gorduxo e corado',
+    new: 'Amar meu prematurinho como ele é',
+  },
+  {
+    id: 4,
+    old: 'Suprir todas as necessidades do meu bebê sozinha',
+    new: 'Fazer a minha parte para ajudar o meu bebê',
+  },
+  {
+    id: 5,
+    old: 'Suprir todas as necessidades da minha família como fazia antes',
+    new: 'Mobilizar pessoas que também possam ajudar a minha família',
+  },
+  {
+    id: 6,
+    old: 'Me fechar para me preservar',
+    new: 'Me abrir com pessoas de confiança para preservar minha saúde mental',
+  },
+];
 
 const ManageExpectations: React.FC = () => {
   const [currentExpectation, setCurrentExpectation] = useState<{
@@ -31,40 +64,6 @@ const ManageExpectations: React.FC = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isCorrectAnswerSelected, setIsCorrectAnswerSelected] = useState(false);
   const [isSubmitModalVisible, setIsSubmitModalVisible] = useState(false);
-
-  const expectations = [
-    {
-      id: 1,
-      old: 'Dormir como antes',
-      new: 'Aproveitar cada oportunidade de cochilo',
-    },
-    {
-      id: 2,
-      old: 'Dar conta de tudo',
-      new: 'Fazer o que estiver ao meu alcance, com amor',
-    },
-    {
-      id: 3,
-      old: 'Ter um bebê saudável, gorduxo e corado',
-      new: 'Amar meu prematurinho como ele é',
-    },
-    {
-      id: 4,
-      old: 'Suprir todas as necessidades do meu bebê sozinha',
-      new: 'Fazer a minha parte para ajudar o meu bebê',
-    },
-    {
-      id: 5,
-      old: 'Suprir todas as necessidades da minha família como fazia antes',
-      new: 'Mobilizar pessoas que também possam ajudar a minha família',
-    },
-    {
-      id: 6,
-      old: 'Me fechar para me preservar',
-      new:
-        'Me abrir com pessoas de confiança para preservar minha saúde mental',
-    },
-  ];
 
   function selectRandomArrayElement(array: any[]) {
     const randomIndex = Math.round(Math.random() * (array.length - 1));
@@ -83,7 +82,7 @@ const ManageExpectations: React.FC = () => {
         return;
       }
 
-      const { lastRunDate, alreadySelectedIds }: ISelectedIdsInfo = JSON.parse(
+      const { lastRunDate, alreadySelectedIds }: SelectedIdsInfo = JSON.parse(
         selectedIdsStorage,
       );
 
@@ -97,6 +96,13 @@ const ManageExpectations: React.FC = () => {
           old: expectations[lastSelectExpectationId].old,
           new: expectations[lastSelectExpectationId].new,
         });
+        await AsyncStorage.setItem(
+          '@AmamentaCoach:alreadySelectedExpectations',
+          JSON.stringify({
+            lastRunDate: new Date(),
+            alreadySelectedIds,
+          }),
+        );
         setIsCorrectAnswerSelected(true);
         setIsButtonDisabled(true);
         return;

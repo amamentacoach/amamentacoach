@@ -1,14 +1,19 @@
 import React from 'react';
-
 import { useNavigation } from '@react-navigation/native';
+
+import theme from '../../../config/theme';
 import MainButton from '../../../components/MainButton';
 import SecondaryButton from '../../../components/SecondaryButton';
 import InformationPages, {
-  IInfoPageProps,
+  InfoModelProps,
+  InfoPage,
 } from '../../../components/InformationPages';
 
+import ExpectationVsReality1 from '../../../../assets/images/expectation_vs_reality_1.svg';
+import ExpectationVsReality2 from '../../../../assets/images/expectation_vs_reality_2.svg';
+import ExpectationVsReality3 from '../../../../assets/images/expectation_vs_reality_3.svg';
+
 import {
-  ContentImage,
   HeaderBackground,
   ContentContainer,
   ContentText,
@@ -17,13 +22,12 @@ import {
   FirstButtonContainer,
   SecondButtonContainer,
 } from './styles';
-import theme from '../../../config/theme';
 
-const pages = [
+const pages: InfoPage[] = [
   {
     id: 1,
-    header: 'Parto prematuro:\nNão era isso que eu esperava',
-    image: require('../../../../assets/images/expectation_vc_reality.png'),
+    title: 'Parto prematuro:\nNão era isso que eu esperava',
+    Image: ExpectationVsReality1,
     content: [
       {
         text:
@@ -33,8 +37,8 @@ const pages = [
   },
   {
     id: 2,
-    header: 'Parto prematuro:\nNão era isso que eu esperava',
-    image: require('../../../../assets/images/sad.png'),
+    title: 'Parto prematuro:\nNão era isso que eu esperava',
+    Image: ExpectationVsReality2,
     content: [
       {
         text:
@@ -44,8 +48,8 @@ const pages = [
   },
   {
     id: 3,
-    header: 'Parto prematuro:\nNão era isso que eu esperava',
-    image: require('../../../../assets/images/mom_premature.png'),
+    title: 'Parto prematuro:\nNão era isso que eu esperava',
+    Image: ExpectationVsReality3,
     content: [
       {
         text:
@@ -58,11 +62,11 @@ const pages = [
 const NotWhatIExpected: React.FC = () => {
   const navigation = useNavigation();
 
-  const InfoPage: React.FC<IInfoPageProps> = ({
+  const InfoModel: React.FC<InfoModelProps> = ({
     pagesLength,
     index,
     title,
-    image,
+    Image,
     content,
     goToPage,
   }) => (
@@ -70,7 +74,7 @@ const NotWhatIExpected: React.FC = () => {
       <HeaderBackground />
       <ContentContainer>
         <ContentHeader>{title}</ContentHeader>
-        <ContentImage source={image} />
+        {Image && typeof Image !== 'number' && <Image />}
         {content.map(({ text }) => (
           <ContentText key={text}>{text}</ContentText>
         ))}
@@ -103,7 +107,7 @@ const NotWhatIExpected: React.FC = () => {
   return (
     <InformationPages
       pages={pages}
-      PageModel={InfoPage}
+      PageModel={InfoModel}
       scrollEnabled={false}
     />
   );

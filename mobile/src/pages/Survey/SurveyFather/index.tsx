@@ -6,8 +6,12 @@ import theme from '../../../config/theme';
 import DiaryForm from '../../../components/DiaryForm';
 import createGenericDiaryFormPage from '../../../components/GenericDiaryFormPage';
 
+import Father from '../../../../assets/images/dad.svg';
+
 const SurveyFather: React.FC = () => {
   const navigation = useNavigation();
+
+  const images = [Father];
 
   // Marca o formulário como enviado no dia.
   async function setFormSent() {
@@ -27,7 +31,7 @@ const SurveyFather: React.FC = () => {
       title="Participação do Pai"
       color={theme.babyBlue}
       category={5}
-      Page={createGenericDiaryFormPage(theme.babyBlue, onFormEnd)}
+      Page={createGenericDiaryFormPage(theme.babyBlue, onFormEnd, images)}
       onFeedbackAccepted={setFormSent}
     />
   );

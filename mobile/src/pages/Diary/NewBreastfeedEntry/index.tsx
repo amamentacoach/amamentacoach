@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -27,10 +26,10 @@ import {
   ErrorText,
 } from './styles';
 
-import UncheckedBox from '../../../../assets/images/icons/checkbox_unchecked.png';
-import CheckedBox from '../../../../assets/images/icons/checkbox_checked.png';
+import UncheckedBox from '../../../../assets/images/icons/checkbox_unchecked.svg';
+import CheckedBox from '../../../../assets/images/icons/checkbox_checked.svg';
 
-interface IFormValues {
+interface FormValues {
   babyName: string;
   time: string;
   duration: string;
@@ -86,7 +85,7 @@ const NewDiaryRegistry: React.FC = () => {
     breastLeft,
     duration,
     time,
-  }: IFormValues) {
+  }: FormValues) {
     const selectedBaby = motherInfo.babies.find(baby => baby.name === babyName);
     if (!selectedBaby) {
       return;
@@ -165,9 +164,7 @@ const NewDiaryRegistry: React.FC = () => {
                       setFieldValue('breastLeft', 'E');
                     }
                   }}>
-                  <Image
-                    source={values.breastLeft ? CheckedBox : UncheckedBox}
-                  />
+                  {values.breastLeft ? <CheckedBox /> : <UncheckedBox />}
                   <OptionText>Esquerda</OptionText>
                 </FirstOption>
                 <SecondOption
@@ -179,9 +176,7 @@ const NewDiaryRegistry: React.FC = () => {
                       setFieldValue('breastRight', 'D');
                     }
                   }}>
-                  <Image
-                    source={values.breastRight ? CheckedBox : UncheckedBox}
-                  />
+                  {values.breastRight ? <CheckedBox /> : <UncheckedBox />}
                   <OptionText>Direita</OptionText>
                 </SecondOption>
               </MultipleOptionContainer>

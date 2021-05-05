@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
 
-interface IContainerProps {
+interface ContainerProps {
   modalVisible: boolean;
 }
 
-export const ModalContainer = styled.View<IContainerProps>`
+export const ModalContainer = styled.View<ContainerProps>`
   position: absolute;
   z-index: 1;
   height: ${({ modalVisible }) => (modalVisible ? '100%' : '0')};

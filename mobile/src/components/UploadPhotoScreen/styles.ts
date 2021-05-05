@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-interface ISelectedImageProps {
+interface SelectedImageProps {
   width: number;
 }
 
@@ -20,7 +20,7 @@ export const Text = styled.Text`
   margin: 25px 0;
 `;
 
-export const SelectedImage = styled.Image<ISelectedImageProps>`
+export const SelectedImage = styled.Image<SelectedImageProps>`
   width: ${({ width }) => width}px;
   flex: 1;
 `;

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image as ReactImage } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import ProgressDots from '../../../components/ProgressDots';
 import InformationPages, {
-  IInfoPageProps,
+  InfoModelProps,
+  InfoPage,
 } from '../../../components/InformationPages';
 
 import {
@@ -20,11 +21,21 @@ import {
   LastPageButtonWrapper,
 } from './styles';
 
-const pages = [
+import MilkWithdrawalOne from '../../../../assets/images/milk_withdrawal_one.png';
+import MilkWithdrawalTwo from '../../../../assets/images/milk_withdrawal_two.png';
+import MilkWithdrawalThree from '../../../../assets/images/milk_withdrawal_three.png';
+import MilkWithdrawalFour from '../../../../assets/images/milk_withdrawal_four.png';
+import MilkWithdrawalFive from '../../../../assets/images/milk_withdrawal_five.png';
+import MilkWithdrawalSix from '../../../../assets/images/milk_withdrawal_six.png';
+import MilkWithdrawalSeven from '../../../../assets/images/milk_withdrawal_seven.png';
+import MilkWithdrawalEight from '../../../../assets/images/milk_withdrawal_eight.png';
+import MilkWithdrawalNine from '../../../../assets/images/milk_withdrawal_nine.png';
+
+const pages: InfoPage[] = [
   {
     id: 1,
     title: 'Como fazer a retirada do leite?',
-    image: require('../../../../assets/images/milk_withdrawal_one.png'),
+    Image: MilkWithdrawalOne,
     content: [
       {
         text: 'Prenda os cabelos e use uma touca de banho ou pano molhado.',
@@ -34,7 +45,7 @@ const pages = [
   {
     id: 2,
     title: 'Como fazer a retirada do leite?',
-    image: require('../../../../assets/images/milk_withdrawal_two.png'),
+    Image: MilkWithdrawalTwo,
     content: [
       {
         text: 'Escolha um lugar limpo e tranquilo.',
@@ -44,7 +55,7 @@ const pages = [
   {
     id: 3,
     title: 'Como fazer a retirada do leite?',
-    image: require('../../../../assets/images/milk_withdrawal_three.png'),
+    Image: MilkWithdrawalThree,
     content: [
       {
         text:
@@ -55,7 +66,7 @@ const pages = [
   {
     id: 4,
     title: 'Como fazer a retirada do leite?',
-    image: require('../../../../assets/images/milk_withdrawal_four.png'),
+    Image: MilkWithdrawalFour,
     content: [
       {
         text: 'Massageie por mais tempo as áreas mais doloridas.',
@@ -65,7 +76,7 @@ const pages = [
   {
     id: 5,
     title: 'Como fazer a retirada do leite?',
-    image: require('../../../../assets/images/milk_withdrawal_five.png'),
+    Image: MilkWithdrawalFive,
     content: [
       {
         text:
@@ -76,7 +87,7 @@ const pages = [
   {
     id: 6,
     title: 'Como fazer a retirada do leite?',
-    image: require('../../../../assets/images/milk_withdrawal_six.png'),
+    Image: MilkWithdrawalSix,
     content: [
       {
         text:
@@ -87,7 +98,7 @@ const pages = [
   {
     id: 7,
     title: 'Como fazer a retirada do leite?',
-    image: require('../../../../assets/images/milk_withdrawal_seven.png'),
+    Image: MilkWithdrawalSeven,
     content: [
       {
         text: 'Jogue fora as primeiras gotas e guarde o restante no frasco.',
@@ -97,7 +108,7 @@ const pages = [
   {
     id: 8,
     title: 'Como fazer a retirada do leite?',
-    image: require('../../../../assets/images/milk_withdrawal_eight.png'),
+    Image: MilkWithdrawalEight,
     content: [
       {
         text:
@@ -108,7 +119,7 @@ const pages = [
   {
     id: 9,
     title: 'Como fazer a retirada do leite?',
-    image: require('../../../../assets/images/milk_withdrawal_nine.png'),
+    Image: MilkWithdrawalNine,
     content: [
       {
         text:
@@ -122,12 +133,12 @@ const HowToBreastfeed: React.FC = () => {
   const navigation = useNavigation();
   const onEnd = () => navigation.goBack();
 
-  const InfoPage: React.FC<IInfoPageProps> = ({
+  const InfoModel: React.FC<InfoModelProps> = ({
     flatListRef,
     pagesLength,
     index,
     title,
-    image,
+    Image,
     content,
   }) => (
     <>
@@ -138,7 +149,12 @@ const HowToBreastfeed: React.FC = () => {
         </CurrentPageText>
       </CurrentPageContainer>
       <ContentWrapper>
-        <Image source={image} />
+        {Image &&
+          (typeof Image === 'number' ? (
+            <ReactImage source={Image} />
+          ) : (
+            <Image />
+          ))}
         {content.map(({ text }) => (
           <ContentText key={text}>{text}</ContentText>
         ))}
@@ -160,7 +176,7 @@ const HowToBreastfeed: React.FC = () => {
     </>
   );
 
-  return <InformationPages pages={pages} PageModel={InfoPage} />;
+  return <InformationPages pages={pages} PageModel={InfoModel} />;
 };
 
 export default HowToBreastfeed;

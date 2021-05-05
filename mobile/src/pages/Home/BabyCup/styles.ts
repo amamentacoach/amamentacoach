@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-interface IVideoContainerProps {
+interface VideoContainerProps {
   display: boolean;
 }
 
@@ -26,7 +26,7 @@ export const LoadingContainer = styled.View`
   height: 200px;
 `;
 
-export const VideoContainer = styled.View<IVideoContainerProps>`
+export const VideoContainer = styled.View<VideoContainerProps>`
   justify-content: center;
   display: ${({ display }) => (display ? 'flex' : 'none')};
   margin: 30px 0 30px 0;

@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { PieChart } from 'react-native-charts-wrapper';
 
-interface IDescriptionColorProps {
+interface DescriptionColorProps {
   color: string;
 }
 
@@ -24,7 +24,7 @@ export const DescriptionContainer = styled.View`
   align-items: center;
 `;
 
-export const DescriptionColor = styled.View<IDescriptionColorProps>`
+export const DescriptionColor = styled.View<DescriptionColorProps>`
   background-color: ${({ color }) => color};
   width: 18px;
   height: 18px;

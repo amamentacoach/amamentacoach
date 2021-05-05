@@ -8,6 +8,12 @@ import Modal from '../../../components/Modal';
 
 import { ModalContainer } from './styles';
 
+import Motivation1 from '../../../../assets/images/motivation-1.png';
+import Motivation2 from '../../../../assets/images/motivation-2.png';
+import Motivation3 from '../../../../assets/images/motivation-3.png';
+import Motivation4 from '../../../../assets/images/motivation-4.png';
+import Motivation5 from '../../../../assets/images/motivation-5.png';
+
 const Goals: React.FC = () => {
   const navigation = useNavigation();
 
@@ -21,11 +27,11 @@ const Goals: React.FC = () => {
   // Retorna uma imagem aleatória para ser exibida no modal.
   function getRandomMotivationImage() {
     const images = [
-      require('../../../../assets/images/motivation-1.jpeg'),
-      require('../../../../assets/images/motivation-2.jpeg'),
-      require('../../../../assets/images/motivation-3.png'),
-      require('../../../../assets/images/motivation-4.png'),
-      require('../../../../assets/images/motivation-5.jpeg'),
+      Motivation1,
+      Motivation2,
+      Motivation3,
+      Motivation4,
+      Motivation5,
     ];
     const randomIndex = Math.round(Math.random() * (images.length - 1));
     return images[randomIndex];

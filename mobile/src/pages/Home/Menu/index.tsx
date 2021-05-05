@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { View, Image as ReactImage } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import RNBootSplash from 'react-native-bootsplash';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
+import { checkOneDayPassed } from '../../../utils/date';
+import { OptionList } from '../../../components/OptionList';
+import theme from '../../../config/theme';
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import FormPickerInput from '../../../components/FormPickerInput';
 import { setHomePageOpened } from '../../../services/telemetry';
@@ -27,7 +30,6 @@ import {
   ContentOption,
   HeaderBackground,
   BannerImage,
-  ContentImage,
   ContentTitle,
   ContentSeparator,
   Option,
@@ -39,9 +41,13 @@ import {
   LocationContainer,
 } from './styles';
 
-import HUBanner from '../../../../assets/images/banner_hu.png';
-import { checkOneDayPassed } from '../../../utils/date';
-import theme from '../../../config/theme';
+import Banner from '../../../../assets/images/home_banner.png';
+import HomeBaby from '../../../../assets/images/home_baby.svg';
+import HomeBreastfeed from '../../../../assets/images/home_breastfeed.svg';
+import HomeMilk from '../../../../assets/images/home_milk.svg';
+import HomeEmotions from '../../../../assets/images/home_emotions.svg';
+import HomeMoreInformation from '../../../../assets/images/home_more_information.svg';
+import HomeMessage from '../../../../assets/images/home_message.svg';
 
 interface BabyModalOption {
   newLocation: string;
@@ -70,39 +76,39 @@ const Home: React.FC = () => {
     setExpectationsModalVisibility,
   ] = useState<Boolean>(false);
 
-  const options = [
+  const options: OptionList[] = [
     {
-      image: require('../../../../assets/images/home_baby.png'),
+      Image: HomeBaby,
       title: 'Olá, sou o prematuro',
       onPress: () => navigation.navigate('Premature'),
     },
     {
-      image: require('../../../../assets/images/home_breastfeed.png'),
+      Image: HomeBreastfeed,
       title: 'Passo a passo para amamentar o prematuro',
       onPress: () => navigation.navigate('StepByStepPremature'),
     },
     {
-      image: require('../../../../assets/images/home_milk.png'),
+      Image: HomeMilk,
       title: 'A retirada do leite',
       onPress: () => navigation.navigate('Breastfeeding'),
     },
     {
-      image: require('../../../../assets/images/home_emotions.png'),
+      Image: HomeEmotions,
       title: 'Emoções e Amamentação ',
       onPress: () => navigation.navigate('EmotionsAndBreastfeeding'),
     },
     {
-      image: require('../../../../assets/images/home_more_information.png'),
+      Image: HomeMoreInformation,
       title: 'Você sabia?',
       onPress: () => navigation.navigate('AdditionalInformation'),
     },
     {
-      image: require('../../../../assets/images/home_message.png'),
+      Image: HomeMessage,
       title: 'Depoimento das mamães',
       onPress: () => navigation.navigate('Messages'),
     },
     {
-      image: require('../../../../assets/images/home_message.png'),
+      Image: HomeMessage,
       title: 'Perguntas',
       onPress: () => navigation.navigate('Questions'),
     },
@@ -323,7 +329,7 @@ const Home: React.FC = () => {
           <HeaderBackground>
             <HeaderText>Início</HeaderText>
           </HeaderBackground>
-          <BannerImage source={HUBanner}>
+          <BannerImage source={Banner}>
             <HUButton
               onPress={() => navigation.navigate('HU')}
               activeOpacity={0.7}>
@@ -333,10 +339,15 @@ const Home: React.FC = () => {
         </Header>
         <ContentContainer>
           <ContentHeader>Conteúdo</ContentHeader>
-          {options.map(({ image, title, onPress }, index) => (
+          {options.map(({ Image, title, onPress }, index) => (
             <Option key={title}>
               <ContentOption activeOpacity={0.7} onPress={onPress}>
-                <ContentImage source={image} />
+                {Image &&
+                  (typeof Image === 'number' ? (
+                    <ReactImage source={Image} width={100} height={100} />
+                  ) : (
+                    <Image width={100} height={100} />
+                  ))}
                 <ContentTextContainer>
                   <ContentTitle>{title}</ContentTitle>
                 </ContentTextContainer>

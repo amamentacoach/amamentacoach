@@ -1,10 +1,34 @@
 import React from 'react';
+import { Dimensions, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import InformationPages from '../../../components/InformationPages';
-import createGenericInfoPage from '../../../components/GenericInfoPage';
+import theme from '../../../config/theme';
+import InformationPages, {
+  InfoModelProps,
+  InfoPage,
+} from '../../../components/InformationPages';
+import ProgressDots from '../../../components/ProgressDots';
 
-const pages = [
+import {
+  ContentHeaderText,
+  ContentText,
+  ContentTitleText,
+  ContentWrapper,
+  ContinueButton,
+  CurrentPageWrapper,
+  Footer,
+  LastPageButtonWrapper,
+  TextContinueButton,
+} from './styles';
+
+import BreastFeedPremature1 from '../../../../assets/images/breastfeed_premature_1.svg';
+import BreastFeedPremature2 from '../../../../assets/images/breastfeed_premature_2.svg';
+import BreastFeedPremature3 from '../../../../assets/images/breastfeed_premature_3.svg';
+import BreastFeedPremature4 from '../../../../assets/images/breastfeed_premature_4.svg';
+import BreastFeedPremature5 from '../../../../assets/images/breastfeed_premature_5.svg';
+import BreastFeedPremature6 from '../../../../assets/images/breastfeed_premature_6.svg';
+
+const pages: InfoPage[] = [
   {
     id: 1,
     title: '6 passos para amamentação do bebê prematuro',
@@ -17,7 +41,7 @@ const pages = [
   },
   {
     id: 2,
-    image: require('../../../../assets/images/meditation.png'),
+    Image: BreastFeedPremature1,
     title: '1.  Procure a serenidade',
     content: [
       {
@@ -29,7 +53,7 @@ const pages = [
   {
     id: 3,
     title: '2. Estimule a produção láctea',
-    image: require('../../../../assets/images/milk.png'),
+    Image: BreastFeedPremature2,
     content: [
       {
         text:
@@ -40,7 +64,7 @@ const pages = [
   {
     id: 4,
     title: '3. Estreite o vínculo',
-    image: require('../../../../assets/images/heart.png'),
+    Image: BreastFeedPremature3,
     content: [
       {
         text:
@@ -51,7 +75,7 @@ const pages = [
   {
     id: 5,
     title: '4. Seja a protagonista',
-    image: require('../../../../assets/images/protagonist.png'),
+    Image: BreastFeedPremature4,
     content: [
       {
         text:
@@ -62,7 +86,7 @@ const pages = [
   {
     id: 6,
     title: '5. Invista em uma rede de apoio',
-    image: require('../../../../assets/images/community.png'),
+    Image: BreastFeedPremature5,
     content: [
       {
         text:
@@ -73,7 +97,7 @@ const pages = [
   {
     id: 7,
     title: '6. Mantenha a paciência',
-    image: require('../../../../assets/images/time.png'),
+    Image: BreastFeedPremature6,
     content: [
       {
         text:
@@ -85,11 +109,74 @@ const pages = [
 
 const StepByStepPremature: React.FC = () => {
   const navigation = useNavigation();
-  const onEnd = () => navigation.goBack();
+  const { height } = Dimensions.get('screen');
+  const colors = [
+    { background: '#fff', foreground: '#fff' },
+    { background: '#F5E9EC', foreground: theme.babyPink },
+    { background: '#F3EFFC', foreground: theme.babyPurple },
+    { background: '#E5EEF1', foreground: theme.babyBlue },
+    { background: '#E9EEEB', foreground: theme.babyGreen },
+    { background: '#F5E9EC', foreground: theme.babyPink },
+    { background: '#F3EFFC', foreground: theme.babyPurple },
+  ];
 
-  return (
-    <InformationPages pages={pages} PageModel={createGenericInfoPage(onEnd)} />
+  const InfoModel: React.FC<InfoModelProps> = ({
+    index,
+    pagesLength,
+    title,
+    content,
+    Image,
+    flatListRef,
+  }) => (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: colors[index].foreground,
+      }}>
+      {index === 0 && <ContentTitleText>{title}</ContentTitleText>}
+
+      {index !== 0 && (
+        <View
+          style={{
+            backgroundColor: colors[index].background,
+            borderBottomLeftRadius: 120,
+            borderBottomRightRadius: 120,
+            height: height * 0.25,
+            alignItems: 'center',
+          }}
+        />
+      )}
+      <ContentWrapper index={index}>
+        {Image && typeof Image !== 'number' && <Image height={300} />}
+        {index !== 0 && <ContentTitleText>{title}</ContentTitleText>}
+        {content.map(({ sectionHeader, text }) => (
+          <View key={text}>
+            {sectionHeader && (
+              <ContentHeaderText>{sectionHeader}</ContentHeaderText>
+            )}
+            <ContentText>{text}</ContentText>
+          </View>
+        ))}
+      </ContentWrapper>
+
+      <Footer index={index}>
+        <CurrentPageWrapper>
+          <ProgressDots
+            flatlistRef={flatListRef}
+            selectedIndex={index}
+            length={pagesLength}
+          />
+        </CurrentPageWrapper>
+        <LastPageButtonWrapper opacity={index === pagesLength - 1 ? 1 : 0}>
+          <ContinueButton onPress={() => navigation.goBack()}>
+            <TextContinueButton>Sair</TextContinueButton>
+          </ContinueButton>
+        </LastPageButtonWrapper>
+      </Footer>
+    </View>
   );
+
+  return <InformationPages pages={pages} PageModel={InfoModel} />;
 };
 
 export default StepByStepPremature;

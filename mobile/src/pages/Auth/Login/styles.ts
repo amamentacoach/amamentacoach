@@ -10,23 +10,8 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
 export const Header = styled.View`
   flex: 1;
   max-height: 200px;
-  margin: 30px auto;
+  margin: 30px auto 0 auto;
   justify-content: space-between;
-`;
-
-export const HeaderImage = styled.Image`
-  min-height: 100px;
-  min-width: 100px;
-  margin: 0 auto;
-`;
-
-export const HeaderText = styled.Text`
-  font-family: 'Manjari-Bold';
-  font-size: 24px;
-  margin: -20px auto auto auto;
-  color: ${props => props.theme.primary};
-  width: 180px;
-  text-align: center;
 `;
 
 export const FormContainer = styled.View`

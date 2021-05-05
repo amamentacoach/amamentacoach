@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
 import { ActivityIndicator } from 'react-native';
-import OptionsList from '../../../components/OptionList';
+import OptionsList, { OptionList } from '../../../components/OptionList';
 
 import {
   ScrollView,
@@ -14,28 +14,33 @@ import {
   LoadingContainer,
 } from './styles';
 
+import ErlenmeyerPrimary from '../../../../assets/images/erlenmeyer_primary.svg';
+import ErlenmeyerYellow from '../../../../assets/images/erlenmeyer_yellow.svg';
+import ErlenmeyerGreen from '../../../../assets/images/erlenmeyer_green.svg';
+import ErlenmeyerPink from '../../../../assets/images/erlenmeyer_pink.svg';
+
 const Resilience: React.FC = () => {
   const navigation = useNavigation();
   const [isLoadingVideo, setIsLoadingVideo] = useState(true);
 
-  const options = [
+  const options: OptionList[] = [
     {
-      image: require('../../../../assets/images/erlenmeyer_primary.png'),
+      Image: ErlenmeyerPrimary,
       title: '1. Manter expectativas realistas',
       onPress: () => navigation.navigate('ManageExpectations'),
     },
     {
-      image: require('../../../../assets/images/erlenmeyer_yellow.png'),
+      Image: ErlenmeyerYellow,
       title: '2. Buscar apoio social e conexão de grupo',
       onPress: () => navigation.navigate('Messages'),
     },
     {
-      image: require('../../../../assets/images/erlenmeyer_green.png'),
+      Image: ErlenmeyerGreen,
       title: '3. Desenvolver uma maneira positiva de pensar',
       onPress: () => navigation.navigate('Diary'),
     },
     {
-      image: require('../../../../assets/images/erlenmeyer_pink.png'),
+      Image: ErlenmeyerPink,
       title: '4. Construir força e autoconfiança',
       onPress: () => navigation.navigate('UploadMotherPhoto'),
     },

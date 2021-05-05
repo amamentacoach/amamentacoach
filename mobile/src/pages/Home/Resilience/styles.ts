@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-interface IVideoContainerProps {
+interface VideoContainerProps {
   display: boolean;
 }
 
@@ -20,7 +20,7 @@ export const PageHeader = styled.Text`
   text-align: center;
 `;
 
-export const VideoContainer = styled.View<IVideoContainerProps>`
+export const VideoContainer = styled.View<VideoContainerProps>`
   flex: 1;
   justify-content: center;
   display: ${({ display }) => (display ? 'flex' : 'none')};

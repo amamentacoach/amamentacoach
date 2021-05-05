@@ -1,6 +1,6 @@
 import api from './api';
 
-export interface IMessage {
+export interface Message {
   id: string;
   name: string;
   content: string;
@@ -20,7 +20,7 @@ export async function createMessage(message: string): Promise<boolean> {
 }
 
 // Retorna as mensagens enviadas pelos usuários.
-export async function listMessages(page: number): Promise<IMessage[] | null> {
+export async function listMessages(page: number): Promise<Message[] | null> {
   try {
     const { data } = await api.get(`/mensagens?page=${page}`);
     const messages = data.map((question: any) => ({

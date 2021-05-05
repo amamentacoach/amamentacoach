@@ -1,13 +1,22 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import InformationPages from '../../../components/InformationPages';
+import InformationPages, {
+  InfoPage,
+} from '../../../components/InformationPages';
 import createGenericInfoPage from '../../../components/GenericInfoPage';
 
-const pages = [
+import BreastfeedBenefits1 from '../../../../assets/images/breastfeed_benefits_1.svg';
+import BreastfeedBenefits2 from '../../../../assets/images/breastfeed_benefits_2.svg';
+import BreastfeedBenefits3 from '../../../../assets/images/breastfeed_benefits_3.svg';
+import BreastfeedBenefits4 from '../../../../assets/images/breastfeed_benefits_4.svg';
+import BreastfeedBenefits5 from '../../../../assets/images/breastfeed_benefits_5.svg';
+import BreastfeedBenefits6 from '../../../../assets/images/breastfeed_benefits_6.svg';
+
+const pages: InfoPage[] = [
   {
     id: 1,
-    image: require('../../../../assets/images/info_mother_baby.png'),
+    Image: BreastfeedBenefits1,
     title: 'Benefícios da amamentação para a mãe e o bebê',
     content: [
       {
@@ -18,7 +27,7 @@ const pages = [
   },
   {
     id: 2,
-    image: require('../../../../assets/images/info_baby.png'),
+    Image: BreastfeedBenefits2,
     title: 'Benefícios da amamentação para o bebê',
     content: [
       {
@@ -30,7 +39,7 @@ const pages = [
   },
   {
     id: 3,
-    image: require('../../../../assets/images/info_baby_tubes.png'),
+    Image: BreastfeedBenefits3,
     title: 'Benefícios da amamentação para o bebê',
     content: [
       {
@@ -46,7 +55,7 @@ const pages = [
   },
   {
     id: 4,
-    image: require('../../../../assets/images/info_father_baby.png'),
+    Image: BreastfeedBenefits4,
     title: 'Benefícios da amamentação para o bebê',
     content: [
       {
@@ -62,7 +71,7 @@ const pages = [
   },
   {
     id: 5,
-    image: require('../../../../assets/images/info_supermom.png'),
+    Image: BreastfeedBenefits5,
     title: 'Benefícios da amamentação para a mãe',
     content: [
       {
@@ -74,7 +83,7 @@ const pages = [
   },
   {
     id: 6,
-    image: require('../../../../assets/images/info_nurse_baby.png'),
+    Image: BreastfeedBenefits6,
     title: 'Benefícios da amamentação para a mãe',
     content: [
       {

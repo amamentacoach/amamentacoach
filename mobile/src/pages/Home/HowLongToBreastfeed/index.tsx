@@ -1,5 +1,4 @@
 import React from 'react';
-import { Image } from 'react-native';
 
 import {
   ContentWrapper,
@@ -9,8 +8,8 @@ import {
   ScrollView,
 } from './styles';
 
-import WithdrawalOne from '../../../../assets/images/withdrawal_premature_one.png';
-import WithdrawalTwo from '../../../../assets/images/withdrawal_premature_two.png';
+import Withdrawal1 from '../../../../assets/images/withdrawal_premature_1.svg';
+import Withdrawal2 from '../../../../assets/images/withdrawal_premature_2.svg';
 
 const HowLongToBreastfeed: React.FC = () => {
   return (
@@ -19,12 +18,12 @@ const HowLongToBreastfeed: React.FC = () => {
         Por quanto tempo fazer a retirada do leite?
       </ContentTitleText>
       <ContentWrapper>
-        <Image source={WithdrawalOne} />
+        <Withdrawal1 />
         <ContentText>
           Enquanto seu bebê ainda não estiver
           <ColoredText> mamando regularmente</ColoredText>.
         </ContentText>
-        <Image source={WithdrawalTwo} />
+        <Withdrawal2 />
         <ContentText>
           Enquanto ele ainda não estiver mamando
           <ColoredText> exclusivamente em você</ColoredText>.

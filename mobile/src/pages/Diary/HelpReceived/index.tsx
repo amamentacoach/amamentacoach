@@ -6,8 +6,13 @@ import theme from '../../../config/theme';
 import DiaryForm from '../../../components/DiaryForm';
 import createGenericDiaryFormPage from '../../../components/GenericDiaryFormPage';
 
+import HelpReceived1 from '../../../../assets/images/help_received_1.svg';
+import HelpReceived2 from '../../../../assets/images/help_received_2.svg';
+
 const HelpReceived: React.FC = () => {
   const navigation = useNavigation();
+
+  const images = [HelpReceived1, HelpReceived2];
 
   // Marca o formulário como enviado no dia.
   async function setFormSent() {
@@ -27,7 +32,7 @@ const HelpReceived: React.FC = () => {
       title="Minha rede de apoio"
       color={theme.babyPurple}
       category={4}
-      Page={createGenericDiaryFormPage(theme.babyPurple, onFormEnd)}
+      Page={createGenericDiaryFormPage(theme.babyPurple, onFormEnd, images)}
       onFeedbackAccepted={setFormSent}
     />
   );

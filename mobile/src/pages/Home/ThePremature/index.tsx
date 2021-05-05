@@ -1,26 +1,30 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import OptionsList from '../../../components/OptionList';
+import OptionsList, { OptionList } from '../../../components/OptionList';
 
 import ScrollView from './styles';
 
+import IcVideo from '../../../../assets/images/ic_video.svg';
+import PrematureSurvey from '../../../../assets/images/premature_survey.svg';
+import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
+
 const ThePremature: React.FC = () => {
   const navigation = useNavigation();
-  const options = [
+  const options: OptionList[] = [
     {
-      image: require('../../../../assets/images/ic_video.png'),
+      Image: IcVideo,
       title: 'Vídeo “Muito prazer, eu sou o prematuro”',
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['w2rbi3aW-rA'] }),
     },
     {
-      image: require('../../../../assets/images/premature_survey.png'),
+      Image: PrematureSurvey,
       title: 'Enquete: Amamentar um prematuro',
       onPress: () => navigation.navigate('SurveyBreastfeed'),
     },
     {
-      image: require('../../../../assets/images/premature_breastfeed.png'),
+      Image: PrematureBreastfeed,
       title: 'Infográfico: 6 passos para a amamentação',
       onPress: () => navigation.navigate('StepByStepPremature'),
     },

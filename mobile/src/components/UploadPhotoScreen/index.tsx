@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import ImagePicker, { ImagePickerResponse } from 'react-native-image-picker';
-import { Dimensions, Image } from 'react-native';
+import { Dimensions, Image as ReactImage } from 'react-native';
 
+import { useAuth } from '../../contexts/auth';
+import SecondaryButton from '../SecondaryButton';
 import MainButton from '../MainButton';
 
 import {
@@ -13,19 +15,17 @@ import {
   SendButtonContainer,
   SelectButtonContainer,
 } from './styles';
-import { useAuth } from '../../contexts/auth';
-import SecondaryButton from '../SecondaryButton';
 
 interface UploadPhotoScreenProps {
   target: 'mother' | 'baby' | 'father';
-  image: any;
+  Image: any;
   text: string;
   uploadFunction: (photo: ImagePickerResponse) => Promise<string | null>;
 }
 
 const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
   target,
-  image,
+  Image,
   text,
   uploadFunction,
 }) => {
@@ -80,7 +80,12 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
         {/* Usuário ainda não enviou uma foto e não selecionou nenhuma para ser enviada */}
         {!photo && !motherInfo.images[target] && (
           <>
-            <Image source={image} />
+            {Image &&
+              (typeof Image === 'number' ? (
+                <ReactImage source={Image} />
+              ) : (
+                <Image />
+              ))}
             <Text>{text}</Text>
           </>
         )}

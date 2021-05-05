@@ -23,10 +23,6 @@ export const ContentHeader = styled.Text`
   margin: 30px;
 `;
 
-export const ContentImage = styled.Image`
-  margin: 0 24px;
-`;
-
 export const ContentText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 14px;
