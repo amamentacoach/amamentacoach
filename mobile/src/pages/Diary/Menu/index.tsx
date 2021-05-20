@@ -19,6 +19,7 @@ import {
   DateText,
 } from './styles';
 
+import Baby from '../../../../assets/images/canguru.svg';
 import CalendarIcon from '../../../../assets/images/icons/ic_calendar.svg';
 import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
 import DiarySmile from '../../../../assets/images/diary_smile.svg';
@@ -85,6 +86,18 @@ const DiaryMenu: React.FC = () => {
       },
     },
     {
+      Image: Baby,
+      title: 'Meu Bebê Hoje',
+      onPress: async () => {
+        // Checa se o usuário já respondeu o formulário no dia.
+        if (await checkOneDayPassed('@AmamentaCoach:DiaryDiaryBabyLastDate')) {
+          navigation.navigate('DiaryBaby');
+        } else {
+          setIsModalVisible(true);
+        }
+      },
+    },
+    {
       Image: EmotionsInfo,
       title: 'Meu Desempenho',
       onPress: () => navigation.navigate('Report'),
@@ -93,7 +106,7 @@ const DiaryMenu: React.FC = () => {
 
   // Exibe o upload de imagem do pai apenas se a mãe tem um companheiro.
   if (motherInfo.partner) {
-    options.splice(5, 0, {
+    options.splice(6, 0, {
       Image: Father,
       title: 'Participação do Pai',
       // @ts-ignore

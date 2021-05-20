@@ -3,7 +3,6 @@ import React from 'react';
 import createColorHeader from '../config/colorHeader';
 import theme from '../../config/theme';
 
-import SurveyBaby from '../../pages/Survey/SurveyBaby';
 import SurveyBreastfeed from '../../pages/Survey/SurveyBreastfeed';
 import SurveyFather from '../../pages/Survey/SurveyFather';
 import SurveyHelp from '../../pages/Survey/SurveyHelp';
@@ -14,12 +13,6 @@ const CreateSurveyRoutes = (Stack: any) => {
   const headerBabyBlue = createColorHeader(theme.babyBlue);
 
   return [
-    <Stack.Screen
-      key="SurveyBaby"
-      name="SurveyBaby"
-      component={SurveyBaby}
-      options={{ title: 'Enquete', ...headerBabyBlue }}
-    />,
     <Stack.Screen
       key="SurveyBreastfeed"
       name="SurveyBreastfeed"
