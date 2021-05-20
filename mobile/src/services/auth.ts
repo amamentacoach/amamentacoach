@@ -7,7 +7,7 @@ export interface MotherSignUpInfo {
   phone: string;
   pregnantCount: number;
   alreadyBreastfeed: boolean;
-  timeSpentBreastFeeding: string[];
+  timeSpentBreastFeeding: string;
   birthday: string;
   partner: boolean;
   liveTogether?: string | null;
