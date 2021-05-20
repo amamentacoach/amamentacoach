@@ -24,5 +24,5 @@ export const LoadingContainer = styled.View`
 `;
 
 export const VideoContainer = styled.View`
-  margin: 20px 24px;
+  margin: 0px 24px;
 `;

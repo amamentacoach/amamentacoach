@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
 import {
@@ -13,6 +13,7 @@ import {
 } from './styles';
 
 const BabyCup: React.FC = () => {
+  const { height } = Dimensions.get('window');
   const [isLoadingVideo, setIsLoadingVideo] = useState(true);
 
   const steps = [
@@ -36,11 +37,16 @@ const BabyCup: React.FC = () => {
       )}
       <VideoContainer display={!isLoadingVideo}>
         <YoutubePlayer
-          height={200}
+          height={height / 3}
           videoId="-VBk8v8TOrE"
           initialPlayerParams={{ loop: false }}
-          onReady={() => {
-            setIsLoadingVideo(false);
+          onReady={() => setIsLoadingVideo(false)}
+          webViewProps={{
+            injectedJavaScript: `
+            var element = document.getElementsByClassName('container')[0];
+            element.style.position = 'unset';
+            true;
+          `,
           }}
         />
       </VideoContainer>

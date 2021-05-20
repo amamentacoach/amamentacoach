@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { ActivityIndicator, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
-import { ActivityIndicator } from 'react-native';
 import OptionsList, { OptionList } from '../../../components/OptionList';
 
 import {
@@ -20,6 +20,7 @@ import ErlenmeyerGreen from '../../../../assets/images/erlenmeyer_green.svg';
 import ErlenmeyerPink from '../../../../assets/images/erlenmeyer_pink.svg';
 
 const Resilience: React.FC = () => {
+  const { height } = Dimensions.get('window');
   const navigation = useNavigation();
   const [isLoadingVideo, setIsLoadingVideo] = useState(true);
 
@@ -60,11 +61,16 @@ const Resilience: React.FC = () => {
       )}
       <VideoContainer display={!isLoadingVideo}>
         <YoutubePlayer
-          height={200}
+          height={height / 3}
           videoId="KGedLLSN0FU"
           initialPlayerParams={{ loop: false }}
-          onReady={() => {
-            setIsLoadingVideo(false);
+          onReady={() => setIsLoadingVideo(false)}
+          webViewProps={{
+            injectedJavaScript: `
+            var element = document.getElementsByClassName('container')[0];
+            element.style.position = 'unset';
+            true;
+          `,
           }}
         />
       </VideoContainer>
