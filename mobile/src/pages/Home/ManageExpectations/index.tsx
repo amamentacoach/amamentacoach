@@ -16,9 +16,15 @@ import {
   CardText,
 } from './styles';
 
-interface SelectedIdsInfo {
+interface Expectation {
+  id: number;
+  old: string;
+  new: string;
+}
+
+interface SelectedInfo {
   lastRunDate: Date;
-  alreadySelectedIds: number[];
+  alreadySelected: Expectation[];
 }
 
 const expectations = [
@@ -55,11 +61,11 @@ const expectations = [
 ];
 
 const ManageExpectations: React.FC = () => {
-  const [currentExpectation, setCurrentExpectation] = useState<{
-    id: number;
-    old: string;
-    new: string;
-  }>({ id: -1, old: '', new: '' });
+  const [currentExpectation, setCurrentExpectation] = useState<Expectation>({
+    id: -1,
+    old: '',
+    new: '',
+  });
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [isCorrectAnswerSelected, setIsCorrectAnswerSelected] = useState(false);
@@ -71,36 +77,36 @@ const ManageExpectations: React.FC = () => {
   }
 
   useEffect(() => {
-    async function loadAlreadySelectedIds() {
-      const selectedIdsStorage = await AsyncStorage.getItem(
+    async function loadAlreadySelected() {
+      const selectedStorage = await AsyncStorage.getItem(
         '@AmamentaCoach:alreadySelectedExpectations',
       );
 
       // Caso seja a primeira vez escolhe uma expectativa aleatória.
-      if (!selectedIdsStorage) {
+      if (!selectedStorage) {
         setCurrentExpectation(selectRandomArrayElement(expectations));
         return;
       }
 
-      const { lastRunDate, alreadySelectedIds }: SelectedIdsInfo = JSON.parse(
-        selectedIdsStorage,
+      const { lastRunDate, alreadySelected }: SelectedInfo = JSON.parse(
+        selectedStorage,
       );
 
       // Desativa caso já tenha sido utilizado uma vez no dia e exibe a opção selecionada
       // anteriormente.
       if (moment(lastRunDate).isSame(new Date(), 'day')) {
-        const lastSelectExpectationId =
-          alreadySelectedIds[alreadySelectedIds.length - 1];
+        const lastSelectedExpectation =
+          alreadySelected[alreadySelected.length - 1];
         setCurrentExpectation({
-          id: lastSelectExpectationId,
-          old: expectations[lastSelectExpectationId].old,
-          new: expectations[lastSelectExpectationId].new,
+          id: lastSelectedExpectation.id,
+          old: lastSelectedExpectation.old,
+          new: lastSelectedExpectation.new,
         });
         await AsyncStorage.setItem(
           '@AmamentaCoach:alreadySelectedExpectations',
           JSON.stringify({
             lastRunDate: new Date(),
-            alreadySelectedIds,
+            alreadySelected,
           }),
         );
         setIsCorrectAnswerSelected(true);
@@ -110,7 +116,7 @@ const ManageExpectations: React.FC = () => {
 
       // Caso todas as expectativas já tenham sido escolhidas limpa o registro e escolhe uma opção
       // aleatória.
-      if (alreadySelectedIds.length === expectations.length) {
+      if (alreadySelected.length === expectations.length) {
         await AsyncStorage.removeItem(
           '@AmamentaCoach:alreadySelectedExpectations',
         );
@@ -120,33 +126,32 @@ const ManageExpectations: React.FC = () => {
 
       // Remove as expectativas já escolhidas anteriormente
       const availableExpectations = expectations.filter(
-        ({ id }) => !alreadySelectedIds.includes(id),
+        expectation => !alreadySelected.includes(expectation),
       );
       if (availableExpectations) {
         setCurrentExpectation(selectRandomArrayElement(availableExpectations));
       }
     }
 
-    loadAlreadySelectedIds();
+    loadAlreadySelected();
   }, []);
 
   // Adiciona o id da expectativa atual ao AsyncStorage, para que não possa ser utilizada na próxima
   // execução.
   async function saveSelectedExpectation() {
-    const selectedIdsStorage = await AsyncStorage.getItem(
+    const selectedStorage = await AsyncStorage.getItem(
       '@AmamentaCoach:alreadySelectedExpectations',
     );
-    let alreadySelectedIds: number[] = [];
-    if (selectedIdsStorage) {
-      alreadySelectedIds = JSON.parse(selectedIdsStorage);
+    let alreadySelected: Expectation[] = [];
+    if (selectedStorage) {
+      alreadySelected = JSON.parse(selectedStorage);
     }
-    const newAlreadySelected = [...alreadySelectedIds, currentExpectation.id];
 
     await AsyncStorage.setItem(
       '@AmamentaCoach:alreadySelectedExpectations',
       JSON.stringify({
         lastRunDate: new Date(),
-        alreadySelectedIds: newAlreadySelected,
+        alreadySelected: [...alreadySelected, currentExpectation],
       }),
     );
 

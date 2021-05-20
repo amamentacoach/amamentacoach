@@ -14,7 +14,7 @@ import FormPickerInput from '../../../components/FormPickerInput';
 import { setHomePageOpened } from '../../../services/telemetry';
 import {
   checkBabiesLocation,
-  IBabyStatus,
+  BabyStatus,
   updateBabyLocation,
 } from '../../../services/babyLocation';
 import Modal from '../../../components/Modal';
@@ -58,7 +58,7 @@ const Home: React.FC = () => {
   const navigation = useNavigation();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
 
-  const [babiesData, setBabiesData] = useState<IBabyStatus[]>([]);
+  const [babiesData, setBabiesData] = useState<BabyStatus[]>([]);
   const [babyModalVisibility, setBabyModalVisibility] = useState<boolean>(
     false,
   );
