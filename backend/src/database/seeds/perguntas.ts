@@ -49,13 +49,13 @@ export async function seed(knex: Knex): Promise<void> {
             id: 4, 
             categoria: 2, 
             descricao:'Como estou me sentindo:',
-            alternativas: 'Feliz|'
-                + 'Confiante|'
-                + 'Orgulhosa|'
-                + 'Ansiosa|'
-                + 'Triste|'
-                + 'Desanimada|'
-                + 'Preocupada',
+            alternativas: '😀 Feliz|'
+                + '😌 Confiante|'
+                + '🤩 Orgulhosa|'
+                + '😥 Ansiosa|'
+                + '😢 Triste|'
+                + '😔 Desanimada|'
+                + '😧 Preocupada',
             outro:true,
             multiplas:false,
         },
@@ -65,9 +65,9 @@ export async function seed(knex: Knex): Promise<void> {
             id: 5, 
             categoria: 10, 
             descricao:'Como meu bebê está:',
-            alternativas: 'Continua como estava|'
-                + 'Piorou|'
-                + 'Melhorou',
+            alternativas: '🙂 Continua como estava|'
+                + '🙁 Piorou|'
+                + '😁 Melhorou',
             outro:false,
             multiplas:false,
         },
@@ -77,7 +77,7 @@ export async function seed(knex: Knex): Promise<void> {
             descricao:'Como meu bebê está se alimentando:',
             alternativas: 'Apenas no meu peito|'
                 + 'No meu peito, c/ complemento por copinho|'
-                + 'Por relactação/ translactação|'
+                + 'Por relactação/translactação|'
                 + 'Apenas por copinho |'
                 + 'Por chuca|'
                 + 'Por sonda',
@@ -189,7 +189,7 @@ export async function seed(knex: Knex): Promise<void> {
                 + 'Me ajudou com a ordenha|'
                 + 'Ofereceu a dieta|'
                 + 'Limpou os olhinhos e boquinha do bebê|'
-                + 'Outra Trocou fraldas|'
+                + 'Trocou fraldas|'
                 + 'Deu banho|'
                 + 'Ajudou mais em casa para que eu pudesse estar mais na Unidade|'
                 + 'Nenhuma das alternativas',
