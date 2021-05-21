@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { useRoute, RouteProp } from '@react-navigation/native';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
 import {
@@ -23,6 +23,7 @@ type IScreenParams = {
 
 const VideoPage: React.FC = () => {
   const { videos } = useRoute<RouteProp<IScreenParams, 'VideoPage'>>().params;
+  const { height } = Dimensions.get('window');
   const [isLoading, setIsLoading] = useState(true);
 
   const playedOnce = useRef(false);
@@ -54,7 +55,7 @@ const VideoPage: React.FC = () => {
         {videos.map(id => (
           <VideoContainer key={id}>
             <YoutubePlayer
-              height={300}
+              height={height / 3}
               videoId={id}
               initialPlayerParams={{ loop: false }}
               onReady={() => setIsLoading(false)}

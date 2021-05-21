@@ -21,7 +21,6 @@ export const PageHeader = styled.Text`
 `;
 
 export const VideoContainer = styled.View<VideoContainerProps>`
-  flex: 1;
   justify-content: center;
   display: ${({ display }) => (display ? 'flex' : 'none')};
 `;

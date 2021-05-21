@@ -68,10 +68,10 @@ export const HeaderText = styled.Text`
 `;
 
 export const BannerImage = styled.ImageBackground`
-  flex: 1;
-  margin: -112px 24px 0 24px;
+  margin: -124px 24px 0 24px;
   align-items: center;
   justify-content: flex-end;
+  height: 100%;
 `;
 
 export const HUButton = styled.TouchableOpacity`
@@ -91,7 +91,7 @@ export const HUButtonText = styled.Text`
 
 export const ContentContainer = styled.View`
   flex: 1;
-  margin: 30px 24px 0 24px;
+  margin: 80px 24px 0 24px;
 `;
 
 export const ContentHeader = styled.Text`

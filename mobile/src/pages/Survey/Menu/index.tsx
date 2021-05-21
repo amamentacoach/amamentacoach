@@ -12,7 +12,6 @@ import SurveysOne from '../../../../assets/images/surveys_one.svg';
 import SurveysTwo from '../../../../assets/images/surveys_two.svg';
 import SurveysThree from '../../../../assets/images/surveys_three.svg';
 import SurveysFour from '../../../../assets/images/surveys_four.svg';
-import SurveysFive from '../../../../assets/images/surveys_five.svg';
 
 const SurveyMenu: React.FC = () => {
   const { motherInfo } = useAuth();
@@ -39,18 +38,6 @@ const SurveyMenu: React.FC = () => {
     },
     {
       Image: SurveysTwo,
-      title: 'Meu Bebê Hoje',
-      onPress: async () => {
-        // Checa se o usuário já respondeu o formulário no dia.
-        if (await checkOneDayPassed('@AmamentaCoach:DiarySurveyBabyLastDate')) {
-          navigation.navigate('SurveyBaby');
-        } else {
-          setIsModalVisible(true);
-        }
-      },
-    },
-    {
-      Image: SurveysThree,
       title: 'Motivação',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -66,7 +53,7 @@ const SurveyMenu: React.FC = () => {
       },
     },
     {
-      Image: SurveysFour,
+      Image: SurveysThree,
       title: 'Sobre ajuda',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -84,7 +71,7 @@ const SurveyMenu: React.FC = () => {
     options = [
       ...options,
       {
-        Image: SurveysFive,
+        Image: SurveysFour,
         title: 'Sobre a participação do pai',
         onPress: async () => {
           // Checa se o usuário já respondeu o formulário no dia.

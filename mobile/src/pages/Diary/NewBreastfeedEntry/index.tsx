@@ -138,7 +138,7 @@ const NewDiaryRegistry: React.FC = () => {
               <FormDateInput
                 label="Horário"
                 fieldName="time"
-                placeholder="Insira o horário da retirada"
+                placeholder="Insira o horário da mamada"
                 mode="time"
                 onChange={setFieldValue}
                 error={errors.time}

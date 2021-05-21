@@ -91,7 +91,7 @@ const Introduction: React.FC = () => {
         </SkipButton>
       </Header>
       <ContentWrapper>
-        {Image && <Image />}
+        {Image && typeof Image !== 'number' && <Image />}
         {content.map(({ text }) => (
           <ContentText key={text}>{text}</ContentText>
         ))}

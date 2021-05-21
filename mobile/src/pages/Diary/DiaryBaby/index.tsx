@@ -6,31 +6,31 @@ import theme from '../../../config/theme';
 import DiaryForm from '../../../components/DiaryForm';
 import createGenericDiaryFormPage from '../../../components/GenericDiaryFormPage';
 
-const SurveyBaby: React.FC = () => {
+const DiaryBaby: React.FC = () => {
   const navigation = useNavigation();
 
   // Marca o formulário como enviado no dia.
   async function setFormSent() {
     await AsyncStorage.setItem(
-      '@AmamentaCoach:DiarySurveyBabyLastDate',
+      '@AmamentaCoach:DiaryDiaryBabyLastDate',
       new Date().toISOString(),
     );
   }
 
   async function onFormEnd() {
     await setFormSent();
-    navigation.navigate('Survey');
+    navigation.navigate('Diary');
   }
 
   return (
     <DiaryForm
       title="Meu Bebê Hoje"
-      color={theme.babyBlue}
+      color={theme.babyPurple}
       category={10}
-      Page={createGenericDiaryFormPage(theme.babyBlue, onFormEnd)}
+      Page={createGenericDiaryFormPage(theme.babyPurple, onFormEnd)}
       onFeedbackAccepted={setFormSent}
     />
   );
 };
 
-export default SurveyBaby;
+export default DiaryBaby;
