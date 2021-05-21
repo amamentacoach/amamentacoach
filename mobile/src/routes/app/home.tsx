@@ -104,7 +104,7 @@ const CreateHomeRoutes = (Stack: any) => {
       key="ManageExpectations"
       name="ManageExpectations"
       component={ManageExpectations}
-      options={{ title: 'Caixinha da distração' }}
+      options={{ title: 'Expectativas' }}
     />,
     <Stack.Screen
       key="Messages"
