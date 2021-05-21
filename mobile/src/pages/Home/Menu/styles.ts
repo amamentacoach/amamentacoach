@@ -31,7 +31,7 @@ export const TextModal = styled.Text`
 
 export const OuterCircle = styled.View<OptionProps>`
   border: 1.4px solid
-    ${({ theme, selected }) => (selected ? theme.babyPink : theme.brightGrey)};
+    ${({ theme, selected }) => (selected ? theme.babyPurple : theme.brightGrey)};
   background-color: transparent;
   width: 18px;
   height: 18px;
@@ -43,7 +43,7 @@ export const OuterCircle = styled.View<OptionProps>`
 
 export const InnerCircle = styled.View<OptionProps>`
   background-color: ${({ theme, selected }) =>
-    selected ? theme.babyPink : 'transparent'};
+    selected ? theme.babyPurple : 'transparent'};
   width: 10px;
   height: 10px;
   border-radius: 5px;

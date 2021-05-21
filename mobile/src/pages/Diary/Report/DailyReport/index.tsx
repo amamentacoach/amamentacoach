@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import { Formik } from 'formik';
 
-import { getDailyReport, IDailyReport } from '../../../../services/report';
+import {
+  getDailyReport,
+  DailyReport as IDailyReport,
+} from '../../../../services/report';
 import MainButton from '../../../../components/MainButton';
 import FormRadioGroupInput from '../../../../components/FormRadioGroup';
 import { answerQuestion } from '../../../../services/survey';

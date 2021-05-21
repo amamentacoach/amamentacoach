@@ -278,7 +278,7 @@ const Home: React.FC = () => {
       />
       {babiesData.length > 0 && (
         <Modal
-          color={theme.babyPink}
+          color={theme.babyPurple}
           options={[
             {
               text: 'Sim',
