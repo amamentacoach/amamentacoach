@@ -44,7 +44,7 @@ class RespostasMaeController{
 
     async responderEscala(req:Request, res:Response){
         const {mae_id} = req
-        const  {ocasiao } = req.body
+        const  {ocasiao} = req.body
         const respostas:Resposta[] = req.body.respostas
 
         let score = 0
@@ -81,7 +81,7 @@ class RespostasMaeController{
         })
 
        
-        res.sendStatus(200)
+        res.send({score})
     }
 
     async responderAlimentacao(req:Request, res:Response){
