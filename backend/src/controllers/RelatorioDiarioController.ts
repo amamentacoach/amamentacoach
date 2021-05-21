@@ -25,30 +25,8 @@ class RelatorioDiarioController{
             .where('data_hora','>=',date)
             .select('*')
             .orderBy('ordenha.data_hora')
-        
-        
-        const jaRespondeu = await  knex('resposta')
-            .where('data','>=',date)
-            .whereIn('pergunta_id',[15,16])
-            .where('mae_id', mae_id)
-            .count('*')
 
-            
-        if(jaRespondeu[0].count==0){
-            const bebe = await knex('bebe').select('local').where('mae_id',mae_id).first()
-            const alvo = alvosMap.get(bebe.local)
-            const perguntas = await knex('pergunta').where('categoria',6).select('*')
-                .where(bd =>{
-                    bd.orWhere('alvo','GERAL')
-                    bd.orWhere('alvo',alvo)
-                }).orderBy('id');
-            perguntas.map((pergunta,i)=>{
-                pergunta["alternativas"]=pergunta.alternativas.split('|')
-            })
-            return res.send({bebes, ordenhas, perguntas});
-        }
-
-        return res.send({bebes, ordenhas, perguntas:[]});
+        return res.send({bebes, ordenhas});
 
     }
 }

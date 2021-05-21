@@ -78,7 +78,7 @@ export async function seed(knex: Knex): Promise<void> {
             alternativas: 'Apenas no meu peito|'
                 + 'No meu peito, c/ complemento por copinho|'
                 + 'Por relactação/translactação|'
-                + 'Apenas por copinho |'
+                + 'Apenas por copinho|'
                 + 'Por chuca|'
                 + 'Por sonda',
             outro:false,

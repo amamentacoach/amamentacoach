@@ -10,10 +10,58 @@ alvosMap.set("Alojamento conjunto",0)
 alvosMap.set("UCI Neonatal", 1)
 alvosMap.set("UTI Neonatal", 2)
 
+const enquete1Map = new Map<string, number>();
+enquete1Map.set("Sentimento de empoderamento (lidar com este desafio me faz acreditar que sou capaz de outras grandes coisas)",1)
+enquete1Map.set("Gratidão pela oportunidade (penso que muitas mulheres, por muitas razões, não conseguem nem tentar)", 2)
+enquete1Map.set("A formação de um poderoso vínculo ao travar uma batalha em parceria com meu(a) pequeno(a)", 3)
+enquete1Map.set("Não consigo identificar nada de bom", 4)
+
+const enquete2Map = new Map<string, number>();
+enquete2Map.set("Pensar que é o melhor para o meu bebê",1)
+enquete2Map.set("O incentivo que estou recebendo dos profissionais", 2)
+enquete2Map.set("O incentivo que estou recebendo da minha família", 3)
+enquete2Map.set("Pensar no custo da fórmula", 4)
+enquete2Map.set("Outras motivações", 5)
+enquete2Map.set("Não estou muito motivada a continuar", 6)
+
+const enquete3Map = new Map<string, number>();
+enquete3Map.set("Sim, tanto dos profissionais quanto da minha família",1)
+enquete3Map.set("Apenas da minha família", 2)
+enquete3Map.set("Apenas dos profissionais", 3)
+enquete3Map.set("Parcialmente, tanto dos profissionais quanto da minha família", 4)
+enquete3Map.set("Não estou recebendo ajuda", 5)
+
+const enquete4Map = new Map<string, number>();
+enquete4Map.set("Visita na Unidade de 1 a 2 vezes",1)
+enquete4Map.set("Visita na Unidade mais de 2 vezes", 2)
+enquete4Map.set("Canguru", 3)
+enquete4Map.set("Me ajudou com a ordenha", 4)
+enquete4Map.set("Ofereceu a dieta", 5)
+enquete4Map.set("Limpou os olhinhos e boquinha do bebê", 6)
+enquete4Map.set("Trocou fraldas", 7)
+enquete4Map.set("Deu banho", 8)
+enquete4Map.set("Ajudou mais em casa para que eu pudesse estar mais na Unidade", 9)
+enquete4Map.set("Nenhuma das alternativas", 10)
+enquete4Map.set("Canguru", 1)
+enquete4Map.set("Me ajudou com a ordenha", 2)
+enquete4Map.set("Limpou os olhinhos e boquinha do bebê", 3)
+enquete4Map.set("Trocou fraldas", 4)
+enquete4Map.set("Deu banho", 5)
+enquete4Map.set("Fez dormir", 6)
+enquete4Map.set("Estimulou e brincou", 7)
+enquete4Map.set("Acompanhou consultas", 8)
+enquete4Map.set("Ajudou mais em casa para que eu pudesse descansar", 9)
+enquete4Map.set("Nenhuma das alternativas", 10)
+
+const quadroBBMap = new Map<string, number>();
+quadroBBMap.set("🙂 Continua como estava",0)
+quadroBBMap.set("🙁 Piorou", 2)
+quadroBBMap.set("😁 Melhorou", 1)
+
 class ResultController{
 
 
-    async dadosMaes(req:Request,res:Response){
+    async dadosGerais(req:Request,res:Response){
         const pathCsv = `${path.resolve(__dirname, '..', '..','csv')}/saida.csv`
         const csv = createObjectCsvWriter({
             path: pathCsv,
@@ -36,7 +84,7 @@ class ResultController{
                 {id:'apgar1bb2', title:'Apgar1BB2'},
                 {id:'apgar5bb2', title:'Apgar5BB2'},
                 {id:'primeira_visita', title:'Primeira visita'},
-                {id:'primeiro_estimulo', title:'Tipo1ºEstimulo'},
+                {id:'primeiro_estimulo2', title:'Tipo1ºEstimulo'},
                 {id:'dias_internadosbb1', title:'DiasInternadosBB1'},
                 {id:'dias_internadosbb2', title:'DiasInternadosBB2'},
                 {id:'filhos_vivos', title:'NºFilhosVivos'},
@@ -50,13 +98,51 @@ class ResultController{
                 {id:'ocupacao', title:'Ocupação'},
                 {id:'licenca_maternidade', title:'Licença maternidade'},
                 {id:'renda', title:'Renda'},
+                {id:'n_dias', title:'NºDiasVidaInícioApp'},
                 {id:'score_1d', title:'BSES1'},
                 {id:'score_alta', title:'BSESAlta'},
                 {id:'score_15d', title:'BSES15d'},
                 {id:'score_1m', title:'BSES1m'},
                 {id:'alim_alta', title:'AlimAlta'},
                 {id:'alim_15d', title:'Alim15d'},
-                {id:'alim_1m', title:'Alim1m'}
+                {id:'alim_1m', title:'Alim1m'},
+                {id:'acessos_app', title:'NºAcessosAoApp'},
+                {id:'acessos_diario', title:'NºAcessosDiário'},
+                {id:'acesso_videos', title:'AcessosVideos'},
+                {id:'enquete1', title:'Enquete1'},
+                {id:'enquete2', title:'Enquete2'},
+                {id:'enquete3', title:'Enquete3'},
+                {id:'enquete4', title:'Enquete4'},
+                {id:'acessos_msg', title:'AcessosMsg'},
+                {id:'envios_msg', title:'EnviosMsg'},
+                {id:'quadrobb1', title:'Quadro clínico do bebe 1'},
+                {id:'quadrobb2', title:'Quadro clínico do bebe 2'},
+                {id:'canguru', title:'Canguru'},
+                {id:'cuidados', title:'Cuidados'},
+                {id:'sentimentos_positivos', title:'N°SentimPosit/NºAcessosDiário'},
+                {id:'sentimentos_negativos', title:'SentimNeg/NºRegistrosSentim'},
+                {id:'alim_verde', title:'AlimVerde/NºRegistrosAlim'},
+                {id:'alim_laranja', title:'AlimLaranj'},
+                {id:'alim_vermelha', title:'AlimVerm'},
+                {id:'n_metas', title:'N°RegistrosMetas'},
+                {id:'bb_sem_melhora', title:'BBs/melhora'},
+                {id:'bb_com_melhora', title:'BBc/melhora'},
+                {id:'menor3_acoes', title:'<3Ações/Acesso diário'},
+                {id:'3-4_acoes', title:'3-4ações'},
+                {id:'maior4_acoes', title:'>4ações'},
+                {id:'registros_ordenha', title:'RegistrosOrd/AcessoDiário'},
+                {id:'registros_ajuda', title:'RegistrAjudaProfiss'},
+                {id:'registros_apoio', title:'RegistrApoio'},
+                {id:'acessos_ordenha', title:'NºAcessosOrd'},
+                {id:'media_ordenhas', title:'MédiaOrd-Dia de acesso Diário'},
+                {id:'volum_ordenhas', title:'VolMéd3últimasOrdenhas'},
+                {id:'media_mamadas', title:'MédiaMamadasDia'},
+                {id:'baby_feed1', title:'BabyFeed1'},
+                {id:'baby_feed2', title:'BabyFeed2'},
+                {id:'baby_feed3', title:'BabyFeed3'},
+                {id:'baby_feed4', title:'BabyFeed4'},
+                {id:'baby_feed5', title:'BabyFeed5'},
+                {id:'baby_feed6', title:'BabyFeed6'}
             ]
         })
         const maes = await knex('mae').select('*').where('status',1);
@@ -85,44 +171,98 @@ class ResultController{
                 if(bebe.data_alta){
                     const diff = moment(bebe.data_alta).diff(moment(bebe.data_parto));
                     const dias = moment.duration(diff).asDays();  
-                    mae[`dias_internadosbb${j}`] = dias
+                    mae[`dias_internadosbb${j}`] = Math.floor(dias)
+                }
+                if(mae.primeiro_acesso){
+                    const diff = moment(mae.primeiro_acesso).diff(moment(bebe.data_parto));
+                    const dias = moment.duration(diff).asDays();
+                    mae[`n_dias`] = Math.floor(dias)
+                }
+
+                const quadro = await knex('resposta').select('descricao').where('mae_id',mae.id).where('pergunta_id',5).orderBy('data','desc').first()
+                if(quadro){
+                    const resul = quadroBBMap.get(quadro.descricao)
+                    if(resul)
+                        mae[`quadrobb${j}`] = resul
                 }
                 
                 j++
             }
 
-            mae['gemelar'] = j > 1 ? 1 : 0
+            mae['gemelar'] = mae['alocacao2'] !== null && mae['alocacao2'] !== undefined ? 1 : 0
 
             mae['filhos_vivos'] = mae.qtd_filhos_vivos
             mae['orientacao_amamentacao'] = mae.orientacao_prenatal ? 1 : 0
             mae['amamentou_antes'] = mae.amamentou_antes ? 1 : 0
             mae['companheiro'] = mae.companheiro ? 1 : 0
             mae['mora'] = mae.moram_juntos ? 1 : 0
+            mae['primeiro_estimulo2'] = mae.primeiro_estimulo === true ? 1 : 2
             mae['tempo_juntos'] = mae.moram_juntos
             mae['ocupacao'] = mae.ocupacao ? 1 : 0
             mae['licenca_maternidade'] = mae.licenca_maternidade ? mae.licenca_maternidade : 0
 
+            const [count1] = await knex('mensagem').count().where('mae_id',mae.id)
+            mae['envios_msg'] = count1['count']
+            mae['acesso_videos'] = mae.acesso_inicio_videos ? 1 : 0
+
+            const resposta1 = await knex('resposta').select('descricao').where('mae_id',mae.id).where('pergunta_id',1).orderBy('data','desc').first()
+            if(resposta1){
+                const resul = enquete1Map.get(resposta1.descricao)
+                if(resul){
+                    mae['enquete1'] = resul
+                }else mae['enquete1'] = 5
+            }else mae['enquete1'] = 0
+
+            const resposta2 = await knex('resposta').select('descricao').where('mae_id',mae.id).where('pergunta_id',2).orderBy('data','desc').first()
+            if(resposta2){
+                const resul = enquete2Map.get(resposta2.descricao)
+                if(resul)
+                    mae['enquete2'] = resul
+            }else mae['enquete2'] = 0
+
+            const resposta3 = await knex('resposta').select('descricao').where('mae_id',mae.id).where('pergunta_id',3).orderBy('data','desc').first()
+            if(resposta3){
+                const resul = enquete3Map.get(resposta3.descricao)
+                if(resul)
+                    mae['enquete3'] = resul
+            }else mae['enquete3'] = 0
+
+            const resposta4 = await knex('resposta').select('descricao').where('mae_id',mae.id).where('pergunta_id',13).orWhere('pergunta_id',14).orderBy('data','desc').first()
+            if(resposta3){
+                const resul = enquete4Map.get(resposta4.descricao)
+                if(resul)
+                    mae['enquete4'] = resul
+            }else mae['enquete4'] = 0
+
+            const [count2] = await knex('resposta').count().where('mae_id',mae.id).where('descricao','like', '%canguru%').where('pergunta_id',15).orWhere('pergunta_id',16)
+            mae[`canguru`] = count2['count']
+
+            const [count3] = await knex('resposta').count().where('mae_id',mae.id).where('descricao','like', '%cuidados%').where('pergunta_id',15).orWhere('pergunta_id',16)
+            mae[`cuidados`] = count3['count']
+
+            const [feed1] = await knex('resposta').count().where('mae_id',mae.id).where('descricao','=', 'Apenas no meu peito').where('pergunta_id',6)
+            mae[`baby_feed1`] = feed1['count'] == 0 ? 0 : 1
+
+            const [feed2] = await knex('resposta').count().where('mae_id',mae.id).where('descricao','=', 'No meu peito, c/ complemento por copinho').where('pergunta_id',6)
+            mae[`baby_feed2`] = feed2['count'] == 0 ? 0 : 1
+
+            const [feed3] = await knex('resposta').count().where('mae_id',mae.id).where('descricao','=', 'Por relactação/translactação').where('pergunta_id',6)
+            mae[`baby_feed3`] = feed3['count'] == 0 ? 0 : 1
+
+            const [feed4] = await knex('resposta').count().where('mae_id',mae.id).where('descricao','=', 'Apenas por copinho').where('pergunta_id',6)
+            mae[`baby_feed4`] = feed4['count'] == 0 ? 0 : 1
+
+            const [feed5] = await knex('resposta').count().where('mae_id',mae.id).where('descricao','=', 'Por chuca').where('pergunta_id',6)
+            mae[`baby_feed5`] = feed5['count'] == 0 ? 0 : 1
+
+            const [feed6] = await knex('resposta').count().where('mae_id',mae.id).where('descricao','=', 'Por sonda').where('pergunta_id',6)
+            mae[`baby_feed6`] = feed6['count'] == 0 ? 0 : 1
         }
 
 
         await csv.writeRecords(maes)
+        //res.sendStatus(200)
         res.download(pathCsv,"dados_gerais.csv")
-    }
-
-    async dadosBebes(req:Request,res:Response){
-        const csv = createObjectCsvWriter({
-            path: `${path.resolve(__dirname, '..', '..','csv')}/saida.csv`,
-            header: [
-                {id:'mae', title:'Mae'},
-            ]
-        })
-        const data = await knex('bebe').join('mae','mae.id','=','bebe.mae_id').select('*').orderBy('mae.nome','asc');
-        console.log(data)
-        /*data.forEach((v,i,a)=>{
-            v['']
-        })*/
-        await csv.writeRecords(data)
-        res.sendStatus(200)
     }
 }
 

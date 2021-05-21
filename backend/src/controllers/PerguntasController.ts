@@ -39,7 +39,7 @@ class PerguntasController{
                 bd.orWhere('alvo','GERAL')
                 bd.orWhere('alvo',alvo)
             }).orderBy('id');
-        const alimentacao = await knex('pergunta').select('*').where('id',5).first();
+        const alimentacao = await knex('pergunta').select('*').where('id',6).first();
         escala.map((pergunta,i)=>{
             pergunta["alternativas"]=pergunta.alternativas.split('|')
         })

@@ -637,6 +637,11 @@ routes.get('/perguntas/:categoria',verifyJWT,perguntasController.index);
  *          ] 
  *      }
  * 
+ * @apiSuccessExample {json} Exemplo Resposta:
+ *      {
+ *          "score":54
+ *      }
+ * 
  *
  */
   routes.post('/responder/escala',verifyJWT,respostasMaeController.responderEscala);
@@ -870,7 +875,7 @@ routes.get('/enviarNotificacoes',async (req,res)=>{
  */
 routes.get('/amamentacao/resultados',respostasController.results)
 
-routes.get('/resultados',resultController.dadosMaes)
+routes.get('/resultados',resultController.dadosGerais)
 
 /**
  * @api {get} /bebes/:bebe_id/mamadas/:date Listagem por data
