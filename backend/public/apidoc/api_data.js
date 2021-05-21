@@ -523,6 +523,15 @@ define({ "api": [
         }
       ]
     },
+    "success": {
+      "examples": [
+        {
+          "title": "Exemplo Resposta:",
+          "content": "{\n    \"score\":54\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./src/routes.ts",
     "groupTitle": "Enquetes",
