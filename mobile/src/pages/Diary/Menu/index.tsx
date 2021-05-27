@@ -25,7 +25,7 @@ import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.
 import DiarySmile from '../../../../assets/images/diary_smile.svg';
 import DiaryStar from '../../../../assets/images/diary_star.svg';
 import PrematureHeart from '../../../../assets/images/premature_heart.svg';
-import EmotionsInfo from '../../../../assets/images/emotions_info.svg';
+import Report from '../../../../assets/images/report.svg';
 import Father from '../../../../assets/images/father.svg';
 
 const DiaryMenu: React.FC = () => {
@@ -98,7 +98,7 @@ const DiaryMenu: React.FC = () => {
       },
     },
     {
-      Image: EmotionsInfo,
+      Image: Report,
       title: 'Meu Desempenho',
       onPress: () => navigation.navigate('Report'),
     },
