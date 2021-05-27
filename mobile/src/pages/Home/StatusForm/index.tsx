@@ -33,7 +33,7 @@ import {
 import {
   CurrentPageContainer,
   CurrentPageText,
-} from '../../../components/GenericDiaryFormPage/styles';
+} from '../../../components/GenericRemoteFormPage/styles';
 
 import QuestionIcon from '../../../../assets/images/icons/ic_question_white.svg';
 

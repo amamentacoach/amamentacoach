@@ -1,11 +1,9 @@
 import api from './api';
 import { BreastfeedEntry, ExtractionEntry } from './diaryRegistry';
-import { SurveyQuestion } from './survey';
 
 export interface DailyReport {
   breastfeedEntries: BreastfeedEntry[];
   registryEntries: ExtractionEntry[];
-  questions: SurveyQuestion[];
 }
 
 export interface WeeklyReport {
@@ -35,20 +33,10 @@ export async function getDailyReport(): Promise<DailyReport> {
     quantity: item.qtd_leite,
     date: item.data_hora,
   }));
-  const questions = data.perguntas.map((question: any) => ({
-    id: question.id,
-    target: question.alvo,
-    category: question.categoria,
-    description: question.descricao,
-    options: question.alternativas,
-    displayOther: question.outro,
-    multipleSelection: question.multiplas,
-  }));
 
   return {
     breastfeedEntries,
     registryEntries,
-    questions,
   };
 }
 

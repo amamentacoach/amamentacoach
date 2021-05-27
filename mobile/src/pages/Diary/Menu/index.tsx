@@ -90,8 +90,20 @@ const DiaryMenu: React.FC = () => {
       title: 'Meu Bebê Hoje',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await checkOneDayPassed('@AmamentaCoach:DiaryDiaryBabyLastDate')) {
+        if (await checkOneDayPassed('@AmamentaCoach:DiaryBabyLastDate')) {
           navigation.navigate('DiaryBaby');
+        } else {
+          setIsModalVisible(true);
+        }
+      },
+    },
+    {
+      Image: Baby,
+      title: 'Ações Realizadas com o bebê',
+      onPress: async () => {
+        // Checa se o usuário já respondeu o formulário no dia.
+        if (await checkOneDayPassed('@AmamentaCoach:DiaryActionsLastDate')) {
+          navigation.navigate('DiaryActions');
         } else {
           setIsModalVisible(true);
         }
@@ -106,7 +118,7 @@ const DiaryMenu: React.FC = () => {
 
   // Exibe o upload de imagem do pai apenas se a mãe tem um companheiro.
   if (motherInfo.partner) {
-    options.splice(6, 0, {
+    options.splice(7, 0, {
       Image: Father,
       title: 'Participação do Pai',
       // @ts-ignore

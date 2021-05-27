@@ -6,7 +6,7 @@ import 'moment/locale/pt-br';
 
 import theme from '../../../config/theme';
 import { dateFormatVerbose } from '../../../utils/date';
-import DiaryForm, { DiaryFormPage } from '../../../components/DiaryForm';
+import RemoteForm, { RemoteFormPage } from '../../../components/RemoteForm';
 import MainButton from '../../../components/MainButton';
 import SecondaryButton from '../../../components/SecondaryButton';
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
@@ -16,7 +16,7 @@ import {
   CurrentPageContainer,
   CurrentPageText,
   QuestionText,
-} from '../../../components/GenericDiaryFormPage/styles';
+} from '../../../components/GenericRemoteFormPage/styles';
 
 const Feelings: React.FC = () => {
   const navigation = useNavigation();
@@ -42,18 +42,19 @@ const Feelings: React.FC = () => {
     navigation.navigate('Diary');
   };
 
-  const FormPage: React.FC<DiaryFormPage> = ({
+  const FormPage: React.FC<RemoteFormPage> = ({
     index,
     pagesLength,
     question,
     isFormValid,
     isDirty,
     isSendingForm,
+    color,
     setFieldValue,
     handleChangePage,
   }) => (
     <Container>
-      <CurrentPageContainer color={theme.babyPurple}>
+      <CurrentPageContainer color={color}>
         <CurrentPageText>
           {index + 1}/{pagesLength}
         </CurrentPageText>
@@ -61,7 +62,7 @@ const Feelings: React.FC = () => {
       <QuestionText>{question.description}</QuestionText>
 
       <FormRadioGroupInput
-        color={theme.babyPurple}
+        color={color}
         fieldName={`${question.id}`}
         options={question.options}
         multipleSelection={question.multipleSelection}
@@ -72,7 +73,7 @@ const Feelings: React.FC = () => {
 
       <Footer>
         <MainButton
-          color={theme.babyPurple}
+          color={color}
           text={index === pagesLength - 1 ? 'Salvar e traçar metas' : 'Próximo'}
           disabled={!isDirty || isSendingForm}
           onPress={() => handleChangePage(index + 1, onFormEndGoals)}
@@ -80,7 +81,7 @@ const Feelings: React.FC = () => {
         {index === pagesLength - 1 && (
           <SecondFooterButtonContainer>
             <SecondaryButton
-              color={theme.babyPurple}
+              color={color}
               text="Salvar e sair"
               disabled={!isDirty || isSendingForm}
               onPress={() => handleChangePage(index + 1, onFormEndDiary)}
@@ -92,7 +93,7 @@ const Feelings: React.FC = () => {
   );
 
   return (
-    <DiaryForm
+    <RemoteForm
       title={currentDate}
       color={theme.babyPurple}
       category={2}

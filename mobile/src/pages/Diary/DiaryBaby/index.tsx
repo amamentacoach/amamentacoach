@@ -3,8 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import theme from '../../../config/theme';
-import DiaryForm from '../../../components/DiaryForm';
-import createGenericDiaryFormPage from '../../../components/GenericDiaryFormPage';
+import RemoteForm from '../../../components/RemoteForm';
+import createGenericRemoteFormPage from '../../../components/GenericRemoteFormPage';
 
 const DiaryBaby: React.FC = () => {
   const navigation = useNavigation();
@@ -12,7 +12,7 @@ const DiaryBaby: React.FC = () => {
   // Marca o formulário como enviado no dia.
   async function setFormSent() {
     await AsyncStorage.setItem(
-      '@AmamentaCoach:DiaryDiaryBabyLastDate',
+      '@AmamentaCoach:DiaryBabyLastDate',
       new Date().toISOString(),
     );
   }
@@ -23,11 +23,11 @@ const DiaryBaby: React.FC = () => {
   }
 
   return (
-    <DiaryForm
+    <RemoteForm
       title="Meu Bebê Hoje"
       color={theme.babyPurple}
       category={10}
-      Page={createGenericDiaryFormPage(theme.babyPurple, onFormEnd)}
+      Page={createGenericRemoteFormPage(onFormEnd)}
       onFeedbackAccepted={setFormSent}
     />
   );

@@ -3,6 +3,7 @@ import React from 'react';
 import createColorHeader from '../config/colorHeader';
 import theme from '../../config/theme';
 
+import DiaryActions from '../../pages/Diary/DiaryActions';
 import DiaryBaby from '../../pages/Diary/DiaryBaby';
 import DiaryBreastfeed from '../../pages/Diary/DiaryBreastfeed';
 import DiaryRegistry from '../../pages/Diary/DiaryRegistry';
@@ -17,6 +18,12 @@ const CreateDiaryRoutes = (Stack: any) => {
   const headerBabyPurple = createColorHeader(theme.babyPurple);
 
   return [
+    <Stack.Screen
+      key="DiaryActions"
+      name="DiaryActions"
+      component={DiaryActions}
+      options={{ title: 'Enquete', ...headerBabyPurple }}
+    />,
     <Stack.Screen
       key="DiaryBaby"
       name="DiaryBaby"

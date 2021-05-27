@@ -1,8 +1,8 @@
 // Altera a cor do header da página.
 // Passado ao argumento options de uma Screen.
 
-const createColorHeader = (color: string, textColor?: string) => ({
-  headerTintColor: textColor || 'black',
+const createColorHeader = (color: string, textColor: string = 'black') => ({
+  headerTintColor: textColor,
   headerStyle: {
     backgroundColor: color,
     elevation: 0, // Remove a sombra no Android

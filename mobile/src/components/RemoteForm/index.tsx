@@ -19,7 +19,7 @@ import {
 } from './styles';
 
 // Props de um componente que pode ser utilizado para gerar uma página do formulário.
-export interface DiaryFormPage {
+export interface RemoteFormPage {
   // Index da página.
   index: number;
   // Número total de páginas.
@@ -32,13 +32,15 @@ export interface DiaryFormPage {
   isDirty: boolean;
   // Verifica se formulário está sendo enviado ao servidor.
   isSendingForm: boolean;
+  // Cor da página.
+  color: string;
   // Define o valor de uma resposta.
   setFieldValue: (field: string, value: any) => void;
   // Altera a página do formulário. Caso seja a última página executa a função handleFormEnd.
   handleChangePage: (newPage: number, handleFormEnd: () => void) => void;
 }
 
-interface DiaryFormProps {
+interface RemoteFormProps {
   // Título da página.
   title: string;
   // Cor da página.
@@ -46,7 +48,7 @@ interface DiaryFormProps {
   // Categoria que deve ser utilizada ao buscar as perguntas no backend.
   category: number;
   // Componente para gerar as páginas do formulário.
-  Page: React.FC<DiaryFormPage>;
+  Page: React.FC<RemoteFormPage>;
   // Função executada ao aceitar o feedback recebido com base nas respostas selecionadas.
   onFeedbackAccepted?: () => void;
 }
@@ -57,7 +59,7 @@ interface FeedbackModalProps {
   onExit: () => void;
 }
 
-const DiaryForm: React.FC<DiaryFormProps> = ({
+const RemoteForm: React.FC<RemoteFormProps> = ({
   color,
   category,
   title,
@@ -79,7 +81,6 @@ const DiaryForm: React.FC<DiaryFormProps> = ({
     feedbackModalData,
     setFeedbackModalData,
   ] = useState<FeedbackModalProps | null>(null);
-  const [isFeedbackModalVisible, setIsFeedbackModalVisible] = useState(false);
 
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
 
@@ -176,7 +177,6 @@ const DiaryForm: React.FC<DiaryFormProps> = ({
         redirect: feedback.redirect,
         onExit: handleFormEnd,
       });
-      setIsFeedbackModalVisible(true);
     } else {
       // Função executada ao fim do formulário, normalmente apenas redireciona o usuário para uma
       // outra página do app.
@@ -238,14 +238,15 @@ const DiaryForm: React.FC<DiaryFormProps> = ({
         ]}
         visible={isErrorModalVisible}
       />
-      {feedbackModalData !== null && (
+
+      {!!feedbackModalData && (
         <Modal
           content={feedbackModalData.content}
           options={[
             {
               text: 'Mais tarde',
               onPress: () => {
-                setIsFeedbackModalVisible(false);
+                setFeedbackModalData(null);
                 feedbackModalData.onExit();
               },
             },
@@ -253,7 +254,7 @@ const DiaryForm: React.FC<DiaryFormProps> = ({
               text: 'Ver conteúdo',
               isBold: true,
               onPress: () => {
-                setIsFeedbackModalVisible(false);
+                setFeedbackModalData(null);
                 // Executa a função fornecida caso exista.
                 if (onFeedbackAccepted) {
                   onFeedbackAccepted();
@@ -265,7 +266,7 @@ const DiaryForm: React.FC<DiaryFormProps> = ({
               },
             },
           ]}
-          visible={isFeedbackModalVisible}
+          visible={!!feedbackModalData}
         />
       )}
 
@@ -288,6 +289,7 @@ const DiaryForm: React.FC<DiaryFormProps> = ({
                     isFormValid={isFormValid}
                     isSendingForm={isSendingForm}
                     isDirty={dirty}
+                    color={color}
                     setFieldValue={setFieldValue}
                     handleChangePage={(newPage, handleFormEnd) =>
                       handleChangePage(
@@ -314,4 +316,4 @@ const DiaryForm: React.FC<DiaryFormProps> = ({
   );
 };
 
-export default DiaryForm;
+export default RemoteForm;
