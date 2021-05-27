@@ -8,7 +8,7 @@ import {
   listStatusFormQuestions,
   answerStatusForm,
   answerFeedingForm,
-  ISurveyQuestion,
+  SurveyQuestion,
 } from '../../../services/survey';
 import Modal from '../../../components/Modal';
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
@@ -40,7 +40,7 @@ import QuestionIcon from '../../../../assets/images/icons/ic_question_white.svg'
 // Página do formulário.
 interface PageProps {
   pageIndex: number;
-  questions: ISurveyQuestion[];
+  questions: SurveyQuestion[];
   values: {
     [key: string]: string[];
   };
@@ -50,7 +50,7 @@ interface PageProps {
   setFieldError: (field: string, message: string) => void;
   // Define o valor de uma resposta.
   setFieldValue: (field: string, value: any) => void;
-  submitForm: () => Promise<boolean>;
+  submitForm: () => Promise<number | null>;
 }
 
 type ScreenParams = {
@@ -69,8 +69,8 @@ const StatusForm: React.FC = () => {
   // Não exibe o formulário de alimentação se for a primeira vez do usuário respondendo a escala.
   const displayFeedingForm = situation !== '1D';
 
-  const [pageQuestions, setPageQuestions] = useState<ISurveyQuestion[][]>([]);
-  const [feedingQuestion, setFeedingQuestion] = useState<ISurveyQuestion>();
+  const [pageQuestions, setPageQuestions] = useState<SurveyQuestion[][]>([]);
+  const [feedingQuestion, setFeedingQuestion] = useState<SurveyQuestion>();
 
   const pageFlatListRef = useRef<FlatList>(null);
   const [formInitialValues, setFormInitialValues] = useState({});
@@ -78,7 +78,7 @@ const StatusForm: React.FC = () => {
   const [isSendingForm, setIsSendingForm] = useState(false);
   const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
-  const [isEndModalVisible, setIsEndModalVisible] = useState(false);
+  const [formScore, setFormScore] = useState<number | null>(null);
 
   // Adiciona um botão na parte superior direita da tela para exibir um popup de ajuda.
   React.useLayoutEffect(() => {
@@ -135,20 +135,19 @@ const StatusForm: React.FC = () => {
       id: parseInt(key, 10),
       content: values[key][0],
     }));
-    const statusFormSuccess = await answerStatusForm(situation, statusAnswers);
+    const statusFormScore = await answerStatusForm(situation, statusAnswers);
 
     if (displayFeedingForm) {
       // @ts-ignore
-      const feedingFormSuccess = await answerFeedingForm(situation, feeding[0]);
-      return statusFormSuccess && feedingFormSuccess;
+      await answerFeedingForm(situation, feeding[0]);
     }
-    return statusFormSuccess;
+    return statusFormScore;
   }
 
   // Verifica se pelo menos uma opção foi selecionada para cada pergunta da página.
   function validateForm(
     currentPageIndex: number,
-    questions: ISurveyQuestion[],
+    questions: SurveyQuestion[],
     values: {
       [key: string]: string[];
     },
@@ -181,12 +180,12 @@ const StatusForm: React.FC = () => {
   async function handleChangePage(
     currentPage: number,
     newPage: number,
-    questions: ISurveyQuestion[],
+    questions: SurveyQuestion[],
     values: {
       [key: string]: string[];
     },
     setFieldError: (field: string, message: string) => void,
-    submitForm: () => Promise<boolean>,
+    submitForm: () => Promise<number | null>,
   ) {
     // Verifica se pelo menos uma resposta foi selecionada ao avançar a página.
     if (
@@ -199,10 +198,11 @@ const StatusForm: React.FC = () => {
     // Envia o formulário caso seja a última página
     if (newPage === pageQuestions.length) {
       setIsSendingForm(true);
-      const status = await submitForm();
+      const score = await submitForm();
+      console.log(score);
       setIsSendingForm(false);
-      if (status) {
-        setIsEndModalVisible(true);
+      if (score) {
+        setFormScore(score);
       } else {
         setIsErrorModalVisible(true);
       }
@@ -334,7 +334,7 @@ const StatusForm: React.FC = () => {
   return (
     <>
       <Modal
-        content={`Obrigada por responder.\nSua resposta foi enviada!`}
+        content={`Obrigada por responder.\nSua pontuação é ${formScore}`}
         color={theme.babyBlue}
         options={[
           {
@@ -343,7 +343,7 @@ const StatusForm: React.FC = () => {
             onPress: () => navigation.navigate('Home'),
           },
         ]}
-        visible={isEndModalVisible}
+        visible={!!formScore}
       />
       <Modal
         color={theme.babyBlue}

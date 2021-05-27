@@ -117,18 +117,18 @@ export async function listStatusFormQuestions(): Promise<StatusForm | null> {
 export async function answerStatusForm(
   situation: 'ALTA' | '1D' | '15D' | '1M',
   answers: { id: number; content: string }[],
-): Promise<boolean> {
+): Promise<number | null> {
   try {
-    await api.post('/responder/escala', {
+    const response = await api.post('/responder/escala', {
       ocasiao: situation,
       respostas: answers.map(question => ({
         pergunta_id: question.id,
         descricao: question.content,
       })),
     });
-    return true;
+    return response.data.score;
   } catch (error) {
-    return false;
+    return null;
   }
 }
 
