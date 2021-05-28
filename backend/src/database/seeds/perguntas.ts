@@ -250,7 +250,7 @@ export async function seed(knex: Knex): Promise<void> {
         {
             id: 17, 
             categoria: 7, 
-            descricao:'Eu consigo retirar leite suficiente da mama para o meu bebê.',
+            descricao:'Eu consigo retirar leite da mama suficiente para o meu bebê.',
             alternativas: '1|2|3|4|5',
             outro:false,
             multiplas:false
@@ -258,7 +258,7 @@ export async function seed(knex: Knex): Promise<void> {
         {
             id: 18, 
             categoria: 7, 
-            descricao:'Eu consigo lidar com o fato de que retirar leite da mama e amamentar podem ser demorados.',
+            descricao:'Eu consigo lidar com o fato de que retirar leite da mama e/ou amamentar podem ser demorados.',
             alternativas: '1|2|3|4|5',
             outro:false,
             multiplas:false
@@ -378,7 +378,7 @@ export async function seed(knex: Knex): Promise<void> {
         {
             id: 33, 
             categoria: 7, 
-            descricao:'Eu serei capaz de reconhecer quando meu bebê terminou de mamar.',
+            descricao:'Eu serei capaz de reconhecer quando meu bebê estiver satisfeito.',
             alternativas: '1|2|3|4|5',
             outro:false,
             multiplas:false
@@ -386,7 +386,7 @@ export async function seed(knex: Knex): Promise<void> {
         {
             id: 34, 
             categoria: 7, 
-            descricao:'Eu serei capaz de trocar a retirada do leite das mamas pela amamentação, na maioria das mamadas ou em todas elas.',
+            descricao:'Eu serei capaz de substituir a retirada do leite das mamas pela amamentação, na maioria das mamadas ou em todas elas.',
             alternativas: '1|2|3|4|5',
             outro:false,
             multiplas:false
