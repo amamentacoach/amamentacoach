@@ -25,7 +25,7 @@ import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.
 import DiarySmile from '../../../../assets/images/diary_smile.svg';
 import DiaryStar from '../../../../assets/images/diary_star.svg';
 import PrematureHeart from '../../../../assets/images/premature_heart.svg';
-import EmotionsInfo from '../../../../assets/images/emotions_info.svg';
+import Report from '../../../../assets/images/report.svg';
 import Father from '../../../../assets/images/father.svg';
 
 const DiaryMenu: React.FC = () => {
@@ -90,7 +90,7 @@ const DiaryMenu: React.FC = () => {
       title: 'Meu Bebê Hoje',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await checkOneDayPassed('@AmamentaCoach:DiaryDiaryBabyLastDate')) {
+        if (await checkOneDayPassed('@AmamentaCoach:DiaryBabyLastDate')) {
           navigation.navigate('DiaryBaby');
         } else {
           setIsModalVisible(true);
@@ -98,7 +98,19 @@ const DiaryMenu: React.FC = () => {
       },
     },
     {
-      Image: EmotionsInfo,
+      Image: Baby,
+      title: 'Ações Realizadas com o bebê',
+      onPress: async () => {
+        // Checa se o usuário já respondeu o formulário no dia.
+        if (await checkOneDayPassed('@AmamentaCoach:DiaryActionsLastDate')) {
+          navigation.navigate('DiaryActions');
+        } else {
+          setIsModalVisible(true);
+        }
+      },
+    },
+    {
+      Image: Report,
       title: 'Meu Desempenho',
       onPress: () => navigation.navigate('Report'),
     },
@@ -106,7 +118,7 @@ const DiaryMenu: React.FC = () => {
 
   // Exibe o upload de imagem do pai apenas se a mãe tem um companheiro.
   if (motherInfo.partner) {
-    options.splice(6, 0, {
+    options.splice(7, 0, {
       Image: Father,
       title: 'Participação do Pai',
       // @ts-ignore

@@ -48,6 +48,7 @@ import HomeMilk from '../../../../assets/images/home_milk.svg';
 import HomeEmotions from '../../../../assets/images/home_emotions.svg';
 import HomeMoreInformation from '../../../../assets/images/home_more_information.svg';
 import HomeMessage from '../../../../assets/images/home_message.svg';
+import HomeCredits from '../../../../assets/images/home_credits.svg';
 
 interface BabyModalOption {
   newLocation: string;
@@ -111,6 +112,11 @@ const Home: React.FC = () => {
       Image: HomeMessage,
       title: 'Perguntas',
       onPress: () => navigation.navigate('Questions'),
+    },
+    {
+      Image: HomeCredits,
+      title: 'Créditos',
+      onPress: () => navigation.navigate('Credits'),
     },
   ];
 
@@ -278,7 +284,7 @@ const Home: React.FC = () => {
       />
       {babiesData.length > 0 && (
         <Modal
-          color={theme.babyPink}
+          color={theme.babyPurple}
           options={[
             {
               text: 'Sim',

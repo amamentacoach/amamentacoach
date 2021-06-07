@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { SvgProps } from 'react-native-svg';
-import { DiaryFormPage } from '../DiaryForm';
+import { RemoteFormPage } from '../RemoteForm';
 import MainButton from '../MainButton';
 import FormRadioGroupInput from '../FormRadioGroup';
 
@@ -14,20 +14,20 @@ import {
   ImageContainer,
 } from './styles';
 
-// Retorna uma página genérica que pode ser fornecida a um componente DiaryForm.
+// Retorna uma página genérica que pode ser fornecida a um componente RemoteForm.
 // Ao final do formulário a função onFormEnd é executada.
-const createGenericDiaryFormPage = (
-  color: string,
+const createGenericRemoteFormPage = (
   onFormEnd: () => void,
   Images?: React.FC<SvgProps>[],
 ) => {
-  const Page: React.FC<DiaryFormPage> = ({
+  const Page: React.FC<RemoteFormPage> = ({
     index,
     pagesLength,
     question,
     isFormValid,
     isDirty,
     isSendingForm,
+    color,
     setFieldValue,
     handleChangePage,
   }) => {
@@ -72,4 +72,4 @@ const createGenericDiaryFormPage = (
   return Page;
 };
 
-export default createGenericDiaryFormPage;
+export default createGenericRemoteFormPage;

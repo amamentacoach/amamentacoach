@@ -3,8 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import theme from '../../../config/theme';
-import DiaryForm from '../../../components/DiaryForm';
-import createGenericDiaryFormPage from '../../../components/GenericDiaryFormPage';
+import RemoteForm from '../../../components/RemoteForm';
+import createGenericRemoteFormPage from '../../../components/GenericRemoteFormPage';
 
 import HelpReceived1 from '../../../../assets/images/help_received_1.svg';
 import HelpReceived2 from '../../../../assets/images/help_received_2.svg';
@@ -28,11 +28,11 @@ const HelpReceived: React.FC = () => {
   }
 
   return (
-    <DiaryForm
+    <RemoteForm
       title="Minha rede de apoio"
       color={theme.babyPurple}
       category={4}
-      Page={createGenericDiaryFormPage(theme.babyPurple, onFormEnd, images)}
+      Page={createGenericRemoteFormPage(onFormEnd, images)}
       onFeedbackAccepted={setFormSent}
     />
   );

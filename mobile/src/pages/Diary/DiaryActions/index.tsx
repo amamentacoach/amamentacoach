@@ -6,35 +6,31 @@ import theme from '../../../config/theme';
 import RemoteForm from '../../../components/RemoteForm';
 import createGenericRemoteFormPage from '../../../components/GenericRemoteFormPage';
 
-import Father from '../../../../assets/images/dad.svg';
-
-const SurveyFather: React.FC = () => {
+const DiaryActions: React.FC = () => {
   const navigation = useNavigation();
-
-  const images = [Father];
 
   // Marca o formulário como enviado no dia.
   async function setFormSent() {
     await AsyncStorage.setItem(
-      '@AmamentaCoach:DiarySurveyFatherLastDate',
+      '@AmamentaCoach:DiaryActionsLastDate',
       new Date().toISOString(),
     );
   }
 
   async function onFormEnd() {
     await setFormSent();
-    navigation.navigate('Survey');
+    navigation.navigate('Diary');
   }
 
   return (
     <RemoteForm
-      title="Participação do Pai"
-      color={theme.babyBlue}
-      category={5}
-      Page={createGenericRemoteFormPage(onFormEnd, images)}
+      title="Ações Realizadas com o bebê"
+      color={theme.babyPurple}
+      category={6}
+      Page={createGenericRemoteFormPage(onFormEnd)}
       onFeedbackAccepted={setFormSent}
     />
   );
 };
 
-export default SurveyFather;
+export default DiaryActions;

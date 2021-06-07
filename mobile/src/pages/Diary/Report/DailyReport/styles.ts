@@ -13,10 +13,3 @@ export const Header = styled.Text`
 export const EntryContainer = styled.View`
   margin-bottom: 10px;
 `;
-
-export const QuestionText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
-  margin: 15px 0;
-  color: ${props => props.theme.black};
-`;

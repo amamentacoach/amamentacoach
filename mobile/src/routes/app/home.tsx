@@ -9,6 +9,7 @@ import BabyCup from '../../pages/Home/BabyCup';
 import BabySling from '../../pages/Home/BabySling';
 import Breastfeeding from '../../pages/Home/Breastfeeding';
 import BreastfeedingBenefits from '../../pages/Home/BreastfeedingBenefits';
+import Credits from '../../pages/Home/Credits';
 import Distractions from '../../pages/Home/Distractions';
 import EmotionsAndBreastfeeding from '../../pages/Home/EmotionsAndBreastfeeding';
 import HowLongToBreastfeed from '../../pages/Home/HowLongToBreastfeed';
@@ -104,7 +105,7 @@ const CreateHomeRoutes = (Stack: any) => {
       key="ManageExpectations"
       name="ManageExpectations"
       component={ManageExpectations}
-      options={{ title: 'Caixinha da distração' }}
+      options={{ title: 'Expectativas' }}
     />,
     <Stack.Screen
       key="Messages"
@@ -135,6 +136,12 @@ const CreateHomeRoutes = (Stack: any) => {
       name="NewQuestion"
       component={NewQuestion}
       options={{ title: 'Enviar Pergunta' }}
+    />,
+    <Stack.Screen
+      key="Credits"
+      name="Credits"
+      component={Credits}
+      options={{ title: 'Créditos' }}
     />,
     <Stack.Screen
       key="NotWhatIExpected"

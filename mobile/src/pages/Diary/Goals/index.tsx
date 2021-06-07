@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { StackActions, useNavigation } from '@react-navigation/native';
 
 import theme from '../../../config/theme';
-import DiaryForm from '../../../components/DiaryForm';
-import createGenericDiaryFormPage from '../../../components/GenericDiaryFormPage';
+import RemoteForm from '../../../components/RemoteForm';
+import createGenericRemoteFormPage from '../../../components/GenericRemoteFormPage';
 import Modal from '../../../components/Modal';
 
 import { ModalContainer } from './styles';
@@ -75,11 +75,11 @@ const Goals: React.FC = () => {
           visible={isFinishedModalVisible}
         />
       </ModalContainer>
-      <DiaryForm
+      <RemoteForm
         title="Minhas metas de hoje"
         color={theme.babyPurple}
         category={3}
-        Page={createGenericDiaryFormPage(theme.babyPurple, onFormEnd)}
+        Page={createGenericRemoteFormPage(onFormEnd)}
       />
     </>
   );

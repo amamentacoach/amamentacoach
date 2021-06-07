@@ -2,8 +2,8 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import DiaryForm from '../../../components/DiaryForm';
-import createGenericDiaryFormPage from '../../../components/GenericDiaryFormPage';
+import RemoteForm from '../../../components/RemoteForm';
+import createGenericRemoteFormPage from '../../../components/GenericRemoteFormPage';
 import theme from '../../../config/theme';
 
 const SurveyHelp: React.FC = () => {
@@ -23,11 +23,11 @@ const SurveyHelp: React.FC = () => {
   }
 
   return (
-    <DiaryForm
+    <RemoteForm
       title="Sobre ajuda"
       color={theme.babyBlue}
       category={9}
-      Page={createGenericDiaryFormPage(theme.babyBlue, onFormEnd)}
+      Page={createGenericRemoteFormPage(onFormEnd)}
       onFeedbackAccepted={setFormSent}
     />
   );
