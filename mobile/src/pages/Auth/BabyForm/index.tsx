@@ -42,13 +42,14 @@ interface Baby {
   name: string;
   birthday: string;
   weight: string;
-  birthType: string[];
-  difficulties: string[];
+  birthType: string;
+  touched: string;
+  difficulties: string;
   gestationWeeks: string;
   gestationDays: string;
   apgar1: string | undefined;
   apgar2: string | undefined;
-  birthLocation: string[];
+  birthLocation: string;
 }
 
 interface FormValues {
@@ -89,12 +90,8 @@ const BabyForm: React.FC = () => {
               .typeError('Deve ser um número')
               .min(0, 'Deve ser maior ou igual a 0')
               .required('Campo obrigatório'),
-            birthType: Yup.array(Yup.string().required()).required(
-              'Campo obrigatório',
-            ),
-            difficulties: Yup.array(Yup.string().required()).required(
-              'Campo obrigatório',
-            ),
+            birthType: Yup.string().required('Campo obrigatório'),
+            difficulties: Yup.string().required('Campo obrigatório'),
             gestationWeeks: Yup.string().required('Campo obrigatório'),
             gestationDays: Yup.string().required('Campo obrigatório'),
             apgar1: Yup.number()
@@ -119,9 +116,7 @@ const BabyForm: React.FC = () => {
               .integer('Deve ser um número inteiro')
               .min(0, 'Deve ser maior ou igual a 0')
               .max(10, 'Deve ser menor ou igual a 10'),
-            birthLocation: Yup.array(Yup.string().required()).required(
-              'Campo obrigatório',
-            ),
+            birthLocation: Yup.string().required('Campo obrigatório'),
           },
           [['apgar1', 'apgar2']],
         ),
@@ -137,13 +132,14 @@ const BabyForm: React.FC = () => {
       name: '',
       birthday: '',
       weight: '',
-      birthType: [],
-      difficulties: [],
+      birthType: '',
+      touched: '',
+      difficulties: '',
       gestationWeeks: '',
       gestationDays: '',
       apgar1: '',
       apgar2: '',
-      birthLocation: [],
+      birthLocation: '',
     };
   }
 
@@ -213,13 +209,14 @@ const BabyForm: React.FC = () => {
         name: baby.name,
         birthday: baby.birthday,
         weight: parseFloat(baby.weight),
-        birthType: baby.birthType[0].toLowerCase() === 'cesária',
+        birthType: baby.birthType.toLowerCase() === 'cesária',
+        touched: baby.difficulties.toLowerCase() === 'sim',
         gestationWeeks: parseInt(baby.gestationWeeks, 10),
         gestationDays: parseInt(baby.gestationDays, 10),
         apgar1: baby.apgar1 ? parseInt(baby.apgar1, 10) : null,
         apgar2: baby.apgar2 ? parseInt(baby.apgar2, 10) : null,
-        birthLocation: baby.birthLocation[0],
-        difficulties: baby.difficulties[0].toLowerCase() === 'sim',
+        birthLocation: baby.birthLocation,
+        difficulties: baby.difficulties.toLowerCase() === 'sim',
       };
       await signUpBaby(token, babyInfo);
     });
@@ -346,15 +343,29 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                   label="Tipo de parto"
                   fieldName={`babies[${index}].birthType`}
                   options={['Normal', 'Cesária']}
-                  onChange={setFieldValue}
+                  onChange={(fieldName, fieldValues) =>
+                    setFieldValue(fieldName, fieldValues[0])
+                  }
                   error={getBabyError(errors, index, 'birthType')}
+                />
+
+                <FormRadioGroupInput
+                  label="Realizou contato pele a pele na primeira hora de vida?"
+                  fieldName={`babies[${index}].touched`}
+                  options={['Sim', 'Não']}
+                  onChange={(fieldName, fieldValues) =>
+                    setFieldValue(fieldName, fieldValues[0])
+                  }
+                  error={getBabyError(errors, index, 'touched')}
                 />
 
                 <FormRadioGroupInput
                   label="Presença de complicação pós-parto?"
                   fieldName={`babies[${index}].difficulties`}
                   options={['Sim', 'Não']}
-                  onChange={setFieldValue}
+                  onChange={(fieldName, fieldValues) =>
+                    setFieldValue(fieldName, fieldValues[0])
+                  }
                   error={getBabyError(errors, index, 'difficulties')}
                 />
 
@@ -426,6 +437,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                     <HelpIcon height={22} width={22} />
                   </ApgarHelpButton>
                 </SubOptionsContainer>
+
                 <FormRadioGroupInput
                   label="Ao nascer, seu bebê foi para:"
                   fieldName={`babies[${index}].birthLocation`}
@@ -434,7 +446,9 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                     'UCI Neonatal',
                     'UTI Neonatal',
                   ]}
-                  onChange={setFieldValue}
+                  onChange={(fieldName, fieldValues) =>
+                    setFieldValue(fieldName, fieldValues[0])
+                  }
                   error={getBabyError(errors, index, 'birthLocation')}
                 />
               </View>

@@ -10,14 +10,14 @@ export interface MotherSignUpInfo {
   timeSpentBreastFeeding: string;
   birthday: string;
   partner: boolean;
-  liveTogether?: string | null;
+  liveTogether: string;
   education: string;
   wage: string;
   plannedPregnancy: boolean;
   firstVisit: string;
   firstStimulus: boolean;
   timeFirstStimulus: string;
-  childrenAlive: number;
+  childrenAlive: string;
   receivedPreNatalGuidance: boolean;
   occupation: boolean;
   maternityLeave: number | null;
@@ -32,6 +32,7 @@ export interface BabySignUpInfo {
   apgar1: number | null;
   apgar2: number | null;
   birthType: boolean;
+  touched: boolean;
   birthLocation: string;
   difficulties: boolean;
 }
@@ -104,6 +105,7 @@ export async function signUpBaby(
       semanas_gest: babyInfo.gestationWeeks,
       dias_gest: babyInfo.gestationDays,
       complicacoes: babyInfo.difficulties,
+      contato_pele: babyInfo.touched,
       peso: babyInfo.weight,
       apgar1: babyInfo.apgar1,
       apgar2: babyInfo.apgar2,
