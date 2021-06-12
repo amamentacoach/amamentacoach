@@ -36,8 +36,7 @@ interface FormValues {
   alreadyBreastfeed: string;
   partner: string;
   liveTogether: string;
-  partnerYears: string;
-  partnerMonths: string;
+  partnerTime: string;
   education: string;
   wage: string;
   plannedPregnancy: string;
@@ -75,8 +74,7 @@ const MotherForm: React.FC = () => {
     alreadyBreastfeed: '',
     partner: '',
     liveTogether: 'Não',
-    partnerYears: '0',
-    partnerMonths: '0',
+    partnerTime: '',
     education: '',
     wage: '',
     plannedPregnancy: '',
@@ -112,47 +110,45 @@ const MotherForm: React.FC = () => {
       .min(0, 'Dever ser maior ou igual a zero')
       .required('Campo obrigatório'),
     yearsSpentBreastFeeding: Yup.number().when('alreadyBreastfeed', {
-      is: 'Não',
-      then: Yup.number(),
-      otherwise: Yup.number()
+      is: 'Sim',
+      then: Yup.number()
         .integer('Deve ser um número inteiro')
         .typeError('Deve ser um número inteiro')
         .min(0, 'Dever ser maior ou igual a zero')
         .required('Campo obrigatório'),
+      otherwise: Yup.number(),
     }),
     monthsSpentBreastFeeding: Yup.number().when('alreadyBreastfeed', {
-      is: 'Não',
-      then: Yup.number(),
-      otherwise: Yup.number()
+      is: 'Sim',
+      then: Yup.number()
         .integer('Deve ser um número inteiro')
         .typeError('Deve ser um número inteiro')
         .min(0, 'Dever ser maior ou igual a zero')
         .required('Campo obrigatório'),
+      otherwise: Yup.number(),
     }),
     partner: Yup.string().required('Campo obrigatório'),
     liveTogether: Yup.string().required('Campo obrigatório'),
-    partnerYears: Yup.string().required('Campo obrigatório'),
-    partnerMonths: Yup.string().required('Campo obrigatório'),
+    partnerTime: Yup.string().when('liveTogether', {
+      is: 'Sim',
+      then: Yup.string().required('Campo obrigatório'),
+      otherwise: Yup.string(),
+    }),
     education: Yup.string().required('Campo obrigatório'),
     wage: Yup.string().required('Campo obrigatório'),
     plannedPregnancy: Yup.string().required('Campo obrigatório'),
     firstVisit: Yup.string().required('Campo obrigatório'),
     firstStimulus: Yup.string().required('Campo obrigatório'),
     timeFirstStimulus: Yup.string().required('Campo obrigatório'),
-    childrenAlive: Yup.number()
-      .integer('Deve ser um número inteiro')
-      .typeError('Deve ser um número inteiro')
-      .min(0, 'Deve ser maior ou igual a zero')
-      .max(100, 'Deve ser menor ou igual a 100')
-      .required('Campo obrigatório'),
+    childrenAlive: Yup.string().required('Campo obrigatório'),
     preNatalGuidance: Yup.string().required('Campo obrigatório'),
     occupation: Yup.string().required('Campo obrigatório'),
     maternityLeave: Yup.string().required('Campo obrigatório'),
     maternityLeaveCount: Yup.number()
       .when('maternityLeave', {
-        is: 'Não',
-        then: Yup.number(),
-        otherwise: Yup.number().required('Campo obrigatório'),
+        is: 'Sim',
+        then: Yup.number().required('Campo obrigatório'),
+        otherwise: Yup.number(),
       })
       .integer('Deve ser um número inteiro')
       .typeError('Deve ser um número inteiro')
@@ -175,17 +171,14 @@ const MotherForm: React.FC = () => {
           ? `${formValues.yearsSpentBreastFeeding},${formValues.monthsSpentBreastFeeding}`
           : '0,0',
       partner: formValues.partner.toLowerCase() === 'sim',
-      liveTogether:
-        formValues.partnerYears !== '0' && formValues.partnerMonths !== '0'
-          ? `${formValues.partnerYears},${formValues.partnerMonths}`
-          : null,
+      liveTogether: formValues.partnerTime,
       education: formValues.education,
       wage: formValues.wage,
       plannedPregnancy: formValues.plannedPregnancy.toLowerCase() === 'sim',
       firstVisit: formValues.firstVisit,
       firstStimulus: formValues.firstStimulus.toLowerCase() === 'sucção',
       timeFirstStimulus: formValues.timeFirstStimulus,
-      childrenAlive: parseInt(formValues.childrenAlive, 10),
+      childrenAlive: formValues.childrenAlive,
       receivedPreNatalGuidance:
         formValues.preNatalGuidance.toLowerCase() === 'sim',
       occupation:
@@ -386,50 +379,15 @@ const MotherForm: React.FC = () => {
                 />
 
                 {values.liveTogether === 'Sim' && (
-                  <SubOptionsContainer>
-                    <FirstSubOptionContainer>
-                      <FormPickerInput
-                        label="Há quantos anos?"
-                        fieldName="partnerYears"
-                        onChange={setFieldValue}
-                        error={errors.partnerYears}
-                        options={[
-                          '1',
-                          '2',
-                          '3',
-                          '4',
-                          '5',
-                          '6',
-                          '7',
-                          '8',
-                          '9',
-                          '10 ou mais',
-                        ]}
-                      />
-                    </FirstSubOptionContainer>
-                    <SecondSubOptionContainer>
-                      <FormPickerInput
-                        label="Há quantos meses?"
-                        fieldName="partnerMonths"
-                        onChange={setFieldValue}
-                        error={errors.partnerMonths}
-                        options={[
-                          '1',
-                          '2',
-                          '3',
-                          '4',
-                          '5',
-                          '6',
-                          '7',
-                          '8',
-                          '9',
-                          '10',
-                          '11',
-                          '12',
-                        ]}
-                      />
-                    </SecondSubOptionContainer>
-                  </SubOptionsContainer>
+                  <OptionPickerContainer>
+                    <FormPickerInput
+                      label="Há quanto tempo moram juntos?"
+                      fieldName="partnerTime"
+                      onChange={setFieldValue}
+                      error={errors.partnerTime}
+                      options={['Até 1 ano', '2 a 4 anos', 'Mais que 5 anos']}
+                    />
+                  </OptionPickerContainer>
                 )}
               </>
             )}
@@ -458,10 +416,9 @@ const MotherForm: React.FC = () => {
                 onChange={setFieldValue}
                 error={errors.wage}
                 options={[
-                  'Até 1 salário mínimo',
-                  'Entre 1 e 3 salários mínimos',
-                  'Entre 4 e 6 salários mínimos',
-                  'Mais que 6 salários mínimos',
+                  'Até 1 salário',
+                  'De 2 e 3 salários',
+                  '4 ou mais salários',
                 ]}
               />
             </OptionPickerContainer>
@@ -488,11 +445,15 @@ const MotherForm: React.FC = () => {
 
             <OptionPickerContainer>
               <FormPickerInput
-                label="Qual foi o primeiro estímulo a ser feito na sua mama?"
+                label="Qual foi o primeiro estímulo realizado em suas mamas?"
                 fieldName="firstStimulus"
                 onChange={setFieldValue}
                 error={errors.firstStimulus}
-                options={['Massagem/Ordenha', 'Sucção']}
+                options={[
+                  'Ainda não realizou nenhum estímulo',
+                  'Massagem/Ordenha',
+                  'Sucção',
+                ]}
               />
             </OptionPickerContainer>
 
@@ -502,18 +463,17 @@ const MotherForm: React.FC = () => {
                 fieldName="timeFirstStimulus"
                 onChange={setFieldValue}
                 error={errors.timeFirstStimulus}
-                options={['em até 1h', '1-6h', '7-12h', '13-24h', '2d', '3d']}
+                options={['Em até 1h', '1-6h', '7-12h', '13-24h', '2d', '3d']}
               />
             </OptionPickerContainer>
 
             <OptionPickerContainer>
-              <FormTextInput
+              <FormPickerInput
                 label="Você possui quantos filhos vivos?"
-                placeholder="Número de filhos"
-                onChangeText={handleChange('childrenAlive')}
-                value={values.childrenAlive}
+                fieldName="childrenAlive"
+                onChange={setFieldValue}
                 error={errors.childrenAlive}
-                keyboardType="number-pad"
+                options={['Nenhum filho', '1 ou 2 filhos', '3 ou mais filhos']}
               />
             </OptionPickerContainer>
 
