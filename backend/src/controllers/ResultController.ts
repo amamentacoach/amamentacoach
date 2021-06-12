@@ -257,6 +257,39 @@ class ResultController{
 
             const [feed6] = await knex('resposta').count().where('mae_id',mae.id).where('descricao','=', 'Por sonda').where('pergunta_id',6)
             mae[`baby_feed6`] = feed6['count'] == 0 ? 0 : 1
+
+            const [registros_ordenha] = await knex('ordenha').count().where('mae_id',mae.id)
+            const reg : any = registros_ordenha['count']
+            if(mae.acessos_diario !== 0)
+                mae[`registros_ordenha`] =  reg/mae.acessos_diario
+
+            const [registros_ajuda] = await knex('resposta').count().where('mae_id',mae.id).where('pergunta_id',11)
+            mae[`registros_ajuda`] = registros_ajuda['count'] == 0 ? 0 : 1
+
+            const [registros_apoio] = await knex('resposta').count().where('mae_id',mae.id).where('pergunta_id',12)
+            mae[`registros_apoio`] = registros_apoio['count'] == 0 ? 0 : 1
+            
+            if(mae.primeiro_acesso){
+                const [media_mamadas] = await knex('mamada').count().where('mae_id',mae.id)
+                const reg_mamadas : any = media_mamadas['count']
+                const diff = moment(mae.primeiro_acesso).diff(new Date());
+                const dias = moment.duration(diff).asDays();
+                const dias_app = Math.floor(dias)
+                if(mae.dias_app !== 0)
+                    mae[`media_mamadas`] =  reg_mamadas/dias_app
+            }
+
+            const ultimas_ordenhas = await knex('ordenha').where('mae_id',mae.id).orderBy('data_hora','desc').limit(3)
+            let qtd_leite = 0
+            for (const ordenha of ultimas_ordenhas) {
+                qtd_leite+=ordenha.qtd_leite
+            }
+            if(ultimas_ordenhas.length != 0)
+                mae['volum_ordenhas'] = qtd_leite/ultimas_ordenhas.length
+
+            const [metas] = await knex('resposta').count().where('mae_id',mae.id).whereIn('pergunta_id',[8,9,10])
+            mae['n_metas'] = metas['count']
+
         }
 
 

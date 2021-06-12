@@ -24,7 +24,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string('primeira_visita').notNullable();
         table.string('primeiro_estimulo').notNullable();
         table.string('tempo_primeiro_estimulo').notNullable();
-        table.integer('qtd_filhos_vivos').notNullable();
+        table.string('qtd_filhos_vivos').notNullable();
         table.boolean('orientacao_prenatal').notNullable();
         table.boolean('ocupacao').notNullable();
         table.integer('licenca_maternidade');

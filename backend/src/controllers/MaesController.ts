@@ -79,7 +79,7 @@ class MaesController{
             orientacao_prenatal,
             ocupacao,
             licenca_maternidade,
-            contato_pele
+            contato_pele: contato_pele != null ? contato_pele : ''
         };
         
         const [id] = await knex('mae').insert(mae).returning('id')
