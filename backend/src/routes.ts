@@ -1,5 +1,6 @@
 import {Router, Request, Response} from 'express';
 import multer from 'multer';
+import path from 'path'
 import uploadConfig from './config/upload';
 import verifyJWT from './middleware/verifyJWT';
 
@@ -1143,5 +1144,10 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
 routes.post('/acessos/:local', verifyJWT, acessosController.create)
 
 routes.get('/aprovar',maesController.esperandoAprovacao);
+
+routes.get('/download', (req, res) =>{
+    const pathApk = `${path.resolve(__dirname, '..','apk')}/amamenta-coach.apk`
+    res.download(pathApk,"amamentacoach.apk")
+})
 
 export default routes;
