@@ -1150,4 +1150,8 @@ routes.get('/download', (req, res) =>{
     res.download(pathApk,"amamentacoach.apk")
 })
 
+routes.get('/politica-de-privacidade',(req,res)=>{
+    res.render('politica-de-privacidade')
+});
+
 export default routes;
