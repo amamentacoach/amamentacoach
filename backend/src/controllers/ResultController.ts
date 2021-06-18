@@ -125,8 +125,6 @@ class ResultController{
                 {id:'alim_laranja', title:'AlimLaranj'},
                 {id:'alim_vermelha', title:'AlimVerm'},
                 {id:'n_metas', title:'N°RegistrosMetas'},
-                {id:'bb_sem_melhora', title:'BBs/melhora'},
-                {id:'bb_com_melhora', title:'BBc/melhora'},
                 {id:'menor3_acoes', title:'<3Ações/Acesso diário'},
                 {id:'3-4_acoes', title:'3-4ações'},
                 {id:'maior4_acoes', title:'>4ações'},
@@ -290,6 +288,43 @@ class ResultController{
             const [metas] = await knex('resposta').count().where('mae_id',mae.id).whereIn('pergunta_id',[8,9,10])
             mae['n_metas'] = metas['count']
 
+            if(mae.acessos_diario !== 0){
+                const [countSentPos] = await knex('resposta').count()
+                        .where('mae_id', mae.id).where('pergunta_id', 4)
+                        .where('descricao', 'like', '%Feliz%')
+                        .orWhere('descricao', 'like', '%Confiante%')
+                        .orWhere('descricao', 'like', '%Orgulhosa%')
+                const sentimentos_positivos : any = countSentPos['count']
+                mae['sentimentos_positivos'] = sentimentos_positivos / mae.acessos_diario
+
+                const [countSentNeg] = await knex('resposta').count()
+                        .where('mae_id', mae.id).where('pergunta_id', 4)
+                        .where('descricao', 'like', '%Ansiosa%')
+                        .orWhere('descricao', 'like', '%Triste%')
+                        .orWhere('descricao', 'like', '%Desanimada%')
+                        .orWhere('descricao', 'like', '%Preocupada%')
+                const sentimentos_negativos : any = countSentNeg['count']
+                mae['sentimentos_negativos'] = sentimentos_negativos / mae.acessos_diario
+
+                const [countVerdes] = await knex('resposta').count()
+                        .where('mae_id', mae.id).where('pergunta_id', 6)
+                        .where('descricao', 'Apenas no meu peito')
+                const alim_verdes : any = countVerdes['count']
+                const [countLaranja] = await knex('resposta').count()
+                        .where('mae_id', mae.id).where('pergunta_id', 6)
+                        .where('descricao', 'like', '%complemento%')
+                        .orWhere('descricao', 'like', '%relactação%')
+                const alim_laranja : any = countLaranja['count']
+                const [countVerm] = await knex('resposta').count()
+                        .where('mae_id', mae.id).where('pergunta_id', 6)
+                        .where('descricao', 'like', '%copinho%')
+                        .orWhere('descricao', 'like', '%chuca%')
+                        .orWhere('descricao', 'like', '%sonda%')
+                const alim_verm : any = countVerm['count']
+                mae['alim_verde'] = alim_verdes / mae.acessos_diario
+                mae['alim_laranja'] = alim_laranja / mae.acessos_diario
+                mae['alim_vermelha'] = alim_verm / mae.acessos_diario
+            }
         }
 
 
