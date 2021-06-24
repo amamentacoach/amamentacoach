@@ -53,7 +53,6 @@ class MaesController{
             orientacao_prenatal,
             ocupacao,
             licenca_maternidade,
-            contato_pele
         } = req.body;
 
         const mae = {
@@ -78,8 +77,7 @@ class MaesController{
             qtd_filhos_vivos,
             orientacao_prenatal,
             ocupacao,
-            licenca_maternidade,
-            contato_pele: contato_pele != null ? contato_pele : false
+            licenca_maternidade
         };
         
         const [id] = await knex('mae').insert(mae).returning('id')
