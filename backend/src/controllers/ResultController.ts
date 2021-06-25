@@ -125,14 +125,13 @@ class ResultController{
                 {id:'alim_laranja', title:'AlimLaranj'},
                 {id:'alim_vermelha', title:'AlimVerm'},
                 {id:'n_metas', title:'N°RegistrosMetas'},
-                {id:'menor3_acoes', title:'<3Ações/Acesso diário'},
+                {id:'menor3_acoes', title:'<3Ações'},
                 {id:'3-4_acoes', title:'3-4ações'},
                 {id:'maior4_acoes', title:'>4ações'},
                 {id:'registros_ordenha', title:'RegistrosOrd/AcessoDiário'},
                 {id:'registros_ajuda', title:'RegistrAjudaProfiss'},
                 {id:'registros_apoio', title:'RegistrApoio'},
                 {id:'acessos_ordenha', title:'NºAcessosOrd'},
-                {id:'media_ordenhas', title:'MédiaOrd-Dia de acesso Diário'},
                 {id:'volum_ordenhas', title:'VolMéd3últimasOrdenhas'},
                 {id:'media_mamadas', title:'MédiaMamadasDia'},
                 {id:'baby_feed1', title:'BabyFeed1'},
@@ -226,7 +225,7 @@ class ResultController{
             }else mae['enquete3'] = 0
 
             const resposta4 = await knex('resposta').select('descricao').where('mae_id',mae.id).where('pergunta_id',13).orWhere('pergunta_id',14).orderBy('data','desc').first()
-            if(resposta3){
+            if(resposta4){
                 const resul = enquete4Map.get(resposta4.descricao)
                 if(resul)
                     mae['enquete4'] = resul
@@ -268,13 +267,17 @@ class ResultController{
             mae[`registros_apoio`] = registros_apoio['count'] == 0 ? 0 : 1
             
             if(mae.primeiro_acesso){
-                const [media_mamadas] = await knex('mamada').count().where('mae_id',mae.id)
+                const [media_mamadas] = await knex('mamada').count()
+                        .join('bebe','bebe.id','=','bebe_id')
+                        .where('bebe.mae_id',mae.id)
                 const reg_mamadas : any = media_mamadas['count']
-                const diff = moment(mae.primeiro_acesso).diff(new Date());
+                const diff = moment(new Date()).diff(mae.primeiro_acesso);
                 const dias = moment.duration(diff).asDays();
                 const dias_app = Math.floor(dias)
-                if(mae.dias_app !== 0)
+                console.log(dias_app)
+                if(dias_app !== 0)
                     mae[`media_mamadas`] =  reg_mamadas/dias_app
+                else mae['media_mamadas'] = reg_mamadas
             }
 
             const ultimas_ordenhas = await knex('ordenha').where('mae_id',mae.id).orderBy('data_hora','desc').limit(3)
@@ -324,6 +327,21 @@ class ResultController{
                 mae['alim_verde'] = alim_verdes / mae.acessos_diario
                 mae['alim_laranja'] = alim_laranja / mae.acessos_diario
                 mae['alim_vermelha'] = alim_verm / mae.acessos_diario
+
+
+                const acoes = await knex('resposta').count().where('mae_id',mae.id)
+                    .where('pergunta_id',15).orWhere('pergunta_id',15)
+                    .groupByRaw('date_trunc(\'day\', data)')
+
+                mae['menor3_acoes'] = 0,
+                mae['3-4_acoes'] = 0,
+                mae['maior4_acoes'] = 0
+                
+                for (const acao of acoes){
+                    if(acao['count']<3) mae['menor3_acoes']++
+                    else if(acao['count']>4) mae['maior4_acoes']++
+                    else mae['3-4_acoes']++
+                }
             }
         }
 
