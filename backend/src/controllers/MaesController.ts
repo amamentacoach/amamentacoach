@@ -186,7 +186,7 @@ class MaesController{
 
     async revogar(req:Request,res:Response){
         const id = req.mae_id;
-        knex('mae').update('status', -1).where(id)
+        await knex('mae').update('status', -1).where(id)
         return res.sendStatus(200)
     }
 }
