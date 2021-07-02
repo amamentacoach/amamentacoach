@@ -92,15 +92,17 @@ class MaesController{
 
     async auth(req:Request,res:Response){
         const {email,senha} = req.body;
-        const mae = await knex('mae').select('*').where('email','=',email).where('status',1).first()
+        const mae = await knex('mae').select('*').where('email','=',email).first()
 
-        if(mae && await bcrypt.compare(senha,mae.senha)){
+        if(mae && mae.status == 1 && await bcrypt.compare(senha,mae.senha)){
             const secret = process.env.SECRET
             await knex('mae').update({ultimo_acesso:new Date()}).where('id',mae.id)
             const token = jwt.sign({id:mae.id},secret?secret:"segredo",{
                 expiresIn:2592000
             })
             res.json({token})
+        }else if(mae && mae.status === 0){
+            res.sendStatus(404)
         }else{
             res.sendStatus(401)
         }
