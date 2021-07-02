@@ -99,8 +99,8 @@ const NewDiaryRegistry: React.FC = () => {
     setIsSendingForm(true);
     await createExtractionEntry(
       breast,
-      parseFloat(quantity),
       parseInt(duration, 10),
+      parseFloat(quantity),
       // Transforma o horário em uma data.
       moment(time, ['kk:mm']).toDate(),
     );
