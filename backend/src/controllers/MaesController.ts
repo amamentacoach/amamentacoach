@@ -183,6 +183,12 @@ class MaesController{
         }
         return res.sendStatus(404)
     }
+
+    async revogar(req:Request,res:Response){
+        const id = req.mae_id;
+        knex('mae').update('status', -1).where(id)
+        return res.sendStatus(200)
+    }
 }
 
 export default MaesController;

@@ -1154,4 +1154,13 @@ routes.get('/politica-de-privacidade',(req,res)=>{
     res.render('politica-de-privacidade')
 });
 
+/**
+ * @api {post} /maes/revogar Revogar consentimento  
+ * @apiDescription Mae revoga consentimento e deve ser redirecionada para pagina de login
+ * @apiGroup Maes
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ */
+ routes.post('/maes/revogar',verifyJWT,maesController.revogar);
+
 export default routes;
