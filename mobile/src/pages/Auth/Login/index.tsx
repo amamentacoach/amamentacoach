@@ -34,8 +34,9 @@ const Login: React.FC = () => {
   const navigation = useNavigation();
   const { signIn } = useAuth();
 
-  const [isWrongDataModalVisible, setIsWrongDataModalVisible] = useState(false);
-  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
+  const [errorModalMessage, setErrorModalMessage] = useState<string | null>(
+    null,
+  );
   const [isSendingForm, setIsSendingForm] = useState(false);
 
   const formInitialValues: FormValues = {
@@ -45,7 +46,11 @@ const Login: React.FC = () => {
   const loginSchema: Yup.ObjectSchema<FormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Campo obrigatório'),
     password: Yup.string()
-      .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
+      .min(8, 'A senha precisa ter pelo menos 8 caracteres')
+      .matches(
+        new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])'),
+        'Precisa ter letras minúsculas, letras maiúsculas e números',
+      )
       .required('Campo obrigatório'),
   }).required();
 
@@ -57,10 +62,15 @@ const Login: React.FC = () => {
     setIsSendingForm(true);
     const status = await signIn(email, password);
     if (status === LoginStatus.FailedToConnect) {
-      setIsErrorModalVisible(true);
+      setErrorModalMessage(
+        'Erro ao realizar login.\nPor favor tente novamente mais tarde.',
+      );
       setIsSendingForm(false);
     } else if (status === LoginStatus.IncorrectLogin) {
-      setIsWrongDataModalVisible(true);
+      setErrorModalMessage('E-mail ou senha incorretos!');
+      setIsSendingForm(false);
+    } else if (status === LoginStatus.AccountNotAuthorized) {
+      setErrorModalMessage('Conta não autorizada!');
       setIsSendingForm(false);
     }
   }
@@ -75,30 +85,19 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <Modal
-        content="E-mail ou senha incorretos!"
-        visible={isWrongDataModalVisible}
-        options={[
-          {
-            text: 'Fechar',
-            isBold: true,
-            onPress: () => setIsWrongDataModalVisible(false),
-          },
-        ]}
-      />
-      <Modal
-        content={
-          'Erro ao realizar login.\nPor favor tente novamente mais tarde.'
-        }
-        visible={isErrorModalVisible}
-        options={[
-          {
-            text: 'Fechar',
-            isBold: true,
-            onPress: () => setIsErrorModalVisible(false),
-          },
-        ]}
-      />
+      {!!errorModalMessage && (
+        <Modal
+          content={errorModalMessage}
+          visible={!!errorModalMessage}
+          options={[
+            {
+              text: 'Fechar',
+              isBold: true,
+              onPress: () => setErrorModalMessage(null),
+            },
+          ]}
+        />
+      )}
 
       <ScrollView>
         <Header>

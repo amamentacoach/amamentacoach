@@ -55,6 +55,7 @@ export interface MotherInfo {
 
 export enum LoginStatus {
   Success,
+  AccountNotAuthorized,
   IncorrectLogin,
   FailedToConnect,
 }
@@ -125,22 +126,26 @@ export async function signIn(
   email: string,
   password: string,
 ): Promise<{ token: string; status: LoginStatus }> {
+  const login = {
+    token: '',
+    status: LoginStatus.FailedToConnect,
+  };
+
   try {
     const request = await api.post('/login', {
       email,
       senha: password,
     });
-    return { token: request.data.token, status: LoginStatus.Success };
+    login.token = request.data.token;
+    login.status = LoginStatus.Success;
   } catch (error) {
-    const login = {
-      token: '',
-      status: LoginStatus.FailedToConnect,
-    };
-    if (error.response) {
+    if (error.response && error.response.status === 404) {
+      login.status = LoginStatus.AccountNotAuthorized;
+    } else if (error.response && error.response.status === 401) {
       login.status = LoginStatus.IncorrectLogin;
     }
-    return login;
   }
+  return login;
 }
 
 // Retorna os dados de uma mãe.

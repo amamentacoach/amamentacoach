@@ -33,11 +33,11 @@ const FormSignUp: React.FC = () => {
     email: Yup.string().email('Email Inválido').required('Campo obrigatório'),
     password: Yup.string()
       .min(8, 'A senha precisa ter pelo menos 8 caracteres')
-      .required('Campo obrigatório')
       .matches(
         new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])'),
         'Precisa ter letras minúsculas, letras maiúsculas e números',
-      ),
+      )
+      .required('Campo obrigatório'),
     password_confirmation: Yup.string()
       .oneOf([Yup.ref('password')], 'As senhas precisam ser iguais')
       .required('Campo obrigatório'),

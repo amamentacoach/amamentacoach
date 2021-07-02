@@ -199,7 +199,6 @@ const StatusForm: React.FC = () => {
     if (newPage === pageQuestions.length) {
       setIsSendingForm(true);
       const score = await submitForm();
-      console.log(score);
       setIsSendingForm(false);
       if (score) {
         setFormScore(score);
