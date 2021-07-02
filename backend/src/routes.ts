@@ -1157,7 +1157,7 @@ routes.get('/politica-de-privacidade',(req,res)=>{
 /**
  * @api {post} /maes/revogar Revogar consentimento  
  * @apiDescription Mae revoga consentimento e deve ser redirecionada para pagina de login
- * @apiGroup Maes
+ * @apiGroup Mães
  * @apiHeader {String} authorization Token de acesso.
  *
  */

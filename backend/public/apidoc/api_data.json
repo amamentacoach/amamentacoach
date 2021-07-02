@@ -580,30 +580,6 @@
     "name": "PostResponderPergunta_id"
   },
   {
-    "type": "post",
-    "url": "/maes/revogar",
-    "title": "Revogar consentimento",
-    "description": "<p>Mae revoga consentimento e deve ser redirecionada para pagina de login</p>",
-    "group": "Maes",
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "authorization",
-            "description": "<p>Token de acesso.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "./src/routes.ts",
-    "groupTitle": "Maes",
-    "name": "PostMaesRevogar"
-  },
-  {
     "type": "get",
     "url": "/bebes/:bebe_id/mamadas",
     "title": "Listagem",
@@ -923,6 +899,30 @@
     "filename": "./src/routes.ts",
     "groupTitle": "Mães",
     "name": "PostMaes"
+  },
+  {
+    "type": "post",
+    "url": "/maes/revogar",
+    "title": "Revogar consentimento",
+    "description": "<p>Mae revoga consentimento e deve ser redirecionada para pagina de login</p>",
+    "group": "Mães",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Mães",
+    "name": "PostMaesRevogar"
   },
   {
     "type": "post",
