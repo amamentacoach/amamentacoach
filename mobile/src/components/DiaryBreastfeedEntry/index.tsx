@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-import { IBreastfeedEntry } from '../../services/diaryRegistry';
+import { BreastfeedEntry } from '../../services/diaryRegistry';
 
 import {
   Breastfeed,
@@ -14,10 +14,7 @@ import {
   BabyName,
 } from './styles';
 
-const DiaryBreastfeedEntry: React.FC<IBreastfeedEntry> = ({
-  name,
-  entries,
-}) => {
+const DiaryBreastfeedEntry: React.FC<BreastfeedEntry> = ({ name, entries }) => {
   if (entries.length <= 0) {
     return <></>;
   }

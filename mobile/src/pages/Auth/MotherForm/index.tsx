@@ -194,7 +194,7 @@ const MotherForm: React.FC = () => {
 
   return (
     <ScrollView>
-      <HeaderText>Passo 2 de 3</HeaderText>
+      <HeaderText>Passo 2 de 4</HeaderText>
       <HeaderSubText>
         Agora, faremos uma série de perguntas sobre você, mamãe, para trazer o
         conteúdo mais adequado para a sua realidade:

@@ -21,6 +21,7 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
 
 export const TextButton = styled.Text<ButtonProps>`
   font-family: 'OpenSans-Bold';
+  text-align: center;
   font-size: 16px;
   color: ${({ theme, color, disabled }) => {
     if (disabled || !color) {

@@ -50,7 +50,7 @@ const FormSignUp: React.FC = () => {
   return (
     <ScrollView>
       <Header>
-        <HeaderText>Passo 1 de 3</HeaderText>
+        <HeaderText>Passo 1 de 4</HeaderText>
         <HeaderSubText>
           Primeiro, precisamos dos seguintes dados para que você possa acessar
           nossa plataforma:

@@ -2,12 +2,13 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { useIsFirstRun } from '../contexts/firstRun';
-import Login from '../pages/Auth/Login';
-import ForgotPassword from '../pages/Auth/ForgotPassword';
-import SignUp from '../pages/Auth/SignUp';
-import MotherForm from '../pages/Auth/MotherForm';
 import BabyForm from '../pages/Auth/BabyForm';
+import ForgotPassword from '../pages/Auth/ForgotPassword';
 import Introduction from '../pages/Auth/Introduction';
+import Login from '../pages/Auth/Login';
+import MotherForm from '../pages/Auth/MotherForm';
+import SignUp from '../pages/Auth/SignUp';
+import TermsOfService from '../pages/Auth/AcceptTermsOfService';
 
 const AuthRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -22,7 +23,6 @@ const AuthRoutes: React.FC = () => {
           options={{ headerShown: false }}
         />
       )}
-
       <Stack.Screen
         name="Login"
         component={Login}
@@ -47,6 +47,11 @@ const AuthRoutes: React.FC = () => {
         name="BabyForm"
         component={BabyForm}
         options={{ title: 'Cadastro' }}
+      />
+      <Stack.Screen
+        name="TermsOfService"
+        component={TermsOfService}
+        options={{ title: 'Termo de Consentimento' }}
       />
     </Stack.Navigator>
   );

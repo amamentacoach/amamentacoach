@@ -4,12 +4,7 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Formik, FormikErrors } from 'formik';
 import * as Yup from 'yup';
 
-import {
-  signUpBaby,
-  MotherSignUpInfo,
-  signUpMother,
-  BabySignUpInfo,
-} from '../../../services/auth';
+import { MotherSignUpInfo, BabySignUpInfo } from '../../../services/auth';
 import Modal from '../../../components/Modal';
 import MainButton from '../../../components/MainButton';
 import SecondaryButton from '../../../components/SecondaryButton';
@@ -58,72 +53,67 @@ interface FormValues {
 }
 
 type ScreenParams = {
-  MotherForm: {
+  BabyForm: {
     motherInfo: MotherSignUpInfo;
   };
 };
 
+const babyFormSchema = Yup.object({
+  numberOfBabies: Yup.number()
+    .min(0, 'Pelo menos um bebê deve ser registrado')
+    .required('Campo obrigatório'),
+  babies: Yup.array()
+    .of(
+      Yup.object().shape(
+        {
+          id: Yup.number(),
+          name: Yup.string().required('Campo obrigatório'),
+          birthday: Yup.string().required('Campo obrigatório'),
+          weight: Yup.number()
+            .typeError('Deve ser um número')
+            .min(0, 'Deve ser maior ou igual a 0')
+            .required('Campo obrigatório'),
+          birthType: Yup.string().required('Campo obrigatório'),
+          difficulties: Yup.string().required('Campo obrigatório'),
+          gestationWeeks: Yup.string().required('Campo obrigatório'),
+          gestationDays: Yup.string().required('Campo obrigatório'),
+          apgar1: Yup.number()
+            .when('apgar2', {
+              is: undefined,
+              then: Yup.number().typeError('Deve ser um número inteiro'),
+              otherwise: Yup.number()
+                .typeError('Deve ser um número inteiro')
+                .required('Apgar 1 também deve ser fornecido'),
+            })
+            .integer('Deve ser um número inteiro')
+            .min(0, 'Deve ser maior ou igual a 0')
+            .max(10, 'Deve ser menor ou igual a 10'),
+          apgar2: Yup.number()
+            .when('apgar1', {
+              is: undefined,
+              then: Yup.number().typeError('Deve ser um número inteiro'),
+              otherwise: Yup.number()
+                .typeError('Deve ser um número inteiro')
+                .required('Apgar 2 também deve ser fornecido'),
+            })
+            .integer('Deve ser um número inteiro')
+            .min(0, 'Deve ser maior ou igual a 0')
+            .max(10, 'Deve ser menor ou igual a 10'),
+          birthLocation: Yup.string().required('Campo obrigatório'),
+        },
+        [['apgar1', 'apgar2']],
+      ),
+    )
+    .min(1, 'Pelo menos um bebê deve ser cadastrado')
+    .required(),
+}).required();
+
 const BabyForm: React.FC = () => {
   const navigation = useNavigation();
-  const { motherInfo } = useRoute<
-    RouteProp<ScreenParams, 'MotherForm'>
-  >().params;
+  const { motherInfo } = useRoute<RouteProp<ScreenParams, 'BabyForm'>>().params;
 
-  const [isSendingForm, setIsSendingForm] = useState(false);
   const [isApgarModalVisible, setIsApgarModalVisible] = useState(false);
-  const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
-  const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [babyCount, setBabyCount] = useState(0);
-
-  const babyFormSchema = Yup.object({
-    numberOfBabies: Yup.number()
-      .min(0, 'Pelo menos um bebê deve ser registrado')
-      .required('Campo obrigatório'),
-    babies: Yup.array()
-      .of(
-        Yup.object().shape(
-          {
-            id: Yup.number(),
-            name: Yup.string().required('Campo obrigatório'),
-            birthday: Yup.string().required('Campo obrigatório'),
-            weight: Yup.number()
-              .typeError('Deve ser um número')
-              .min(0, 'Deve ser maior ou igual a 0')
-              .required('Campo obrigatório'),
-            birthType: Yup.string().required('Campo obrigatório'),
-            difficulties: Yup.string().required('Campo obrigatório'),
-            gestationWeeks: Yup.string().required('Campo obrigatório'),
-            gestationDays: Yup.string().required('Campo obrigatório'),
-            apgar1: Yup.number()
-              .when('apgar2', {
-                is: undefined,
-                then: Yup.number().typeError('Deve ser um número inteiro'),
-                otherwise: Yup.number()
-                  .typeError('Deve ser um número inteiro')
-                  .required('Apgar 1 também deve ser fornecido'),
-              })
-              .integer('Deve ser um número inteiro')
-              .min(0, 'Deve ser maior ou igual a 0')
-              .max(10, 'Deve ser menor ou igual a 10'),
-            apgar2: Yup.number()
-              .when('apgar1', {
-                is: undefined,
-                then: Yup.number().typeError('Deve ser um número inteiro'),
-                otherwise: Yup.number()
-                  .typeError('Deve ser um número inteiro')
-                  .required('Apgar 2 também deve ser fornecido'),
-              })
-              .integer('Deve ser um número inteiro')
-              .min(0, 'Deve ser maior ou igual a 0')
-              .max(10, 'Deve ser menor ou igual a 10'),
-            birthLocation: Yup.string().required('Campo obrigatório'),
-          },
-          [['apgar1', 'apgar2']],
-        ),
-      )
-      .min(1, 'Pelo menos um bebê deve ser cadastrado')
-      .required(),
-  }).required();
 
   // Retorna um novo objeto Baby com um id especificado.
   function newBaby(babyId: number): Baby {
@@ -196,44 +186,28 @@ const BabyForm: React.FC = () => {
     setBabyCount(newBabyCount);
   }
 
-  // Registra a mãe no sistema.
-  async function registerNewMother(): Promise<string | null> {
-    const token = await signUpMother(motherInfo);
-    return token;
-  }
-
-  // Registra todos os bebês do formulário.
-  async function registerNewBabies(token: string, formValues: FormValues) {
-    formValues.babies.forEach(async baby => {
-      const babyInfo: BabySignUpInfo = {
-        name: baby.name,
-        birthday: baby.birthday,
-        weight: parseFloat(baby.weight),
-        birthType: baby.birthType.toLowerCase() === 'cesária',
-        touched: baby.difficulties.toLowerCase() === 'sim',
-        gestationWeeks: parseInt(baby.gestationWeeks, 10),
-        gestationDays: parseInt(baby.gestationDays, 10),
-        apgar1: baby.apgar1 ? parseInt(baby.apgar1, 10) : null,
-        apgar2: baby.apgar2 ? parseInt(baby.apgar2, 10) : null,
-        birthLocation: baby.birthLocation,
-        difficulties: baby.difficulties.toLowerCase() === 'sim',
-      };
-      await signUpBaby(token, babyInfo);
-    });
+  // Prepara os valores dos bebês para serem enviados ao backend.
+  function prepareNewBabiesData(formValues: FormValues) {
+    const babiesInfo: BabySignUpInfo[] = formValues.babies.map(baby => ({
+      name: baby.name,
+      birthday: baby.birthday,
+      birthLocation: baby.birthLocation,
+      weight: parseFloat(baby.weight),
+      gestationWeeks: parseInt(baby.gestationWeeks, 10),
+      gestationDays: parseInt(baby.gestationDays, 10),
+      apgar1: baby.apgar1 ? parseInt(baby.apgar1, 10) : null,
+      apgar2: baby.apgar2 ? parseInt(baby.apgar2, 10) : null,
+      birthType: baby.birthType.toLowerCase() === 'cesária',
+      touched: baby.difficulties.toLowerCase() === 'sim',
+      difficulties: baby.difficulties.toLowerCase() === 'sim',
+    }));
+    return babiesInfo;
   }
 
   // Registra a mãe e os bebês.
   async function handleFormSubmit(formValues: FormValues) {
-    setIsSendingForm(true);
-    const token = await registerNewMother();
-    if (token === null) {
-      setIsErrorModalVisible(true);
-      return;
-    }
-
-    registerNewBabies(token, formValues);
-    setIsSendingForm(false);
-    setIsSignUpModalVisible(true);
+    const babiesInfo = prepareNewBabiesData(formValues);
+    navigation.navigate('TermsOfService', { motherInfo, babiesInfo });
   }
 
   return (
@@ -250,39 +224,10 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
         ]}
         visible={isApgarModalVisible}
       />
-      <Modal
-        content="Conta criada com sucesso! Seja muito bem-vinda ao AmamentaCoach!"
-        options={[
-          {
-            text: 'Fechar',
-            isBold: true,
-            onPress: async () => {
-              setIsSignUpModalVisible(false);
-              navigation.navigate('Login');
-            },
-          },
-        ]}
-        visible={isSignUpModalVisible}
-      />
-      <Modal
-        content={'Erro ao registrar.\nPor favor tente novamente mais tarde.'}
-        options={[
-          {
-            text: 'Fechar',
-            isBold: true,
-            onPress: async () => {
-              setIsErrorModalVisible(false);
-              setIsSendingForm(false);
-            },
-          },
-        ]}
-        visible={isErrorModalVisible}
-      />
 
-      <HeaderText>Passo 3 de 3</HeaderText>
+      <HeaderText>Passo 3 de 4</HeaderText>
       <HeaderSubText>
-        Você está quase lá! Por último, faremos algumas perguntas sobre seu
-        bebê:
+        Você está quase lá! Agora faremos algumas perguntas sobre seu bebê:
       </HeaderSubText>
       <Formik
         initialValues={{
@@ -464,8 +409,8 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
               <SecondSubOptionContainer>
                 <MainButton
                   onPress={handleSubmit}
-                  disabled={!dirty || isSendingForm}
-                  text={isSendingForm ? 'Enviando...' : 'Salvar'}
+                  disabled={!dirty}
+                  text="Proximo"
                 />
               </SecondSubOptionContainer>
             </SubmitButtonContainer>

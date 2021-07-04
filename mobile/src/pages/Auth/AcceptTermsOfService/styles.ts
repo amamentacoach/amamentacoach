@@ -25,34 +25,7 @@ export const HeaderSubText = styled.Text`
 
 export const FormContainer = styled.View`
   flex: 1;
-  margin-bottom: 20px;
-`;
-
-export const DDDContainer = styled.View`
-  margin-right: 4px;
-  width: 70px;
-`;
-
-export const PhoneInputContainer = styled.View`
-  flex: 4;
-`;
-
-export const SubOptionsContainer = styled.View`
-  flex: 1;
-  flex-direction: row;
-`;
-
-export const OptionPickerContainer = styled.View`
-  flex: 1;
-`;
-
-export const FirstSubOptionContainer = styled.View`
-  flex: 1;
-  margin-right: 4px;
-`;
-
-export const SecondSubOptionContainer = styled.View`
-  flex: 1;
+  margin-bottom: 6px;
 `;
 
 export const SubmitButtonContainer = styled.View`
@@ -60,4 +33,5 @@ export const SubmitButtonContainer = styled.View`
   align-items: flex-end;
   flex-direction: row;
   padding: 15px 0px;
+  margin-bottom: 20px;
 `;
