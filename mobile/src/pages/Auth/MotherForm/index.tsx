@@ -57,6 +57,73 @@ type IScreenParams = {
   };
 };
 
+const motherFormSchema = Yup.object({
+  name: Yup.string().required('Campo obrigatório'),
+  birthday: Yup.string().required('Campo obrigatório'),
+  ddd: Yup.number()
+    .integer('Deve ser um número inteiro')
+    .typeError('Deve ser um número inteiro')
+    .min(10, 'Deve ser maior ou igual a 10')
+    .max(99, 'Deve ser menor que 100')
+    .required('Campo obrigatório'),
+  phone: Yup.number()
+    .integer('Deve ser um número inteiro')
+    .typeError('Deve ser um número inteiro')
+    .min(100000000, 'Deve possuir 9 dígitos')
+    .max(999999999, 'Deve possuir 9 dígitos')
+    .required('Campo obrigatório'),
+  alreadyBreastfeed: Yup.string().required('Campo obrigatório'),
+  pregnantCount: Yup.number()
+    .integer('Deve ser um número inteiro')
+    .typeError('Deve ser um número inteiro')
+    .min(0, 'Dever ser maior ou igual a zero')
+    .required('Campo obrigatório'),
+  yearsSpentBreastFeeding: Yup.number().when('alreadyBreastfeed', {
+    is: 'Sim',
+    then: Yup.number()
+      .integer('Deve ser um número inteiro')
+      .typeError('Deve ser um número inteiro')
+      .min(0, 'Dever ser maior ou igual a zero')
+      .required('Campo obrigatório'),
+    otherwise: Yup.number(),
+  }),
+  monthsSpentBreastFeeding: Yup.number().when('alreadyBreastfeed', {
+    is: 'Sim',
+    then: Yup.number()
+      .integer('Deve ser um número inteiro')
+      .typeError('Deve ser um número inteiro')
+      .min(0, 'Dever ser maior ou igual a zero')
+      .required('Campo obrigatório'),
+    otherwise: Yup.number(),
+  }),
+  partner: Yup.string().required('Campo obrigatório'),
+  liveTogether: Yup.string().required('Campo obrigatório'),
+  partnerTime: Yup.string().when('liveTogether', {
+    is: 'Sim',
+    then: Yup.string().required('Campo obrigatório'),
+    otherwise: Yup.string(),
+  }),
+  education: Yup.string().required('Campo obrigatório'),
+  wage: Yup.string().required('Campo obrigatório'),
+  plannedPregnancy: Yup.string().required('Campo obrigatório'),
+  firstVisit: Yup.string().required('Campo obrigatório'),
+  firstStimulus: Yup.string().required('Campo obrigatório'),
+  timeFirstStimulus: Yup.string().required('Campo obrigatório'),
+  childrenAlive: Yup.string().required('Campo obrigatório'),
+  preNatalGuidance: Yup.string().required('Campo obrigatório'),
+  occupation: Yup.string().required('Campo obrigatório'),
+  maternityLeave: Yup.string().required('Campo obrigatório'),
+  maternityLeaveCount: Yup.number()
+    .when('maternityLeave', {
+      is: 'Sim',
+      then: Yup.number().required('Campo obrigatório'),
+      otherwise: Yup.number(),
+    })
+    .integer('Deve ser um número inteiro')
+    .typeError('Deve ser um número inteiro')
+    .min(0, 'Deve ser maior ou igual a zero'),
+}).required();
+
 const MotherForm: React.FC = () => {
   const navigation = useNavigation();
   const { email, password } = useRoute<
@@ -87,73 +154,6 @@ const MotherForm: React.FC = () => {
     maternityLeave: '',
     maternityLeaveCount: '',
   };
-
-  const motherFormSchema = Yup.object({
-    name: Yup.string().required('Campo obrigatório'),
-    birthday: Yup.string().required('Campo obrigatório'),
-    ddd: Yup.number()
-      .integer('Deve ser um número inteiro')
-      .typeError('Deve ser um número inteiro')
-      .min(10, 'Deve ser maior ou igual a 10')
-      .max(99, 'Deve ser menor que 100')
-      .required('Campo obrigatório'),
-    phone: Yup.number()
-      .integer('Deve ser um número inteiro')
-      .typeError('Deve ser um número inteiro')
-      .min(100000000, 'Deve possuir 9 dígitos')
-      .max(999999999, 'Deve possuir 9 dígitos')
-      .required('Campo obrigatório'),
-    alreadyBreastfeed: Yup.string().required('Campo obrigatório'),
-    pregnantCount: Yup.number()
-      .integer('Deve ser um número inteiro')
-      .typeError('Deve ser um número inteiro')
-      .min(0, 'Dever ser maior ou igual a zero')
-      .required('Campo obrigatório'),
-    yearsSpentBreastFeeding: Yup.number().when('alreadyBreastfeed', {
-      is: 'Sim',
-      then: Yup.number()
-        .integer('Deve ser um número inteiro')
-        .typeError('Deve ser um número inteiro')
-        .min(0, 'Dever ser maior ou igual a zero')
-        .required('Campo obrigatório'),
-      otherwise: Yup.number(),
-    }),
-    monthsSpentBreastFeeding: Yup.number().when('alreadyBreastfeed', {
-      is: 'Sim',
-      then: Yup.number()
-        .integer('Deve ser um número inteiro')
-        .typeError('Deve ser um número inteiro')
-        .min(0, 'Dever ser maior ou igual a zero')
-        .required('Campo obrigatório'),
-      otherwise: Yup.number(),
-    }),
-    partner: Yup.string().required('Campo obrigatório'),
-    liveTogether: Yup.string().required('Campo obrigatório'),
-    partnerTime: Yup.string().when('liveTogether', {
-      is: 'Sim',
-      then: Yup.string().required('Campo obrigatório'),
-      otherwise: Yup.string(),
-    }),
-    education: Yup.string().required('Campo obrigatório'),
-    wage: Yup.string().required('Campo obrigatório'),
-    plannedPregnancy: Yup.string().required('Campo obrigatório'),
-    firstVisit: Yup.string().required('Campo obrigatório'),
-    firstStimulus: Yup.string().required('Campo obrigatório'),
-    timeFirstStimulus: Yup.string().required('Campo obrigatório'),
-    childrenAlive: Yup.string().required('Campo obrigatório'),
-    preNatalGuidance: Yup.string().required('Campo obrigatório'),
-    occupation: Yup.string().required('Campo obrigatório'),
-    maternityLeave: Yup.string().required('Campo obrigatório'),
-    maternityLeaveCount: Yup.number()
-      .when('maternityLeave', {
-        is: 'Sim',
-        then: Yup.number().required('Campo obrigatório'),
-        otherwise: Yup.number(),
-      })
-      .integer('Deve ser um número inteiro')
-      .typeError('Deve ser um número inteiro')
-      .min(0, 'Deve ser maior ou igual a zero'),
-  }).required();
 
   // Avança para a próxima página passando as informações do usuário.
   function handleFormSubmit(formValues: FormValues) {

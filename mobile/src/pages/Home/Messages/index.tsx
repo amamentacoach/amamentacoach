@@ -4,7 +4,7 @@ import { FlatList } from 'react-native';
 
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import { setMessagesPageOpened } from '../../../services/telemetry';
-import { IMessage, listMessages } from '../../../services/messages';
+import { Message as IMessage, listMessages } from '../../../services/messages';
 
 import {
   AddMessageButton,

@@ -39,6 +39,7 @@ export interface BabySignUpInfo {
 
 export interface MotherInfo {
   name: string;
+  birthday: string;
   images: {
     mother: string | null;
     baby: string | null;
@@ -139,10 +140,12 @@ export async function signIn(
     login.token = request.data.token;
     login.status = LoginStatus.Success;
   } catch (error) {
-    if (error.response && error.response.status === 404) {
-      login.status = LoginStatus.AccountNotAuthorized;
-    } else if (error.response && error.response.status === 401) {
-      login.status = LoginStatus.IncorrectLogin;
+    if (error.response) {
+      if (error.response.status === 401) {
+        login.status = LoginStatus.IncorrectLogin;
+      } else if (error.response.status === 404) {
+        login.status = LoginStatus.AccountNotAuthorized;
+      }
     }
   }
   return login;
@@ -186,6 +189,7 @@ export async function getMotherInfo(): Promise<MotherInfo | null> {
 
     return {
       name: data.nome,
+      birthday: data.data_nascimento,
       partner: data.companheiro,
       images: {
         mother: data.imagem_mae,

@@ -27,7 +27,7 @@ const NewMessage: React.FC = () => {
   const formInitialValues: FormValues = {
     message: '',
   };
-  const newPasswordSchema: Yup.ObjectSchema<FormValues> = Yup.object({
+  const newMessageSchema: Yup.ObjectSchema<FormValues> = Yup.object({
     message: Yup.string().required('Campo obrigatório'),
   }).required();
 
@@ -58,7 +58,7 @@ const NewMessage: React.FC = () => {
       <HeaderText>Envie uma mensagem para outras mamães</HeaderText>
       <Formik
         initialValues={formInitialValues}
-        validationSchema={newPasswordSchema}
+        validationSchema={newMessageSchema}
         validateOnChange={false}
         onSubmit={values => handleNewMessage(values)}>
         {({ setFieldValue, handleSubmit, dirty, errors }) => (

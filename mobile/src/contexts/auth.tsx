@@ -11,8 +11,8 @@ interface AuthContextData {
   isSigned: boolean;
   motherInfo: MotherInfo;
   updateMotherInfo: () => Promise<void>;
-  signIn(email: string, password: string): Promise<LoginStatus>;
-  signOut(): void;
+  signIn: (email: string, password: string) => Promise<LoginStatus>;
+  signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -33,7 +33,13 @@ export const AuthProvider: React.FC = ({ children }) => {
       '@AmamentaCoach:motherInfo',
     );
     if (storageMotherInfo) {
-      setMotherInfo(JSON.parse(storageMotherInfo));
+      const savedMotherInfo: MotherInfo = JSON.parse(storageMotherInfo);
+      if (!savedMotherInfo.birthday) {
+        await AsyncStorage.removeItem('@AmamentaCoach:motherInfo');
+        await initMotherInfo();
+        return;
+      }
+      setMotherInfo(savedMotherInfo);
     } else {
       const apiMotherInfo = await auth.getMotherInfo();
       if (apiMotherInfo) {
@@ -73,17 +79,15 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   async function signIn(email: string, password: string): Promise<LoginStatus> {
     const { token: newToken, status } = await auth.signIn(email, password);
-    if (status !== LoginStatus.Success) {
-      return status;
+    if (status === LoginStatus.Success) {
+      api.defaults.headers.common.Authorization = newToken;
+      await initMotherInfo();
+
+      await initPushNotifications();
+
+      await AsyncStorage.setItem('@AmamentaCoach:token', newToken);
+      setToken(newToken);
     }
-    api.defaults.headers.common.Authorization = newToken;
-    await initMotherInfo();
-
-    await initPushNotifications();
-
-    await AsyncStorage.setItem('@AmamentaCoach:token', newToken);
-    setToken(newToken);
-
     return status;
   }
 

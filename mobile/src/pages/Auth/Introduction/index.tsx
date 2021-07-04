@@ -73,7 +73,7 @@ const Introduction: React.FC = () => {
     RNBootSplash.hide({ duration: 250 });
   }, []);
 
-  async function handleSkip() {
+  async function handleEnd() {
     await setPersistentNotFirstRun('appIntroduction');
   }
 
@@ -86,7 +86,7 @@ const Introduction: React.FC = () => {
   }) => (
     <>
       <Header>
-        <SkipButton onPress={handleSkip}>
+        <SkipButton onPress={handleEnd}>
           {index < pagesLength - 1 && <SkipButtonText>Pular</SkipButtonText>}
         </SkipButton>
       </Header>
@@ -107,7 +107,7 @@ const Introduction: React.FC = () => {
         <LastPageButtonWrapper opacity={index === pagesLength - 1 ? 1 : 0}>
           <MainButton
             text="Vamos começar!"
-            onPress={handleSkip}
+            onPress={handleEnd}
             disabled={index !== pagesLength - 1}
           />
         </LastPageButtonWrapper>

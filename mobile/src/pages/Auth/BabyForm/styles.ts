@@ -78,5 +78,7 @@ export const ApgarHelpButton = styled.TouchableOpacity`
 export const SubmitButtonContainer = styled.View`
   flex: 1;
   flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
   padding: 15px 0px;
 `;

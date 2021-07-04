@@ -15,6 +15,10 @@ const Profile: React.FC = () => {
         <OptionText>Alterar senha</OptionText>
       </OptionButton>
       <Line />
+      <OptionButton onPress={() => navigation.navigate('MenuTermsOfService')}>
+        <OptionText>Termo de Consentimento</OptionText>
+      </OptionButton>
+      <Line />
       <OptionButton onPress={signOut}>
         <OptionText>Sair</OptionText>
       </OptionButton>
