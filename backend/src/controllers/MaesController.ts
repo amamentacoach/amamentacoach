@@ -192,7 +192,7 @@ class MaesController{
     async revogar(req:Request,res:Response){
         const id = req.mae_id;
         const {motivo} = req.body
-        await knex('mae').update({status: -2, motivo_revogacao: motivo}).where(id)
+        await knex('mae').update({status: -2, motivo_revogacao: motivo}).where({id})
         return res.sendStatus(200)
     }
 }
