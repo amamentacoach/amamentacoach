@@ -919,6 +919,15 @@ define({ "api": [
         ]
       }
     },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "{\n    \"motivo\":\"Nao me senti segura informando  meus dados\"\n}",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./src/routes.ts",
     "groupTitle": "Mães",

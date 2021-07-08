@@ -12,7 +12,7 @@ class MaesController{
         if(id==req.mae_id){
 
             const mae = await knex('mae')
-            .select('mae.id', 'email', 'mae.nome', 'ultimo_acesso', 'imagem_mae', 'imagem_bebe', 'imagem_pai', 'companheiro')
+            .select('mae.id', 'email', 'mae.nome', 'ultimo_acesso', 'imagem_mae', 'imagem_bebe', 'imagem_pai', 'companheiro', 'data_nascimento')
             .where('mae.id',id).first()
 
 
@@ -169,7 +169,12 @@ class MaesController{
 
     async esperandoAprovacao(req:Request,res:Response){
         const maes = await knex('mae').select('id','nome','email').where('status',0)
-        return res.render('aprovar',{maes})
+        const countRevogacoes = await knex('mae')
+                .where('status',-2)
+                .count()
+                .first()
+        const revogacoes = await knex('mae').select('id','nome','email','whatsapp', 'motivo_revogacao').where('status',-2)
+        return res.render('aprovar',{maes, revogacoes, countRevogacoes})
     }
 
     async aprovar(req:Request,res:Response){
@@ -186,7 +191,8 @@ class MaesController{
 
     async revogar(req:Request,res:Response){
         const id = req.mae_id;
-        await knex('mae').update('status', -1).where(id)
+        const {motivo} = req.body
+        await knex('mae').update({status: -2, motivo_revogacao: motivo}).where(id)
         return res.sendStatus(200)
     }
 }

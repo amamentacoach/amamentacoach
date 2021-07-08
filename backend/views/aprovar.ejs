@@ -25,35 +25,67 @@
                 <div class="card" style="width: 80vw; min-width: 700px;">
                     <div class="card-body">
                         <h2>Aprovação das Mamães</h2>
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                              <a class="nav-link active" aria-current="page" data-toggle="tab" href="#pendentes">Pendentes</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" data-toggle="tab" href="#revogacoes">Revogações(<%=countRevogacoes.count%>)</a>
+                            </li>
+                        </ul>
                         <div class="tab-content clearfix">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Mamãe</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col"></th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <% maes.forEach(function(mae){ %>
+                            <div class="tab-pane active" id="pendentes">
+                                <table class="table">
+                                    <thead>
                                         <tr>
-                                            <td><%=mae.nome%></td>
-                                            <td><%=mae.email%></td>
-                                            <td>
-                                                <button type="button" class="btn" style="background-color: #7D5CD7; color: #fff;" onclick="aprovar(<%=mae.id%>)">
-                                                    Aprovar
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" onclick="reprovar(<%=mae.id%>)">
-                                                    Reprovar
-                                                </button>
-                                            </td>
+                                            <th scope="col">Mamãe</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
                                         </tr>
-                                    <% }); %>
-                                </tbody>
-                            </table>  
+                                    </thead>
+                                    <tbody>
+                                        <% maes.forEach(function(mae){ %>
+                                            <tr>
+                                                <td><%=mae.nome%></td>
+                                                <td><%=mae.email%></td>
+                                                <td>
+                                                    <button type="button" class="btn" style="background-color: #7D5CD7; color: #fff;" onclick="aprovar(<%=mae.id%>)">
+                                                        Aprovar
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal" onclick="reprovar(<%=mae.id%>)">
+                                                        Reprovar
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        <% }); %>
+                                    </tbody>
+                                </table>  
+                            </div>
+                            <div class="tab-pane active" id="revogacoes">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Mamãe</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">WhatsApp</th>
+                                            <th scope="col">Motivo</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% revogacoes.forEach(function(mae){ %>
+                                            <tr>
+                                                <td><%=mae.nome%></td>
+                                                <td><%=mae.email%></td>
+                                                <td><%=mae.whatsapp%></td>
+                                                <td><%=mae.motivo_revogacao%></td>
+                                            </tr>
+                                        <% }); %>
+                                    </tbody>
+                                </table>  
+                            </div>
                         </div>  
                     </div>
                 </div>

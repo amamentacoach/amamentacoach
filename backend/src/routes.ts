@@ -1159,6 +1159,11 @@ routes.get('/politica-de-privacidade',(req,res)=>{
  * @apiDescription Mae revoga consentimento e deve ser redirecionada para pagina de login
  * @apiGroup Mães
  * @apiHeader {String} authorization Token de acesso.
+ * 
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "motivo":"Nao me senti segura informando  meus dados"
+ *      }
  *
  */
  routes.post('/maes/revogar',verifyJWT,maesController.revogar);
