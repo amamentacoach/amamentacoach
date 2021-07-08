@@ -70,7 +70,9 @@ const Home: React.FC = () => {
   const [formModalVisibility, setFormModalVisibility] = useState<boolean>(
     false,
   );
-  const [formAction, setFormAction] = useState<string>('');
+  const [formAction, setFormAction] = useState<'1D' | '15D' | '1M' | null>(
+    null,
+  );
 
   const [
     expectationsModalVisibility,
@@ -264,7 +266,9 @@ const Home: React.FC = () => {
       />
       <Modal
         color={theme.babyPink}
-        content="Chegou o momento de avaliar novamente sua pontuação na escala de confiança materna para amamentar! Vamos lá?"
+        content={`Chegou o momento de avaliar${
+          formAction !== '1D' ? ' novamente' : ''
+        } sua pontuação na escala de confiança materna para amamentar! Vamos lá?`}
         options={[
           {
             text: 'Sim',
