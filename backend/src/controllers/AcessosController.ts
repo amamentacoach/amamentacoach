@@ -19,7 +19,7 @@ class AcessosController{
                 const timeDiff = Math.abs(new Date().getTime() - bebe.data_parto.getTime())
                 const diffDays =  Math.ceil(timeDiff/(1000 * 3600 * 24))
 
-                if(mae.acessos_app > 1 && mae.score_1d == null){
+                if(mae.acessos_app >= 1 && mae.score_1d == null){
                     return res.send({acao:"1D"})
                 }else if(diffDays >= 15 && mae.score_15d == null){
                     return res.send({acao:"15D"})
