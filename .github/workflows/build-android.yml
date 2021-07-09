@@ -3,7 +3,7 @@ name: Build Android and create release.
 on:
   push:
     tags:
-    - 'v*' # Push events matching v*, i.e. v1.0, v20.15.10
+      - "v*" # Push events matching v*, i.e. v1.0, v20.15.10
 
 defaults:
   run:
@@ -22,12 +22,10 @@ jobs:
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
 
       - name: Install dependencies
-        run: |
-          yarn install
+        run: yarn install
 
       - name: Build Android release
-        run: |
-          cd android && ./gradlew assembleRelease
+        run: yarn run android:assemble:development
 
       - name: Create release
         id: create_release
@@ -47,7 +45,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: mobile/android/app/build/outputs/apk/release/app-release.apk
-          asset_name: amamenta-coach-${{ steps.version.outputs.tag }}.apk
+          asset_path: mobile/android/app/build/outputs/apk/debug/amamentacoach-${{ steps.version.outputs.tag }}-debug.apk
+          asset_name: amamentacoach-${{ steps.version.outputs.tag }}.apk
           asset_content_type: application/zip
-

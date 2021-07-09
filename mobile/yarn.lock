@@ -1982,10 +1982,10 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
 
-"@types/react-native-charts-wrapper@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@types/react-native-charts-wrapper/-/react-native-charts-wrapper-0.5.1.tgz#9670108245921b7744976652933335fd15ddafde"
-  integrity sha512-jK9xPThohuuRP6G0OQ1WdLO4mq9FbNz5b6kcquuYQlwbTqh0ARIPnPM+nG8hv+dGMU0i2wKfWCzu7B0EtEHtKw==
+"@types/react-native-charts-wrapper@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@types/react-native-charts-wrapper/-/react-native-charts-wrapper-0.5.2.tgz#212d3f8829c464deaedec0fb0ff5cf0751cf395e"
+  integrity sha512-ct8pmkh13s980Yj/cuxFdMJH3pi28/G5a+4DcZoPhIuHsmPadVOCDsfCh0E9PPFDfaZAK7sbK8zfjHCXNBygeQ==
   dependencies:
     "@types/react" "*"
     "@types/react-native" "*"
@@ -7380,6 +7380,11 @@ react-native-charts-wrapper@^0.5.7:
   dependencies:
     prop-types "^15.5.10"
     react "16.8.3"
+
+react-native-config@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-1.4.2.tgz#cc39f22ed72c5cb06af1adf0ba70ef01593900b4"
+  integrity sha512-iTvCvThvFTH7SdiBcsxYtpLy86zglsh51ZBqFPPZ75tdrQMdlRnDNnb86kNjQf03KT0qs1nCMLRejfPMIim8iA==
 
 react-native-gesture-handler@^1.8.0:
   version "1.8.0"

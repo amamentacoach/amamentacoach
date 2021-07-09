@@ -1,7 +1,8 @@
 import axios from 'axios';
+import config from 'react-native-config';
 
 const api = axios.create({
-  baseURL: 'https://dev-amamentacoach.herokuapp.com',
+  baseURL: config.API_URL,
 });
 
 export default api;

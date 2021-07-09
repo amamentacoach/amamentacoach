@@ -11,3 +11,6 @@
 
 # react-native-svg
 -keep public class com.horcrux.svg.** {*;}
+
+# react-native-config
+-keep class com.amamentacoach.BuildConfig { *; }

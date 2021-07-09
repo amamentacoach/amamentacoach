@@ -10,6 +10,8 @@ target 'AmamentaCoach' do
 
   pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
 
+  pod 'react-native-config', :path => '../node_modules/react-native-config'
+
   target 'AmamentaCoachTests' do
     inherit! :complete
     # Pods for testing
