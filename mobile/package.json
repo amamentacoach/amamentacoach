@@ -5,6 +5,7 @@
   "scripts": {
     "android:assemble:development": "cd android && ENVFILE='../.env.development' ./gradlew assembleDebug",
     "android:assemble:release": "cd android && ENVFILE='../.env.production' ./gradlew assembleRelease",
+    "android:bundle:development": "cd android && ENVFILE='../.env.development' ./gradlew bundleRelease",
     "android:bundle:release": "cd android && ENVFILE='../.env.production' ./gradlew bundleRelease",
     "android": "ENVFILE='.env.development' react-native run-android",
     "ios": "ENVFILE='.env.development' react-native run-ios",
