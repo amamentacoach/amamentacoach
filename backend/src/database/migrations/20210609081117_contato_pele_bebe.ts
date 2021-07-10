@@ -3,7 +3,7 @@ import * as Knex from "knex";
 
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.table('bebe',table =>{
-        table.boolean('contato_pele').notNullable();
+        table.boolean('contato_pele').nullable();
     });
 }
 
