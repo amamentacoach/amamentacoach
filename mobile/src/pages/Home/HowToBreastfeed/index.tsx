@@ -58,8 +58,7 @@ const pages: InfoPage[] = [
     Image: MilkWithdrawalThree,
     content: [
       {
-        text:
-          'Massageie o peito com a ponta de dois dedos, iniciando na região mais próxima da aréola indo até a mais distante do peito, apoiando-o com a outra mão.',
+        text: 'Massageie o peito com a ponta de dois dedos, iniciando na região mais próxima da aréola indo até a mais distante do peito, apoiando-o com a outra mão.',
       },
     ],
   },
@@ -79,8 +78,7 @@ const pages: InfoPage[] = [
     Image: MilkWithdrawalFive,
     content: [
       {
-        text:
-          'Apoie a ponta dos dedos (polegar e indicador) acima e abaixo da aréola, apertando o peito contra o tórax.',
+        text: 'Apoie a ponta dos dedos (polegar e indicador) acima e abaixo da aréola, apertando o peito contra o tórax.',
       },
     ],
   },
@@ -90,8 +88,7 @@ const pages: InfoPage[] = [
     Image: MilkWithdrawalSix,
     content: [
       {
-        text:
-          'Aperte o peito com movimentos rítmicos como se tentasse aproximar as pontas dos dedos, sem deslizar na pele. ',
+        text: 'Aperte o peito com movimentos rítmicos como se tentasse aproximar as pontas dos dedos, sem deslizar na pele. ',
       },
     ],
   },
@@ -111,8 +108,7 @@ const pages: InfoPage[] = [
     Image: MilkWithdrawalEight,
     content: [
       {
-        text:
-          'Se não tiver como guardar imediatamente na geladeira, o leite pode permanecer em local fresco e usado até seis horas após a coleta.',
+        text: 'Se não tiver como guardar imediatamente na geladeira, o leite pode permanecer em local fresco e usado até seis horas após a coleta.',
       },
     ],
   },
@@ -122,8 +118,7 @@ const pages: InfoPage[] = [
     Image: MilkWithdrawalNine,
     content: [
       {
-        text:
-          'Em geladeira, o leite ordenhado pode ser guardado com segurança por até 24 horas ou congelado por até 30 dias. Antes de alimentar o bebê com o leite guardado, aqueça-o em banho-maria.',
+        text: 'Em geladeira, o leite ordenhado pode ser guardado com segurança por até 24 horas ou congelado por até 30 dias. Antes de alimentar o bebê com o leite guardado, aqueça-o em banho-maria.',
       },
     ],
   },

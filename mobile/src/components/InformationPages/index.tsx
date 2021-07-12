@@ -76,6 +76,7 @@ const InformationPages: React.FC<InformationPagesProps> = ({
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         scrollEnabled={scrollEnabled}
+        keyboardShouldPersistTaps="handled"
       />
     </ListContainer>
   );

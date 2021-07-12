@@ -2,11 +2,11 @@ import React from 'react';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-import { IExtractionEntry } from '../../services/diaryRegistry';
+import { ExtractionEntry } from '../../services/diaryRegistry';
 
 import { Registry, Row, Text, TextContainer, Content } from './styles';
 
-const DiaryRegistryEntry: React.FC<IExtractionEntry> = ({
+const DiaryRegistryEntry: React.FC<ExtractionEntry> = ({
   breast,
   date,
   duration,

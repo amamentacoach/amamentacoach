@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { FlatList } from 'react-native';
 
-import { IFAQ, listQuestions } from '../../../services/questions';
+import { FAQ, listQuestions } from '../../../services/questions';
 
 import {
   AddQuestionButton,
@@ -25,7 +25,7 @@ interface MessageEntryProps {
 const Questions: React.FC = () => {
   const navigation = useNavigation();
 
-  const [questions, setQuestions] = useState<IFAQ[]>([]);
+  const [questions, setQuestions] = useState<FAQ[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Adiciona um botão na parte superior direita da tela, permitindo registrar uma nova pergunta.

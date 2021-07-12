@@ -12,7 +12,7 @@ import 'moment/locale/pt-br';
 import { dateFormatVerbose } from '../../../utils/date';
 import { useAuth } from '../../../contexts/auth';
 import {
-  IBreastfeedEntry,
+  BreastfeedEntry,
   listBreastfeedEntries,
 } from '../../../services/diaryRegistry';
 import DiaryBreastfeedEntry from '../../../components/DiaryBreastfeedEntry';
@@ -27,14 +27,13 @@ type ScreenParams = {
 };
 
 const DiaryBreastfeed: React.FC = () => {
-  const { date } = useRoute<
-    RouteProp<ScreenParams, 'DiaryBreastfeed'>
-  >().params;
+  const { date } =
+    useRoute<RouteProp<ScreenParams, 'DiaryBreastfeed'>>().params;
 
   const navigation = useNavigation();
   const { motherInfo } = useAuth();
   const isFocused = useIsFocused();
-  const [registries, setRegistries] = useState<IBreastfeedEntry[]>([]);
+  const [registries, setRegistries] = useState<BreastfeedEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

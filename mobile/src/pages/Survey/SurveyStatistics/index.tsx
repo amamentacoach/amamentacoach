@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { HeaderBackButton } from '@react-navigation/stack';
 
 import {
-  ISurveyStatistics,
+  SurveyStatistics as ISurveyStatistics,
   listSurveyStatistics,
 } from '../../../services/survey';
 import PieChart from '../../../components/PieChart';

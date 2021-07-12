@@ -33,9 +33,8 @@ type ScreenParams = {
 
 const AcceptTermsOfService: React.FC = () => {
   const navigation = useNavigation();
-  const { motherInfo, babiesInfo } = useRoute<
-    RouteProp<ScreenParams, 'AcceptTermsOfService'>
-  >().params;
+  const { motherInfo, babiesInfo } =
+    useRoute<RouteProp<ScreenParams, 'AcceptTermsOfService'>>().params;
 
   const [isSendingForm, setIsSendingForm] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);

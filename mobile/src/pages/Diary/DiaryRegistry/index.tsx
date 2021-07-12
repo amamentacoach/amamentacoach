@@ -12,7 +12,7 @@ import 'moment/locale/pt-br';
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import { setExtractionPageOpened } from '../../../services/telemetry';
 import {
-  IExtractionEntry,
+  ExtractionEntry,
   listExtractionsEntries,
 } from '../../../services/diaryRegistry';
 import { dateFormatVerbose } from '../../../utils/date';
@@ -33,7 +33,7 @@ const DiaryRegistry: React.FC = () => {
   const navigation = useNavigation();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
   const isFocused = useIsFocused();
-  const [registries, setRegistries] = useState<IExtractionEntry[]>([]);
+  const [registries, setRegistries] = useState<ExtractionEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

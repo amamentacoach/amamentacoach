@@ -28,8 +28,7 @@ const pages = [
     Image: SurveyPrimary,
     content: [
       {
-        text:
-          'Como você se sente com relação à sua autoconfiança para amamentar?\n\nPara cada uma das afirmações a seguir, por favor, escolha a resposta que melhor descreve sua autoconfiança em amamentar seu bebê.',
+        text: 'Como você se sente com relação à sua autoconfiança para amamentar?\n\nPara cada uma das afirmações a seguir, por favor, escolha a resposta que melhor descreve sua autoconfiança em amamentar seu bebê.',
       },
     ],
   },
@@ -38,8 +37,7 @@ const pages = [
     Image: SurveyPrimary,
     content: [
       {
-        text:
-          'Por favor, marque sua resposta circulando o número que melhor descreve como você se sente. Não há respostas certas ou erradas.',
+        text: 'Por favor, marque sua resposta circulando o número que melhor descreve como você se sente. Não há respostas certas ou erradas.',
       },
     ],
   },

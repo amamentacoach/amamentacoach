@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Image as ReactImage } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import RNBootSplash from 'react-native-bootsplash';
 import moment from 'moment';
@@ -60,24 +60,20 @@ const Home: React.FC = () => {
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
 
   const [babiesData, setBabiesData] = useState<BabyStatus[]>([]);
-  const [babyModalVisibility, setBabyModalVisibility] = useState<boolean>(
-    false,
-  );
+  const [babyModalVisibility, setBabyModalVisibility] =
+    useState<boolean>(false);
   const [selectedModalOptions, setSelectedModalOptions] = useState<
     BabyModalOption[]
   >([]);
 
-  const [formModalVisibility, setFormModalVisibility] = useState<boolean>(
-    false,
-  );
+  const [formModalVisibility, setFormModalVisibility] =
+    useState<boolean>(false);
   const [formAction, setFormAction] = useState<'1D' | '15D' | '1M' | null>(
     null,
   );
 
-  const [
-    expectationsModalVisibility,
-    setExpectationsModalVisibility,
-  ] = useState<Boolean>(false);
+  const [expectationsModalVisibility, setExpectationsModalVisibility] =
+    useState<Boolean>(false);
 
   const options: OptionList[] = [
     {

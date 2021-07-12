@@ -27,8 +27,7 @@ const pages = [
     Image: IntroDiary,
     content: [
       {
-        text:
-          'Esse é o seu DIÁRIO! Um espaço para registrar seus avanços e oferecer recursos que poderão te ajudar nessa jornada!',
+        text: 'Esse é o seu DIÁRIO! Um espaço para registrar seus avanços e oferecer recursos que poderão te ajudar nessa jornada!',
       },
     ],
   },
@@ -38,8 +37,7 @@ const pages = [
     Image: IntroDiaryCalendar,
     content: [
       {
-        text:
-          'Será muito importante que você o acesse todos os dias e informe sobre você, o seu bebê e a produção de leite.',
+        text: 'Será muito importante que você o acesse todos os dias e informe sobre você, o seu bebê e a produção de leite.',
       },
     ],
   },

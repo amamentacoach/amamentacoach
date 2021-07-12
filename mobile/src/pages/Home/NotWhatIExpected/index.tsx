@@ -30,8 +30,7 @@ const pages: InfoPage[] = [
     Image: ExpectationVsReality1,
     content: [
       {
-        text:
-          'O nascimento prematuro é algo que sempre mexe com a estrutura da família. Em geral, a realidade não tem muito a ver com aquilo que foi sonhado durante a gravidez...',
+        text: 'O nascimento prematuro é algo que sempre mexe com a estrutura da família. Em geral, a realidade não tem muito a ver com aquilo que foi sonhado durante a gravidez...',
       },
     ],
   },
@@ -41,8 +40,7 @@ const pages: InfoPage[] = [
     Image: ExpectationVsReality2,
     content: [
       {
-        text:
-          'Não há nada de errado com você caso esteja sentindo uma mistura de medo, frustração, insegurança, ansiedade, estresse...',
+        text: 'Não há nada de errado com você caso esteja sentindo uma mistura de medo, frustração, insegurança, ansiedade, estresse...',
       },
     ],
   },
@@ -52,8 +50,7 @@ const pages: InfoPage[] = [
     Image: ExpectationVsReality3,
     content: [
       {
-        text:
-          'Tenha paciência com você mesma! Respire fundo... escolha alguém para se abrir e falar sobre como você está se sentindo... e então, tome posse do seu bebê do jeitinho que ele é. Decida abraçar essa nova situação!',
+        text: 'Tenha paciência com você mesma! Respire fundo... escolha alguém para se abrir e falar sobre como você está se sentindo... e então, tome posse do seu bebê do jeitinho que ele é. Decida abraçar essa nova situação!',
       },
     ],
   },

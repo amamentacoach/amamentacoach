@@ -1,5 +1,14 @@
 import styled from 'styled-components/native';
 
+interface BackgroundProps {
+  color: string;
+}
+
+interface ForegroundProps {
+  color: string;
+  height: number;
+}
+
 interface LastPageButtonWrapperProps {
   opacity: number;
 }
@@ -7,6 +16,19 @@ interface LastPageButtonWrapperProps {
 interface ContentProps {
   index: number;
 }
+
+export const Background = styled.View<BackgroundProps>`
+  flex: 1;
+  background-color: ${({ color }) => color};
+`;
+
+export const Foreground = styled.View<ForegroundProps>`
+  background-color: ${({ color }) => color};
+  border-bottom-left-radius: 120px;
+  border-bottom-right-radius: 120px;
+  height: ${({ height }) => height * 0.25}px;
+  align-items: center;
+`;
 
 export const ContentTitleText = styled.Text`
   font-family: 'OpenSans-Bold';

@@ -10,6 +10,7 @@ import InformationPages, {
 import ProgressDots from '../../../components/ProgressDots';
 
 import {
+  Foreground,
   ContentHeaderText,
   ContentText,
   ContentTitleText,
@@ -17,6 +18,7 @@ import {
   ContinueButton,
   CurrentPageWrapper,
   Footer,
+  Background,
   LastPageButtonWrapper,
   TextContinueButton,
 } from './styles';
@@ -34,8 +36,7 @@ const pages: InfoPage[] = [
     title: '6 passos para amamentação do bebê prematuro',
     content: [
       {
-        text:
-          'Com o nascimento prematuro, é comum que o bebê não consiga pegar o peito logo ao nascer e que ele precise ficar internado para receber alguns cuidados.\n\nApesar dos desafios, saiba que amamentar o bebê prematuro é possível, e que vale cada esforço!\n\n Os passos a seguir resumem a jornada rumo ao sucesso na amamentação do prematuro',
+        text: 'Com o nascimento prematuro, é comum que o bebê não consiga pegar o peito logo ao nascer e que ele precise ficar internado para receber alguns cuidados.\n\nApesar dos desafios, saiba que amamentar o bebê prematuro é possível, e que vale cada esforço!\n\n Os passos a seguir resumem a jornada rumo ao sucesso na amamentação do prematuro',
       },
     ],
   },
@@ -45,8 +46,7 @@ const pages: InfoPage[] = [
     title: '1.  Procure a serenidade',
     content: [
       {
-        text:
-          'Parto prematuro: expectativas frustradas, incertezas, medo... quem espera que seu bebê nasça antes da hora?\nRecupere-se do susto, respire fundo, deixe a nova realidade se encaixar na sua cabeça e no seu coração, e então, abrace\u2011a!',
+        text: 'Parto prematuro: expectativas frustradas, incertezas, medo... quem espera que seu bebê nasça antes da hora?\nRecupere-se do susto, respire fundo, deixe a nova realidade se encaixar na sua cabeça e no seu coração, e então, abrace\u2011a!',
       },
     ],
   },
@@ -56,8 +56,7 @@ const pages: InfoPage[] = [
     Image: BreastFeedPremature2,
     content: [
       {
-        text:
-          'Enquanto o bebê não puder pegar o peito, ou enquanto ele não mamar o suficiente, você vai precisar substituí-lo na tarefa de manter suas mamas produzindo leite. Para isso, precisa retirar o leite no mínimo a cada 3 horas.',
+        text: 'Enquanto o bebê não puder pegar o peito, ou enquanto ele não mamar o suficiente, você vai precisar substituí-lo na tarefa de manter suas mamas produzindo leite. Para isso, precisa retirar o leite no mínimo a cada 3 horas.',
       },
     ],
   },
@@ -67,8 +66,7 @@ const pages: InfoPage[] = [
     Image: BreastFeedPremature3,
     content: [
       {
-        text:
-          'Permaneça o maior tempo possível na Unidade Neonatal, faça muito canguru, observe seu bebê, toque nele, fale com ele, cante pra ele...tudo isso também vai estimular seu corpo a produzir mais leite.',
+        text: 'Permaneça o maior tempo possível na Unidade Neonatal, faça muito canguru, observe seu bebê, toque nele, fale com ele, cante pra ele...tudo isso também vai estimular seu corpo a produzir mais leite.',
       },
     ],
   },
@@ -78,8 +76,7 @@ const pages: InfoPage[] = [
     Image: BreastFeedPremature4,
     content: [
       {
-        text:
-          'Cuide do seu bebê: faça a limpeza dos olhinhos e da boquinha, troque fraldas, dê banho; observe o jeitinho dele(a) e aprenda sobre seus costumes e preferências. Só você pode fazer seu papel de mãe!',
+        text: 'Cuide do seu bebê: faça a limpeza dos olhinhos e da boquinha, troque fraldas, dê banho; observe o jeitinho dele(a) e aprenda sobre seus costumes e preferências. Só você pode fazer seu papel de mãe!',
       },
     ],
   },
@@ -89,8 +86,7 @@ const pages: InfoPage[] = [
     Image: BreastFeedPremature5,
     content: [
       {
-        text:
-          'Procure apoio nos profissionais do serviço (enfermeiros, técnicos, médicos, psicólogos, assistentes sociais...) e em pessoas de sua confiança que te façam bem. Lembre-se: você não está sozinha!',
+        text: 'Procure apoio nos profissionais do serviço (enfermeiros, técnicos, médicos, psicólogos, assistentes sociais...) e em pessoas de sua confiança que te façam bem. Lembre-se: você não está sozinha!',
       },
     ],
   },
@@ -100,8 +96,7 @@ const pages: InfoPage[] = [
     Image: BreastFeedPremature6,
     content: [
       {
-        text:
-          'Quando seu bebê começar a mamar, não se esqueça de que por ser prematuro, ele pode ser mais sonolento, mais “molinho”, e poderá precisar de mais tempo até conseguir dar conta do recado. ',
+        text: 'Quando seu bebê começar a mamar, não se esqueça de que por ser prematuro, ele pode ser mais sonolento, mais “molinho”, e poderá precisar de mais tempo até conseguir dar conta do recado. ',
       },
     ],
   },
@@ -111,13 +106,13 @@ const StepByStepPremature: React.FC = () => {
   const navigation = useNavigation();
   const { height } = Dimensions.get('screen');
   const colors = [
-    { background: '#fff', foreground: '#fff' },
-    { background: '#F5E9EC', foreground: theme.babyPink },
-    { background: '#F3EFFC', foreground: theme.babyPurple },
-    { background: '#E5EEF1', foreground: theme.babyBlue },
-    { background: '#E9EEEB', foreground: theme.babyGreen },
-    { background: '#F5E9EC', foreground: theme.babyPink },
-    { background: '#F3EFFC', foreground: theme.babyPurple },
+    { foreground: '#fff', background: '#fff' },
+    { foreground: '#F5E9EC', background: theme.babyPink },
+    { foreground: '#F3EFFC', background: theme.babyPurple },
+    { foreground: '#E5EEF1', background: theme.babyBlue },
+    { foreground: '#E9EEEB', background: theme.babyGreen },
+    { foreground: '#F5E9EC', background: theme.babyPink },
+    { foreground: '#F3EFFC', background: theme.babyPurple },
   ];
 
   const InfoModel: React.FC<InfoModelProps> = ({
@@ -128,23 +123,11 @@ const StepByStepPremature: React.FC = () => {
     Image,
     flatListRef,
   }) => (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: colors[index].foreground,
-      }}>
+    <Background color={colors[index].background}>
       {index === 0 && <ContentTitleText>{title}</ContentTitleText>}
 
       {index !== 0 && (
-        <View
-          style={{
-            backgroundColor: colors[index].background,
-            borderBottomLeftRadius: 120,
-            borderBottomRightRadius: 120,
-            height: height * 0.25,
-            alignItems: 'center',
-          }}
-        />
+        <Foreground color={colors[index].foreground} height={height} />
       )}
       <ContentWrapper index={index}>
         {Image && typeof Image !== 'number' && <Image height={300} />}
@@ -173,7 +156,7 @@ const StepByStepPremature: React.FC = () => {
           </ContinueButton>
         </LastPageButtonWrapper>
       </Footer>
-    </View>
+    </Background>
   );
 
   return <InformationPages pages={pages} PageModel={InfoModel} />;

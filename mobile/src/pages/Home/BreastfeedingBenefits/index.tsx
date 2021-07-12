@@ -20,8 +20,7 @@ const pages: InfoPage[] = [
     title: 'Benefícios da amamentação para a mãe e o bebê',
     content: [
       {
-        text:
-          'A amamentação ajuda na formação do vínculo desde muito cedo.\n\nO leite materno é o alimento mais completo para o bebê, além de oferecer muitas outras vantagens.\n\nNão há nada melhor do que amamentar o bebê somente no peito até o 6º mês de vida, e manter o aleitamento junto com alimentos saudáveis até 2 anos ou mais.',
+        text: 'A amamentação ajuda na formação do vínculo desde muito cedo.\n\nO leite materno é o alimento mais completo para o bebê, além de oferecer muitas outras vantagens.\n\nNão há nada melhor do que amamentar o bebê somente no peito até o 6º mês de vida, e manter o aleitamento junto com alimentos saudáveis até 2 anos ou mais.',
       },
     ],
   },
@@ -32,8 +31,7 @@ const pages: InfoPage[] = [
     content: [
       {
         sectionHeader: 'SISTEMA IMUNOLÓGICO',
-        text:
-          'O leite materno ajuda a defender o organismo de várias doenças. O efeito das vacinas é melhor em crianças amamentadas. Diminui o risco de câncer infantil.',
+        text: 'O leite materno ajuda a defender o organismo de várias doenças. O efeito das vacinas é melhor em crianças amamentadas. Diminui o risco de câncer infantil.',
       },
     ],
   },
@@ -48,8 +46,7 @@ const pages: InfoPage[] = [
       },
       {
         sectionHeader: 'INTELIGÊNCIA',
-        text:
-          'Crianças amamentadas por mais de um ano têm coeficiente de inteligência (QI) maior.',
+        text: 'Crianças amamentadas por mais de um ano têm coeficiente de inteligência (QI) maior.',
       },
     ],
   },
@@ -60,8 +57,7 @@ const pages: InfoPage[] = [
     content: [
       {
         sectionHeader: 'PROTEÇÃO',
-        text:
-          'Protege contra uma série de doenças, infecções e problemas como diarreia e prisão de ventre.',
+        text: 'Protege contra uma série de doenças, infecções e problemas como diarreia e prisão de ventre.',
       },
       {
         sectionHeader: 'QUANDO ADULTOS...',
@@ -76,8 +72,7 @@ const pages: InfoPage[] = [
     content: [
       {
         sectionHeader: 'REDUZ O RISCO',
-        text:
-          'Pesquisas defendem que reduz o risco de câncer de mama, do ovário e de osteoporose.',
+        text: 'Pesquisas defendem que reduz o risco de câncer de mama, do ovário e de osteoporose.',
       },
     ],
   },
@@ -96,8 +91,7 @@ const pages: InfoPage[] = [
       },
       {
         sectionHeader: 'PROMOVE',
-        text:
-          'A involução uterina promove o retorno do útero ao seu tamanho normal.',
+        text: 'A involução uterina promove o retorno do útero ao seu tamanho normal.',
       },
     ],
   },

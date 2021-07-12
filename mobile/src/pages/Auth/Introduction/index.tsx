@@ -30,8 +30,7 @@ const pages = [
     Image: IntroMother,
     content: [
       {
-        text:
-          'Bem vinda! O AmamentaCoach foi pensado para te auxiliar na desafiadora jornada de amamentar um bebê prematuro.',
+        text: 'Bem vinda! O AmamentaCoach foi pensado para te auxiliar na desafiadora jornada de amamentar um bebê prematuro.',
       },
     ],
   },
@@ -49,8 +48,7 @@ const pages = [
     Image: IntroChart,
     content: [
       {
-        text:
-          'Quanto mais você usar o AmamentaCoach , mais recursos terá para amamentar seu bebê prematuro!',
+        text: 'Quanto mais você usar o AmamentaCoach , mais recursos terá para amamentar seu bebê prematuro!',
       },
     ],
   },
@@ -59,8 +57,7 @@ const pages = [
     Image: IntroMobile,
     content: [
       {
-        text:
-          'Você registrará seus avanços diários e terá acesso a conteúdos exclusivos para te instruir e te motivar!',
+        text: 'Você registrará seus avanços diários e terá acesso a conteúdos exclusivos para te instruir e te motivar!',
       },
     ],
   },
