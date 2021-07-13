@@ -3,8 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import theme from '../../../config/theme';
-import RemoteForm from '../../../components/RemoteForm';
-import createGenericRemoteFormPage from '../../../components/GenericRemoteFormPage';
+import Survey from '../../../components/Survey';
+import createGenericSurveyPage from '../../../components/GenericSurveyPage';
 
 import HelpReceived1 from '../../../../assets/images/help_received_1.png';
 import HelpReceived2 from '../../../../assets/images/help_received_2.png';
@@ -28,11 +28,11 @@ const HelpReceived: React.FC = () => {
   }
 
   return (
-    <RemoteForm
+    <Survey
       title="Minha rede de apoio"
       color={theme.babyPurple}
       category={4}
-      Page={createGenericRemoteFormPage(onFormEnd, images)}
+      Page={createGenericSurveyPage(onFormEnd, images)}
       onFeedbackAccepted={setFormSent}
     />
   );

@@ -41,7 +41,7 @@ const UploadMotherPhoto: React.FC = () => {
       />
       <UploadPhotoScreen
         target="mother"
-        Image={Mirror}
+        image={Mirror}
         text={
           'Espelho, espelho meu... existe alguém mais capaz de amamentar do que eu?”\nClique no botão abaixo e faça o upload de uma foto sua!'
         }

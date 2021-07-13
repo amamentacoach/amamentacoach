@@ -3,12 +3,12 @@ import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 import { StackActions, useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 
+import { useAuth } from '../../contexts/auth';
 import {
+  getSurveyQuestions,
   SurveyQuestion,
-  listQuestions,
-  answerQuestion,
-  AnswerFeedback,
-} from '../../services/survey';
+} from '../../utils/getSurveyQuestions';
+import { answerQuestion, AnswerFeedback } from '../../services/survey';
 import Modal from '../Modal';
 
 import {
@@ -19,7 +19,7 @@ import {
 } from './styles';
 
 // Props de um componente que pode ser utilizado para gerar uma página do formulário.
-export interface RemoteFormPage {
+export interface SurveyPage {
   // Index da página.
   index: number;
   // Número total de páginas.
@@ -40,7 +40,7 @@ export interface RemoteFormPage {
   handleChangePage: (newPage: number, handleFormEnd: () => void) => void;
 }
 
-interface RemoteFormProps {
+interface SurveyProps {
   // Título da página.
   title: string;
   // Cor da página.
@@ -48,7 +48,7 @@ interface RemoteFormProps {
   // Categoria que deve ser utilizada ao buscar as perguntas no backend.
   category: number;
   // Componente para gerar as páginas do formulário.
-  Page: React.FC<RemoteFormPage>;
+  Page: React.FC<SurveyPage>;
   // Função executada ao aceitar o feedback recebido com base nas respostas selecionadas.
   onFeedbackAccepted?: () => void;
 }
@@ -59,7 +59,7 @@ interface FeedbackModalProps {
   onExit: () => void;
 }
 
-const RemoteForm: React.FC<RemoteFormProps> = ({
+const Survey: React.FC<SurveyProps> = ({
   color,
   category,
   title,
@@ -67,6 +67,7 @@ const RemoteForm: React.FC<RemoteFormProps> = ({
   onFeedbackAccepted,
 }) => {
   const { width } = Dimensions.get('window');
+  const { motherInfo } = useAuth();
   const navigation = useNavigation();
   const pageFlatListRef = useRef<FlatList>(null);
 
@@ -86,7 +87,7 @@ const RemoteForm: React.FC<RemoteFormProps> = ({
 
   useEffect(() => {
     async function fetchQuestions() {
-      const questions = await listQuestions(category);
+      const questions = await getSurveyQuestions(motherInfo, { category });
       if (!questions) {
         return;
       }
@@ -316,4 +317,4 @@ const RemoteForm: React.FC<RemoteFormProps> = ({
   );
 };
 
-export default RemoteForm;
+export default Survey;

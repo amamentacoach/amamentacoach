@@ -3,8 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import theme from '../../../config/theme';
-import RemoteForm from '../../../components/RemoteForm';
-import createGenericRemoteFormPage from '../../../components/GenericRemoteFormPage';
+import Survey from '../../../components/Survey';
+import createGenericSurveyPage from '../../../components/GenericSurveyPage';
 
 const DiaryBaby: React.FC = () => {
   const navigation = useNavigation();
@@ -23,11 +23,11 @@ const DiaryBaby: React.FC = () => {
   }
 
   return (
-    <RemoteForm
+    <Survey
       title="Meu Bebê Hoje"
       color={theme.babyPurple}
       category={10}
-      Page={createGenericRemoteFormPage(onFormEnd)}
+      Page={createGenericSurveyPage(onFormEnd)}
       onFeedbackAccepted={setFormSent}
     />
   );

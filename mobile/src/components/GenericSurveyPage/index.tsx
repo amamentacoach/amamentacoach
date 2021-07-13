@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { SvgProps } from 'react-native-svg';
-import { RemoteFormPage } from '../RemoteForm';
+import { SurveyPage } from '../Survey';
 import MainButton from '../MainButton';
 import FormRadioGroupInput from '../FormRadioGroup';
 
@@ -15,13 +15,13 @@ import {
   FullWidthImage,
 } from './styles';
 
-// Retorna uma página genérica que pode ser fornecida a um componente RemoteForm.
+// Retorna uma página genérica que pode ser fornecida a um componente Survey.
 // Ao final do formulário a função onFormEnd é executada.
-const createGenericRemoteFormPage = (
+const createGenericSurveyPage = (
   onFormEnd: () => void,
   Images?: React.FC<SvgProps>[],
 ) => {
-  const Page: React.FC<RemoteFormPage> = ({
+  const Page: React.FC<SurveyPage> = ({
     index,
     pagesLength,
     question,
@@ -78,4 +78,4 @@ const createGenericRemoteFormPage = (
   return Page;
 };
 
-export default createGenericRemoteFormPage;
+export default createGenericSurveyPage;
