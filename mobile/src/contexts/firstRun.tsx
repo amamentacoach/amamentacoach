@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type IIsFirstRun = {
+interface IsFirstRun {
   persistent: {
     appIntroduction: boolean;
     diaryIntroduction: boolean;
@@ -13,18 +13,20 @@ type IIsFirstRun = {
     diary: boolean;
     messages: boolean;
   };
-};
+}
+
+type TemporaryField = 'diary' | 'extraction' | 'home' | 'messages';
+type PermanentField =
+  | 'diaryIntroduction'
+  | 'appIntroduction'
+  | 'statusFormIntroduction';
 
 interface IsFirstRunContextData {
-  isFirstRun: IIsFirstRun;
+  isFirstRun: IsFirstRun;
   // Marca um campo como executado até o aplicativo ser aberto novamente.
-  setTemporaryNotFirstRun: (
-    field: 'diary' | 'extraction' | 'home' | 'messages',
-  ) => void;
+  setTemporaryNotFirstRun: (field: TemporaryField) => void;
   // Marca um campo como executado permanentemente.
-  setPersistentNotFirstRun: (
-    field: 'diaryIntroduction' | 'appIntroduction' | 'statusFormIntroduction',
-  ) => Promise<void>;
+  setPersistentNotFirstRun: (field: PermanentField) => Promise<void>;
 }
 
 const IsFirstRun = createContext<IsFirstRunContextData>(
@@ -32,7 +34,7 @@ const IsFirstRun = createContext<IsFirstRunContextData>(
 );
 
 export const IsFirstRunProvider: React.FC = ({ children }) => {
-  const [isFirstRun, setIsFirstRun] = useState<IIsFirstRun>({
+  const [isFirstRun, setIsFirstRun] = useState<IsFirstRun>({
     persistent: {
       appIntroduction: true,
       diaryIntroduction: true,
@@ -62,18 +64,14 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
   }, []);
 
   // Marca um campo como já executado até o aplicativo ser iniciado novamente.
-  function setTemporaryNotFirstRun(
-    field: 'diary' | 'extraction' | 'home' | 'messages',
-  ) {
+  function setTemporaryNotFirstRun(field: TemporaryField) {
     const copy = { ...isFirstRun };
     copy.temporary[field] = false;
     setIsFirstRun(copy);
   }
 
   // Marca um campo como já executado permanentemente.
-  async function setPersistentNotFirstRun(
-    field: 'diaryIntroduction' | 'appIntroduction' | 'statusFormIntroduction',
-  ) {
+  async function setPersistentNotFirstRun(field: PermanentField) {
     const copy = { ...isFirstRun };
     copy.persistent[field] = false;
     await AsyncStorage.setItem(
