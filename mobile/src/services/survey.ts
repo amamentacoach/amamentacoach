@@ -1,15 +1,5 @@
 import api from './api';
 
-export interface SurveyQuestion {
-  id: number;
-  target: string;
-  category: number;
-  description: string;
-  options: string[];
-  displayOther: boolean;
-  multipleSelection: boolean;
-}
-
 export interface SurveyStatistics {
   id: number;
   question: string;
@@ -24,39 +14,16 @@ export interface AnswerFeedback {
   redirect: string;
 }
 
-export interface StatusForm {
-  statusQuestions: SurveyQuestion[];
-  feedingQuestion: SurveyQuestion;
-}
-
 // Registra a resposta do usuário para uma pergunta.
-export async function answerQuestion(questionId: number, answers: string[]) {
+export async function answerQuestion(
+  questionId: number,
+  answers: string[],
+): Promise<AnswerFeedback | undefined | null> {
   try {
     const { data } = await api.post(`/responder/${questionId}`, {
       respostas: answers,
     });
     return data !== 'OK' ? data : undefined;
-  } catch (error) {
-    return null;
-  }
-}
-
-// Retorna todos as perguntas feitas no diário.
-export async function listQuestions(
-  questionCategory: number,
-): Promise<SurveyQuestion[] | null> {
-  try {
-    const { data } = await api.get(`/perguntas/${questionCategory}`);
-    const surveyQuestions = data.map((question: any) => ({
-      id: question.id,
-      target: question.alvo,
-      category: question.categoria,
-      description: question.descricao,
-      options: question.alternativas,
-      displayOther: question.outro,
-      multipleSelection: question.multiplas,
-    }));
-    return surveyQuestions;
   } catch (error) {
     return null;
   }
@@ -77,37 +44,6 @@ export async function listSurveyStatistics(): Promise<
       })),
     }));
     return surveyStatistics;
-  } catch (error) {
-    return null;
-  }
-}
-
-// Retorna todos as perguntas da escala e alimentação.
-export async function listStatusFormQuestions(): Promise<StatusForm | null> {
-  try {
-    const { data } = await api.get('/perguntas/escalaealimentacao');
-    const statusQuestions = data.escala.map((field: any) => ({
-      id: field.id,
-      target: field.alvo,
-      category: field.categoria,
-      description: field.descricao,
-      options: field.alternativas,
-      displayOther: field.outro,
-      multipleSelection: field.multiplas,
-    }));
-    const feedingQuestion = {
-      id: data.alimentacao.id,
-      target: data.alimentacao.alvo,
-      category: data.alimentacao.categoria,
-      description: data.alimentacao.descricao,
-      options: data.alimentacao.alternativas,
-      displayOther: data.alimentacao.outro,
-      multipleSelection: data.alimentacao.multiplas,
-    };
-    return {
-      statusQuestions,
-      feedingQuestion,
-    };
   } catch (error) {
     return null;
   }
