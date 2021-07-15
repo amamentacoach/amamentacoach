@@ -8,7 +8,7 @@ import { useAuth } from '../../../contexts/auth';
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import { setDiaryPageOpened } from '../../../services/telemetry';
 import { checkOneDayPassed, dateFormatVerbose } from '../../../utils/date';
-import OptionsList, { OptionList } from '../../../components/OptionList';
+import OptionsList, { Options } from '../../../components/OptionList';
 import Modal from '../../../components/Modal';
 
 import {
@@ -37,9 +37,9 @@ const DiaryMenu: React.FC = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(moment());
 
-  const options: OptionList[] = [
+  const options: Options[] = [
     {
-      Image: PrematureBreastfeed,
+      image: PrematureBreastfeed,
       title: 'Registro de amamentação',
       onPress: () =>
         navigation.navigate('DiaryBreastfeed', {
@@ -47,7 +47,7 @@ const DiaryMenu: React.FC = () => {
         }),
     },
     {
-      Image: PrematureBreastfeed,
+      image: PrematureBreastfeed,
       title: 'Registro de retiradas de leite',
       onPress: () =>
         navigation.navigate('DiaryRegistry', {
@@ -55,7 +55,7 @@ const DiaryMenu: React.FC = () => {
         }),
     },
     {
-      Image: DiarySmile,
+      image: DiarySmile,
       title: 'Sentimentos',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -67,12 +67,12 @@ const DiaryMenu: React.FC = () => {
       },
     },
     {
-      Image: DiaryStar,
+      image: DiaryStar,
       title: 'Metas',
       onPress: () => navigation.navigate('Goals'),
     },
     {
-      Image: PrematureHeart,
+      image: PrematureHeart,
       title: 'Ajuda recebida',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -86,7 +86,7 @@ const DiaryMenu: React.FC = () => {
       },
     },
     {
-      Image: Baby,
+      image: Baby,
       title: 'Meu Bebê Hoje',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -98,7 +98,7 @@ const DiaryMenu: React.FC = () => {
       },
     },
     {
-      Image: Baby,
+      image: Baby,
       title: 'Ações Realizadas com o bebê',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -110,7 +110,7 @@ const DiaryMenu: React.FC = () => {
       },
     },
     {
-      Image: Report,
+      image: Report,
       title: 'Meu Desempenho',
       onPress: () => navigation.navigate('Report'),
     },
@@ -119,7 +119,7 @@ const DiaryMenu: React.FC = () => {
   // Exibe o upload de imagem do pai apenas se a mãe tem um companheiro.
   if (motherInfo.partner) {
     options.splice(7, 0, {
-      Image: Father,
+      image: Father,
       title: 'Participação do Pai',
       // @ts-ignore
       subtitle: 'Registre e acompanhe a participação do papai',

@@ -28,7 +28,7 @@ const NewPassword: React.FC = () => {
     password: '',
     password_confirmation: '',
   };
-  const newPasswordSchema: Yup.ObjectSchema<FormValues> = Yup.object({
+  const newPasswordSchema: Yup.SchemaOf<FormValues> = Yup.object({
     password: Yup.string()
       .min(6, 'A senha precisa ter pelo menos 6 caracteres!')
       .required('Campo obrigatório'),

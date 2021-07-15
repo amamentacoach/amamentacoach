@@ -1,8 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useRef } from 'react';
-import { Dimensions, FlatList, Image } from 'react-native';
+import { Dimensions, FlatList } from 'react-native';
 
 import ProgressDots from '../../../components/ProgressDots';
+import ImageWrapper, {
+  ImageWrapperSourcePropType,
+} from '../../../components/ImageWrapper';
 
 import {
   ContinueButton,
@@ -23,17 +26,21 @@ import {
 import MilkWithdrawalSeven from '../../../../assets/images/milk_withdrawal_seven.png';
 import WhyMilkWithdrawalTwo from '../../../../assets/images/why_milk_withdrawal_two.png';
 
-interface PageProps {
-  index: number;
+interface Content {
+  id: number;
   title: string;
-  image: any;
+  image: ImageWrapperSourcePropType;
   content: {
     idText: number;
     text: JSX.Element;
   }[];
 }
 
-const pages = [
+interface PageProps extends Content {
+  index: number;
+}
+
+const pages: Content[] = [
   {
     id: 1,
     title: 'Por que fazer a retirada do leite?',
@@ -107,7 +114,7 @@ const WhyBreastfeed: React.FC = () => {
     <>
       <ContentTitleText>{title}</ContentTitleText>
       <ContentWrapper>
-        <Image source={image} resizeMode="contain" />
+        <ImageWrapper source={image} resizeMode="contain" />
         {content.map(({ idText, text }) => (
           <TextContainer key={idText}>{text}</TextContainer>
         ))}
@@ -139,6 +146,7 @@ const WhyBreastfeed: React.FC = () => {
             <ScrollView>
               <InfoModel
                 index={index}
+                id={item.id}
                 title={item.title}
                 content={item.content}
                 image={item.image}

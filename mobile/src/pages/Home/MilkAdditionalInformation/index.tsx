@@ -1,16 +1,23 @@
 import React from 'react';
 
+import ImageWrapper from '../../../components/ImageWrapper';
+
 import { ContentWrapper, ContentText, ScrollView } from './styles';
 
-import MilkAdditionalInfoOne from '../../../../assets/images/milk_additional_info_one.svg';
-import MilkAdditionalInfoTwo from '../../../../assets/images/milk_additional_info_two.svg';
-import MilkAdditionalInfoThree from '../../../../assets/images/milk_additional_info_three.svg';
+import MilkAdditionalInfoOne from '../../../../assets/images/milk_additional_info_one.png';
+import MilkAdditionalInfoTwo from '../../../../assets/images/milk_additional_info_two.png';
+import MilkAdditionalInfoThree from '../../../../assets/images/milk_additional_info_three.png';
 
 const MilkAdditionalInformation: React.FC = () => {
   return (
     <ScrollView>
       <ContentWrapper>
-        <MilkAdditionalInfoOne />
+        <ImageWrapper
+          source={MilkAdditionalInfoOne}
+          resizeMode="contain"
+          width="100%"
+          height={200}
+        />
         <ContentText>
           Quando o bebê nasce e a placenta sai, acontecem alterações importantes
           no corpo que ajudam a dar início na produção de leite. Os hormônios
@@ -23,7 +30,12 @@ const MilkAdditionalInformation: React.FC = () => {
         </ContentText>
       </ContentWrapper>
       <ContentWrapper>
-        <MilkAdditionalInfoTwo />
+        <ImageWrapper
+          source={MilkAdditionalInfoTwo}
+          resizeMode="contain"
+          width="100%"
+          height={200}
+        />
         <ContentText>
           Conforme o bebê suga o peito, ou conforme o leite é retirado, o
           cérebro produz mais e mais hormônio ocitocina. Dentro da mama, a
@@ -33,7 +45,12 @@ const MilkAdditionalInformation: React.FC = () => {
         </ContentText>
       </ContentWrapper>
       <ContentWrapper>
-        <MilkAdditionalInfoThree />
+        <ImageWrapper
+          source={MilkAdditionalInfoThree}
+          resizeMode="contain"
+          width="100%"
+          height={200}
+        />
         <ContentText>
           A ocitocina é produzida e liberada com mais facilidade quando a mulher
           sente-se bem, está calma e confiante. Também quando vê o bebê, toca

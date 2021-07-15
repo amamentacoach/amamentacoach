@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { createQuestion } from '../../../services/questions';
+import { createUserQuestion } from '../../../services/questions';
 import FormTextInput from '../../../components/FormTextInput';
 import MainButton from '../../../components/MainButton';
 import Modal from '../../../components/Modal';
@@ -27,13 +27,13 @@ const NewQuestion: React.FC = () => {
   const formInitialValues: FormValues = {
     question: '',
   };
-  const newPasswordSchema: Yup.ObjectSchema<FormValues> = Yup.object({
+  const newPasswordSchema: Yup.SchemaOf<FormValues> = Yup.object({
     question: Yup.string().required('Campo obrigatório'),
   }).required();
 
   async function handleNewQuestion({ question }: FormValues) {
     setIsSendingForm(true);
-    const successfulRequest = await createQuestion(question);
+    const successfulRequest = await createUserQuestion(question);
     setIsSendingForm(false);
     if (successfulRequest) {
       setIsSubmitModalVisible(true);

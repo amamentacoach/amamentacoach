@@ -6,8 +6,8 @@ import theme from '../../../config/theme';
 import RemoteForm from '../../../components/RemoteForm';
 import createGenericRemoteFormPage from '../../../components/GenericRemoteFormPage';
 
-import HelpReceived1 from '../../../../assets/images/help_received_1.svg';
-import HelpReceived2 from '../../../../assets/images/help_received_2.svg';
+import HelpReceived1 from '../../../../assets/images/help_received_1.png';
+import HelpReceived2 from '../../../../assets/images/help_received_2.png';
 
 const HelpReceived: React.FC = () => {
   const navigation = useNavigation();

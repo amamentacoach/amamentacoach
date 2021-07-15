@@ -27,7 +27,7 @@ const NewMessage: React.FC = () => {
   const formInitialValues: FormValues = {
     message: '',
   };
-  const newMessageSchema: Yup.ObjectSchema<FormValues> = Yup.object({
+  const newMessageSchema: Yup.SchemaOf<FormValues> = Yup.object({
     message: Yup.string().required('Campo obrigatório'),
   }).required();
 

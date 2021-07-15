@@ -27,8 +27,9 @@ type ScreenParams = {
 };
 
 const DiaryBreastfeed: React.FC = () => {
-  const { date } =
-    useRoute<RouteProp<ScreenParams, 'DiaryBreastfeed'>>().params;
+  const { date } = useRoute<
+    RouteProp<ScreenParams, 'DiaryBreastfeed'>
+  >().params;
 
   const navigation = useNavigation();
   const { motherInfo } = useAuth();

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Dimensions, FlatList } from 'react-native';
-import { SvgProps } from 'react-native-svg';
+import { ImageWrapperSourcePropType } from '../ImageWrapper';
 
 import { ListContainer, PageContainer, ScrollView } from './styles';
 
@@ -9,7 +9,7 @@ export interface InfoModelProps {
   index: number;
   pagesLength: number;
   title?: string;
-  Image?: number | React.FC<SvgProps>;
+  image?: ImageWrapperSourcePropType;
   content: {
     sectionHeader?: string;
     text: string;
@@ -20,7 +20,7 @@ export interface InfoModelProps {
 export interface InfoPage {
   id: number;
   title?: string;
-  Image?: number | React.FC<SvgProps>;
+  image?: ImageWrapperSourcePropType;
   content: {
     sectionHeader?: string;
     text: string;
@@ -64,7 +64,7 @@ const InformationPages: React.FC<InformationPagesProps> = ({
                 pagesLength={pages.length}
                 title={item.title}
                 content={item.content}
-                Image={item.Image}
+                image={item.image}
                 flatListRef={flatListRef}
                 goToPage={goToPage}
               />

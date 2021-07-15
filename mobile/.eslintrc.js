@@ -20,6 +20,7 @@ module.exports = {
     'global-require': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react-hooks/exhaustive-deps': 'off',
+    'react/require-default-props': 'off',
   },
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],

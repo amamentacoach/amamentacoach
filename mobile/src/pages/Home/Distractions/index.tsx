@@ -2,7 +2,7 @@ import React from 'react';
 import { Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import OptionsList from '../../../components/OptionList';
+import OptionsList, { Options } from '../../../components/OptionList';
 
 import { ScrollView, HeaderText } from './styles';
 
@@ -12,9 +12,9 @@ import Music from '../../../../assets/images/music.svg';
 
 const Distractions: React.FC = () => {
   const navigation = useNavigation();
-  const options: OptionList[] = [
+  const options: Options[] = [
     {
-      Image: Puzzle,
+      image: Puzzle,
       title: 'Quebra-cabeça',
       onPress: async () => {
         await Linking.openURL(
@@ -23,7 +23,7 @@ const Distractions: React.FC = () => {
       },
     },
     {
-      Image: Crosswords,
+      image: Crosswords,
       title: 'Palavras Cruzadas',
       onPress: async () => {
         await Linking.openURL(
@@ -32,7 +32,7 @@ const Distractions: React.FC = () => {
       },
     },
     {
-      Image: Music,
+      image: Music,
       title: 'Músicas para relaxar',
       onPress: () => navigation.navigate('MusicPlaylists'),
     },

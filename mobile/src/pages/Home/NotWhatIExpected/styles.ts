@@ -13,6 +13,7 @@ export const ContentContainer = styled.View`
   margin: -140px 24px 0 24px;
   background-color: ${props => props.theme.white};
   border-radius: 5px;
+  padding: 12px;
 `;
 
 export const ContentHeader = styled.Text`

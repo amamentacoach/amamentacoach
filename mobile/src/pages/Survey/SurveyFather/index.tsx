@@ -6,7 +6,7 @@ import theme from '../../../config/theme';
 import RemoteForm from '../../../components/RemoteForm';
 import createGenericRemoteFormPage from '../../../components/GenericRemoteFormPage';
 
-import Father from '../../../../assets/images/dad.svg';
+import Father from '../../../../assets/images/dad.png';
 
 const SurveyFather: React.FC = () => {
   const navigation = useNavigation();

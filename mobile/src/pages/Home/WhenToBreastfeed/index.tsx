@@ -1,5 +1,6 @@
 import React from 'react';
-import { Image } from 'react-native';
+
+import ImageWrapper from '../../../components/ImageWrapper';
 
 import {
   ContentWrapper,
@@ -16,7 +17,7 @@ const WhenToBreastfeed: React.FC = () => {
     <ScrollView>
       <ContentTitleText>Quando retirar o leite?</ContentTitleText>
       <ContentWrapper>
-        <Image source={WithdrawalWhen} />
+        <ImageWrapper source={WithdrawalWhen} />
         <ContentText>
           Estamos tentando <ColoredText>fazer seu corpo entender </ColoredText>
           que precisa produzir leite para o bebê, lembra? Então, a retirada do

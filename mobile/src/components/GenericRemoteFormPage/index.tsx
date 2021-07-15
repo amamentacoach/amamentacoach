@@ -12,6 +12,7 @@ import {
   CurrentPageText,
   Container,
   ImageContainer,
+  FullWidthImage,
 } from './styles';
 
 // Retorna uma página genérica que pode ser fornecida a um componente RemoteForm.
@@ -42,7 +43,12 @@ const createGenericRemoteFormPage = (
         </CurrentPageContainer>
         {Image && (
           <ImageContainer>
-            <Image />
+            <FullWidthImage
+              source={Image}
+              resizeMode="contain"
+              width="100%"
+              height={180}
+            />
           </ImageContainer>
         )}
         <QuestionText>{question.description}</QuestionText>

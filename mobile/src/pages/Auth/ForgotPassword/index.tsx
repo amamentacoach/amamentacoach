@@ -26,7 +26,7 @@ const ForgotPassword: React.FC = () => {
   const formInitialValues: FormValues = {
     email: '',
   };
-  const signUpSchema: Yup.ObjectSchema<FormValues> = Yup.object({
+  const signUpSchema: Yup.SchemaOf<FormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Campo obrigatório'),
   }).required();
 

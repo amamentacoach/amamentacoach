@@ -77,8 +77,10 @@ const RemoteForm: React.FC<RemoteFormProps> = ({
   const [isFormValid, setIsFormValid] = useState(true);
   const [isSendingForm, setIsSendingForm] = useState(false);
 
-  const [feedbackModalData, setFeedbackModalData] =
-    useState<FeedbackModalProps | null>(null);
+  const [
+    feedbackModalData,
+    setFeedbackModalData,
+  ] = useState<FeedbackModalProps | null>(null);
 
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
 

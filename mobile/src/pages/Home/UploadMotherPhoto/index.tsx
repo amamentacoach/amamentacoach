@@ -6,7 +6,7 @@ import { uploadMotherPhoto } from '../../../services/uploadPhoto';
 import UploadPhotoScreen from '../../../components/UploadPhotoScreen';
 import Modal from '../../../components/Modal';
 
-import Mirror from '../../../../assets/images/mirror.svg';
+import Mirror from '../../../../assets/images/mirror.png';
 
 const UploadMotherPhoto: React.FC = () => {
   const navigation = useNavigation();

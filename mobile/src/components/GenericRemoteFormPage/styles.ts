@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import ImageWrapper from '../ImageWrapper';
 
 interface CurrentPageContainerProps {
   color: string;
@@ -20,6 +21,10 @@ export const ImageContainer = styled.View`
   align-items: center;
   justify-content: center;
   margin: 15px 0 0 0;
+`;
+
+export const FullWidthImage = styled(ImageWrapper)`
+  max-height: 180px;
 `;
 
 export const CurrentPageText = styled.Text`

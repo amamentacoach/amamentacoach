@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image as ReactImage, View } from 'react-native';
+import { View } from 'react-native';
 
 import ProgressDots from '../ProgressDots';
 import { InfoModelProps } from '../InformationPages';
+import ImageWrapper from '../ImageWrapper';
 
 import {
   ContinueButton,
@@ -23,18 +24,20 @@ const createGenericInfoPage = (onEnd: () => void) => {
     pagesLength,
     title,
     content,
-    Image,
+    image,
     flatListRef,
   }) => (
     <>
       <ContentTitleText>{title}</ContentTitleText>
       <ContentWrapper>
-        {Image &&
-          (typeof Image === 'number' ? (
-            <ReactImage source={Image} />
-          ) : (
-            <Image />
-          ))}
+        {image && (
+          <ImageWrapper
+            source={image}
+            width="100%"
+            height="50%"
+            resizeMode="contain"
+          />
+        )}
         {content.map(({ sectionHeader, text }) => (
           <View key={text}>
             {sectionHeader && (

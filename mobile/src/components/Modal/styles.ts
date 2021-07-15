@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import ImageWrapper from '../ImageWrapper';
 
 interface OptionTextProps {
   color?: string;
@@ -21,10 +22,8 @@ export const Content = styled.Text`
   text-align: center;
 `;
 
-export const Image = styled.Image`
-  width: 100%;
-  height: 300px;
-  max-height: 300px;
+export const MaxHeightImage = styled(ImageWrapper)`
+  max-width: 300px;
 `;
 
 export const Line = styled.View`

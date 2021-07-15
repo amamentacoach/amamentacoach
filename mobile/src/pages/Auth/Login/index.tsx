@@ -23,7 +23,7 @@ import {
   SignUpContainer,
 } from './styles';
 
-import Logo from '../../../../assets/images/logo_primary.svg';
+import Logo from '../../../../assets/images/logo_primary.png';
 
 interface FormValues {
   email: string;
@@ -43,7 +43,7 @@ const Login: React.FC = () => {
     email: '',
     password: '',
   };
-  const loginSchema: Yup.ObjectSchema<FormValues> = Yup.object({
+  const loginSchema: Yup.SchemaOf<FormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Campo obrigatório'),
     password: Yup.string()
       .min(8, 'A senha precisa ter pelo menos 8 caracteres')
@@ -100,9 +100,7 @@ const Login: React.FC = () => {
       )}
 
       <ScrollView>
-        <Header>
-          <Logo />
-        </Header>
+        <Header source={Logo} resizeMode="contain" width="100%" />
         <Formik
           initialValues={formInitialValues}
           validationSchema={loginSchema}

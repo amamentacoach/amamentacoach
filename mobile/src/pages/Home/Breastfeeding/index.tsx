@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import OptionsList, { OptionList } from '../../../components/OptionList';
+import OptionsList, { Options } from '../../../components/OptionList';
 
 import { HeaderText, ScrollView } from './styles';
 
@@ -13,24 +13,24 @@ import WithdrawalClock from '../../../../assets/images/withdrawal_clock.svg';
 const Breastfeeding: React.FC = () => {
   const navigation = useNavigation();
 
-  const options: OptionList[] = [
+  const options: Options[] = [
     {
-      Image: WithdrawalQuestion,
+      image: WithdrawalQuestion,
       title: 'Por que fazer?',
       onPress: () => navigation.navigate('WhyBreastfeed'),
     },
     {
-      Image: PrematureBreastfeed,
+      image: PrematureBreastfeed,
       title: 'Como fazer?',
       onPress: () => navigation.navigate('HowToBreastfeed'),
     },
     {
-      Image: WithdrawalCalendar,
+      image: WithdrawalCalendar,
       title: 'Quando fazer?',
       onPress: () => navigation.navigate('WhenToBreastfeed'),
     },
     {
-      Image: WithdrawalClock,
+      image: WithdrawalClock,
       title: 'Por quanto tempo fazer?',
       onPress: () => navigation.navigate('HowLongToBreastfeed'),
     },

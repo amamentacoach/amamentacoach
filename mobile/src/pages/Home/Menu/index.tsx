@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Image as ReactImage } from 'react-native';
+import { View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import RNBootSplash from 'react-native-bootsplash';
@@ -7,7 +7,7 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 
 import { checkOneDayPassed } from '../../../utils/date';
-import { OptionList } from '../../../components/OptionList';
+import { Options } from '../../../components/OptionList';
 import theme from '../../../config/theme';
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import FormPickerInput from '../../../components/FormPickerInput';
@@ -18,6 +18,7 @@ import {
   updateBabyLocation,
 } from '../../../services/babyLocation';
 import Modal from '../../../components/Modal';
+import ImageWrapper from '../../../components/ImageWrapper';
 
 import {
   ScrollView,
@@ -60,59 +61,63 @@ const Home: React.FC = () => {
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
 
   const [babiesData, setBabiesData] = useState<BabyStatus[]>([]);
-  const [babyModalVisibility, setBabyModalVisibility] =
-    useState<boolean>(false);
+  const [babyModalVisibility, setBabyModalVisibility] = useState<boolean>(
+    false,
+  );
   const [selectedModalOptions, setSelectedModalOptions] = useState<
     BabyModalOption[]
   >([]);
 
-  const [formModalVisibility, setFormModalVisibility] =
-    useState<boolean>(false);
+  const [formModalVisibility, setFormModalVisibility] = useState<boolean>(
+    false,
+  );
   const [formAction, setFormAction] = useState<'1D' | '15D' | '1M' | null>(
     null,
   );
 
-  const [expectationsModalVisibility, setExpectationsModalVisibility] =
-    useState<Boolean>(false);
+  const [
+    expectationsModalVisibility,
+    setExpectationsModalVisibility,
+  ] = useState<Boolean>(false);
 
-  const options: OptionList[] = [
+  const options: Options[] = [
     {
-      Image: HomeBaby,
+      image: HomeBaby,
       title: 'Olá, sou o prematuro',
       onPress: () => navigation.navigate('Premature'),
     },
     {
-      Image: HomeBreastfeed,
+      image: HomeBreastfeed,
       title: 'Passo a passo para amamentar o prematuro',
       onPress: () => navigation.navigate('StepByStepPremature'),
     },
     {
-      Image: HomeMilk,
+      image: HomeMilk,
       title: 'A retirada do leite',
       onPress: () => navigation.navigate('Breastfeeding'),
     },
     {
-      Image: HomeEmotions,
+      image: HomeEmotions,
       title: 'Emoções e Amamentação ',
       onPress: () => navigation.navigate('EmotionsAndBreastfeeding'),
     },
     {
-      Image: HomeMoreInformation,
+      image: HomeMoreInformation,
       title: 'Você sabia?',
       onPress: () => navigation.navigate('AdditionalInformation'),
     },
     {
-      Image: HomeMessage,
+      image: HomeMessage,
       title: 'Depoimento das mamães',
       onPress: () => navigation.navigate('Messages'),
     },
     {
-      Image: HomeMessage,
+      image: HomeMessage,
       title: 'Perguntas',
       onPress: () => navigation.navigate('Questions'),
     },
     {
-      Image: HomeCredits,
+      image: HomeCredits,
       title: 'Créditos',
       onPress: () => navigation.navigate('Credits'),
     },
@@ -345,15 +350,12 @@ const Home: React.FC = () => {
         </Header>
         <ContentContainer>
           <ContentHeader>Conteúdo</ContentHeader>
-          {options.map(({ Image, title, onPress }, index) => (
+          {options.map(({ image, title, onPress }, index) => (
             <Option key={title}>
               <ContentOption activeOpacity={0.7} onPress={onPress}>
-                {Image &&
-                  (typeof Image === 'number' ? (
-                    <ReactImage source={Image} width={100} height={100} />
-                  ) : (
-                    <Image width={100} height={100} />
-                  ))}
+                {image && (
+                  <ImageWrapper source={image} width={100} height={100} />
+                )}
                 <ContentTextContainer>
                   <ContentTitle>{title}</ContentTitle>
                 </ContentTextContainer>

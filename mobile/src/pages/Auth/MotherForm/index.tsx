@@ -126,8 +126,9 @@ const motherFormSchema = Yup.object({
 
 const MotherForm: React.FC = () => {
   const navigation = useNavigation();
-  const { email, password } =
-    useRoute<RouteProp<IScreenParams, 'MotherForm'>>().params;
+  const { email, password } = useRoute<
+    RouteProp<IScreenParams, 'MotherForm'>
+  >().params;
 
   const formInitialValues: FormValues = {
     name: '',

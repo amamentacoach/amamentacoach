@@ -3,7 +3,7 @@ import React from 'react';
 import UploadPhotoScreen from '../../../components/UploadPhotoScreen';
 import { uploadFatherPhoto } from '../../../services/uploadPhoto';
 
-import Family from '../../../../assets/images/family.svg';
+import Family from '../../../../assets/images/family.png';
 
 const UploadFatherPhoto: React.FC = () => {
   return (

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { FlatList } from 'react-native';
 
-import { FAQ, listQuestions } from '../../../services/questions';
+import { FAQ, listUserQuestions } from '../../../services/questions';
 
 import {
   AddQuestionButton,
@@ -44,7 +44,7 @@ const Questions: React.FC = () => {
   useEffect(() => {
     async function fetchQuestions() {
       setLoading(true);
-      const oldQuestions = await listQuestions();
+      const oldQuestions = await listUserQuestions();
       if (oldQuestions) {
         setQuestions(oldQuestions);
         setLoading(false);

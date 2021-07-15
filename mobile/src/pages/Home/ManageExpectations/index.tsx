@@ -88,8 +88,9 @@ const ManageExpectations: React.FC = () => {
         return;
       }
 
-      const { lastRunDate, alreadySelected }: SelectedInfo =
-        JSON.parse(selectedStorage);
+      const { lastRunDate, alreadySelected }: SelectedInfo = JSON.parse(
+        selectedStorage,
+      );
 
       // Desativa caso já tenha sido utilizado uma vez no dia e exibe a opção selecionada
       // anteriormente.

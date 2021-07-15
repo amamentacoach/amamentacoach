@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import OptionsList, { OptionList } from '../../../components/OptionList';
+import OptionsList, { Options } from '../../../components/OptionList';
 
 import ScrollView from './styles';
 
@@ -13,33 +13,33 @@ import EmotionsInfo from '../../../../assets/images/emotions_info.svg';
 
 const AdditionalInformation: React.FC = () => {
   const navigation = useNavigation();
-  const options: OptionList[] = [
+  const options: Options[] = [
     {
-      Image: PrematureBreastfeed,
+      image: PrematureBreastfeed,
       title: 'Como meu leite é produzido?',
       subtitle: 'Saiba como seu corpo produz o leite',
       onPress: () => navigation.navigate('MilkAdditionalInformation'),
     },
     {
-      Image: PrematureBaby,
+      image: PrematureBaby,
       title: 'Benefícios do Canguru',
       subtitle: 'Como o canguru pode ajudar',
       onPress: () => navigation.navigate('BabySling'),
     },
     {
-      Image: DiarySmile,
+      image: DiarySmile,
       title: 'Você sabe o que é Resiliência?',
       subtitle: 'Explicamos pra você!',
       onPress: () => navigation.navigate('Resilience'),
     },
     {
-      Image: Change,
+      image: Change,
       title: 'Reformulando as expectativas',
       subtitle: 'Troque expectativas que são improváveis por realistas',
       onPress: () => navigation.navigate('ManageExpectations'),
     },
     {
-      Image: EmotionsInfo,
+      image: EmotionsInfo,
       title: 'Oferta de leite pelo copinho',
       subtitle: 'Vídeo Demonstrativo',
       onPress: () => navigation.navigate('BabyCup'),

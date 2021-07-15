@@ -62,8 +62,9 @@ type ScreenParams = {
 const StatusForm: React.FC = () => {
   const { width } = Dimensions.get('window');
   const navigation = useNavigation();
-  const { situation } =
-    useRoute<RouteProp<ScreenParams, 'StatusForm'>>().params;
+  const { situation } = useRoute<
+    RouteProp<ScreenParams, 'StatusForm'>
+  >().params;
 
   // Não exibe o formulário de alimentação se for a primeira vez do usuário respondendo a escala.
   const displayFeedingForm = situation !== '1D';
