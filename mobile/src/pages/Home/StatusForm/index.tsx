@@ -4,12 +4,12 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 
 import theme from '../../../config/theme';
+import { useAuth } from '../../../contexts/auth';
 import {
-  listStatusFormQuestions,
-  answerStatusForm,
-  answerFeedingForm,
+  getSurveyQuestions,
   SurveyQuestion,
-} from '../../../services/survey';
+} from '../../../utils/getSurveyQuestions';
+import { answerStatusForm, answerFeedingForm } from '../../../services/survey';
 import Modal from '../../../components/Modal';
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
 import MainButton from '../../../components/MainButton';
@@ -33,7 +33,7 @@ import {
 import {
   CurrentPageContainer,
   CurrentPageText,
-} from '../../../components/GenericRemoteFormPage/styles';
+} from '../../../components/GenericSurveyPage/styles';
 
 import QuestionIcon from '../../../../assets/images/icons/ic_question_white.svg';
 
@@ -62,11 +62,12 @@ type ScreenParams = {
 const StatusForm: React.FC = () => {
   const { width } = Dimensions.get('window');
   const navigation = useNavigation();
+  const { motherInfo } = useAuth();
   const { situation } = useRoute<
     RouteProp<ScreenParams, 'StatusForm'>
   >().params;
 
-  // Não exibe o formulário de alimentação se for a primeira vez do usuário respondendo a escala.
+  // Não exibe a questão de alimentação se for a primeira vez do usuário respondendo a escala.
   const displayFeedingForm = situation !== '1D';
 
   const [pageQuestions, setPageQuestions] = useState<SurveyQuestion[][]>([]);
@@ -95,13 +96,18 @@ const StatusForm: React.FC = () => {
 
   useEffect(() => {
     async function fetchQuestions() {
-      const form = await listStatusFormQuestions();
-      if (!form) {
+      const statusQuestions = await getSurveyQuestions(motherInfo, {
+        category: 7,
+      });
+      const feedingQuestions = await getSurveyQuestions(motherInfo, {
+        id: 6,
+      });
+      if (!statusQuestions || !feedingQuestions) {
         return;
       }
 
       // Inicia todas as respostas vazias.
-      let initialValues = form.statusQuestions.reduce(
+      let initialValues = statusQuestions.reduce(
         (object, page) => ({
           ...object,
           [page.id]: [],
@@ -111,13 +117,13 @@ const StatusForm: React.FC = () => {
 
       if (displayFeedingForm) {
         initialValues = { ...initialValues, feeding: '' };
-        setFeedingQuestion(form.feedingQuestion);
+        setFeedingQuestion(feedingQuestions[0]);
       }
 
       const pages = [];
       // Separa 3 perguntas por página.
-      for (let i = 0; i < form.statusQuestions.length; i += 3)
-        pages.push(form.statusQuestions.slice(i, i + 3));
+      for (let i = 0; i < statusQuestions.length; i += 3)
+        pages.push(statusQuestions.slice(i, i + 3));
       setPageQuestions(pages);
 
       setFormInitialValues(initialValues);

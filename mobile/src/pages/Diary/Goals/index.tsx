@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { StackActions, useNavigation } from '@react-navigation/native';
 
 import theme from '../../../config/theme';
-import RemoteForm from '../../../components/RemoteForm';
-import createGenericRemoteFormPage from '../../../components/GenericRemoteFormPage';
+import Survey from '../../../components/Survey';
+import createGenericSurveyPage from '../../../components/GenericSurveyPage';
 import Modal from '../../../components/Modal';
 
 import { ModalContainer } from './styles';
@@ -75,11 +75,11 @@ const Goals: React.FC = () => {
           visible={isFinishedModalVisible}
         />
       </ModalContainer>
-      <RemoteForm
+      <Survey
         title="Minhas metas de hoje"
         color={theme.babyPurple}
         category={3}
-        Page={createGenericRemoteFormPage(onFormEnd)}
+        Page={createGenericSurveyPage(onFormEnd)}
       />
     </>
   );
