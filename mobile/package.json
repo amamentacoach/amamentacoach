@@ -9,9 +9,12 @@
     "android:bundle:production": "cd android && ENVFILE='../.env.production' ./gradlew bundleRelease",
     "android": "ENVFILE='.env.development' react-native run-android",
     "ios": "ENVFILE='.env.development' react-native run-ios",
+    "android:local": "ENVFILE='.env.local' react-native run-android",
+    "ios:local": "ENVFILE='.env.local' react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "yarn run check-types && eslint . --ext .js,.jsx,.ts,.tsx",
+    "check-types": "tsc --noemit --skiplibcheck"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.5",
