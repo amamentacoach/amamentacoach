@@ -10,9 +10,9 @@ const { getDefaultConfig } = require('metro-config');
 
 module.exports = (async () => {
   const extraNodeModules = {
-    common: path.resolve(`${__dirname}/../common`),
+    common: path.resolve(`${__dirname}/../backend/common`),
   };
-  const watchFolders = [path.resolve(`${__dirname}/../common`)];
+  const watchFolders = [path.resolve(`${__dirname}/../backend/common`)];
   const {
     resolver: { sourceExts, assetExts },
   } = await getDefaultConfig();

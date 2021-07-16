@@ -1,6 +1,6 @@
 import { MotherInfo } from '../services/auth';
 
-import perguntas from '../../../common/perguntas';
+import perguntas from '../../../backend/common/perguntas';
 
 export interface SurveyQuestion {
   id: number;
