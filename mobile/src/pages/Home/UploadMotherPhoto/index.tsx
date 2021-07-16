@@ -6,7 +6,7 @@ import { uploadMotherPhoto } from '../../../services/uploadPhoto';
 import UploadPhotoScreen from '../../../components/UploadPhotoScreen';
 import Modal from '../../../components/Modal';
 
-import Mirror from '../../../../assets/images/mirror.svg';
+import Mirror from '../../../../assets/images/mirror.png';
 
 const UploadMotherPhoto: React.FC = () => {
   const navigation = useNavigation();
@@ -41,7 +41,7 @@ const UploadMotherPhoto: React.FC = () => {
       />
       <UploadPhotoScreen
         target="mother"
-        Image={Mirror}
+        image={Mirror}
         text={
           'Espelho, espelho meu... existe alguém mais capaz de amamentar do que eu?”\nClique no botão abaixo e faça o upload de uma foto sua!'
         }

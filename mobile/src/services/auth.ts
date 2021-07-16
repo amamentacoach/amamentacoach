@@ -151,6 +151,24 @@ export async function signIn(
   return login;
 }
 
+export function isMotherInfo(motherInfo: MotherInfo) {
+  return (
+    motherInfo &&
+    motherInfo.name &&
+    motherInfo.birthday &&
+    motherInfo.partner &&
+    motherInfo.images &&
+    motherInfo.images.baby !== undefined &&
+    motherInfo.images.father !== undefined &&
+    motherInfo.images.mother !== undefined &&
+    motherInfo.babiesBirthLocations &&
+    motherInfo.babiesBirthLocations.AC !== undefined &&
+    motherInfo.babiesBirthLocations.UCI !== undefined &&
+    motherInfo.babiesBirthLocations.UTI !== undefined &&
+    motherInfo.babies
+  );
+}
+
 // Retorna os dados de uma mãe.
 export async function getMotherInfo(): Promise<MotherInfo | null> {
   try {

@@ -6,7 +6,9 @@ import MainButton from '../../../components/MainButton';
 import ProgressDots from '../../../components/ProgressDots';
 import InformationPages, {
   InfoModelProps,
+  InfoPage,
 } from '../../../components/InformationPages';
+import ImageWrapper from '../../../components/ImageWrapper';
 
 import {
   Header,
@@ -24,10 +26,10 @@ import IntroDiaryHeart from '../../../../assets/images/intro_diary_pencil.svg';
 import IntroChart from '../../../../assets/images/intro_chart.svg';
 import IntroMobile from '../../../../assets/images/intro_mobile.svg';
 
-const pages = [
+const pages: InfoPage[] = [
   {
     id: 1,
-    Image: IntroMother,
+    image: IntroMother,
     content: [
       {
         text:
@@ -37,7 +39,7 @@ const pages = [
   },
   {
     id: 2,
-    Image: IntroDiaryHeart,
+    image: IntroDiaryHeart,
     content: [
       {
         text: 'Explore cada ícone e faça do App seu grande aliado! ',
@@ -46,7 +48,7 @@ const pages = [
   },
   {
     id: 3,
-    Image: IntroChart,
+    image: IntroChart,
     content: [
       {
         text:
@@ -56,7 +58,7 @@ const pages = [
   },
   {
     id: 4,
-    Image: IntroMobile,
+    image: IntroMobile,
     content: [
       {
         text:
@@ -81,7 +83,7 @@ const Introduction: React.FC = () => {
     flatListRef,
     index,
     pagesLength,
-    Image,
+    image,
     content,
   }) => (
     <>
@@ -91,7 +93,9 @@ const Introduction: React.FC = () => {
         </SkipButton>
       </Header>
       <ContentWrapper>
-        {Image && typeof Image !== 'number' && <Image />}
+        {image && (
+          <ImageWrapper source={image} resizeMode="contain" width="100%" />
+        )}
         {content.map(({ text }) => (
           <ContentText key={text}>{text}</ContentText>
         ))}

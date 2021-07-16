@@ -5,7 +5,9 @@ import MainButton from '../../../components/MainButton';
 import ProgressDots from '../../../components/ProgressDots';
 import InformationPages, {
   InfoModelProps,
+  InfoPage,
 } from '../../../components/InformationPages';
+import ImageWrapper from '../../../components/ImageWrapper';
 
 import {
   Header,
@@ -22,10 +24,10 @@ import {
 
 import SurveyPrimary from '../../../../assets/images/icons/survey_primary.svg';
 
-const pages = [
+const pages: InfoPage[] = [
   {
     id: 1,
-    Image: SurveyPrimary,
+    image: SurveyPrimary,
     content: [
       {
         text:
@@ -35,7 +37,7 @@ const pages = [
   },
   {
     id: 2,
-    Image: SurveyPrimary,
+    image: SurveyPrimary,
     content: [
       {
         text:
@@ -45,7 +47,7 @@ const pages = [
   },
   {
     id: 3,
-    Image: SurveyPrimary,
+    image: SurveyPrimary,
     content: [],
   },
 ];
@@ -62,14 +64,16 @@ const IntroductionStatusForm: React.FC = () => {
     pagesLength,
     index,
     content,
-    Image,
+    image,
   }) => (
     <>
       <Header>
         <ContentText>Autoconfiança para amamentar</ContentText>
       </Header>
       <ContentWrapper>
-        <ImageContainer>{Image && <Image />}</ImageContainer>
+        <ImageContainer>
+          {image && <ImageWrapper source={image} />}
+        </ImageContainer>
         {index === pagesLength - 1 ? (
           <LastPageBox>
             <HeaderLastPageBox>Escala</HeaderLastPageBox>

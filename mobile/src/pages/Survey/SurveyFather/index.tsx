@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import theme from '../../../config/theme';
-import RemoteForm from '../../../components/RemoteForm';
-import createGenericRemoteFormPage from '../../../components/GenericRemoteFormPage';
+import Survey from '../../../components/Survey';
+import createGenericSurveyPage from '../../../components/GenericSurveyPage';
 
-import Father from '../../../../assets/images/dad.svg';
+import Father from '../../../../assets/images/dad.png';
 
 const SurveyFather: React.FC = () => {
   const navigation = useNavigation();
@@ -27,11 +27,11 @@ const SurveyFather: React.FC = () => {
   }
 
   return (
-    <RemoteForm
+    <Survey
       title="Participação do Pai"
       color={theme.babyBlue}
       category={5}
-      Page={createGenericRemoteFormPage(onFormEnd, images)}
+      Page={createGenericSurveyPage(onFormEnd, images)}
       onFeedbackAccepted={setFormSent}
     />
   );

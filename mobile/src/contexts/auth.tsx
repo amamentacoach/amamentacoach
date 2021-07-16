@@ -1,10 +1,10 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import OneSignal from 'react-native-onesignal';
 
 import api from '../services/api';
 import * as auth from '../services/auth';
-import { MotherInfo, LoginStatus } from '../services/auth';
+import { MotherInfo, LoginStatus, isMotherInfo } from '../services/auth';
 import pushNotificationSubscribe from '../services/pushNotification';
 
 interface AuthContextData {
@@ -34,7 +34,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     );
     if (storageMotherInfo) {
       const savedMotherInfo: MotherInfo = JSON.parse(storageMotherInfo);
-      if (!savedMotherInfo.birthday) {
+      if (!isMotherInfo(savedMotherInfo)) {
         await AsyncStorage.removeItem('@AmamentaCoach:motherInfo');
         await initMotherInfo();
         return;

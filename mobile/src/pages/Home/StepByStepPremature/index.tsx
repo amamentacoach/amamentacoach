@@ -8,8 +8,10 @@ import InformationPages, {
   InfoPage,
 } from '../../../components/InformationPages';
 import ProgressDots from '../../../components/ProgressDots';
+import ImageWrapper from '../../../components/ImageWrapper';
 
 import {
+  Foreground,
   ContentHeaderText,
   ContentText,
   ContentTitleText,
@@ -17,6 +19,7 @@ import {
   ContinueButton,
   CurrentPageWrapper,
   Footer,
+  Background,
   LastPageButtonWrapper,
   TextContinueButton,
 } from './styles';
@@ -41,7 +44,7 @@ const pages: InfoPage[] = [
   },
   {
     id: 2,
-    Image: BreastFeedPremature1,
+    image: BreastFeedPremature1,
     title: '1.  Procure a serenidade',
     content: [
       {
@@ -53,7 +56,7 @@ const pages: InfoPage[] = [
   {
     id: 3,
     title: '2. Estimule a produção láctea',
-    Image: BreastFeedPremature2,
+    image: BreastFeedPremature2,
     content: [
       {
         text:
@@ -64,7 +67,7 @@ const pages: InfoPage[] = [
   {
     id: 4,
     title: '3. Estreite o vínculo',
-    Image: BreastFeedPremature3,
+    image: BreastFeedPremature3,
     content: [
       {
         text:
@@ -75,7 +78,7 @@ const pages: InfoPage[] = [
   {
     id: 5,
     title: '4. Seja a protagonista',
-    Image: BreastFeedPremature4,
+    image: BreastFeedPremature4,
     content: [
       {
         text:
@@ -86,7 +89,7 @@ const pages: InfoPage[] = [
   {
     id: 6,
     title: '5. Invista em uma rede de apoio',
-    Image: BreastFeedPremature5,
+    image: BreastFeedPremature5,
     content: [
       {
         text:
@@ -97,7 +100,7 @@ const pages: InfoPage[] = [
   {
     id: 7,
     title: '6. Mantenha a paciência',
-    Image: BreastFeedPremature6,
+    image: BreastFeedPremature6,
     content: [
       {
         text:
@@ -111,13 +114,13 @@ const StepByStepPremature: React.FC = () => {
   const navigation = useNavigation();
   const { height } = Dimensions.get('screen');
   const colors = [
-    { background: '#fff', foreground: '#fff' },
-    { background: '#F5E9EC', foreground: theme.babyPink },
-    { background: '#F3EFFC', foreground: theme.babyPurple },
-    { background: '#E5EEF1', foreground: theme.babyBlue },
-    { background: '#E9EEEB', foreground: theme.babyGreen },
-    { background: '#F5E9EC', foreground: theme.babyPink },
-    { background: '#F3EFFC', foreground: theme.babyPurple },
+    { foreground: '#fff', background: '#fff' },
+    { foreground: '#F5E9EC', background: theme.babyPink },
+    { foreground: '#F3EFFC', background: theme.babyPurple },
+    { foreground: '#E5EEF1', background: theme.babyBlue },
+    { foreground: '#E9EEEB', background: theme.babyGreen },
+    { foreground: '#F5E9EC', background: theme.babyPink },
+    { foreground: '#F3EFFC', background: theme.babyPurple },
   ];
 
   const InfoModel: React.FC<InfoModelProps> = ({
@@ -125,29 +128,17 @@ const StepByStepPremature: React.FC = () => {
     pagesLength,
     title,
     content,
-    Image,
+    image,
     flatListRef,
   }) => (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: colors[index].foreground,
-      }}>
+    <Background color={colors[index].background}>
       {index === 0 && <ContentTitleText>{title}</ContentTitleText>}
 
       {index !== 0 && (
-        <View
-          style={{
-            backgroundColor: colors[index].background,
-            borderBottomLeftRadius: 120,
-            borderBottomRightRadius: 120,
-            height: height * 0.25,
-            alignItems: 'center',
-          }}
-        />
+        <Foreground color={colors[index].foreground} height={height} />
       )}
       <ContentWrapper index={index}>
-        {Image && typeof Image !== 'number' && <Image height={300} />}
+        {image && <ImageWrapper source={image} height={300} />}
         {index !== 0 && <ContentTitleText>{title}</ContentTitleText>}
         {content.map(({ sectionHeader, text }) => (
           <View key={text}>
@@ -173,7 +164,7 @@ const StepByStepPremature: React.FC = () => {
           </ContinueButton>
         </LastPageButtonWrapper>
       </Footer>
-    </View>
+    </Background>
   );
 
   return <InformationPages pages={pages} PageModel={InfoModel} />;

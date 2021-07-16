@@ -29,7 +29,7 @@ const FormSignUp: React.FC = () => {
     password: '',
     password_confirmation: '',
   };
-  const signUpSchema: Yup.ObjectSchema<FormValues> = Yup.object({
+  const signUpSchema: Yup.SchemaOf<FormValues> = Yup.object({
     email: Yup.string().email('Email Inválido').required('Campo obrigatório'),
     password: Yup.string()
       .min(8, 'A senha precisa ter pelo menos 8 caracteres')

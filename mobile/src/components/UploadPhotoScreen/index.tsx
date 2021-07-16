@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ImagePicker, { ImagePickerResponse } from 'react-native-image-picker';
-import { Dimensions, Image as ReactImage } from 'react-native';
+import { Dimensions } from 'react-native';
+import ImageWrapper, { ImageWrapperSourcePropType } from '../ImageWrapper';
 
 import { useAuth } from '../../contexts/auth';
 import SecondaryButton from '../SecondaryButton';
@@ -18,14 +19,14 @@ import {
 
 interface UploadPhotoScreenProps {
   target: 'mother' | 'baby' | 'father';
-  Image: any;
+  image: ImageWrapperSourcePropType;
   text: string;
   uploadFunction: (photo: ImagePickerResponse) => Promise<string | null>;
 }
 
 const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
   target,
-  Image,
+  image,
   text,
   uploadFunction,
 }) => {
@@ -80,12 +81,14 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
         {/* Usuário ainda não enviou uma foto e não selecionou nenhuma para ser enviada */}
         {!photo && !motherInfo.images[target] && (
           <>
-            {Image &&
-              (typeof Image === 'number' ? (
-                <ReactImage source={Image} />
-              ) : (
-                <Image />
-              ))}
+            {image && (
+              <ImageWrapper
+                source={image}
+                resizeMode="contain"
+                width="100%"
+                height={300}
+              />
+            )}
             <Text>{text}</Text>
           </>
         )}

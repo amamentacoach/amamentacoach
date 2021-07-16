@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
 import { useAuth } from '../../../contexts/auth';
-import OptionsList, { OptionList } from '../../../components/OptionList';
+import OptionsList, { Options } from '../../../components/OptionList';
 import Modal from '../../../components/Modal';
 import { checkOneDayPassed } from '../../../utils/date';
 
@@ -19,9 +19,9 @@ const SurveyMenu: React.FC = () => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  let options: OptionList[] = [
+  let options: Options[] = [
     {
-      Image: SurveysOne,
+      image: SurveysOne,
       title: 'Amamentar um prematuro',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -37,7 +37,7 @@ const SurveyMenu: React.FC = () => {
       },
     },
     {
-      Image: SurveysTwo,
+      image: SurveysTwo,
       title: 'Motivação',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -53,7 +53,7 @@ const SurveyMenu: React.FC = () => {
       },
     },
     {
-      Image: SurveysThree,
+      image: SurveysThree,
       title: 'Sobre ajuda',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
@@ -71,7 +71,7 @@ const SurveyMenu: React.FC = () => {
     options = [
       ...options,
       {
-        Image: SurveysFour,
+        image: SurveysFour,
         title: 'Sobre a participação do pai',
         onPress: async () => {
           // Checa se o usuário já respondeu o formulário no dia.

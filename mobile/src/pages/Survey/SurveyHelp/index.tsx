@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import RemoteForm from '../../../components/RemoteForm';
-import createGenericRemoteFormPage from '../../../components/GenericRemoteFormPage';
+import Survey from '../../../components/Survey';
+import createGenericSurveyPage from '../../../components/GenericSurveyPage';
 import theme from '../../../config/theme';
 
 const SurveyHelp: React.FC = () => {
@@ -23,11 +23,11 @@ const SurveyHelp: React.FC = () => {
   }
 
   return (
-    <RemoteForm
+    <Survey
       title="Sobre ajuda"
       color={theme.babyBlue}
       category={9}
-      Page={createGenericRemoteFormPage(onFormEnd)}
+      Page={createGenericSurveyPage(onFormEnd)}
       onFeedbackAccepted={setFormSent}
     />
   );

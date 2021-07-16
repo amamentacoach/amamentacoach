@@ -6,17 +6,17 @@ import InformationPages, {
 } from '../../../components/InformationPages';
 import createGenericInfoPage from '../../../components/GenericInfoPage';
 
-import BreastfeedBenefits1 from '../../../../assets/images/breastfeed_benefits_1.svg';
-import BreastfeedBenefits2 from '../../../../assets/images/breastfeed_benefits_2.svg';
-import BreastfeedBenefits3 from '../../../../assets/images/breastfeed_benefits_3.svg';
-import BreastfeedBenefits4 from '../../../../assets/images/breastfeed_benefits_4.svg';
-import BreastfeedBenefits5 from '../../../../assets/images/breastfeed_benefits_5.svg';
-import BreastfeedBenefits6 from '../../../../assets/images/breastfeed_benefits_6.svg';
+import BreastfeedBenefits1 from '../../../../assets/images/breastfeed_benefits_1.png';
+import BreastfeedBenefits2 from '../../../../assets/images/breastfeed_benefits_2.png';
+import BreastfeedBenefits3 from '../../../../assets/images/breastfeed_benefits_3.png';
+import BreastfeedBenefits4 from '../../../../assets/images/breastfeed_benefits_4.png';
+import BreastfeedBenefits5 from '../../../../assets/images/breastfeed_benefits_5.png';
+import BreastfeedBenefits6 from '../../../../assets/images/breastfeed_benefits_6.png';
 
 const pages: InfoPage[] = [
   {
     id: 1,
-    Image: BreastfeedBenefits1,
+    image: BreastfeedBenefits1,
     title: 'Benefícios da amamentação para a mãe e o bebê',
     content: [
       {
@@ -27,7 +27,7 @@ const pages: InfoPage[] = [
   },
   {
     id: 2,
-    Image: BreastfeedBenefits2,
+    image: BreastfeedBenefits2,
     title: 'Benefícios da amamentação para o bebê',
     content: [
       {
@@ -39,7 +39,7 @@ const pages: InfoPage[] = [
   },
   {
     id: 3,
-    Image: BreastfeedBenefits3,
+    image: BreastfeedBenefits3,
     title: 'Benefícios da amamentação para o bebê',
     content: [
       {
@@ -55,7 +55,7 @@ const pages: InfoPage[] = [
   },
   {
     id: 4,
-    Image: BreastfeedBenefits4,
+    image: BreastfeedBenefits4,
     title: 'Benefícios da amamentação para o bebê',
     content: [
       {
@@ -71,7 +71,7 @@ const pages: InfoPage[] = [
   },
   {
     id: 5,
-    Image: BreastfeedBenefits5,
+    image: BreastfeedBenefits5,
     title: 'Benefícios da amamentação para a mãe',
     content: [
       {
@@ -83,7 +83,7 @@ const pages: InfoPage[] = [
   },
   {
     id: 6,
-    Image: BreastfeedBenefits6,
+    image: BreastfeedBenefits6,
     title: 'Benefícios da amamentação para a mãe',
     content: [
       {

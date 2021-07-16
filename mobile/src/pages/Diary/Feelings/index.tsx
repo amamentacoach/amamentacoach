@@ -1,12 +1,12 @@
 import React from 'react';
 import { useNavigation, StackActions } from '@react-navigation/native';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
 import theme from '../../../config/theme';
 import { dateFormatVerbose } from '../../../utils/date';
-import RemoteForm, { RemoteFormPage } from '../../../components/RemoteForm';
+import Survey, { SurveyPage } from '../../../components/Survey';
 import MainButton from '../../../components/MainButton';
 import SecondaryButton from '../../../components/SecondaryButton';
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
@@ -16,7 +16,7 @@ import {
   CurrentPageContainer,
   CurrentPageText,
   QuestionText,
-} from '../../../components/GenericRemoteFormPage/styles';
+} from '../../../components/GenericSurveyPage/styles';
 
 const Feelings: React.FC = () => {
   const navigation = useNavigation();
@@ -42,7 +42,7 @@ const Feelings: React.FC = () => {
     navigation.navigate('Diary');
   };
 
-  const FormPage: React.FC<RemoteFormPage> = ({
+  const FormPage: React.FC<SurveyPage> = ({
     index,
     pagesLength,
     question,
@@ -93,7 +93,7 @@ const Feelings: React.FC = () => {
   );
 
   return (
-    <RemoteForm
+    <Survey
       title={currentDate}
       color={theme.babyPurple}
       category={2}

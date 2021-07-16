@@ -8,10 +8,11 @@ import InformationPages, {
   InfoModelProps,
   InfoPage,
 } from '../../../components/InformationPages';
+import ImageWrapper from '../../../components/ImageWrapper';
 
-import ExpectationVsReality1 from '../../../../assets/images/expectation_vs_reality_1.svg';
-import ExpectationVsReality2 from '../../../../assets/images/expectation_vs_reality_2.svg';
-import ExpectationVsReality3 from '../../../../assets/images/expectation_vs_reality_3.svg';
+import ExpectationVsReality1 from '../../../../assets/images/expectation_vs_reality_1.png';
+import ExpectationVsReality2 from '../../../../assets/images/expectation_vs_reality_2.png';
+import ExpectationVsReality3 from '../../../../assets/images/expectation_vs_reality_3.png';
 
 import {
   HeaderBackground,
@@ -27,7 +28,7 @@ const pages: InfoPage[] = [
   {
     id: 1,
     title: 'Parto prematuro:\nNão era isso que eu esperava',
-    Image: ExpectationVsReality1,
+    image: ExpectationVsReality1,
     content: [
       {
         text:
@@ -38,7 +39,7 @@ const pages: InfoPage[] = [
   {
     id: 2,
     title: 'Parto prematuro:\nNão era isso que eu esperava',
-    Image: ExpectationVsReality2,
+    image: ExpectationVsReality2,
     content: [
       {
         text:
@@ -49,7 +50,7 @@ const pages: InfoPage[] = [
   {
     id: 3,
     title: 'Parto prematuro:\nNão era isso que eu esperava',
-    Image: ExpectationVsReality3,
+    image: ExpectationVsReality3,
     content: [
       {
         text:
@@ -66,7 +67,7 @@ const NotWhatIExpected: React.FC = () => {
     pagesLength,
     index,
     title,
-    Image,
+    image,
     content,
     goToPage,
   }) => (
@@ -74,7 +75,14 @@ const NotWhatIExpected: React.FC = () => {
       <HeaderBackground />
       <ContentContainer>
         <ContentHeader>{title}</ContentHeader>
-        {Image && typeof Image !== 'number' && <Image />}
+        {image && (
+          <ImageWrapper
+            source={image}
+            width="100%"
+            height="50%"
+            resizeMode="contain"
+          />
+        )}
         {content.map(({ text }) => (
           <ContentText key={text}>{text}</ContentText>
         ))}

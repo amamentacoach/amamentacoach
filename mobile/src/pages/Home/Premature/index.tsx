@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
-import OptionsList, { OptionList } from '../../../components/OptionList';
+import OptionsList, { Options } from '../../../components/OptionList';
 
 import ScrollView from './styles';
 
@@ -12,24 +12,24 @@ import PrematureTrophy from '../../../../assets/images/premature_trophy.svg';
 
 const Premature: React.FC = () => {
   const navigation = useNavigation();
-  const options: OptionList[] = [
+  const options: Options[] = [
     {
-      Image: PrematureBirth,
+      image: PrematureBirth,
       title: 'Parto prematuro: não era isso que eu esperava',
       onPress: () => navigation.navigate('NotWhatIExpected'),
     },
     {
-      Image: PrematureBaby,
+      image: PrematureBaby,
       title: 'Muito prazer, eu sou o Prematuro',
       onPress: () => navigation.navigate('ThePremature'),
     },
     {
-      Image: PrematureHeart,
+      image: PrematureHeart,
       title: 'Minha maior motivação para amamentar',
       onPress: () => navigation.navigate('UploadBabyPhoto'),
     },
     {
-      Image: PrematureTrophy,
+      image: PrematureTrophy,
       title: 'Um período de luta, toda uma vida de resultados',
       subtitle: 'Benefícios da amamentação',
       onPress: () => navigation.navigate('BreastfeedingBenefits'),

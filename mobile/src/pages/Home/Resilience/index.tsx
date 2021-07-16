@@ -3,7 +3,7 @@ import { ActivityIndicator, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
-import OptionsList, { OptionList } from '../../../components/OptionList';
+import OptionsList, { Options } from '../../../components/OptionList';
 
 import {
   ScrollView,
@@ -24,24 +24,24 @@ const Resilience: React.FC = () => {
   const navigation = useNavigation();
   const [isLoadingVideo, setIsLoadingVideo] = useState(true);
 
-  const options: OptionList[] = [
+  const options: Options[] = [
     {
-      Image: ErlenmeyerPrimary,
+      image: ErlenmeyerPrimary,
       title: '1. Manter expectativas realistas',
       onPress: () => navigation.navigate('ManageExpectations'),
     },
     {
-      Image: ErlenmeyerYellow,
+      image: ErlenmeyerYellow,
       title: '2. Buscar apoio social e conexão de grupo',
       onPress: () => navigation.navigate('Messages'),
     },
     {
-      Image: ErlenmeyerGreen,
+      image: ErlenmeyerGreen,
       title: '3. Desenvolver uma maneira positiva de pensar',
       onPress: () => navigation.navigate('Diary'),
     },
     {
-      Image: ErlenmeyerPink,
+      image: ErlenmeyerPink,
       title: '4. Construir força e autoconfiança',
       onPress: () => navigation.navigate('UploadMotherPhoto'),
     },

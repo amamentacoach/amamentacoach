@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import theme from '../config/theme';
 import { useIsFirstRun } from '../contexts/firstRun';
 import DiaryIntroduction from '../pages/Diary/DiaryIntroduction';
 import DiaryMenu from '../pages/Diary/Menu';
@@ -20,8 +21,8 @@ const TabNavigator: React.FC = () => {
   return (
     <Tab.Navigator
       tabBarOptions={{
-        activeTintColor: '#7D5CD7',
-        inactiveTintColor: '#545454',
+        activeTintColor: theme.primary,
+        inactiveTintColor: theme.grey,
       }}>
       <Tab.Screen
         name="Home"
@@ -43,17 +44,9 @@ const TabNavigator: React.FC = () => {
         options={{
           tabBarLabel: 'Diário',
           tabBarVisible: !isFirstRun.persistent.diaryIntroduction,
-          tabBarIcon: ({ color, size }) => {
-            return (
-              // <Image
-              //   source={diaryIcon}
-              //   height={size}
-              //   width={size}
-              //   style={{ tintColor: color }}
-              // />
-              <DiaryIcon height={size} width={size} fill={color} />
-            );
-          },
+          tabBarIcon: ({ color, size }) => (
+            <DiaryIcon height={size} width={size} fill={color} />
+          ),
         }}
       />
       <Tab.Screen
@@ -61,17 +54,9 @@ const TabNavigator: React.FC = () => {
         component={SurveyMenu}
         options={{
           tabBarLabel: 'Enquetes',
-          tabBarIcon: ({ color, size }) => {
-            return (
-              // <Image
-              //   source={surveyIcon}
-              //   height={size}
-              //   width={size}
-              //   style={{ tintColor: color }}
-              // />
-              <SurveyIcon height={size} width={size} fill={color} />
-            );
-          },
+          tabBarIcon: ({ color, size }) => (
+            <SurveyIcon height={size} width={size} fill={color} />
+          ),
         }}
       />
       <Tab.Screen
@@ -79,17 +64,9 @@ const TabNavigator: React.FC = () => {
         component={ProfileMenu}
         options={{
           tabBarLabel: 'Perfil',
-          tabBarIcon: ({ color, size }) => {
-            return (
-              // <Image
-              //   source={profileIcon}
-              //   height={size}
-              //   width={size}
-              //   style={{ tintColor: color }}
-              // />
-              <ProfileIcon height={size} width={size} fill={color} />
-            );
-          },
+          tabBarIcon: ({ color, size }) => (
+            <ProfileIcon height={size} width={size} fill={color} />
+          ),
         }}
       />
     </Tab.Navigator>

@@ -9,7 +9,7 @@ const UploadBabyPhoto: React.FC = () => {
   return (
     <UploadPhotoScreen
       target="baby"
-      Image={HeartArrow}
+      image={HeartArrow}
       text="Escolha uma foto de seu(s) bebê(s) na galeria e deixe aqui
       para lembrar qual a sua grande motivação para amamentar."
       uploadFunction={uploadBabyPhoto}

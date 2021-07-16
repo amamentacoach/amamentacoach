@@ -5,10 +5,10 @@ import {
   Container,
   Content,
   Line,
-  Image,
   OptionText,
   OptionsContainer,
   Option,
+  MaxHeightImage,
 } from './styles';
 
 interface MainModalProps {
@@ -43,7 +43,14 @@ const Modal: React.FC<MainModalProps> = ({
     <ReactNativeModal animationType="fade" transparent visible={visible}>
       <Container>
         {content && <Content>{content}</Content>}
-        {image && <Image source={image} resizeMode="contain" />}
+        {image && (
+          <MaxHeightImage
+            source={image}
+            resizeMode="contain"
+            width="100%"
+            height={300}
+          />
+        )}
         {children}
         <Line />
         <OptionsContainer>

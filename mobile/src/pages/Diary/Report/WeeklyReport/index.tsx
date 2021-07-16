@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-import { getWeeklyReport, IWeeklyReport } from '../../../../services/report';
+import {
+  getWeeklyReport,
+  WeeklyReport as IWeeklyReport,
+} from '../../../../services/report';
 
 import {
   Header,

@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import ImageWrapper from '../../../components/ImageWrapper';
 
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
@@ -7,11 +8,11 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
   flex: 1;
 `;
 
-export const Header = styled.View`
-  flex: 1;
+export const Header = styled(ImageWrapper)`
+  align-items: center;
   max-height: 200px;
-  margin: 30px auto 0 auto;
-  justify-content: space-between;
+  margin: 30px auto 30px auto;
+  justify-content: center;
 `;
 
 export const FormContainer = styled.View`
