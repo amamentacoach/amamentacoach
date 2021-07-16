@@ -33,6 +33,6 @@
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "build": "tsc",
-    "start": "npm run build && node dist/src/server.js"
+    "start": "npm run build && node dist/backend/src/server.js"
   }
 }
