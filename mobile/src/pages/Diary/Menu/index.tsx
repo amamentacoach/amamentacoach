@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
-import 'moment/locale/pt-br';
 
 import Modal from '../../../components/Modal';
 import OptionsList, { Options } from '../../../components/OptionList';

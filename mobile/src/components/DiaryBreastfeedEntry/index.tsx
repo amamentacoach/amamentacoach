@@ -2,7 +2,6 @@ import React from 'react';
 
 import moment from 'moment';
 import { View } from 'react-native';
-import 'moment/locale/pt-br';
 
 import { BreastfeedEntry } from '../../services/diaryRegistry';
 

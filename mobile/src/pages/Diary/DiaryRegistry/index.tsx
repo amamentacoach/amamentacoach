@@ -8,7 +8,6 @@ import {
 } from '@react-navigation/native';
 import moment from 'moment';
 import { ActivityIndicator } from 'react-native';
-import 'moment/locale/pt-br';
 
 import DiaryRegistryEntry from '../../../components/DiaryRegistryEntry';
 import MainButton from '../../../components/MainButton';

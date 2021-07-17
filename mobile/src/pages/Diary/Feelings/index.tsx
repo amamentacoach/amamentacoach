@@ -3,7 +3,6 @@ import React from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, StackActions } from '@react-navigation/native';
 import moment from 'moment';
-import 'moment/locale/pt-br';
 
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
 import {

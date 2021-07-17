@@ -2,7 +2,6 @@ import React from 'react';
 
 import moment from 'moment';
 import { View } from 'react-native';
-import 'moment/locale/pt-br';
 
 import { Title, MainText, BoldMainText, Container } from './styles';
 

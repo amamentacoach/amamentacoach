@@ -4,7 +4,6 @@ import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import moment from 'moment';
 import * as Yup from 'yup';
-import 'moment/locale/pt-br';
 
 import FormDateInput from '../../../components/FormDateInput';
 import FormTextInput from '../../../components/FormTextInput';
