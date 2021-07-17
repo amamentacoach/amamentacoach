@@ -1,18 +1,15 @@
 import React from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 
-import theme from '../../../config/theme';
-import MainButton from '../../../components/MainButton';
-import SecondaryButton from '../../../components/SecondaryButton';
+import ImageWrapper from '../../../components/ImageWrapper';
 import InformationPages, {
   InfoModelProps,
   InfoPage,
 } from '../../../components/InformationPages';
-import ImageWrapper from '../../../components/ImageWrapper';
-
-import ExpectationVsReality1 from '../../../../assets/images/expectation_vs_reality_1.png';
-import ExpectationVsReality2 from '../../../../assets/images/expectation_vs_reality_2.png';
-import ExpectationVsReality3 from '../../../../assets/images/expectation_vs_reality_3.png';
+import MainButton from '../../../components/MainButton';
+import SecondaryButton from '../../../components/SecondaryButton';
+import theme from '../../../config/theme';
 
 import {
   HeaderBackground,
@@ -23,6 +20,10 @@ import {
   FirstButtonContainer,
   SecondButtonContainer,
 } from './styles';
+
+import ExpectationVsReality1 from '../../../../assets/images/expectation_vs_reality_1.png';
+import ExpectationVsReality2 from '../../../../assets/images/expectation_vs_reality_2.png';
+import ExpectationVsReality3 from '../../../../assets/images/expectation_vs_reality_3.png';
 
 const pages: InfoPage[] = [
   {

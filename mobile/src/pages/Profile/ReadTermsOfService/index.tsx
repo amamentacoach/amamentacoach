@@ -1,12 +1,13 @@
 import React from 'react';
+
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-import { useAuth } from '../../../contexts/auth';
 import {
   AdultTermsOfService,
   MinorTermsOfService,
 } from '../../../components/TermsOfService';
+import { useAuth } from '../../../contexts/auth';
 
 import ScrollView from './styles';
 

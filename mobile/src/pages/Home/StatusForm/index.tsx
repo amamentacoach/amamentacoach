@@ -1,19 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
+
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
+import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 
+import FormRadioGroupInput from '../../../components/FormRadioGroup';
+import {
+  CurrentPageContainer,
+  CurrentPageText,
+} from '../../../components/GenericSurveyPage/styles';
+import MainButton from '../../../components/MainButton';
+import Modal from '../../../components/Modal';
+import SecondaryButton from '../../../components/SecondaryButton';
 import theme from '../../../config/theme';
 import { useAuth } from '../../../contexts/auth';
+import { answerStatusForm, answerFeedingForm } from '../../../services/survey';
 import {
   getSurveyQuestions,
   SurveyQuestion,
 } from '../../../utils/getSurveyQuestions';
-import { answerStatusForm, answerFeedingForm } from '../../../services/survey';
-import Modal from '../../../components/Modal';
-import FormRadioGroupInput from '../../../components/FormRadioGroup';
-import MainButton from '../../../components/MainButton';
-import SecondaryButton from '../../../components/SecondaryButton';
 
 import {
   HeaderBackground,
@@ -30,10 +35,6 @@ import {
   SecondButtonContainer,
   FirstButtonContainer,
 } from './styles';
-import {
-  CurrentPageContainer,
-  CurrentPageText,
-} from '../../../components/GenericSurveyPage/styles';
 
 import QuestionIcon from '../../../../assets/images/icons/ic_question_white.svg';
 

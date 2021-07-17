@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 
 import { ScrollView, OptionButton, OptionText, Line } from './styles';

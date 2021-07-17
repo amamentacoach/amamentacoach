@@ -1,9 +1,10 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import Survey from '../../../components/Survey';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+
 import createGenericSurveyPage from '../../../components/GenericSurveyPage';
+import Survey from '../../../components/Survey';
 import theme from '../../../config/theme';
 
 const SurveyHelp: React.FC = () => {

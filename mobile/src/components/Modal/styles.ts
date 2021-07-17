@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+
 import ImageWrapper from '../ImageWrapper';
 
 interface OptionTextProps {

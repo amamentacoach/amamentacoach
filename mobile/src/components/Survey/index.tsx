@@ -1,14 +1,15 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
+
 import { StackActions, useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
+import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 
 import { useAuth } from '../../contexts/auth';
+import { answerQuestion, AnswerFeedback } from '../../services/survey';
 import {
   getSurveyQuestions,
   SurveyQuestion,
 } from '../../utils/getSurveyQuestions';
-import { answerQuestion, AnswerFeedback } from '../../services/survey';
 import Modal from '../Modal';
 
 import {

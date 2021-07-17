@@ -1,11 +1,12 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useRef } from 'react';
+
+import { useNavigation } from '@react-navigation/native';
 import { Dimensions, FlatList } from 'react-native';
 
-import ProgressDots from '../../../components/ProgressDots';
 import ImageWrapper, {
   ImageWrapperSourcePropType,
 } from '../../../components/ImageWrapper';
+import ProgressDots from '../../../components/ProgressDots';
 
 import {
   ContinueButton,

@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import RNBootSplash from 'react-native-bootsplash';
 import moment from 'moment';
+import { View } from 'react-native';
+import RNBootSplash from 'react-native-bootsplash';
 import 'moment/locale/pt-br';
 
-import { checkOneDayPassed } from '../../../utils/date';
+import FormPickerInput from '../../../components/FormPickerInput';
+import ImageWrapper from '../../../components/ImageWrapper';
+import Modal from '../../../components/Modal';
 import { Options } from '../../../components/OptionList';
 import theme from '../../../config/theme';
 import { useIsFirstRun } from '../../../contexts/firstRun';
-import FormPickerInput from '../../../components/FormPickerInput';
-import { setHomePageOpened } from '../../../services/telemetry';
 import {
   checkBabiesLocation,
   BabyStatus,
   updateBabyLocation,
 } from '../../../services/babyLocation';
-import Modal from '../../../components/Modal';
-import ImageWrapper from '../../../components/ImageWrapper';
+import { setHomePageOpened } from '../../../services/telemetry';
+import { checkOneDayPassed } from '../../../utils/date';
 
 import {
   ScrollView,
@@ -42,14 +43,14 @@ import {
   LocationContainer,
 } from './styles';
 
-import Banner from '../../../../assets/images/home_banner.png';
 import HomeBaby from '../../../../assets/images/home_baby.svg';
+import Banner from '../../../../assets/images/home_banner.png';
 import HomeBreastfeed from '../../../../assets/images/home_breastfeed.svg';
-import HomeMilk from '../../../../assets/images/home_milk.svg';
-import HomeEmotions from '../../../../assets/images/home_emotions.svg';
-import HomeMoreInformation from '../../../../assets/images/home_more_information.svg';
-import HomeMessage from '../../../../assets/images/home_message.svg';
 import HomeCredits from '../../../../assets/images/home_credits.svg';
+import HomeEmotions from '../../../../assets/images/home_emotions.svg';
+import HomeMessage from '../../../../assets/images/home_message.svg';
+import HomeMilk from '../../../../assets/images/home_milk.svg';
+import HomeMoreInformation from '../../../../assets/images/home_more_information.svg';
 
 interface BabyModalOption {
   newLocation: string;

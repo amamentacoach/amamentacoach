@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
+import MainButton from '../../../components/MainButton';
+import Modal from '../../../components/Modal';
 import {
   AdultTermsOfService,
   MinorTermsOfService,
@@ -13,8 +16,6 @@ import {
   signUpBaby,
   signUpMother,
 } from '../../../services/auth';
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
 
 import {
   ScrollView,

@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 
-import { useAuth } from '../../../contexts/auth';
-import OptionsList, { Options } from '../../../components/OptionList';
 import Modal from '../../../components/Modal';
+import OptionsList, { Options } from '../../../components/OptionList';
+import { useAuth } from '../../../contexts/auth';
 import { checkOneDayPassed } from '../../../utils/date';
 
 import { Header, HeaderTitle, ScrollView } from './styles';
 
-import SurveysOne from '../../../../assets/images/surveys_one.svg';
-import SurveysTwo from '../../../../assets/images/surveys_two.svg';
-import SurveysThree from '../../../../assets/images/surveys_three.svg';
 import SurveysFour from '../../../../assets/images/surveys_four.svg';
+import SurveysOne from '../../../../assets/images/surveys_one.svg';
+import SurveysThree from '../../../../assets/images/surveys_three.svg';
+import SurveysTwo from '../../../../assets/images/surveys_two.svg';
 
 const SurveyMenu: React.FC = () => {
   const { motherInfo } = useAuth();

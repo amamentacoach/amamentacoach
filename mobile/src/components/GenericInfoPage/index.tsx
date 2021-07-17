@@ -1,9 +1,10 @@
 import React from 'react';
+
 import { View } from 'react-native';
 
-import ProgressDots from '../ProgressDots';
-import { InfoModelProps } from '../InformationPages';
 import ImageWrapper from '../ImageWrapper';
+import { InfoModelProps } from '../InformationPages';
+import ProgressDots from '../ProgressDots';
 
 import {
   ContinueButton,

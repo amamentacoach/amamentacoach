@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator } from 'react-native';
+
 import {
   RouteProp,
   useIsFocused,
@@ -7,17 +7,18 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import moment from 'moment';
+import { ActivityIndicator } from 'react-native';
 import 'moment/locale/pt-br';
 
+import DiaryRegistryEntry from '../../../components/DiaryRegistryEntry';
+import MainButton from '../../../components/MainButton';
 import { useIsFirstRun } from '../../../contexts/firstRun';
-import { setExtractionPageOpened } from '../../../services/telemetry';
 import {
   ExtractionEntry,
   listExtractionsEntries,
 } from '../../../services/diaryRegistry';
+import { setExtractionPageOpened } from '../../../services/telemetry';
 import { dateFormatVerbose } from '../../../utils/date';
-import MainButton from '../../../components/MainButton';
-import DiaryRegistryEntry from '../../../components/DiaryRegistryEntry';
 
 import { DateText, Container, ListContainer } from './styles';
 

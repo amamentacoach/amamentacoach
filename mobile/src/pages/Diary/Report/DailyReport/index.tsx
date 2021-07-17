@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
+import DiaryBreastfeedEntry from '../../../../components/DiaryBreastfeedEntry';
+import DiaryRegistryEntry from '../../../../components/DiaryRegistryEntry';
 import {
   getDailyReport,
   DailyReport as IDailyReport,
 } from '../../../../services/report';
-import DiaryBreastfeedEntry from '../../../../components/DiaryBreastfeedEntry';
-import DiaryRegistryEntry from '../../../../components/DiaryRegistryEntry';
 
 import { Header, Container, EntryContainer } from './styles';
 

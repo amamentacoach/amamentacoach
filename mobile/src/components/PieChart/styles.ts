@@ -1,5 +1,5 @@
-import styled from 'styled-components/native';
 import { PieChart } from 'react-native-charts-wrapper';
+import styled from 'styled-components/native';
 
 interface DescriptionColorProps {
   color: string;

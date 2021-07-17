@@ -1,9 +1,10 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
 
+import { useNavigation } from '@react-navigation/native';
 import { View } from 'react-native';
-import OptionsList, { Options } from '../../../components/OptionList';
+
 import ImageWrapper from '../../../components/ImageWrapper';
+import OptionsList, { Options } from '../../../components/OptionList';
 
 import { ScrollView, Text, Container } from './styles';
 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { TouchableOpacity, Platform } from 'react-native';
+
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment, { Moment } from 'moment';
+import { TouchableOpacity, Platform } from 'react-native';
 import 'moment/locale/pt-br';
 
 import {

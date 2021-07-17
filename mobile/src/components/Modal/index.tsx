@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { Modal as ReactNativeModal } from 'react-native';
 
 import {

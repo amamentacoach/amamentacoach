@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { useIsFirstRun } from '../../../contexts/firstRun';
-import MainButton from '../../../components/MainButton';
-import ProgressDots from '../../../components/ProgressDots';
+import ImageWrapper from '../../../components/ImageWrapper';
 import InformationPages, {
   InfoModelProps,
   InfoPage,
 } from '../../../components/InformationPages';
-import ImageWrapper from '../../../components/ImageWrapper';
+import MainButton from '../../../components/MainButton';
+import ProgressDots from '../../../components/ProgressDots';
+import { useIsFirstRun } from '../../../contexts/firstRun';
 
 import {
   Header,

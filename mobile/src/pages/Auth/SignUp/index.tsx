@@ -1,10 +1,12 @@
 import React from 'react';
-import { View } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
+import { View } from 'react-native';
 import * as Yup from 'yup';
 
 import FormTextInput from '../../../components/FormTextInput';
+import MainButton from '../../../components/MainButton';
 
 import {
   ScrollView,
@@ -14,7 +16,6 @@ import {
   FormContainer,
   SubmitButtonContainer,
 } from './styles';
-import MainButton from '../../../components/MainButton';
 
 interface FormValues {
   email: string;
