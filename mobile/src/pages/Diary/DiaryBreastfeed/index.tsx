@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator } from 'react-native';
+
 import {
   RouteProp,
   useIsFocused,
@@ -7,16 +7,17 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import moment from 'moment';
+import { ActivityIndicator } from 'react-native';
 import 'moment/locale/pt-br';
 
-import { dateFormatVerbose } from '../../../utils/date';
+import DiaryBreastfeedEntry from '../../../components/DiaryBreastfeedEntry';
+import MainButton from '../../../components/MainButton';
 import { useAuth } from '../../../contexts/auth';
 import {
   BreastfeedEntry,
   listBreastfeedEntries,
 } from '../../../services/diaryRegistry';
-import DiaryBreastfeedEntry from '../../../components/DiaryBreastfeedEntry';
-import MainButton from '../../../components/MainButton';
+import { dateFormatVerbose } from '../../../utils/date';
 
 import { DateText, ListContainer, ScrollView, Container } from './styles';
 

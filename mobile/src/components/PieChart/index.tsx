@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { processColor } from 'react-native';
 
 import {

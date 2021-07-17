@@ -1,12 +1,13 @@
 import React from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 
 import OptionsList, { Options } from '../../../components/OptionList';
 
 import ScrollView from './styles';
 
-import PrematureBirth from '../../../../assets/images/premature_birth.svg';
 import PrematureBaby from '../../../../assets/images/premature_baby.svg';
+import PrematureBirth from '../../../../assets/images/premature_birth.svg';
 import PrematureHeart from '../../../../assets/images/premature_heart.svg';
 import PrematureTrophy from '../../../../assets/images/premature_trophy.svg';
 

@@ -1,8 +1,6 @@
 import React from 'react';
 
-import createColorHeader from '../config/colorHeader';
 import theme from '../../config/theme';
-
 import DiaryActions from '../../pages/Diary/DiaryActions';
 import DiaryBaby from '../../pages/Diary/DiaryBaby';
 import DiaryBreastfeed from '../../pages/Diary/DiaryBreastfeed';
@@ -13,6 +11,7 @@ import HelpReceived from '../../pages/Diary/HelpReceived';
 import NewBreastfeedEntry from '../../pages/Diary/NewBreastfeedEntry';
 import NewDiaryRegistry from '../../pages/Diary/NewDiaryRegistry';
 import Report from '../../pages/Diary/Report';
+import createColorHeader from '../config/colorHeader';
 
 const CreateDiaryRoutes = (Stack: any) => {
   const headerBabyPurple = createColorHeader(theme.babyPurple);

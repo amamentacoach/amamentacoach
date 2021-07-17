@@ -1,22 +1,23 @@
 import React from 'react';
-import { useNavigation, StackActions } from '@react-navigation/native';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation, StackActions } from '@react-navigation/native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
-import theme from '../../../config/theme';
-import { dateFormatVerbose } from '../../../utils/date';
-import Survey, { SurveyPage } from '../../../components/Survey';
-import MainButton from '../../../components/MainButton';
-import SecondaryButton from '../../../components/SecondaryButton';
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
-
-import { Container, Footer, SecondFooterButtonContainer } from './styles';
 import {
   CurrentPageContainer,
   CurrentPageText,
   QuestionText,
 } from '../../../components/GenericSurveyPage/styles';
+import MainButton from '../../../components/MainButton';
+import SecondaryButton from '../../../components/SecondaryButton';
+import Survey, { SurveyPage } from '../../../components/Survey';
+import theme from '../../../config/theme';
+import { dateFormatVerbose } from '../../../utils/date';
+
+import { Container, Footer, SecondFooterButtonContainer } from './styles';
 
 const Feelings: React.FC = () => {
   const navigation = useNavigation();

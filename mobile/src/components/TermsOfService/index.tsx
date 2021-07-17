@@ -1,8 +1,9 @@
 import React from 'react';
+
 import moment from 'moment';
+import { View } from 'react-native';
 import 'moment/locale/pt-br';
 
-import { View } from 'react-native';
 import { Title, MainText, BoldMainText, Container } from './styles';
 
 interface Props {

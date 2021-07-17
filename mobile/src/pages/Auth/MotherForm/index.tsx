@@ -1,15 +1,16 @@
 import React from 'react';
+
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { MotherSignUpInfo } from '../../../services/auth';
-import MainButton from '../../../components/MainButton';
-import SecondaryButton from '../../../components/SecondaryButton';
-import FormRadioGroupInput from '../../../components/FormRadioGroup';
-import FormTextInput from '../../../components/FormTextInput';
 import FormDateInput from '../../../components/FormDateInput';
 import FormPickerInput from '../../../components/FormPickerInput';
+import FormRadioGroupInput from '../../../components/FormRadioGroup';
+import FormTextInput from '../../../components/FormTextInput';
+import MainButton from '../../../components/MainButton';
+import SecondaryButton from '../../../components/SecondaryButton';
+import { MotherSignUpInfo } from '../../../services/auth';
 
 import {
   ScrollView,

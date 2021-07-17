@@ -1,15 +1,16 @@
 import React from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 
 import OptionsList, { Options } from '../../../components/OptionList';
 
 import ScrollView from './styles';
 
-import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
-import PrematureBaby from '../../../../assets/images/premature_baby.svg';
-import DiarySmile from '../../../../assets/images/diary_smile.svg';
 import Change from '../../../../assets/images/change.svg';
+import DiarySmile from '../../../../assets/images/diary_smile.svg';
 import EmotionsInfo from '../../../../assets/images/emotions_info.svg';
+import PrematureBaby from '../../../../assets/images/premature_baby.svg';
+import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
 
 const AdditionalInformation: React.FC = () => {
   const navigation = useNavigation();

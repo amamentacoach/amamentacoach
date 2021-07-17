@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
+import Modal from '../../../components/Modal';
+import OptionsList, { Options } from '../../../components/OptionList';
 import { useAuth } from '../../../contexts/auth';
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import { setDiaryPageOpened } from '../../../services/telemetry';
 import { checkOneDayPassed, dateFormatVerbose } from '../../../utils/date';
-import OptionsList, { Options } from '../../../components/OptionList';
-import Modal from '../../../components/Modal';
 
 import {
   ScrollView,
@@ -20,13 +21,13 @@ import {
 } from './styles';
 
 import Baby from '../../../../assets/images/canguru.svg';
-import CalendarIcon from '../../../../assets/images/icons/ic_calendar.svg';
-import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
 import DiarySmile from '../../../../assets/images/diary_smile.svg';
 import DiaryStar from '../../../../assets/images/diary_star.svg';
+import Father from '../../../../assets/images/father.svg';
+import CalendarIcon from '../../../../assets/images/icons/ic_calendar.svg';
+import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
 import PrematureHeart from '../../../../assets/images/premature_heart.svg';
 import Report from '../../../../assets/images/report.svg';
-import Father from '../../../../assets/images/father.svg';
 
 const DiaryMenu: React.FC = () => {
   const { motherInfo } = useAuth();

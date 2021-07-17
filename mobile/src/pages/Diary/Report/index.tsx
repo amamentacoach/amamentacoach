@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+
 import { ActivityIndicator, View } from 'react-native';
 
 import FormPickerInput from '../../../components/FormPickerInput';
-import DailyReport from './DailyReport';
-import WeeklyReport from './WeeklyReport';
 
+import DailyReport from './DailyReport';
 import { ScrollView, Container } from './styles';
+import WeeklyReport from './WeeklyReport';
 
 enum Reports {
   Daily,

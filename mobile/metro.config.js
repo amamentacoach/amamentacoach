@@ -6,6 +6,7 @@
  */
 
 const path = require('path');
+
 const { getDefaultConfig } = require('metro-config');
 
 module.exports = (async () => {

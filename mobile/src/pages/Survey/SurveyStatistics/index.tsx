@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
 import { HeaderBackButton } from '@react-navigation/stack';
+import { ActivityIndicator } from 'react-native';
 
+import PieChart from '../../../components/PieChart';
 import {
   SurveyStatistics as ISurveyStatistics,
   listSurveyStatistics,
 } from '../../../services/survey';
-import PieChart from '../../../components/PieChart';
 
 import {
   ScrollView,

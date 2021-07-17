@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { HeaderBackButton } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
 
-import { uploadMotherPhoto } from '../../../services/uploadPhoto';
-import UploadPhotoScreen from '../../../components/UploadPhotoScreen';
+import { useNavigation } from '@react-navigation/native';
+import { HeaderBackButton } from '@react-navigation/stack';
+
 import Modal from '../../../components/Modal';
+import UploadPhotoScreen from '../../../components/UploadPhotoScreen';
+import { uploadMotherPhoto } from '../../../services/uploadPhoto';
 
 import Mirror from '../../../../assets/images/mirror.png';
 

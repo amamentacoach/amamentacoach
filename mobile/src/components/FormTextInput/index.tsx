@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { TextInput as ReactTextInput, TextInputProps } from 'react-native';
 
 import {

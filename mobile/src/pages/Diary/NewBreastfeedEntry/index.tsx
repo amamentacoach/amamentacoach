@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 import moment from 'moment';
+import * as Yup from 'yup';
 import 'moment/locale/pt-br';
 
-import { createBreastfeedEntry } from '../../../services/diaryRegistry';
-import { useAuth } from '../../../contexts/auth';
-import MainButton from '../../../components/MainButton';
-import FormTextInput from '../../../components/FormTextInput';
 import FormDateInput from '../../../components/FormDateInput';
 import FormPickerInput from '../../../components/FormPickerInput';
+import FormTextInput from '../../../components/FormTextInput';
+import MainButton from '../../../components/MainButton';
+import { useAuth } from '../../../contexts/auth';
+import { createBreastfeedEntry } from '../../../services/diaryRegistry';
 
 import {
   ScrollView,
@@ -26,8 +27,8 @@ import {
   ErrorText,
 } from './styles';
 
-import UncheckedBox from '../../../../assets/images/icons/checkbox_unchecked.svg';
 import CheckedBox from '../../../../assets/images/icons/checkbox_checked.svg';
+import UncheckedBox from '../../../../assets/images/icons/checkbox_unchecked.svg';
 
 interface FormValues {
   babyName: string;

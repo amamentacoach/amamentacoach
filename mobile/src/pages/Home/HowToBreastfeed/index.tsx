@@ -1,12 +1,13 @@
 import React from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 
-import ProgressDots from '../../../components/ProgressDots';
+import ImageWrapper from '../../../components/ImageWrapper';
 import InformationPages, {
   InfoModelProps,
   InfoPage,
 } from '../../../components/InformationPages';
-import ImageWrapper from '../../../components/ImageWrapper';
+import ProgressDots from '../../../components/ProgressDots';
 
 import {
   ContentWrapper,
@@ -21,15 +22,15 @@ import {
   LastPageButtonWrapper,
 } from './styles';
 
-import MilkWithdrawalOne from '../../../../assets/images/milk_withdrawal_one.png';
-import MilkWithdrawalTwo from '../../../../assets/images/milk_withdrawal_two.png';
-import MilkWithdrawalThree from '../../../../assets/images/milk_withdrawal_three.png';
-import MilkWithdrawalFour from '../../../../assets/images/milk_withdrawal_four.png';
-import MilkWithdrawalFive from '../../../../assets/images/milk_withdrawal_five.png';
-import MilkWithdrawalSix from '../../../../assets/images/milk_withdrawal_six.png';
-import MilkWithdrawalSeven from '../../../../assets/images/milk_withdrawal_seven.png';
 import MilkWithdrawalEight from '../../../../assets/images/milk_withdrawal_eight.png';
+import MilkWithdrawalFive from '../../../../assets/images/milk_withdrawal_five.png';
+import MilkWithdrawalFour from '../../../../assets/images/milk_withdrawal_four.png';
 import MilkWithdrawalNine from '../../../../assets/images/milk_withdrawal_nine.png';
+import MilkWithdrawalOne from '../../../../assets/images/milk_withdrawal_one.png';
+import MilkWithdrawalSeven from '../../../../assets/images/milk_withdrawal_seven.png';
+import MilkWithdrawalSix from '../../../../assets/images/milk_withdrawal_six.png';
+import MilkWithdrawalThree from '../../../../assets/images/milk_withdrawal_three.png';
+import MilkWithdrawalTwo from '../../../../assets/images/milk_withdrawal_two.png';
 
 const pages: InfoPage[] = [
   {

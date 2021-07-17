@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+
 import { Formik } from 'formik';
+import { View } from 'react-native';
 import * as Yup from 'yup';
 
-import { createUserQuestion } from '../../../services/questions';
 import FormTextInput from '../../../components/FormTextInput';
 import MainButton from '../../../components/MainButton';
 import Modal from '../../../components/Modal';
+import { createUserQuestion } from '../../../services/questions';
 
 import {
   ScrollView,
