@@ -62,7 +62,7 @@ class ResultController{
 
 
     async dadosGerais(req:Request,res:Response){
-        const pathCsv = `${path.resolve(__dirname, '..', '..','csv')}/saida.csv`
+        const pathCsv = `${path.resolve(__dirname, '..', '..')}/saida.csv`
         const csv = createObjectCsvWriter({
             path: pathCsv,
             header: [
