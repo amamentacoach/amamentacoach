@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import path from 'path';
 import knex from '../database/connection';  
 import {createObjectCsvWriter} from 'csv-writer';
+const convertCsvToXlsx = require('@aternus/csv-to-xlsx');
 import moment from 'moment'
 require('dotenv/config');
 
@@ -63,6 +64,7 @@ class ResultController{
 
     async dadosGerais(req:Request,res:Response){
         const pathCsv = `${path.resolve(__dirname, '..', '..')}/saida.csv`
+        const pathXlsx = `${path.resolve(__dirname, '..', '..')}/saida.xlsx`
         const csv = createObjectCsvWriter({
             path: pathCsv,
             header: [
@@ -161,7 +163,7 @@ class ResultController{
                 mae[`complicacoes`] = bebe.complicacoes ? 1 : 0
                 mae[`data_parto`] = bebe.data_parto.toLocaleDateString('pt-br')
                 mae[`tipo_parto`] = bebe.tipo_parto ? 1 : 0
-                mae[`alocacao${j}`] = alvosMap.get(bebe.local)
+                mae[`alocacao${j}`] = alvosMap.get(bebe.local_cadastro)
                 mae['idade_gestacional'] = bebe.semanas_gest
                 mae[`apgar1bb${j}`] = bebe.apgar1
                 mae[`apgar5bb${j}`] = bebe.apgar2
@@ -347,8 +349,13 @@ class ResultController{
 
 
         await csv.writeRecords(maes)
+        try{
+            convertCsvToXlsx(pathCsv, pathXlsx)
+        }catch (e){
+            console.error(e.toString());
+        }
         //res.sendStatus(200)
-        res.download(pathCsv,"dados_gerais.csv")
+        res.download(pathXlsx,"dados_gerais.csv")
     }
 }
 
