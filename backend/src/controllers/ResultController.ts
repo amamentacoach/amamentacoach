@@ -355,7 +355,7 @@ class ResultController{
             console.error(e.toString());
         }
         //res.sendStatus(200)
-        res.download(pathXlsx,"dados_gerais.csv")
+        res.download(pathXlsx,"dados_gerais.xlsx")
     }
 }
 
