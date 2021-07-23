@@ -124,7 +124,7 @@ const pages: InfoPage[] = [
     content: [
       {
         text:
-          'Em geladeira, o leite ordenhado pode ser guardado com segurança por até 24 horas ou congelado por até 30 dias. Antes de alimentar o bebê com o leite guardado, aqueça-o em banho-maria.',
+          'Em geladeira, o leite ordenhado pode ser guardado com segurança por até 12 horas ou congelado por até 15 dias. Antes de alimentar o bebê com o leite guardado, aqueça-o em banho-maria.',
       },
     ],
   },
