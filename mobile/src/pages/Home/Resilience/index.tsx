@@ -7,12 +7,12 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 import OptionsList, { Options } from '../../../components/OptionList';
 
 import {
-  ScrollView,
-  PageHeader,
   Header,
+  LoadingContainer,
+  PageHeader,
+  ScrollView,
   Text,
   VideoContainer,
-  LoadingContainer,
 } from './styles';
 
 import ErlenmeyerGreen from '../../../../assets/images/erlenmeyer_green.svg';

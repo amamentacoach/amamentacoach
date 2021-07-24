@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import { FlatList } from 'react-native';
 
 import { useIsFirstRun } from '../../../contexts/firstRun';
-import { Message as IMessage, listMessages } from '../../../services/messages';
+import { listMessages, Message as IMessage } from '../../../services/messages';
 import { setMessagesPageOpened } from '../../../services/telemetry';
 
 import {
@@ -13,8 +13,8 @@ import {
   Content,
   FlatlistContainer,
   Line,
-  MessageContainer,
   LoadingIndicator,
+  MessageContainer,
 } from './styles';
 
 import AddIcon from '../../../../assets/images/icons/ic_add.svg';

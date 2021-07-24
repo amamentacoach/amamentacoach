@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import DiaryBreastfeedEntry from '../../../../components/DiaryBreastfeedEntry';
 import DiaryRegistryEntry from '../../../../components/DiaryRegistryEntry';
 import {
-  getDailyReport,
   DailyReport as IDailyReport,
+  getDailyReport,
 } from '../../../../services/report';
 
-import { Header, Container, EntryContainer } from './styles';
+import { Container, EntryContainer, Header } from './styles';
 
 interface DailyReportProps {
   isLoading: boolean;

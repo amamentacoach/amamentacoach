@@ -7,15 +7,15 @@ import { InfoModelProps } from '../InformationPages';
 import ProgressDots from '../ProgressDots';
 
 import {
-  ContinueButton,
-  TextContinueButton,
-  ContentWrapper,
+  ContentHeaderText,
   ContentText,
+  ContentTitleText,
+  ContentWrapper,
+  ContinueButton,
+  CurrentPageWrapper,
   Footer,
   LastPageButtonWrapper,
-  CurrentPageWrapper,
-  ContentTitleText,
-  ContentHeaderText,
+  TextContinueButton,
 } from './styles';
 
 // Página genérica que pode ser passada a um componente InformationPages.

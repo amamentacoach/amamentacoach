@@ -1,11 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { StackActions, useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 
 import { useAuth } from '../../contexts/auth';
-import { answerQuestion, AnswerFeedback } from '../../services/survey';
+import { AnswerFeedback, answerQuestion } from '../../services/survey';
 import {
   getSurveyQuestions,
   SurveyQuestion,
@@ -13,8 +13,8 @@ import {
 import Modal from '../Modal';
 
 import {
-  HeaderBackground,
   ContentContainer,
+  HeaderBackground,
   HeaderText,
   ScrollView,
 } from './styles';

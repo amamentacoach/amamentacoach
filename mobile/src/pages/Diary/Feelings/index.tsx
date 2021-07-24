@@ -1,9 +1,7 @@
 import React from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation, StackActions } from '@react-navigation/native';
-import moment from 'moment';
-import 'moment/locale/pt-br';
+import { StackActions, useNavigation } from '@react-navigation/native';
 
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
 import {
@@ -15,13 +13,13 @@ import MainButton from '../../../components/MainButton';
 import SecondaryButton from '../../../components/SecondaryButton';
 import Survey, { SurveyPage } from '../../../components/Survey';
 import theme from '../../../config/theme';
-import { dateFormatVerbose } from '../../../utils/date';
+import { dateFormatVerbose } from '../../../lib/date-fns';
 
 import { Container, Footer, SecondFooterButtonContainer } from './styles';
 
 const Feelings: React.FC = () => {
   const navigation = useNavigation();
-  const currentDate = dateFormatVerbose(moment());
+  const currentDate = dateFormatVerbose(new Date());
 
   // Marca o formulário como enviado no dia.
   async function setFormSent() {

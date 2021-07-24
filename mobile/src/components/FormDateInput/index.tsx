@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
-import moment, { Moment } from 'moment';
-import { TouchableOpacity, Platform } from 'react-native';
-import 'moment/locale/pt-br';
+import { Platform, TouchableOpacity } from 'react-native';
+
+import { format } from '../../lib/date-fns';
 
 import {
   Container,
-  LabelText,
-  TextInput,
   ErrorContainer,
   ErrorText,
+  LabelText,
+  TextInput,
 } from './styles';
 
 interface FormDateProps {
@@ -33,28 +33,28 @@ const FormDateInput: React.FC<FormDateProps> = ({
   onChange,
 }) => {
   const [show, setShow] = useState(false);
-  const [date, setDate] = useState<Moment | undefined>();
+  const [date, setDate] = useState<Date | undefined>();
 
   // Formata a data salva para ser exibida no TextInput do componente.
-  function formatDisplayDate(dateToFormat?: Moment): string {
+  function formatDisplayDate(dateToFormat?: Date): string {
     if (!dateToFormat) {
       return '';
     }
     if (mode === 'time') {
-      return dateToFormat.format('kk:mm');
+      return format(dateToFormat, 'kk:mm');
     }
-    return dateToFormat.format('DD[/]MM[/]YYYY');
+    return format(dateToFormat, 'dd/MM/yyyy');
   }
 
   // Formata a data salva para ser armazenada no useState do componente e valor final do formulário.
-  function formatStateDate(dateToFormat?: Moment): string {
+  function formatStateDate(dateToFormat?: Date): string {
     if (!dateToFormat) {
       return '';
     }
     if (mode === 'time') {
-      return dateToFormat.format('kk:mm');
+      return format(dateToFormat, 'kk:mm');
     }
-    return dateToFormat.format('YYYY[-]MM[-]DD');
+    return format(dateToFormat, 'yyyy-MM-dd');
   }
 
   // Exibe o seletor.
@@ -66,9 +66,8 @@ const FormDateInput: React.FC<FormDateProps> = ({
   function handleDateSelected(selectedDate?: Date) {
     setShow(Platform.OS === 'ios');
     if (selectedDate) {
-      const newDate = moment(selectedDate);
-      setDate(newDate);
-      onChange(fieldName, formatStateDate(newDate));
+      onChange(fieldName, formatStateDate(selectedDate));
+      setDate(selectedDate);
     }
   }
 
@@ -90,7 +89,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={date ? date.toDate() : maxDate}
+          value={date || maxDate}
           // @ts-ignore
           mode={mode}
           display="default"

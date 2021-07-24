@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   getWeeklyReport,
@@ -6,13 +6,13 @@ import {
 } from '../../../../services/report';
 
 import {
-  Header,
-  Container,
-  Question,
   Answer,
-  EntryContainer,
-  Line,
   AnswerHeader,
+  Container,
+  EntryContainer,
+  Header,
+  Line,
+  Question,
 } from './styles';
 
 interface WeeklyReportProps {

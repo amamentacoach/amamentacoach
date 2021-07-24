@@ -14,14 +14,14 @@ import { useAuth } from '../../../contexts/auth';
 import { LoginStatus } from '../../../services/auth';
 
 import {
-  ScrollView,
-  Header,
-  FormContainer,
-  SubmitButtonContainer,
   ForgotPasswordText,
+  FormContainer,
+  Header,
   NoAccountText,
-  SignUpText,
+  ScrollView,
   SignUpContainer,
+  SignUpText,
+  SubmitButtonContainer,
 } from './styles';
 
 import Logo from '../../../../assets/images/logo_primary.png';

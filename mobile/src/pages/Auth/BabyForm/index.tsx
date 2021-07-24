@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Formik, FormikErrors } from 'formik';
 import { View } from 'react-native';
 import * as Yup from 'yup';
@@ -12,23 +12,23 @@ import FormTextInput from '../../../components/FormTextInput';
 import MainButton from '../../../components/MainButton';
 import Modal from '../../../components/Modal';
 import SecondaryButton from '../../../components/SecondaryButton';
-import { MotherSignUpInfo, BabySignUpInfo } from '../../../services/auth';
+import { BabySignUpInfo, MotherSignUpInfo } from '../../../services/auth';
 
 import {
-  ScrollView,
-  HeaderText,
-  HeaderSubText,
-  FormContainer,
-  SubOptionsContainer,
-  FirstSubOptionContainer,
-  SecondSubOptionContainer,
-  GestationWeeksContainer,
-  GestationDaysContainer,
-  ApgarTextContainer,
-  ApgarText,
-  SubmitButtonContainer,
-  ApgarTextHeader,
   ApgarHelpButton,
+  ApgarText,
+  ApgarTextContainer,
+  ApgarTextHeader,
+  FirstSubOptionContainer,
+  FormContainer,
+  GestationDaysContainer,
+  GestationWeeksContainer,
+  HeaderSubText,
+  HeaderText,
+  ScrollView,
+  SecondSubOptionContainer,
+  SubmitButtonContainer,
+  SubOptionsContainer,
 } from './styles';
 
 import HelpIcon from '../../../../assets/images/icons/ic_question.svg';

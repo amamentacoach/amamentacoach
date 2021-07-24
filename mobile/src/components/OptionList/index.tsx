@@ -6,11 +6,11 @@ import {
   ContentContainer,
   ContentHeader,
   ContentOptionButton,
-  ContentTitle,
-  ContentSubtitle,
   ContentSeparator,
-  Option,
+  ContentSubtitle,
   ContentTextContainer,
+  ContentTitle,
+  Option,
 } from './styles';
 
 import NextIcon from '../../../assets/images/icons/ic_next.svg';

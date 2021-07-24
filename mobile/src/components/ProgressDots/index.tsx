@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FlatList } from 'react-native';
 
-import { Container, CircleShape } from './styles';
+import { CircleShape, Container } from './styles';
 
 interface ProgressDotsProps {
   selectedIndex: number;

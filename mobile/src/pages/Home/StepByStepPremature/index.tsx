@@ -12,7 +12,7 @@ import ProgressDots from '../../../components/ProgressDots';
 import theme from '../../../config/theme';
 
 import {
-  Foreground,
+  Background,
   ContentHeaderText,
   ContentText,
   ContentTitleText,
@@ -20,7 +20,7 @@ import {
   ContinueButton,
   CurrentPageWrapper,
   Footer,
-  Background,
+  Foreground,
   LastPageButtonWrapper,
   TextContinueButton,
 } from './styles';

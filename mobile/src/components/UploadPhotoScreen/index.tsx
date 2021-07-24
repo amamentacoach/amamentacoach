@@ -9,13 +9,13 @@ import MainButton from '../MainButton';
 import SecondaryButton from '../SecondaryButton';
 
 import {
-  ScrollView,
   FormContainer,
-  SubmitButtonContainer,
-  Text,
+  ScrollView,
+  SelectButtonContainer,
   SelectedImage,
   SendButtonContainer,
-  SelectButtonContainer,
+  SubmitButtonContainer,
+  Text,
 } from './styles';
 
 interface UploadPhotoScreenProps {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import { FlatList } from 'react-native';
@@ -10,9 +10,9 @@ import {
   Answer,
   FlatlistContainer,
   Line,
-  QuestionContainer,
   LoadingIndicator,
   Question,
+  QuestionContainer,
 } from './styles';
 
 import AddIcon from '../../../../assets/images/icons/ic_add.svg';

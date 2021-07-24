@@ -12,14 +12,14 @@ import ProgressDots from '../../../components/ProgressDots';
 import { useIsFirstRun } from '../../../contexts/firstRun';
 
 import {
+  ContentText,
+  ContentWrapper,
+  CurrentPageWrapper,
+  Footer,
   Header,
+  LastPageButtonWrapper,
   SkipButton,
   SkipButtonText,
-  ContentWrapper,
-  ContentText,
-  Footer,
-  LastPageButtonWrapper,
-  CurrentPageWrapper,
 } from './styles';
 
 import IntroChart from '../../../../assets/images/intro_chart.svg';

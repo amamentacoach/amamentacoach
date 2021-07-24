@@ -7,13 +7,13 @@ import MainButton from '../MainButton';
 import { SurveyPage } from '../Survey';
 
 import {
-  Footer,
-  QuestionText,
+  Container,
   CurrentPageContainer,
   CurrentPageText,
-  Container,
-  ImageContainer,
+  Footer,
   FullWidthImage,
+  ImageContainer,
+  QuestionText,
 } from './styles';
 
 // Retorna uma página genérica que pode ser fornecida a um componente Survey.

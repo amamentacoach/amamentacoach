@@ -6,7 +6,7 @@ import { View } from 'react-native';
 import ImageWrapper from '../../../components/ImageWrapper';
 import OptionsList, { Options } from '../../../components/OptionList';
 
-import { ScrollView, Text, Container } from './styles';
+import { Container, ScrollView, Text } from './styles';
 
 import Banner from '../../../../assets/images/banner_canguru.png';
 import IcVideo from '../../../../assets/images/ic_video.svg';

@@ -10,16 +10,16 @@ import ProgressDots from '../../../components/ProgressDots';
 import { useIsFirstRun } from '../../../contexts/firstRun';
 
 import {
-  Header,
-  ContentWrapper,
+  ColoredText,
   ContentText,
-  Footer,
-  LastPageButtonWrapper,
+  ContentWrapper,
   CurrentPageWrapper,
+  Footer,
+  Header,
+  HeaderLastPageBox,
   ImageContainer,
   LastPageBox,
-  ColoredText,
-  HeaderLastPageBox,
+  LastPageButtonWrapper,
 } from './styles';
 
 import SurveyPrimary from '../../../../assets/images/icons/survey_primary.svg';

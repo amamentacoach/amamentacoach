@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import OptionsList, { Options } from '../../../components/OptionList';
 
-import { ScrollView, Header, BannerImage } from './styles';
+import { BannerImage, Header, ScrollView } from './styles';
 
 import HUBanner from '../../../../assets/images/banner_hu.png';
 import IcVideo from '../../../../assets/images/ic_video.svg';

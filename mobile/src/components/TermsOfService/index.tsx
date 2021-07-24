@@ -1,16 +1,16 @@
 import React from 'react';
 
-import moment from 'moment';
 import { View } from 'react-native';
-import 'moment/locale/pt-br';
 
-import { Title, MainText, BoldMainText, Container } from './styles';
+import { format } from '../../lib/date-fns';
+
+import { BoldMainText, Container, MainText, Title } from './styles';
 
 interface Props {
   name: string;
 }
 
-const date = moment().format('DD [de] MMMM [de] yy');
+const date = format(new Date(), 'dd [de] MMMM [de] yy');
 
 export const AdultTermsOfService: React.FC<Props> = ({ name }) => {
   return (

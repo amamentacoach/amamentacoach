@@ -2,7 +2,7 @@ import React from 'react';
 
 import ImageWrapper from '../../../components/ImageWrapper';
 
-import { ContentWrapper, ContentText, ScrollView } from './styles';
+import { ContentText, ContentWrapper, ScrollView } from './styles';
 
 import MilkAdditionalInfoOne from '../../../../assets/images/milk_additional_info_one.png';
 import MilkAdditionalInfoThree from '../../../../assets/images/milk_additional_info_three.png';

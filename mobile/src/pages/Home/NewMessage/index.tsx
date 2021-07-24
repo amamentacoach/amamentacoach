@@ -10,10 +10,10 @@ import Modal from '../../../components/Modal';
 import { createMessage } from '../../../services/messages';
 
 import {
-  ScrollView,
   FormContainer,
-  SubmitButtonContainer,
   HeaderText,
+  ScrollView,
+  SubmitButtonContainer,
 } from './styles';
 
 interface FormValues {

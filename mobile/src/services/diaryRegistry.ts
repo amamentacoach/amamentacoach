@@ -1,4 +1,4 @@
-import { Moment } from 'moment';
+import { format } from '../lib/date-fns';
 
 import api from './api';
 
@@ -45,9 +45,11 @@ export async function createExtractionEntry(
 
 // Retorna todas as ordenhas realizadas pela mãe em uma data.
 export async function listExtractionsEntries(
-  date: Moment,
+  date: Date,
 ): Promise<ExtractionEntry[]> {
-  const { data } = await api.get(`/maes/ordenhas/${date.format('YYYY-MM-DD')}`);
+  const { data } = await api.get(
+    `/maes/ordenhas/${format(date, 'yyyy-MM-dd')}`,
+  );
   return data.map((item: any) => ({
     id: item.id,
     baby_id: item.bebe_id,
@@ -80,10 +82,10 @@ export async function createBreastfeedEntry(
 // Retorna todos os registros de amamentação feitos no diário em uma data.
 export async function listBreastfeedEntries(
   babyId: number,
-  date: Moment,
+  date: Date,
 ): Promise<BreastfeedEntry> {
   const { data } = await api.get(
-    `/bebes/${babyId}/mamadas/${date.format('YYYY-MM-DD')}`,
+    `/bebes/${babyId}/mamadas/${format(date, 'yyyy-MM-dd')}`,
   );
   return {
     id: data.id,

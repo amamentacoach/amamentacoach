@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
-import moment from 'moment';
 import * as Yup from 'yup';
-import 'moment/locale/pt-br';
 
 import FormDateInput from '../../../components/FormDateInput';
 import FormPickerInput from '../../../components/FormPickerInput';
@@ -14,17 +12,17 @@ import { useAuth } from '../../../contexts/auth';
 import { createBreastfeedEntry } from '../../../services/diaryRegistry';
 
 import {
-  ScrollView,
-  FormContainer,
-  SubmitButtonContainer,
-  FormContent,
-  OptionText,
-  MultipleOptionContainer,
-  OptionHeader,
-  FirstOption,
-  SecondOption,
   ErrorContainer,
   ErrorText,
+  FirstOption,
+  FormContainer,
+  FormContent,
+  MultipleOptionContainer,
+  OptionHeader,
+  OptionText,
+  ScrollView,
+  SecondOption,
+  SubmitButtonContainer,
 } from './styles';
 
 import CheckedBox from '../../../../assets/images/icons/checkbox_checked.svg';
@@ -100,13 +98,18 @@ const NewDiaryRegistry: React.FC = () => {
       breast = breastRight;
     }
 
+    const [minutes, seconds] = time
+      .split(':')
+      .map(value => parseInt(value, 10));
+    const now = new Date();
+    now.setHours(minutes, seconds);
+
     setIsSendingForm(true);
     await createBreastfeedEntry(
       selectedBaby.id,
       breast,
       parseInt(duration, 10),
-      // Transforma o horário em uma data.
-      moment(time, ['kk:mm']).toDate(),
+      now,
     );
     navigation.navigate('DiaryBreastfeed');
   }

@@ -6,20 +6,20 @@ import { ActivityIndicator } from 'react-native';
 
 import PieChart from '../../../components/PieChart';
 import {
-  SurveyStatistics as ISurveyStatistics,
   listSurveyStatistics,
+  SurveyStatistics as ISurveyStatistics,
 } from '../../../services/survey';
 
 import {
-  ScrollView,
-  HeaderText,
-  HeaderBackground,
   ContentContainer,
-  QuestionContainer,
-  ContentSeparator,
   ContentHeader,
+  ContentSeparator,
+  HeaderBackground,
+  HeaderText,
   Question,
+  QuestionContainer,
   QuestionIndex,
+  ScrollView,
 } from './styles';
 
 const SurveyStatistics: React.FC = () => {

@@ -9,11 +9,11 @@ import FormTextInput from '../../../components/FormTextInput';
 import MainButton from '../../../components/MainButton';
 
 import {
-  ScrollView,
-  Header,
-  HeaderText,
-  HeaderSubText,
   FormContainer,
+  Header,
+  HeaderSubText,
+  HeaderText,
+  ScrollView,
   SubmitButtonContainer,
 } from './styles';
 

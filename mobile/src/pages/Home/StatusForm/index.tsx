@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
@@ -14,26 +14,26 @@ import Modal from '../../../components/Modal';
 import SecondaryButton from '../../../components/SecondaryButton';
 import theme from '../../../config/theme';
 import { useAuth } from '../../../contexts/auth';
-import { answerStatusForm, answerFeedingForm } from '../../../services/survey';
+import { answerFeedingForm, answerStatusForm } from '../../../services/survey';
 import {
   getSurveyQuestions,
   SurveyQuestion,
 } from '../../../utils/getSurveyQuestions';
 
 import {
-  HeaderBackground,
+  ColoredText,
   ContentContainer,
+  FirstButtonContainer,
+  Footer,
+  HeaderBackground,
+  HeaderInfoModal,
   HeaderText,
-  ScrollView,
+  InfoButton,
   QuestionContainer,
   QuestionText,
-  Footer,
-  InfoButton,
-  HeaderInfoModal,
-  TextInfoModal,
-  ColoredText,
+  ScrollView,
   SecondButtonContainer,
-  FirstButtonContainer,
+  TextInfoModal,
 } from './styles';
 
 import QuestionIcon from '../../../../assets/images/icons/ic_question_white.svg';

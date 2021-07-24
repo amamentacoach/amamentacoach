@@ -12,12 +12,12 @@ import SecondaryButton from '../../../components/SecondaryButton';
 import theme from '../../../config/theme';
 
 import {
-  HeaderBackground,
   ContentContainer,
-  ContentText,
   ContentHeader,
-  Footer,
+  ContentText,
   FirstButtonContainer,
+  Footer,
+  HeaderBackground,
   SecondButtonContainer,
 } from './styles';
 

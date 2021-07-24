@@ -1,9 +1,9 @@
 import React from 'react';
 
 import {
-  ImageSourcePropType,
-  ImageProps,
   Image as ReactImage,
+  ImageProps,
+  ImageSourcePropType,
 } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 

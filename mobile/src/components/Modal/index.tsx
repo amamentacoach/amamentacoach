@@ -6,10 +6,10 @@ import {
   Container,
   Content,
   Line,
-  OptionText,
-  OptionsContainer,
-  Option,
   MaxHeightImage,
+  Option,
+  OptionsContainer,
+  OptionText,
 } from './styles';
 
 interface MainModalProps {

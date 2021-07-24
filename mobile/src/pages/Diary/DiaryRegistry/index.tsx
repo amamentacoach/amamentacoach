@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   RouteProp,
@@ -6,21 +6,19 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
-import moment from 'moment';
 import { ActivityIndicator } from 'react-native';
-import 'moment/locale/pt-br';
 
 import DiaryRegistryEntry from '../../../components/DiaryRegistryEntry';
 import MainButton from '../../../components/MainButton';
 import { useIsFirstRun } from '../../../contexts/firstRun';
+import { dateFormatVerbose } from '../../../lib/date-fns';
 import {
   ExtractionEntry,
   listExtractionsEntries,
 } from '../../../services/diaryRegistry';
 import { setExtractionPageOpened } from '../../../services/telemetry';
-import { dateFormatVerbose } from '../../../utils/date';
 
-import { DateText, Container, ListContainer } from './styles';
+import { Container, DateText, ListContainer } from './styles';
 
 type ScreenParams = {
   DiaryRegistry: {
@@ -40,7 +38,7 @@ const DiaryRegistry: React.FC = () => {
   useEffect(() => {
     async function fetchRegistries() {
       setIsLoading(true);
-      const oldRegistries = await listExtractionsEntries(moment(date));
+      const oldRegistries = await listExtractionsEntries(new Date(date));
       setRegistries(oldRegistries);
       setIsLoading(false);
     }
@@ -56,7 +54,7 @@ const DiaryRegistry: React.FC = () => {
 
   return (
     <Container>
-      <DateText>{dateFormatVerbose(moment(date))}</DateText>
+      <DateText>{dateFormatVerbose(new Date(date))}</DateText>
       <ListContainer>
         {isLoading ? (
           <ActivityIndicator

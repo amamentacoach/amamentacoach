@@ -10,13 +10,13 @@ import ProgressDots from '../../../components/ProgressDots';
 import { useIsFirstRun } from '../../../contexts/firstRun';
 
 import {
-  ContinueButton,
-  TextContinueButton,
-  ContentWrapper,
   ContentText,
+  ContentWrapper,
+  ContinueButton,
+  CurrentPageWrapper,
   Footer,
   FooterButtonWrapper,
-  CurrentPageWrapper,
+  TextContinueButton,
 } from './styles';
 
 import IntroDiary from '../../../../assets/images/intro_diary.svg';

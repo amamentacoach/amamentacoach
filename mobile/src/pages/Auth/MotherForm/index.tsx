@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -13,17 +13,17 @@ import SecondaryButton from '../../../components/SecondaryButton';
 import { MotherSignUpInfo } from '../../../services/auth';
 
 import {
-  ScrollView,
-  HeaderText,
-  HeaderSubText,
-  FormContainer,
-  PhoneInputContainer,
   DDDContainer,
-  SubmitButtonContainer,
   FirstSubOptionContainer,
-  SecondSubOptionContainer,
-  SubOptionsContainer,
+  FormContainer,
+  HeaderSubText,
+  HeaderText,
   OptionPickerContainer,
+  PhoneInputContainer,
+  ScrollView,
+  SecondSubOptionContainer,
+  SubmitButtonContainer,
+  SubOptionsContainer,
 } from './styles';
 
 interface FormValues {

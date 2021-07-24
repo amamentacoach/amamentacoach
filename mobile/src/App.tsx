@@ -1,5 +1,7 @@
 import React from 'react';
 
+import 'moment/locale/pt-br';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components/native';

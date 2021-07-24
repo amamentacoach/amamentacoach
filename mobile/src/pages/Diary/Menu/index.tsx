@@ -2,22 +2,20 @@ import React, { useEffect, useState } from 'react';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from '@react-navigation/native';
-import moment from 'moment';
-import 'moment/locale/pt-br';
 
 import Modal from '../../../components/Modal';
 import OptionsList, { Options } from '../../../components/OptionList';
 import { useAuth } from '../../../contexts/auth';
 import { useIsFirstRun } from '../../../contexts/firstRun';
+import { storageIsToday, dateFormatVerbose } from '../../../lib/date-fns';
 import { setDiaryPageOpened } from '../../../services/telemetry';
-import { checkOneDayPassed, dateFormatVerbose } from '../../../utils/date';
 
 import {
-  ScrollView,
-  Header,
-  HeaderTitle,
   CalendarButton,
   DateText,
+  Header,
+  HeaderTitle,
+  ScrollView,
 } from './styles';
 
 import Baby from '../../../../assets/images/canguru.svg';
@@ -36,7 +34,7 @@ const DiaryMenu: React.FC = () => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(moment());
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const options: Options[] = [
     {
@@ -60,7 +58,7 @@ const DiaryMenu: React.FC = () => {
       title: 'Sentimentos',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await checkOneDayPassed('@AmamentaCoach:DiaryFeelingsLastDate')) {
+        if (await storageIsToday('@AmamentaCoach:DiaryFeelingsLastDate')) {
           navigation.navigate('Feelings');
         } else {
           setIsModalVisible(true);
@@ -77,9 +75,7 @@ const DiaryMenu: React.FC = () => {
       title: 'Ajuda recebida',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (
-          await checkOneDayPassed('@AmamentaCoach:DiaryHelpReceivedLastDate')
-        ) {
+        if (await storageIsToday('@AmamentaCoach:DiaryHelpReceivedLastDate')) {
           navigation.navigate('HelpReceived');
         } else {
           setIsModalVisible(true);
@@ -91,7 +87,7 @@ const DiaryMenu: React.FC = () => {
       title: 'Meu Bebê Hoje',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await checkOneDayPassed('@AmamentaCoach:DiaryBabyLastDate')) {
+        if (await storageIsToday('@AmamentaCoach:DiaryBabyLastDate')) {
           navigation.navigate('DiaryBaby');
         } else {
           setIsModalVisible(true);
@@ -103,7 +99,7 @@ const DiaryMenu: React.FC = () => {
       title: 'Ações Realizadas com o bebê',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await checkOneDayPassed('@AmamentaCoach:DiaryActionsLastDate')) {
+        if (await storageIsToday('@AmamentaCoach:DiaryActionsLastDate')) {
           navigation.navigate('DiaryActions');
         } else {
           setIsModalVisible(true);
@@ -138,7 +134,7 @@ const DiaryMenu: React.FC = () => {
   function handleDateSelected(date?: Date) {
     setShowCalendar(false);
     if (date) {
-      setSelectedDate(moment(date));
+      setSelectedDate(new Date(date));
     }
   }
 
@@ -158,7 +154,7 @@ const DiaryMenu: React.FC = () => {
         {showCalendar && (
           <DateTimePicker
             testID="dateTimePicker"
-            value={selectedDate.toDate()}
+            value={selectedDate}
             mode="date"
             maximumDate={new Date()}
             onChange={(_: Event, date?: Date) => handleDateSelected(date)}

@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import moment, { Moment } from 'moment';
-import 'moment/locale/pt-br';
 
 // Formata uma data no formato Quarta-Feira, 01 de Janeiro de 2020
 function dateFormatVerbose(date: Moment) {

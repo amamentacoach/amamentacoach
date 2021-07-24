@@ -4,10 +4,10 @@ import { Picker } from '@react-native-picker/picker';
 
 import {
   Container,
-  LabelText,
-  PickerContainer,
   ErrorContainer,
   ErrorText,
+  LabelText,
+  PickerContainer,
 } from './styles';
 
 interface FormPickerProps {

@@ -4,10 +4,10 @@ import { TextInput as ReactTextInput, TextInputProps } from 'react-native';
 
 import {
   Container,
-  LabelText,
-  TextInput,
   ErrorContainer,
   ErrorText,
+  LabelText,
+  TextInput,
 } from './styles';
 
 interface FormTextProps extends TextInputProps {

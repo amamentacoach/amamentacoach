@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import { View } from 'react-native';
 import RNBootSplash from 'react-native-bootsplash';
-import 'moment/locale/pt-br';
 
 import FormPickerInput from '../../../components/FormPickerInput';
 import ImageWrapper from '../../../components/ImageWrapper';

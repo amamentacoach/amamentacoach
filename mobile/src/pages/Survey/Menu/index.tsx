@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import Modal from '../../../components/Modal';
 import OptionsList, { Options } from '../../../components/OptionList';
 import { useAuth } from '../../../contexts/auth';
-import { checkOneDayPassed } from '../../../utils/date';
+import { storageIsToday } from '../../../lib/date-fns';
 
 import { Header, HeaderTitle, ScrollView } from './styles';
 
@@ -27,9 +27,7 @@ const SurveyMenu: React.FC = () => {
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (
-          await checkOneDayPassed(
-            '@AmamentaCoach:DiarySurveyBreastfeedLastDate',
-          )
+          await storageIsToday('@AmamentaCoach:DiarySurveyBreastfeedLastDate')
         ) {
           navigation.navigate('SurveyBreastfeed');
         } else {
@@ -43,9 +41,7 @@ const SurveyMenu: React.FC = () => {
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (
-          await checkOneDayPassed(
-            '@AmamentaCoach:DiarySurveyMotivationLastDate',
-          )
+          await storageIsToday('@AmamentaCoach:DiarySurveyMotivationLastDate')
         ) {
           navigation.navigate('SurveyMotivation');
         } else {
@@ -58,7 +54,7 @@ const SurveyMenu: React.FC = () => {
       title: 'Sobre ajuda',
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await checkOneDayPassed('@AmamentaCoach:DiarySurveyHelpLastDate')) {
+        if (await storageIsToday('@AmamentaCoach:DiarySurveyHelpLastDate')) {
           navigation.navigate('SurveyHelp');
         } else {
           setIsModalVisible(true);
@@ -77,7 +73,7 @@ const SurveyMenu: React.FC = () => {
         onPress: async () => {
           // Checa se o usuário já respondeu o formulário no dia.
           if (
-            await checkOneDayPassed('@AmamentaCoach:DiarySurveyFatherLastDate')
+            await storageIsToday('@AmamentaCoach:DiarySurveyFatherLastDate')
           ) {
             navigation.navigate('SurveyFather');
           } else {

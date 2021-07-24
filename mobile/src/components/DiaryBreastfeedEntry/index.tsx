@@ -1,18 +1,17 @@
 import React from 'react';
 
-import moment from 'moment';
 import { View } from 'react-native';
-import 'moment/locale/pt-br';
 
+import { format } from '../../lib/date-fns';
 import { BreastfeedEntry } from '../../services/diaryRegistry';
 
 import {
+  BabyName,
   Breastfeed,
+  Content,
   Row,
   Text,
   TextContainer,
-  Content,
-  BabyName,
 } from './styles';
 
 const DiaryBreastfeedEntry: React.FC<BreastfeedEntry> = ({ name, entries }) => {
@@ -28,7 +27,7 @@ const DiaryBreastfeedEntry: React.FC<BreastfeedEntry> = ({ name, entries }) => {
           <Row>
             <TextContainer>
               <Text>Horário: </Text>
-              <Content>{moment(date).format('kk:mm')}</Content>
+              <Content>{format(new Date(date), 'kk:mm')}</Content>
             </TextContainer>
             <TextContainer>
               <Text>Duração: </Text>

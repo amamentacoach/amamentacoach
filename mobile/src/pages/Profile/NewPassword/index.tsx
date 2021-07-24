@@ -10,10 +10,10 @@ import Modal from '../../../components/Modal';
 import { newPassword } from '../../../services/auth';
 
 import {
-  ScrollView,
   FormContainer,
-  SubmitButtonContainer,
   HeaderText,
+  ScrollView,
+  SubmitButtonContainer,
 } from './styles';
 
 interface FormValues {

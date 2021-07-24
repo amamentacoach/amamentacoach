@@ -9,19 +9,19 @@ import ImageWrapper, {
 import ProgressDots from '../../../components/ProgressDots';
 
 import {
-  ContinueButton,
-  TextContinueButton,
+  ColoredContentText,
+  ContentText,
+  ContentTitleText,
   ContentWrapper,
+  ContinueButton,
+  CurrentPageWrapper,
   Footer,
   LastPageButtonWrapper,
-  CurrentPageWrapper,
-  ContentTitleText,
+  ListContainer,
   PageContainer,
   ScrollView,
-  ListContainer,
   TextContainer,
-  ContentText,
-  ColoredContentText,
+  TextContinueButton,
 } from './styles';
 
 import MilkWithdrawalSeven from '../../../../assets/images/milk_withdrawal_seven.png';

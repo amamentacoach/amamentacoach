@@ -5,7 +5,7 @@ import { Linking } from 'react-native';
 
 import OptionsList, { Options } from '../../../components/OptionList';
 
-import { ScrollView, HeaderText } from './styles';
+import { HeaderText, ScrollView } from './styles';
 
 import Crosswords from '../../../../assets/images/crosswords.svg';
 import Music from '../../../../assets/images/music.svg';

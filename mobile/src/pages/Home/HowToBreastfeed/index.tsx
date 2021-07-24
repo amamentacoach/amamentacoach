@@ -10,16 +10,16 @@ import InformationPages, {
 import ProgressDots from '../../../components/ProgressDots';
 
 import {
-  ContentWrapper,
   ContentText,
-  Footer,
-  CurrentPageWrapper,
   ContentTitleText,
+  ContentWrapper,
+  ContinueButton,
   CurrentPageContainer,
   CurrentPageText,
-  ContinueButton,
-  TextContinueButton,
+  CurrentPageWrapper,
+  Footer,
   LastPageButtonWrapper,
+  TextContinueButton,
 } from './styles';
 
 import MilkWithdrawalEight from '../../../../assets/images/milk_withdrawal_eight.png';

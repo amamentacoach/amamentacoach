@@ -10,9 +10,9 @@ import {
   LabelText,
   OptionButton,
   OptionsContainer,
+  OtherInputContainer,
   OuterCircle,
   TextOption,
-  OtherInputContainer,
 } from './styles';
 
 interface FormRadioGroupProps {
