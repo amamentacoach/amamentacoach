@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import moment from 'moment';
 
 import MainButton from '../../../components/MainButton';
-import SecondaryButton from '../../../components/SecondaryButton';
 import Modal from '../../../components/Modal';
+import SecondaryButton from '../../../components/SecondaryButton';
+import { isToday } from '../../../lib/date-fns';
 
 import {
-  ScrollView,
-  HeaderTitle,
   Card,
-  InnerBorder,
-  Footer,
-  FirstButtonContainer,
   CardText,
+  FirstButtonContainer,
+  Footer,
+  HeaderTitle,
+  InnerBorder,
+  ScrollView,
 } from './styles';
 
 interface Expectation {
@@ -94,7 +95,7 @@ const ManageExpectations: React.FC = () => {
 
       // Desativa caso já tenha sido utilizado uma vez no dia e exibe a opção selecionada
       // anteriormente.
-      if (moment(lastRunDate).isSame(new Date(), 'day')) {
+      if (isToday(new Date(lastRunDate))) {
         const lastSelectedExpectation =
           alreadySelected[alreadySelected.length - 1];
         setCurrentExpectation({
@@ -102,13 +103,6 @@ const ManageExpectations: React.FC = () => {
           old: lastSelectedExpectation.old,
           new: lastSelectedExpectation.new,
         });
-        await AsyncStorage.setItem(
-          '@AmamentaCoach:alreadySelectedExpectations',
-          JSON.stringify({
-            lastRunDate: new Date(),
-            alreadySelected,
-          }),
-        );
         setIsCorrectAnswerSelected(true);
         setIsButtonDisabled(true);
         return;

@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
+
 import { Dimensions, FlatList } from 'react-native';
+
 import { ImageWrapperSourcePropType } from '../ImageWrapper';
 
 import { ListContainer, PageContainer, ScrollView } from './styles';

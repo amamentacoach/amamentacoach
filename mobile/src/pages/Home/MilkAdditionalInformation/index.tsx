@@ -2,11 +2,11 @@ import React from 'react';
 
 import ImageWrapper from '../../../components/ImageWrapper';
 
-import { ContentWrapper, ContentText, ScrollView } from './styles';
+import { ContentText, ContentWrapper, ScrollView } from './styles';
 
 import MilkAdditionalInfoOne from '../../../../assets/images/milk_additional_info_one.png';
-import MilkAdditionalInfoTwo from '../../../../assets/images/milk_additional_info_two.png';
 import MilkAdditionalInfoThree from '../../../../assets/images/milk_additional_info_three.png';
+import MilkAdditionalInfoTwo from '../../../../assets/images/milk_additional_info_two.png';
 
 const MilkAdditionalInformation: React.FC = () => {
   return (

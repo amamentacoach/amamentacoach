@@ -1,14 +1,15 @@
 import React from 'react';
+
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { useIsFirstRun } from '../contexts/firstRun';
+import TermsOfService from '../pages/Auth/AcceptTermsOfService';
 import BabyForm from '../pages/Auth/BabyForm';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
 import Introduction from '../pages/Auth/Introduction';
 import Login from '../pages/Auth/Login';
 import MotherForm from '../pages/Auth/MotherForm';
 import SignUp from '../pages/Auth/SignUp';
-import TermsOfService from '../pages/Auth/AcceptTermsOfService';
 
 const AuthRoutes: React.FC = () => {
   const Stack = createStackNavigator();

@@ -1,9 +1,10 @@
 import React from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 
 import { useAuth } from '../../../contexts/auth';
 
-import { ScrollView, OptionButton, OptionText, Line } from './styles';
+import { Line, OptionButton, OptionText, ScrollView } from './styles';
 
 const Profile: React.FC = () => {
   const navigation = useNavigation();

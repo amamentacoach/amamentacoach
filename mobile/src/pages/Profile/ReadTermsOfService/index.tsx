@@ -1,12 +1,11 @@
 import React from 'react';
-import moment from 'moment';
-import 'moment/locale/pt-br';
 
-import { useAuth } from '../../../contexts/auth';
 import {
   AdultTermsOfService,
   MinorTermsOfService,
 } from '../../../components/TermsOfService';
+import { useAuth } from '../../../contexts/auth';
+import { differenceInYears } from '../../../lib/date-fns';
 
 import ScrollView from './styles';
 
@@ -15,7 +14,7 @@ const AcceptTermsOfService: React.FC = () => {
 
   return (
     <ScrollView>
-      {moment().diff(motherInfo.birthday, 'years') >= 18 ? (
+      {differenceInYears(new Date(), new Date(motherInfo.birthday)) >= 18 ? (
         <AdultTermsOfService name={motherInfo.name} />
       ) : (
         <MinorTermsOfService name={motherInfo.name} />

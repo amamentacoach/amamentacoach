@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import FormTextInput from '../FormTextInput';
+
 import {
   Container,
   ErrorContainer,
@@ -8,11 +10,10 @@ import {
   LabelText,
   OptionButton,
   OptionsContainer,
+  OtherInputContainer,
   OuterCircle,
   TextOption,
-  OtherInputContainer,
 } from './styles';
-import FormTextInput from '../FormTextInput';
 
 interface FormRadioGroupProps {
   fieldName: string;

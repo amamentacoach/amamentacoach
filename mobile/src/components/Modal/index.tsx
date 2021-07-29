@@ -1,14 +1,15 @@
 import * as React from 'react';
+
 import { Modal as ReactNativeModal } from 'react-native';
 
 import {
   Container,
   Content,
   Line,
-  OptionText,
-  OptionsContainer,
-  Option,
   MaxHeightImage,
+  Option,
+  OptionsContainer,
+  OptionText,
 } from './styles';
 
 interface MainModalProps {

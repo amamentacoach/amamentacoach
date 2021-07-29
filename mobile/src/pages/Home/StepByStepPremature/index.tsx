@@ -1,17 +1,18 @@
 import React from 'react';
-import { Dimensions, View } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
-import theme from '../../../config/theme';
+import { useNavigation } from '@react-navigation/native';
+import { Dimensions, View } from 'react-native';
+
+import ImageWrapper from '../../../components/ImageWrapper';
 import InformationPages, {
   InfoModelProps,
   InfoPage,
 } from '../../../components/InformationPages';
 import ProgressDots from '../../../components/ProgressDots';
-import ImageWrapper from '../../../components/ImageWrapper';
+import theme from '../../../config/theme';
 
 import {
-  Foreground,
+  Background,
   ContentHeaderText,
   ContentText,
   ContentTitleText,
@@ -19,7 +20,7 @@ import {
   ContinueButton,
   CurrentPageWrapper,
   Footer,
-  Background,
+  Foreground,
   LastPageButtonWrapper,
   TextContinueButton,
 } from './styles';

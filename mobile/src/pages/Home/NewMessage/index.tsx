@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+
 import { Formik } from 'formik';
+import { View } from 'react-native';
 import * as Yup from 'yup';
 
-import { createMessage } from '../../../services/messages';
 import FormTextInput from '../../../components/FormTextInput';
 import MainButton from '../../../components/MainButton';
 import Modal from '../../../components/Modal';
+import { createMessage } from '../../../services/messages';
 
 import {
-  ScrollView,
   FormContainer,
-  SubmitButtonContainer,
   HeaderText,
+  ScrollView,
+  SubmitButtonContainer,
 } from './styles';
 
 interface FormValues {

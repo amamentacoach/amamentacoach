@@ -1,10 +1,9 @@
 import React from 'react';
-import moment from 'moment';
-import 'moment/locale/pt-br';
 
+import { format } from '../../lib/date-fns';
 import { ExtractionEntry } from '../../services/diaryRegistry';
 
-import { Registry, Row, Text, TextContainer, Content } from './styles';
+import { Content, Registry, Row, Text, TextContainer } from './styles';
 
 const DiaryRegistryEntry: React.FC<ExtractionEntry> = ({
   breast,
@@ -17,7 +16,7 @@ const DiaryRegistryEntry: React.FC<ExtractionEntry> = ({
       <Row>
         <TextContainer>
           <Text>Horário: </Text>
-          <Content>{moment(date).format('kk:mm')}</Content>
+          <Content>{format(new Date(date), 'kk:mm')}</Content>
         </TextContainer>
         <TextContainer>
           <Text>Duração: </Text>

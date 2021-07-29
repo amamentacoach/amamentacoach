@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { useRoute, RouteProp } from '@react-navigation/native';
+
+import { RouteProp, useRoute } from '@react-navigation/native';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
@@ -9,10 +10,10 @@ import {
 } from '../../../services/telemetry';
 
 import {
-  ScrollView,
-  VideoContainer,
   ContentContainer,
   LoadingContainer,
+  ScrollView,
+  VideoContainer,
 } from './styles';
 
 type IScreenParams = {

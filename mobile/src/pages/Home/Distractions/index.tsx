@@ -1,14 +1,15 @@
 import React from 'react';
-import { Linking } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
+import { Linking } from 'react-native';
 
 import OptionsList, { Options } from '../../../components/OptionList';
 
-import { ScrollView, HeaderText } from './styles';
+import { HeaderText, ScrollView } from './styles';
 
-import Puzzle from '../../../../assets/images/puzzle.svg';
 import Crosswords from '../../../../assets/images/crosswords.svg';
 import Music from '../../../../assets/images/music.svg';
+import Puzzle from '../../../../assets/images/puzzle.svg';
 
 const Distractions: React.FC = () => {
   const navigation = useNavigation();

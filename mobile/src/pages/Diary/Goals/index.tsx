@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+
 import { StackActions, useNavigation } from '@react-navigation/native';
 
-import theme from '../../../config/theme';
-import Survey from '../../../components/Survey';
 import createGenericSurveyPage from '../../../components/GenericSurveyPage';
 import Modal from '../../../components/Modal';
+import Survey from '../../../components/Survey';
+import theme from '../../../config/theme';
 
 import { ModalContainer } from './styles';
 

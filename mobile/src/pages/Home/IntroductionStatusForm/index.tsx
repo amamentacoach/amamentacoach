@@ -1,25 +1,25 @@
 import React from 'react';
 
-import { useIsFirstRun } from '../../../contexts/firstRun';
-import MainButton from '../../../components/MainButton';
-import ProgressDots from '../../../components/ProgressDots';
+import ImageWrapper from '../../../components/ImageWrapper';
 import InformationPages, {
   InfoModelProps,
   InfoPage,
 } from '../../../components/InformationPages';
-import ImageWrapper from '../../../components/ImageWrapper';
+import MainButton from '../../../components/MainButton';
+import ProgressDots from '../../../components/ProgressDots';
+import { useIsFirstRun } from '../../../contexts/firstRun';
 
 import {
-  Header,
-  ContentWrapper,
+  ColoredText,
   ContentText,
-  Footer,
-  LastPageButtonWrapper,
+  ContentWrapper,
   CurrentPageWrapper,
+  Footer,
+  Header,
+  HeaderLastPageBox,
   ImageContainer,
   LastPageBox,
-  ColoredText,
-  HeaderLastPageBox,
+  LastPageButtonWrapper,
 } from './styles';
 
 import SurveyPrimary from '../../../../assets/images/icons/survey_primary.svg';

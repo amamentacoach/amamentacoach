@@ -1,14 +1,15 @@
 import React from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 
 import OptionsList, { Options } from '../../../components/OptionList';
 
 import { HeaderText, ScrollView } from './styles';
 
-import WithdrawalQuestion from '../../../../assets/images/withdrawal_question.svg';
 import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
 import WithdrawalCalendar from '../../../../assets/images/withdrawal_calendar.svg';
 import WithdrawalClock from '../../../../assets/images/withdrawal_clock.svg';
+import WithdrawalQuestion from '../../../../assets/images/withdrawal_question.svg';
 
 const Breastfeeding: React.FC = () => {
   const navigation = useNavigation();

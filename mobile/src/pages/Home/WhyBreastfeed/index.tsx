@@ -1,26 +1,27 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useRef } from 'react';
+
+import { useNavigation } from '@react-navigation/native';
 import { Dimensions, FlatList } from 'react-native';
 
-import ProgressDots from '../../../components/ProgressDots';
 import ImageWrapper, {
   ImageWrapperSourcePropType,
 } from '../../../components/ImageWrapper';
+import ProgressDots from '../../../components/ProgressDots';
 
 import {
-  ContinueButton,
-  TextContinueButton,
+  ColoredContentText,
+  ContentText,
+  ContentTitleText,
   ContentWrapper,
+  ContinueButton,
+  CurrentPageWrapper,
   Footer,
   LastPageButtonWrapper,
-  CurrentPageWrapper,
-  ContentTitleText,
+  ListContainer,
   PageContainer,
   ScrollView,
-  ListContainer,
   TextContainer,
-  ContentText,
-  ColoredContentText,
+  TextContinueButton,
 } from './styles';
 
 import MilkWithdrawalSeven from '../../../../assets/images/milk_withdrawal_seven.png';

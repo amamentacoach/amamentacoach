@@ -1,0 +1,25 @@
+{
+  // Compartilhado
+  "sim": "Sim",
+  "nao": "Não",
+  "alojamento": "Alojamento Conjunto",
+  "casa": "Casa",
+  "uci": "UCI Neonatal",
+  // Tela inicial.
+  "InicioCabecalho": "Início",
+  "InicioBotaoHU": "Comece por aqui!",
+  "InicioConteudo": "Conteúdo",
+  "InicioPopUpEscala": "Chegou o momento de avaliar novamente sua pontuação na escala de confiança materna para amamentar! Vamos lá?",
+  "InicioPopUpPrimeiraEscala": "Chegou o momento de avaliar sua pontuação na escala de confiança materna para amamentar! Vamos lá?",
+  "InicioPopUpExpectativas": "Você gostaria de visitar as expectativas hoje?",
+  "InicioPopUpStatusBebe": "Algum dos(as) seus(as) bebês já recebeu alta?",
+  "InicioLocalizacaoBebe": "Onde se encontra agora?",
+  "InicioOpcao1": "Olá, sou o prematuro",
+  "InicioOpcao2": "Passo a passo para amamentar o prematuro",
+  "InicioOpcao3": "A retirada do leite",
+  "InicioOpcao4": "Emoções e Amamentação",
+  "InicioOpcao5": "Você sabia?",
+  "InicioOpcao6": "Depoimento das mamães",
+  "InicioOpcao7": "Perguntas",
+  "InicioOpcao8": "Créditos"
+}

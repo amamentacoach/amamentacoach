@@ -1,55 +1,55 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
+import { View } from 'react-native';
 import RNBootSplash from 'react-native-bootsplash';
-import moment from 'moment';
-import 'moment/locale/pt-br';
 
-import { checkOneDayPassed } from '../../../utils/date';
+import FormPickerInput from '../../../components/FormPickerInput';
+import ImageWrapper from '../../../components/ImageWrapper';
+import Modal from '../../../components/Modal';
 import { Options } from '../../../components/OptionList';
 import theme from '../../../config/theme';
 import { useIsFirstRun } from '../../../contexts/firstRun';
-import FormPickerInput from '../../../components/FormPickerInput';
-import { setHomePageOpened } from '../../../services/telemetry';
+import { storageIsToday, isToday } from '../../../lib/date-fns';
 import {
-  checkBabiesLocation,
   BabyStatus,
+  checkBabiesLocation,
   updateBabyLocation,
 } from '../../../services/babyLocation';
-import Modal from '../../../components/Modal';
-import ImageWrapper from '../../../components/ImageWrapper';
+import { setHomePageOpened } from '../../../services/telemetry';
 
 import {
-  ScrollView,
-  Header,
-  HeaderText,
-  HUButton,
-  HUButtonText,
+  BannerImage,
   ContentContainer,
   ContentHeader,
   ContentOption,
-  HeaderBackground,
-  BannerImage,
-  ContentTitle,
   ContentSeparator,
-  Option,
   ContentTextContainer,
-  TextModal,
+  ContentTitle,
+  Header,
+  HeaderBackground,
+  HeaderText,
+  HUButton,
+  HUButtonText,
   InnerCircle,
-  OuterCircle,
-  ModalOption,
   LocationContainer,
+  ModalOption,
+  Option,
+  OuterCircle,
+  ScrollView,
+  TextModal,
 } from './styles';
 
-import Banner from '../../../../assets/images/home_banner.png';
 import HomeBaby from '../../../../assets/images/home_baby.svg';
+import Banner from '../../../../assets/images/home_banner.png';
 import HomeBreastfeed from '../../../../assets/images/home_breastfeed.svg';
-import HomeMilk from '../../../../assets/images/home_milk.svg';
-import HomeEmotions from '../../../../assets/images/home_emotions.svg';
-import HomeMoreInformation from '../../../../assets/images/home_more_information.svg';
-import HomeMessage from '../../../../assets/images/home_message.svg';
 import HomeCredits from '../../../../assets/images/home_credits.svg';
+import HomeEmotions from '../../../../assets/images/home_emotions.svg';
+import HomeMessage from '../../../../assets/images/home_message.svg';
+import HomeMilk from '../../../../assets/images/home_milk.svg';
+import HomeMoreInformation from '../../../../assets/images/home_more_information.svg';
 
 interface BabyModalOption {
   newLocation: string;
@@ -83,42 +83,42 @@ const Home: React.FC = () => {
   const options: Options[] = [
     {
       image: HomeBaby,
-      title: 'Olá, sou o prematuro',
+      title: i18n.t('InicioOpcao1'),
       onPress: () => navigation.navigate('Premature'),
     },
     {
       image: HomeBreastfeed,
-      title: 'Passo a passo para amamentar o prematuro',
+      title: i18n.t('InicioOpcao2'),
       onPress: () => navigation.navigate('StepByStepPremature'),
     },
     {
       image: HomeMilk,
-      title: 'A retirada do leite',
+      title: i18n.t('InicioOpcao3'),
       onPress: () => navigation.navigate('Breastfeeding'),
     },
     {
       image: HomeEmotions,
-      title: 'Emoções e Amamentação ',
+      title: i18n.t('InicioOpcao4'),
       onPress: () => navigation.navigate('EmotionsAndBreastfeeding'),
     },
     {
       image: HomeMoreInformation,
-      title: 'Você sabia?',
+      title: i18n.t('InicioOpcao5'),
       onPress: () => navigation.navigate('AdditionalInformation'),
     },
     {
       image: HomeMessage,
-      title: 'Depoimento das mamães',
+      title: i18n.t('InicioOpcao6'),
       onPress: () => navigation.navigate('Messages'),
     },
     {
       image: HomeMessage,
-      title: 'Perguntas',
+      title: i18n.t('InicioOpcao7'),
       onPress: () => navigation.navigate('Questions'),
     },
     {
       image: HomeCredits,
-      title: 'Créditos',
+      title: i18n.t('InicioOpcao8'),
       onPress: () => navigation.navigate('Credits'),
     },
   ];
@@ -160,7 +160,7 @@ const Home: React.FC = () => {
       }
 
       const { lastRunDate } = JSON.parse(expectationsStorage);
-      if (moment().diff(moment(lastRunDate), 'days') >= 1) {
+      if (!isToday(new Date(lastRunDate))) {
         setExpectationsModalVisibility(true);
       }
     }
@@ -169,7 +169,7 @@ const Home: React.FC = () => {
     // vez abrindo o app é buscado os bebês que podem receber alta.
     async function checkUserActions() {
       // Menos de um dia se passou.
-      if (!checkOneDayPassed('@AmamentaCoach:lastOpenedDate')) {
+      if (!storageIsToday('@AmamentaCoach:lastOpenedDate')) {
         return;
       }
 
@@ -245,17 +245,17 @@ const Home: React.FC = () => {
     <>
       <Modal
         color={theme.babyPink}
-        content="Você gostaria de visitar as expectativas hoje?"
+        content={i18n.t('InicioPopUpExpectativas')}
         options={[
           {
-            text: 'Sim',
+            text: i18n.t('sim'),
             onPress: () => {
               hideAllModals();
               navigation.navigate('ManageExpectations');
             },
           },
           {
-            text: 'Não',
+            text: i18n.t('nao'),
             onPress: () => setExpectationsModalVisibility(false),
           },
         ]}
@@ -267,12 +267,14 @@ const Home: React.FC = () => {
       />
       <Modal
         color={theme.babyPink}
-        content={`Chegou o momento de avaliar${
-          formAction !== '1D' ? ' novamente' : ''
-        } sua pontuação na escala de confiança materna para amamentar! Vamos lá?`}
+        content={
+          formAction === '1D'
+            ? i18n.t('InicioPopUpPrimeiraEscala')
+            : i18n.t('InicioPopUpEscala')
+        }
         options={[
           {
-            text: 'Sim',
+            text: i18n.t('sim'),
             onPress: () => {
               hideAllModals();
               navigation.navigate('StatusForm', {
@@ -281,7 +283,7 @@ const Home: React.FC = () => {
             },
           },
           {
-            text: 'Não',
+            text: i18n.t('nao'),
             onPress: () => setFormModalVisibility(false),
           },
         ]}
@@ -292,18 +294,18 @@ const Home: React.FC = () => {
           color={theme.babyPurple}
           options={[
             {
-              text: 'Sim',
+              text: i18n.t('sim'),
               disabled: !validateModalFields(),
               onPress: handleUpdateBabyLocation,
             },
             {
-              text: 'Não',
+              text: i18n.t('nao'),
               onPress: () => setBabyModalVisibility(false),
             },
           ]}
           visible={babyModalVisibility && !formModalVisibility}>
           <View>
-            <TextModal>Algum dos(as) seus(as) bebês já recebeu alta?</TextModal>
+            <TextModal>{i18n.t('InicioPopUpStatusBebe')}</TextModal>
             {babiesData.map((baby, index) => (
               <View key={baby.id}>
                 <ModalOption
@@ -321,8 +323,12 @@ const Home: React.FC = () => {
                   <LocationContainer>
                     <FormPickerInput
                       fieldName=""
-                      placeholder="Onde se encontra agora?"
-                      options={['Alojamento Conjunto', 'Casa', 'UCI Neonatal']}
+                      placeholder={i18n.t('InicioLocalizacaoBebe')}
+                      options={[
+                        i18n.t('alojamento'),
+                        i18n.t('casa'),
+                        i18n.t('uci'),
+                      ]}
                       onChange={(_, value) =>
                         handleBabyLocationSelected(index, value)
                       }
@@ -338,18 +344,18 @@ const Home: React.FC = () => {
       <ScrollView>
         <Header>
           <HeaderBackground>
-            <HeaderText>Início</HeaderText>
+            <HeaderText>{i18n.t('InicioCabecalho')}</HeaderText>
           </HeaderBackground>
           <BannerImage source={Banner}>
             <HUButton
               onPress={() => navigation.navigate('HU')}
               activeOpacity={0.7}>
-              <HUButtonText>Comece por aqui!</HUButtonText>
+              <HUButtonText>{i18n.t('InicioBotaoHU')}</HUButtonText>
             </HUButton>
           </BannerImage>
         </Header>
         <ContentContainer>
-          <ContentHeader>Conteúdo</ContentHeader>
+          <ContentHeader>{i18n.t('InicioConteudo')}</ContentHeader>
           {options.map(({ image, title, onPress }, index) => (
             <Option key={title}>
               <ContentOption activeOpacity={0.7} onPress={onPress}>

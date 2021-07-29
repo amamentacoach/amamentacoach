@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import RNBootSplash from 'react-native-bootsplash';
 import { Formik } from 'formik';
+import { View } from 'react-native';
+import RNBootSplash from 'react-native-bootsplash';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Yup from 'yup';
 
-import Modal from '../../../components/Modal';
 import FormTextInput from '../../../components/FormTextInput';
 import MainButton from '../../../components/MainButton';
-import { LoginStatus } from '../../../services/auth';
+import Modal from '../../../components/Modal';
 import { useAuth } from '../../../contexts/auth';
+import { LoginStatus } from '../../../services/auth';
 
 import {
-  ScrollView,
-  Header,
-  FormContainer,
-  SubmitButtonContainer,
   ForgotPasswordText,
+  FormContainer,
+  Header,
   NoAccountText,
-  SignUpText,
+  ScrollView,
   SignUpContainer,
+  SignUpText,
+  SubmitButtonContainer,
 } from './styles';
 
 import Logo from '../../../../assets/images/logo_primary.png';

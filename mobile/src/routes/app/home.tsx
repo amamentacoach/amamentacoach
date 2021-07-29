@@ -1,9 +1,7 @@
 import React from 'react';
 
-import createColorHeader from '../config/colorHeader';
 import theme from '../../config/theme';
 import { useIsFirstRun } from '../../contexts/firstRun';
-
 import AdditionalInformation from '../../pages/Home/AdditionalInformation';
 import BabyCup from '../../pages/Home/BabyCup';
 import BabySling from '../../pages/Home/BabySling';
@@ -34,6 +32,7 @@ import UploadFatherPhoto from '../../pages/Home/UploadFatherPhoto';
 import UploadMotherPhoto from '../../pages/Home/UploadMotherPhoto';
 import WhenToBreastfeed from '../../pages/Home/WhenToBreastfeed';
 import WhyBreastfeed from '../../pages/Home/WhyBreastfeed';
+import createColorHeader from '../config/colorHeader';
 
 const CreateHomeRoutes = (Stack: any) => {
   const { isFirstRun } = useIsFirstRun();

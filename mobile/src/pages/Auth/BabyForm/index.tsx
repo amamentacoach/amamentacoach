@@ -1,33 +1,34 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Formik, FormikErrors } from 'formik';
+import { View } from 'react-native';
 import * as Yup from 'yup';
 
-import { MotherSignUpInfo, BabySignUpInfo } from '../../../services/auth';
-import Modal from '../../../components/Modal';
-import MainButton from '../../../components/MainButton';
-import SecondaryButton from '../../../components/SecondaryButton';
-import FormRadioGroupInput from '../../../components/FormRadioGroup';
-import FormTextInput from '../../../components/FormTextInput';
 import FormDateInput from '../../../components/FormDateInput';
 import FormPickerInput from '../../../components/FormPickerInput';
+import FormRadioGroupInput from '../../../components/FormRadioGroup';
+import FormTextInput from '../../../components/FormTextInput';
+import MainButton from '../../../components/MainButton';
+import Modal from '../../../components/Modal';
+import SecondaryButton from '../../../components/SecondaryButton';
+import { BabySignUpInfo, MotherSignUpInfo } from '../../../services/auth';
 
 import {
-  ScrollView,
-  HeaderText,
-  HeaderSubText,
-  FormContainer,
-  SubOptionsContainer,
-  FirstSubOptionContainer,
-  SecondSubOptionContainer,
-  GestationWeeksContainer,
-  GestationDaysContainer,
-  ApgarTextContainer,
-  ApgarText,
-  SubmitButtonContainer,
-  ApgarTextHeader,
   ApgarHelpButton,
+  ApgarText,
+  ApgarTextContainer,
+  ApgarTextHeader,
+  FirstSubOptionContainer,
+  FormContainer,
+  GestationDaysContainer,
+  GestationWeeksContainer,
+  HeaderSubText,
+  HeaderText,
+  ScrollView,
+  SecondSubOptionContainer,
+  SubmitButtonContainer,
+  SubOptionsContainer,
 } from './styles';
 
 import HelpIcon from '../../../../assets/images/icons/ic_question.svg';

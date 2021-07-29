@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { uploadBabyPhoto } from '../../../services/uploadPhoto';
 import UploadPhotoScreen from '../../../components/UploadPhotoScreen';
+import { uploadBabyPhoto } from '../../../services/uploadPhoto';
 
 import HeartArrow from '../../../../assets/images/heart_arrow.svg';
 

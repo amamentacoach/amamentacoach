@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 
 import OptionsList, { Options } from '../../../components/OptionList';
@@ -6,8 +7,8 @@ import OptionsList, { Options } from '../../../components/OptionList';
 import ScrollView from './styles';
 
 import IcVideo from '../../../../assets/images/ic_video.svg';
-import PrematureSurvey from '../../../../assets/images/premature_survey.svg';
 import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
+import PrematureSurvey from '../../../../assets/images/premature_survey.svg';
 
 const ThePremature: React.FC = () => {
   const navigation = useNavigation();
