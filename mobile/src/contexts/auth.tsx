@@ -1,10 +1,11 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import OneSignal from 'react-native-onesignal';
 
 import api from '../services/api';
 import * as auth from '../services/auth';
-import { MotherInfo, LoginStatus, isMotherInfo } from '../services/auth';
+import { isMotherInfo, LoginStatus, MotherInfo } from '../services/auth';
 import pushNotificationSubscribe from '../services/pushNotification';
 
 interface AuthContextData {

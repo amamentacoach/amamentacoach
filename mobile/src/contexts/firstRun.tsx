@@ -1,16 +1,26 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-interface IsFirstRun {
+interface IsFirstRunValues {
+  // Valores que são salvos permanentemente.
   persistent: {
+    // Usuário já viu a introdução do app.
     appIntroduction: boolean;
+    // Usuário já viu a introdução do diário.
     diaryIntroduction: boolean;
+    // Usuário já viu a introdução do formulário de escala.
     statusFormIntroduction: boolean;
   };
+  // Valores que são reiniciados ao reabrir o app.
   temporary: {
+    // Usuário visitou a tela inicial.
     home: boolean;
+    // Usuário visitou a tela de ordenhas.
     extraction: boolean;
+    // Usuário visitou a tela do diário.
     diary: boolean;
+    // Usuário visitou a tela de mensagens.
     messages: boolean;
   };
 }
@@ -22,7 +32,7 @@ type PermanentField =
   | 'statusFormIntroduction';
 
 interface IsFirstRunContextData {
-  isFirstRun: IsFirstRun;
+  isFirstRun: IsFirstRunValues;
   // Marca um campo como executado até o aplicativo ser aberto novamente.
   setTemporaryNotFirstRun: (field: TemporaryField) => void;
   // Marca um campo como executado permanentemente.
@@ -34,7 +44,7 @@ const IsFirstRun = createContext<IsFirstRunContextData>(
 );
 
 export const IsFirstRunProvider: React.FC = ({ children }) => {
-  const [isFirstRun, setIsFirstRun] = useState<IsFirstRun>({
+  const [isFirstRun, setIsFirstRun] = useState<IsFirstRunValues>({
     persistent: {
       appIntroduction: true,
       diaryIntroduction: true,
@@ -46,15 +56,15 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     async function checkDataInStorage() {
-      const isFirstRunStorage = await AsyncStorage.getItem(
+      const persistentFirstRunStorage = await AsyncStorage.getItem(
         '@AmamentaCoach:isFirstRun',
       );
 
-      if (isFirstRunStorage) {
+      if (persistentFirstRunStorage) {
         const firstRun = { ...isFirstRun };
         firstRun.persistent = {
           ...firstRun.persistent,
-          ...JSON.parse(isFirstRunStorage),
+          ...JSON.parse(persistentFirstRunStorage),
         };
         setIsFirstRun(firstRun);
       }

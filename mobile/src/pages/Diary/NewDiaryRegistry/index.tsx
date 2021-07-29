@@ -1,31 +1,30 @@
 import React, { useState } from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import moment from 'moment';
-import 'moment/locale/pt-br';
 
-import { createExtractionEntry } from '../../../services/diaryRegistry';
-import MainButton from '../../../components/MainButton';
-import FormTextInput from '../../../components/FormTextInput';
 import FormDateInput from '../../../components/FormDateInput';
+import FormTextInput from '../../../components/FormTextInput';
+import MainButton from '../../../components/MainButton';
+import { createExtractionEntry } from '../../../services/diaryRegistry';
 
 import {
-  ScrollView,
-  FormContainer,
-  SubmitButtonContainer,
-  FormContent,
-  OptionText,
-  MultipleOptionContainer,
-  OptionHeader,
-  FirstOption,
-  SecondOption,
   ErrorContainer,
   ErrorText,
+  FirstOption,
+  FormContainer,
+  FormContent,
+  MultipleOptionContainer,
+  OptionHeader,
+  OptionText,
+  ScrollView,
+  SecondOption,
+  SubmitButtonContainer,
 } from './styles';
 
-import UncheckedBox from '../../../../assets/images/icons/checkbox_unchecked.svg';
 import CheckedBox from '../../../../assets/images/icons/checkbox_checked.svg';
+import UncheckedBox from '../../../../assets/images/icons/checkbox_unchecked.svg';
 
 interface FormValues {
   time: string;
@@ -96,13 +95,18 @@ const NewDiaryRegistry: React.FC = () => {
       breast = breastRight;
     }
 
+    const [minutes, seconds] = time
+      .split(':')
+      .map(value => parseInt(value, 10));
+    const now = new Date();
+    now.setHours(minutes, seconds);
+
     setIsSendingForm(true);
     await createExtractionEntry(
       breast,
       parseInt(duration, 10),
       parseFloat(quantity),
-      // Transforma o horário em uma data.
-      moment(time, ['kk:mm']).toDate(),
+      now,
     );
     navigation.navigate('DiaryRegistry', { shouldUpdateRegistries: true });
   }

@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
 import { HeaderBackButton } from '@react-navigation/stack';
+import { ActivityIndicator } from 'react-native';
 
-import {
-  SurveyStatistics as ISurveyStatistics,
-  listSurveyStatistics,
-} from '../../../services/survey';
 import PieChart from '../../../components/PieChart';
+import {
+  listSurveyStatistics,
+  SurveyStatistics as ISurveyStatistics,
+} from '../../../services/survey';
 
 import {
-  ScrollView,
-  HeaderText,
-  HeaderBackground,
   ContentContainer,
-  QuestionContainer,
-  ContentSeparator,
   ContentHeader,
+  ContentSeparator,
+  HeaderBackground,
+  HeaderText,
   Question,
+  QuestionContainer,
   QuestionIndex,
+  ScrollView,
 } from './styles';
 
 const SurveyStatistics: React.FC = () => {

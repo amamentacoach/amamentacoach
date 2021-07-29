@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Linking, TouchableOpacity } from 'react-native';
 
 import { ScrollView, Text } from './styles';

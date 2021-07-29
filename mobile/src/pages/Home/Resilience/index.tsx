@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, Dimensions } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
+import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
 import OptionsList, { Options } from '../../../components/OptionList';
 
 import {
-  ScrollView,
-  PageHeader,
   Header,
+  LoadingContainer,
+  PageHeader,
+  ScrollView,
   Text,
   VideoContainer,
-  LoadingContainer,
 } from './styles';
 
-import ErlenmeyerPrimary from '../../../../assets/images/erlenmeyer_primary.svg';
-import ErlenmeyerYellow from '../../../../assets/images/erlenmeyer_yellow.svg';
 import ErlenmeyerGreen from '../../../../assets/images/erlenmeyer_green.svg';
 import ErlenmeyerPink from '../../../../assets/images/erlenmeyer_pink.svg';
+import ErlenmeyerPrimary from '../../../../assets/images/erlenmeyer_primary.svg';
+import ErlenmeyerYellow from '../../../../assets/images/erlenmeyer_yellow.svg';
 
 const Resilience: React.FC = () => {
   const { height } = Dimensions.get('window');

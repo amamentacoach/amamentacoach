@@ -1,12 +1,14 @@
 import React from 'react';
+
 import { createStackNavigator } from '@react-navigation/stack';
 
-import TabNavigator from './tabNavigator';
+import VideoPage from '../pages/Generic/VideoPage';
+
 import createDiaryRoutes from './app/diary';
-import createSurveyRoutes from './app/survey';
 import createHomeRoutes from './app/home';
 import createProfileRoutes from './app/profile';
-import VideoPage from '../pages/Generic/VideoPage';
+import createSurveyRoutes from './app/survey';
+import TabNavigator from './tabNavigator';
 
 import BackIcon from '../../assets/images/icons/ic_back.svg';
 

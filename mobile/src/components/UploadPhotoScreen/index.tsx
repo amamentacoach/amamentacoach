@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import ImagePicker, { ImagePickerResponse } from 'react-native-image-picker';
+
 import { Dimensions } from 'react-native';
-import ImageWrapper, { ImageWrapperSourcePropType } from '../ImageWrapper';
+import ImagePicker, { ImagePickerResponse } from 'react-native-image-picker';
 
 import { useAuth } from '../../contexts/auth';
-import SecondaryButton from '../SecondaryButton';
+import ImageWrapper, { ImageWrapperSourcePropType } from '../ImageWrapper';
 import MainButton from '../MainButton';
+import SecondaryButton from '../SecondaryButton';
 
 import {
-  ScrollView,
   FormContainer,
-  SubmitButtonContainer,
-  Text,
+  ScrollView,
+  SelectButtonContainer,
   SelectedImage,
   SendButtonContainer,
-  SelectButtonContainer,
+  SubmitButtonContainer,
+  Text,
 } from './styles';
 
 interface UploadPhotoScreenProps {

@@ -1,13 +1,12 @@
 import React from 'react';
 
-import createColorHeader from '../config/colorHeader';
 import theme from '../../config/theme';
-
 import SurveyBreastfeed from '../../pages/Survey/SurveyBreastfeed';
 import SurveyFather from '../../pages/Survey/SurveyFather';
 import SurveyHelp from '../../pages/Survey/SurveyHelp';
 import SurveyMotivation from '../../pages/Survey/SurveyMotivation';
 import SurveyStatistics from '../../pages/Survey/SurveyStatistics';
+import createColorHeader from '../config/colorHeader';
 
 const CreateSurveyRoutes = (Stack: any) => {
   const headerBabyBlue = createColorHeader(theme.babyBlue);

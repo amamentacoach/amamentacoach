@@ -1,10 +1,11 @@
 import React from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 
+import createGenericInfoPage from '../../../components/GenericInfoPage';
 import InformationPages, {
   InfoPage,
 } from '../../../components/InformationPages';
-import createGenericInfoPage from '../../../components/GenericInfoPage';
 
 import BreastfeedBenefits1 from '../../../../assets/images/breastfeed_benefits_1.png';
 import BreastfeedBenefits2 from '../../../../assets/images/breastfeed_benefits_2.png';

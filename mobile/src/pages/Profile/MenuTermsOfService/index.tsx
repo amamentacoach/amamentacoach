@@ -1,7 +1,8 @@
 import React from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 
-import { ScrollView, OptionButton, OptionText, Line } from './styles';
+import { Line, OptionButton, OptionText, ScrollView } from './styles';
 
 const MenuTermsOfService: React.FC = () => {
   const navigation = useNavigation();

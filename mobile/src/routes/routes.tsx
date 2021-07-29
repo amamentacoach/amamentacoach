@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { useAuth } from '../contexts/auth';
-import AuthRoutes from './auth';
+
 import AppRoutes from './app';
+import AuthRoutes from './auth';
 
 const Routes: React.FC = () => {
   const { isSigned } = useAuth();

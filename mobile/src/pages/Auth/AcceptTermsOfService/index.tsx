@@ -1,27 +1,27 @@
 import React, { useState } from 'react';
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import moment from 'moment';
-import 'moment/locale/pt-br';
 
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+
+import MainButton from '../../../components/MainButton';
+import Modal from '../../../components/Modal';
 import {
   AdultTermsOfService,
   MinorTermsOfService,
 } from '../../../components/TermsOfService';
+import { differenceInYears } from '../../../lib/date-fns';
 import {
   BabySignUpInfo,
   MotherSignUpInfo,
   signUpBaby,
   signUpMother,
 } from '../../../services/auth';
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
 
 import {
+  FormContainer,
+  HeaderSubText,
+  HeaderText,
   ScrollView,
   SubmitButtonContainer,
-  FormContainer,
-  HeaderText,
-  HeaderSubText,
 } from './styles';
 
 type ScreenParams = {
@@ -94,7 +94,7 @@ const AcceptTermsOfService: React.FC = () => {
           compromisso:
         </HeaderSubText>
 
-        {moment().diff(motherInfo.birthday, 'years') >= 18 ? (
+        {differenceInYears(new Date(), new Date(motherInfo.birthday)) >= 18 ? (
           <AdultTermsOfService name={motherInfo.name} />
         ) : (
           <MinorTermsOfService name={motherInfo.name} />

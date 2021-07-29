@@ -1,24 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { ActivityIndicator } from 'react-native';
+import React, { useEffect, useState } from 'react';
+
 import {
   RouteProp,
   useIsFocused,
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
-import moment from 'moment';
-import 'moment/locale/pt-br';
+import { ActivityIndicator } from 'react-native';
 
-import { dateFormatVerbose } from '../../../utils/date';
+import DiaryBreastfeedEntry from '../../../components/DiaryBreastfeedEntry';
+import MainButton from '../../../components/MainButton';
 import { useAuth } from '../../../contexts/auth';
+import { dateFormatVerbose } from '../../../lib/date-fns';
 import {
   BreastfeedEntry,
   listBreastfeedEntries,
 } from '../../../services/diaryRegistry';
-import DiaryBreastfeedEntry from '../../../components/DiaryBreastfeedEntry';
-import MainButton from '../../../components/MainButton';
 
-import { DateText, ListContainer, ScrollView, Container } from './styles';
+import { Container, DateText, ListContainer, ScrollView } from './styles';
 
 type ScreenParams = {
   DiaryBreastfeed: {
@@ -44,7 +43,7 @@ const DiaryBreastfeed: React.FC = () => {
         // Recebe os registros de todos os bebês da mãe.
         const oldRegistries = await Promise.all(
           motherInfo.babies.map(async ({ id }) =>
-            listBreastfeedEntries(id, moment(date)),
+            listBreastfeedEntries(id, new Date(date)),
           ),
         );
         setRegistries(oldRegistries);
@@ -59,7 +58,7 @@ const DiaryBreastfeed: React.FC = () => {
   return (
     <ScrollView>
       <Container>
-        <DateText>{dateFormatVerbose(moment(date))}</DateText>
+        <DateText>{dateFormatVerbose(new Date(date))}</DateText>
         <ListContainer>
           {isLoading ? (
             <ActivityIndicator

@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { useNavigation } from '@react-navigation/native';
-
 import { View } from 'react-native';
-import OptionsList, { Options } from '../../../components/OptionList';
-import ImageWrapper from '../../../components/ImageWrapper';
 
-import { ScrollView, Text, Container } from './styles';
+import ImageWrapper from '../../../components/ImageWrapper';
+import OptionsList, { Options } from '../../../components/OptionList';
+
+import { Container, ScrollView, Text } from './styles';
 
 import Banner from '../../../../assets/images/banner_canguru.png';
 import IcVideo from '../../../../assets/images/ic_video.svg';

@@ -1,30 +1,31 @@
 import React, { useEffect } from 'react';
+
 import RNBootSplash from 'react-native-bootsplash';
 
-import { useIsFirstRun } from '../../../contexts/firstRun';
-import MainButton from '../../../components/MainButton';
-import ProgressDots from '../../../components/ProgressDots';
+import ImageWrapper from '../../../components/ImageWrapper';
 import InformationPages, {
   InfoModelProps,
   InfoPage,
 } from '../../../components/InformationPages';
-import ImageWrapper from '../../../components/ImageWrapper';
+import MainButton from '../../../components/MainButton';
+import ProgressDots from '../../../components/ProgressDots';
+import { useIsFirstRun } from '../../../contexts/firstRun';
 
 import {
+  ContentText,
+  ContentWrapper,
+  CurrentPageWrapper,
+  Footer,
   Header,
+  LastPageButtonWrapper,
   SkipButton,
   SkipButtonText,
-  ContentWrapper,
-  ContentText,
-  Footer,
-  LastPageButtonWrapper,
-  CurrentPageWrapper,
 } from './styles';
 
-import IntroMother from '../../../../assets/images/intro_mother.svg';
-import IntroDiaryHeart from '../../../../assets/images/intro_diary_pencil.svg';
 import IntroChart from '../../../../assets/images/intro_chart.svg';
+import IntroDiaryHeart from '../../../../assets/images/intro_diary_pencil.svg';
 import IntroMobile from '../../../../assets/images/intro_mobile.svg';
+import IntroMother from '../../../../assets/images/intro_mother.svg';
 
 const pages: InfoPage[] = [
   {

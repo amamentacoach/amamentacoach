@@ -1,13 +1,16 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useRef, useState } from 'react';
+
+import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
+import { Dimensions, FlatList } from 'react-native';
 import * as Yup from 'yup';
 
-import { Dimensions, FlatList } from 'react-native';
+import FormTextInput from '../../../components/FormTextInput';
 import MainButton from '../../../components/MainButton';
+import Modal from '../../../components/Modal';
 import SecondaryButton from '../../../components/SecondaryButton';
-
 import { useAuth } from '../../../contexts/auth';
+import leaveResearch from '../../../services/leaveResearch';
 
 import {
   BoldMainText,
@@ -18,9 +21,6 @@ import {
   SecondSubOptionContainer,
   SubmitButtonContainer,
 } from './styles';
-import FormTextInput from '../../../components/FormTextInput';
-import leaveResearch from '../../../services/leaveResearch';
-import Modal from '../../../components/Modal';
 
 interface Page {
   index: number;
