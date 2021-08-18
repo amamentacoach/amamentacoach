@@ -2,9 +2,10 @@ import express  from 'express';
 import path from 'path';
 import routes from './routes';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 dotenv.config()
-import * as schedule from "node-schedule";
-import sendPushNotification from './utils/sendPushNotification';
+//import * as schedule from "node-schedule";
+//import sendPushNotification from './utils/sendPushNotification';
 
 const app = express()
 
@@ -14,6 +15,15 @@ const app = express()
 //rule.hour = 21;
 //rule.minute = 0;
 //schedule.scheduleJob(rule,sendPushNotification)
+const mongo_url = process.env.MONGO_URL || ""
+
+
+mongoose.connect(mongo_url, {
+    useNewUrlParser:true,
+    useUnifiedTopology:true,
+    useCreateIndex:true,
+    useFindAndModify:false
+});
 
 app.set('view engine','ejs');
 app.use("/",express.static(path.resolve(__dirname, '..', 'public','apidoc')));
