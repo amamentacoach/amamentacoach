@@ -1080,7 +1080,7 @@
     "type": "post",
     "url": "/telemetria",
     "title": "Informar acao",
-    "description": "<p>Informa a acao da mae no App</p>",
+    "description": "<p>Informa as acoes da mae no App</p>",
     "group": "Telemetria",
     "header": {
       "fields": {
@@ -1099,7 +1099,7 @@
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"acao\":\"Diario\" // padronizar o nome das acoes no App\n}",
+          "content": "[\n    {\n        \"acao\" : \"Teste1\",\n        \"created_at\": \"2021-08-23T19:22:27.897+00:00\"\n    },\n    {\n        \"acao\" : \"Teste2\",\n        \"created_at\": \"2021-08-23T19:22:27.897+00:00\"\n    },\n    {\n        \"acao\" : \"Teste3\",\n        \"created_at\": \"2021-08-23T19:22:27.897+00:00\"\n    }\n]",
           "type": "json"
         }
       ]

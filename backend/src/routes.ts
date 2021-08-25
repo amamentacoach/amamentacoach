@@ -20,7 +20,7 @@ import RelatorioDiarioController from './controllers/RelatorioDiarioController';
 import RelatorioSemanalController from './controllers/RelatorioSemanalController';
 import AcessosController from './controllers/AcessosController';
 import AltaController from './controllers/AltaController';
-import TelemetriaController from './controllers/TelemetriaController';
+import TelemetriaController from './controllers/TelemetriaController'
 
 
 const maesController = new MaesController();
@@ -974,14 +974,25 @@ routes.get('/politica-de-privacidade',(req,res)=>{
 
  /**
  * @api {post} /telemetria Informar acao 
- * @apiDescription Informa a acao da mae no App
+ * @apiDescription Informa as acoes da mae no App
  * @apiGroup Telemetria
  * @apiHeader {String} authorization Token de acesso.
  * 
  * @apiParamExample {json} Exemplo Request:
- *      {
- *          "acao":"Diario" // padronizar o nome das acoes no App
- *      }
+ *      [
+ *          {
+ *              "acao" : "Teste1",
+ *              "created_at": "2021-08-23T19:22:27.897+00:00"
+ *          },
+ *          {
+ *              "acao" : "Teste2",
+ *              "created_at": "2021-08-23T19:22:27.897+00:00"
+ *          },
+ *          {
+ *              "acao" : "Teste3",
+ *              "created_at": "2021-08-23T19:22:27.897+00:00"
+ *          }
+ *      ]
  *
  */
   routes.post('/telemetria',verifyJWT,telemetriaController.create);

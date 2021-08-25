@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose'
 
-interface ITelemetria {
+export interface ITelemetria {
     mae_id: string;
     acao: string;
     created_at?: Date;
@@ -8,7 +8,8 @@ interface ITelemetria {
 
 const TelemetriaSchema =  new Schema<ITelemetria>({
     mae_id : String,
-    acao : String
-}, {timestamps : true});
+    acao : String,
+    created_at: Date
+});
 
 export default model<ITelemetria>('Telemetria', TelemetriaSchema);
