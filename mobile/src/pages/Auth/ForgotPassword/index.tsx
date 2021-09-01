@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { Formik } from 'formik';
+import i18n from 'i18n-js';
 import { View } from 'react-native';
 import * as Yup from 'yup';
 
@@ -28,7 +29,9 @@ const ForgotPassword: React.FC = () => {
     email: '',
   };
   const signUpSchema: Yup.SchemaOf<FormValues> = Yup.object({
-    email: Yup.string().email('Email Inválido').required('Campo obrigatório'),
+    email: Yup.string()
+      .email(i18n.t('Yup.InvalidEmail'))
+      .required(i18n.t('Yup.Required')),
   }).required();
 
   async function handleForgotPassword({ email }: FormValues) {
@@ -43,21 +46,17 @@ const ForgotPassword: React.FC = () => {
   return (
     <ScrollView>
       <Modal
-        content="Cheque sua caixa de entrada do e-mail e acesse o link que enviamos para a redefinição de sua senha."
+        content={i18n.t('ForgotPasswordPage.PopUp')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => setIsSubmitModalVisible(false),
           },
         ]}
         visible={isSubmitModalVisible}
       />
-
-      <HeaderText>
-        Preencha o campo abaixo com o seu e-mail de cadastro para que possamos
-        enviar um link de redefinição de senha.
-      </HeaderText>
+      <HeaderText>{i18n.t('ForgotPasswordPage.Header')}</HeaderText>
       <Formik
         initialValues={formInitialValues}
         validationSchema={signUpSchema}
@@ -67,10 +66,10 @@ const ForgotPassword: React.FC = () => {
           <FormContainer>
             <View>
               <FormTextInput
-                label="Email"
+                label={i18n.t('Email')}
                 onChangeText={handleChange('email')}
                 value={values.email}
-                placeholder="Insira seu email"
+                placeholder={i18n.t('Placeholder.Email')}
                 keyboardType="email-address"
                 error={errors.email}
               />
@@ -78,7 +77,7 @@ const ForgotPassword: React.FC = () => {
 
             <SubmitButtonContainer>
               <MainButton
-                text="Enviar"
+                text={i18n.t('Actions.Send')}
                 onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
               />
