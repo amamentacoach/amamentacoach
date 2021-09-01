@@ -1,5 +1,7 @@
 import React from 'react';
 
+import i18n from 'i18n-js';
+
 import ImageWrapper from '../../../components/ImageWrapper';
 
 import { ContentText, ContentWrapper, ScrollView } from './styles';
@@ -19,14 +21,10 @@ const MilkAdditionalInformation: React.FC = () => {
           height={200}
         />
         <ContentText>
-          Quando o bebê nasce e a placenta sai, acontecem alterações importantes
-          no corpo que ajudam a dar início na produção de leite. Os hormônios
-          saem do cérebro e agem nas mamas.
+          {i18n.t('MilkAdditionalInformationPage.Text1')}
         </ContentText>
         <ContentText>
-          Nesse processo, os lóbulos mamários – que se parecem com cachos de uva
-          e estão localizados no final de canais conhecidos como ductos –
-          começam a produzir e armazenar o leite materno.
+          {i18n.t('MilkAdditionalInformationPage.Text2')}
         </ContentText>
       </ContentWrapper>
       <ContentWrapper>
@@ -37,11 +35,10 @@ const MilkAdditionalInformation: React.FC = () => {
           height={200}
         />
         <ContentText>
-          Conforme o bebê suga o peito, ou conforme o leite é retirado, o
-          cérebro produz mais e mais hormônio ocitocina. Dentro da mama, a
-          ocitocina é responsável por “espremer” os lóbulos, o que ajuda a
-          empurrar o leite com mais naturalidade pelos ductos até os saquinhos
-          chamados ampolas.
+          {i18n.t('MilkAdditionalInformationPage.Text3')}
+        </ContentText>
+        <ContentText>
+          {i18n.t('MilkAdditionalInformationPage.Text4')}
         </ContentText>
       </ContentWrapper>
       <ContentWrapper>
@@ -52,19 +49,13 @@ const MilkAdditionalInformation: React.FC = () => {
           height={200}
         />
         <ContentText>
-          A ocitocina é produzida e liberada com mais facilidade quando a mulher
-          sente-se bem, está calma e confiante. Também quando vê o bebê, toca
-          nele e sente seu cheirinho, ou até quando pensa nele.
+          {i18n.t('MilkAdditionalInformationPage.Text5')}
         </ContentText>
         <ContentText>
-          Quanto mais se retira o leite (seja pela sucção do bebê, seja
-          manualmente ou com bombinha), mais hormônios do leite o cérebro produz
+          {i18n.t('MilkAdditionalInformationPage.Text6')}
         </ContentText>
-      </ContentWrapper>
-      <ContentWrapper>
         <ContentText>
-          Fonte: Adaptado do site
-          https://bebe.abril.com.br/amamentacao/leite-materno-infografico-mostra-como-ele-e-produzido/
+          {i18n.t('MilkAdditionalInformationPage.Text7')}
         </ContentText>
       </ContentWrapper>
     </ScrollView>

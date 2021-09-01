@@ -5,6 +5,7 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
   keyboardShouldPersistTaps: 'handled',
 }))`
   flex: 1;
+  padding: 0 24px;
 `;
 
 export const ContentTitleText = styled.Text`
@@ -12,14 +13,15 @@ export const ContentTitleText = styled.Text`
   color: ${props => props.theme.black};
   font-size: 18px;
   text-align: center;
-  margin: 20px 24px 0 24px;
+  margin-top: 24px;
 `;
 
 export const ContentWrapper = styled.View`
   flex: 1;
   align-items: center;
   justify-content: flex-start;
-  margin: 24px 24px 0 24px;
+  margin-top: 10px;
+  margin-bottom: 24px;
 `;
 
 export const ContentText = styled.Text`

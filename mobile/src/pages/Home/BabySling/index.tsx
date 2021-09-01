@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 import { View } from 'react-native';
 
 import ImageWrapper from '../../../components/ImageWrapper';
@@ -17,19 +18,19 @@ const BabySling: React.FC = () => {
   const options: Options[] = [
     {
       image: IcVideo,
-      title: 'Video 1',
+      title: i18n.t('BabySlingPage.1'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['IhKyaqGX_MQ'] }),
     },
     {
       image: IcVideo,
-      title: 'Video 2',
+      title: i18n.t('BabySlingPage.2'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['rdTTyKGrq_s'] }),
     },
     {
       image: IcVideo,
-      title: 'Video 3',
+      title: i18n.t('BabySlingPage.3'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['wx1ofoCZw9w'] }),
     },
@@ -46,9 +47,8 @@ const BabySling: React.FC = () => {
             height={200}
           />
         </View>
-        <Text>
-          Use e abuse do Canguru! Informe-se e inspire-se nos vídeos abaixo:
-        </Text>
+
+        <Text>{i18n.t('BabySlingPage.Header')}</Text>
       </Container>
       <OptionsList options={options} displayArrows />
     </ScrollView>

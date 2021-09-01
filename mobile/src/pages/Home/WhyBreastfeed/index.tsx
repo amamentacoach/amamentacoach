@@ -1,166 +1,88 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
-import { Dimensions, FlatList } from 'react-native';
+import i18n from 'i18n-js';
 
-import ImageWrapper, {
-  ImageWrapperSourcePropType,
-} from '../../../components/ImageWrapper';
-import ProgressDots from '../../../components/ProgressDots';
+import createGenericInfoPage from '../../../components/GenericInfoPage';
+import InformationPages, {
+  InfoPageItem,
+} from '../../../components/InformationPages';
 
-import {
-  ColoredContentText,
-  ContentText,
-  ContentTitleText,
-  ContentWrapper,
-  ContinueButton,
-  CurrentPageWrapper,
-  Footer,
-  LastPageButtonWrapper,
-  ListContainer,
-  PageContainer,
-  ScrollView,
-  TextContainer,
-  TextContinueButton,
-} from './styles';
+import { ColoredContentText, ContentText } from './styles';
 
 import MilkWithdrawalSeven from '../../../../assets/images/milk_withdrawal_seven.png';
 import WhyMilkWithdrawalTwo from '../../../../assets/images/why_milk_withdrawal_two.png';
 
-interface Content {
-  id: number;
-  title: string;
-  image: ImageWrapperSourcePropType;
-  content: {
-    idText: number;
-    text: JSX.Element;
-  }[];
-}
-
-interface PageProps extends Content {
-  index: number;
-}
-
-const pages: Content[] = [
-  {
-    id: 1,
-    title: 'Por que fazer a retirada do leite?',
-    image: MilkWithdrawalSeven,
-    content: [
-      {
-        idText: 1,
-        text: (
-          <ContentText>
-            Sabe aqueles inúmeros benefícios do leite materno pro bebê
-            prematuro?
-          </ContentText>
-        ),
-      },
-      {
-        idText: 2,
-        text: (
-          <ContentText>
-            A retirada frequente do leite é o caminho para
-            <ColoredContentText> evitar que o leite seque </ColoredContentText>
-            enquanto o bebê não suga.
-          </ContentText>
-        ),
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: 'Por que fazer a retirada do leite?',
-    image: WhyMilkWithdrawalTwo,
-    content: [
-      {
-        idText: 1,
-        text: (
-          <ContentText>
-            Leite parado na mama faz o corpo entender que não precisa produzir
-            mais!
-          </ContentText>
-        ),
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: 'Por que fazer a retirada do leite?',
-    image: WhyMilkWithdrawalTwo,
-    content: [
-      {
-        idText: 1,
-        text: (
-          <ContentText>
-            Então, ao contrário...
-            <ColoredContentText>
-              quanto mais você esvazia sua mama
-            </ColoredContentText>
-            , mais ela produz! Pois ela entende que o leite está sendo
-            necessário!
-          </ContentText>
-        ),
-      },
-    ],
-  },
-];
-
 const WhyBreastfeed: React.FC = () => {
   const navigation = useNavigation();
-  const { width } = Dimensions.get('window');
-  const flatListRef = useRef<FlatList>(null);
+  const onEnd = () => navigation.goBack();
 
-  const InfoModel: React.FC<PageProps> = ({ index, title, image, content }) => (
-    <>
-      <ContentTitleText>{title}</ContentTitleText>
-      <ContentWrapper>
-        <ImageWrapper source={image} resizeMode="contain" />
-        {content.map(({ idText, text }) => (
-          <TextContainer key={idText}>{text}</TextContainer>
-        ))}
-      </ContentWrapper>
-      <Footer>
-        <CurrentPageWrapper>
-          <ProgressDots
-            flatlistRef={flatListRef}
-            selectedIndex={index}
-            length={pages.length}
-          />
-        </CurrentPageWrapper>
-        <LastPageButtonWrapper opacity={index === pages.length - 1 ? 1 : 0}>
-          <ContinueButton onPress={() => navigation.goBack()}>
-            <TextContinueButton>Sair</TextContinueButton>
-          </ContinueButton>
-        </LastPageButtonWrapper>
-      </Footer>
-    </>
-  );
+  const pages: InfoPageItem[] = [
+    {
+      id: '1',
+      title: i18n.t('WhyBreastfeedPage.Header'),
+      image: MilkWithdrawalSeven,
+      content: [
+        {
+          id: '1',
+          text: (
+            <ContentText>{i18n.t('WhyBreastfeedPage.Page1.Text1')}</ContentText>
+          ),
+        },
+        {
+          id: '2',
+          text: (
+            <ContentText>
+              {i18n.t('WhyBreastfeedPage.Page1.Text2')}
+              <ColoredContentText>
+                {' '}
+                {i18n.t('WhyBreastfeedPage.Page1.Text3')}{' '}
+              </ColoredContentText>
+              {i18n.t('WhyBreastfeedPage.Page1.Text4')}
+            </ContentText>
+          ),
+        },
+      ],
+    },
+    {
+      id: '2',
+      title: i18n.t('WhyBreastfeedPage.Header'),
+      image: WhyMilkWithdrawalTwo,
+      content: [
+        {
+          id: '1',
+          text: (
+            <ContentText>{i18n.t('WhyBreastfeedPage.Page2.Text1')}</ContentText>
+          ),
+        },
+      ],
+    },
+    {
+      id: '3',
+      title: i18n.t('WhyBreastfeedPage.Header'),
+      image: WhyMilkWithdrawalTwo,
+      content: [
+        {
+          id: '1',
+          text: (
+            <ContentText>
+              {i18n.t('WhyBreastfeedPage.Page3.Text1')}
+              <ColoredContentText>
+                {i18n.t('WhyBreastfeedPage.Page3.Text2')}
+              </ColoredContentText>
+              {i18n.t('WhyBreastfeedPage.Page3.Text3')}
+            </ContentText>
+          ),
+        },
+      ],
+    },
+  ];
 
   return (
-    <ListContainer>
-      <FlatList
-        ref={flatListRef}
-        data={pages}
-        renderItem={({ item, index }) => (
-          <PageContainer width={width}>
-            <ScrollView>
-              <InfoModel
-                index={index}
-                id={item.id}
-                title={item.title}
-                content={item.content}
-                image={item.image}
-              />
-            </ScrollView>
-          </PageContainer>
-        )}
-        keyExtractor={item => item.id.toString()}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-      />
-    </ListContainer>
+    <InformationPages
+      data={pages}
+      PageModel={createGenericInfoPage({ onEnd })}
+    />
   );
 };
 

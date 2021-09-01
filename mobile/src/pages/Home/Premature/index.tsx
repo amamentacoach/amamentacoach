@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 
 import OptionsList, { Options } from '../../../components/OptionList';
 
@@ -16,23 +17,23 @@ const Premature: React.FC = () => {
   const options: Options[] = [
     {
       image: PrematureBirth,
-      title: 'Parto prematuro: não era isso que eu esperava',
+      title: i18n.t('PrematurePage.Header1'),
       onPress: () => navigation.navigate('NotWhatIExpected'),
     },
     {
       image: PrematureBaby,
-      title: 'Muito prazer, eu sou o Prematuro',
+      title: i18n.t('PrematurePage.Header2'),
       onPress: () => navigation.navigate('ThePremature'),
     },
     {
       image: PrematureHeart,
-      title: 'Minha maior motivação para amamentar',
+      title: i18n.t('PrematurePage.Header3'),
       onPress: () => navigation.navigate('UploadBabyPhoto'),
     },
     {
       image: PrematureTrophy,
-      title: 'Um período de luta, toda uma vida de resultados',
-      subtitle: 'Benefícios da amamentação',
+      title: i18n.t('PrematurePage.Header4'),
+      subtitle: i18n.t('PrematurePage.Subtitle5'),
       onPress: () => navigation.navigate('BreastfeedingBenefits'),
     },
   ];

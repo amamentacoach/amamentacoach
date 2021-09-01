@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 
 import OptionsList, { Options } from '../../../components/OptionList';
 
@@ -17,31 +18,29 @@ const Breastfeeding: React.FC = () => {
   const options: Options[] = [
     {
       image: WithdrawalQuestion,
-      title: 'Por que fazer?',
+      title: i18n.t('BreastfeedingPage.1'),
       onPress: () => navigation.navigate('WhyBreastfeed'),
     },
     {
       image: PrematureBreastfeed,
-      title: 'Como fazer?',
+      title: i18n.t('BreastfeedingPage.2'),
       onPress: () => navigation.navigate('HowToBreastfeed'),
     },
     {
       image: WithdrawalCalendar,
-      title: 'Quando fazer?',
+      title: i18n.t('BreastfeedingPage.3'),
       onPress: () => navigation.navigate('WhenToBreastfeed'),
     },
     {
       image: WithdrawalClock,
-      title: 'Por quanto tempo fazer?',
+      title: i18n.t('BreastfeedingPage.4'),
       onPress: () => navigation.navigate('HowLongToBreastfeed'),
     },
   ];
 
   return (
     <ScrollView>
-      <HeaderText>
-        Tudo o que você precisa saber sobre retirada do leite
-      </HeaderText>
+      <HeaderText>{i18n.t('BreastfeedingPage.Header')}</HeaderText>
       <OptionsList options={options} />
     </ScrollView>
   );

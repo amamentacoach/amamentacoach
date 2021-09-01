@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 
 import OptionsList, { Options } from '../../../components/OptionList';
 
@@ -14,15 +15,15 @@ const HU: React.FC = () => {
   const options: Options[] = [
     {
       image: IcVideo,
-      title: 'Vídeo AmamentaCoach',
-      subtitle: 'Conheça o AmamentaCoach',
+      title: i18n.t('HUPage.5'),
+      subtitle: i18n.t('HUPage.6'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['z9V26A0Lipg'] }),
     },
     {
       image: IcVideo,
-      title: 'Video HU Londrina',
-      subtitle: 'Conheça o HU',
+      title: i18n.t('HUPage.7'),
+      subtitle: i18n.t('HUPage.8'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['CLOZL3N_QXs'] }),
     },

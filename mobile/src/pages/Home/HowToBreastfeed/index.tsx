@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 
 import ImageWrapper from '../../../components/ImageWrapper';
 import InformationPages, {
-  InfoModelProps,
-  InfoPage,
+  InfoPageItem,
+  InfoPageModelProps,
 } from '../../../components/InformationPages';
 import ProgressDots from '../../../components/ProgressDots';
 
@@ -32,109 +33,96 @@ import MilkWithdrawalSix from '../../../../assets/images/milk_withdrawal_six.png
 import MilkWithdrawalThree from '../../../../assets/images/milk_withdrawal_three.png';
 import MilkWithdrawalTwo from '../../../../assets/images/milk_withdrawal_two.png';
 
-const pages: InfoPage[] = [
-  {
-    id: 1,
-    title: 'Como fazer a retirada do leite?',
-    image: MilkWithdrawalOne,
-    content: [
-      {
-        text: 'Prenda os cabelos e use uma touca de banho ou pano molhado.',
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: 'Como fazer a retirada do leite?',
-    image: MilkWithdrawalTwo,
-    content: [
-      {
-        text: 'Escolha um lugar limpo e tranquilo.',
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: 'Como fazer a retirada do leite?',
-    image: MilkWithdrawalThree,
-    content: [
-      {
-        text:
-          'Massageie o peito com a ponta de dois dedos, iniciando na região mais próxima da aréola indo até a mais distante do peito, apoiando-o com a outra mão.',
-      },
-    ],
-  },
-  {
-    id: 4,
-    title: 'Como fazer a retirada do leite?',
-    image: MilkWithdrawalFour,
-    content: [
-      {
-        text: 'Massageie por mais tempo as áreas mais doloridas.',
-      },
-    ],
-  },
-  {
-    id: 5,
-    title: 'Como fazer a retirada do leite?',
-    image: MilkWithdrawalFive,
-    content: [
-      {
-        text:
-          'Apoie a ponta dos dedos (polegar e indicador) acima e abaixo da aréola, apertando o peito contra o tórax.',
-      },
-    ],
-  },
-  {
-    id: 6,
-    title: 'Como fazer a retirada do leite?',
-    image: MilkWithdrawalSix,
-    content: [
-      {
-        text:
-          'Aperte o peito com movimentos rítmicos como se tentasse aproximar as pontas dos dedos, sem deslizar na pele. ',
-      },
-    ],
-  },
-  {
-    id: 7,
-    title: 'Como fazer a retirada do leite?',
-    image: MilkWithdrawalSeven,
-    content: [
-      {
-        text: 'Jogue fora as primeiras gotas e guarde o restante no frasco.',
-      },
-    ],
-  },
-  {
-    id: 8,
-    title: 'Como fazer a retirada do leite?',
-    image: MilkWithdrawalEight,
-    content: [
-      {
-        text:
-          'Se não tiver como guardar imediatamente na geladeira, o leite pode permanecer em local fresco e usado até seis horas após a coleta.',
-      },
-    ],
-  },
-  {
-    id: 9,
-    title: 'Como fazer a retirada do leite?',
-    image: MilkWithdrawalNine,
-    content: [
-      {
-        text:
-          'Em geladeira, o leite ordenhado pode ser guardado com segurança por até 12 horas ou congelado por até 15 dias. Antes de alimentar o bebê com o leite guardado, aqueça-o em banho-maria.',
-      },
-    ],
-  },
-];
-
 const HowToBreastfeed: React.FC = () => {
   const navigation = useNavigation();
-  const onEnd = () => navigation.goBack();
 
-  const InfoModel: React.FC<InfoModelProps> = ({
+  const pages: InfoPageItem[] = [
+    {
+      id: '1',
+      title: i18n.t('HowToBreastfeedPage.Title'),
+      image: MilkWithdrawalOne,
+      content: [{ id: '1', text: i18n.t('HowToBreastfeedPage.Page1') }],
+    },
+    {
+      id: '2',
+      title: i18n.t('HowToBreastfeedPage.Title'),
+      image: MilkWithdrawalTwo,
+      content: [{ id: '1', text: i18n.t('HowToBreastfeedPage.Page2') }],
+    },
+    {
+      id: '3',
+      title: i18n.t('HowToBreastfeedPage.Title'),
+      image: MilkWithdrawalThree,
+      content: [
+        {
+          id: '1',
+          text: i18n.t('HowToBreastfeedPage.Page3'),
+        },
+      ],
+    },
+    {
+      id: '4',
+      title: i18n.t('HowToBreastfeedPage.Title'),
+      image: MilkWithdrawalFour,
+      content: [{ id: '1', text: i18n.t('HowToBreastfeedPage.Page4') }],
+    },
+    {
+      id: '5',
+      title: i18n.t('HowToBreastfeedPage.Title'),
+      image: MilkWithdrawalFive,
+      content: [
+        {
+          id: '1',
+          text: i18n.t('HowToBreastfeedPage.Page5'),
+        },
+      ],
+    },
+    {
+      id: '6',
+      title: i18n.t('HowToBreastfeedPage.Title'),
+      image: MilkWithdrawalSix,
+      content: [
+        {
+          id: '1',
+          text: i18n.t('HowToBreastfeedPage.Page6'),
+        },
+      ],
+    },
+    {
+      id: '7',
+      title: i18n.t('HowToBreastfeedPage.Title'),
+      image: MilkWithdrawalSeven,
+      content: [{ id: '1', text: i18n.t('HowToBreastfeedPage.Page7') }],
+    },
+    {
+      id: '8',
+      title: i18n.t('HowToBreastfeedPage.Title'),
+      image: MilkWithdrawalEight,
+      content: [
+        {
+          id: '1',
+          text: i18n.t('HowToBreastfeedPage.Page8'),
+        },
+      ],
+    },
+    {
+      id: '9',
+      title: i18n.t('HowToBreastfeedPage.Title'),
+      image: MilkWithdrawalNine,
+      content: [
+        {
+          id: '1',
+          text: i18n.t('HowToBreastfeedPage.Page9'),
+        },
+      ],
+    },
+  ];
+
+  function onEnd() {
+    navigation.goBack();
+  }
+
+  const InfoModel: React.FC<InfoPageModelProps> = ({
     flatListRef,
     pagesLength,
     index,
@@ -151,8 +139,8 @@ const HowToBreastfeed: React.FC = () => {
       </CurrentPageContainer>
       <ContentWrapper>
         {image && <ImageWrapper source={image} />}
-        {content.map(({ text }) => (
-          <ContentText key={text}>{text}</ContentText>
+        {content.map(({ id, text }) => (
+          <ContentText key={id}>{text}</ContentText>
         ))}
       </ContentWrapper>
       <Footer>
@@ -165,14 +153,14 @@ const HowToBreastfeed: React.FC = () => {
         </CurrentPageWrapper>
         <LastPageButtonWrapper opacity={index === pagesLength - 1 ? 1 : 0}>
           <ContinueButton onPress={() => onEnd()}>
-            <TextContinueButton>Sair</TextContinueButton>
+            <TextContinueButton>{i18n.t('Leave')}</TextContinueButton>
           </ContinueButton>
         </LastPageButtonWrapper>
       </Footer>
     </>
   );
 
-  return <InformationPages pages={pages} PageModel={InfoModel} />;
+  return <InformationPages data={pages} PageModel={InfoModel} />;
 };
 
 export default HowToBreastfeed;

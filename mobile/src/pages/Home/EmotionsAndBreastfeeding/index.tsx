@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 
 import OptionsList, { Options } from '../../../components/OptionList';
 
@@ -15,12 +16,12 @@ const EmotionsAndBreastfeeding: React.FC = () => {
   const options: Options[] = [
     {
       image: EmotionsBox,
-      title: 'Caixinha da distração',
+      title: i18n.t('EmotionsAndBreastfeedingPage.1'),
       onPress: () => navigation.navigate('Distractions'),
     },
     {
       image: EmotionsJacobson,
-      title: 'Técnica de Relaxamento de Jacobson',
+      title: i18n.t('EmotionsAndBreastfeedingPage.2'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['C2hFGeJj48k'] }),
     },

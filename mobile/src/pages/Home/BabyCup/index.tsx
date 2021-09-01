@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
+import i18n from 'i18n-js';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
+import { ThemeContext } from 'styled-components';
 
 import {
   Instruction,
@@ -15,23 +17,24 @@ import {
 
 const BabyCup: React.FC = () => {
   const { height } = Dimensions.get('window');
+  const themeContext = useContext(ThemeContext);
   const [isLoadingVideo, setIsLoadingVideo] = useState(true);
 
   const steps = [
-    'Despertar o bebê, massagear os pés e a face. Não deixar que o bebê esteja agitado de fome ou outro desconforto, pois dificulta a manobra.',
-    'Acomodar o bebê na posição sentada ou semi-sentada em seu colo, sendo que a cabeça forme um ângulo de 90º com o pescoço.',
-    'Encostar a borda do copo no lábio inferior do bebê e deixar o leite materno tocar o lábio.',
-    'O bebê fará movimentos de lambida do leite seguidos de deglutição, cuida para não despejar o leite na boca do bebê.',
+    i18n.t('BabyCupPage.Step1'),
+    i18n.t('BabyCupPage.Step2'),
+    i18n.t('BabyCupPage.Step3'),
+    i18n.t('BabyCupPage.Step4'),
   ];
 
   return (
     <ScrollView>
-      <VideoLink>Demonstração</VideoLink>
+      <VideoLink>{i18n.t('BabyCupPage.Header')}</VideoLink>
       {isLoadingVideo && (
         <LoadingContainer>
           <ActivityIndicator
             size="large"
-            color="#7d5cd7"
+            color={themeContext.primary}
             animating={isLoadingVideo}
           />
         </LoadingContainer>

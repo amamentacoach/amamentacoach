@@ -1,5 +1,6 @@
 import React from 'react';
 
+import i18n from 'i18n-js';
 import { Linking } from 'react-native';
 
 import OptionsList, { Options } from '../../../components/OptionList';
@@ -12,7 +13,7 @@ const MusicPlaylists: React.FC = () => {
   const options: Options[] = [
     {
       image: Music,
-      title: 'Pop Instrumental',
+      title: i18n.t('MusicPlaylistsPage.1'),
       onPress: async () => {
         await Linking.openURL(
           'https://youtube.com/playlist?list=PLK7oeiGgzDtiNeJduFPY8Kep7mq9wRQ7l',
@@ -21,7 +22,7 @@ const MusicPlaylists: React.FC = () => {
     },
     {
       image: Music,
-      title: 'Calma',
+      title: i18n.t('MusicPlaylistsPage.2'),
       onPress: async () => {
         await Linking.openURL(
           'https://youtube.com/playlist?list=PLK7oeiGgzDthw88gK7lCBtoYxdX4XhqvJ',
@@ -30,7 +31,7 @@ const MusicPlaylists: React.FC = () => {
     },
     {
       image: Music,
-      title: 'Sertanejo',
+      title: i18n.t('MusicPlaylistsPage.3'),
       onPress: async () => {
         await Linking.openURL(
           'https://youtube.com/playlist?list=PLK7oeiGgzDtitdfAYT5bQNWTpsBOqiWc7',
@@ -39,7 +40,7 @@ const MusicPlaylists: React.FC = () => {
     },
     {
       image: Music,
-      title: 'Funk',
+      title: i18n.t('MusicPlaylistsPage.4'),
       onPress: async () => {
         await Linking.openURL(
           'https://youtube.com/playlist?list=PLK7oeiGgzDtj2PhNH_958pOx30vfuZ8ZS',

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import i18n from 'i18n-js';
+
 import ImageWrapper from '../../../components/ImageWrapper';
 
 import {
@@ -17,7 +19,7 @@ const HowLongToBreastfeed: React.FC = () => {
   return (
     <ScrollView>
       <ContentTitleText>
-        Por quanto tempo fazer a retirada do leite?
+        {i18n.t('HowLongToBreastfeedPage.Header')}
       </ContentTitleText>
       <ContentWrapper>
         <ImageWrapper
@@ -27,8 +29,8 @@ const HowLongToBreastfeed: React.FC = () => {
           height={190}
         />
         <ContentText>
-          Enquanto seu bebê ainda não estiver
-          <ColoredText> mamando regularmente</ColoredText>.
+          {i18n.t('HowLongToBreastfeedPage.Text1')}{' '}
+          <ColoredText>{i18n.t('HowLongToBreastfeedPage.Text2')}</ColoredText>.
         </ContentText>
         <ImageWrapper
           source={Withdrawal2}
@@ -37,8 +39,8 @@ const HowLongToBreastfeed: React.FC = () => {
           height={190}
         />
         <ContentText>
-          Enquanto ele ainda não estiver mamando
-          <ColoredText> exclusivamente em você</ColoredText>.
+          {i18n.t('HowLongToBreastfeedPage.Text3')}{' '}
+          <ColoredText>{i18n.t('HowLongToBreastfeedPage.Text4')}</ColoredText>.
         </ContentText>
       </ContentWrapper>
     </ScrollView>

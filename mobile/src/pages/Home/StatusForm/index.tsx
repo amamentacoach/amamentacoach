@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
+import i18n from 'i18n-js';
 import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
@@ -163,7 +164,7 @@ const StatusForm: React.FC = () => {
     let isValid = true;
     questions.forEach(question => {
       if (values[question.id].length <= 0) {
-        setFieldError(question.id.toString(), 'Pergunta obrigatória');
+        setFieldError(question.id.toString(), i18n.t('AnswerRequired'));
         isValid = false;
       } else {
         setFieldError(question.id.toString(), '');
@@ -172,7 +173,7 @@ const StatusForm: React.FC = () => {
 
     if (currentPageIndex === pageQuestions.length - 1 && displayFeedingForm) {
       if (values.feeding.length <= 0) {
-        setFieldError('feeding', 'Pergunta obrigatória');
+        setFieldError('feeding', i18n.t('AnswerRequired'));
         isValid = false;
       } else {
         setFieldError('feeding', '');
@@ -282,7 +283,7 @@ const StatusForm: React.FC = () => {
             <FirstButtonContainer>
               <SecondaryButton
                 color={theme.babyBlue}
-                text="Voltar"
+                text={i18n.t('GoBack')}
                 disabled={isSendingForm}
                 onPress={() =>
                   handleChangePage(
@@ -301,7 +302,9 @@ const StatusForm: React.FC = () => {
             <MainButton
               color={theme.babyBlue}
               text={
-                pageIndex >= pageQuestions.length - 1 ? 'Finalizar' : 'Próximo'
+                pageIndex >= pageQuestions.length - 1
+                  ? i18n.t('Actions.End')
+                  : i18n.t('Next')
               }
               disabled={isSendingForm}
               onPress={() =>
@@ -325,7 +328,7 @@ const StatusForm: React.FC = () => {
     return (
       <>
         <HeaderBackground />
-        <HeaderText>Autoconfiança para amamentar</HeaderText>
+        <HeaderText>{i18n.t('StatusFormPage.Header')}</HeaderText>
         <ContentContainer>
           <ActivityIndicator
             size="large"
@@ -340,11 +343,11 @@ const StatusForm: React.FC = () => {
   return (
     <>
       <Modal
-        content={`Obrigada por responder.\nSua pontuação é ${formScore}`}
+        content={i18n.t('StatusFormPage.Score', { score: formScore })}
         color={theme.babyBlue}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => navigation.navigate('Home'),
           },
@@ -353,12 +356,10 @@ const StatusForm: React.FC = () => {
       />
       <Modal
         color={theme.babyBlue}
-        content={
-          'Erro ao enviar suas respostas.\nPor favor tente novamente mais tarde.'
-        }
+        content={i18n.t('SurveyComponent.SubmitError')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => setIsErrorModalVisible(false),
           },
@@ -369,27 +370,27 @@ const StatusForm: React.FC = () => {
         color={theme.babyBlue}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => setIsInfoModalVisible(false),
           },
         ]}
         visible={isInfoModalVisible}>
-        <HeaderInfoModal>Escala</HeaderInfoModal>
+        <HeaderInfoModal>{i18n.t('StatusFormPage.FormName')}</HeaderInfoModal>
         <TextInfoModal>
-          <ColoredText>1</ColoredText> = nada confiante
+          <ColoredText>1</ColoredText> = {i18n.t('StatusFormPage.Value1')}
         </TextInfoModal>
         <TextInfoModal>
-          <ColoredText>2</ColoredText> = muito pouco confiante
+          <ColoredText>2</ColoredText> = {i18n.t('StatusFormPage.Value2')}
         </TextInfoModal>
         <TextInfoModal>
-          <ColoredText>3</ColoredText> = às vezes confiante
+          <ColoredText>3</ColoredText> = {i18n.t('StatusFormPage.Value3')}
         </TextInfoModal>
         <TextInfoModal>
-          <ColoredText>4</ColoredText> = confiante
+          <ColoredText>4</ColoredText> = {i18n.t('StatusFormPage.Value4')}
         </TextInfoModal>
         <TextInfoModal>
-          <ColoredText>5</ColoredText> = muito confiante
+          <ColoredText>5</ColoredText> = {i18n.t('StatusFormPage.Value5')}
         </TextInfoModal>
       </Modal>
 
@@ -404,7 +405,7 @@ const StatusForm: React.FC = () => {
             renderItem={({ item, index }) => (
               <ScrollView width={width}>
                 <HeaderBackground />
-                <HeaderText>Autoconfiança para amamentar</HeaderText>
+                <HeaderText>{i18n.t('StatusFormPage.Header')}</HeaderText>
                 <Page
                   pageIndex={index}
                   questions={item}

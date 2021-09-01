@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import { FlatList } from 'react-native';
+import { ThemeContext } from 'styled-components';
 
 import { FAQ, listUserQuestions } from '../../../services/questions';
 
@@ -25,6 +26,7 @@ interface MessageEntryProps {
 
 const Questions: React.FC = () => {
   const navigation = useNavigation();
+  const themeContext = useContext(ThemeContext);
 
   const [questions, setQuestions] = useState<FAQ[]>([]);
   const [loading, setLoading] = useState(true);
@@ -73,7 +75,11 @@ const Questions: React.FC = () => {
         )}
         keyExtractor={item => item.question}
         ListFooterComponent={() => (
-          <LoadingIndicator size="large" color="#7d5cd7" animating={loading} />
+          <LoadingIndicator
+            size="large"
+            color={themeContext.primary}
+            animating={loading}
+          />
         )}
         showsVerticalScrollIndicator={false}
       />

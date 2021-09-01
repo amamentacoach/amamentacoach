@@ -64,13 +64,13 @@ export const ContentText = styled.Text`
 export const Footer = styled.View<ContentProps>`
   flex: ${({ index }) => (index === 0 ? 0 : 1)};
   flex-direction: column;
-  padding: 30px;
+  padding: 30px 0 60px 0px;
 `;
 
 export const CurrentPageWrapper = styled.View`
   flex: 1;
   justify-content: flex-end;
-  margin-bottom: 60px;
+  margin-bottom: 20px;
 `;
 
 export const LastPageButtonWrapper = styled.View<LastPageButtonWrapperProps>`

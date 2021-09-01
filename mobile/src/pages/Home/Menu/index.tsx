@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { View } from 'react-native';
-import RNBootSplash from 'react-native-bootsplash';
+import { hide } from 'react-native-bootsplash';
 
 import FormPickerInput from '../../../components/FormPickerInput';
 import ImageWrapper from '../../../components/ImageWrapper';
@@ -83,42 +83,42 @@ const Home: React.FC = () => {
   const options: Options[] = [
     {
       image: HomeBaby,
-      title: i18n.t('InicioOpcao1'),
+      title: i18n.t('HomePage.Option1'),
       onPress: () => navigation.navigate('Premature'),
     },
     {
       image: HomeBreastfeed,
-      title: i18n.t('InicioOpcao2'),
+      title: i18n.t('HomePage.Option2'),
       onPress: () => navigation.navigate('StepByStepPremature'),
     },
     {
       image: HomeMilk,
-      title: i18n.t('InicioOpcao3'),
+      title: i18n.t('HomePage.Option3'),
       onPress: () => navigation.navigate('Breastfeeding'),
     },
     {
       image: HomeEmotions,
-      title: i18n.t('InicioOpcao4'),
+      title: i18n.t('HomePage.Option4'),
       onPress: () => navigation.navigate('EmotionsAndBreastfeeding'),
     },
     {
       image: HomeMoreInformation,
-      title: i18n.t('InicioOpcao5'),
+      title: i18n.t('HomePage.Option5'),
       onPress: () => navigation.navigate('AdditionalInformation'),
     },
     {
       image: HomeMessage,
-      title: i18n.t('InicioOpcao6'),
+      title: i18n.t('HomePage.Option6'),
       onPress: () => navigation.navigate('Messages'),
     },
     {
       image: HomeMessage,
-      title: i18n.t('InicioOpcao7'),
+      title: i18n.t('HomePage.Option7'),
       onPress: () => navigation.navigate('Questions'),
     },
     {
       image: HomeCredits,
-      title: i18n.t('InicioOpcao8'),
+      title: i18n.t('HomePage.Option8'),
       onPress: () => navigation.navigate('Credits'),
     },
   ];
@@ -191,7 +191,7 @@ const Home: React.FC = () => {
     if (isFirstRun.temporary.home) {
       checkUserActions();
     }
-    RNBootSplash.hide({ duration: 250 });
+    hide({ duration: 250 });
   }, []);
 
   // Fecha todos os modais.
@@ -245,17 +245,17 @@ const Home: React.FC = () => {
     <>
       <Modal
         color={theme.babyPink}
-        content={i18n.t('InicioPopUpExpectativas')}
+        content={i18n.t('HomePage.ExpectationPopUp')}
         options={[
           {
-            text: i18n.t('sim'),
+            text: i18n.t('Yes'),
             onPress: () => {
               hideAllModals();
               navigation.navigate('ManageExpectations');
             },
           },
           {
-            text: i18n.t('nao'),
+            text: i18n.t('No'),
             onPress: () => setExpectationsModalVisibility(false),
           },
         ]}
@@ -269,12 +269,12 @@ const Home: React.FC = () => {
         color={theme.babyPink}
         content={
           formAction === '1D'
-            ? i18n.t('InicioPopUpPrimeiraEscala')
-            : i18n.t('InicioPopUpEscala')
+            ? i18n.t('HomePage.FirstStatusPopup')
+            : i18n.t('HomePage.StatusPopup')
         }
         options={[
           {
-            text: i18n.t('sim'),
+            text: i18n.t('Yes'),
             onPress: () => {
               hideAllModals();
               navigation.navigate('StatusForm', {
@@ -283,7 +283,7 @@ const Home: React.FC = () => {
             },
           },
           {
-            text: i18n.t('nao'),
+            text: i18n.t('No'),
             onPress: () => setFormModalVisibility(false),
           },
         ]}
@@ -294,18 +294,18 @@ const Home: React.FC = () => {
           color={theme.babyPurple}
           options={[
             {
-              text: i18n.t('sim'),
+              text: i18n.t('Yes'),
               disabled: !validateModalFields(),
               onPress: handleUpdateBabyLocation,
             },
             {
-              text: i18n.t('nao'),
+              text: i18n.t('No'),
               onPress: () => setBabyModalVisibility(false),
             },
           ]}
           visible={babyModalVisibility && !formModalVisibility}>
           <View>
-            <TextModal>{i18n.t('InicioPopUpStatusBebe')}</TextModal>
+            <TextModal>{i18n.t('HomePage.BabyStatusPopUp')}</TextModal>
             {babiesData.map((baby, index) => (
               <View key={baby.id}>
                 <ModalOption
@@ -323,11 +323,11 @@ const Home: React.FC = () => {
                   <LocationContainer>
                     <FormPickerInput
                       fieldName=""
-                      placeholder={i18n.t('InicioLocalizacaoBebe')}
+                      placeholder={i18n.t('HomePage.BabyLocation')}
                       options={[
-                        i18n.t('alojamento'),
-                        i18n.t('casa'),
-                        i18n.t('uci'),
+                        i18n.t('Lodging'),
+                        i18n.t('Home'),
+                        i18n.t('UCI'),
                       ]}
                       onChange={(_, value) =>
                         handleBabyLocationSelected(index, value)
@@ -344,18 +344,18 @@ const Home: React.FC = () => {
       <ScrollView>
         <Header>
           <HeaderBackground>
-            <HeaderText>{i18n.t('InicioCabecalho')}</HeaderText>
+            <HeaderText>{i18n.t('Begin')}</HeaderText>
           </HeaderBackground>
           <BannerImage source={Banner}>
             <HUButton
               onPress={() => navigation.navigate('HU')}
               activeOpacity={0.7}>
-              <HUButtonText>{i18n.t('InicioBotaoHU')}</HUButtonText>
+              <HUButtonText>{i18n.t('HomePage.HUButton')}</HUButtonText>
             </HUButton>
           </BannerImage>
         </Header>
         <ContentContainer>
-          <ContentHeader>{i18n.t('InicioConteudo')}</ContentHeader>
+          <ContentHeader>{i18n.t('Content')}</ContentHeader>
           {options.map(({ image, title, onPress }, index) => (
             <Option key={title}>
               <ContentOption activeOpacity={0.7} onPress={onPress}>

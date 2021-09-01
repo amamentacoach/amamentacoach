@@ -1,9 +1,11 @@
 import React from 'react';
 
+import i18n from 'i18n-js';
+
 import ImageWrapper from '../../../components/ImageWrapper';
 import InformationPages, {
-  InfoModelProps,
-  InfoPage,
+  InfoPageModelProps,
+  InfoPageItem,
 } from '../../../components/InformationPages';
 import MainButton from '../../../components/MainButton';
 import ProgressDots from '../../../components/ProgressDots';
@@ -24,42 +26,42 @@ import {
 
 import SurveyPrimary from '../../../../assets/images/icons/survey_primary.svg';
 
-const pages: InfoPage[] = [
-  {
-    id: 1,
-    image: SurveyPrimary,
-    content: [
-      {
-        text:
-          'Como você se sente com relação à sua autoconfiança para amamentar?\n\nPara cada uma das afirmações a seguir, por favor, escolha a resposta que melhor descreve sua autoconfiança em amamentar seu bebê.',
-      },
-    ],
-  },
-  {
-    id: 2,
-    image: SurveyPrimary,
-    content: [
-      {
-        text:
-          'Por favor, marque sua resposta circulando o número que melhor descreve como você se sente. Não há respostas certas ou erradas.',
-      },
-    ],
-  },
-  {
-    id: 3,
-    image: SurveyPrimary,
-    content: [],
-  },
-];
-
 const IntroductionStatusForm: React.FC = () => {
   const { setPersistentNotFirstRun } = useIsFirstRun();
+
+  const pages: InfoPageItem[] = [
+    {
+      id: '1',
+      image: SurveyPrimary,
+      content: [
+        {
+          id: '1',
+          text: i18n.t('IntroductionStatusFormPage.Text1'),
+        },
+      ],
+    },
+    {
+      id: '2',
+      image: SurveyPrimary,
+      content: [
+        {
+          id: '1',
+          text: i18n.t('IntroductionStatusFormPage.Text2'),
+        },
+      ],
+    },
+    {
+      id: '3',
+      image: SurveyPrimary,
+      content: [],
+    },
+  ];
 
   async function handleEndIntroduction() {
     await setPersistentNotFirstRun('statusFormIntroduction');
   }
 
-  const InfoModel: React.FC<InfoModelProps> = ({
+  const InfoModel: React.FC<InfoPageModelProps> = ({
     flatListRef,
     pagesLength,
     index,
@@ -68,7 +70,7 @@ const IntroductionStatusForm: React.FC = () => {
   }) => (
     <>
       <Header>
-        <ContentText>Autoconfiança para amamentar</ContentText>
+        <ContentText>{i18n.t('StatusFormPage.Header')}</ContentText>
       </Header>
       <ContentWrapper>
         <ImageContainer>
@@ -76,27 +78,29 @@ const IntroductionStatusForm: React.FC = () => {
         </ImageContainer>
         {index === pagesLength - 1 ? (
           <LastPageBox>
-            <HeaderLastPageBox>Escala</HeaderLastPageBox>
+            <HeaderLastPageBox>
+              {i18n.t('StatusFormPage.FormName')}
+            </HeaderLastPageBox>
             <ContentText>
-              <ColoredText>1</ColoredText> = nada confiante
+              <ColoredText>1</ColoredText> = {i18n.t('StatusFormPage.Value1')}
             </ContentText>
             <ContentText>
-              <ColoredText>2</ColoredText> = muito pouco confiante
+              <ColoredText>2</ColoredText> = {i18n.t('StatusFormPage.Value2')}
             </ContentText>
             <ContentText>
-              <ColoredText>3</ColoredText> = às vezes confiante
+              <ColoredText>3</ColoredText> = {i18n.t('StatusFormPage.Value3')}
             </ContentText>
             <ContentText>
-              <ColoredText>4</ColoredText> = confiante
+              <ColoredText>4</ColoredText> = {i18n.t('StatusFormPage.Value4')}
             </ContentText>
             <ContentText>
-              <ColoredText>5</ColoredText> = muito confiante
+              <ColoredText>5</ColoredText> = {i18n.t('StatusFormPage.Value5')}
             </ContentText>
           </LastPageBox>
         ) : (
           <>
-            {content.map(({ text }) => (
-              <ContentText key={text}>{text}</ContentText>
+            {content.map(({ id, text }) => (
+              <ContentText key={id}>{text}</ContentText>
             ))}
           </>
         )}
@@ -111,7 +115,7 @@ const IntroductionStatusForm: React.FC = () => {
         </CurrentPageWrapper>
         <LastPageButtonWrapper opacity={index === pagesLength - 1 ? 1 : 0}>
           <MainButton
-            text="Vamos começar!"
+            text={i18n.t('LetsStart')}
             onPress={handleEndIntroduction}
             disabled={index !== pagesLength - 1}
           />
@@ -120,7 +124,7 @@ const IntroductionStatusForm: React.FC = () => {
     </>
   );
 
-  return <InformationPages pages={pages} PageModel={InfoModel} />;
+  return <InformationPages data={pages} PageModel={InfoModel} />;
 };
 
 export default IntroductionStatusForm;

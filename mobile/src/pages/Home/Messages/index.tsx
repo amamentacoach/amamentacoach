@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import { FlatList } from 'react-native';
+import { ThemeContext } from 'styled-components';
 
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import { listMessages, Message as IMessage } from '../../../services/messages';
@@ -22,6 +23,7 @@ import AddIcon from '../../../../assets/images/icons/ic_add.svg';
 const Messages: React.FC = () => {
   const navigation = useNavigation();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
+  const themeContext = useContext(ThemeContext);
 
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [page, setPage] = useState(1);
@@ -86,7 +88,11 @@ const Messages: React.FC = () => {
         onEndReached={fetchOlderMessages}
         onEndReachedThreshold={0.1}
         ListFooterComponent={() => (
-          <LoadingIndicator size="large" color="#7d5cd7" animating={loading} />
+          <LoadingIndicator
+            size="large"
+            color={themeContext.primary}
+            animating={loading}
+          />
         )}
         showsVerticalScrollIndicator={false}
       />

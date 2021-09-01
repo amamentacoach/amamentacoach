@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 import { Linking } from 'react-native';
 
 import OptionsList, { Options } from '../../../components/OptionList';
@@ -16,35 +17,28 @@ const Distractions: React.FC = () => {
   const options: Options[] = [
     {
       image: Puzzle,
-      title: 'Quebra-cabeça',
-      onPress: async () => {
-        await Linking.openURL(
-          'https://www.geniol.com.br/raciocinio/quebra-cabeca',
-        );
-      },
+      title: i18n.t('DistractionsPage.1'),
+      onPress: async () =>
+        Linking.openURL('https://www.geniol.com.br/raciocinio/quebra-cabeca'),
     },
     {
       image: Crosswords,
-      title: 'Palavras Cruzadas',
-      onPress: async () => {
-        await Linking.openURL(
+      title: i18n.t('DistractionsPage.2'),
+      onPress: async () =>
+        Linking.openURL(
           'https://cruzadasclube.com.br/jogo/categoria/id/1/n/cruzadas-classicas',
-        );
-      },
+        ),
     },
     {
       image: Music,
-      title: 'Músicas para relaxar',
+      title: i18n.t('DistractionsPage.3'),
       onPress: () => navigation.navigate('MusicPlaylists'),
     },
   ];
 
   return (
     <ScrollView>
-      <HeaderText>
-        Você não só pode como deve pensar em outras coisas além dos desafios da
-        prematuridade e da amamentação! E, às vezes, não pensar em NADA!
-      </HeaderText>
+      <HeaderText>{i18n.t('DistractionsPage.Header')}</HeaderText>
       <OptionsList options={options} displayArrows />
     </ScrollView>
   );

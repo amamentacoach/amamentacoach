@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 
 import OptionsList, { Options } from '../../../components/OptionList';
 
@@ -17,32 +18,32 @@ const AdditionalInformation: React.FC = () => {
   const options: Options[] = [
     {
       image: PrematureBreastfeed,
-      title: 'Como meu leite é produzido?',
-      subtitle: 'Saiba como seu corpo produz o leite',
+      title: i18n.t('AdditionalInformationPage.1'),
+      subtitle: i18n.t('AdditionalInformationPage.2'),
       onPress: () => navigation.navigate('MilkAdditionalInformation'),
     },
     {
       image: PrematureBaby,
-      title: 'Benefícios do Canguru',
-      subtitle: 'Como o canguru pode ajudar',
+      title: i18n.t('BabySlingPage.PageName'),
+      subtitle: i18n.t('AdditionalInformationPage.4'),
       onPress: () => navigation.navigate('BabySling'),
     },
     {
       image: DiarySmile,
-      title: 'Você sabe o que é Resiliência?',
-      subtitle: 'Explicamos pra você!',
+      title: i18n.t('AdditionalInformationPage.5'),
+      subtitle: i18n.t('AdditionalInformationPage.6'),
       onPress: () => navigation.navigate('Resilience'),
     },
     {
       image: Change,
-      title: 'Reformulando as expectativas',
-      subtitle: 'Troque expectativas que são improváveis por realistas',
+      title: i18n.t('AdditionalInformationPage.7'),
+      subtitle: i18n.t('AdditionalInformationPage.8'),
       onPress: () => navigation.navigate('ManageExpectations'),
     },
     {
       image: EmotionsInfo,
-      title: 'Oferta de leite pelo copinho',
-      subtitle: 'Vídeo Demonstrativo',
+      title: i18n.t('AdditionalInformationPage.9'),
+      subtitle: i18n.t('AdditionalInformationPage.10'),
       onPress: () => navigation.navigate('BabyCup'),
     },
   ];

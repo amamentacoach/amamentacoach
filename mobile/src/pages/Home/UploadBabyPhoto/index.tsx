@@ -1,5 +1,7 @@
 import React from 'react';
 
+import i18n from 'i18n-js';
+
 import UploadPhotoScreen from '../../../components/UploadPhotoScreen';
 import { uploadBabyPhoto } from '../../../services/uploadPhoto';
 
@@ -10,8 +12,7 @@ const UploadBabyPhoto: React.FC = () => {
     <UploadPhotoScreen
       target="baby"
       image={HeartArrow}
-      text="Escolha uma foto de seu(s) bebê(s) na galeria e deixe aqui
-      para lembrar qual a sua grande motivação para amamentar."
+      text={i18n.t('UploadBabyPhotoPage.SelectPhoto')}
       uploadFunction={uploadBabyPhoto}
     />
   );

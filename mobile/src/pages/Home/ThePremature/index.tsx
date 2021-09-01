@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 
 import OptionsList, { Options } from '../../../components/OptionList';
 
@@ -15,18 +16,18 @@ const ThePremature: React.FC = () => {
   const options: Options[] = [
     {
       image: IcVideo,
-      title: 'Vídeo “Muito prazer, eu sou o prematuro”',
+      title: i18n.t('ThePrematurePage.Option1'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['w2rbi3aW-rA'] }),
     },
     {
       image: PrematureSurvey,
-      title: 'Enquete: Amamentar um prematuro',
+      title: i18n.t('ThePrematurePage.Option2'),
       onPress: () => navigation.navigate('SurveyBreastfeed'),
     },
     {
       image: PrematureBreastfeed,
-      title: 'Infográfico: 6 passos para a amamentação',
+      title: i18n.t('ThePrematurePage.Option3'),
       onPress: () => navigation.navigate('StepByStepPremature'),
     },
   ];
