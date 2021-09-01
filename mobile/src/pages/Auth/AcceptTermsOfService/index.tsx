@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import i18n from 'i18n-js';
 
 import MainButton from '../../../components/MainButton';
 import Modal from '../../../components/Modal';
@@ -60,10 +61,10 @@ const AcceptTermsOfService: React.FC = () => {
   return (
     <ScrollView>
       <Modal
-        content="Conta criada com sucesso! Seja muito bem-vinda ao AmamentaCoach!"
+        content={i18n.t('AcceptTermsOfServicePage.AccountCreated')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => {
               setIsSignUpModalVisible(false);
@@ -74,10 +75,10 @@ const AcceptTermsOfService: React.FC = () => {
         visible={isSignUpModalVisible}
       />
       <Modal
-        content={'Erro ao registrar.\nPor favor tente novamente mais tarde.'}
+        content={i18n.t('AcceptTermsOfServicePage.ErrorPopUp')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => {
               setIsErrorModalVisible(false);
@@ -88,10 +89,11 @@ const AcceptTermsOfService: React.FC = () => {
         visible={isErrorModalVisible}
       />
       <FormContainer>
-        <HeaderText>Passo 4 de 4</HeaderText>
+        <HeaderText>
+          {i18n.t('Auth.SignUpStep', { current: '4', max: '4' })}
+        </HeaderText>
         <HeaderSubText>
-          Você está quase lá! Por último, você deve aceitar o termo de
-          compromisso:
+          {i18n.t('AcceptTermsOfServicePage.HeaderSubText')}
         </HeaderSubText>
 
         {differenceInYears(new Date(), new Date(motherInfo.birthday)) >= 18 ? (
@@ -106,8 +108,8 @@ const AcceptTermsOfService: React.FC = () => {
             disabled={isSendingForm}
             text={
               isSendingForm
-                ? 'Enviando...'
-                : 'Eu concordo com os Termos de Compromisso'
+                ? i18n.t('Status.Sending')
+                : i18n.t('AcceptTermsOfServicePage.Agree')
             }
           />
         </SubmitButtonContainer>
