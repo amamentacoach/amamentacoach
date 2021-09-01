@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 
 import { useAuth } from '../../../contexts/auth';
 
@@ -13,15 +14,15 @@ const Profile: React.FC = () => {
   return (
     <ScrollView>
       <OptionButton onPress={() => navigation.navigate('NewPassword')}>
-        <OptionText>Alterar senha</OptionText>
+        <OptionText>{i18n.t('ProfileMenuPage.ChangePassword')}</OptionText>
       </OptionButton>
       <Line />
       <OptionButton onPress={() => navigation.navigate('MenuTermsOfService')}>
-        <OptionText>Termo de Consentimento</OptionText>
+        <OptionText>{i18n.t('TermsOfService')}</OptionText>
       </OptionButton>
       <Line />
       <OptionButton onPress={signOut}>
-        <OptionText>Sair</OptionText>
+        <OptionText>{i18n.t('Leave')}</OptionText>
       </OptionButton>
       <Line />
     </ScrollView>

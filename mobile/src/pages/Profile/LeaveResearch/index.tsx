@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
+import i18n from 'i18n-js';
 import { Dimensions, FlatList } from 'react-native';
 import * as Yup from 'yup';
 
@@ -14,6 +15,7 @@ import leaveResearch from '../../../services/leaveResearch';
 
 import {
   BoldMainText,
+  Container,
   FirstSubOptionContainer,
   LeaveText,
   MainText,
@@ -43,25 +45,21 @@ const Confirm: React.FC<Page> = ({ index, flatListRef }) => {
 
   return (
     <>
-      <BoldMainText>Prezada Senhora,</BoldMainText>
-      <MainText>
-        Ao confirmar o descadastramento, todos os seus dados serão excluídos e
-        você não fará mais parte da pesquisa “Coaching via App: uma abordagem
-        inovadora para o aleitamento materno de bebês prematuros”.
-      </MainText>
-      <MainText>
-        Seu acesso ao app será apagado e não será possível ver o conteúdo
-        presente nesta plataforma.
-      </MainText>
+      <BoldMainText>{i18n.t('LeaveResearchPage.Introduction')},</BoldMainText>
+      <MainText>{i18n.t('LeaveResearchPage.Header')}</MainText>
+      <MainText>{i18n.t('LeaveResearchPage.Content')}</MainText>
       <SubmitButtonContainer>
         <FirstSubOptionContainer>
           <SecondaryButton
-            text="Cancelar"
+            text={i18n.t('Cancel')}
             onPress={() => navigation.goBack()}
           />
         </FirstSubOptionContainer>
         <SecondSubOptionContainer>
-          <MainButton text="Proximo" onPress={() => handleNextPage(index)} />
+          <MainButton
+            text={i18n.t('Next')}
+            onPress={() => handleNextPage(index)}
+          />
         </SecondSubOptionContainer>
       </SubmitButtonContainer>
     </>
@@ -81,7 +79,7 @@ const Leave: React.FC<Page> = () => {
     message: '',
   };
   const newMessageSchema: Yup.SchemaOf<FormValues> = Yup.object({
-    message: Yup.string().required('Campo obrigatório'),
+    message: Yup.string().required(i18n.t('Yup.Required')),
   }).required();
 
   async function handleFormSubmit() {
@@ -99,10 +97,10 @@ const Leave: React.FC<Page> = () => {
   return (
     <>
       <Modal
-        content="Tem certeza? Ao se descadastrar da pesquisa “Coaching via App: uma abordagem inovadora para o aleitamento materno de bebês prematuros” você não terá mais acesso ao app e ao conteúdo aqui presente."
+        content={i18n.t('LeaveResearchPage.PopUp')}
         options={[
           {
-            text: 'Cancelar',
+            text: i18n.t('Cancel'),
             isBold: false,
             onPress: () => {
               setIsConfirmModalVisible(false);
@@ -110,7 +108,9 @@ const Leave: React.FC<Page> = () => {
             },
           },
           {
-            text: isSendingForm ? 'Enviando...' : 'Tenho Certeza',
+            text: isSendingForm
+              ? i18n.t('Status.Sending')
+              : i18n.t('LeaveResearchPage.Confirm'),
             isBold: true,
             disabled: isSendingForm,
             onPress: () => handleFormSubmit(),
@@ -119,16 +119,16 @@ const Leave: React.FC<Page> = () => {
         visible={isConfirmModalVisible}
       />
       <Modal
-        content="Erro ao descadastrar, verifique sua conexão."
+        content={i18n.t('LeaveResearchPage.Error')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             onPress: () => setIsErrorModalVisible(false),
           },
         ]}
         visible={isErrorModalVisible}
       />
-      <LeaveText>Poderia nos informar o motivo do descadastramento?</LeaveText>
+      <LeaveText>{i18n.t('LeaveResearchPage.Reason')}</LeaveText>
       <Formik
         initialValues={formInitialValues}
         validationSchema={newMessageSchema}
@@ -142,7 +142,7 @@ const Leave: React.FC<Page> = () => {
                 setMessage(text);
               }}
               value={message}
-              placeholder="Digite aqui sua mensagem..."
+              placeholder={i18n.t('Placeholder.Message')}
               error={errors.message}
               multiline
               numberOfLines={20}
@@ -152,13 +152,13 @@ const Leave: React.FC<Page> = () => {
             <SubmitButtonContainer>
               <FirstSubOptionContainer>
                 <SecondaryButton
-                  text="Cancelar"
+                  text={i18n.t('Cancel')}
                   onPress={() => navigation.goBack()}
                 />
               </FirstSubOptionContainer>
               <SecondSubOptionContainer>
                 <MainButton
-                  text="Descadastrar"
+                  text={i18n.t('LeaveResearchPage.Leave')}
                   onPress={handleSubmit}
                   disabled={!dirty}
                 />
@@ -192,7 +192,9 @@ const LeaveResearch: React.FC = () => {
       data={pages}
       renderItem={({ item, index }) => (
         <ScrollView width={width}>
-          <item.Component index={index} flatListRef={flatListRef} />
+          <Container>
+            <item.Component index={index} flatListRef={flatListRef} />
+          </Container>
         </ScrollView>
       )}
       keyExtractor={item => item.id}

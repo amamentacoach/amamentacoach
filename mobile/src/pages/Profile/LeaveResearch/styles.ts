@@ -9,8 +9,12 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
   keyboardShouldPersistTaps: 'handled',
 }))<ContainerProps>`
   flex: 1;
-  padding: 24px;
   width: ${({ width }) => width}px;
+`;
+
+export const Container = styled.View`
+  flex: 1;
+  padding: 24px;
 `;
 
 export const LeaveText = styled.Text`
@@ -18,7 +22,6 @@ export const LeaveText = styled.Text`
   font-size: 16px;
   color: ${props => props.theme.grey};
   text-align: center;
-  margin: 25px 24px;
 `;
 
 export const MainText = styled.Text`
