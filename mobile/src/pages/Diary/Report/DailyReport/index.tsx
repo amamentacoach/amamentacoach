@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import i18n from 'i18n-js';
+
 import DiaryBreastfeedEntry from '../../../../components/DiaryBreastfeedEntry';
 import DiaryRegistryEntry from '../../../../components/DiaryRegistryEntry';
 import {
@@ -40,7 +42,7 @@ const DailyReport: React.FC<DailyReportProps> = ({
     <Container>
       {dailyReport?.breastfeedEntries.some(baby => baby.entries.length > 0) && (
         <EntryContainer>
-          <Header>Amamentações</Header>
+          <Header>{i18n.t('DailyReportPage.Breastfeed')}</Header>
           {dailyReport?.breastfeedEntries.map(entry => (
             <DiaryBreastfeedEntry key={entry.id} {...entry} />
           ))}
@@ -49,7 +51,7 @@ const DailyReport: React.FC<DailyReportProps> = ({
 
       {dailyReport?.registryEntries.length > 0 && (
         <EntryContainer>
-          <Header>Retiradas de leite</Header>
+          <Header>{i18n.t('DailyReportPage.Extraction')}</Header>
           {dailyReport?.registryEntries.map(entry => (
             <DiaryRegistryEntry key={entry.id} {...entry} />
           ))}

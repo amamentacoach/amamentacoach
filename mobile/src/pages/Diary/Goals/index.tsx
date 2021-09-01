@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { StackActions, useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 
 import createGenericSurveyPage from '../../../components/GenericSurveyPage';
 import Modal from '../../../components/Modal';
@@ -46,7 +47,7 @@ const Goals: React.FC = () => {
           image={getRandomMotivationImage()}
           options={[
             {
-              text: 'Fechar',
+              text: i18n.t('Close'),
               isBold: true,
               onPress: () => setIsIntroModalVisible(false),
             },
@@ -54,17 +55,17 @@ const Goals: React.FC = () => {
           visible={isIntroModalVisible}
         />
         <Modal
-          content={`Suas metas foram traçadas!\nGostaria de ver o seu desempenho?`}
+          content={i18n.t('GoalsPage.PopupContent')}
           options={[
             {
-              text: 'Mais Tarde',
+              text: i18n.t('Later'),
               onPress: () => {
                 setIsFinishedModalVisible(false);
                 navigation.navigate('Diary');
               },
             },
             {
-              text: 'Ver desempenho',
+              text: i18n.t('GoalsPage.OpenReport'),
               isBold: true,
               onPress: () => {
                 setIsFinishedModalVisible(false);
@@ -77,7 +78,7 @@ const Goals: React.FC = () => {
         />
       </ModalContainer>
       <Survey
-        title="Minhas metas de hoje"
+        title={i18n.t('GoalsPage.Title')}
         color={theme.babyPurple}
         category={3}
         Page={createGenericSurveyPage(onFormEnd)}

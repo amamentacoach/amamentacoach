@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import i18n from 'i18n-js';
+
 import {
   getWeeklyReport,
   WeeklyReport as IWeeklyReport,
@@ -39,9 +41,15 @@ const WeeklyReport: React.FC<WeeklyReportProps> = ({
     return (
       <>
         <Question>{question}</Question>
-        {answers.length === 0 && <AnswerHeader>Não respondida</AnswerHeader>}
-        {answers.length === 1 && <AnswerHeader>Sua resposta:</AnswerHeader>}
-        {answers.length > 1 && <AnswerHeader>Suas respostas:</AnswerHeader>}
+        {answers.length === 0 && (
+          <AnswerHeader>{i18n.t('WeeklyReportPage.NotAnswered')}</AnswerHeader>
+        )}
+        {answers.length === 1 && (
+          <AnswerHeader>{i18n.t('WeeklyReportPage.YourAnswer')}:</AnswerHeader>
+        )}
+        {answers.length > 1 && (
+          <AnswerHeader>{i18n.t('WeeklyReportPage.YourAnswers')}:</AnswerHeader>
+        )}
         {answers.map(answer => (
           <Answer key={answer}>{answer}</Answer>
         ))}
@@ -55,7 +63,7 @@ const WeeklyReport: React.FC<WeeklyReportProps> = ({
 
   return (
     <Container>
-      <Header>Perguntas da semana</Header>
+      <Header>{i18n.t('WeeklyReportPage.Header')}</Header>
       {weeklyReport.map((entry, index) => {
         return (
           <EntryContainer key={entry.question}>

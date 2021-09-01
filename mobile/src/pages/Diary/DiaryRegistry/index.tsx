@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import {
   RouteProp,
@@ -6,7 +6,9 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
+import i18n from 'i18n-js';
 import { ActivityIndicator } from 'react-native';
+import { ThemeContext } from 'styled-components';
 
 import DiaryRegistryEntry from '../../../components/DiaryRegistryEntry';
 import MainButton from '../../../components/MainButton';
@@ -28,7 +30,7 @@ type ScreenParams = {
 
 const DiaryRegistry: React.FC = () => {
   const { date } = useRoute<RouteProp<ScreenParams, 'DiaryRegistry'>>().params;
-
+  const themeContext = useContext(ThemeContext);
   const navigation = useNavigation();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
   const isFocused = useIsFocused();
@@ -59,7 +61,7 @@ const DiaryRegistry: React.FC = () => {
         {isLoading ? (
           <ActivityIndicator
             size="large"
-            color="#7d5cd7"
+            color={themeContext.primary}
             animating={isLoading}
           />
         ) : (
@@ -69,7 +71,7 @@ const DiaryRegistry: React.FC = () => {
         )}
       </ListContainer>
       <MainButton
-        text="Registrar retirada"
+        text={i18n.t('DiaryRegistryPage.CreateExtractionEntry')}
         onPress={() => navigation.navigate('NewDiaryRegistry')}
       />
     </Container>

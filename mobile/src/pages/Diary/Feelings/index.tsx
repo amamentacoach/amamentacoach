@@ -2,6 +2,7 @@ import React from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StackActions, useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
 import {
@@ -66,14 +67,18 @@ const Feelings: React.FC = () => {
         options={question.options}
         multipleSelection={question.multipleSelection}
         displayOtherField={question.displayOther}
-        error={isFormValid ? '' : 'Pergunta obrigatória'}
+        error={isFormValid ? '' : i18n.t('Yup.AnswerRequired')}
         onChange={setFieldValue}
       />
 
       <Footer>
         <MainButton
           color={color}
-          text={index === pagesLength - 1 ? 'Salvar e traçar metas' : 'Próximo'}
+          text={
+            index === pagesLength - 1
+              ? i18n.t('FeelingsPage.SaveGoals')
+              : i18n.t('Next')
+          }
           disabled={!isDirty || isSendingForm}
           onPress={() => handleChangePage(index + 1, onFormEndGoals)}
         />
@@ -81,7 +86,7 @@ const Feelings: React.FC = () => {
           <SecondFooterButtonContainer>
             <SecondaryButton
               color={color}
-              text="Salvar e sair"
+              text={i18n.t('Actions.SaveAndExit')}
               disabled={!isDirty || isSendingForm}
               onPress={() => handleChangePage(index + 1, onFormEndDiary)}
             />

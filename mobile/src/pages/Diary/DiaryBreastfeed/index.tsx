@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import {
   RouteProp,
@@ -6,7 +6,9 @@ import {
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
+import i18n from 'i18n-js';
 import { ActivityIndicator } from 'react-native';
+import { ThemeContext } from 'styled-components';
 
 import DiaryBreastfeedEntry from '../../../components/DiaryBreastfeedEntry';
 import MainButton from '../../../components/MainButton';
@@ -29,7 +31,7 @@ const DiaryBreastfeed: React.FC = () => {
   const { date } = useRoute<
     RouteProp<ScreenParams, 'DiaryBreastfeed'>
   >().params;
-
+  const themeContext = useContext(ThemeContext);
   const navigation = useNavigation();
   const { motherInfo } = useAuth();
   const isFocused = useIsFocused();
@@ -63,7 +65,7 @@ const DiaryBreastfeed: React.FC = () => {
           {isLoading ? (
             <ActivityIndicator
               size="large"
-              color="#7d5cd7"
+              color={themeContext.primary}
               animating={isLoading}
             />
           ) : (
@@ -73,7 +75,7 @@ const DiaryBreastfeed: React.FC = () => {
           )}
         </ListContainer>
         <MainButton
-          text="Registrar amamentação"
+          text={i18n.t('DiaryBreastfeedPage.CreateBreastfeedingEntry')}
           onPress={() => navigation.navigate('NewBreastfeedEntry')}
         />
       </Container>

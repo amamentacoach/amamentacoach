@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
+import i18n from 'i18n-js';
 import { ActivityIndicator, View } from 'react-native';
+import { ThemeContext } from 'styled-components';
 
 import FormPickerInput from '../../../components/FormPickerInput';
 
@@ -16,12 +18,13 @@ enum Reports {
 const Report: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedReport, setSelectedReport] = useState(Reports.Daily);
+  const themeContext = useContext(ThemeContext);
 
   function handleChangeReport(value: string) {
     if (!value) {
       return;
     }
-    if (value === 'Semanal') {
+    if (value === i18n.t('ReportPage.Weekly')) {
       setSelectedReport(Reports.Weekly);
     } else {
       setSelectedReport(Reports.Daily);
@@ -34,16 +37,16 @@ const Report: React.FC = () => {
         <View>
           <FormPickerInput
             fieldName="reportSelected"
-            label="Período desejado:"
-            defaultValue="Diário"
-            options={['Diário', 'Semanal']}
+            label={i18n.t('ReportPage.Placeholder')}
+            defaultValue={i18n.t('Diary')}
+            options={[i18n.t('ReportPage.Daily'), i18n.t('ReportPage.Weekly')]}
             onChange={(_, fieldValue) => handleChangeReport(fieldValue)}
           />
         </View>
         {isLoading && (
           <ActivityIndicator
             size="large"
-            color="#7d5cd7"
+            color={themeContext.primary}
             animating={isLoading}
           />
         )}

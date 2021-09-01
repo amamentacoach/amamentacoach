@@ -1,9 +1,11 @@
 import React from 'react';
 
+import i18n from 'i18n-js';
+
 import ImageWrapper from '../../../components/ImageWrapper';
 import InformationPages, {
-  InfoModelProps,
-  InfoPage,
+  InfoPageItem,
+  InfoPageModelProps,
 } from '../../../components/InformationPages';
 import MainButton from '../../../components/MainButton';
 import ProgressDots from '../../../components/ProgressDots';
@@ -22,38 +24,37 @@ import {
 import IntroDiary from '../../../../assets/images/intro_diary.svg';
 import IntroDiaryCalendar from '../../../../assets/images/intro_diary_calendar.svg';
 
-const pages: InfoPage[] = [
-  {
-    id: 1,
-    image: IntroDiary,
-    content: [
-      {
-        text:
-          'Esse é o seu DIÁRIO! Um espaço para registrar seus avanços e oferecer recursos que poderão te ajudar nessa jornada!',
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: '1.  Procure a serenidade',
-    image: IntroDiaryCalendar,
-    content: [
-      {
-        text:
-          'Será muito importante que você o acesse todos os dias e informe sobre você, o seu bebê e a produção de leite.',
-      },
-    ],
-  },
-];
-
 const DiaryIntroduction: React.FC = () => {
   const { setPersistentNotFirstRun } = useIsFirstRun();
 
-  async function handleEndDiaryIntroduction() {
+  const pages: InfoPageItem[] = [
+    {
+      id: '1',
+      image: IntroDiary,
+      content: [
+        {
+          id: '1',
+          text: i18n.t('DiaryIntroductionPage.Text1'),
+        },
+      ],
+    },
+    {
+      id: '2',
+      image: IntroDiaryCalendar,
+      content: [
+        {
+          id: '1',
+          text: i18n.t('DiaryIntroductionPage.Text2'),
+        },
+      ],
+    },
+  ];
+
+  async function onEnd() {
     await setPersistentNotFirstRun('diaryIntroduction');
   }
 
-  const InfoModel: React.FC<InfoModelProps> = ({
+  const InfoModel: React.FC<InfoPageModelProps> = ({
     flatListRef,
     index,
     pagesLength,
@@ -63,8 +64,8 @@ const DiaryIntroduction: React.FC = () => {
     <>
       <ContentWrapper>
         {image && <ImageWrapper source={image} />}
-        {content.map(({ text }) => (
-          <ContentText key={text}>{text}</ContentText>
+        {content.map(({ id, text }) => (
+          <ContentText key={id}>{text}</ContentText>
         ))}
       </ContentWrapper>
       <Footer>
@@ -77,15 +78,10 @@ const DiaryIntroduction: React.FC = () => {
         </CurrentPageWrapper>
         <FooterButtonWrapper>
           {index === pagesLength - 1 ? (
-            <MainButton
-              onPress={handleEndDiaryIntroduction}
-              text="Vamos começar!"
-            />
+            <MainButton onPress={onEnd} text={i18n.t('LetsStart')} />
           ) : (
-            <ContinueButton
-              activeOpacity={0.7}
-              onPress={handleEndDiaryIntroduction}>
-              <TextContinueButton>Pular</TextContinueButton>
+            <ContinueButton activeOpacity={0.7} onPress={onEnd}>
+              <TextContinueButton>{i18n.t('Skip')}</TextContinueButton>
             </ContinueButton>
           )}
         </FooterButtonWrapper>
@@ -93,7 +89,7 @@ const DiaryIntroduction: React.FC = () => {
     </>
   );
 
-  return <InformationPages pages={pages} PageModel={InfoModel} />;
+  return <InformationPages data={pages} PageModel={InfoModel} />;
 };
 
 export default DiaryIntroduction;

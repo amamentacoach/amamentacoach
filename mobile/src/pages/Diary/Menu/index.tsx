@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 
 import Modal from '../../../components/Modal';
 import OptionsList, { Options } from '../../../components/OptionList';
@@ -39,7 +40,7 @@ const DiaryMenu: React.FC = () => {
   const options: Options[] = [
     {
       image: PrematureBreastfeed,
-      title: 'Registro de amamentação',
+      title: i18n.t('DiaryMenuPage.Option1'),
       onPress: () =>
         navigation.navigate('DiaryBreastfeed', {
           date: selectedDate.toISOString(),
@@ -47,7 +48,7 @@ const DiaryMenu: React.FC = () => {
     },
     {
       image: PrematureBreastfeed,
-      title: 'Registro de retiradas de leite',
+      title: i18n.t('DiaryMenuPage.Option2'),
       onPress: () =>
         navigation.navigate('DiaryRegistry', {
           date: selectedDate.toISOString(),
@@ -55,7 +56,7 @@ const DiaryMenu: React.FC = () => {
     },
     {
       image: DiarySmile,
-      title: 'Sentimentos',
+      title: i18n.t('DiaryMenuPage.Option3'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (await storageIsToday('@AmamentaCoach:DiaryFeelingsLastDate')) {
@@ -67,12 +68,12 @@ const DiaryMenu: React.FC = () => {
     },
     {
       image: DiaryStar,
-      title: 'Metas',
+      title: i18n.t('DiaryMenuPage.Option4'),
       onPress: () => navigation.navigate('Goals'),
     },
     {
       image: PrematureHeart,
-      title: 'Ajuda recebida',
+      title: i18n.t('DiaryMenuPage.Option5'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (await storageIsToday('@AmamentaCoach:DiaryHelpReceivedLastDate')) {
@@ -84,7 +85,7 @@ const DiaryMenu: React.FC = () => {
     },
     {
       image: Baby,
-      title: 'Meu Bebê Hoje',
+      title: i18n.t('DiaryMenuPage.Option6'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (await storageIsToday('@AmamentaCoach:DiaryBabyLastDate')) {
@@ -96,7 +97,7 @@ const DiaryMenu: React.FC = () => {
     },
     {
       image: Baby,
-      title: 'Ações Realizadas com o bebê',
+      title: i18n.t('DiaryMenuPage.Option7'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (await storageIsToday('@AmamentaCoach:DiaryActionsLastDate')) {
@@ -108,7 +109,7 @@ const DiaryMenu: React.FC = () => {
     },
     {
       image: Report,
-      title: 'Meu Desempenho',
+      title: i18n.t('DiaryMenuPage.Option8'),
       onPress: () => navigation.navigate('Report'),
     },
   ];
@@ -117,9 +118,8 @@ const DiaryMenu: React.FC = () => {
   if (motherInfo.partner) {
     options.splice(7, 0, {
       image: Father,
-      title: 'Participação do Pai',
-      // @ts-ignore
-      subtitle: 'Registre e acompanhe a participação do papai',
+      title: i18n.t('DiaryMenuPage.Option9'),
+      subtitle: i18n.t('DiaryMenuPage.SubtextOption9'),
       onPress: () => navigation.navigate('UploadFatherPhoto'),
     });
   }
@@ -141,10 +141,10 @@ const DiaryMenu: React.FC = () => {
   return (
     <>
       <Modal
-        content="Ops! Você já respondeu a enquete hoje. Volte novamente amanhã."
+        content={i18n.t('ErrorSurveyAlreadyAnswered')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             onPress: () => setIsModalVisible(false),
           },
         ]}
@@ -162,7 +162,7 @@ const DiaryMenu: React.FC = () => {
         )}
 
         <Header>
-          <HeaderTitle>Diário</HeaderTitle>
+          <HeaderTitle>{i18n.t('Diary')}</HeaderTitle>
           <CalendarButton
             onPress={() => setShowCalendar(true)}
             activeOpacity={0.7}>
