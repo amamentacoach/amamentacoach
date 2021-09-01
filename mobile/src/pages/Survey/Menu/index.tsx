@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 
 import Modal from '../../../components/Modal';
 import OptionsList, { Options } from '../../../components/OptionList';
@@ -23,7 +24,7 @@ const SurveyMenu: React.FC = () => {
   let options: Options[] = [
     {
       image: SurveysOne,
-      title: 'Amamentar um prematuro',
+      title: i18n.t('PrematureBreastfeed'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (
@@ -37,7 +38,7 @@ const SurveyMenu: React.FC = () => {
     },
     {
       image: SurveysTwo,
-      title: 'Motivação',
+      title: i18n.t('SurveyMenuPage.3'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (
@@ -51,7 +52,7 @@ const SurveyMenu: React.FC = () => {
     },
     {
       image: SurveysThree,
-      title: 'Sobre ajuda',
+      title: i18n.t('SurveyMenuPage.5'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (await storageIsToday('@AmamentaCoach:DiarySurveyHelpLastDate')) {
@@ -69,7 +70,7 @@ const SurveyMenu: React.FC = () => {
       ...options,
       {
         image: SurveysFour,
-        title: 'Sobre a participação do pai',
+        title: i18n.t('SurveyMenuPage.6'),
         onPress: async () => {
           // Checa se o usuário já respondeu o formulário no dia.
           if (
@@ -87,10 +88,10 @@ const SurveyMenu: React.FC = () => {
   return (
     <>
       <Modal
-        content="Ops! Você já respondeu a enquete hoje. Volte novamente amanhã."
+        content={i18n.t('ErrorSurveyAlreadyAnswered')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             onPress: () => setIsModalVisible(false),
           },
         ]}
@@ -98,7 +99,7 @@ const SurveyMenu: React.FC = () => {
       />
       <ScrollView>
         <Header>
-          <HeaderTitle>Enquetes</HeaderTitle>
+          <HeaderTitle>{i18n.t('Surveys')}</HeaderTitle>
         </Header>
         <OptionsList options={options} />
       </ScrollView>

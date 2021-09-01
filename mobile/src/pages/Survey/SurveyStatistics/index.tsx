@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import { HeaderBackButton } from '@react-navigation/stack';
+import i18n from 'i18n-js';
 import { ActivityIndicator } from 'react-native';
 
 import PieChart from '../../../components/PieChart';
@@ -61,7 +62,7 @@ const SurveyStatistics: React.FC = () => {
   return (
     <ScrollView>
       <HeaderBackground />
-      <HeaderText>Amamentar um prematuro</HeaderText>
+      <HeaderText>{i18n.t('PrematureBreastfeed')}</HeaderText>
 
       <ContentContainer>
         {loading ? (
@@ -69,13 +70,12 @@ const SurveyStatistics: React.FC = () => {
         ) : (
           <>
             <ContentHeader>
-              Obrigada por responder a nossa enquete! Veja abaixo as respostas
-              mais votadas no App pelas mães
+              {i18n.t('SurveyStatisticsPage.FormSubmitted')}
             </ContentHeader>
             {statistics.map(({ id, question, options }, index) => (
               <QuestionContainer key={id}>
                 <QuestionIndex>
-                  Pergunta {(index + 1).toString().padStart(2, '0')}
+                  {i18n.t('Question')} {(index + 1).toString().padStart(2, '0')}
                 </QuestionIndex>
                 <Question>{question}</Question>
 
