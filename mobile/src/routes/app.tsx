@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
+import i18n from 'i18n-js';
 
 import VideoPage from '../pages/Generic/VideoPage';
 
@@ -35,7 +36,7 @@ const AppRoutes: React.FC = () => {
         key="VideoPage"
         name="VideoPage"
         component={VideoPage}
-        options={{ title: 'Vídeo' }}
+        options={{ title: i18n.t('Video') }}
       />
     </Stack.Navigator>
   );

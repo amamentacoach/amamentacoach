@@ -1,5 +1,7 @@
 import React from 'react';
 
+import i18n from 'i18n-js';
+
 import theme from '../../config/theme';
 import SurveyBreastfeed from '../../pages/Survey/SurveyBreastfeed';
 import SurveyFather from '../../pages/Survey/SurveyFather';
@@ -16,31 +18,31 @@ const CreateSurveyRoutes = (Stack: any) => {
       key="SurveyBreastfeed"
       name="SurveyBreastfeed"
       component={SurveyBreastfeed}
-      options={{ title: 'Enquete', ...headerBabyBlue }}
+      options={{ title: i18n.t('Survey'), ...headerBabyBlue }}
     />,
     <Stack.Screen
       key="SurveyFather"
       name="SurveyFather"
       component={SurveyFather}
-      options={{ title: 'Enquete', ...headerBabyBlue }}
+      options={{ title: i18n.t('Survey'), ...headerBabyBlue }}
     />,
     <Stack.Screen
       key="SurveyHelp"
       name="SurveyHelp"
       component={SurveyHelp}
-      options={{ title: 'Enquete', ...headerBabyBlue }}
+      options={{ title: i18n.t('Survey'), ...headerBabyBlue }}
     />,
     <Stack.Screen
       key="SurveyMotivation"
       name="SurveyMotivation"
       component={SurveyMotivation}
-      options={{ title: 'Enquete', ...headerBabyBlue }}
+      options={{ title: i18n.t('Survey'), ...headerBabyBlue }}
     />,
     <Stack.Screen
       key="SurveyStatistics"
       name="SurveyStatistics"
       component={SurveyStatistics}
-      options={{ title: 'Enquete', ...headerBabyBlue }}
+      options={{ title: i18n.t('Survey'), ...headerBabyBlue }}
     />,
   ];
 };

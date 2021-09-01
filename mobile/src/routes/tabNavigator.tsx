@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import i18n from 'i18n-js';
 
 import theme from '../config/theme';
 import { useIsFirstRun } from '../contexts/firstRun';
@@ -29,7 +30,7 @@ const TabNavigator: React.FC = () => {
         name="Home"
         component={HomeMenu}
         options={{
-          tabBarLabel: 'Início',
+          tabBarLabel: i18n.t('Begin'),
           tabBarIcon: ({ color, size }) => (
             <HomeIcon width={size} height={size} fill={color} />
           ),
@@ -43,7 +44,7 @@ const TabNavigator: React.FC = () => {
             : DiaryMenu
         }
         options={{
-          tabBarLabel: 'Diário',
+          tabBarLabel: i18n.t('Diary'),
           tabBarVisible: !isFirstRun.persistent.diaryIntroduction,
           tabBarIcon: ({ color, size }) => (
             <DiaryIcon height={size} width={size} fill={color} />
@@ -54,7 +55,7 @@ const TabNavigator: React.FC = () => {
         name="Survey"
         component={SurveyMenu}
         options={{
-          tabBarLabel: 'Enquetes',
+          tabBarLabel: i18n.t('Surveys'),
           tabBarIcon: ({ color, size }) => (
             <SurveyIcon height={size} width={size} fill={color} />
           ),
@@ -64,7 +65,7 @@ const TabNavigator: React.FC = () => {
         name="Profile"
         component={ProfileMenu}
         options={{
-          tabBarLabel: 'Perfil',
+          tabBarLabel: i18n.t('Profile'),
           tabBarIcon: ({ color, size }) => (
             <ProfileIcon height={size} width={size} fill={color} />
           ),

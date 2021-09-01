@@ -1,5 +1,7 @@
 import React from 'react';
 
+import i18n from 'i18n-js';
+
 import theme from '../../config/theme';
 import DiaryActions from '../../pages/Diary/DiaryActions';
 import DiaryBaby from '../../pages/Diary/DiaryBaby';
@@ -21,61 +23,61 @@ const CreateDiaryRoutes = (Stack: any) => {
       key="DiaryActions"
       name="DiaryActions"
       component={DiaryActions}
-      options={{ title: 'Enquete', ...headerBabyPurple }}
+      options={{ title: i18n.t('Survey'), ...headerBabyPurple }}
     />,
     <Stack.Screen
       key="DiaryBaby"
       name="DiaryBaby"
       component={DiaryBaby}
-      options={{ title: 'Enquete', ...headerBabyPurple }}
+      options={{ title: i18n.t('Survey'), ...headerBabyPurple }}
     />,
     <Stack.Screen
       key="DiaryBreastfeed"
       name="DiaryBreastfeed"
       component={DiaryBreastfeed}
-      options={{ title: 'Amamentação' }}
+      options={{ title: i18n.t('Diary') }}
     />,
     <Stack.Screen
       key="DiaryRegistry"
       name="DiaryRegistry"
       component={DiaryRegistry}
-      options={{ title: 'Retirada de Leite' }}
+      options={{ title: i18n.t('Diary') }}
     />,
     <Stack.Screen
       key="Feelings"
       name="Feelings"
       component={Feelings}
-      options={{ title: 'Diário', ...headerBabyPurple }}
+      options={{ title: i18n.t('Diary'), ...headerBabyPurple }}
     />,
     <Stack.Screen
       key="Goals"
       name="Goals"
       component={Goals}
-      options={{ title: 'Diário', ...headerBabyPurple }}
+      options={{ title: i18n.t('Diary'), ...headerBabyPurple }}
     />,
     <Stack.Screen
       key="HelpReceived"
       name="HelpReceived"
       component={HelpReceived}
-      options={{ title: 'Diário', ...headerBabyPurple }}
+      options={{ title: i18n.t('Diary'), ...headerBabyPurple }}
     />,
     <Stack.Screen
       key="NewBreastfeedEntry"
       name="NewBreastfeedEntry"
       component={NewBreastfeedEntry}
-      options={{ title: 'Registrar Amamentação' }}
+      options={{ title: i18n.t('Diary') }}
     />,
     <Stack.Screen
       key="NewDiaryRegistry"
       name="NewDiaryRegistry"
       component={NewDiaryRegistry}
-      options={{ title: 'Registrar Retirada de Leite' }}
+      options={{ title: i18n.t('Diary') }}
     />,
     <Stack.Screen
       key="Report"
       name="Report"
       component={Report}
-      options={{ title: 'Meu Desempenho' }}
+      options={{ title: i18n.t('DiaryMenuPage.Option5') }}
     />,
   ];
 };

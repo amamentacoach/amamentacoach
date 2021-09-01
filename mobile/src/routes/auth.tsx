@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { createStackNavigator } from '@react-navigation/stack';
+import i18n from 'i18n-js';
 
 import { useIsFirstRun } from '../contexts/firstRun';
 import TermsOfService from '../pages/Auth/AcceptTermsOfService';
@@ -32,27 +33,27 @@ const AuthRoutes: React.FC = () => {
       <Stack.Screen
         name="ForgotPassword"
         component={ForgotPassword}
-        options={{ title: 'Esqueceu a senha?' }}
+        options={{ title: i18n.t('LoginPage.ForgotPassword') }}
       />
       <Stack.Screen
         name="SignUp"
         component={SignUp}
-        options={{ title: 'Cadastro' }}
+        options={{ title: i18n.t('SignUp') }}
       />
       <Stack.Screen
         name="MotherForm"
         component={MotherForm}
-        options={{ title: 'Cadastro' }}
+        options={{ title: i18n.t('SignUp') }}
       />
       <Stack.Screen
         name="BabyForm"
         component={BabyForm}
-        options={{ title: 'Cadastro' }}
+        options={{ title: i18n.t('SignUp') }}
       />
       <Stack.Screen
         name="TermsOfService"
         component={TermsOfService}
-        options={{ title: 'Termo de Consentimento' }}
+        options={{ title: i18n.t('SignUp') }}
       />
     </Stack.Navigator>
   );

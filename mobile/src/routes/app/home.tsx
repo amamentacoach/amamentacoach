@@ -1,5 +1,7 @@
 import React from 'react';
 
+import i18n from 'i18n-js';
+
 import theme from '../../config/theme';
 import { useIsFirstRun } from '../../contexts/firstRun';
 import AdditionalInformation from '../../pages/Home/AdditionalInformation';
@@ -44,127 +46,127 @@ const CreateHomeRoutes = (Stack: any) => {
       key="AdditionalInformation"
       name="AdditionalInformation"
       component={AdditionalInformation}
-      options={{ title: 'Você sabia?' }}
+      options={{ title: i18n.t('HomePage.Option5') }}
     />,
     <Stack.Screen
       key="BabyCup"
       name="BabyCup"
       component={BabyCup}
-      options={{ title: 'Oferta de leite pelo copinho' }}
+      options={{ title: i18n.t('PageTitles.2') }}
     />,
     <Stack.Screen
       key="BabySling"
       name="BabySling"
       component={BabySling}
-      options={{ title: 'Benefícios do canguru' }}
+      options={{ title: i18n.t('BabySlingPage.PageName') }}
     />,
     <Stack.Screen
       key="Breastfeeding"
       name="Breastfeeding"
       component={Breastfeeding}
-      options={{ title: 'Retirada do leite' }}
+      options={{ title: i18n.t('PageTitles.11') }}
     />,
     <Stack.Screen
       key="BreastfeedingBenefits"
       name="BreastfeedingBenefits"
       component={BreastfeedingBenefits}
-      options={{ title: 'Infográfico' }}
+      options={{ title: i18n.t('Infograph') }}
     />,
     <Stack.Screen
       key="Distractions"
       name="Distractions"
       component={Distractions}
-      options={{ title: 'Caixinha da distração' }}
+      options={{ title: i18n.t('EmotionsAndBreastfeedingPage.1') }}
     />,
     <Stack.Screen
       key="EmotionsAndBreastfeeding"
       name="EmotionsAndBreastfeeding"
       component={EmotionsAndBreastfeeding}
-      options={{ title: 'Emoções e amamentação' }}
+      options={{ title: i18n.t('HomePage.Option4') }}
     />,
     <Stack.Screen
       key="HowLongToBreastfeed"
       name="HowLongToBreastfeed"
       component={HowLongToBreastfeed}
-      options={{ title: 'Retirada do leite' }}
+      options={{ title: i18n.t('PageTitles.11') }}
     />,
     <Stack.Screen
       key="HowToBreastfeed"
       name="HowToBreastfeed"
       component={HowToBreastfeed}
-      options={{ title: 'Retirada do leite' }}
+      options={{ title: i18n.t('PageTitles.11') }}
     />,
     <Stack.Screen
       key="HU"
       name="HU"
       component={HU}
-      options={{ title: 'Sinta-se em casa!' }}
+      options={{ title: i18n.t('PageTitles.1') }}
     />,
     <Stack.Screen
       key="ManageExpectations"
       name="ManageExpectations"
       component={ManageExpectations}
-      options={{ title: 'Expectativas' }}
+      options={{ title: i18n.t('Expectations') }}
     />,
     <Stack.Screen
       key="Messages"
       name="Messages"
       component={Messages}
-      options={{ title: 'Mural de mensagens' }}
+      options={{ title: i18n.t('PageTitles.3') }}
     />,
     <Stack.Screen
       key="MilkAdditionalInformation"
       name="MilkAdditionalInformation"
       component={MilkAdditionalInformation}
-      options={{ title: 'Produção de leite' }}
+      options={{ title: i18n.t('PageTitles.4') }}
     />,
     <Stack.Screen
       key="MusicPlaylists"
       name="MusicPlaylists"
       component={MusicPlaylists}
-      options={{ title: 'Músicas para relaxar' }}
+      options={{ title: i18n.t('DistractionsPage.3') }}
     />,
     <Stack.Screen
       key="NewMessage"
       name="NewMessage"
       component={NewMessage}
-      options={{ title: 'Enviar mensagem' }}
+      options={{ title: i18n.t('NewMessagePage.SendMessage') }}
     />,
     <Stack.Screen
       key="NewQuestion"
       name="NewQuestion"
       component={NewQuestion}
-      options={{ title: 'Enviar Pergunta' }}
+      options={{ title: i18n.t('Actions.SendQuestion') }}
     />,
     <Stack.Screen
       key="Credits"
       name="Credits"
       component={Credits}
-      options={{ title: 'Créditos' }}
+      options={{ title: i18n.t('HomePage.Option8') }}
     />,
     <Stack.Screen
       key="NotWhatIExpected"
       name="NotWhatIExpected"
       component={NotWhatIExpected}
-      options={{ title: 'O Prematuro', ...headerBabyGreen }}
+      options={{ title: i18n.t('PageTitles.5'), ...headerBabyGreen }}
     />,
     <Stack.Screen
       key="Premature"
       name="Premature"
       component={Premature}
-      options={{ title: 'O Prematuro' }}
+      options={{ title: i18n.t('PageTitles.5') }}
     />,
     <Stack.Screen
       key="Questions"
       name="Questions"
       component={Questions}
-      options={{ title: 'Perguntas' }}
+      options={{ title: i18n.t('HomePage.Option7') }}
     />,
     <Stack.Screen
       key="Resilience"
       name="Resilience"
       component={Resilience}
-      options={{ title: 'Resiliência' }}
+      options={{ title: i18n.t('PageTitles.6') }}
     />,
     <Stack.Screen
       key="StatusForm"
@@ -176,51 +178,51 @@ const CreateHomeRoutes = (Stack: any) => {
       }
       options={
         isFirstRun.persistent.statusFormIntroduction
-          ? { title: 'Enquete' }
-          : { title: 'Enquete', ...headerBabyBlue }
+          ? { title: i18n.t('Survey') }
+          : { title: i18n.t('Survey'), ...headerBabyBlue }
       }
     />,
     <Stack.Screen
       key="StepByStepPremature"
       name="StepByStepPremature"
       component={StepByStepPremature}
-      options={{ title: 'Infográfico' }}
+      options={{ title: i18n.t('Infograph') }}
     />,
     <Stack.Screen
       key="ThePremature"
       name="ThePremature"
       component={ThePremature}
-      options={{ title: 'Sou o Prematuro' }}
+      options={{ title: i18n.t('PageTitles.7') }}
     />,
     <Stack.Screen
       key="UploadBabyPhoto"
       name="UploadBabyPhoto"
       component={UploadBabyPhoto}
-      options={{ title: 'Minha maior motivação' }}
+      options={{ title: i18n.t('PageTitles.8') }}
     />,
     <Stack.Screen
       key="UploadFatherPhoto"
       name="UploadFatherPhoto"
       component={UploadFatherPhoto}
-      options={{ title: 'O Papai' }}
+      options={{ title: i18n.t('PageTitles.9') }}
     />,
     <Stack.Screen
       key="UploadMotherPhoto"
       name="UploadMotherPhoto"
       component={UploadMotherPhoto}
-      options={{ title: 'Espelho' }}
+      options={{ title: i18n.t('PageTitles.10') }}
     />,
     <Stack.Screen
       key="WhenToBreastfeed"
       name="WhenToBreastfeed"
       component={WhenToBreastfeed}
-      options={{ title: 'Retirada do leite' }}
+      options={{ title: i18n.t('PageTitles.11') }}
     />,
     <Stack.Screen
       key="WhyBreastfeed"
       name="WhyBreastfeed"
       component={WhyBreastfeed}
-      options={{ title: 'Retirada do leite' }}
+      options={{ title: i18n.t('PageTitles.11') }}
     />,
   ];
 };
