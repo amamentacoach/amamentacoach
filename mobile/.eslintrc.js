@@ -6,6 +6,8 @@ module.exports = {
     'prettier',
     'prettier/@typescript-eslint',
     'prettier/react',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
   ],
   parserOptions: {
     project: ['./tsconfig.json'],
@@ -25,6 +27,8 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react-hooks/exhaustive-deps': 'off',
     'react/require-default-props': 'off',
+    'import/named': 'off',
+    'import/namespace': 'off',
     'import/order': [
       'error',
       {

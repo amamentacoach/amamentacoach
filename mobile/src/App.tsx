@@ -16,12 +16,18 @@ import Routes from './routes/routes';
 const App: React.FC = () => {
   const [isLocalizationLoaded, setIsLocalizationLoaded] = useState(false);
 
-  const setI18nConfig = async () => {
+  function setI18nConfig() {
     const translationPaths: {
-      [key: string]: { translation: object; locale: Locale };
+      [key: string]: { getTranslation: () => object; dateLocale: Locale };
     } = {
-      pt: { translation: require('./translations/pt.json'), locale: ptBR },
-      en: { translation: require('./translations/en.json'), locale: enCA },
+      pt: {
+        getTranslation: () => require('../assets/locales/pt.json'),
+        dateLocale: ptBR,
+      },
+      en: {
+        getTranslation: () => require('../assets/locales/en.json'),
+        dateLocale: enCA,
+      },
     };
 
     // Caso nenhuma língua seja encontrada é utilizado português.
@@ -33,20 +39,16 @@ const App: React.FC = () => {
 
     I18nManager.forceRTL(isRTL);
     i18n.translations = {
-      [languageTag]: translationPaths[languageTag].translation,
+      [languageTag]: translationPaths[languageTag].getTranslation(),
     };
     i18n.locale = languageTag;
-    dateFNSSetLocale(translationPaths[languageTag].locale);
-  };
+    dateFNSSetLocale(translationPaths[languageTag].dateLocale);
+  }
 
   useEffect(() => {
-    async function setLocale() {
-      await setI18nConfig();
-      RNLocalize.addEventListener('change', setI18nConfig);
-      setIsLocalizationLoaded(true);
-    }
-    setLocale();
-
+    setI18nConfig();
+    RNLocalize.addEventListener('change', setI18nConfig);
+    setIsLocalizationLoaded(true);
     return () => {
       RNLocalize.removeEventListener('change', setI18nConfig);
     };
