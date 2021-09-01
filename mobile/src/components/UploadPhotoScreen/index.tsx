@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import i18n from 'i18n-js';
 import { Dimensions } from 'react-native';
 import ImagePicker, { ImagePickerResponse } from 'react-native-image-picker';
 
@@ -9,7 +10,7 @@ import MainButton from '../MainButton';
 import SecondaryButton from '../SecondaryButton';
 
 import {
-  FormContainer,
+  Container,
   ScrollView,
   SelectButtonContainer,
   SelectedImage,
@@ -60,7 +61,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
 
   return (
     <ScrollView>
-      <FormContainer>
+      <Container>
         {/* Usuário já fez o upload de uma foto */}
         {!photo && !formSent && motherInfo.images[target] && (
           <SelectedImage
@@ -82,31 +83,31 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
         {/* Usuário ainda não enviou uma foto e não selecionou nenhuma para ser enviada */}
         {!photo && !motherInfo.images[target] && (
           <>
-            {image && (
-              <ImageWrapper
-                source={image}
-                resizeMode="contain"
-                width="100%"
-                height={300}
-              />
-            )}
+            <ImageWrapper
+              source={image}
+              resizeMode="contain"
+              height={250}
+              width={250}
+            />
             <Text>{text}</Text>
           </>
         )}
-      </FormContainer>
+      </Container>
       <SubmitButtonContainer>
         <SelectButtonContainer>
           <SecondaryButton
             onPress={handleSelectPhoto}
             disabled={isSendingForm}
-            text="Selecionar foto"
+            text={i18n.t('Actions.SelectPicture')}
           />
         </SelectButtonContainer>
         <SendButtonContainer>
           <MainButton
             onPress={handleSubmitNewPhoto}
             disabled={!photo || formSent || isSendingForm}
-            text={isSendingForm ? 'Enviando...' : 'Enviar'}
+            text={
+              isSendingForm ? i18n.t('Status.Sending') : i18n.t('Actions.Send')
+            }
           />
         </SendButtonContainer>
       </SubmitButtonContainer>

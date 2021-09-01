@@ -1,5 +1,6 @@
 import React from 'react';
 
+import i18n from 'i18n-js';
 import { View } from 'react-native';
 
 import { format } from '../../lib/date-fns';
@@ -26,18 +27,20 @@ const DiaryBreastfeedEntry: React.FC<BreastfeedEntry> = ({ name, entries }) => {
         <Breastfeed key={id}>
           <Row>
             <TextContainer>
-              <Text>Horário: </Text>
+              <Text>{i18n.t('Time')}: </Text>
               <Content>{format(new Date(date), 'kk:mm')}</Content>
             </TextContainer>
             <TextContainer>
-              <Text>Duração: </Text>
+              <Text>{i18n.t('Duration')}: </Text>
               <Content>{duration} min</Content>
             </TextContainer>
           </Row>
           <Row>
             <TextContainer>
-              <Text>Mama: </Text>
-              <Content>{breast === 'E' ? 'Esquerda' : 'Direita'}</Content>
+              <Text>{i18n.t('Breast')}: </Text>
+              <Content>
+                {breast === 'E' ? i18n.t('Left') : i18n.t('Right')}
+              </Content>
             </TextContainer>
           </Row>
         </Breastfeed>

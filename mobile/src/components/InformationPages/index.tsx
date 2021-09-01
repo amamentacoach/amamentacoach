@@ -1,44 +1,42 @@
 import React, { useRef } from 'react';
 
-import { Dimensions, FlatList } from 'react-native';
+import { FlatListProps, Dimensions, FlatList } from 'react-native';
 
 import { ImageWrapperSourcePropType } from '../ImageWrapper';
 
-import { ListContainer, PageContainer, ScrollView } from './styles';
+import { PageContainer } from './styles';
 
-export interface InfoModelProps {
+interface InfoPage {
+  title?: string | JSX.Element;
+  image?: ImageWrapperSourcePropType;
+  content: {
+    id: string;
+    sectionHeader?: string | JSX.Element;
+    text: string | JSX.Element;
+  }[];
+}
+
+export interface InfoPageModelProps extends InfoPage {
   flatListRef: React.RefObject<FlatList<any>>;
   index: number;
   pagesLength: number;
-  title?: string;
-  image?: ImageWrapperSourcePropType;
-  content: {
-    sectionHeader?: string;
-    text: string;
-  }[];
   goToPage: (page: number) => void;
 }
 
-export interface InfoPage {
-  id: number;
-  title?: string;
-  image?: ImageWrapperSourcePropType;
-  content: {
-    sectionHeader?: string;
-    text: string;
-  }[];
+export interface InfoPageItem extends InfoPage {
+  id: string;
 }
 
-interface InformationPagesProps {
-  PageModel: React.FC<InfoModelProps>;
-  pages: InfoPage[];
-  scrollEnabled?: boolean;
+interface InformationPagesProps
+  extends Omit<FlatListProps<InfoPageItem>, 'renderItem' | 'data'> {
+  PageModel: React.FC<InfoPageModelProps>;
+  data: InfoPageItem[];
 }
 
 const InformationPages: React.FC<InformationPagesProps> = ({
-  pages,
+  data: pages,
   PageModel,
-  scrollEnabled,
+  ...props
 }) => {
   const { width } = Dimensions.get('window');
   const flatListRef = useRef<FlatList>(null);
@@ -54,33 +52,30 @@ const InformationPages: React.FC<InformationPagesProps> = ({
   }
 
   return (
-    <ListContainer>
-      <FlatList
-        ref={flatListRef}
-        data={pages}
-        renderItem={({ item, index }) => (
-          <PageContainer width={width}>
-            <ScrollView>
-              <PageModel
-                index={index}
-                pagesLength={pages.length}
-                title={item.title}
-                content={item.content}
-                image={item.image}
-                flatListRef={flatListRef}
-                goToPage={goToPage}
-              />
-            </ScrollView>
-          </PageContainer>
-        )}
-        keyExtractor={item => item.id.toString()}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        scrollEnabled={scrollEnabled}
-        keyboardShouldPersistTaps="handled"
-      />
-    </ListContainer>
+    <FlatList
+      renderItem={({ item, index }) => (
+        <PageContainer width={width}>
+          <PageModel
+            index={index}
+            pagesLength={pages.length}
+            title={item.title}
+            content={item.content}
+            image={item.image}
+            flatListRef={flatListRef}
+            goToPage={goToPage}
+          />
+        </PageContainer>
+      )}
+      ref={flatListRef}
+      data={pages}
+      keyExtractor={item => item.id}
+      horizontal
+      pagingEnabled
+      showsHorizontalScrollIndicator={false}
+      keyboardShouldPersistTaps="handled"
+      nestedScrollEnabled
+      {...props}
+    />
   );
 };
 

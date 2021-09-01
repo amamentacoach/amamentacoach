@@ -43,7 +43,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
     if (mode === 'time') {
       return format(dateToFormat, 'kk:mm');
     }
-    return format(dateToFormat, 'dd/MM/yyyy');
+    return format(dateToFormat, 'P');
   }
 
   // Formata a data salva para ser armazenada no useState do componente e valor final do formulário.

@@ -25,7 +25,7 @@ export const TextContainer = styled.View`
 export const Text = styled.Text`
   color: ${props => props.theme.primary};
   font-size: 16px;
-  font-family: 'OpenSans-Regular';
+  font-family: 'OpenSans-Bold';
 `;
 
 export const Content = styled.Text`

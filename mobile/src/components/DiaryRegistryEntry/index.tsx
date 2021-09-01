@@ -1,5 +1,7 @@
 import React from 'react';
 
+import i18n from 'i18n-js';
+
 import { format } from '../../lib/date-fns';
 import { ExtractionEntry } from '../../services/diaryRegistry';
 
@@ -15,21 +17,21 @@ const DiaryRegistryEntry: React.FC<ExtractionEntry> = ({
     <Registry>
       <Row>
         <TextContainer>
-          <Text>Horário: </Text>
+          <Text>{i18n.t('Time')}: </Text>
           <Content>{format(new Date(date), 'kk:mm')}</Content>
         </TextContainer>
         <TextContainer>
-          <Text>Duração: </Text>
+          <Text>{i18n.t('Duration')}: </Text>
           <Content>{duration} min</Content>
         </TextContainer>
       </Row>
       <Row>
         <TextContainer>
-          <Text>Mama: </Text>
-          <Content>{breast === 'E' ? 'Esquerda' : 'Direita'}</Content>
+          <Text>{i18n.t('Breast')}: </Text>
+          <Content>{breast === 'E' ? i18n.t('Left') : i18n.t('Right')}</Content>
         </TextContainer>
         <TextContainer>
-          <Text>Quantidade: </Text>
+          <Text>{i18n.t('Quantity')}: </Text>
           <Content>{quantity} ml</Content>
         </TextContainer>
       </Row>

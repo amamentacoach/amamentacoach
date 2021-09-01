@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { StackActions, useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
+import i18n from 'i18n-js';
 import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 
 import { useAuth } from '../../contexts/auth';
@@ -115,7 +116,7 @@ const Survey: React.FC<SurveyProps> = ({
   function validateForm(
     question: SurveyQuestion,
     values: {
-      [key: number]: string[];
+      [key: string]: string[];
     },
   ) {
     const atLeastOneSelected = values[question.id].length > 0;
@@ -228,17 +229,16 @@ const Survey: React.FC<SurveyProps> = ({
   return (
     <>
       <Modal
-        content={
-          'Erro ao enviar suas respostas.\nPor favor tente novamente mais tarde.'
-        }
+        content={i18n.t('SurveyComponent.SubmitError')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => setIsErrorModalVisible(false),
           },
         ]}
         visible={isErrorModalVisible}
+        color={color}
       />
 
       {!!feedbackModalData && (
@@ -246,14 +246,14 @@ const Survey: React.FC<SurveyProps> = ({
           content={feedbackModalData.content}
           options={[
             {
-              text: 'Mais tarde',
+              text: i18n.t('Later'),
               onPress: () => {
                 setFeedbackModalData(null);
                 feedbackModalData.onExit();
               },
             },
             {
-              text: 'Ver conteúdo',
+              text: i18n.t('SurveyComponent.ReadFeedback'),
               isBold: true,
               onPress: () => {
                 setFeedbackModalData(null);
@@ -269,6 +269,7 @@ const Survey: React.FC<SurveyProps> = ({
             },
           ]}
           visible={!!feedbackModalData}
+          color={color}
         />
       )}
 
@@ -306,7 +307,7 @@ const Survey: React.FC<SurveyProps> = ({
                 </ContentContainer>
               </ScrollView>
             )}
-            keyExtractor={item => item.id.toString()}
+            keyExtractor={item => item.id}
             horizontal
             scrollEnabled={false}
             showsHorizontalScrollIndicator={false}
