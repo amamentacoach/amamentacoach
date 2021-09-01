@@ -2,7 +2,7 @@ import perguntas from '../../../backend/common/perguntas';
 import { MotherInfo } from '../services/auth';
 
 export interface SurveyQuestion {
-  id: number;
+  id: string;
   target: string;
   category: number;
   description: string;
@@ -36,7 +36,7 @@ export async function getSurveyQuestions(
       return true;
     })
     .map(question => ({
-      id: question.id,
+      id: question.id.toString(),
       target: question.alvo,
       category: question.categoria,
       description: question.descricao,

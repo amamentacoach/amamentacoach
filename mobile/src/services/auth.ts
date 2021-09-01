@@ -10,12 +10,12 @@ export interface MotherSignUpInfo {
   timeSpentBreastFeeding: string;
   birthday: string;
   partner: boolean;
-  liveTogether: string;
+  liveTogether: string | null;
   education: string;
   wage: string;
   plannedPregnancy: boolean;
   firstVisit: string;
-  firstStimulus: boolean;
+  firstStimulus: string;
   timeFirstStimulus: string;
   childrenAlive: string;
   receivedPreNatalGuidance: boolean;

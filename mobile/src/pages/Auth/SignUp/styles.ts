@@ -14,6 +14,7 @@ export const Header = styled.View`
 
 export const HeaderText = styled.Text`
   font-size: 18px;
+  font-family: 'OpenSans-Bold';
   color: ${props => props.theme.primary};
   text-align: center;
 `;

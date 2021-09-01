@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
+import i18n from 'i18n-js';
 import { View } from 'react-native';
 import * as Yup from 'yup';
 
@@ -31,17 +32,19 @@ const FormSignUp: React.FC = () => {
     password_confirmation: '',
   };
   const signUpSchema: Yup.SchemaOf<FormValues> = Yup.object({
-    email: Yup.string().email('Email Inválido').required('Campo obrigatório'),
+    email: Yup.string()
+      .email(i18n.t('Yup.InvalidEmail'))
+      .required(i18n.t('Yup.Required')),
     password: Yup.string()
-      .min(8, 'A senha precisa ter pelo menos 8 caracteres')
+      .min(8, i18n.t('Yup.InvalidPassword'))
       .matches(
         new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])'),
-        'Precisa ter letras minúsculas, letras maiúsculas e números',
+        i18n.t('Yup.InvalidPassword'),
       )
-      .required('Campo obrigatório'),
+      .required(i18n.t('Yup.Required')),
     password_confirmation: Yup.string()
-      .oneOf([Yup.ref('password')], 'As senhas precisam ser iguais')
-      .required('Campo obrigatório'),
+      .oneOf([Yup.ref('password')], i18n.t('Yup.PasswordMustMatch'))
+      .required(i18n.t('Yup.Required')),
   }).required();
 
   function handleFormSubmit({ email, password }: FormValues) {
@@ -51,10 +54,11 @@ const FormSignUp: React.FC = () => {
   return (
     <ScrollView>
       <Header>
-        <HeaderText>Passo 1 de 4</HeaderText>
+        <HeaderText>
+          {i18n.t('Auth.SignUpStep', { current: '1', max: '4' })}
+        </HeaderText>
         <HeaderSubText>
-          Primeiro, precisamos dos seguintes dados para que você possa acessar
-          nossa plataforma:
+          <HeaderSubText>{i18n.t('SignUpPage.Header')}</HeaderSubText>
         </HeaderSubText>
       </Header>
       <Formik
@@ -66,29 +70,29 @@ const FormSignUp: React.FC = () => {
           <FormContainer>
             <View>
               <FormTextInput
-                label="Email"
+                label={i18n.t('Email')}
                 error={errors.email}
                 onChangeText={handleChange('email')}
                 value={values.email}
-                placeholder="Email"
+                placeholder={i18n.t('Email')}
                 keyboardType="email-address"
               />
 
               <FormTextInput
-                label="Senha"
+                label={i18n.t('Password')}
                 error={errors.password}
                 onChangeText={handleChange('password')}
                 value={values.password}
-                placeholder="Senha"
+                placeholder={i18n.t('Password')}
                 secureTextEntry
               />
 
               <FormTextInput
-                label="Confirme sua senha"
+                label={i18n.t('SignUpPage.ConfirmPassword')}
                 error={errors.password_confirmation}
                 onChangeText={handleChange('password_confirmation')}
                 value={values.password_confirmation}
-                placeholder="Confirme sua senha"
+                placeholder={i18n.t('SignUpPage.ConfirmPassword')}
                 secureTextEntry
               />
             </View>
@@ -97,7 +101,7 @@ const FormSignUp: React.FC = () => {
               <MainButton
                 onPress={handleSubmit}
                 disabled={!dirty}
-                text="Próximo"
+                text={i18n.t('Next')}
               />
             </SubmitButtonContainer>
           </FormContainer>

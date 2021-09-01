@@ -2,6 +2,7 @@ import React from 'react';
 
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
+import i18n from 'i18n-js';
 import * as Yup from 'yup';
 
 import FormDateInput from '../../../components/FormDateInput';
@@ -34,20 +35,20 @@ interface FormValues {
   pregnantCount: string;
   yearsSpentBreastFeeding: string;
   monthsSpentBreastFeeding: string;
-  alreadyBreastfeed: string;
-  partner: string;
-  liveTogether: string;
+  alreadyBreastfeed: boolean | null;
+  partner: boolean | null;
+  liveTogether: boolean | null;
   partnerTime: string;
   education: string;
   wage: string;
-  plannedPregnancy: string;
+  plannedPregnancy: boolean | null;
   firstVisit: string;
   firstStimulus: string;
   timeFirstStimulus: string;
   childrenAlive: string;
-  preNatalGuidance: string;
-  occupation: string;
-  maternityLeave: string;
+  receivedPreNatalGuidance: boolean | null;
+  occupation: boolean | null;
+  maternityLeave: boolean | null;
   maternityLeaveCount: string;
 }
 
@@ -57,73 +58,6 @@ type IScreenParams = {
     password: string;
   };
 };
-
-const motherFormSchema = Yup.object({
-  name: Yup.string().required('Campo obrigatório'),
-  birthday: Yup.string().required('Campo obrigatório'),
-  ddd: Yup.number()
-    .integer('Deve ser um número inteiro')
-    .typeError('Deve ser um número inteiro')
-    .min(10, 'Deve ser maior ou igual a 10')
-    .max(99, 'Deve ser menor que 100')
-    .required('Campo obrigatório'),
-  phone: Yup.number()
-    .integer('Deve ser um número inteiro')
-    .typeError('Deve ser um número inteiro')
-    .min(100000000, 'Deve possuir 9 dígitos')
-    .max(999999999, 'Deve possuir 9 dígitos')
-    .required('Campo obrigatório'),
-  alreadyBreastfeed: Yup.string().required('Campo obrigatório'),
-  pregnantCount: Yup.number()
-    .integer('Deve ser um número inteiro')
-    .typeError('Deve ser um número inteiro')
-    .min(0, 'Dever ser maior ou igual a zero')
-    .required('Campo obrigatório'),
-  yearsSpentBreastFeeding: Yup.number().when('alreadyBreastfeed', {
-    is: 'Sim',
-    then: Yup.number()
-      .integer('Deve ser um número inteiro')
-      .typeError('Deve ser um número inteiro')
-      .min(0, 'Dever ser maior ou igual a zero')
-      .required('Campo obrigatório'),
-    otherwise: Yup.number(),
-  }),
-  monthsSpentBreastFeeding: Yup.number().when('alreadyBreastfeed', {
-    is: 'Sim',
-    then: Yup.number()
-      .integer('Deve ser um número inteiro')
-      .typeError('Deve ser um número inteiro')
-      .min(0, 'Dever ser maior ou igual a zero')
-      .required('Campo obrigatório'),
-    otherwise: Yup.number(),
-  }),
-  partner: Yup.string().required('Campo obrigatório'),
-  liveTogether: Yup.string().required('Campo obrigatório'),
-  partnerTime: Yup.string().when('liveTogether', {
-    is: 'Sim',
-    then: Yup.string().required('Campo obrigatório'),
-    otherwise: Yup.string(),
-  }),
-  education: Yup.string().required('Campo obrigatório'),
-  wage: Yup.string().required('Campo obrigatório'),
-  plannedPregnancy: Yup.string().required('Campo obrigatório'),
-  firstVisit: Yup.string().required('Campo obrigatório'),
-  firstStimulus: Yup.string().required('Campo obrigatório'),
-  timeFirstStimulus: Yup.string().required('Campo obrigatório'),
-  childrenAlive: Yup.string().required('Campo obrigatório'),
-  preNatalGuidance: Yup.string().required('Campo obrigatório'),
-  occupation: Yup.string().required('Campo obrigatório'),
-  maternityLeave: Yup.string().required('Campo obrigatório'),
-  maternityLeaveCount: Yup.number()
-    .when('maternityLeave', {
-      is: 'Sim',
-      then: Yup.number().required('Campo obrigatório'),
-      otherwise: Yup.number(),
-    })
-    .integer('Deve ser um número inteiro')
-    .typeError('Deve ser um número inteiro')
-    .min(0, 'Deve ser maior ou igual a zero'),
-}).required();
 
 const MotherForm: React.FC = () => {
   const navigation = useNavigation();
@@ -139,22 +73,93 @@ const MotherForm: React.FC = () => {
     pregnantCount: '',
     yearsSpentBreastFeeding: '',
     monthsSpentBreastFeeding: '',
-    alreadyBreastfeed: '',
-    partner: '',
-    liveTogether: 'Não',
+    alreadyBreastfeed: null,
+    partner: null,
+    liveTogether: false,
     partnerTime: '',
     education: '',
     wage: '',
-    plannedPregnancy: '',
+    plannedPregnancy: null,
     firstVisit: '',
     firstStimulus: '',
     timeFirstStimulus: '',
     childrenAlive: '',
-    preNatalGuidance: '',
-    occupation: '',
-    maternityLeave: '',
+    receivedPreNatalGuidance: null,
+    occupation: null,
+    maternityLeave: null,
     maternityLeaveCount: '',
   };
+
+  const motherFormSchema = Yup.object({
+    name: Yup.string().required(i18n.t('Yup.Required')),
+    birthday: Yup.string().required(i18n.t('Yup.Required')),
+    ddd: Yup.number()
+      .integer(i18n.t('Yup.MustBeIntegerError'))
+      .typeError(i18n.t('Yup.MustBeIntegerError'))
+      .min(10, i18n.t('Yup.MinEqualError', { num: 10 }))
+      .max(99, i18n.t('Yup.MaxError', { num: 100 }))
+      .required(i18n.t('Yup.Required')),
+    phone: Yup.number()
+      .integer(i18n.t('Yup.MustBeIntegerError'))
+      .typeError(i18n.t('Yup.MustBeIntegerError'))
+      .min(100000000, i18n.t('Yup.LengthError', { num: 9 }))
+      .max(999999999, i18n.t('Yup.LengthError', { num: 9 }))
+      .required(i18n.t('Yup.Required')),
+    alreadyBreastfeed: Yup.boolean()
+      .nullable()
+      .required(i18n.t('Yup.Required')),
+    pregnantCount: Yup.number()
+      .integer(i18n.t('Yup.MustBeIntegerError'))
+      .typeError(i18n.t('Yup.MustBeIntegerError'))
+      .min(0, i18n.t('Yup.MinEqualError', { num: 0 }))
+      .required(i18n.t('Yup.Required')),
+    yearsSpentBreastFeeding: Yup.number().when('alreadyBreastfeed', {
+      is: true,
+      then: Yup.number()
+        .integer(i18n.t('Yup.MustBeIntegerError'))
+        .typeError(i18n.t('Yup.MustBeIntegerError'))
+        .min(0, i18n.t('Yup.MinEqualError', { num: 0 }))
+        .required(i18n.t('Yup.Required')),
+      otherwise: Yup.number(),
+    }),
+    monthsSpentBreastFeeding: Yup.number().when('alreadyBreastfeed', {
+      is: true,
+      then: Yup.number()
+        .integer(i18n.t('Yup.MustBeIntegerError'))
+        .typeError(i18n.t('Yup.MustBeIntegerError'))
+        .min(0, i18n.t('Yup.MinEqualError', { num: 0 }))
+        .required(i18n.t('Yup.Required')),
+      otherwise: Yup.number(),
+    }),
+    partner: Yup.boolean().nullable().required(i18n.t('Yup.Required')),
+    liveTogether: Yup.boolean().nullable().required(i18n.t('Yup.Required')),
+    partnerTime: Yup.string().when('liveTogether', {
+      is: true,
+      then: Yup.string().required(i18n.t('Yup.Required')),
+      otherwise: Yup.string(),
+    }),
+    education: Yup.string().required(i18n.t('Yup.Required')),
+    wage: Yup.string().required(i18n.t('Yup.Required')),
+    plannedPregnancy: Yup.boolean().nullable().required(i18n.t('Yup.Required')),
+    firstVisit: Yup.string().required(i18n.t('Yup.Required')),
+    firstStimulus: Yup.string().required(i18n.t('Yup.Required')),
+    timeFirstStimulus: Yup.string().required(i18n.t('Yup.Required')),
+    childrenAlive: Yup.string().required(i18n.t('Yup.Required')),
+    receivedPreNatalGuidance: Yup.boolean()
+      .nullable()
+      .required(i18n.t('Yup.Required')),
+    occupation: Yup.boolean().nullable().required(i18n.t('Yup.Required')),
+    maternityLeave: Yup.boolean().nullable().required(i18n.t('Yup.Required')),
+    maternityLeaveCount: Yup.number()
+      .when('maternityLeave', {
+        is: true,
+        then: Yup.number().required(i18n.t('Yup.Required')),
+        otherwise: Yup.number(),
+      })
+      .integer(i18n.t('Yup.MustBeIntegerError'))
+      .typeError(i18n.t('Yup.MustBeIntegerError'))
+      .min(0, i18n.t('Yup.MinEqualError', { num: 0 })),
+  }).required();
 
   // Avança para a próxima página passando as informações do usuário.
   function handleFormSubmit(formValues: FormValues) {
@@ -164,42 +169,35 @@ const MotherForm: React.FC = () => {
       name: formValues.name,
       birthday: formValues.birthday,
       phone: `${formValues.ddd}${formValues.phone}`,
-      alreadyBreastfeed: formValues.alreadyBreastfeed.toLowerCase() === 'sim',
+      alreadyBreastfeed: formValues.alreadyBreastfeed!,
       pregnantCount: parseInt(formValues.pregnantCount, 10),
-      timeSpentBreastFeeding:
-        formValues.yearsSpentBreastFeeding &&
-        formValues.monthsSpentBreastFeeding
-          ? `${formValues.yearsSpentBreastFeeding},${formValues.monthsSpentBreastFeeding}`
-          : '0,0',
-      partner: formValues.partner.toLowerCase() === 'sim',
-      liveTogether: formValues.partnerTime,
+      timeSpentBreastFeeding: `${formValues.yearsSpentBreastFeeding || '0'},${
+        formValues.monthsSpentBreastFeeding || '0'
+      }`,
+      partner: formValues.partner!,
+      liveTogether: formValues.partnerTime || null,
       education: formValues.education,
       wage: formValues.wage,
-      plannedPregnancy: formValues.plannedPregnancy.toLowerCase() === 'sim',
+      plannedPregnancy: formValues.plannedPregnancy!,
       firstVisit: formValues.firstVisit,
-      firstStimulus: formValues.firstStimulus.toLowerCase() === 'sucção',
+      firstStimulus: formValues.firstStimulus,
       timeFirstStimulus: formValues.timeFirstStimulus,
       childrenAlive: formValues.childrenAlive,
-      receivedPreNatalGuidance:
-        formValues.preNatalGuidance.toLowerCase() === 'sim',
-      occupation:
-        formValues.occupation.toLowerCase() ===
-        'fora de casa (alguma outra ocupação)',
-      maternityLeave:
-        formValues.maternityLeave.toLowerCase() === 'sim'
-          ? parseInt(formValues.maternityLeaveCount, 10)
-          : null,
+      receivedPreNatalGuidance: formValues.receivedPreNatalGuidance!,
+      occupation: formValues.occupation!,
+      maternityLeave: formValues.maternityLeave
+        ? parseInt(formValues.maternityLeaveCount, 10)
+        : null,
     };
     navigation.navigate('BabyForm', { motherInfo });
   }
 
   return (
     <ScrollView>
-      <HeaderText>Passo 2 de 4</HeaderText>
-      <HeaderSubText>
-        Agora, faremos uma série de perguntas sobre você, mamãe, para trazer o
-        conteúdo mais adequado para a sua realidade:
-      </HeaderSubText>
+      <HeaderText>
+        {i18n.t('Auth.SignUpStep', { current: '2', max: '4' })}
+      </HeaderText>
+      <HeaderSubText>{i18n.t('MotherFormPage.HeaderSubText')}</HeaderSubText>
       <Formik
         initialValues={formInitialValues}
         validationSchema={motherFormSchema}
@@ -215,29 +213,29 @@ const MotherForm: React.FC = () => {
         }) => (
           <FormContainer>
             <FormTextInput
-              label="Seu Nome"
+              label={i18n.t('MotherFormPage.Name')}
               error={errors.name}
               onChangeText={handleChange('name')}
               value={values.name}
-              placeholder="Nome"
+              placeholder={i18n.t('Name')}
             />
 
             <FormDateInput
-              label="Sua data de nascimento"
+              label={i18n.t('MotherFormPage.Birthday')}
               fieldName="birthday"
               onChange={setFieldValue}
-              placeholder="Data de nascimento"
+              placeholder={i18n.t('MotherFormPage.BirthdayPlaceholder')}
               error={errors.birthday}
             />
 
             <SubOptionsContainer>
               <DDDContainer>
                 <FormTextInput
-                  label="DDD"
+                  label={i18n.t('MotherFormPage.DDD')}
                   error={errors.ddd}
                   onChangeText={handleChange('ddd')}
                   value={values.ddd}
-                  placeholder="DDD"
+                  placeholder={i18n.t('MotherFormPage.DDD')}
                   keyboardType="number-pad"
                   centerText
                 />
@@ -245,61 +243,57 @@ const MotherForm: React.FC = () => {
 
               <PhoneInputContainer>
                 <FormTextInput
-                  label="Telefone"
+                  label={i18n.t('MotherFormPage.Phone')}
                   error={errors.phone}
                   onChangeText={handleChange('phone')}
                   value={values.phone}
-                  placeholder="Telefone"
+                  placeholder={i18n.t('MotherFormPage.Phone')}
                   keyboardType="phone-pad"
                 />
               </PhoneInputContainer>
             </SubOptionsContainer>
 
             <FormTextInput
-              label="Quantas vezes já esteve grávida? (contando abortos)"
+              label={i18n.t('MotherFormPage.PregnantCount')}
               value={values.pregnantCount}
               onChangeText={(text: string) => {
+                setFieldValue('pregnantCount', text);
                 if (text === '') {
-                  setFieldValue('pregnantCount', text);
                   // Limpa os campos de seleção abaixo
-                  setFieldValue('alreadyBreastfeed', 'Não');
+                  setFieldValue('alreadyBreastfeed', false);
                   setFieldValue('yearsSpentBreastFeeding', '0');
                   setFieldValue('monthsSpentBreastFeeding', '0');
                   return;
                 }
-
-                setFieldValue('pregnantCount', text);
-                if (text !== '0') {
-                  setFieldValue('alreadyBreastfeed', '');
-                } else {
-                  setFieldValue('alreadyBreastfeed', 'Não');
+                if (text === '0') {
+                  setFieldValue('alreadyBreastfeed', false);
                 }
               }}
-              placeholder="Insira o número de vezes"
+              placeholder={i18n.t('MotherFormPage.PregnantCountPlaceholder')}
               keyboardType="numeric"
               error={errors.pregnantCount}
             />
 
             {values.pregnantCount !== '0' && values.pregnantCount !== '' && (
               <FormRadioGroupInput
-                label="Você já amamentou antes?"
+                label={i18n.t('MotherFormPage.AlreadyBreastfeed')}
                 fieldName="alreadyBreastfeed"
                 onChange={(fieldName, fieldValues) =>
-                  setFieldValue(fieldName, fieldValues[0])
+                  setFieldValue(fieldName, fieldValues[0] === i18n.t('Yes'))
                 }
-                options={['Sim', 'Não']}
+                options={[i18n.t('Yes'), i18n.t('No')]}
                 error={errors.alreadyBreastfeed}
               />
             )}
 
-            {values.alreadyBreastfeed === 'Sim' && (
+            {values.alreadyBreastfeed && (
               <SubOptionsContainer>
                 <FirstSubOptionContainer>
                   <FormPickerInput
-                    label="Por quantos anos?"
+                    label={i18n.t('MotherFormPage.YearsSpentBreastFeeding')}
                     fieldName="yearsSpentBreastFeeding"
-                    onChange={(fieldName, fieldValues) =>
-                      setFieldValue(fieldName, fieldValues[0])
+                    onChange={(fieldName, fieldValue) =>
+                      setFieldValue(fieldName, fieldValue)
                     }
                     error={errors.yearsSpentBreastFeeding}
                     options={[
@@ -312,16 +306,16 @@ const MotherForm: React.FC = () => {
                       '7',
                       '8',
                       '9',
-                      '10 ou mais',
+                      `10 ${i18n.t('OrMore')}`,
                     ]}
                   />
                 </FirstSubOptionContainer>
                 <SecondSubOptionContainer>
                   <FormPickerInput
-                    label="Por quantos meses?"
+                    label={i18n.t('MotherFormPage.MonthsSpentBreastFeeding')}
                     fieldName="monthsSpentBreastFeeding"
-                    onChange={(fieldName, fieldValues) =>
-                      setFieldValue(fieldName, fieldValues[0])
+                    onChange={(fieldName, fieldValue) =>
+                      setFieldValue(fieldName, fieldValue)
                     }
                     error={errors.monthsSpentBreastFeeding}
                     options={[
@@ -344,49 +338,57 @@ const MotherForm: React.FC = () => {
             )}
 
             <FormRadioGroupInput
-              label="Tem companheiro?"
+              label={i18n.t('MotherFormPage.Partner')}
               fieldName="partner"
-              onChange={(fieldName: string, fieldValue: string[]) => {
-                setFieldValue(fieldName, fieldValue[0]);
-                if (fieldValue[0] === 'Não') {
-                  setFieldValue('liveTogether', 'Não');
+              onChange={(fieldName: string, fieldValues: string[]) => {
+                const hasPartner = fieldValues[0] === i18n.t('Yes');
+                setFieldValue(fieldName, hasPartner);
+
+                if (hasPartner) {
+                  setFieldValue('liveTogether', null);
+                } else {
+                  setFieldValue('liveTogether', false);
                   setFieldValue('partnerYears', '0');
                   setFieldValue('partnerMonths', '0');
-                } else if (fieldValue[0] === 'Sim') {
-                  setFieldValue('liveTogether', '');
                 }
               }}
-              options={['Sim', 'Não']}
+              options={[i18n.t('Yes'), i18n.t('No')]}
               error={errors.partner}
             />
 
-            {values.partner === 'Sim' && (
+            {values.partner && (
               <>
                 <FormRadioGroupInput
-                  label="Moram juntos?"
+                  label={i18n.t('MotherFormPage.LiveTogether')}
                   fieldName="liveTogether"
                   onChange={(fieldName: string, fieldValue: string[]) => {
-                    setFieldValue(fieldName, fieldValue[0]);
-                    if (fieldValue[0] === 'Não') {
-                      setFieldValue('partnerYears', '0');
-                      setFieldValue('partnerMonths', '0');
-                    } else if (fieldValue[0] === 'Sim') {
+                    const liveTogether = fieldValue[0] === i18n.t('Yes');
+                    setFieldValue(fieldName, liveTogether);
+
+                    if (liveTogether) {
                       setFieldValue('partnerYears', '');
                       setFieldValue('partnerMonths', '');
+                    } else {
+                      setFieldValue('partnerYears', '0');
+                      setFieldValue('partnerMonths', '0');
                     }
                   }}
-                  options={['Sim', 'Não']}
+                  options={[i18n.t('Yes'), i18n.t('No')]}
                   error={errors.liveTogether}
                 />
 
-                {values.liveTogether === 'Sim' && (
+                {values.liveTogether && (
                   <OptionPickerContainer>
                     <FormPickerInput
-                      label="Há quanto tempo moram juntos?"
+                      label={i18n.t('MotherFormPage.PartnerTime')}
                       fieldName="partnerTime"
                       onChange={setFieldValue}
                       error={errors.partnerTime}
-                      options={['Até 1 ano', '2 a 4 anos', 'Mais que 5 anos']}
+                      options={[
+                        i18n.t('MotherFormPage.LiveTogetherOptions.Option1'),
+                        i18n.t('MotherFormPage.LiveTogetherOptions.Option2'),
+                        i18n.t('MotherFormPage.LiveTogetherOptions.Option3'),
+                      ]}
                     />
                   </OptionPickerContainer>
                 )}
@@ -395,127 +397,157 @@ const MotherForm: React.FC = () => {
 
             <OptionPickerContainer>
               <FormPickerInput
-                label="Qual sua escolaridade?"
+                label={i18n.t('MotherFormPage.Education')}
                 fieldName="education"
                 onChange={setFieldValue}
                 error={errors.education}
                 options={[
-                  'Fundamental incompleto',
-                  'Fundamental completo',
-                  'Ensino médio incompleto',
-                  'Ensino médio completo',
-                  'Superior incompleto',
-                  'Superior completo',
+                  i18n.t('MotherFormPage.EducationOptions.Option1'),
+                  i18n.t('MotherFormPage.EducationOptions.Option2'),
+                  i18n.t('MotherFormPage.EducationOptions.Option3'),
+                  i18n.t('MotherFormPage.EducationOptions.Option4'),
+                  i18n.t('MotherFormPage.EducationOptions.Option5'),
+                  i18n.t('MotherFormPage.EducationOptions.Option6'),
                 ]}
               />
             </OptionPickerContainer>
 
             <OptionPickerContainer>
               <FormPickerInput
-                label="Em qual faixa sua renda familiar se encaixa?"
+                label={i18n.t('MotherFormPage.Wage')}
                 fieldName="wage"
                 onChange={setFieldValue}
                 error={errors.wage}
                 options={[
-                  'Até 1 salário',
-                  'De 2 e 3 salários',
-                  '4 ou mais salários',
+                  i18n.t('MotherFormPage.WageOptions.Option1'),
+                  i18n.t('MotherFormPage.WageOptions.Option2'),
+                  i18n.t('MotherFormPage.WageOptions.Option3'),
                 ]}
               />
             </OptionPickerContainer>
 
             <OptionPickerContainer>
               <FormPickerInput
-                label="A gestação foi planejada?"
+                label={i18n.t('MotherFormPage.PlannedPregnancy')}
                 fieldName="plannedPregnancy"
-                onChange={setFieldValue}
+                onChange={(fieldName, fieldValue) =>
+                  setFieldValue(fieldName, fieldValue === i18n.t('Yes'))
+                }
                 error={errors.plannedPregnancy}
-                options={['Sim', 'Não']}
+                options={[i18n.t('Yes'), i18n.t('No')]}
               />
             </OptionPickerContainer>
 
             <OptionPickerContainer>
               <FormPickerInput
-                label="Quanto tempo após o parto você fez a primeira visita ao seu bebe?"
+                label={i18n.t('MotherFormPage.FirstVisit')}
                 fieldName="firstVisit"
                 onChange={setFieldValue}
                 error={errors.firstVisit}
-                options={['12h', '13-24h', '2 dias', '3 dias']}
+                options={[
+                  i18n.t('MotherFormPage.FirstVisitOptions.Option1'),
+                  i18n.t('MotherFormPage.FirstVisitOptions.Option2'),
+                  i18n.t('MotherFormPage.FirstVisitOptions.Option3'),
+                  i18n.t('MotherFormPage.FirstVisitOptions.Option4'),
+                ]}
               />
             </OptionPickerContainer>
 
             <OptionPickerContainer>
               <FormPickerInput
-                label="Qual foi o primeiro estímulo realizado em suas mamas?"
+                label={i18n.t('MotherFormPage.FirstStimulus')}
                 fieldName="firstStimulus"
                 onChange={setFieldValue}
                 error={errors.firstStimulus}
                 options={[
-                  'Ainda não realizou nenhum estímulo',
-                  'Massagem/Ordenha',
-                  'Sucção',
+                  i18n.t('MotherFormPage.FirstStimulusOptions.Option1'),
+                  i18n.t('MotherFormPage.FirstStimulusOptions.Option2'),
+                  i18n.t('MotherFormPage.FirstStimulusOptions.Option3'),
                 ]}
               />
             </OptionPickerContainer>
 
             <OptionPickerContainer>
               <FormPickerInput
-                label="Quanto tempo após o nascimento do bebê foi realizado o primeiro estímulo?"
+                label={i18n.t('MotherFormPage.TimeFirstStimulus')}
                 fieldName="timeFirstStimulus"
                 onChange={setFieldValue}
                 error={errors.timeFirstStimulus}
-                options={['Em até 1h', '1-6h', '7-12h', '13-24h', '2d', '3d']}
-              />
-            </OptionPickerContainer>
-
-            <OptionPickerContainer>
-              <FormPickerInput
-                label="Você possui quantos filhos vivos?"
-                fieldName="childrenAlive"
-                onChange={setFieldValue}
-                error={errors.childrenAlive}
-                options={['Nenhum filho', '1 ou 2 filhos', '3 ou mais filhos']}
-              />
-            </OptionPickerContainer>
-
-            <OptionPickerContainer>
-              <FormPickerInput
-                label="Você recebeu orientações no pré-natal sobre aleitamento materno?"
-                fieldName="preNatalGuidance"
-                onChange={setFieldValue}
-                error={errors.preNatalGuidance}
-                options={['Sim', 'Não']}
-              />
-            </OptionPickerContainer>
-
-            <OptionPickerContainer>
-              <FormPickerInput
-                label="Você trabalha:"
-                fieldName="occupation"
-                onChange={setFieldValue}
-                error={errors.occupation}
                 options={[
-                  'Em casa (do lar)',
-                  'Fora de casa (alguma outra ocupação)',
+                  i18n.t('MotherFormPage.TimeFirstStimulusOptions.Option1'),
+                  i18n.t('MotherFormPage.TimeFirstStimulusOptions.Option2'),
+                  i18n.t('MotherFormPage.TimeFirstStimulusOptions.Option3'),
+                  i18n.t('MotherFormPage.TimeFirstStimulusOptions.Option4'),
+                  i18n.t('MotherFormPage.TimeFirstStimulusOptions.Option5'),
+                  i18n.t('MotherFormPage.TimeFirstStimulusOptions.Option6'),
                 ]}
               />
             </OptionPickerContainer>
 
             <OptionPickerContainer>
               <FormPickerInput
-                label="Possui licença maternidade:"
-                fieldName="maternityLeave"
+                label={i18n.t('MotherFormPage.ChildrenAlive')}
+                fieldName="childrenAlive"
                 onChange={setFieldValue}
-                error={errors.maternityLeave}
-                options={['Sim', 'Não']}
+                error={errors.childrenAlive}
+                options={[
+                  i18n.t('MotherFormPage.ChildrenAliveOptions.Option1'),
+                  i18n.t('MotherFormPage.ChildrenAliveOptions.Option2'),
+                  i18n.t('MotherFormPage.ChildrenAliveOptions.Option3'),
+                ]}
               />
             </OptionPickerContainer>
 
-            {values.maternityLeave === 'Sim' && (
+            <OptionPickerContainer>
+              <FormPickerInput
+                label={i18n.t('MotherFormPage.ReceivedPreNatalGuidance')}
+                fieldName="receivedPreNatalGuidance"
+                onChange={(fieldName, fieldValue) =>
+                  setFieldValue(fieldName, fieldValue === i18n.t('Yes'))
+                }
+                error={errors.receivedPreNatalGuidance}
+                options={[i18n.t('Yes'), i18n.t('No')]}
+              />
+            </OptionPickerContainer>
+
+            <OptionPickerContainer>
+              <FormPickerInput
+                label={i18n.t('MotherFormPage.Occupation')}
+                fieldName="occupation"
+                onChange={(fieldName, fieldValue) =>
+                  setFieldValue(
+                    fieldName,
+                    fieldValue ===
+                      i18n.t('MotherFormPage.OccupationOptions.Option2'),
+                  )
+                }
+                error={errors.occupation}
+                options={[
+                  i18n.t('MotherFormPage.OccupationOptions.Option1'),
+                  i18n.t('MotherFormPage.OccupationOptions.Option2'),
+                ]}
+              />
+            </OptionPickerContainer>
+
+            <OptionPickerContainer>
+              <FormPickerInput
+                label={i18n.t('MotherFormPage.MaternityLeave')}
+                fieldName="maternityLeave"
+                onChange={(fieldName, fieldValue) =>
+                  setFieldValue(fieldName, fieldValue === i18n.t('Yes'))
+                }
+                error={errors.maternityLeave}
+                options={[i18n.t('Yes'), i18n.t('No')]}
+              />
+            </OptionPickerContainer>
+
+            {values.maternityLeave && (
               <OptionPickerContainer>
                 <FormTextInput
-                  label="Quantos meses?"
-                  placeholder="Número de meses"
+                  label={i18n.t('MotherFormPage.MaternityLeaveCount')}
+                  placeholder={i18n.t(
+                    'MotherFormPage.MaternityLeaveCountPlaceholder',
+                  )}
                   onChangeText={handleChange('maternityLeaveCount')}
                   value={values.maternityLeaveCount}
                   error={errors.maternityLeaveCount}
@@ -528,14 +560,14 @@ const MotherForm: React.FC = () => {
               <FirstSubOptionContainer>
                 <SecondaryButton
                   onPress={() => navigation.goBack()}
-                  text="Voltar"
+                  text={i18n.t('GoBack')}
                 />
               </FirstSubOptionContainer>
               <SecondSubOptionContainer>
                 <MainButton
                   onPress={handleSubmit}
                   disabled={!dirty}
-                  text="Próximo"
+                  text={i18n.t('Next')}
                 />
               </SecondSubOptionContainer>
             </SubmitButtonContainer>
