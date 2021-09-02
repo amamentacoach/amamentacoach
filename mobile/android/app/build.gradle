@@ -146,7 +146,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 5
-        versionName "1.14.1"
+        versionName "1.15.0"
         multiDexEnabled true
         setProperty("archivesBaseName", "amamentacoach" + "-v" + versionName + "-" + project.env.get("ENV_NAME"))
     }
