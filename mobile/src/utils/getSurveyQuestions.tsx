@@ -18,7 +18,7 @@ export async function getSurveyQuestions(
 ): Promise<SurveyQuestion[]> {
   return perguntas
     .filter(pergunta => {
-      if (options.id && options.id !== pergunta.categoria) {
+      if (options.id && options.id !== pergunta.id) {
         return false;
       }
       if (options.category && options.category !== pergunta.categoria) {
