@@ -28,7 +28,9 @@ const SurveyMenu: React.FC = () => {
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (
-          await storageIsToday('@AmamentaCoach:DiarySurveyBreastfeedLastDate')
+          !(await storageIsToday(
+            '@AmamentaCoach:DiarySurveyBreastfeedLastDate',
+          ))
         ) {
           navigation.navigate('SurveyBreastfeed');
         } else {
@@ -42,7 +44,9 @@ const SurveyMenu: React.FC = () => {
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (
-          await storageIsToday('@AmamentaCoach:DiarySurveyMotivationLastDate')
+          !(await storageIsToday(
+            '@AmamentaCoach:DiarySurveyMotivationLastDate',
+          ))
         ) {
           navigation.navigate('SurveyMotivation');
         } else {
@@ -55,7 +59,7 @@ const SurveyMenu: React.FC = () => {
       title: i18n.t('SurveyMenuPage.5'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await storageIsToday('@AmamentaCoach:DiarySurveyHelpLastDate')) {
+        if (!(await storageIsToday('@AmamentaCoach:DiarySurveyHelpLastDate'))) {
           navigation.navigate('SurveyHelp');
         } else {
           setIsModalVisible(true);
@@ -74,7 +78,7 @@ const SurveyMenu: React.FC = () => {
         onPress: async () => {
           // Checa se o usuário já respondeu o formulário no dia.
           if (
-            await storageIsToday('@AmamentaCoach:DiarySurveyFatherLastDate')
+            !(await storageIsToday('@AmamentaCoach:DiarySurveyFatherLastDate'))
           ) {
             navigation.navigate('SurveyFather');
           } else {

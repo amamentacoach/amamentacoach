@@ -59,7 +59,7 @@ const DiaryMenu: React.FC = () => {
       title: i18n.t('DiaryMenuPage.Option3'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await storageIsToday('@AmamentaCoach:DiaryFeelingsLastDate')) {
+        if (!(await storageIsToday('@AmamentaCoach:DiaryFeelingsLastDate'))) {
           navigation.navigate('Feelings');
         } else {
           setIsModalVisible(true);
@@ -76,7 +76,9 @@ const DiaryMenu: React.FC = () => {
       title: i18n.t('DiaryMenuPage.Option5'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await storageIsToday('@AmamentaCoach:DiaryHelpReceivedLastDate')) {
+        if (
+          !(await storageIsToday('@AmamentaCoach:DiaryHelpReceivedLastDate'))
+        ) {
           navigation.navigate('HelpReceived');
         } else {
           setIsModalVisible(true);
@@ -88,7 +90,7 @@ const DiaryMenu: React.FC = () => {
       title: i18n.t('DiaryMenuPage.Option6'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await storageIsToday('@AmamentaCoach:DiaryBabyLastDate')) {
+        if (!(await storageIsToday('@AmamentaCoach:DiaryBabyLastDate'))) {
           navigation.navigate('DiaryBaby');
         } else {
           setIsModalVisible(true);
@@ -100,7 +102,7 @@ const DiaryMenu: React.FC = () => {
       title: i18n.t('DiaryMenuPage.Option7'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await storageIsToday('@AmamentaCoach:DiaryActionsLastDate')) {
+        if (!(await storageIsToday('@AmamentaCoach:DiaryActionsLastDate'))) {
           navigation.navigate('DiaryActions');
         } else {
           setIsModalVisible(true);

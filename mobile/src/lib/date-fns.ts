@@ -38,11 +38,11 @@ export function dateFormatVerbose(date: Date) {
 
 // Verifica se a diferença entra a data atual e uma data armazenada no AsyncStorage é maior ou igual
 // a 1 dia.
-// Caso o valor não exista retorna true.
+// Caso o valor não exista retorna false.
 export async function storageIsToday(storageId: string) {
   const storageString = await AsyncStorage.getItem(storageId);
   if (!storageString) {
-    return true;
+    return false;
   }
-  return !isToday(new Date(storageString));
+  return isToday(new Date(storageString));
 }
