@@ -14,3 +14,7 @@
 
 # react-native-config
 -keep class com.amamentacoach.BuildConfig { *; }
+
+# Hermes
+-keep class com.facebook.hermes.unicode.** { *; }
+-keep class com.facebook.jni.** { *; }
