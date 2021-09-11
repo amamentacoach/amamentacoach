@@ -1,5 +1,3 @@
-import React from 'react';
-
 import i18n from 'i18n-js';
 
 import { format } from '../../lib/date-fns';

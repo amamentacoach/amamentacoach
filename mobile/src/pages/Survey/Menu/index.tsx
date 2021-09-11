@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useState } from 'react';
 
 import Modal from '../../../components/Modal';
-import OptionsList, { Options } from '../../../components/OptionList';
+import OptionsList from '../../../components/OptionList';
 import { useAuth } from '../../../contexts/auth';
 import { storageIsToday } from '../../../lib/date-fns';
+
+import type { OptionListEntry } from '../../../components/OptionList';
+import type { RootStackProps } from '../../../routes/app';
 
 import { Header, HeaderTitle, ScrollView } from './styles';
 
@@ -17,11 +19,11 @@ import SurveysTwo from '../../../../assets/images/surveys_two.svg';
 
 const SurveyMenu: React.FC = () => {
   const { motherInfo } = useAuth();
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  let options: Options[] = [
+  let options: OptionListEntry[] = [
     {
       image: SurveysOne,
       title: i18n.t('PrematureBreastfeed'),

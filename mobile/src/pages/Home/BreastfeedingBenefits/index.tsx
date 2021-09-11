@@ -1,12 +1,11 @@
-import React from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
 import createGenericInfoPage from '../../../components/GenericInfoPage';
-import InformationPages, {
-  InfoPageItem,
-} from '../../../components/InformationPages';
+import InformationPages from '../../../components/InformationPages';
+
+import type { InfoPageItem } from '../../../components/InformationPages';
+import type { RootStackProps } from '../../../routes/app';
 
 import BreastfeedBenefits1 from '../../../../assets/images/breastfeed_benefits_1.png';
 import BreastfeedBenefits2 from '../../../../assets/images/breastfeed_benefits_2.png';
@@ -16,7 +15,7 @@ import BreastfeedBenefits5 from '../../../../assets/images/breastfeed_benefits_5
 import BreastfeedBenefits6 from '../../../../assets/images/breastfeed_benefits_6.png';
 
 const BreastfeedingBenefits: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
 
   const pages: InfoPageItem[] = [
     {

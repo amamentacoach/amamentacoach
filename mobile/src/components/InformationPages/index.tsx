@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
+import { Dimensions, FlatList } from 'react-native';
 
-import { FlatListProps, Dimensions, FlatList } from 'react-native';
-
-import { ImageWrapperSourcePropType } from '../ImageWrapper';
+import type { ImageWrapperSourcePropType } from '../ImageWrapper';
+import type { FlatListProps } from 'react-native';
 
 import { PageContainer } from './styles';
 

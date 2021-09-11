@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-
 import i18n from 'i18n-js';
+import { useEffect } from 'react';
 import { hide } from 'react-native-bootsplash';
 
 import ImageWrapper from '../../../components/ImageWrapper';

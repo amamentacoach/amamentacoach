@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from 'react';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { hide } from 'react-native-bootsplash';
 
 import FormPickerInput from '../../../components/FormPickerInput';
 import ImageWrapper from '../../../components/ImageWrapper';
 import Modal from '../../../components/Modal';
-import { Options } from '../../../components/OptionList';
 import theme from '../../../config/theme';
 import { useIsFirstRun } from '../../../contexts/firstRun';
-import { storageIsToday, isToday } from '../../../lib/date-fns';
+import { isToday, storageIsToday } from '../../../lib/date-fns';
 import {
-  BabyStatus,
   checkBabiesLocation,
   updateBabyLocation,
 } from '../../../services/babyLocation';
 import { setHomePageOpened } from '../../../services/telemetry';
+
+import type { OptionListEntry } from '../../../components/OptionList';
+import type { RootStackProps } from '../../../routes/app';
+import type { BabyStatus } from '../../../services/babyLocation';
 
 import {
   BannerImage,
@@ -57,30 +58,26 @@ interface BabyModalOption {
 }
 
 const Home: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
 
   const [babiesData, setBabiesData] = useState<BabyStatus[]>([]);
-  const [babyModalVisibility, setBabyModalVisibility] = useState<boolean>(
-    false,
-  );
+  const [babyModalVisibility, setBabyModalVisibility] =
+    useState<boolean>(false);
   const [selectedModalOptions, setSelectedModalOptions] = useState<
     BabyModalOption[]
   >([]);
 
-  const [formModalVisibility, setFormModalVisibility] = useState<boolean>(
-    false,
-  );
+  const [formModalVisibility, setFormModalVisibility] =
+    useState<boolean>(false);
   const [formAction, setFormAction] = useState<'1D' | '15D' | '1M' | null>(
     null,
   );
 
-  const [
-    expectationsModalVisibility,
-    setExpectationsModalVisibility,
-  ] = useState<Boolean>(false);
+  const [expectationsModalVisibility, setExpectationsModalVisibility] =
+    useState<Boolean>(false);
 
-  const options: Options[] = [
+  const options: OptionListEntry[] = [
     {
       image: HomeBaby,
       title: i18n.t('HomePage.Option1'),
@@ -278,7 +275,7 @@ const Home: React.FC = () => {
             onPress: () => {
               hideAllModals();
               navigation.navigate('StatusForm', {
-                situation: formAction,
+                situation: formAction!,
               });
             },
           },

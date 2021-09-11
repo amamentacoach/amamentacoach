@@ -1,14 +1,15 @@
-import React from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
 import ImageWrapper from '../../../components/ImageWrapper';
-import InformationPages, {
+import InformationPages from '../../../components/InformationPages';
+import ProgressDots from '../../../components/ProgressDots';
+
+import type {
   InfoPageItem,
   InfoPageModelProps,
 } from '../../../components/InformationPages';
-import ProgressDots from '../../../components/ProgressDots';
+import type { RootStackProps } from '../../../routes/app';
 
 import {
   ContentText,
@@ -34,7 +35,7 @@ import MilkWithdrawalThree from '../../../../assets/images/milk_withdrawal_three
 import MilkWithdrawalTwo from '../../../../assets/images/milk_withdrawal_two.png';
 
 const HowToBreastfeed: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
 
   const pages: InfoPageItem[] = [
     {

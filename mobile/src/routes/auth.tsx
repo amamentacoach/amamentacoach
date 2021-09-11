@@ -1,16 +1,43 @@
-import React from 'react';
-
 import { createStackNavigator } from '@react-navigation/stack';
 import i18n from 'i18n-js';
 
 import { useIsFirstRun } from '../contexts/firstRun';
-import TermsOfService from '../pages/Auth/AcceptTermsOfService';
+import AcceptTermsOfService from '../pages/Auth/AcceptTermsOfService';
 import BabyForm from '../pages/Auth/BabyForm';
 import ForgotPassword from '../pages/Auth/ForgotPassword';
 import Introduction from '../pages/Auth/Introduction';
 import Login from '../pages/Auth/Login';
 import MotherForm from '../pages/Auth/MotherForm';
 import SignUp from '../pages/Auth/SignUp';
+
+import type { BabySignUpInfo, MotherSignUpInfo } from '../services/auth';
+import type { RouteProp } from '@react-navigation/core';
+import type { StackNavigationProp } from '@react-navigation/stack';
+
+type AuthStackParamList = {
+  BabyForm: {
+    motherInfo: MotherSignUpInfo;
+  };
+  MotherForm: {
+    email: string;
+    password: string;
+  };
+  DiaryBreastfeed: {
+    date: string;
+  };
+  AcceptTermsOfService: {
+    motherInfo: MotherSignUpInfo;
+    babiesInfo: BabySignUpInfo[];
+  };
+  Login: undefined;
+  ForgotPassword: undefined;
+  SignUp: undefined;
+};
+
+export type AuthStackProps = StackNavigationProp<AuthStackParamList>;
+
+export type AuthRouteProp<RouteName extends keyof AuthStackParamList> =
+  RouteProp<AuthStackParamList, RouteName>;
 
 const AuthRoutes: React.FC = () => {
   const Stack = createStackNavigator();
@@ -51,8 +78,8 @@ const AuthRoutes: React.FC = () => {
         options={{ title: i18n.t('SignUp') }}
       />
       <Stack.Screen
-        name="TermsOfService"
-        component={TermsOfService}
+        name="AcceptTermsOfService"
+        component={AcceptTermsOfService}
         options={{ title: i18n.t('SignUp') }}
       />
     </Stack.Navigator>

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-
 import { NavigationContainer } from '@react-navigation/native';
 import { enCA, ptBR } from 'date-fns/locale';
 import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 import { I18nManager, StatusBar } from 'react-native';
 import * as RNLocalize from 'react-native-localize';
 import { ThemeProvider } from 'styled-components/native';

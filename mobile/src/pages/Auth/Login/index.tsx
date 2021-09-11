@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { hide } from 'react-native-bootsplash';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -13,6 +12,8 @@ import MainButton from '../../../components/MainButton';
 import Modal from '../../../components/Modal';
 import { useAuth } from '../../../contexts/auth';
 import { LoginStatus } from '../../../services/auth';
+
+import type { AuthStackProps } from '../../../routes/auth';
 
 import {
   ForgotPasswordText,
@@ -33,7 +34,7 @@ interface FormValues {
 }
 
 const Login: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<AuthStackProps>();
   const { signIn } = useAuth();
 
   const [errorModalMessage, setErrorModalMessage] = useState<string | null>(

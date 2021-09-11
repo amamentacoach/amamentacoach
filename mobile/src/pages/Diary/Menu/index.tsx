@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 
 import Modal from '../../../components/Modal';
-import OptionsList, { Options } from '../../../components/OptionList';
+import OptionsList, { OptionListEntry } from '../../../components/OptionList';
 import { useAuth } from '../../../contexts/auth';
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import { storageIsToday, dateFormatVerbose } from '../../../lib/date-fns';
 import { setDiaryPageOpened } from '../../../services/telemetry';
+
+import type { RootStackProps } from '../../../routes/app';
 
 import {
   CalendarButton,
@@ -30,14 +31,14 @@ import Report from '../../../../assets/images/report.svg';
 
 const DiaryMenu: React.FC = () => {
   const { motherInfo } = useAuth();
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const options: Options[] = [
+  const options: OptionListEntry[] = [
     {
       image: PrematureBreastfeed,
       title: i18n.t('DiaryMenuPage.Option1'),

@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
-
 import {
-  RouteProp,
   useIsFocused,
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
@@ -14,33 +12,29 @@ import DiaryRegistryEntry from '../../../components/DiaryRegistryEntry';
 import MainButton from '../../../components/MainButton';
 import { useIsFirstRun } from '../../../contexts/firstRun';
 import { dateFormatVerbose } from '../../../lib/date-fns';
-import {
-  ExtractionEntry,
-  listExtractionsEntries,
-} from '../../../services/diaryRegistry';
+import { listExtractionsEntries } from '../../../services/diaryRegistry';
 import { setExtractionPageOpened } from '../../../services/telemetry';
+
+import type { RootRouteProp, RootStackProps } from '../../../routes/app';
+import type { ExtractionEntry } from '../../../services/diaryRegistry';
 
 import { Container, DateText, ListContainer } from './styles';
 
-type ScreenParams = {
-  DiaryRegistry: {
-    date: string;
-  };
-};
-
 const DiaryRegistry: React.FC = () => {
-  const { date } = useRoute<RouteProp<ScreenParams, 'DiaryRegistry'>>().params;
+  const { params } = useRoute<RootRouteProp<'DiaryRegistry'>>();
   const themeContext = useContext(ThemeContext);
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
   const isFocused = useIsFocused();
   const [registries, setRegistries] = useState<ExtractionEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const selectedDate = params?.date ? new Date(params?.date) : new Date();
+
   useEffect(() => {
     async function fetchRegistries() {
       setIsLoading(true);
-      const oldRegistries = await listExtractionsEntries(new Date(date));
+      const oldRegistries = await listExtractionsEntries(selectedDate);
       setRegistries(oldRegistries);
       setIsLoading(false);
     }
@@ -56,7 +50,7 @@ const DiaryRegistry: React.FC = () => {
 
   return (
     <Container>
-      <DateText>{dateFormatVerbose(new Date(date))}</DateText>
+      <DateText>{dateFormatVerbose(selectedDate)}</DateText>
       <ListContainer>
         {isLoading ? (
           <ActivityIndicator

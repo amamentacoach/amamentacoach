@@ -1,17 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
-
 import { StackActions, useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
+import { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 
 import { useAuth } from '../../contexts/auth';
-import { AnswerFeedback, answerQuestion } from '../../services/survey';
+import { answerQuestion } from '../../services/survey';
 import {
   getSurveyQuestions,
   SurveyQuestion,
 } from '../../utils/getSurveyQuestions';
 import Modal from '../Modal';
+
+import type { RootStackProps } from '../../routes/app';
+import type { AnswerFeedback } from '../../services/survey';
 
 import {
   ContentContainer,
@@ -70,7 +72,7 @@ const Survey: React.FC<SurveyProps> = ({
 }) => {
   const { width } = Dimensions.get('window');
   const { motherInfo } = useAuth();
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const pageFlatListRef = useRef<FlatList>(null);
 
   const [pages, setPages] = useState<SurveyQuestion[]>([]);
@@ -80,10 +82,8 @@ const Survey: React.FC<SurveyProps> = ({
   const [isFormValid, setIsFormValid] = useState(true);
   const [isSendingForm, setIsSendingForm] = useState(false);
 
-  const [
-    feedbackModalData,
-    setFeedbackModalData,
-  ] = useState<FeedbackModalProps | null>(null);
+  const [feedbackModalData, setFeedbackModalData] =
+    useState<FeedbackModalProps | null>(null);
 
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
 

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-
 import i18n from 'i18n-js';
+import { useState } from 'react';
 
 import Modal from '../../../components/Modal';
 import UploadPhotoScreen from '../../../components/UploadPhotoScreen';

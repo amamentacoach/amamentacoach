@@ -1,14 +1,14 @@
-import React from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
 import { useAuth } from '../../../contexts/auth';
 
+import type { RootStackProps } from '../../../routes/app';
+
 import { Line, OptionButton, OptionText, ScrollView } from './styles';
 
 const Profile: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const { signOut } = useAuth();
 
   return (

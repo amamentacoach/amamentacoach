@@ -1,5 +1,3 @@
-import React from 'react';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StackActions, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
@@ -16,10 +14,12 @@ import Survey, { SurveyPage } from '../../../components/Survey';
 import theme from '../../../config/theme';
 import { dateFormatVerbose } from '../../../lib/date-fns';
 
+import type { RootStackProps } from '../../../routes/app';
+
 import { Container, Footer, SecondFooterButtonContainer } from './styles';
 
 const Feelings: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const currentDate = dateFormatVerbose(new Date());
 
   // Marca o formulário como enviado no dia.

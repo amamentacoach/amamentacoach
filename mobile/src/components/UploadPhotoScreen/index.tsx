@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-
 import i18n from 'i18n-js';
+import { useState } from 'react';
 import { Dimensions } from 'react-native';
-import ImagePicker, { ImagePickerResponse } from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-picker';
 
 import { useAuth } from '../../contexts/auth';
-import ImageWrapper, { ImageWrapperSourcePropType } from '../ImageWrapper';
+import ImageWrapper from '../ImageWrapper';
 import MainButton from '../MainButton';
 import SecondaryButton from '../SecondaryButton';
+
+import type { ImageWrapperSourcePropType } from '../ImageWrapper';
+import type { ImagePickerResponse } from 'react-native-image-picker';
 
 import {
   Container,

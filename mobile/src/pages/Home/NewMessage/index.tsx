@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
+import { useState } from 'react';
 import { View } from 'react-native';
 import * as Yup from 'yup';
 

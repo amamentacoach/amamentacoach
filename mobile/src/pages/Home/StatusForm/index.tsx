@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 
 import FormRadioGroupInput from '../../../components/FormRadioGroup';
@@ -16,10 +15,10 @@ import SecondaryButton from '../../../components/SecondaryButton';
 import theme from '../../../config/theme';
 import { useAuth } from '../../../contexts/auth';
 import { answerFeedingForm, answerStatusForm } from '../../../services/survey';
-import {
-  getSurveyQuestions,
-  SurveyQuestion,
-} from '../../../utils/getSurveyQuestions';
+import { getSurveyQuestions } from '../../../utils/getSurveyQuestions';
+
+import type { RootRouteProp, RootStackProps } from '../../../routes/app';
+import type { SurveyQuestion } from '../../../utils/getSurveyQuestions';
 
 import {
   ColoredText,
@@ -55,19 +54,11 @@ interface PageProps {
   submitForm: () => Promise<number | null>;
 }
 
-type ScreenParams = {
-  StatusForm: {
-    situation: 'ALTA' | '1D' | '15D' | '1M';
-  };
-};
-
 const StatusForm: React.FC = () => {
   const { width } = Dimensions.get('window');
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const { motherInfo } = useAuth();
-  const { situation } = useRoute<
-    RouteProp<ScreenParams, 'StatusForm'>
-  >().params;
+  const { situation } = useRoute<RootRouteProp<'StatusForm'>>().params;
 
   // Não exibe a questão de alimentação se for a primeira vez do usuário respondendo a escala.
   const displayFeedingForm = situation !== '1D';
@@ -84,7 +75,7 @@ const StatusForm: React.FC = () => {
   const [formScore, setFormScore] = useState<number | null>(null);
 
   // Adiciona um botão na parte superior direita da tela para exibir um popup de ajuda.
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <InfoButton

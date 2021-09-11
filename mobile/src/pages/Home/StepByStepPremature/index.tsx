@@ -1,16 +1,17 @@
-import React from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { Dimensions, View } from 'react-native';
 
 import ImageWrapper from '../../../components/ImageWrapper';
-import InformationPages, {
-  InfoPageModelProps,
-  InfoPageItem,
-} from '../../../components/InformationPages';
+import InformationPages from '../../../components/InformationPages';
 import ProgressDots from '../../../components/ProgressDots';
 import theme from '../../../config/theme';
+
+import type {
+  InfoPageItem,
+  InfoPageModelProps,
+} from '../../../components/InformationPages';
+import type { RootStackProps } from '../../../routes/app';
 
 import {
   Background,
@@ -34,7 +35,7 @@ import BreastFeedPremature5 from '../../../../assets/images/breastfeed_premature
 import BreastFeedPremature6 from '../../../../assets/images/breastfeed_premature_6.svg';
 
 const StepByStepPremature: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const { height } = Dimensions.get('screen');
   const colors = [
     { foreground: '#fff', background: '#fff' },

@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
+import { useState } from 'react';
 import * as Yup from 'yup';
 
 import FormDateInput from '../../../components/FormDateInput';
 import FormTextInput from '../../../components/FormTextInput';
 import MainButton from '../../../components/MainButton';
 import { createExtractionEntry } from '../../../services/diaryRegistry';
+
+import type { RootStackProps } from '../../../routes/app';
 
 import {
   ErrorContainer,
@@ -37,8 +38,7 @@ interface FormValues {
 }
 
 const NewDiaryRegistry: React.FC = () => {
-  const navigation = useNavigation();
-
+  const navigation = useNavigation<RootStackProps>();
   const [isSendingForm, setIsSendingForm] = useState(false);
   const formInitialValues = {
     time: '',

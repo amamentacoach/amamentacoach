@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
-
 import i18n from 'i18n-js';
+import { useContext, useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { ThemeContext } from 'styled-components';

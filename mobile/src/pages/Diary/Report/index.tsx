@@ -1,6 +1,5 @@
-import React, { useContext, useState } from 'react';
-
 import i18n from 'i18n-js';
+import { useContext, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { ThemeContext } from 'styled-components';
 

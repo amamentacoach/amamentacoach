@@ -1,12 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
-
 import { useNavigation } from '@react-navigation/native';
+import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
 import { useIsFirstRun } from '../../../contexts/firstRun';
-import { listMessages, Message as IMessage } from '../../../services/messages';
+import { listMessages } from '../../../services/messages';
 import { setMessagesPageOpened } from '../../../services/telemetry';
+
+import type { RootStackProps } from '../../../routes/app';
+import type { Message as IMessage } from '../../../services/messages';
 
 import {
   AddMessageButton,
@@ -21,7 +23,7 @@ import {
 import AddIcon from '../../../../assets/images/icons/ic_add.svg';
 
 const Messages: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
   const themeContext = useContext(ThemeContext);
 
@@ -31,7 +33,7 @@ const Messages: React.FC = () => {
   const [noMoreMessages, setNoMoreMessages] = useState(false);
 
   // Adiciona um botão na parte superior direita da tela, permitindo registrar uma nova mensagem
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <AddMessageButton

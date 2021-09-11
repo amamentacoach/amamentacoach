@@ -1,6 +1,6 @@
-import React from 'react';
+import ImageWrapper from '../ImageWrapper';
 
-import ImageWrapper, { ImageWrapperSourcePropType } from '../ImageWrapper';
+import type { ImageWrapperSourcePropType } from '../ImageWrapper';
 
 import {
   ContentContainer,
@@ -15,7 +15,7 @@ import {
 
 import NextIcon from '../../../assets/images/icons/ic_next.svg';
 
-export interface Options {
+export interface OptionListEntry {
   image?: ImageWrapperSourcePropType;
   title: string;
   subtitle?: string;
@@ -23,7 +23,7 @@ export interface Options {
 }
 
 interface OptionListProps {
-  options: Options[];
+  options: OptionListEntry[];
   label?: string;
   displayArrows?: boolean;
 }

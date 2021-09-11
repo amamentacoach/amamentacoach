@@ -4,6 +4,7 @@ module.exports = {
     '@react-native-community',
     'airbnb-typescript',
     'prettier',
+    'plugin:react/jsx-runtime',
     'prettier/@typescript-eslint',
     'prettier/react',
     'plugin:import/recommended',
@@ -37,16 +38,12 @@ module.exports = {
           'external',
           'internal',
           'parent',
+          'type',
           'sibling',
           'index',
           'object',
         ],
         pathGroups: [
-          {
-            pattern: 'react',
-            group: 'external',
-            position: 'before',
-          },
           {
             pattern: 'styles',
             group: 'index',

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import i18n from 'i18n-js';
 
 import theme from '../../config/theme';
@@ -10,7 +8,9 @@ import SurveyMotivation from '../../pages/Survey/SurveyMotivation';
 import SurveyStatistics from '../../pages/Survey/SurveyStatistics';
 import createColorHeader from '../config/colorHeader';
 
-const CreateSurveyRoutes = (Stack: any) => {
+import type { StackScreens } from '../config/getNavigatorType';
+
+const CreateSurveyRoutes = (Stack: StackScreens) => {
   const headerBabyBlue = createColorHeader(theme.babyBlue);
 
   return [

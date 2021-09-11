@@ -1,12 +1,14 @@
-import React, { useContext, useState } from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useContext, useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { ThemeContext } from 'styled-components';
 
-import OptionsList, { Options } from '../../../components/OptionList';
+import OptionsList from '../../../components/OptionList';
+
+import type { OptionListEntry } from '../../../components/OptionList';
+import type { RootStackProps } from '../../../routes/app';
 
 import {
   Header,
@@ -25,10 +27,10 @@ import ErlenmeyerYellow from '../../../../assets/images/erlenmeyer_yellow.svg';
 const Resilience: React.FC = () => {
   const { height } = Dimensions.get('window');
   const themeContext = useContext(ThemeContext);
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const [isLoadingVideo, setIsLoadingVideo] = useState(true);
 
-  const options: Options[] = [
+  const options: OptionListEntry[] = [
     {
       image: ErlenmeyerPrimary,
       title: i18n.t('ResiliencePage.Option1'),

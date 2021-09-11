@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-
 import { StackActions, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useState } from 'react';
 
 import createGenericSurveyPage from '../../../components/GenericSurveyPage';
 import Modal from '../../../components/Modal';
 import Survey from '../../../components/Survey';
 import theme from '../../../config/theme';
+
+import type { RootStackProps } from '../../../routes/app';
 
 import { ModalContainer } from './styles';
 
@@ -17,7 +18,7 @@ import Motivation4 from '../../../../assets/images/motivation-4.png';
 import Motivation5 from '../../../../assets/images/motivation-5.png';
 
 const Goals: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
 
   const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
   const [isFinishedModalVisible, setIsFinishedModalVisible] = useState(false);

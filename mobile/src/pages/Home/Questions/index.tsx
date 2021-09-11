@@ -1,10 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
-
 import { useNavigation } from '@react-navigation/native';
+import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
-import { FAQ, listUserQuestions } from '../../../services/questions';
+import { listUserQuestions } from '../../../services/questions';
+
+import type { RootStackProps } from '../../../routes/app';
+import type { FAQ } from '../../../services/questions';
 
 import {
   AddQuestionButton,
@@ -25,14 +27,14 @@ interface MessageEntryProps {
 }
 
 const Questions: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const themeContext = useContext(ThemeContext);
 
   const [questions, setQuestions] = useState<FAQ[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Adiciona um botão na parte superior direita da tela, permitindo registrar uma nova pergunta.
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <AddQuestionButton

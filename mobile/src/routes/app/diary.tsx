@@ -1,5 +1,3 @@
-import React from 'react';
-
 import i18n from 'i18n-js';
 
 import theme from '../../config/theme';
@@ -15,7 +13,9 @@ import NewDiaryRegistry from '../../pages/Diary/NewDiaryRegistry';
 import Report from '../../pages/Diary/Report';
 import createColorHeader from '../config/colorHeader';
 
-const CreateDiaryRoutes = (Stack: any) => {
+import type { StackScreens } from '../config/getNavigatorType';
+
+const CreateDiaryRoutes = (Stack: StackScreens) => {
   const headerBabyPurple = createColorHeader(theme.babyPurple);
 
   return [

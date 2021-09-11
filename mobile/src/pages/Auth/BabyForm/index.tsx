@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { Formik, FormikErrors } from 'formik';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { Formik } from 'formik';
 import i18n from 'i18n-js';
+import { useState } from 'react';
 import { View } from 'react-native';
 import * as Yup from 'yup';
 
@@ -13,7 +12,10 @@ import FormTextInput from '../../../components/FormTextInput';
 import MainButton from '../../../components/MainButton';
 import Modal from '../../../components/Modal';
 import SecondaryButton from '../../../components/SecondaryButton';
-import { BabySignUpInfo, MotherSignUpInfo } from '../../../services/auth';
+
+import type { AuthRouteProp, AuthStackProps } from '../../../routes/auth';
+import type { BabySignUpInfo } from '../../../services/auth';
+import type { FormikErrors } from 'formik';
 
 import {
   ApgarHelpButton,
@@ -54,15 +56,9 @@ interface FormValues {
   babies: Baby[];
 }
 
-type ScreenParams = {
-  BabyForm: {
-    motherInfo: MotherSignUpInfo;
-  };
-};
-
 const BabyForm: React.FC = () => {
-  const navigation = useNavigation();
-  const { motherInfo } = useRoute<RouteProp<ScreenParams, 'BabyForm'>>().params;
+  const navigation = useNavigation<AuthStackProps>();
+  const { motherInfo } = useRoute<AuthRouteProp<'BabyForm'>>().params;
 
   const [isApgarModalVisible, setIsApgarModalVisible] = useState(false);
   const [babyCount, setBabyCount] = useState(0);
@@ -232,7 +228,7 @@ const BabyForm: React.FC = () => {
   // Registra a mãe e os bebês.
   async function handleFormSubmit(formValues: FormValues) {
     const babiesInfo = prepareNewBabiesData(formValues);
-    navigation.navigate('TermsOfService', { motherInfo, babiesInfo });
+    navigation.navigate('AcceptTermsOfService', { motherInfo, babiesInfo });
   }
 
   return (

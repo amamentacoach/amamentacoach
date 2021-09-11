@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
 import * as Yup from 'yup';
@@ -11,7 +9,9 @@ import FormRadioGroupInput from '../../../components/FormRadioGroup';
 import FormTextInput from '../../../components/FormTextInput';
 import MainButton from '../../../components/MainButton';
 import SecondaryButton from '../../../components/SecondaryButton';
-import { MotherSignUpInfo } from '../../../services/auth';
+
+import type { AuthRouteProp, AuthStackProps } from '../../../routes/auth';
+import type { MotherSignUpInfo } from '../../../services/auth';
 
 import {
   DDDContainer,
@@ -52,18 +52,9 @@ interface FormValues {
   maternityLeaveCount: string;
 }
 
-type IScreenParams = {
-  MotherForm: {
-    email: string;
-    password: string;
-  };
-};
-
 const MotherForm: React.FC = () => {
-  const navigation = useNavigation();
-  const { email, password } = useRoute<
-    RouteProp<IScreenParams, 'MotherForm'>
-  >().params;
+  const navigation = useNavigation<AuthStackProps>();
+  const { email, password } = useRoute<AuthRouteProp<'MotherForm'>>().params;
 
   const formInitialValues: FormValues = {
     name: '',

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-
 import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 
 import DiaryBreastfeedEntry from '../../../../components/DiaryBreastfeedEntry';
 import DiaryRegistryEntry from '../../../../components/DiaryRegistryEntry';

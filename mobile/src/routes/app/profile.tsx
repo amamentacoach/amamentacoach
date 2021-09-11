@@ -1,5 +1,3 @@
-import React from 'react';
-
 import i18n from 'i18n-js';
 
 import LeaveResearch from '../../pages/Profile/LeaveResearch';
@@ -7,7 +5,9 @@ import MenuTermsOfService from '../../pages/Profile/MenuTermsOfService';
 import NewPassword from '../../pages/Profile/NewPassword';
 import ReadTermsOfService from '../../pages/Profile/ReadTermsOfService';
 
-const CreateProfileRoutes = (Stack: any) => {
+import type { StackScreens } from '../config/getNavigatorType';
+
+const CreateProfileRoutes = (Stack: StackScreens) => {
   return [
     <Stack.Screen
       key="NewPassword"

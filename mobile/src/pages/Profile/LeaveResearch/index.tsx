@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
+import { useRef, useState } from 'react';
 import { Dimensions, FlatList } from 'react-native';
 import * as Yup from 'yup';
 
@@ -12,6 +11,8 @@ import Modal from '../../../components/Modal';
 import SecondaryButton from '../../../components/SecondaryButton';
 import { useAuth } from '../../../contexts/auth';
 import leaveResearch from '../../../services/leaveResearch';
+
+import type { RootStackProps } from '../../../routes/app';
 
 import {
   BoldMainText,
@@ -34,7 +35,7 @@ interface FormValues {
 }
 
 const Confirm: React.FC<Page> = ({ index, flatListRef }) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
 
   function handleNextPage(currentPage: number) {
     flatListRef.current?.scrollToIndex({
@@ -68,7 +69,7 @@ const Confirm: React.FC<Page> = ({ index, flatListRef }) => {
 
 const Leave: React.FC<Page> = () => {
   const { signOut } = useAuth();
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
 
   const [isConfirmModalVisible, setIsConfirmModalVisible] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);

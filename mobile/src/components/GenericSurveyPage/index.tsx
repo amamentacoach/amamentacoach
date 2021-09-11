@@ -1,10 +1,8 @@
-import React from 'react';
-
-import { SvgProps } from 'react-native-svg';
-
 import FormRadioGroupInput from '../FormRadioGroup';
 import MainButton from '../MainButton';
 import { SurveyPage } from '../Survey';
+
+import type { SvgProps } from 'react-native-svg';
 
 import {
   Container,

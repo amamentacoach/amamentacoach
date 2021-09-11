@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
-
 import { useNavigation } from '@react-navigation/native';
-import { HeaderBackButton } from '@react-navigation/stack';
 import i18n from 'i18n-js';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
 import PieChart from '../../../components/PieChart';
-import {
-  listSurveyStatistics,
-  SurveyStatistics as ISurveyStatistics,
-} from '../../../services/survey';
+import { RootStackProps } from '../../../routes/app';
+import { listSurveyStatistics } from '../../../services/survey';
+
+import type { SurveyStatistics as ISurveyStatistics } from '../../../services/survey';
 
 import {
   ContentContainer,
@@ -23,18 +21,21 @@ import {
   ScrollView,
 } from './styles';
 
+import BackIcon from '../../../../assets/images/icons/ic_back.svg';
+
 const SurveyStatistics: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const [statistics, setStatistics] = useState<ISurveyStatistics[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Faz com que o botão de retorno redirecione para a página de enquetes. Ao contrário do
   // comportamento padrão de voltar a tela anterior.
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: () => (
-        <HeaderBackButton
-          tintColor="#ffffff"
+      // headerBackImage: () => <BackIcon />,
+      headerBackImage: ({ tintColor }) => (
+        <BackIcon
+          color={tintColor}
           onPress={() => navigation.navigate('Survey')}
         />
       ),
@@ -42,12 +43,13 @@ const SurveyStatistics: React.FC = () => {
   }, [navigation]);
 
   useEffect(() => {
-    // Faz com que o gesto de retorno carregue a página de enquetes.
-    navigation.addListener('beforeRemove', e => {
+    function navigateToSurveyPage(event: any) {
       // Impede a ação padrão de retornar a tela anterior.
-      e.preventDefault();
+      event.preventDefault();
       navigation.navigate('Survey');
-    });
+    }
+    // Faz com que o gesto de retorno carregue a página de enquetes.
+    navigation.addListener('beforeRemove', navigateToSurveyPage);
 
     async function fetchStatistics() {
       const stats = await listSurveyStatistics();
@@ -57,6 +59,10 @@ const SurveyStatistics: React.FC = () => {
       }
     }
     fetchStatistics();
+
+    return () => {
+      navigation.removeListener('beforeRemove', navigateToSurveyPage);
+    };
   }, []);
 
   return (

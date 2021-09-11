@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 
 import MainButton from '../../../components/MainButton';
 import Modal from '../../../components/Modal';
@@ -136,9 +135,8 @@ const ManageExpectations: React.FC = () => {
         return;
       }
 
-      const { lastRunDate, alreadySelected }: SelectedInfo = JSON.parse(
-        selectedStorage,
-      );
+      const { lastRunDate, alreadySelected }: SelectedInfo =
+        JSON.parse(selectedStorage);
 
       // Desativa caso já tenha sido utilizado uma vez no dia e exibe a opção selecionada
       // anteriormente.

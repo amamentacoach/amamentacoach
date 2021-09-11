@@ -1,5 +1,3 @@
-import React from 'react';
-
 import i18n from 'i18n-js';
 
 import theme from '../../config/theme';
@@ -36,7 +34,9 @@ import WhenToBreastfeed from '../../pages/Home/WhenToBreastfeed';
 import WhyBreastfeed from '../../pages/Home/WhyBreastfeed';
 import createColorHeader from '../config/colorHeader';
 
-const CreateHomeRoutes = (Stack: any) => {
+import type { StackScreens } from '../config/getNavigatorType';
+
+const CreateHomeRoutes = (Stack: StackScreens) => {
   const { isFirstRun } = useIsFirstRun();
   const headerBabyBlue = createColorHeader(theme.babyBlue, 'black');
   const headerBabyGreen = createColorHeader(theme.babyGreen);

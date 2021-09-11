@@ -1,9 +1,10 @@
-import React from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
-import OptionsList, { Options } from '../../../components/OptionList';
+import OptionsList from '../../../components/OptionList';
+
+import type { OptionListEntry } from '../../../components/OptionList';
+import type { RootStackProps } from '../../../routes/app';
 
 import { BannerImage, Header, ScrollView } from './styles';
 
@@ -11,8 +12,8 @@ import HUBanner from '../../../../assets/images/banner_hu.png';
 import IcVideo from '../../../../assets/images/ic_video.svg';
 
 const HU: React.FC = () => {
-  const navigation = useNavigation();
-  const options: Options[] = [
+  const navigation = useNavigation<RootStackProps>();
+  const options: OptionListEntry[] = [
     {
       image: IcVideo,
       title: i18n.t('HUPage.5'),

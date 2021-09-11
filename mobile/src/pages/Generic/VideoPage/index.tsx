@@ -1,6 +1,5 @@
-import React, { useCallback, useContext, useRef, useState } from 'react';
-
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { useRoute } from '@react-navigation/native';
+import { useCallback, useContext, useRef, useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { ThemeContext } from 'styled-components';
@@ -10,6 +9,8 @@ import {
   setUserVideoStarted,
 } from '../../../services/telemetry';
 
+import type { RootRouteProp } from '../../../routes/app';
+
 import {
   ContentContainer,
   LoadingContainer,
@@ -17,14 +18,8 @@ import {
   VideoContainer,
 } from './styles';
 
-type IScreenParams = {
-  VideoPage: {
-    videos: string[];
-  };
-};
-
 const VideoPage: React.FC = () => {
-  const { videos } = useRoute<RouteProp<IScreenParams, 'VideoPage'>>().params;
+  const { videos } = useRoute<RootRouteProp<'VideoPage'>>().params;
   const { height } = Dimensions.get('window');
   const [isLoading, setIsLoading] = useState(true);
   const themeContext = useContext(ThemeContext);

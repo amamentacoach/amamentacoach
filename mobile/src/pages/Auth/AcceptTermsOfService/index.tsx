@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useState } from 'react';
 
 import MainButton from '../../../components/MainButton';
 import Modal from '../../../components/Modal';
@@ -10,12 +9,9 @@ import {
   MinorTermsOfService,
 } from '../../../components/TermsOfService';
 import { differenceInYears } from '../../../lib/date-fns';
-import {
-  BabySignUpInfo,
-  MotherSignUpInfo,
-  signUpBaby,
-  signUpMother,
-} from '../../../services/auth';
+import { signUpBaby, signUpMother } from '../../../services/auth';
+
+import type { AuthRouteProp, AuthStackProps } from '../../../routes/auth';
 
 import {
   FormContainer,
@@ -25,18 +21,10 @@ import {
   SubmitButtonContainer,
 } from './styles';
 
-type ScreenParams = {
-  AcceptTermsOfService: {
-    motherInfo: MotherSignUpInfo;
-    babiesInfo: BabySignUpInfo[];
-  };
-};
-
 const AcceptTermsOfService: React.FC = () => {
-  const navigation = useNavigation();
-  const { motherInfo, babiesInfo } = useRoute<
-    RouteProp<ScreenParams, 'AcceptTermsOfService'>
-  >().params;
+  const navigation = useNavigation<AuthStackProps>();
+  const { motherInfo, babiesInfo } =
+    useRoute<AuthRouteProp<'AcceptTermsOfService'>>().params;
 
   const [isSendingForm, setIsSendingForm] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);

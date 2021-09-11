@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import i18n from 'i18n-js';
 
@@ -22,15 +20,16 @@ const TabNavigator: React.FC = () => {
 
   return (
     <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: theme.primary,
-        inactiveTintColor: theme.grey,
+      screenOptions={{
+        tabBarActiveTintColor: theme.primary,
+        tabBarInactiveTintColor: theme.grey,
       }}>
       <Tab.Screen
         name="Home"
         component={HomeMenu}
         options={{
           tabBarLabel: i18n.t('Begin'),
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <HomeIcon width={size} height={size} fill={color} />
           ),
@@ -45,7 +44,10 @@ const TabNavigator: React.FC = () => {
         }
         options={{
           tabBarLabel: i18n.t('Diary'),
-          tabBarVisible: !isFirstRun.persistent.diaryIntroduction,
+          headerShown: false,
+          tabBarStyle: {
+            display: isFirstRun.persistent.diaryIntroduction ? 'none' : 'flex',
+          },
           tabBarIcon: ({ color, size }) => (
             <DiaryIcon height={size} width={size} fill={color} />
           ),
@@ -56,6 +58,7 @@ const TabNavigator: React.FC = () => {
         component={SurveyMenu}
         options={{
           tabBarLabel: i18n.t('Surveys'),
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <SurveyIcon height={size} width={size} fill={color} />
           ),
@@ -66,6 +69,7 @@ const TabNavigator: React.FC = () => {
         component={ProfileMenu}
         options={{
           tabBarLabel: i18n.t('Profile'),
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <ProfileIcon height={size} width={size} fill={color} />
           ),

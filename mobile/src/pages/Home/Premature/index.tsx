@@ -1,9 +1,10 @@
-import React from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
-import OptionsList, { Options } from '../../../components/OptionList';
+import OptionsList from '../../../components/OptionList';
+
+import type { OptionListEntry } from '../../../components/OptionList';
+import type { RootStackProps } from '../../../routes/app';
 
 import ScrollView from './styles';
 
@@ -13,8 +14,8 @@ import PrematureHeart from '../../../../assets/images/premature_heart.svg';
 import PrematureTrophy from '../../../../assets/images/premature_trophy.svg';
 
 const Premature: React.FC = () => {
-  const navigation = useNavigation();
-  const options: Options[] = [
+  const navigation = useNavigation<RootStackProps>();
+  const options: OptionListEntry[] = [
     {
       image: PrematureBirth,
       title: i18n.t('PrematurePage.Header1'),

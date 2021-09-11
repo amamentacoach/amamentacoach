@@ -1,9 +1,10 @@
-import React from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
-import OptionsList, { Options } from '../../../components/OptionList';
+import OptionsList from '../../../components/OptionList';
+
+import type { OptionListEntry } from '../../../components/OptionList';
+import type { RootStackProps } from '../../../routes/app';
 
 import { HeaderText, ScrollView } from './styles';
 
@@ -13,9 +14,9 @@ import WithdrawalClock from '../../../../assets/images/withdrawal_clock.svg';
 import WithdrawalQuestion from '../../../../assets/images/withdrawal_question.svg';
 
 const Breastfeeding: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
 
-  const options: Options[] = [
+  const options: OptionListEntry[] = [
     {
       image: WithdrawalQuestion,
       title: i18n.t('BreastfeedingPage.1'),

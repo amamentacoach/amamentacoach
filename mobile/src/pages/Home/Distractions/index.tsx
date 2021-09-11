@@ -1,10 +1,11 @@
-import React from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { Linking } from 'react-native';
 
-import OptionsList, { Options } from '../../../components/OptionList';
+import OptionsList from '../../../components/OptionList';
+
+import type { OptionListEntry } from '../../../components/OptionList';
+import type { RootStackProps } from '../../../routes/app';
 
 import { HeaderText, ScrollView } from './styles';
 
@@ -13,8 +14,8 @@ import Music from '../../../../assets/images/music.svg';
 import Puzzle from '../../../../assets/images/puzzle.svg';
 
 const Distractions: React.FC = () => {
-  const navigation = useNavigation();
-  const options: Options[] = [
+  const navigation = useNavigation<RootStackProps>();
+  const options: OptionListEntry[] = [
     {
       image: Puzzle,
       title: i18n.t('DistractionsPage.1'),

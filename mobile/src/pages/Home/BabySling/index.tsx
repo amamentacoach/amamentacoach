@@ -1,11 +1,12 @@
-import React from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { View } from 'react-native';
 
 import ImageWrapper from '../../../components/ImageWrapper';
-import OptionsList, { Options } from '../../../components/OptionList';
+import OptionsList from '../../../components/OptionList';
+
+import type { OptionListEntry } from '../../../components/OptionList';
+import type { RootStackProps } from '../../../routes/app';
 
 import { Container, ScrollView, Text } from './styles';
 
@@ -13,9 +14,9 @@ import Banner from '../../../../assets/images/banner_canguru.png';
 import IcVideo from '../../../../assets/images/ic_video.svg';
 
 const BabySling: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
 
-  const options: Options[] = [
+  const options: OptionListEntry[] = [
     {
       image: IcVideo,
       title: i18n.t('BabySlingPage.1'),
@@ -47,7 +48,6 @@ const BabySling: React.FC = () => {
             height={200}
           />
         </View>
-
         <Text>{i18n.t('BabySlingPage.Header')}</Text>
       </Container>
       <OptionsList options={options} displayArrows />

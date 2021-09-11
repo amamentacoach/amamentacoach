@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
@@ -8,6 +6,8 @@ import * as Yup from 'yup';
 
 import FormTextInput from '../../../components/FormTextInput';
 import MainButton from '../../../components/MainButton';
+
+import type { AuthStackProps } from '../../../routes/auth';
 
 import {
   FormContainer,
@@ -25,7 +25,7 @@ interface FormValues {
 }
 
 const FormSignUp: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<AuthStackProps>();
   const formInitialValues: FormValues = {
     email: '',
     password: '',

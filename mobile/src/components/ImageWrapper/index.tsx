@@ -1,11 +1,7 @@
-import React from 'react';
+import { Image as ReactImage } from 'react-native';
 
-import {
-  Image as ReactImage,
-  ImageProps,
-  ImageSourcePropType,
-} from 'react-native';
-import { SvgProps } from 'react-native-svg';
+import type { ImageProps, ImageSourcePropType } from 'react-native';
+import type { SvgProps } from 'react-native-svg';
 
 export type ImageWrapperSourcePropType =
   | ImageSourcePropType

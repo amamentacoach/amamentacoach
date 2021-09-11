@@ -139,7 +139,7 @@ export async function signIn(
     });
     login.token = request.data.token;
     login.status = LoginStatus.Success;
-  } catch (error) {
+  } catch (error: any) {
     if (error.response) {
       if (error.response.status === 401) {
         login.status = LoginStatus.IncorrectLogin;
