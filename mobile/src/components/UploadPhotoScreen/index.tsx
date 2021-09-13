@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { Dimensions } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 
-import { useAuth } from '../../contexts/auth';
-import ImageWrapper from '../ImageWrapper';
-import MainButton from '../MainButton';
-import SecondaryButton from '../SecondaryButton';
+import ImageWrapper from 'components/ImageWrapper';
+import MainButton from 'components/MainButton';
+import SecondaryButton from 'components/SecondaryButton';
+import { useAuth } from 'contexts/auth';
 
-import type { ImageWrapperSourcePropType } from '../ImageWrapper';
+import type { ImageWrapperSourcePropType } from 'components/ImageWrapper';
 import type { ImagePickerResponse } from 'react-native-image-picker';
 
 import {

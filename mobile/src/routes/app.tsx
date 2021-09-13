@@ -1,18 +1,17 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import i18n from 'i18n-js';
 
-import VideoPage from '../pages/Generic/VideoPage';
+import VideoPage from 'pages/Generic/VideoPage';
+import createDiaryRoutes from 'routes/app/diary';
+import createHomeRoutes from 'routes/app/home';
+import createProfileRoutes from 'routes/app/profile';
+import createSurveyRoutes from 'routes/app/survey';
+import TabNavigator from 'routes/tabNavigator';
 
 import type { RouteProp } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
 
-import createDiaryRoutes from './app/diary';
-import createHomeRoutes from './app/home';
-import createProfileRoutes from './app/profile';
-import createSurveyRoutes from './app/survey';
-import TabNavigator from './tabNavigator';
-
-import BackIcon from '../../assets/images/icons/ic_back.svg';
+import BackIcon from '@assets/images/icons/ic_back.svg';
 
 export type RootStackParamList = {
   TabNavigator: undefined;

@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { Dimensions, FlatList } from 'react-native';
 
-import type { ImageWrapperSourcePropType } from '../ImageWrapper';
+import type { ImageWrapperSourcePropType } from 'components/ImageWrapper';
 import type { FlatListProps } from 'react-native';
 
 import { PageContainer } from './styles';

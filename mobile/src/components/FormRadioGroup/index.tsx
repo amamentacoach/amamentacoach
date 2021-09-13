@@ -1,7 +1,7 @@
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
 
-import FormTextInput from '../FormTextInput';
+import FormTextInput from 'components/FormTextInput';
 
 import {
   Container,

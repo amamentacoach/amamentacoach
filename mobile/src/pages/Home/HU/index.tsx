@@ -1,15 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
-import OptionsList from '../../../components/OptionList';
+import OptionsList from 'components/OptionList';
 
-import type { OptionListEntry } from '../../../components/OptionList';
-import type { RootStackProps } from '../../../routes/app';
+import type { OptionListEntry } from 'components/OptionList';
+import type { RootStackProps } from 'routes/app';
 
 import { BannerImage, Header, ScrollView } from './styles';
 
-import HUBanner from '../../../../assets/images/banner_hu.png';
-import IcVideo from '../../../../assets/images/ic_video.svg';
+import HUBanner from '@assets/images/banner_hu.png';
+import IcVideo from '@assets/images/ic_video.svg';
 
 const HU: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

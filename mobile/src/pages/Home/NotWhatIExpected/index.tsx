@@ -1,17 +1,17 @@
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
-import ImageWrapper from '../../../components/ImageWrapper';
-import InformationPages from '../../../components/InformationPages';
-import MainButton from '../../../components/MainButton';
-import SecondaryButton from '../../../components/SecondaryButton';
-import theme from '../../../config/theme';
+import ImageWrapper from 'components/ImageWrapper';
+import InformationPages from 'components/InformationPages';
+import MainButton from 'components/MainButton';
+import SecondaryButton from 'components/SecondaryButton';
+import theme from 'config/theme';
 
 import type {
   InfoPageModelProps,
   InfoPageItem,
-} from '../../../components/InformationPages';
-import type { RootStackProps } from '../../../routes/app';
+} from 'components/InformationPages';
+import type { RootStackProps } from 'routes/app';
 
 import {
   ContentContainer,
@@ -24,9 +24,9 @@ import {
   SecondButtonContainer,
 } from './styles';
 
-import ExpectationVsReality1 from '../../../../assets/images/expectation_vs_reality_1.png';
-import ExpectationVsReality2 from '../../../../assets/images/expectation_vs_reality_2.png';
-import ExpectationVsReality3 from '../../../../assets/images/expectation_vs_reality_3.png';
+import ExpectationVsReality1 from '@assets/images/expectation_vs_reality_1.png';
+import ExpectationVsReality2 from '@assets/images/expectation_vs_reality_2.png';
+import ExpectationVsReality3 from '@assets/images/expectation_vs_reality_3.png';
 
 const NotWhatIExpected: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

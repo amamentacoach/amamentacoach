@@ -1,4 +1,4 @@
-import { useAuth } from '../contexts/auth';
+import { useAuth } from 'contexts/auth';
 
 import AppRoutes from './app';
 import AuthRoutes from './auth';

@@ -4,21 +4,21 @@ import i18n from 'i18n-js';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 
-import FormRadioGroupInput from '../../../components/FormRadioGroup';
+import FormRadioGroupInput from 'components/FormRadioGroup';
 import {
   CurrentPageContainer,
   CurrentPageText,
-} from '../../../components/GenericSurveyPage/styles';
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
-import SecondaryButton from '../../../components/SecondaryButton';
-import theme from '../../../config/theme';
-import { useAuth } from '../../../contexts/auth';
-import { answerFeedingForm, answerStatusForm } from '../../../services/survey';
-import { getSurveyQuestions } from '../../../utils/getSurveyQuestions';
+} from 'components/GenericSurveyPage/styles';
+import MainButton from 'components/MainButton';
+import Modal from 'components/Modal';
+import SecondaryButton from 'components/SecondaryButton';
+import theme from 'config/theme';
+import { useAuth } from 'contexts/auth';
+import { answerFeedingForm, answerStatusForm } from 'services/survey';
+import { getSurveyQuestions } from 'utils/getSurveyQuestions';
 
-import type { RootRouteProp, RootStackProps } from '../../../routes/app';
-import type { SurveyQuestion } from '../../../utils/getSurveyQuestions';
+import type { RootRouteProp, RootStackProps } from 'routes/app';
+import type { SurveyQuestion } from 'utils/getSurveyQuestions';
 
 import {
   ColoredText,
@@ -36,7 +36,7 @@ import {
   TextInfoModal,
 } from './styles';
 
-import QuestionIcon from '../../../../assets/images/icons/ic_question_white.svg';
+import QuestionIcon from '@assets/images/icons/ic_question_white.svg';
 
 // Página do formulário.
 interface PageProps {

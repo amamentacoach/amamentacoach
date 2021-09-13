@@ -2,20 +2,20 @@ import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useState } from 'react';
 
-import Modal from '../../../components/Modal';
-import OptionsList from '../../../components/OptionList';
-import { useAuth } from '../../../contexts/auth';
-import { storageIsToday } from '../../../lib/date-fns';
+import Modal from 'components/Modal';
+import OptionsList from 'components/OptionList';
+import { useAuth } from 'contexts/auth';
+import { storageIsToday } from 'lib/date-fns';
 
-import type { OptionListEntry } from '../../../components/OptionList';
-import type { RootStackProps } from '../../../routes/app';
+import type { OptionListEntry } from 'components/OptionList';
+import type { RootStackProps } from 'routes/app';
 
 import { Header, HeaderTitle, ScrollView } from './styles';
 
-import SurveysFour from '../../../../assets/images/surveys_four.svg';
-import SurveysOne from '../../../../assets/images/surveys_one.svg';
-import SurveysThree from '../../../../assets/images/surveys_three.svg';
-import SurveysTwo from '../../../../assets/images/surveys_two.svg';
+import SurveysFour from '@assets/images/surveys_four.svg';
+import SurveysOne from '@assets/images/surveys_one.svg';
+import SurveysThree from '@assets/images/surveys_three.svg';
+import SurveysTwo from '@assets/images/surveys_two.svg';
 
 const SurveyMenu: React.FC = () => {
   const { motherInfo } = useAuth();

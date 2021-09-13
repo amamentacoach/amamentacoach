@@ -1,16 +1,16 @@
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
-import createGenericInfoPage from '../../../components/GenericInfoPage';
-import InformationPages from '../../../components/InformationPages';
+import createGenericInfoPage from 'components/GenericInfoPage';
+import InformationPages from 'components/InformationPages';
 
-import type { InfoPageItem } from '../../../components/InformationPages';
-import type { RootStackProps } from '../../../routes/app';
+import type { InfoPageItem } from 'components/InformationPages';
+import type { RootStackProps } from 'routes/app';
 
 import { ColoredContentText, ContentText } from './styles';
 
-import MilkWithdrawalSeven from '../../../../assets/images/milk_withdrawal_seven.png';
-import WhyMilkWithdrawalTwo from '../../../../assets/images/why_milk_withdrawal_two.png';
+import MilkWithdrawalSeven from '@assets/images/milk_withdrawal_seven.png';
+import WhyMilkWithdrawalTwo from '@assets/images/why_milk_withdrawal_two.png';
 
 const WhyBreastfeed: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

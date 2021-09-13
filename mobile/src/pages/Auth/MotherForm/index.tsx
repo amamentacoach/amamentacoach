@@ -3,15 +3,15 @@ import { Formik } from 'formik';
 import i18n from 'i18n-js';
 import * as Yup from 'yup';
 
-import FormDateInput from '../../../components/FormDateInput';
-import FormPickerInput from '../../../components/FormPickerInput';
-import FormRadioGroupInput from '../../../components/FormRadioGroup';
-import FormTextInput from '../../../components/FormTextInput';
-import MainButton from '../../../components/MainButton';
-import SecondaryButton from '../../../components/SecondaryButton';
+import FormDateInput from 'components/FormDateInput';
+import FormPickerInput from 'components/FormPickerInput';
+import FormRadioGroupInput from 'components/FormRadioGroup';
+import FormTextInput from 'components/FormTextInput';
+import MainButton from 'components/MainButton';
+import SecondaryButton from 'components/SecondaryButton';
 
-import type { AuthRouteProp, AuthStackProps } from '../../../routes/auth';
-import type { MotherSignUpInfo } from '../../../services/auth';
+import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
+import type { MotherSignUpInfo } from 'services/auth';
 
 import {
   DDDContainer,

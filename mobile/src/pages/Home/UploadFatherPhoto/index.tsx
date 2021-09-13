@@ -1,9 +1,9 @@
 import i18n from 'i18n-js';
 
-import UploadPhotoScreen from '../../../components/UploadPhotoScreen';
-import { uploadFatherPhoto } from '../../../services/uploadPhoto';
+import UploadPhotoScreen from 'components/UploadPhotoScreen';
+import { uploadFatherPhoto } from 'services/uploadPhoto';
 
-import Family from '../../../../assets/images/family.png';
+import Family from '@assets/images/family.png';
 
 const UploadFatherPhoto: React.FC = () => {
   return (

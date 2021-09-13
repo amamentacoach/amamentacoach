@@ -1,6 +1,6 @@
 import i18n from 'i18n-js';
 
-import ImageWrapper from '../../../components/ImageWrapper';
+import ImageWrapper from 'components/ImageWrapper';
 
 import {
   ColoredText,
@@ -10,7 +10,7 @@ import {
   ScrollView,
 } from './styles';
 
-import WithdrawalWhen from '../../../../assets/images/withdrawal_when.png';
+import WithdrawalWhen from '@assets/images/withdrawal_when.png';
 
 const WhenToBreastfeed: React.FC = () => {
   return (

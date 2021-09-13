@@ -1,16 +1,16 @@
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
-import OptionsList from '../../../components/OptionList';
+import OptionsList from 'components/OptionList';
 
-import type { OptionListEntry } from '../../../components/OptionList';
-import type { RootStackProps } from '../../../routes/app';
+import type { OptionListEntry } from 'components/OptionList';
+import type { RootStackProps } from 'routes/app';
 
 import ScrollView from './styles';
 
-import IcVideo from '../../../../assets/images/ic_video.svg';
-import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
-import PrematureSurvey from '../../../../assets/images/premature_survey.svg';
+import IcVideo from '@assets/images/ic_video.svg';
+import PrematureBreastfeed from '@assets/images/premature_breastfeed.svg';
+import PrematureSurvey from '@assets/images/premature_survey.svg';
 
 const ThePremature: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

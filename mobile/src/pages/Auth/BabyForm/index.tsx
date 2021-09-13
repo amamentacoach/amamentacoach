@@ -5,17 +5,17 @@ import { useState } from 'react';
 import { View } from 'react-native';
 import * as Yup from 'yup';
 
-import FormDateInput from '../../../components/FormDateInput';
-import FormPickerInput from '../../../components/FormPickerInput';
-import FormRadioGroupInput from '../../../components/FormRadioGroup';
-import FormTextInput from '../../../components/FormTextInput';
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
-import SecondaryButton from '../../../components/SecondaryButton';
+import FormDateInput from 'components/FormDateInput';
+import FormPickerInput from 'components/FormPickerInput';
+import FormRadioGroupInput from 'components/FormRadioGroup';
+import FormTextInput from 'components/FormTextInput';
+import MainButton from 'components/MainButton';
+import Modal from 'components/Modal';
+import SecondaryButton from 'components/SecondaryButton';
 
-import type { AuthRouteProp, AuthStackProps } from '../../../routes/auth';
-import type { BabySignUpInfo } from '../../../services/auth';
 import type { FormikErrors } from 'formik';
+import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
+import type { BabySignUpInfo } from 'services/auth';
 
 import {
   ApgarHelpButton,
@@ -34,7 +34,7 @@ import {
   SubOptionsContainer,
 } from './styles';
 
-import HelpIcon from '../../../../assets/images/icons/ic_question.svg';
+import HelpIcon from '@assets/images/icons/ic_question.svg';
 
 interface Baby {
   id: number;

@@ -1,6 +1,6 @@
-import ImageWrapper from '../ImageWrapper';
+import ImageWrapper from 'components/ImageWrapper';
 
-import type { ImageWrapperSourcePropType } from '../ImageWrapper';
+import type { ImageWrapperSourcePropType } from 'components/ImageWrapper';
 
 import {
   ContentContainer,
@@ -13,7 +13,7 @@ import {
   Option,
 } from './styles';
 
-import NextIcon from '../../../assets/images/icons/ic_next.svg';
+import NextIcon from '@assets/images/icons/ic_next.svg';
 
 export interface OptionListEntry {
   image?: ImageWrapperSourcePropType;

@@ -1,14 +1,14 @@
 import i18n from 'i18n-js';
 
-import theme from '../../config/theme';
-import SurveyBreastfeed from '../../pages/Survey/SurveyBreastfeed';
-import SurveyFather from '../../pages/Survey/SurveyFather';
-import SurveyHelp from '../../pages/Survey/SurveyHelp';
-import SurveyMotivation from '../../pages/Survey/SurveyMotivation';
-import SurveyStatistics from '../../pages/Survey/SurveyStatistics';
-import createColorHeader from '../config/colorHeader';
+import theme from 'config/theme';
+import SurveyBreastfeed from 'pages/Survey/SurveyBreastfeed';
+import SurveyFather from 'pages/Survey/SurveyFather';
+import SurveyHelp from 'pages/Survey/SurveyHelp';
+import SurveyMotivation from 'pages/Survey/SurveyMotivation';
+import SurveyStatistics from 'pages/Survey/SurveyStatistics';
+import createColorHeader from 'routes/config/colorHeader';
 
-import type { StackScreens } from '../config/getNavigatorType';
+import type { StackScreens } from 'routes/config/getNavigatorType';
 
 const CreateSurveyRoutes = (Stack: StackScreens) => {
   const headerBabyBlue = createColorHeader(theme.babyBlue);

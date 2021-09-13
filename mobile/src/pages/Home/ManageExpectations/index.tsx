@@ -2,10 +2,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
 
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
-import SecondaryButton from '../../../components/SecondaryButton';
-import { isToday } from '../../../lib/date-fns';
+import MainButton from 'components/MainButton';
+import Modal from 'components/Modal';
+import SecondaryButton from 'components/SecondaryButton';
+import { isToday } from 'lib/date-fns';
 
 import {
   Card,

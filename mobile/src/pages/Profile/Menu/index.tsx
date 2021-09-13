@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
-import { useAuth } from '../../../contexts/auth';
+import { useAuth } from 'contexts/auth';
 
-import type { RootStackProps } from '../../../routes/app';
+import type { RootStackProps } from 'routes/app';
 
 import { Line, OptionButton, OptionText, ScrollView } from './styles';
 

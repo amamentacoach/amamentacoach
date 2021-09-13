@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { View } from 'react-native';
 import * as Yup from 'yup';
 
-import FormTextInput from '../../../components/FormTextInput';
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
-import { forgotPassword } from '../../../services/auth';
+import FormTextInput from 'components/FormTextInput';
+import MainButton from 'components/MainButton';
+import Modal from 'components/Modal';
+import { forgotPassword } from 'services/auth';
 
 import {
   FormContainer,

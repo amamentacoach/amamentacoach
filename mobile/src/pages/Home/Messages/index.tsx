@@ -3,12 +3,12 @@ import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
-import { useIsFirstRun } from '../../../contexts/firstRun';
-import { listMessages } from '../../../services/messages';
-import { setMessagesPageOpened } from '../../../services/telemetry';
+import { useIsFirstRun } from 'contexts/firstRun';
+import { listMessages } from 'services/messages';
+import { setMessagesPageOpened } from 'services/telemetry';
 
-import type { RootStackProps } from '../../../routes/app';
-import type { Message as IMessage } from '../../../services/messages';
+import type { RootStackProps } from 'routes/app';
+import type { Message as IMessage } from 'services/messages';
 
 import {
   AddMessageButton,
@@ -20,7 +20,7 @@ import {
   MessageContainer,
 } from './styles';
 
-import AddIcon from '../../../../assets/images/icons/ic_add.svg';
+import AddIcon from '@assets/images/icons/ic_add.svg';
 
 const Messages: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

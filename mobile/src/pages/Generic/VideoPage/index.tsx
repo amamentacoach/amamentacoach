@@ -4,12 +4,9 @@ import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { ThemeContext } from 'styled-components';
 
-import {
-  setUserVideoSeen,
-  setUserVideoStarted,
-} from '../../../services/telemetry';
+import { setUserVideoSeen, setUserVideoStarted } from 'services/telemetry';
 
-import type { RootRouteProp } from '../../../routes/app';
+import type { RootRouteProp } from 'routes/app';
 
 import {
   ContentContainer,

@@ -3,10 +3,10 @@ import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
-import { listUserQuestions } from '../../../services/questions';
+import { listUserQuestions } from 'services/questions';
 
-import type { RootStackProps } from '../../../routes/app';
-import type { FAQ } from '../../../services/questions';
+import type { RootStackProps } from 'routes/app';
+import type { FAQ } from 'services/questions';
 
 import {
   AddQuestionButton,
@@ -18,7 +18,7 @@ import {
   QuestionContainer,
 } from './styles';
 
-import AddIcon from '../../../../assets/images/icons/ic_add.svg';
+import AddIcon from '@assets/images/icons/ic_add.svg';
 
 interface MessageEntryProps {
   question: string;

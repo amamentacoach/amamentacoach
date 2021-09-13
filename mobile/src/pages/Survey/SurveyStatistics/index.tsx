@@ -3,11 +3,11 @@ import i18n from 'i18n-js';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
-import PieChart from '../../../components/PieChart';
-import { RootStackProps } from '../../../routes/app';
-import { listSurveyStatistics } from '../../../services/survey';
+import PieChart from 'components/PieChart';
+import { RootStackProps } from 'routes/app';
+import { listSurveyStatistics } from 'services/survey';
 
-import type { SurveyStatistics as ISurveyStatistics } from '../../../services/survey';
+import type { SurveyStatistics as ISurveyStatistics } from 'services/survey';
 
 import {
   ContentContainer,
@@ -21,7 +21,7 @@ import {
   ScrollView,
 } from './styles';
 
-import BackIcon from '../../../../assets/images/icons/ic_back.svg';
+import BackIcon from '@assets/images/icons/ic_back.svg';
 
 const SurveyStatistics: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

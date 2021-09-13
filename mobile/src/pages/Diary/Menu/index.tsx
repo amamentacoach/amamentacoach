@@ -3,14 +3,15 @@ import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
 
-import Modal from '../../../components/Modal';
-import OptionsList, { OptionListEntry } from '../../../components/OptionList';
-import { useAuth } from '../../../contexts/auth';
-import { useIsFirstRun } from '../../../contexts/firstRun';
-import { storageIsToday, dateFormatVerbose } from '../../../lib/date-fns';
-import { setDiaryPageOpened } from '../../../services/telemetry';
+import Modal from 'components/Modal';
+import OptionsList from 'components/OptionList';
+import { useAuth } from 'contexts/auth';
+import { useIsFirstRun } from 'contexts/firstRun';
+import { storageIsToday, dateFormatVerbose } from 'lib/date-fns';
+import { setDiaryPageOpened } from 'services/telemetry';
 
-import type { RootStackProps } from '../../../routes/app';
+import type { OptionListEntry } from 'components/OptionList';
+import type { RootStackProps } from 'routes/app';
 
 import {
   CalendarButton,
@@ -20,14 +21,14 @@ import {
   ScrollView,
 } from './styles';
 
-import Baby from '../../../../assets/images/canguru.svg';
-import DiarySmile from '../../../../assets/images/diary_smile.svg';
-import DiaryStar from '../../../../assets/images/diary_star.svg';
-import Father from '../../../../assets/images/father.svg';
-import CalendarIcon from '../../../../assets/images/icons/ic_calendar.svg';
-import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
-import PrematureHeart from '../../../../assets/images/premature_heart.svg';
-import Report from '../../../../assets/images/report.svg';
+import Baby from '@assets/images/canguru.svg';
+import DiarySmile from '@assets/images/diary_smile.svg';
+import DiaryStar from '@assets/images/diary_star.svg';
+import Father from '@assets/images/father.svg';
+import CalendarIcon from '@assets/images/icons/ic_calendar.svg';
+import PrematureBreastfeed from '@assets/images/premature_breastfeed.svg';
+import PrematureHeart from '@assets/images/premature_heart.svg';
+import Report from '@assets/images/report.svg';
 
 const DiaryMenu: React.FC = () => {
   const { motherInfo } = useAuth();

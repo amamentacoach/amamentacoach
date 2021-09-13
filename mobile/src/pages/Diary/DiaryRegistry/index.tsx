@@ -8,15 +8,15 @@ import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
-import DiaryRegistryEntry from '../../../components/DiaryRegistryEntry';
-import MainButton from '../../../components/MainButton';
-import { useIsFirstRun } from '../../../contexts/firstRun';
-import { dateFormatVerbose } from '../../../lib/date-fns';
-import { listExtractionsEntries } from '../../../services/diaryRegistry';
-import { setExtractionPageOpened } from '../../../services/telemetry';
+import DiaryRegistryEntry from 'components/DiaryRegistryEntry';
+import MainButton from 'components/MainButton';
+import { useIsFirstRun } from 'contexts/firstRun';
+import { dateFormatVerbose } from 'lib/date-fns';
+import { listExtractionsEntries } from 'services/diaryRegistry';
+import { setExtractionPageOpened } from 'services/telemetry';
 
-import type { RootRouteProp, RootStackProps } from '../../../routes/app';
-import type { ExtractionEntry } from '../../../services/diaryRegistry';
+import type { RootRouteProp, RootStackProps } from 'routes/app';
+import type { ExtractionEntry } from 'services/diaryRegistry';
 
 import { Container, DateText, ListContainer } from './styles';
 

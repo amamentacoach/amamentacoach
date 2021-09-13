@@ -1,18 +1,18 @@
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
-import OptionsList from '../../../components/OptionList';
+import OptionsList from 'components/OptionList';
 
-import type { OptionListEntry } from '../../../components/OptionList';
-import type { RootStackProps } from '../../../routes/app';
+import type { OptionListEntry } from 'components/OptionList';
+import type { RootStackProps } from 'routes/app';
 
 import ScrollView from './styles';
 
-import Change from '../../../../assets/images/change.svg';
-import DiarySmile from '../../../../assets/images/diary_smile.svg';
-import EmotionsInfo from '../../../../assets/images/emotions_info.svg';
-import PrematureBaby from '../../../../assets/images/premature_baby.svg';
-import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
+import Change from '@assets/images/change.svg';
+import DiarySmile from '@assets/images/diary_smile.svg';
+import EmotionsInfo from '@assets/images/emotions_info.svg';
+import PrematureBaby from '@assets/images/premature_baby.svg';
+import PrematureBreastfeed from '@assets/images/premature_breastfeed.svg';
 
 const AdditionalInformation: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

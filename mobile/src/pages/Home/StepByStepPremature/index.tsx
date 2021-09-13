@@ -2,16 +2,16 @@ import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { Dimensions, View } from 'react-native';
 
-import ImageWrapper from '../../../components/ImageWrapper';
-import InformationPages from '../../../components/InformationPages';
-import ProgressDots from '../../../components/ProgressDots';
-import theme from '../../../config/theme';
+import ImageWrapper from 'components/ImageWrapper';
+import InformationPages from 'components/InformationPages';
+import ProgressDots from 'components/ProgressDots';
+import theme from 'config/theme';
 
 import type {
   InfoPageItem,
   InfoPageModelProps,
-} from '../../../components/InformationPages';
-import type { RootStackProps } from '../../../routes/app';
+} from 'components/InformationPages';
+import type { RootStackProps } from 'routes/app';
 
 import {
   Background,
@@ -27,12 +27,12 @@ import {
   TextContinueButton,
 } from './styles';
 
-import BreastFeedPremature1 from '../../../../assets/images/breastfeed_premature_1.svg';
-import BreastFeedPremature2 from '../../../../assets/images/breastfeed_premature_2.svg';
-import BreastFeedPremature3 from '../../../../assets/images/breastfeed_premature_3.svg';
-import BreastFeedPremature4 from '../../../../assets/images/breastfeed_premature_4.svg';
-import BreastFeedPremature5 from '../../../../assets/images/breastfeed_premature_5.svg';
-import BreastFeedPremature6 from '../../../../assets/images/breastfeed_premature_6.svg';
+import BreastFeedPremature1 from '@assets/images/breastfeed_premature_1.svg';
+import BreastFeedPremature2 from '@assets/images/breastfeed_premature_2.svg';
+import BreastFeedPremature3 from '@assets/images/breastfeed_premature_3.svg';
+import BreastFeedPremature4 from '@assets/images/breastfeed_premature_4.svg';
+import BreastFeedPremature5 from '@assets/images/breastfeed_premature_5.svg';
+import BreastFeedPremature6 from '@assets/images/breastfeed_premature_6.svg';
 
 const StepByStepPremature: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

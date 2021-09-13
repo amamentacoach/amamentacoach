@@ -1,6 +1,6 @@
 import i18n from 'i18n-js';
 
-import ImageWrapper from '../../../components/ImageWrapper';
+import ImageWrapper from 'components/ImageWrapper';
 
 import {
   ColoredText,
@@ -10,8 +10,8 @@ import {
   ScrollView,
 } from './styles';
 
-import Withdrawal1 from '../../../../assets/images/withdrawal_premature_1.png';
-import Withdrawal2 from '../../../../assets/images/withdrawal_premature_2.png';
+import Withdrawal1 from '@assets/images/withdrawal_premature_1.png';
+import Withdrawal2 from '@assets/images/withdrawal_premature_2.png';
 
 const HowLongToBreastfeed: React.FC = () => {
   return (

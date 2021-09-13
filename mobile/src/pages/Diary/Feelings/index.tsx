@@ -2,19 +2,19 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StackActions, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
-import FormRadioGroupInput from '../../../components/FormRadioGroup';
+import FormRadioGroupInput from 'components/FormRadioGroup';
 import {
   CurrentPageContainer,
   CurrentPageText,
   QuestionText,
-} from '../../../components/GenericSurveyPage/styles';
-import MainButton from '../../../components/MainButton';
-import SecondaryButton from '../../../components/SecondaryButton';
-import Survey, { SurveyPage } from '../../../components/Survey';
-import theme from '../../../config/theme';
-import { dateFormatVerbose } from '../../../lib/date-fns';
+} from 'components/GenericSurveyPage/styles';
+import MainButton from 'components/MainButton';
+import SecondaryButton from 'components/SecondaryButton';
+import Survey, { SurveyPage } from 'components/Survey';
+import theme from 'config/theme';
+import { dateFormatVerbose } from 'lib/date-fns';
 
-import type { RootStackProps } from '../../../routes/app';
+import type { RootStackProps } from 'routes/app';
 
 import { Container, Footer, SecondFooterButtonContainer } from './styles';
 

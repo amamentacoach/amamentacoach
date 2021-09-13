@@ -2,20 +2,20 @@ import { StackActions, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useState } from 'react';
 
-import createGenericSurveyPage from '../../../components/GenericSurveyPage';
-import Modal from '../../../components/Modal';
-import Survey from '../../../components/Survey';
-import theme from '../../../config/theme';
+import createGenericSurveyPage from 'components/GenericSurveyPage';
+import Modal from 'components/Modal';
+import Survey from 'components/Survey';
+import theme from 'config/theme';
 
-import type { RootStackProps } from '../../../routes/app';
+import type { RootStackProps } from 'routes/app';
 
 import { ModalContainer } from './styles';
 
-import Motivation1 from '../../../../assets/images/motivation-1.png';
-import Motivation2 from '../../../../assets/images/motivation-2.png';
-import Motivation3 from '../../../../assets/images/motivation-3.png';
-import Motivation4 from '../../../../assets/images/motivation-4.png';
-import Motivation5 from '../../../../assets/images/motivation-5.png';
+import Motivation1 from '@assets/images/motivation-1.png';
+import Motivation2 from '@assets/images/motivation-2.png';
+import Motivation3 from '@assets/images/motivation-3.png';
+import Motivation4 from '@assets/images/motivation-4.png';
+import Motivation5 from '@assets/images/motivation-5.png';
 
 const Goals: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

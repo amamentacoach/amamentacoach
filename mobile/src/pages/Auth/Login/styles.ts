@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import ImageWrapper from '../../../components/ImageWrapper';
+import ImageWrapper from 'components/ImageWrapper';
 
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },

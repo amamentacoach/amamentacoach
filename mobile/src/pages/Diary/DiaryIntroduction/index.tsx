@@ -1,13 +1,13 @@
 import i18n from 'i18n-js';
 
-import ImageWrapper from '../../../components/ImageWrapper';
+import ImageWrapper from 'components/ImageWrapper';
 import InformationPages, {
   InfoPageItem,
   InfoPageModelProps,
-} from '../../../components/InformationPages';
-import MainButton from '../../../components/MainButton';
-import ProgressDots from '../../../components/ProgressDots';
-import { useIsFirstRun } from '../../../contexts/firstRun';
+} from 'components/InformationPages';
+import MainButton from 'components/MainButton';
+import ProgressDots from 'components/ProgressDots';
+import { useIsFirstRun } from 'contexts/firstRun';
 
 import {
   ContentText,
@@ -19,8 +19,8 @@ import {
   TextContinueButton,
 } from './styles';
 
-import IntroDiary from '../../../../assets/images/intro_diary.svg';
-import IntroDiaryCalendar from '../../../../assets/images/intro_diary_calendar.svg';
+import IntroDiary from '@assets/images/intro_diary.svg';
+import IntroDiaryCalendar from '@assets/images/intro_diary_calendar.svg';
 
 const DiaryIntroduction: React.FC = () => {
   const { setPersistentNotFirstRun } = useIsFirstRun();

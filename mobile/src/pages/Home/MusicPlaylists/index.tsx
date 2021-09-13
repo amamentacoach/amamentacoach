@@ -1,13 +1,13 @@
 import i18n from 'i18n-js';
 import { Linking } from 'react-native';
 
-import OptionsList from '../../../components/OptionList';
+import OptionsList from 'components/OptionList';
 
-import type { OptionListEntry } from '../../../components/OptionList';
+import type { OptionListEntry } from 'components/OptionList';
 
 import ScrollView from './styles';
 
-import Music from '../../../../assets/images/music.svg';
+import Music from '@assets/images/music.svg';
 
 const MusicPlaylists: React.FC = () => {
   const options: OptionListEntry[] = [

@@ -1,15 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
-import ImageWrapper from '../../../components/ImageWrapper';
-import InformationPages from '../../../components/InformationPages';
-import ProgressDots from '../../../components/ProgressDots';
+import ImageWrapper from 'components/ImageWrapper';
+import InformationPages from 'components/InformationPages';
+import ProgressDots from 'components/ProgressDots';
 
 import type {
   InfoPageItem,
   InfoPageModelProps,
-} from '../../../components/InformationPages';
-import type { RootStackProps } from '../../../routes/app';
+} from 'components/InformationPages';
+import type { RootStackProps } from 'routes/app';
 
 import {
   ContentText,
@@ -24,15 +24,15 @@ import {
   TextContinueButton,
 } from './styles';
 
-import MilkWithdrawalEight from '../../../../assets/images/milk_withdrawal_eight.png';
-import MilkWithdrawalFive from '../../../../assets/images/milk_withdrawal_five.png';
-import MilkWithdrawalFour from '../../../../assets/images/milk_withdrawal_four.png';
-import MilkWithdrawalNine from '../../../../assets/images/milk_withdrawal_nine.png';
-import MilkWithdrawalOne from '../../../../assets/images/milk_withdrawal_one.png';
-import MilkWithdrawalSeven from '../../../../assets/images/milk_withdrawal_seven.png';
-import MilkWithdrawalSix from '../../../../assets/images/milk_withdrawal_six.png';
-import MilkWithdrawalThree from '../../../../assets/images/milk_withdrawal_three.png';
-import MilkWithdrawalTwo from '../../../../assets/images/milk_withdrawal_two.png';
+import MilkWithdrawalEight from '@assets/images/milk_withdrawal_eight.png';
+import MilkWithdrawalFive from '@assets/images/milk_withdrawal_five.png';
+import MilkWithdrawalFour from '@assets/images/milk_withdrawal_four.png';
+import MilkWithdrawalNine from '@assets/images/milk_withdrawal_nine.png';
+import MilkWithdrawalOne from '@assets/images/milk_withdrawal_one.png';
+import MilkWithdrawalSeven from '@assets/images/milk_withdrawal_seven.png';
+import MilkWithdrawalSix from '@assets/images/milk_withdrawal_six.png';
+import MilkWithdrawalThree from '@assets/images/milk_withdrawal_three.png';
+import MilkWithdrawalTwo from '@assets/images/milk_withdrawal_two.png';
 
 const HowToBreastfeed: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

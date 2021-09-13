@@ -5,14 +5,14 @@ import { useRef, useState } from 'react';
 import { Dimensions, FlatList } from 'react-native';
 import * as Yup from 'yup';
 
-import FormTextInput from '../../../components/FormTextInput';
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
-import SecondaryButton from '../../../components/SecondaryButton';
-import { useAuth } from '../../../contexts/auth';
-import leaveResearch from '../../../services/leaveResearch';
+import FormTextInput from 'components/FormTextInput';
+import MainButton from 'components/MainButton';
+import Modal from 'components/Modal';
+import SecondaryButton from 'components/SecondaryButton';
+import { useAuth } from 'contexts/auth';
+import leaveResearch from 'services/leaveResearch';
 
-import type { RootStackProps } from '../../../routes/app';
+import type { RootStackProps } from 'routes/app';
 
 import {
   BoldMainText,

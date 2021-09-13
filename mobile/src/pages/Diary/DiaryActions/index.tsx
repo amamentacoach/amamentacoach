@@ -1,11 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 
-import createGenericSurveyPage from '../../../components/GenericSurveyPage';
-import Survey from '../../../components/Survey';
-import theme from '../../../config/theme';
+import createGenericSurveyPage from 'components/GenericSurveyPage';
+import Survey from 'components/Survey';
+import theme from 'config/theme';
 
-import type { RootStackProps } from '../../../routes/app';
+import type { RootStackProps } from 'routes/app';
 
 const DiaryActions: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

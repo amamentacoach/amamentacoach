@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import {
   getWeeklyReport,
   WeeklyReport as IWeeklyReport,
-} from '../../../../services/report';
+} from 'services/report';
 
 import {
   Answer,

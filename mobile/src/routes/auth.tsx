@@ -1,18 +1,18 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import i18n from 'i18n-js';
 
-import { useIsFirstRun } from '../contexts/firstRun';
-import AcceptTermsOfService from '../pages/Auth/AcceptTermsOfService';
-import BabyForm from '../pages/Auth/BabyForm';
-import ForgotPassword from '../pages/Auth/ForgotPassword';
-import Introduction from '../pages/Auth/Introduction';
-import Login from '../pages/Auth/Login';
-import MotherForm from '../pages/Auth/MotherForm';
-import SignUp from '../pages/Auth/SignUp';
+import { useIsFirstRun } from 'contexts/firstRun';
+import AcceptTermsOfService from 'pages/Auth/AcceptTermsOfService';
+import BabyForm from 'pages/Auth/BabyForm';
+import ForgotPassword from 'pages/Auth/ForgotPassword';
+import Introduction from 'pages/Auth/Introduction';
+import Login from 'pages/Auth/Login';
+import MotherForm from 'pages/Auth/MotherForm';
+import SignUp from 'pages/Auth/SignUp';
 
-import type { BabySignUpInfo, MotherSignUpInfo } from '../services/auth';
 import type { RouteProp } from '@react-navigation/core';
 import type { StackNavigationProp } from '@react-navigation/stack';
+import type { BabySignUpInfo, MotherSignUpInfo } from 'services/auth';
 
 type AuthStackParamList = {
   BabyForm: {

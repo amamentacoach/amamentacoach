@@ -4,12 +4,12 @@ import i18n from 'i18n-js';
 import { useState } from 'react';
 import * as Yup from 'yup';
 
-import FormDateInput from '../../../components/FormDateInput';
-import FormTextInput from '../../../components/FormTextInput';
-import MainButton from '../../../components/MainButton';
-import { createExtractionEntry } from '../../../services/diaryRegistry';
+import FormDateInput from 'components/FormDateInput';
+import FormTextInput from 'components/FormTextInput';
+import MainButton from 'components/MainButton';
+import { createExtractionEntry } from 'services/diaryRegistry';
 
-import type { RootStackProps } from '../../../routes/app';
+import type { RootStackProps } from 'routes/app';
 
 import {
   ErrorContainer,
@@ -26,8 +26,8 @@ import {
   SubmitButtonContainer,
 } from './styles';
 
-import CheckedBox from '../../../../assets/images/icons/checkbox_checked.svg';
-import UncheckedBox from '../../../../assets/images/icons/checkbox_unchecked.svg';
+import CheckedBox from '@assets/images/icons/checkbox_checked.svg';
+import UncheckedBox from '@assets/images/icons/checkbox_unchecked.svg';
 
 interface FormValues {
   time: string;

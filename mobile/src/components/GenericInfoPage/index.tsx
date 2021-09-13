@@ -1,9 +1,9 @@
 import i18n from 'i18n-js';
 
-import ImageWrapper from '../ImageWrapper';
-import ProgressDots from '../ProgressDots';
+import ImageWrapper from 'components/ImageWrapper';
+import ProgressDots from 'components/ProgressDots';
 
-import type { InfoPageModelProps } from '../InformationPages';
+import type { InfoPageModelProps } from 'components/InformationPages';
 
 import {
   ContentHeaderText,

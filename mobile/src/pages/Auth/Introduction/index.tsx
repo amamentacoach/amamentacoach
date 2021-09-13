@@ -2,14 +2,16 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 import { hide } from 'react-native-bootsplash';
 
-import ImageWrapper from '../../../components/ImageWrapper';
-import InformationPages, {
+import ImageWrapper from 'components/ImageWrapper';
+import InformationPages from 'components/InformationPages';
+import MainButton from 'components/MainButton';
+import ProgressDots from 'components/ProgressDots';
+import { useIsFirstRun } from 'contexts/firstRun';
+
+import type {
   InfoPageItem,
   InfoPageModelProps,
-} from '../../../components/InformationPages';
-import MainButton from '../../../components/MainButton';
-import ProgressDots from '../../../components/ProgressDots';
-import { useIsFirstRun } from '../../../contexts/firstRun';
+} from 'components/InformationPages';
 
 import {
   ContentText,
@@ -22,10 +24,10 @@ import {
   SkipButtonText,
 } from './styles';
 
-import IntroChart from '../../../../assets/images/intro_chart.svg';
-import IntroDiaryHeart from '../../../../assets/images/intro_diary_pencil.svg';
-import IntroMobile from '../../../../assets/images/intro_mobile.svg';
-import IntroMother from '../../../../assets/images/intro_mother.svg';
+import IntroChart from '@assets/images/intro_chart.svg';
+import IntroDiaryHeart from '@assets/images/intro_diary_pencil.svg';
+import IntroMobile from '@assets/images/intro_mobile.svg';
+import IntroMother from '@assets/images/intro_mother.svg';
 
 const Introduction: React.FC = () => {
   const { setPersistentNotFirstRun } = useIsFirstRun();

@@ -1,9 +1,9 @@
 import i18n from 'i18n-js';
 
-import UploadPhotoScreen from '../../../components/UploadPhotoScreen';
-import { uploadBabyPhoto } from '../../../services/uploadPhoto';
+import UploadPhotoScreen from 'components/UploadPhotoScreen';
+import { uploadBabyPhoto } from 'services/uploadPhoto';
 
-import HeartArrow from '../../../../assets/images/heart_arrow.svg';
+import HeartArrow from '@assets/images/heart_arrow.svg';
 
 const UploadBabyPhoto: React.FC = () => {
   return (

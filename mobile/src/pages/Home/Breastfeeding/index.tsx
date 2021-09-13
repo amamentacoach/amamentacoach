@@ -1,17 +1,17 @@
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 
-import OptionsList from '../../../components/OptionList';
+import OptionsList from 'components/OptionList';
 
-import type { OptionListEntry } from '../../../components/OptionList';
-import type { RootStackProps } from '../../../routes/app';
+import type { OptionListEntry } from 'components/OptionList';
+import type { RootStackProps } from 'routes/app';
 
 import { HeaderText, ScrollView } from './styles';
 
-import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
-import WithdrawalCalendar from '../../../../assets/images/withdrawal_calendar.svg';
-import WithdrawalClock from '../../../../assets/images/withdrawal_clock.svg';
-import WithdrawalQuestion from '../../../../assets/images/withdrawal_question.svg';
+import PrematureBreastfeed from '@assets/images/premature_breastfeed.svg';
+import WithdrawalCalendar from '@assets/images/withdrawal_calendar.svg';
+import WithdrawalClock from '@assets/images/withdrawal_clock.svg';
+import WithdrawalQuestion from '@assets/images/withdrawal_question.svg';
 
 const Breastfeeding: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

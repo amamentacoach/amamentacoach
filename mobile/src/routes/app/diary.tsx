@@ -1,19 +1,19 @@
 import i18n from 'i18n-js';
 
-import theme from '../../config/theme';
-import DiaryActions from '../../pages/Diary/DiaryActions';
-import DiaryBaby from '../../pages/Diary/DiaryBaby';
-import DiaryBreastfeed from '../../pages/Diary/DiaryBreastfeed';
-import DiaryRegistry from '../../pages/Diary/DiaryRegistry';
-import Feelings from '../../pages/Diary/Feelings';
-import Goals from '../../pages/Diary/Goals';
-import HelpReceived from '../../pages/Diary/HelpReceived';
-import NewBreastfeedEntry from '../../pages/Diary/NewBreastfeedEntry';
-import NewDiaryRegistry from '../../pages/Diary/NewDiaryRegistry';
-import Report from '../../pages/Diary/Report';
-import createColorHeader from '../config/colorHeader';
+import theme from 'config/theme';
+import DiaryActions from 'pages/Diary/DiaryActions';
+import DiaryBaby from 'pages/Diary/DiaryBaby';
+import DiaryBreastfeed from 'pages/Diary/DiaryBreastfeed';
+import DiaryRegistry from 'pages/Diary/DiaryRegistry';
+import Feelings from 'pages/Diary/Feelings';
+import Goals from 'pages/Diary/Goals';
+import HelpReceived from 'pages/Diary/HelpReceived';
+import NewBreastfeedEntry from 'pages/Diary/NewBreastfeedEntry';
+import NewDiaryRegistry from 'pages/Diary/NewDiaryRegistry';
+import Report from 'pages/Diary/Report';
+import createColorHeader from 'routes/config/colorHeader';
 
-import type { StackScreens } from '../config/getNavigatorType';
+import type { StackScreens } from 'routes/config/getNavigatorType';
 
 const CreateDiaryRoutes = (Stack: StackScreens) => {
   const headerBabyPurple = createColorHeader(theme.babyPurple);
@@ -77,7 +77,7 @@ const CreateDiaryRoutes = (Stack: StackScreens) => {
       key="Report"
       name="Report"
       component={Report}
-      options={{ title: i18n.t('DiaryMenuPage.Option5') }}
+      options={{ title: i18n.t('DiaryMenuPage.Option8') }}
     />,
   ];
 };

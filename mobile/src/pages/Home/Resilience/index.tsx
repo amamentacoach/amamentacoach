@@ -5,10 +5,10 @@ import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { ThemeContext } from 'styled-components';
 
-import OptionsList from '../../../components/OptionList';
+import OptionsList from 'components/OptionList';
 
-import type { OptionListEntry } from '../../../components/OptionList';
-import type { RootStackProps } from '../../../routes/app';
+import type { OptionListEntry } from 'components/OptionList';
+import type { RootStackProps } from 'routes/app';
 
 import {
   Header,
@@ -19,10 +19,10 @@ import {
   VideoContainer,
 } from './styles';
 
-import ErlenmeyerGreen from '../../../../assets/images/erlenmeyer_green.svg';
-import ErlenmeyerPink from '../../../../assets/images/erlenmeyer_pink.svg';
-import ErlenmeyerPrimary from '../../../../assets/images/erlenmeyer_primary.svg';
-import ErlenmeyerYellow from '../../../../assets/images/erlenmeyer_yellow.svg';
+import ErlenmeyerGreen from '@assets/images/erlenmeyer_green.svg';
+import ErlenmeyerPink from '@assets/images/erlenmeyer_pink.svg';
+import ErlenmeyerPrimary from '@assets/images/erlenmeyer_primary.svg';
+import ErlenmeyerYellow from '@assets/images/erlenmeyer_yellow.svg';
 
 const Resilience: React.FC = () => {
   const { height } = Dimensions.get('window');

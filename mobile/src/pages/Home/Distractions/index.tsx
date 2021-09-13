@@ -2,16 +2,16 @@ import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { Linking } from 'react-native';
 
-import OptionsList from '../../../components/OptionList';
+import OptionsList from 'components/OptionList';
 
-import type { OptionListEntry } from '../../../components/OptionList';
-import type { RootStackProps } from '../../../routes/app';
+import type { OptionListEntry } from 'components/OptionList';
+import type { RootStackProps } from 'routes/app';
 
 import { HeaderText, ScrollView } from './styles';
 
-import Crosswords from '../../../../assets/images/crosswords.svg';
-import Music from '../../../../assets/images/music.svg';
-import Puzzle from '../../../../assets/images/puzzle.svg';
+import Crosswords from '@assets/images/crosswords.svg';
+import Music from '@assets/images/music.svg';
+import Puzzle from '@assets/images/puzzle.svg';
 
 const Distractions: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

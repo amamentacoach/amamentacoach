@@ -6,11 +6,11 @@ import { I18nManager, StatusBar } from 'react-native';
 import * as RNLocalize from 'react-native-localize';
 import { ThemeProvider } from 'styled-components/native';
 
-import theme from './config/theme';
-import { AuthProvider } from './contexts/auth';
-import { IsFirstRunProvider } from './contexts/firstRun';
-import { dateFNSSetLocale } from './lib/date-fns';
-import Routes from './routes/routes';
+import theme from 'config/theme';
+import { AuthProvider } from 'contexts/auth';
+import { IsFirstRunProvider } from 'contexts/firstRun';
+import { dateFNSSetLocale } from 'lib/date-fns';
+import Routes from 'routes/routes';
 
 const App: React.FC = () => {
   const [isLocalizationLoaded, setIsLocalizationLoaded] = useState(false);
@@ -20,11 +20,11 @@ const App: React.FC = () => {
       [key: string]: { getTranslation: () => object; dateLocale: Locale };
     } = {
       pt: {
-        getTranslation: () => require('../assets/locales/pt.json'),
+        getTranslation: () => require('@assets/locales/pt.json'),
         dateLocale: ptBR,
       },
       en: {
-        getTranslation: () => require('../assets/locales/en.json'),
+        getTranslation: () => require('@assets/locales/en.json'),
         dateLocale: enCA,
       },
     };

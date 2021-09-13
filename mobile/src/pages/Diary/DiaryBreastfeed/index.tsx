@@ -8,14 +8,14 @@ import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
-import DiaryBreastfeedEntry from '../../../components/DiaryBreastfeedEntry';
-import MainButton from '../../../components/MainButton';
-import { useAuth } from '../../../contexts/auth';
-import { dateFormatVerbose } from '../../../lib/date-fns';
-import { listBreastfeedEntries } from '../../../services/diaryRegistry';
+import DiaryBreastfeedEntry from 'components/DiaryBreastfeedEntry';
+import MainButton from 'components/MainButton';
+import { useAuth } from 'contexts/auth';
+import { dateFormatVerbose } from 'lib/date-fns';
+import { listBreastfeedEntries } from 'services/diaryRegistry';
 
-import type { RootRouteProp, RootStackProps } from '../../../routes/app';
-import type { BreastfeedEntry } from '../../../services/diaryRegistry';
+import type { RootRouteProp, RootStackProps } from 'routes/app';
+import type { BreastfeedEntry } from 'services/diaryRegistry';
 
 import { Container, DateText, ListContainer, ScrollView } from './styles';
 

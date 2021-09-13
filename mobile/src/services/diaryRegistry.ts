@@ -1,4 +1,4 @@
-import { format } from '../lib/date-fns';
+import { format } from 'lib/date-fns';
 
 import api from './api';
 

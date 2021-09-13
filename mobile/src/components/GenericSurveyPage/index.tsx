@@ -1,6 +1,6 @@
-import FormRadioGroupInput from '../FormRadioGroup';
-import MainButton from '../MainButton';
-import { SurveyPage } from '../Survey';
+import FormRadioGroupInput from 'components/FormRadioGroup';
+import MainButton from 'components/MainButton';
+import { SurveyPage } from 'components/Survey';
 
 import type { SvgProps } from 'react-native-svg';
 

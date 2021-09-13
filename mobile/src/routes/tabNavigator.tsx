@@ -1,18 +1,18 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import i18n from 'i18n-js';
 
-import theme from '../config/theme';
-import { useIsFirstRun } from '../contexts/firstRun';
-import DiaryIntroduction from '../pages/Diary/DiaryIntroduction';
-import DiaryMenu from '../pages/Diary/Menu';
-import HomeMenu from '../pages/Home/Menu';
-import ProfileMenu from '../pages/Profile/Menu';
-import SurveyMenu from '../pages/Survey/Menu';
+import theme from 'config/theme';
+import { useIsFirstRun } from 'contexts/firstRun';
+import DiaryIntroduction from 'pages/Diary/DiaryIntroduction';
+import DiaryMenu from 'pages/Diary/Menu';
+import HomeMenu from 'pages/Home/Menu';
+import ProfileMenu from 'pages/Profile/Menu';
+import SurveyMenu from 'pages/Survey/Menu';
 
-import DiaryIcon from '../../assets/images/icons/ic_diary_grey.svg';
-import HomeIcon from '../../assets/images/icons/ic_home_grey.svg';
-import ProfileIcon from '../../assets/images/icons/ic_profile_grey.svg';
-import SurveyIcon from '../../assets/images/icons/ic_survey_grey.svg';
+import DiaryIcon from '@assets/images/icons/ic_diary_grey.svg';
+import HomeIcon from '@assets/images/icons/ic_home_grey.svg';
+import ProfileIcon from '@assets/images/icons/ic_profile_grey.svg';
+import SurveyIcon from '@assets/images/icons/ic_survey_grey.svg';
 
 const TabNavigator: React.FC = () => {
   const { isFirstRun } = useIsFirstRun();

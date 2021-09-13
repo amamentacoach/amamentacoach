@@ -1,9 +1,9 @@
 import {
   AdultTermsOfService,
   MinorTermsOfService,
-} from '../../../components/TermsOfService';
-import { useAuth } from '../../../contexts/auth';
-import { differenceInYears } from '../../../lib/date-fns';
+} from 'components/TermsOfService';
+import { useAuth } from 'contexts/auth';
+import { differenceInYears } from 'lib/date-fns';
 
 import { ScrollView, Container } from './styles';
 

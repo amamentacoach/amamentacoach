@@ -1,12 +1,9 @@
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
 
-import DiaryBreastfeedEntry from '../../../../components/DiaryBreastfeedEntry';
-import DiaryRegistryEntry from '../../../../components/DiaryRegistryEntry';
-import {
-  DailyReport as IDailyReport,
-  getDailyReport,
-} from '../../../../services/report';
+import DiaryBreastfeedEntry from 'components/DiaryBreastfeedEntry';
+import DiaryRegistryEntry from 'components/DiaryRegistryEntry';
+import { DailyReport as IDailyReport, getDailyReport } from 'services/report';
 
 import { Container, EntryContainer, Header } from './styles';
 

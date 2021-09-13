@@ -3,7 +3,7 @@ import { useContext, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
-import FormPickerInput from '../../../components/FormPickerInput';
+import FormPickerInput from 'components/FormPickerInput';
 
 import DailyReport from './DailyReport';
 import { Container, ScrollView } from './styles';

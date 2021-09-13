@@ -4,16 +4,13 @@ import i18n from 'i18n-js';
 import { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 
-import { useAuth } from '../../contexts/auth';
-import { answerQuestion } from '../../services/survey';
-import {
-  getSurveyQuestions,
-  SurveyQuestion,
-} from '../../utils/getSurveyQuestions';
-import Modal from '../Modal';
+import Modal from 'components/Modal';
+import { useAuth } from 'contexts/auth';
+import { answerQuestion } from 'services/survey';
+import { getSurveyQuestions, SurveyQuestion } from 'utils/getSurveyQuestions';
 
-import type { RootStackProps } from '../../routes/app';
-import type { AnswerFeedback } from '../../services/survey';
+import type { RootStackProps } from 'routes/app';
+import type { AnswerFeedback } from 'services/survey';
 
 import {
   ContentContainer,

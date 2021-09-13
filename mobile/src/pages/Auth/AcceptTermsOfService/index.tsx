@@ -2,16 +2,16 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useState } from 'react';
 
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
+import MainButton from 'components/MainButton';
+import Modal from 'components/Modal';
 import {
   AdultTermsOfService,
   MinorTermsOfService,
-} from '../../../components/TermsOfService';
-import { differenceInYears } from '../../../lib/date-fns';
-import { signUpBaby, signUpMother } from '../../../services/auth';
+} from 'components/TermsOfService';
+import { differenceInYears } from 'lib/date-fns';
+import { signUpBaby, signUpMother } from 'services/auth';
 
-import type { AuthRouteProp, AuthStackProps } from '../../../routes/auth';
+import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
 
 import {
   FormContainer,

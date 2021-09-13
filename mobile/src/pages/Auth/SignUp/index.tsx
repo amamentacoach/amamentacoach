@@ -4,10 +4,10 @@ import i18n from 'i18n-js';
 import { View } from 'react-native';
 import * as Yup from 'yup';
 
-import FormTextInput from '../../../components/FormTextInput';
-import MainButton from '../../../components/MainButton';
+import FormTextInput from 'components/FormTextInput';
+import MainButton from 'components/MainButton';
 
-import type { AuthStackProps } from '../../../routes/auth';
+import type { AuthStackProps } from 'routes/auth';
 
 import {
   FormContainer,

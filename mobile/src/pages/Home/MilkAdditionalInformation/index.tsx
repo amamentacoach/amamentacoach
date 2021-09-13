@@ -1,12 +1,12 @@
 import i18n from 'i18n-js';
 
-import ImageWrapper from '../../../components/ImageWrapper';
+import ImageWrapper from 'components/ImageWrapper';
 
 import { ContentText, ContentWrapper, ScrollView } from './styles';
 
-import MilkAdditionalInfoOne from '../../../../assets/images/milk_additional_info_one.png';
-import MilkAdditionalInfoThree from '../../../../assets/images/milk_additional_info_three.png';
-import MilkAdditionalInfoTwo from '../../../../assets/images/milk_additional_info_two.png';
+import MilkAdditionalInfoOne from '@assets/images/milk_additional_info_one.png';
+import MilkAdditionalInfoThree from '@assets/images/milk_additional_info_three.png';
+import MilkAdditionalInfoTwo from '@assets/images/milk_additional_info_two.png';
 
 const MilkAdditionalInformation: React.FC = () => {
   return (

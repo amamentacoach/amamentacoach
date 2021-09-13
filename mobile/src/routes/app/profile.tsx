@@ -1,11 +1,11 @@
 import i18n from 'i18n-js';
 
-import LeaveResearch from '../../pages/Profile/LeaveResearch';
-import MenuTermsOfService from '../../pages/Profile/MenuTermsOfService';
-import NewPassword from '../../pages/Profile/NewPassword';
-import ReadTermsOfService from '../../pages/Profile/ReadTermsOfService';
+import LeaveResearch from 'pages/Profile/LeaveResearch';
+import MenuTermsOfService from 'pages/Profile/MenuTermsOfService';
+import NewPassword from 'pages/Profile/NewPassword';
+import ReadTermsOfService from 'pages/Profile/ReadTermsOfService';
 
-import type { StackScreens } from '../config/getNavigatorType';
+import type { StackScreens } from 'routes/config/getNavigatorType';
 
 const CreateProfileRoutes = (Stack: StackScreens) => {
   return [

@@ -1,13 +1,13 @@
 import i18n from 'i18n-js';
 
-import ImageWrapper from '../../../components/ImageWrapper';
+import ImageWrapper from 'components/ImageWrapper';
 import InformationPages, {
   InfoPageModelProps,
   InfoPageItem,
-} from '../../../components/InformationPages';
-import MainButton from '../../../components/MainButton';
-import ProgressDots from '../../../components/ProgressDots';
-import { useIsFirstRun } from '../../../contexts/firstRun';
+} from 'components/InformationPages';
+import MainButton from 'components/MainButton';
+import ProgressDots from 'components/ProgressDots';
+import { useIsFirstRun } from 'contexts/firstRun';
 
 import {
   ColoredText,
@@ -22,7 +22,7 @@ import {
   LastPageButtonWrapper,
 } from './styles';
 
-import SurveyPrimary from '../../../../assets/images/icons/survey_primary.svg';
+import SurveyPrimary from '@assets/images/icons/survey_primary.svg';
 
 const IntroductionStatusForm: React.FC = () => {
   const { setPersistentNotFirstRun } = useIsFirstRun();

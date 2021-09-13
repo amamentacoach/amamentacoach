@@ -7,13 +7,13 @@ import { hide } from 'react-native-bootsplash';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Yup from 'yup';
 
-import FormTextInput from '../../../components/FormTextInput';
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
-import { useAuth } from '../../../contexts/auth';
-import { LoginStatus } from '../../../services/auth';
+import FormTextInput from 'components/FormTextInput';
+import MainButton from 'components/MainButton';
+import Modal from 'components/Modal';
+import { useAuth } from 'contexts/auth';
+import { LoginStatus } from 'services/auth';
 
-import type { AuthStackProps } from '../../../routes/auth';
+import type { AuthStackProps } from 'routes/auth';
 
 import {
   ForgotPasswordText,
@@ -26,7 +26,7 @@ import {
   SubmitButtonContainer,
 } from './styles';
 
-import Logo from '../../../../assets/images/logo_primary.png';
+import Logo from '@assets/images/logo_primary.png';
 
 interface FormValues {
   email: string;

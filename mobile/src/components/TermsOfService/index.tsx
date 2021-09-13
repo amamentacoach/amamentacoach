@@ -1,7 +1,7 @@
 import i18n from 'i18n-js';
 import { View } from 'react-native';
 
-import { format } from '../../lib/date-fns';
+import { format } from 'lib/date-fns';
 
 import { BoldMainText, Container, MainText, Title } from './styles';
 
