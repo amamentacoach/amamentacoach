@@ -981,16 +981,12 @@ routes.get('/politica-de-privacidade',(req,res)=>{
  * @apiParamExample {json} Exemplo Request:
  *      [
  *          {
- *              "acao" : "Teste1",
- *              "created_at": "2021-08-23T19:22:27.897+00:00"
- *          },
- *          {
- *              "acao" : "Teste2",
- *              "created_at": "2021-08-23T19:22:27.897+00:00"
- *          },
- *          {
- *              "acao" : "Teste3",
- *              "created_at": "2021-08-23T19:22:27.897+00:00"
+ *              "action":0,
+ *              "context":{
+ *                  "screen":0,
+ *                  "target":"SUBMIT_BTN"
+ *              },
+ *              "created_at": "2021-09-15T11:38:23.846Z"
  *          }
  *      ]
  *

@@ -28,7 +28,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Bebês",
     "name": "GetBebes"
   },
@@ -61,7 +61,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Bebês",
     "name": "GetBebesAlta"
   },
@@ -102,7 +102,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Bebês",
     "name": "PostBebes"
   },
@@ -143,7 +143,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Bebês",
     "name": "PostBebesIdAlta"
   },
@@ -176,7 +176,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Canal_de_comunicacao",
     "name": "GetDuvidasFrequentes"
   },
@@ -209,7 +209,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Canal_de_comunicacao",
     "name": "PostDuvidas"
   },
@@ -252,7 +252,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Controle_de_Acessos",
     "name": "PostAcessosApp"
   },
@@ -276,7 +276,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Controle_de_Acessos",
     "name": "PostAcessosDiario"
   },
@@ -300,7 +300,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Controle_de_Acessos",
     "name": "PostAcessosMensagens"
   },
@@ -324,7 +324,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Controle_de_Acessos",
     "name": "PostAcessosOrdenha"
   },
@@ -348,7 +348,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Controle_de_Acessos",
     "name": "PostAcessosVideos"
   },
@@ -372,7 +372,7 @@ define({ "api": [
       }
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Controle_de_Acessos",
     "name": "PostAcessosVideosInicio"
   },
@@ -392,7 +392,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Enquetes",
     "name": "GetAmamentacaoResultados"
   },
@@ -425,7 +425,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Enquetes",
     "name": "PostResponderAlimentacao"
   },
@@ -467,7 +467,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Enquetes",
     "name": "PostResponderEscala"
   },
@@ -509,7 +509,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Enquetes",
     "name": "PostResponderPergunta_id"
   },
@@ -542,7 +542,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Mamadas",
     "name": "GetBebesBebe_idMamadas"
   },
@@ -575,7 +575,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Mamadas",
     "name": "GetBebesBebe_idMamadasDate"
   },
@@ -608,7 +608,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Mamadas",
     "name": "PostBebesBebe_idMamadas"
   },
@@ -654,7 +654,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Mensagens",
     "name": "GetMensagens"
   },
@@ -687,7 +687,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Mensagens",
     "name": "PostMensagens"
   },
@@ -720,7 +720,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Mães",
     "name": "GetMaes"
   },
@@ -753,7 +753,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Mães",
     "name": "PostAlterarsenha"
   },
@@ -773,7 +773,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Mães",
     "name": "PostEsqueceusenha"
   },
@@ -802,7 +802,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Mães",
     "name": "PostLogin"
   },
@@ -830,7 +830,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Mães",
     "name": "PostMaes"
   },
@@ -863,7 +863,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Mães",
     "name": "PostMaesRevogar"
   },
@@ -896,7 +896,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Mães",
     "name": "PostSubscribe"
   },
@@ -907,7 +907,7 @@ define({ "api": [
     "description": "<p>Envia notificacao para todas as maes que nao preencheram o diario nesse dia</br></p>",
     "group": "Notificação",
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Notificação",
     "name": "GetEnviarnotificacoes"
   },
@@ -940,7 +940,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Ordenhas",
     "name": "GetMaesOrdenhas"
   },
@@ -973,7 +973,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Ordenhas",
     "name": "GetMaesOrdenhasDate"
   },
@@ -1006,7 +1006,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Ordenhas",
     "name": "PostMaesOrdenhas"
   },
@@ -1039,7 +1039,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Relatórios",
     "name": "GetRelatoriosDiario"
   },
@@ -1072,7 +1072,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Relatórios",
     "name": "GetRelatoriosSemanal"
   },
@@ -1099,13 +1099,13 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "[\n    {\n        \"acao\" : \"Teste1\",\n        \"created_at\": \"2021-08-23T19:22:27.897+00:00\"\n    },\n    {\n        \"acao\" : \"Teste2\",\n        \"created_at\": \"2021-08-23T19:22:27.897+00:00\"\n    },\n    {\n        \"acao\" : \"Teste3\",\n        \"created_at\": \"2021-08-23T19:22:27.897+00:00\"\n    }\n]",
+          "content": "[\n    {\n        \"action\":0,\n        \"context\":{\n            \"screen\":0,\n            \"target\":\"SUBMIT_BTN\"\n        },\n        \"created_at\": \"2021-09-15T11:38:23.846Z\"\n    }\n]",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Telemetria",
     "name": "PostTelemetria"
   },
@@ -1161,7 +1161,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Uploads",
     "name": "PostUploadBebe"
   },
@@ -1217,7 +1217,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Uploads",
     "name": "PostUploadMae"
   },
@@ -1273,7 +1273,7 @@ define({ "api": [
       ]
     },
     "version": "0.0.0",
-    "filename": "src/routes.ts",
+    "filename": "./src/routes.ts",
     "groupTitle": "Uploads",
     "name": "PostUploadPai"
   }
