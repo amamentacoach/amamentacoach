@@ -1,15 +1,28 @@
-import { useNavigation } from '@react-navigation/native';
+import { Action, AppScreen } from '@common/Telemetria';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useEffect } from 'react';
 
 import { useAuth } from 'contexts/auth';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 
 import { Line, OptionButton, OptionText, ScrollView } from './styles';
 
-const Profile: React.FC = () => {
+const ProfileMenu: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
+  const isFocused = useIsFocused();
   const { signOut } = useAuth();
+
+  useEffect(() => {
+    if (isFocused) {
+      createTelemetryAction({
+        action: Action.Opened,
+        context: { screen: AppScreen.ProfileMenu },
+      });
+    }
+  }, [isFocused]);
 
   return (
     <ScrollView>
@@ -29,4 +42,4 @@ const Profile: React.FC = () => {
   );
 };
 
-export default Profile;
+export default ProfileMenu;

@@ -1,3 +1,4 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import {
   useIsFocused,
   useNavigation,
@@ -13,6 +14,7 @@ import MainButton from 'components/MainButton';
 import { useAuth } from 'contexts/auth';
 import { dateFormatVerbose } from 'lib/date-fns';
 import { listBreastfeedEntries } from 'services/diaryRegistry';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootRouteProp, RootStackProps } from 'routes/app';
 import type { BreastfeedEntry } from 'services/diaryRegistry';
@@ -30,6 +32,14 @@ const DiaryBreastfeed: React.FC = () => {
 
   const selectedDate = params?.date ? new Date(params?.date) : new Date();
 
+  async function handleNewBreastfeedEntry(target: string) {
+    await createTelemetryAction({
+      action: Action.Pressed,
+      context: { screen: AppScreen.DiaryBreastfeed, target },
+    });
+    navigation.navigate('NewBreastfeedEntry');
+  }
+
   useEffect(() => {
     async function fetchRegistries() {
       if (motherInfo.babies) {
@@ -46,6 +56,10 @@ const DiaryBreastfeed: React.FC = () => {
     }
     if (isFocused) {
       fetchRegistries();
+      createTelemetryAction({
+        action: Action.Opened,
+        context: { screen: AppScreen.DiaryBreastfeed },
+      });
     }
   }, [isFocused]);
 
@@ -68,7 +82,11 @@ const DiaryBreastfeed: React.FC = () => {
         </ListContainer>
         <MainButton
           text={i18n.t('DiaryBreastfeedPage.CreateBreastfeedingEntry')}
-          onPress={() => navigation.navigate('NewBreastfeedEntry')}
+          onPress={() =>
+            handleNewBreastfeedEntry(
+              'DiaryBreastfeedPage.CreateBreastfeedingEntry',
+            )
+          }
         />
       </Container>
     </ScrollView>

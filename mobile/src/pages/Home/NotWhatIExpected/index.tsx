@@ -1,11 +1,14 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useEffect } from 'react';
 
 import ImageWrapper from 'components/ImageWrapper';
 import InformationPages from 'components/InformationPages';
 import MainButton from 'components/MainButton';
 import SecondaryButton from 'components/SecondaryButton';
 import theme from 'config/theme';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type {
   InfoPageModelProps,
@@ -66,6 +69,13 @@ const NotWhatIExpected: React.FC = () => {
       ],
     },
   ];
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.NotWhatIExpected },
+    });
+  }, []);
 
   const InfoModel: React.FC<InfoPageModelProps> = ({
     pagesLength,

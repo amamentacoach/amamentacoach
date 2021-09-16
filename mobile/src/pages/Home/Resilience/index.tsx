@@ -1,11 +1,13 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { ThemeContext } from 'styled-components';
 
 import OptionsList from 'components/OptionList';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
@@ -52,6 +54,13 @@ const Resilience: React.FC = () => {
       onPress: () => navigation.navigate('UploadMotherPhoto'),
     },
   ];
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.Resilience },
+    });
+  }, []);
 
   return (
     <ScrollView>

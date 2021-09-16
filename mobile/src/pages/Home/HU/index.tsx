@@ -1,7 +1,10 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useEffect } from 'react';
 
 import OptionsList from 'components/OptionList';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
@@ -29,6 +32,13 @@ const HU: React.FC = () => {
         navigation.navigate('VideoPage', { videos: ['CLOZL3N_QXs'] }),
     },
   ];
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.HU },
+    });
+  }, []);
 
   return (
     <ScrollView>

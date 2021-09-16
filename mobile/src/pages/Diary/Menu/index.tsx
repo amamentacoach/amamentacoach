@@ -1,14 +1,14 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
 
 import Modal from 'components/Modal';
 import OptionsList from 'components/OptionList';
 import { useAuth } from 'contexts/auth';
-import { useIsFirstRun } from 'contexts/firstRun';
-import { storageIsToday, dateFormatVerbose } from 'lib/date-fns';
-import { setDiaryPageOpened } from 'services/telemetry';
+import { dateFormatVerbose, storageIsToday } from 'lib/date-fns';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
@@ -33,8 +33,7 @@ import Report from '@assets/images/report.svg';
 const DiaryMenu: React.FC = () => {
   const { motherInfo } = useAuth();
   const navigation = useNavigation<RootStackProps>();
-  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
-
+  const isFocused = useIsFocused();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -128,19 +127,21 @@ const DiaryMenu: React.FC = () => {
     });
   }
 
-  useEffect(() => {
-    if (isFirstRun.temporary.diary) {
-      setDiaryPageOpened();
-      setTemporaryNotFirstRun('diary');
-    }
-  }, []);
-
   function handleDateSelected(date?: Date) {
     setShowCalendar(false);
     if (date) {
       setSelectedDate(new Date(date));
     }
   }
+
+  useEffect(() => {
+    if (isFocused) {
+      createTelemetryAction({
+        action: Action.Opened,
+        context: { screen: AppScreen.DiaryMenu },
+      });
+    }
+  }, [isFocused]);
 
   return (
     <>

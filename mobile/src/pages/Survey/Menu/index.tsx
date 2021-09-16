@@ -1,11 +1,13 @@
-import { useNavigation } from '@react-navigation/native';
+import { Action, AppScreen } from '@common/Telemetria';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Modal from 'components/Modal';
 import OptionsList from 'components/OptionList';
 import { useAuth } from 'contexts/auth';
 import { storageIsToday } from 'lib/date-fns';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
@@ -20,7 +22,7 @@ import SurveysTwo from '@assets/images/surveys_two.svg';
 const SurveyMenu: React.FC = () => {
   const { motherInfo } = useAuth();
   const navigation = useNavigation<RootStackProps>();
-
+  const isFocused = useIsFocused();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   let options: OptionListEntry[] = [
@@ -90,6 +92,15 @@ const SurveyMenu: React.FC = () => {
       },
     ];
   }
+
+  useEffect(() => {
+    if (isFocused) {
+      createTelemetryAction({
+        action: Action.Opened,
+        context: { screen: AppScreen.SurveyMenu },
+      });
+    }
+  }, [isFocused]);
 
   return (
     <>

@@ -32,17 +32,12 @@ const AcceptTermsOfService: React.FC = () => {
 
   async function handleSubmit() {
     setIsSendingForm(true);
-
     const token = await signUpMother(motherInfo);
     if (token === null) {
       setIsErrorModalVisible(true);
       return;
     }
-
-    babiesInfo.forEach(async baby => {
-      await signUpBaby(token, baby);
-    });
-
+    babiesInfo.forEach(async baby => signUpBaby(token, baby));
     setIsSignUpModalVisible(true);
   }
 

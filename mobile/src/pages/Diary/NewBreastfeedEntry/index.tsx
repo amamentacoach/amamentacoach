@@ -1,7 +1,8 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 
 import FormDateInput from 'components/FormDateInput';
@@ -10,6 +11,7 @@ import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import { useAuth } from 'contexts/auth';
 import { createBreastfeedEntry } from 'services/diaryRegistry';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 
@@ -39,7 +41,7 @@ interface FormValues {
   breastRight: string;
 }
 
-const NewDiaryRegistry: React.FC = () => {
+const NewBreastfeedEntry: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const { motherInfo } = useAuth();
   const [isSendingForm, setIsSendingForm] = useState(false);
@@ -110,12 +112,27 @@ const NewDiaryRegistry: React.FC = () => {
       parseInt(duration, 10),
       now,
     );
+
     if (status) {
+      await createTelemetryAction({
+        action: Action.Pressed,
+        context: {
+          screen: AppScreen.NewBreastfeedEntry,
+          target: 'Actions.Save',
+        },
+      });
       navigation.navigate('DiaryBreastfeed');
     } else {
       setIsSendingForm(false);
     }
   }
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.NewBreastfeedEntry },
+    });
+  }, []);
 
   return (
     <ScrollView>
@@ -217,4 +234,4 @@ const NewDiaryRegistry: React.FC = () => {
   );
 };
 
-export default NewDiaryRegistry;
+export default NewBreastfeedEntry;

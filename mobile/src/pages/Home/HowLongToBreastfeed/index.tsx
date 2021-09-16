@@ -1,6 +1,9 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import i18n from 'i18n-js';
+import { useEffect } from 'react';
 
 import ImageWrapper from 'components/ImageWrapper';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import {
   ColoredText,
@@ -14,6 +17,13 @@ import Withdrawal1 from '@assets/images/withdrawal_premature_1.png';
 import Withdrawal2 from '@assets/images/withdrawal_premature_2.png';
 
 const HowLongToBreastfeed: React.FC = () => {
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.HowLongToBreastfeed },
+    });
+  }, []);
+
   return (
     <ScrollView>
       <ContentTitleText>

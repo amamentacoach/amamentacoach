@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 import { ImagePickerResponse } from 'react-native-image-picker';
 
-import api from './api';
+import api from 'services/api';
 
 // Retorna um objeto FormData contendo a imagem passada.
 function prepareImageFormData(photo: ImagePickerResponse) {

@@ -1,6 +1,5 @@
 import { format } from 'lib/date-fns';
-
-import api from './api';
+import api from 'services/api';
 
 export interface ExtractionEntry {
   id: number;

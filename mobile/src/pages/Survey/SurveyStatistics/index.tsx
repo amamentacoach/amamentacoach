@@ -1,3 +1,4 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
@@ -6,6 +7,7 @@ import { ActivityIndicator } from 'react-native';
 import PieChart from 'components/PieChart';
 import { RootStackProps } from 'routes/app';
 import { listSurveyStatistics } from 'services/survey';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { SurveyStatistics as ISurveyStatistics } from 'services/survey';
 
@@ -43,14 +45,6 @@ const SurveyStatistics: React.FC = () => {
   }, [navigation]);
 
   useEffect(() => {
-    function navigateToSurveyPage(event: any) {
-      // Impede a ação padrão de retornar a tela anterior.
-      event.preventDefault();
-      navigation.navigate('Survey');
-    }
-    // Faz com que o gesto de retorno carregue a página de enquetes.
-    navigation.addListener('beforeRemove', navigateToSurveyPage);
-
     async function fetchStatistics() {
       const stats = await listSurveyStatistics();
       if (stats) {
@@ -58,7 +52,19 @@ const SurveyStatistics: React.FC = () => {
         setLoading(false);
       }
     }
+    function navigateToSurveyPage(event: any) {
+      // Impede a ação padrão de retornar a tela anterior.
+      event.preventDefault();
+      navigation.navigate('Survey');
+    }
+
+    // Faz com que o gesto de retorno carregue a página de enquetes.
+    navigation.addListener('beforeRemove', navigateToSurveyPage);
     fetchStatistics();
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.SurveyStatistics },
+    });
 
     return () => {
       navigation.removeListener('beforeRemove', navigateToSurveyPage);

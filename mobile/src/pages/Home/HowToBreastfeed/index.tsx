@@ -1,9 +1,12 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useEffect } from 'react';
 
 import ImageWrapper from 'components/ImageWrapper';
 import InformationPages from 'components/InformationPages';
 import ProgressDots from 'components/ProgressDots';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type {
   InfoPageItem,
@@ -122,6 +125,13 @@ const HowToBreastfeed: React.FC = () => {
   function onEnd() {
     navigation.goBack();
   }
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.HowToBreastfeed },
+    });
+  }, []);
 
   const InfoModel: React.FC<InfoPageModelProps> = ({
     flatListRef,

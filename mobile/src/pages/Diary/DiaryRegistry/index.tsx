@@ -1,3 +1,4 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import {
   useIsFocused,
   useNavigation,
@@ -10,10 +11,9 @@ import { ThemeContext } from 'styled-components';
 
 import DiaryRegistryEntry from 'components/DiaryRegistryEntry';
 import MainButton from 'components/MainButton';
-import { useIsFirstRun } from 'contexts/firstRun';
 import { dateFormatVerbose } from 'lib/date-fns';
 import { listExtractionsEntries } from 'services/diaryRegistry';
-import { setExtractionPageOpened } from 'services/telemetry';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootRouteProp, RootStackProps } from 'routes/app';
 import type { ExtractionEntry } from 'services/diaryRegistry';
@@ -24,12 +24,19 @@ const DiaryRegistry: React.FC = () => {
   const { params } = useRoute<RootRouteProp<'DiaryRegistry'>>();
   const themeContext = useContext(ThemeContext);
   const navigation = useNavigation<RootStackProps>();
-  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
   const isFocused = useIsFocused();
   const [registries, setRegistries] = useState<ExtractionEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const selectedDate = params?.date ? new Date(params?.date) : new Date();
+
+  async function handleNewRegistryEntry(target: string) {
+    await createTelemetryAction({
+      action: Action.Pressed,
+      context: { screen: AppScreen.DiaryRegistry, target },
+    });
+    navigation.navigate('NewBreastfeedEntry');
+  }
 
   useEffect(() => {
     async function fetchRegistries() {
@@ -42,10 +49,10 @@ const DiaryRegistry: React.FC = () => {
       fetchRegistries();
     }
 
-    if (isFirstRun.temporary.extraction) {
-      setExtractionPageOpened();
-      setTemporaryNotFirstRun('extraction');
-    }
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.DiaryRegistry },
+    });
   }, [isFocused]);
 
   return (
@@ -66,7 +73,9 @@ const DiaryRegistry: React.FC = () => {
       </ListContainer>
       <MainButton
         text={i18n.t('DiaryRegistryPage.CreateExtractionEntry')}
-        onPress={() => navigation.navigate('NewDiaryRegistry')}
+        onPress={() =>
+          handleNewRegistryEntry('DiaryRegistryPage.CreateExtractionEntry')
+        }
       />
     </Container>
   );

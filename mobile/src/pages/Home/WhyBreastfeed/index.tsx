@@ -1,8 +1,11 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useEffect } from 'react';
 
 import createGenericInfoPage from 'components/GenericInfoPage';
 import InformationPages from 'components/InformationPages';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { InfoPageItem } from 'components/InformationPages';
 import type { RootStackProps } from 'routes/app';
@@ -76,6 +79,13 @@ const WhyBreastfeed: React.FC = () => {
       ],
     },
   ];
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.WhyBreastfeed },
+    });
+  }, []);
 
   return (
     <InformationPages

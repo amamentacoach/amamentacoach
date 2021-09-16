@@ -1,9 +1,12 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useEffect } from 'react';
 import { View } from 'react-native';
 
 import ImageWrapper from 'components/ImageWrapper';
 import OptionsList from 'components/OptionList';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
@@ -36,6 +39,13 @@ const BabySling: React.FC = () => {
         navigation.navigate('VideoPage', { videos: ['wx1ofoCZw9w'] }),
     },
   ];
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.BabySling },
+    });
+  }, []);
 
   return (
     <ScrollView>

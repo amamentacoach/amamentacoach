@@ -1,7 +1,10 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import i18n from 'i18n-js';
+import { useEffect } from 'react';
 import { Linking } from 'react-native';
 
 import OptionsList from 'components/OptionList';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 
@@ -48,6 +51,13 @@ const MusicPlaylists: React.FC = () => {
       },
     },
   ];
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.MusicPlaylists },
+    });
+  }, []);
 
   return (
     <ScrollView>

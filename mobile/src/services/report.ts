@@ -1,4 +1,5 @@
-import api from './api';
+import api from 'services/api';
+
 import { BreastfeedEntry, ExtractionEntry } from './diaryRegistry';
 
 export interface DailyReport {

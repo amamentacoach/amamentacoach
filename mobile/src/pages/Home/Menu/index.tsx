@@ -1,5 +1,6 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
@@ -13,6 +14,7 @@ import { useIsFirstRun } from 'contexts/firstRun';
 import { isToday, storageIsToday } from 'lib/date-fns';
 import { checkBabiesLocation, updateBabyLocation } from 'services/babyLocation';
 import { setHomePageOpened } from 'services/telemetry';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
@@ -57,7 +59,7 @@ interface BabyModalOption {
 const Home: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
-
+  const isFocused = useIsFocused();
   const [babiesData, setBabiesData] = useState<BabyStatus[]>([]);
   const [babyModalVisibility, setBabyModalVisibility] =
     useState<boolean>(false);
@@ -163,7 +165,7 @@ const Home: React.FC = () => {
     // vez abrindo o app é buscado os bebês que podem receber alta.
     async function checkUserActions() {
       // Menos de um dia se passou.
-      if (!storageIsToday('@AmamentaCoach:lastOpenedDate')) {
+      if (await storageIsToday('@AmamentaCoach:lastOpenedDate')) {
         return;
       }
 
@@ -187,6 +189,16 @@ const Home: React.FC = () => {
     }
     hide({ duration: 250 });
   }, []);
+
+  useEffect(() => {
+    // Cria um registro de telemetria quando o usuário acessa a página.
+    if (isFocused) {
+      createTelemetryAction({
+        action: Action.Opened,
+        context: { screen: AppScreen.HomeMenu },
+      });
+    }
+  }, [isFocused]);
 
   // Fecha todos os modais.
   function hideAllModals() {

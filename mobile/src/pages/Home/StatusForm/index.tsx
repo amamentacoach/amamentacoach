@@ -1,3 +1,4 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
@@ -16,6 +17,7 @@ import theme from 'config/theme';
 import { useAuth } from 'contexts/auth';
 import { answerFeedingForm, answerStatusForm } from 'services/survey';
 import { getSurveyQuestions } from 'utils/getSurveyQuestions';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootRouteProp, RootStackProps } from 'routes/app';
 import type { SurveyQuestion } from 'utils/getSurveyQuestions';
@@ -124,6 +126,10 @@ const StatusForm: React.FC = () => {
     }
 
     fetchQuestions();
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.StatusForm },
+    });
   }, []);
 
   // Envia as respostas do usuário.
@@ -200,6 +206,13 @@ const StatusForm: React.FC = () => {
       const score = await submitForm();
       setIsSendingForm(false);
       if (score) {
+        await createTelemetryAction({
+          action: Action.Pressed,
+          context: {
+            screen: AppScreen.StatusForm,
+            target: 'Actions.End',
+          },
+        });
         setFormScore(score);
       } else {
         setIsErrorModalVisible(true);

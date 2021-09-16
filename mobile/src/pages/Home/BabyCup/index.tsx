@@ -1,8 +1,11 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import i18n from 'i18n-js';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { ThemeContext } from 'styled-components';
+
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import {
   Instruction,
@@ -25,6 +28,13 @@ const BabyCup: React.FC = () => {
     i18n.t('BabyCupPage.Step3'),
     i18n.t('BabyCupPage.Step4'),
   ];
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.BabyCup },
+    });
+  }, []);
 
   return (
     <ScrollView>

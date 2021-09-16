@@ -1,7 +1,8 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Dimensions, FlatList } from 'react-native';
 import * as Yup from 'yup';
 
@@ -11,6 +12,7 @@ import Modal from 'components/Modal';
 import SecondaryButton from 'components/SecondaryButton';
 import { useAuth } from 'contexts/auth';
 import leaveResearch from 'services/leaveResearch';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 
@@ -186,6 +188,13 @@ const LeaveResearch: React.FC = () => {
       Component: Leave,
     },
   ];
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.LeaveResearch },
+    });
+  }, []);
 
   return (
     <FlatList

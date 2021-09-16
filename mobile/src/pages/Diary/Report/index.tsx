@@ -1,9 +1,11 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import i18n from 'i18n-js';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
 import FormPickerInput from 'components/FormPickerInput';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import DailyReport from './DailyReport';
 import { Container, ScrollView } from './styles';
@@ -29,6 +31,13 @@ const Report: React.FC = () => {
       setSelectedReport(Reports.Daily);
     }
   }
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.Report },
+    });
+  }, []);
 
   return (
     <ScrollView>

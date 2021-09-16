@@ -1,6 +1,8 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StackActions, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useEffect } from 'react';
 
 import FormRadioGroupInput from 'components/FormRadioGroup';
 import {
@@ -13,6 +15,7 @@ import SecondaryButton from 'components/SecondaryButton';
 import Survey, { SurveyPage } from 'components/Survey';
 import theme from 'config/theme';
 import { dateFormatVerbose } from 'lib/date-fns';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 
@@ -22,25 +25,36 @@ const Feelings: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const currentDate = dateFormatVerbose(new Date());
 
-  // Marca o formulário como enviado no dia.
-  async function setFormSent() {
+  // Marca o formulário como enviado no dia e registra uma ação de telemetria.
+  async function setFormSent(target: string) {
     await AsyncStorage.setItem(
       '@AmamentaCoach:DiaryFeelingsLastDate',
       new Date().toISOString(),
     );
+    await createTelemetryAction({
+      action: Action.Pressed,
+      context: { screen: AppScreen.Feelings, target },
+    });
   }
 
   // Executada caso o usuário decida traçar suas metas.
-  const onFormEndGoals = async () => {
-    await setFormSent();
+  async function onFormEndGoals() {
+    await setFormSent('FeelingsPage.SaveGoals');
     navigation.dispatch(StackActions.replace('Goals'));
-  };
+  }
 
   // Executada se o usuário decidir não traçar suas metas.
-  const onFormEndDiary = async () => {
-    await setFormSent();
+  async function onFormEndDiary() {
+    await setFormSent('Actions.SaveAndExit');
     navigation.navigate('Diary');
-  };
+  }
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.Feelings },
+    });
+  }, []);
 
   const FormPage: React.FC<SurveyPage> = ({
     index,
@@ -102,7 +116,7 @@ const Feelings: React.FC = () => {
       color={theme.babyPurple}
       category={2}
       Page={FormPage}
-      onFeedbackAccepted={setFormSent}
+      onFeedbackAccepted={() => setFormSent('SurveyComponent.ReadFeedback')}
     />
   );
 };

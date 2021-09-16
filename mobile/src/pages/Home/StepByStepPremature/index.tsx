@@ -1,11 +1,14 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useEffect } from 'react';
 import { Dimensions, View } from 'react-native';
 
 import ImageWrapper from 'components/ImageWrapper';
 import InformationPages from 'components/InformationPages';
 import ProgressDots from 'components/ProgressDots';
 import theme from 'config/theme';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type {
   InfoPageItem,
@@ -104,6 +107,13 @@ const StepByStepPremature: React.FC = () => {
       ],
     },
   ];
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.StepByStepPremature },
+    });
+  }, []);
 
   const InfoModel: React.FC<InfoPageModelProps> = ({
     index,

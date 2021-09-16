@@ -11,10 +11,20 @@ import { AuthProvider } from 'contexts/auth';
 import { IsFirstRunProvider } from 'contexts/firstRun';
 import { dateFNSSetLocale } from 'lib/date-fns';
 import Routes from 'routes/routes';
+import { submitTelemetryActions } from 'utils/telemetryAction';
 
 const App: React.FC = () => {
   const [isLocalizationLoaded, setIsLocalizationLoaded] = useState(false);
 
+  // Tentar enviar todas as ações de telemetria armazenadas no dispositivo.
+  async function submitTelemetry() {
+    let status = true;
+    while (status) {
+      status = await submitTelemetryActions();
+    }
+  }
+
+  // Carrega o idioma e locale correto de acordo com a linguagem do usuário.
   function setI18nConfig() {
     const translationPaths: {
       [key: string]: { getTranslation: () => object; dateLocale: Locale };
@@ -45,6 +55,7 @@ const App: React.FC = () => {
   }
 
   useEffect(() => {
+    submitTelemetry();
     setI18nConfig();
     RNLocalize.addEventListener('change', setI18nConfig);
     setIsLocalizationLoaded(true);

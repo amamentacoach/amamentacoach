@@ -1,11 +1,13 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { StackActions, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import createGenericSurveyPage from 'components/GenericSurveyPage';
 import Modal from 'components/Modal';
 import Survey from 'components/Survey';
 import theme from 'config/theme';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 
@@ -39,6 +41,13 @@ const Goals: React.FC = () => {
     const randomIndex = Math.round(Math.random() * (images.length - 1));
     return images[randomIndex];
   }
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.Goals },
+    });
+  }, []);
 
   return (
     <>

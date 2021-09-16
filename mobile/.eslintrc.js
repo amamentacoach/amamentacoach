@@ -27,6 +27,7 @@ module.exports = {
   },
   rules: {
     'global-require': 'off',
+    'no-console': 'error',
     'import/named': 'off',
     'import/namespace': 'off',
     'import/no-extraneous-dependencies': ['off'],

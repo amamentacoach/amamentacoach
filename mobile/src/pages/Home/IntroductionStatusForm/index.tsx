@@ -2,8 +2,8 @@ import i18n from 'i18n-js';
 
 import ImageWrapper from 'components/ImageWrapper';
 import InformationPages, {
-  InfoPageModelProps,
   InfoPageItem,
+  InfoPageModelProps,
 } from 'components/InformationPages';
 import MainButton from 'components/MainButton';
 import ProgressDots from 'components/ProgressDots';

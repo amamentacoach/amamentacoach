@@ -1,6 +1,7 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import * as Yup from 'yup';
 
@@ -8,6 +9,7 @@ import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import { newPassword } from 'services/auth';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import {
   FormContainer,
@@ -44,9 +46,23 @@ const NewPassword: React.FC = () => {
     const successfulRequest = await newPassword(password);
     setIsSendingForm(false);
     if (successfulRequest) {
+      await createTelemetryAction({
+        action: Action.Pressed,
+        context: {
+          screen: AppScreen.NewPassword,
+          target: 'Actions.Save',
+        },
+      });
       setIsSubmitModalVisible(true);
     }
   }
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.NewPassword },
+    });
+  }, []);
 
   return (
     <ScrollView>

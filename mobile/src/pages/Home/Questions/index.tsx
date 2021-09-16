@@ -1,9 +1,11 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
 import { listUserQuestions } from 'services/questions';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 import type { FAQ } from 'services/questions';
@@ -55,6 +57,11 @@ const Questions: React.FC = () => {
         setLoading(false);
       }
     }
+
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.Questions },
+    });
     fetchQuestions();
   }, []);
 

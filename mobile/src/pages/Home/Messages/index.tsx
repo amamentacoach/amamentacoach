@@ -1,11 +1,11 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
-import { useIsFirstRun } from 'contexts/firstRun';
 import { listMessages } from 'services/messages';
-import { setMessagesPageOpened } from 'services/telemetry';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 import type { Message as IMessage } from 'services/messages';
@@ -24,7 +24,6 @@ import AddIcon from '@assets/images/icons/ic_add.svg';
 
 const Messages: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
-  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
   const themeContext = useContext(ThemeContext);
 
   const [messages, setMessages] = useState<IMessage[]>([]);
@@ -57,14 +56,6 @@ const Messages: React.FC = () => {
     setLoading(false);
   }
 
-  useEffect(() => {
-    fetchMessages(1);
-    if (isFirstRun.temporary.diary) {
-      setMessagesPageOpened();
-      setTemporaryNotFirstRun('diary');
-    }
-  }, []);
-
   async function fetchOlderMessages() {
     if (loading || noMoreMessages) {
       return;
@@ -72,6 +63,14 @@ const Messages: React.FC = () => {
     await fetchMessages(page + 1);
     setPage(page + 1);
   }
+
+  useEffect(() => {
+    fetchMessages(1);
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.Messages },
+    });
+  }, []);
 
   const Message: React.FC<IMessage> = ({ name, content }) => (
     <MessageContainer>

@@ -1,13 +1,15 @@
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 
 import FormDateInput from 'components/FormDateInput';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import { createExtractionEntry } from 'services/diaryRegistry';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 
@@ -107,12 +109,24 @@ const NewDiaryRegistry: React.FC = () => {
       parseFloat(quantity),
       now,
     );
+
     if (status) {
+      await createTelemetryAction({
+        action: Action.Pressed,
+        context: { screen: AppScreen.NewDiaryRegistry, target: 'Actions.Save' },
+      });
       navigation.navigate('DiaryRegistry');
     } else {
       setIsSendingForm(false);
     }
   }
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.NewDiaryRegistry },
+    });
+  }, []);
 
   return (
     <ScrollView>
