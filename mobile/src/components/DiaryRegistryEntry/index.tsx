@@ -16,7 +16,7 @@ const DiaryRegistryEntry: React.FC<ExtractionEntry> = ({
       <Row>
         <TextContainer>
           <Text>{i18n.t('Time')}: </Text>
-          <Content>{format(new Date(date), 'kk:mm')}</Content>
+          <Content>{format(new Date(date), 'HH:mm')}</Content>
         </TextContainer>
         <TextContainer>
           <Text>{i18n.t('Duration')}: </Text>

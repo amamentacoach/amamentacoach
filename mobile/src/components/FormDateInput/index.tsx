@@ -40,7 +40,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
       return '';
     }
     if (mode === 'time') {
-      return format(dateToFormat, 'kk:mm');
+      return format(dateToFormat, 'HH:mm');
     }
     return format(dateToFormat, 'P');
   }
@@ -51,7 +51,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
       return '';
     }
     if (mode === 'time') {
-      return format(dateToFormat, 'kk:mm');
+      return format(dateToFormat, 'HH:mm');
     }
     return format(dateToFormat, 'yyyy-MM-dd');
   }
