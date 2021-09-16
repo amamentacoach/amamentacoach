@@ -1,4 +1,5 @@
-import { format } from 'lib/date-fns';
+import { formatISO } from 'date-fns';
+
 import api from 'services/api';
 
 type Breast = 'D' | 'E';
@@ -48,9 +49,7 @@ export async function createExtractionEntry(
 export async function listExtractionsEntries(
   date: Date,
 ): Promise<ExtractionEntry[]> {
-  const { data } = await api.get(
-    `/maes/ordenhas/${format(date, 'yyyy-MM-dd')}`,
-  );
+  const { data } = await api.get(`/maes/ordenhas/${formatISO(date)}`);
   return data.map((entry: any) => ({
     id: entry.id,
     baby_id: entry.bebe_id,
@@ -85,9 +84,7 @@ export async function listBreastfeedEntries(
   babyId: number,
   date: Date,
 ): Promise<BreastfeedEntry> {
-  const { data } = await api.get(
-    `/bebes/${babyId}/mamadas/${format(date, 'yyyy-MM-dd')}`,
-  );
+  const { data } = await api.get(`/bebes/${babyId}/mamadas/${formatISO(date)}`);
   return {
     id: data.id,
     name: data.nome,
