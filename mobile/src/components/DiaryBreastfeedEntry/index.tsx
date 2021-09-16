@@ -21,7 +21,7 @@ const DiaryBreastfeedEntry: React.FC<BreastfeedEntry> = ({ name, entries }) => {
   return (
     <View>
       <BabyName>{name}</BabyName>
-      {entries.map(({ id, breast, date, duration }) => (
+      {entries.map(({ id, breasts, date, duration }) => (
         <Breastfeed key={id}>
           <Row>
             <TextContainer>
@@ -36,9 +36,12 @@ const DiaryBreastfeedEntry: React.FC<BreastfeedEntry> = ({ name, entries }) => {
           <Row>
             <TextContainer>
               <Text>{i18n.t('Breast')}: </Text>
-              <Content>
-                {breast === 'E' ? i18n.t('Left') : i18n.t('Right')}
-              </Content>
+              {breasts.map((breast, index) => (
+                <Content key={breast}>
+                  {index > 0 && ', '}
+                  {breast === 'E' ? i18n.t('Left') : i18n.t('Right')}
+                </Content>
+              ))}
             </TextContainer>
           </Row>
         </Breastfeed>

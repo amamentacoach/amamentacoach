@@ -35,7 +35,7 @@ const DiaryRegistry: React.FC = () => {
       action: Action.Pressed,
       context: { screen: AppScreen.DiaryRegistry, target },
     });
-    navigation.navigate('NewBreastfeedEntry');
+    navigation.navigate('NewDiaryRegistry');
   }
 
   useEffect(() => {

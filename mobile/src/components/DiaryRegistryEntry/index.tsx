@@ -6,7 +6,7 @@ import { ExtractionEntry } from 'services/diaryRegistry';
 import { Content, Registry, Row, Text, TextContainer } from './styles';
 
 const DiaryRegistryEntry: React.FC<ExtractionEntry> = ({
-  breast,
+  breasts,
   date,
   duration,
   quantity,
@@ -26,7 +26,12 @@ const DiaryRegistryEntry: React.FC<ExtractionEntry> = ({
       <Row>
         <TextContainer>
           <Text>{i18n.t('Breast')}: </Text>
-          <Content>{breast === 'E' ? i18n.t('Left') : i18n.t('Right')}</Content>
+          {breasts.map((breast, index) => (
+            <Content key={breast}>
+              {index > 0 && ', '}
+              {breast === 'E' ? i18n.t('Left') : i18n.t('Right')}
+            </Content>
+          ))}
         </TextContainer>
         <TextContainer>
           <Text>{i18n.t('Quantity')}: </Text>
