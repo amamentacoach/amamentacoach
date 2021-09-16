@@ -11,7 +11,7 @@ import ImageWrapper from 'components/ImageWrapper';
 import Modal from 'components/Modal';
 import theme from 'config/theme';
 import { useIsFirstRun } from 'contexts/firstRun';
-import { isToday, storageIsToday } from 'lib/date-fns';
+import { storageIsToday } from 'lib/date-fns';
 import { checkBabiesLocation, updateBabyLocation } from 'services/babyLocation';
 import { setHomePageOpened } from 'services/telemetry';
 import { createTelemetryAction } from 'utils/telemetryAction';
@@ -147,16 +147,11 @@ const Home: React.FC = () => {
 
     // Verifica se o usuário acessou a tela de expectativas hoje.
     async function checkExpectations() {
-      const expectationsStorage = await AsyncStorage.getItem(
+      const openedToday = await storageIsToday(
         '@AmamentaCoach:alreadySelectedExpectations',
+        storage => storage.lastRunDate,
       );
-      if (!expectationsStorage) {
-        setExpectationsModalVisibility(true);
-        return;
-      }
-
-      const { lastRunDate } = JSON.parse(expectationsStorage);
-      if (!isToday(new Date(lastRunDate))) {
+      if (!openedToday) {
         setExpectationsModalVisibility(true);
       }
     }

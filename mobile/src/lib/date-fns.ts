@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   differenceInYears as _differenceInYears,
   format as _format,
+  isToday,
   isToday as _isToday,
 } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
@@ -14,9 +15,9 @@ export function dateFNSSetLocale(locale: Locale) {
 
 // Define um locale padrão para todos as funções do date-fns.
 function addDefaultLocale<T extends (...args: any[]) => any>(func: T): T {
-  function localeAdded(...args: Parameters<typeof _format>) {
+  function localeAdded(...args: Parameters<typeof func>) {
     const functionArgs: any[] = [...args];
-    const lastParameterIndex = _format.length - 1;
+    const lastParameterIndex = func.length - 1;
     functionArgs[lastParameterIndex] = {
       locale: currentLocale,
       ...functionArgs[lastParameterIndex],
@@ -27,7 +28,6 @@ function addDefaultLocale<T extends (...args: any[]) => any>(func: T): T {
 }
 
 export const format = addDefaultLocale(_format);
-export const isToday = addDefaultLocale(_isToday);
 export const differenceInYears = addDefaultLocale(_differenceInYears);
 
 // Formata uma data no formato $DiaSemana, $DiaMes de $Mes de $Ano
@@ -38,11 +38,19 @@ export function dateFormatVerbose(date: Date) {
 
 // Verifica se a diferença entra a data atual e uma data armazenada no AsyncStorage é maior ou igual
 // a 1 dia.
+// Caso a data esteja armazenada em um objeto é possível fornecer uma função para acessa-la.
 // Caso o valor não exista retorna false.
-export async function storageIsToday(storageId: string) {
+export async function storageIsToday(
+  storageId: string,
+  getDateFromStorage?: (storageObject: Record<string, any>) => string,
+) {
   const storageString = await AsyncStorage.getItem(storageId);
   if (!storageString) {
     return false;
   }
-  return isToday(new Date(storageString));
+  let storageDate = storageString;
+  if (getDateFromStorage) {
+    storageDate = getDateFromStorage(JSON.parse(storageString));
+  }
+  return isToday(new Date(storageDate));
 }
