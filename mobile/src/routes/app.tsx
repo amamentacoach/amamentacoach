@@ -1,4 +1,7 @@
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from '@react-navigation/stack';
 import i18n from 'i18n-js';
 
 import VideoPage from 'pages/Generic/VideoPage';
@@ -85,6 +88,7 @@ const AppRoutes: React.FC = () => {
       screenOptions={{
         headerTitleAlign: 'center',
         headerBackImage: ({ tintColor }) => <BackIcon color={tintColor} />,
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}>
       <Stack.Screen
         key="TabNavigator"
