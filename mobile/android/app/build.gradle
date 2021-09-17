@@ -142,8 +142,8 @@ android {
         applicationId "com.amamentacoach"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 6
-        versionName "1.16.0"
+        versionCode 7
+        versionName "1.16.1"
         multiDexEnabled true
         setProperty("archivesBaseName", "amamentacoach" + "-v" + versionName + "-" + project.env.get("ENV_NAME"))
     }
