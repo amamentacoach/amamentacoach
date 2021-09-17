@@ -26,12 +26,14 @@ const DiaryRegistryEntry: React.FC<ExtractionEntry> = ({
       <Row>
         <TextContainer>
           <Text>{i18n.t('Breast')}: </Text>
-          {breasts.map((breast, index) => (
-            <Content key={breast}>
-              {index > 0 && ', '}
-              {breast === 'E' ? i18n.t('Left') : i18n.t('Right')}
-            </Content>
-          ))}
+          <TextContainer>
+            {breasts.map((breast, index) => (
+              <Content key={breast}>
+                {index > 0 && ', '}
+                {breast === 'E' ? i18n.t('Left') : i18n.t('Right')}
+              </Content>
+            ))}
+          </TextContainer>
         </TextContainer>
         <TextContainer>
           <Text>{i18n.t('Quantity')}: </Text>

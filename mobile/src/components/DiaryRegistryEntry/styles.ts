@@ -14,6 +14,8 @@ export const Row = styled.View`
 
 export const TextContainer = styled.View`
   flex-direction: row;
+  flex-wrap: wrap;
+  flex-shrink: 1;
 `;
 
 export const Text = styled.Text`
