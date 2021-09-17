@@ -27,14 +27,14 @@ const Feelings: React.FC = () => {
 
   // Marca o formulário como enviado no dia e registra uma ação de telemetria.
   async function setFormSent(target: string) {
-    await AsyncStorage.setItem(
-      '@AmamentaCoach:DiaryFeelingsLastDate',
-      new Date().toISOString(),
-    );
     await createTelemetryAction({
       action: Action.Pressed,
       context: { screen: AppScreen.Feelings, target },
     });
+    await AsyncStorage.setItem(
+      '@AmamentaCoach:DiaryFeelingsLastDate',
+      new Date().toISOString(),
+    );
   }
 
   // Executada caso o usuário decida traçar suas metas.

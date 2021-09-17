@@ -1,6 +1,7 @@
 import { Action, AppScreen } from '@common/Telemetria';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import createGenericSurveyPage from 'components/GenericSurveyPage';
@@ -15,11 +16,15 @@ import HelpReceived2 from '@assets/images/help_received_2.png';
 
 const HelpReceived: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
-
   const images = [HelpReceived1, HelpReceived2];
 
   // Marca o formulário como enviado no dia.
   async function setFormSent() {
+    // TODO
+    await createTelemetryAction({
+      action: Action.Pressed,
+      context: { screen: AppScreen.HelpReceived, target: 'Actions.End' },
+    });
     await AsyncStorage.setItem(
       '@AmamentaCoach:DiaryHelpReceivedLastDate',
       new Date().toISOString(),
@@ -40,7 +45,7 @@ const HelpReceived: React.FC = () => {
 
   return (
     <Survey
-      title="Minha rede de apoio"
+      title={i18n.t('SurveyTitles.HelpReceived')}
       color={theme.babyPurple}
       category={4}
       Page={createGenericSurveyPage(onFormEnd, images)}

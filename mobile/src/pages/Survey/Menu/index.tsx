@@ -44,7 +44,7 @@ const SurveyMenu: React.FC = () => {
     },
     {
       image: SurveysTwo,
-      title: i18n.t('SurveyMenuPage.3'),
+      title: i18n.t('SurveyTitles.SurveyMotivation'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (
@@ -60,7 +60,7 @@ const SurveyMenu: React.FC = () => {
     },
     {
       image: SurveysThree,
-      title: i18n.t('SurveyMenuPage.5'),
+      title: i18n.t('SurveyTitles.SurveyHelp'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (!(await storageIsToday('@AmamentaCoach:DiarySurveyHelpLastDate'))) {
@@ -78,7 +78,7 @@ const SurveyMenu: React.FC = () => {
       ...options,
       {
         image: SurveysFour,
-        title: i18n.t('SurveyMenuPage.6'),
+        title: i18n.t('SurveyMenuPage.Father'),
         onPress: async () => {
           // Checa se o usuário já respondeu o formulário no dia.
           if (

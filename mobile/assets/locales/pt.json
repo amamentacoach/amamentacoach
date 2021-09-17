@@ -1,4 +1,44 @@
 {
+  "And": "e",
+  "Begin": "Início",
+  "Breast": "Mama",
+  "Cancel": "Cancelar",
+  "Close": "Fechar",
+  "Content": "Conteúdo",
+  "Diary": "Diário",
+  "Duration": "Duração",
+  "Email": "Email",
+  "ErrorSurveyAlreadyAnswered": "Ops! Você já respondeu a enquete hoje. Volte novamente amanhã.",
+  "Expectations": "Expectativas",
+  "GoBack": "Voltar",
+  "Home": "Casa",
+  "Infograph": "Infográfico",
+  "Later": "Mais Tarde",
+  "Leave": "Sair",
+  "Left": "Esquerda",
+  "LetsStart": "Vamos começar!",
+  "Lodging": "Alojamento Conjunto",
+  "Name": "Nome",
+  "Next": "Próximo",
+  "No": "Não",
+  "OrMore": "ou mais",
+  "Other": "Outro",
+  "Password": "Senha",
+  "PrematureBreastfeed": "Amamentar um prematuro",
+  "Profile": "Perfil",
+  "Quantity": "Quantidade",
+  "Question": "Pergunta",
+  "Right": "Direita",
+  "SignUp": "Cadastro",
+  "Skip": "Pular",
+  "Survey": "Enquete",
+  "Surveys": "Enquetes",
+  "TermsOfService": "Termo de Consentimento",
+  "Time": "Horário",
+  "UCI": "UCI Neonatal",
+  "UTI": "UTI Neonatal",
+  "Video": "Vídeo",
+  "Yes": "Sim",
   "AcceptTermsOfServicePage": {
     "AccountCreated": "Conta criada com sucesso! Seja muito bem-vinda ao AmamentaCoach!",
     "HeaderSubText": "Você está quase lá! Por último, você deve aceitar o termo de compromisso:",
@@ -25,7 +65,6 @@
     "9": "Oferta de leite pelo copinho",
     "10": "Vídeo Demonstrativo"
   },
-  "And": "e",
   "AppIntroductionPage": {
     "1": "Bem vinda! O AmamentaCoach foi pensado para te auxiliar na desafiadora jornada de amamentar um bebê prematuro.",
     "2": "Explore cada ícone e faça do App seu grande aliado!",
@@ -78,8 +117,6 @@
     "PageName": "Benefícios do canguru",
     "Header": "Use e abuse do Canguru! Informe-se e inspire-se nos vídeos abaixo:"
   },
-  "Begin": "Início",
-  "Breast": "Mama",
   "BreastfeedingBenefitsPage": {
     "TitleBaby": "Benefícios da amamentação para o bebê",
     "TitleMom": "Benefícios da amamentação para a mãe",
@@ -123,9 +160,6 @@
     "4": "Por quanto tempo fazer?",
     "Header": "Tudo o que você precisa saber sobre retirada do leite"
   },
-  "Cancel": "Cancelar",
-  "Close": "Fechar",
-  "Content": "Conteúdo",
   "CreditsPage": {
     "AvailableIn": "Disponível em",
     "Item1": {
@@ -172,7 +206,6 @@
     "Breastfeed": "Amamentações",
     "Extraction": "Retiradas de leite"
   },
-  "Diary": "Diário",
   "DiaryBreastfeedPage": {
     "CreateBreastfeedingEntry": "Registrar amamentação"
   },
@@ -201,14 +234,10 @@
     "3": "Músicas para relaxar",
     "Header": "Você não só pode como deve pensar em outras coisas além dos desafios da prematuridade e da amamentação! E, às vezes, não pensar em NADA!"
   },
-  "Duration": "Duração",
-  "Email": "Email",
   "EmotionsAndBreastfeedingPage": {
     "1": "Caixinha da distração",
     "2": "Técnica de Relaxamento de Jacobson"
   },
-  "ErrorSurveyAlreadyAnswered": "Ops! Você já respondeu a enquete hoje. Volte novamente amanhã.",
-  "Expectations": "Expectativas",
   "FeelingsPage": {
     "SaveGoals": "Salvar e traçar metas"
   },
@@ -216,7 +245,6 @@
     "Header": "Preencha o campo abaixo com o seu e-mail de cadastro para que possamos enviar um link de redefinição de senha.",
     "PopUp": "Cheque sua caixa de entrada do e-mail e acesse o link que enviamos para a redefinição de sua senha."
   },
-  "GoBack": "Voltar",
   "GoalsPage": {
     "Title": "Minhas metas de hoje",
     "OpenReport": "Ver desempenho",
@@ -228,7 +256,6 @@
     "7": "Video HU Londrina",
     "8": "Conheça o HU"
   },
-  "Home": "Casa",
   "HomePage": {
     "BabyLocation": "Onde se encontra agora?",
     "HUButton": "Comece por aqui!",
@@ -264,13 +291,10 @@
     "Page8": "Se não tiver como guardar imediatamente na geladeira, o leite pode permanecer em local fresco e usado até seis horas após a coleta.",
     "Page9": "Em geladeira, o leite ordenhado pode ser guardado com segurança por até 12 horas ou congelado por até 15 dias. Antes de alimentar o bebê com o leite guardado, aqueça-o em banho-maria."
   },
-  "Infograph": "Infográfico",
   "IntroductionStatusFormPage": {
     "Text1": "Como você se sente com relação à sua autoconfiança para amamentar?\n\nPara cada uma das afirmações a seguir, por favor, escolha a resposta que melhor descreve sua autoconfiança em amamentar seu bebê.",
     "Text2": "Por favor, marque sua resposta circulando o número que melhor descreve como você se sente. Não há respostas certas ou erradas."
   },
-  "Later": "Mais Tarde",
-  "Leave": "Sair",
   "LeaveResearchPage": {
     "Introduction": "Prezada Senhora",
     "Header": "Ao confirmar o descadastramento, todos os seus dados serão excluídos e você não fará mais parte da pesquisa “Coaching via App: uma abordagem inovadora para o aleitamento materno de bebês prematuros”.",
@@ -282,9 +306,6 @@
     "PopUp": "Tem certeza? Ao se descadastrar da pesquisa “Coaching via App: \"uma abordagem inovadora para o aleitamento materno de bebês prematuros” você não terá mais acesso ao app e ao conteúdo aqui presente.",
     "Confirm": "Tenho Certeza"
   },
-  "Left": "Esquerda",
-  "LetsStart": "Vamos começar!",
-  "Lodging": "Alojamento Conjunto",
   "LoginPage": {
     "PasswordPlaceholder": "Insira sua senha",
     "ForgotPassword": "Esqueceu a senha?",
@@ -405,7 +426,6 @@
     "3": "Sertanejo",
     "4": "Funk"
   },
-  "Name": "Nome",
   "NewBreastfeedEntryPage": {
     "Header": "Registrar amamentação",
     "BabyPlaceholder": "Selecionar bebê",
@@ -433,16 +453,12 @@
     "QuestionSent": "Dúvida enviada!",
     "QuestionPlaceholder": "Digite aqui sua pergunta..."
   },
-  "Next": "Próximo",
-  "No": "Não",
   "NotWhatIExpectedPage": {
     "Header": "Parto prematuro:\nNão era isso que eu esperava",
     "Text1": "O nascimento prematuro é algo que sempre mexe com a estrutura da família. Em geral, a realidade não tem muito a ver com aquilo que foi sonhado durante a gravidez...",
     "Text2": "Não há nada de errado com você caso esteja sentindo uma mistura de medo, frustração, insegurança, ansiedade, estresse...",
     "Text3": "Tenha paciência com você mesma! Respire fundo... escolha alguém para se abrir e falar sobre como você está se sentindo... e então, tome posse do seu bebê do jeitinho que ele é. Decida abraçar essa nova situação!"
   },
-  "OrMore": "ou mais",
-  "Other": "Outro",
   "PageTitles": {
     "1": "Sinta-se em casa!",
     "2": "Oferta de leite pelo copinho",
@@ -456,13 +472,11 @@
     "10": "Espelho",
     "11": "Retirada do leite"
   },
-  "Password": "Senha",
   "Placeholder": {
     "Email": "Insira seu email",
     "Duration": "Insira a duração (min)",
     "Message": "Digite aqui sua mensagem..."
   },
-  "PrematureBreastfeed": "Amamentar um prematuro",
   "PrematurePage": {
     "Header1": "Parto prematuro: não era isso que eu esperava",
     "Header2": "Muito prazer, eu sou o Prematuro",
@@ -470,12 +484,9 @@
     "Header4": "Um período de luta, toda uma vida de resultados",
     "Subtitle5": "Benefícios da amamentação"
   },
-  "Profile": "Perfil",
   "ProfileMenuPage": {
     "ChangePassword": "Alterar senha"
   },
-  "Quantity": "Quantidade",
-  "Question": "Pergunta",
   "RadioGroupComponent": {
     "OtherFieldAnswer": "Resposta para outro"
   },
@@ -493,13 +504,10 @@
     "Option3": "3. Desenvolver uma maneira positiva de pensar",
     "Option4": "4. Construir força e autoconfiança"
   },
-  "Right": "Direita",
-  "SignUp": "Cadastro",
   "SignUpPage": {
     "Header": "Primeiro, precisamos dos seguintes dados para que você possa acessar nossa plataforma:",
     "ConfirmPassword": "Confirme sua senha"
   },
-  "Skip": "Pular",
   "Status": {
     "Saving": "Salvando...",
     "Sending": "Enviando...",
@@ -545,21 +553,25 @@
       "Text": "Quando seu bebê começar a mamar, não se esqueça de que por ser prematuro, ele pode ser mais sonolento, mais “molinho”, e poderá precisar de mais tempo até conseguir dar conta do recado. "
     }
   },
-  "Survey": "Enquete",
   "SurveyComponent": {
     "SubmitError": "Erro ao enviar suas respostas.\nPor favor tente novamente mais tarde.",
     "ReadFeedback": "Ver conteúdo"
   },
   "SurveyMenuPage": {
-    "3": "Motivação",
-    "5": "Sobre ajuda",
-    "6": "Sobre a participação do pai"
+    "Father": "Sobre a participação do pai"
   },
   "SurveyStatisticsPage": {
     "FormSubmitted": "Obrigada por responder a nossa enquete! Veja abaixo as respostas mais votadas no App pelas mães"
   },
-  "Surveys": "Enquetes",
-  "TermsOfService": "Termo de Consentimento",
+  "SurveyTitles": {
+    "DiaryActions": "Ações Realizadas com o bebê",
+    "DiaryBaby": "Meu Bebê Hoje",
+    "HelpReceived": "Minha rede de apoio",
+    "SurveyBreastfeed": "Amamentar um prematuro",
+    "SurveyFather": "Participação do Pai",
+    "SurveyHelp": "Sobre ajuda",
+    "SurveyMotivation": "Motivação"
+  },
   "TermsOfServiceText": {
     "Adult": {
       "Title": "Termo de Consentimento Livre e Esclarecido - Mães",
@@ -648,9 +660,6 @@
     "Option2": "Enquete: Amamentar um prematuro",
     "Option3": "Infográfico: 6 passos para a amamentação"
   },
-  "Time": "Horário",
-  "UCI": "UCI Neonatal",
-  "UTI": "UTI Neonatal",
   "UploadBabyPhotoPage": {
     "SelectPhoto": "Escolha uma foto de seu(s) bebê(s) na galeria e deixe aqui para lembrar qual a sua grande motivação para amamentar."
   },
@@ -661,7 +670,6 @@
     "BestMother": "VOCÊ é a melhor mãe do mundo para o seu bebê! Isso simplesmente porque VOCÊ deu a vida a ele, o que ninguém mais poderia fazer! O SEU LEITE é o melhor alimento que ele pode receber!",
     "Mirror": "Espelho, espelho meu... existe alguém mais capaz de amamentar do que eu?”\nClique no botão abaixo e faça o upload de uma foto sua!"
   },
-  "Video": "Vídeo",
   "WeeklyReportPage": {
     "Header": "Perguntas da semana",
     "NotAnswered": "Não respondida",
@@ -693,7 +701,6 @@
       "Text3": ", mais ela produz! Pois ela entende que o leite está sendo necessário! [1]"
     }
   },
-  "Yes": "Sim",
   "Yup": {
     "Required": "Campo obrigatório",
     "MustBeNumberError": "Deve ser um número",

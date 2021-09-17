@@ -1,3 +1,5 @@
+import i18n from 'i18n-js';
+
 import FormRadioGroupInput from 'components/FormRadioGroup';
 import MainButton from 'components/MainButton';
 import { SurveyPage } from 'components/Survey';
@@ -58,14 +60,16 @@ const createGenericSurveyPage = (
           options={question.options}
           multipleSelection={question.multipleSelection}
           displayOtherField={question.displayOther}
-          error={isFormValid ? '' : 'Pergunta obrigatória'}
+          error={isFormValid ? '' : i18n.t('Yup.AnswerRequired')}
           onChange={setFieldValue}
         />
 
         <Footer>
           <MainButton
             color={color}
-            text={index >= pagesLength - 1 ? 'Finalizar' : 'Próximo'}
+            text={
+              index >= pagesLength - 1 ? i18n.t('Actions.End') : i18n.t('Next')
+            }
             disabled={!isDirty || isSendingForm}
             onPress={() => handleChangePage(index + 1, onFormEnd)}
           />

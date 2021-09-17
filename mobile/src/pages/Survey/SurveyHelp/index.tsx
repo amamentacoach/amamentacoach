@@ -1,6 +1,7 @@
 import { Action, AppScreen } from '@common/Telemetria';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import createGenericSurveyPage from 'components/GenericSurveyPage';
@@ -15,6 +16,10 @@ const SurveyHelp: React.FC = () => {
 
   // Marca o formulário como enviado no dia.
   async function setFormSent() {
+    await createTelemetryAction({
+      action: Action.Pressed,
+      context: { screen: AppScreen.SurveyHelp, target: 'Actions.End' },
+    });
     await AsyncStorage.setItem(
       '@AmamentaCoach:DiarySurveyHelpLastDate',
       new Date().toISOString(),
@@ -35,7 +40,7 @@ const SurveyHelp: React.FC = () => {
 
   return (
     <Survey
-      title="Sobre ajuda"
+      title={i18n.t('SurveyTitles.SurveyHelp')}
       color={theme.babyBlue}
       category={9}
       Page={createGenericSurveyPage(onFormEnd)}
