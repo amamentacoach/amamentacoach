@@ -1,6 +1,5 @@
 import api from 'services/api';
-
-import { BreastfeedEntry, ExtractionEntry } from './diaryRegistry';
+import { BreastfeedEntry, ExtractionEntry } from 'services/diaryRegistry';
 
 export interface DailyReport {
   breastfeedEntries: BreastfeedEntry[];
@@ -16,20 +15,20 @@ export interface WeeklyReport {
 export async function getDailyReport(): Promise<DailyReport> {
   const { data } = await api.get('relatorios/diario');
 
-  const breastfeedEntries = data.bebes.map((baby: any) => ({
+  const breastfeedEntries: BreastfeedEntry[] = data.bebes.map((baby: any) => ({
     id: baby.id,
     name: baby.nome,
     entries: baby.mamadas.map((entry: any) => ({
       id: entry.id,
       baby_id: entry.bebe_id,
+      breasts: entry.mama.split(','),
       date: entry.data_hora,
       duration: entry.duracao,
-      breast: entry.mama,
     })),
   }));
-  const registryEntries = data.ordenhas.map((item: any) => ({
+  const registryEntries: ExtractionEntry[] = data.ordenhas.map((item: any) => ({
     id: item.id,
-    breast: item.mama,
+    breasts: item.mama.split(','),
     duration: item.duracao,
     quantity: item.qtd_leite,
     date: item.data_hora,

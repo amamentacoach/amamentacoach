@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react';
 
 import DiaryBreastfeedEntry from 'components/DiaryBreastfeedEntry';
 import DiaryRegistryEntry from 'components/DiaryRegistryEntry';
-import { DailyReport as IDailyReport, getDailyReport } from 'services/report';
+import { getDailyReport } from 'services/report';
+
+import type { DailyReport as IDailyReport } from 'services/report';
 
 import { Container, EntryContainer, Header } from './styles';
 

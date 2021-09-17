@@ -37,6 +37,7 @@ export const ContentText = styled.Text`
 `;
 
 export const Footer = styled.View`
+  flex: 1;
   flex-direction: row;
   align-items: flex-end;
 `;
