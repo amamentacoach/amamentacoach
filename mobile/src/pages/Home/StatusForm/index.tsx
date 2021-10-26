@@ -161,7 +161,7 @@ const StatusForm: React.FC = () => {
     let isValid = true;
     questions.forEach(question => {
       if (values[question.id].length <= 0) {
-        setFieldError(question.id.toString(), i18n.t('AnswerRequired'));
+        setFieldError(question.id.toString(), i18n.t('Yup.AnswerRequired'));
         isValid = false;
       } else {
         setFieldError(question.id.toString(), '');
@@ -170,7 +170,7 @@ const StatusForm: React.FC = () => {
 
     if (currentPageIndex === pageQuestions.length - 1 && displayFeedingForm) {
       if (values.feeding.length <= 0) {
-        setFieldError('feeding', i18n.t('AnswerRequired'));
+        setFieldError('feeding', i18n.t('Yup.AnswerRequired'));
         isValid = false;
       } else {
         setFieldError('feeding', '');

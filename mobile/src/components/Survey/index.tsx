@@ -7,10 +7,11 @@ import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 import Modal from 'components/Modal';
 import { useAuth } from 'contexts/auth';
 import { answerQuestion } from 'services/survey';
-import { getSurveyQuestions, SurveyQuestion } from 'utils/getSurveyQuestions';
+import { getSurveyQuestions } from 'utils/getSurveyQuestions';
 
 import type { RootStackProps } from 'routes/app';
 import type { AnswerFeedback } from 'services/survey';
+import type { SurveyQuestion } from 'utils/getSurveyQuestions';
 
 import {
   ContentContainer,

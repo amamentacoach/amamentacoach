@@ -1,7 +1,8 @@
 import i18n from 'i18n-js';
 
 import { format } from 'lib/date-fns';
-import { ExtractionEntry } from 'services/diaryRegistry';
+
+import type { ExtractionEntry } from 'services/diaryRegistry';
 
 import { Content, Registry, Row, Text, TextContainer } from './styles';
 

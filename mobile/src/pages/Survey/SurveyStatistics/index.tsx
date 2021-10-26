@@ -5,10 +5,10 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
 import PieChart from 'components/PieChart';
-import { RootStackProps } from 'routes/app';
 import { listSurveyStatistics } from 'services/survey';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
+import type { RootStackProps } from 'routes/app';
 import type { SurveyStatistics as ISurveyStatistics } from 'services/survey';
 
 import {

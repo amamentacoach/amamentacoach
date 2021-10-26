@@ -1,5 +1,4 @@
-import { formatISO } from 'date-fns';
-
+import { formatISO } from 'lib/date-fns';
 import api from 'services/api';
 
 type Breast = 'D' | 'E';

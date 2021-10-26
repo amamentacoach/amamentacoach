@@ -16,8 +16,8 @@ type WrapperImageType = Omit<ImageProps, 'source' | 'height' | 'width'> &
 
 const ImageWrapper: React.FC<WrapperImageType> = ({
   source: File,
-  height = undefined,
-  width = undefined,
+  height,
+  width,
   style,
   ...props
 }: WrapperImageType) => {

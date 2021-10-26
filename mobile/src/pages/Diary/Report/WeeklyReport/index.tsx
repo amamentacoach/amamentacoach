@@ -1,10 +1,9 @@
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
 
-import {
-  getWeeklyReport,
-  WeeklyReport as IWeeklyReport,
-} from 'services/report';
+import { getWeeklyReport } from 'services/report';
+
+import type { WeeklyReport as IWeeklyReport } from 'services/report';
 
 import {
   Answer,

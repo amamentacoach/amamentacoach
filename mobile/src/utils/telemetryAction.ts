@@ -4,7 +4,7 @@ import { registerUserAction } from 'services/telemetry';
 
 import type { TelemetryPayload } from '@common/Telemetria';
 
-// Armazena um novo registro telemetria que o usuário realizou uma ação.
+// Armazena um novo registro telemetria indicando que o usuário realizou uma ação.
 export async function createTelemetryAction(
   action: Omit<TelemetryPayload, 'created_at'>,
 ) {

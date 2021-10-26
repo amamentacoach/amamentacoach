@@ -20,7 +20,6 @@ const HelpReceived: React.FC = () => {
 
   // Marca o formulário como enviado no dia.
   async function setFormSent() {
-    // TODO
     await createTelemetryAction({
       action: Action.Pressed,
       context: { screen: AppScreen.HelpReceived, target: 'Actions.End' },
