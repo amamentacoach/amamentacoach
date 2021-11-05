@@ -4,23 +4,29 @@ import { registerUserAction } from 'services/telemetry';
 
 import type { TelemetryPayload } from '@common/Telemetria';
 
+type PayloadWithoutDate = Omit<TelemetryPayload, 'created_at'>;
+
 // Armazena um novo registro telemetria indicando que o usuário realizou uma ação.
-export async function createTelemetryAction(
-  action: Omit<TelemetryPayload, 'created_at'>,
-) {
-  let telemetryActions: TelemetryPayload[] = [];
+export async function createTelemetryAction(action: PayloadWithoutDate) {
   const storageActions = await AsyncStorage.getItem(
     '@AmamentaCoach:telemetryActions',
   );
-  if (storageActions) {
-    telemetryActions = JSON.parse(storageActions);
-  }
+
   const newTelemetryAction: TelemetryPayload = {
     ...action,
     created_at: new Date(),
   };
 
+  let telemetryActions: TelemetryPayload[] = [];
+  if (storageActions) {
+    telemetryActions = JSON.parse(storageActions);
+  }
   telemetryActions = [...telemetryActions, newTelemetryAction];
+  // Limita o array a 500 elementos.
+  if (telemetryActions.length > 500) {
+    telemetryActions.splice(0, telemetryActions.length - 500);
+  }
+
   await AsyncStorage.setItem(
     '@AmamentaCoach:telemetryActions',
     JSON.stringify(telemetryActions),
