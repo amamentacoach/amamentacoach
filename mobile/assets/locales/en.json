@@ -37,7 +37,10 @@
   "Time": "Horário",
   "UCI": "UCI Neonatal",
   "UTI": "UTI Neonatal",
-  "Video": "Vídeo",
+  "Video": {
+    "one": "Vídeo",
+    "other": "Videos"
+  },
   "Yes": "Sim",
   "AcceptTermsOfServicePage": {
     "AccountCreated": "Conta criada com sucesso! Seja muito bem-vinda ao AmamentaCoach!",

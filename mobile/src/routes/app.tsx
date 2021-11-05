@@ -104,7 +104,7 @@ const AppRoutes: React.FC = () => {
         key="VideoPage"
         name="VideoPage"
         component={VideoPage}
-        options={{ title: i18n.t('Video') }}
+        options={{ title: i18n.t('Video', { count: 1 }) }}
       />
     </Stack.Navigator>
   );

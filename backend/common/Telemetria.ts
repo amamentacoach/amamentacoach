@@ -71,6 +71,7 @@ export enum AppScreen {
   VideoPage,
   WhenToBreastfeed,
   WhyBreastfeed,
+  VideosMenu,
 }
 
 interface Context {
