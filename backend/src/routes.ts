@@ -69,7 +69,8 @@ const uploadMiddleware = multer(uploadConfig);
  *          "qtd_filhos_vivos": 3,
  *          "orientacao_prenatal": true,
  *          "ocupacao": true, // Em casa (do lar) = false | Fora de casa = true
- *          "licenca_maternidade": 6 // Qtd de meses de licenca maternidade - Caso nao tenha: null
+ *          "licenca_maternidade": 6, // Qtd de meses de licenca maternidade - Caso nao tenha: null
+ *          "localizacao:": "HU-UEL"
  *      }
  * 
  * @apiSuccessExample {json} Sucesso
