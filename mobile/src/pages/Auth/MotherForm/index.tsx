@@ -93,8 +93,6 @@ const MotherForm: React.FC = () => {
     phone: Yup.number()
       .integer(i18n.t('Yup.MustBeIntegerError'))
       .typeError(i18n.t('Yup.MustBeIntegerError'))
-      .min(100000000, i18n.t('Yup.LengthError', { num: 9 }))
-      .max(999999999, i18n.t('Yup.LengthError', { num: 9 }))
       .required(i18n.t('Yup.Required')),
     alreadyBreastfeed: Yup.boolean()
       .nullable()
