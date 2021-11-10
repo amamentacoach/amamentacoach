@@ -1,4 +1,7 @@
-import perguntas from '@common/perguntas';
+import perguntasPt from '@common/perguntas';
+import perguntasEn from '@common/perguntas-en';
+
+import { getBestLocale, SupportedLocales } from 'utils/localize';
 
 import type { MotherInfo } from 'services/auth';
 
@@ -17,7 +20,14 @@ export async function getSurveyQuestions(
   motherInfo: MotherInfo,
   options: { category?: number; id?: number },
 ): Promise<SurveyQuestion[]> {
-  return perguntas
+  const { languageTag } = getBestLocale();
+
+  const perguntas: Record<SupportedLocales, typeof perguntasPt> = {
+    en: perguntasEn,
+    pt: perguntasPt,
+  };
+
+  return perguntas[languageTag]
     .filter(pergunta => {
       if (options.id && options.id !== pergunta.id) {
         return false;

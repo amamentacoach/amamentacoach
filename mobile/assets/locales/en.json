@@ -321,7 +321,7 @@
   "ManageExpectationsPage": {
     "Header": "Exchanging improbable expectations for realistic expectations helps with resilience!\nClick on \"Swap\" if you want or need it. If you don't want to, click on “Keep expectation”.",
     "PopUp": "Congratulations on exchanging this unlikely expectation for the realistic expectation! Come back tomorrow to change other expectations.",
-    "Switch": "Exchange",
+    "Switch": "Swap",
     "Keep": "Keep expectation",
     "OldExpectation1": "Sleep as before",
     "NewExpectation1": "Seize Every Nap Opportunity",

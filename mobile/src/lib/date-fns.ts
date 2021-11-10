@@ -6,6 +6,8 @@ import {
 } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
+type DateFromStorageFunc = (storageObject: Record<string, any>) => string;
+
 let currentLocale: Locale = ptBR;
 
 export function dateFNSSetLocale(locale: Locale) {
@@ -41,7 +43,7 @@ export function dateFormatVerbose(date: Date) {
 // Caso o valor não exista retorna false.
 export async function storageIsToday(
   storageId: string,
-  getDateFromStorage?: (storageObject: Record<string, any>) => string,
+  getDateFromStorage?: DateFromStorageFunc,
 ) {
   const storageString = await AsyncStorage.getItem(storageId);
   if (!storageString) {
