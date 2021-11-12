@@ -827,8 +827,7 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
  *            ]
  *          }
  *        ],
- *        "ordenhas": [],
- *        "perguntas": []
+ *        "ordenhas": []
  *      }
  *
  */
@@ -848,32 +847,32 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
  *    HTTP/1.1 200 OK
  *  [
  *    {
- *      "pergunta": "Como me senti:",
+ *      "pergunta": 4,
  *      "respostas": [
  *        "Feliz",
  *        "Orgulhosa"
  *      ]
  *    },
  *    {
- *      "pergunta": "Como meu bebê esteve se alimentando:",
+ *      "pergunta": 5,
  *      "respostas": []
  *    },
  *    {
- *      "pergunta": "Minhas Metas para Pensamentos e Sentimentos",
+ *      "pergunta": 8,
  *      "respostas": []
  *    },
  *    {
- *      "pergunta": "Minhas Metas para Ações",
+ *      "pergunta": 9,
  *      "respostas": []
  *    },
  *    {
- *      "pergunta": "Precisei de uma ajuda específica...",
+ *      "pergunta": 10,
  *      "respostas": [
  *        "Sim"
  *      ]
  *    },
  *    {
- *      "pergunta": "Meu ombro amigo da semana:",
+ *      "pergunta": 11,
  *      "respostas": []
  *    }
  *  ]

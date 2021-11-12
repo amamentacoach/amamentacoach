@@ -1033,7 +1033,7 @@
       "examples": [
         {
           "title": "Sucesso",
-          "content": "HTTP/1.1 200 OK\n  {\n    \"bebes\": [\n      {\n        \"nome\": \"Joao\",\n        \"id\": 5,\n        \"mamadas\": [\n          {\n            \"id\": 3,\n            \"data_hora\": \"2021-04-01T00:00:00.000Z\",\n            \"mama\": \"D\",\n            \"duracao\": 9,\n            \"bebe_id\": 5\n          }\n        ]\n      }\n    ],\n    \"ordenhas\": [],\n    \"perguntas\": []\n  }",
+          "content": "HTTP/1.1 200 OK\n  {\n    \"bebes\": [\n      {\n        \"nome\": \"Joao\",\n        \"id\": 5,\n        \"mamadas\": [\n          {\n            \"id\": 3,\n            \"data_hora\": \"2021-04-01T00:00:00.000Z\",\n            \"mama\": \"D\",\n            \"duracao\": 9,\n            \"bebe_id\": 5\n          }\n        ]\n      }\n    ],\n    \"ordenhas\": []\n  }",
           "type": "json"
         }
       ]
@@ -1066,7 +1066,7 @@
       "examples": [
         {
           "title": "Sucesso",
-          "content": "  HTTP/1.1 200 OK\n[\n  {\n    \"pergunta\": \"Como me senti:\",\n    \"respostas\": [\n      \"Feliz\",\n      \"Orgulhosa\"\n    ]\n  },\n  {\n    \"pergunta\": \"Como meu bebê esteve se alimentando:\",\n    \"respostas\": []\n  },\n  {\n    \"pergunta\": \"Minhas Metas para Pensamentos e Sentimentos\",\n    \"respostas\": []\n  },\n  {\n    \"pergunta\": \"Minhas Metas para Ações\",\n    \"respostas\": []\n  },\n  {\n    \"pergunta\": \"Precisei de uma ajuda específica...\",\n    \"respostas\": [\n      \"Sim\"\n    ]\n  },\n  {\n    \"pergunta\": \"Meu ombro amigo da semana:\",\n    \"respostas\": []\n  }\n]",
+          "content": "  HTTP/1.1 200 OK\n[\n  {\n    \"pergunta\": 4,\n    \"respostas\": [\n      \"Feliz\",\n      \"Orgulhosa\"\n    ]\n  },\n  {\n    \"pergunta\": 5,\n    \"respostas\": []\n  },\n  {\n    \"pergunta\": 8,\n    \"respostas\": []\n  },\n  {\n    \"pergunta\": 9,\n    \"respostas\": []\n  },\n  {\n    \"pergunta\": 10,\n    \"respostas\": [\n      \"Sim\"\n    ]\n  },\n  {\n    \"pergunta\": 11,\n    \"respostas\": []\n  }\n]",
           "type": "json"
         }
       ]
