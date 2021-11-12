@@ -614,7 +614,6 @@ routes.get('/enviarNotificacoes',async (req,res)=>{
  * [
  *   {
  *     "id": 1,
- *     "pergunta": "Pra você, qual é a melhor parte de dedicar-se a amamentar um bebê prematuro?",
  *     "alternativas": [
  *       {
  *         "descricao": "Sentimento de empoderamento (lidar com este desafio me faz acreditar que sou capaz de outras grandes coisas)",
@@ -640,7 +639,6 @@ routes.get('/enviarNotificacoes',async (req,res)=>{
  *   },
  *   {
  *     "id": 2,
- *     "pergunta": "O que te motiva a continuar tentando amamentar?",
  *     "alternativas": [
  *       {
  *         "descricao": "O incentivo que estou recebendo da minha família",
@@ -658,7 +656,6 @@ routes.get('/enviarNotificacoes',async (req,res)=>{
  *   },
  *   {
  *     "id": 3,
- *     "pergunta": "Você sente que está recebendo toda a ajuda de que precisa para continuar tentando amamentar seu bebê?",
  *     "alternativas": [
  *       {
  *         "descricao": "Parcialmente, tanto dos profissionais quanto da minha família",
