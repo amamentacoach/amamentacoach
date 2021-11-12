@@ -100,6 +100,7 @@ routes.post('/maes',maesController.create);
  *   "imagem_bebe": null,
  *   "imagem_pai": null,
  *   "companheiro": true,
+ *   "localizacao": "HU-UEL",
  *   "bebes": [
  *       {
  *          "id": 1,
