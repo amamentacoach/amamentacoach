@@ -1,5 +1,6 @@
 import api from 'services/api';
-import { BreastfeedEntry, ExtractionEntry } from 'services/diaryRegistry';
+
+import type { BreastfeedEntry, ExtractionEntry } from 'services/diaryRegistry';
 
 export interface DailyReport {
   breastfeedEntries: BreastfeedEntry[];

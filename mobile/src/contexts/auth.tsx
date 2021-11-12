@@ -4,8 +4,10 @@ import OneSignal from 'react-native-onesignal';
 
 import api from 'services/api';
 import * as auth from 'services/auth';
-import { isMotherInfo, LoginStatus, MotherInfo } from 'services/auth';
+import { isMotherInfo, LoginStatus } from 'services/auth';
 import pushNotificationSubscribe from 'services/pushNotification';
+
+import type { MotherInfo } from 'services/auth';
 
 interface AuthContextData {
   isSigned: boolean;

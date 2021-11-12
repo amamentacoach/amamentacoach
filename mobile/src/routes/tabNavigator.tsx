@@ -8,11 +8,13 @@ import DiaryMenu from 'pages/Diary/Menu';
 import HomeMenu from 'pages/Home/Menu';
 import ProfileMenu from 'pages/Profile/Menu';
 import SurveyMenu from 'pages/Survey/Menu';
+import VideosMenu from 'pages/Videos/Menu';
 
 import DiaryIcon from '@assets/images/icons/ic_diary_grey.svg';
 import HomeIcon from '@assets/images/icons/ic_home_grey.svg';
 import ProfileIcon from '@assets/images/icons/ic_profile_grey.svg';
 import SurveyIcon from '@assets/images/icons/ic_survey_grey.svg';
+import VideoIcon from '@assets/images/icons/video.svg';
 
 const TabNavigator: React.FC = () => {
   const { isFirstRun } = useIsFirstRun();
@@ -61,6 +63,17 @@ const TabNavigator: React.FC = () => {
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <SurveyIcon height={size} width={size} fill={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Videos"
+        component={VideosMenu}
+        options={{
+          tabBarLabel: i18n.t('Video', { count: 2 }),
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <VideoIcon height={size} width={size} fill={color} />
           ),
         }}
       />

@@ -2,8 +2,8 @@ import i18n from 'i18n-js';
 
 import FormRadioGroupInput from 'components/FormRadioGroup';
 import MainButton from 'components/MainButton';
-import { SurveyPage } from 'components/Survey';
 
+import type { SurveyPage } from 'components/Survey';
 import type { SvgProps } from 'react-native-svg';
 
 import {

@@ -1,7 +1,9 @@
 import i18n from 'i18n-js';
-import { useState } from 'react';
-import { Dimensions } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { ActivityIndicator, Dimensions } from 'react-native';
+import config from 'react-native-config';
 import ImagePicker from 'react-native-image-picker';
+import { ThemeContext } from 'styled-components';
 
 import ImageWrapper from 'components/ImageWrapper';
 import MainButton from 'components/MainButton';
@@ -36,9 +38,11 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
 }) => {
   const { width } = Dimensions.get('window');
   const { motherInfo, updateMotherInfo } = useAuth();
-  const [photo, setPhoto] = useState<ImagePickerResponse | null>(null);
+  const themeContext = useContext(ThemeContext);
 
+  const [photo, setPhoto] = useState<ImagePickerResponse | null>(null);
   const [isSendingForm, setIsSendingForm] = useState(false);
+  const [isLoadingImage, setIsLoadingImage] = useState(true);
   const [formSent, setFormSent] = useState(false);
 
   async function handleSubmitNewPhoto() {
@@ -66,13 +70,24 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
       <Container>
         {/* Usuário já fez o upload de uma foto */}
         {!photo && !formSent && motherInfo.images[target] && (
-          <SelectedImage
-            source={{
-              uri: `https://amamentacoach.herokuapp.com/uploads/${motherInfo.images[target]}`,
-            }}
-            width={width}
-            resizeMode="contain"
-          />
+          <>
+            <SelectedImage
+              source={{
+                uri: `${config.API_URL}/uploads/${motherInfo.images[target]}`,
+              }}
+              width={width}
+              onLoadEnd={() => setIsLoadingImage(false)}
+              resizeMode="contain"
+              isVisible={!isLoadingImage}
+            />
+            {isLoadingImage && (
+              <ActivityIndicator
+                size="large"
+                color={themeContext.primary}
+                animating={isLoadingImage}
+              />
+            )}
+          </>
         )}
         {/* Usuário selecionou uma nova foto */}
         {photo && (

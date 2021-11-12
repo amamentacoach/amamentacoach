@@ -3,9 +3,10 @@ import {
   differenceInYears as _differenceInYears,
   format as _format,
   isToday,
-  isToday as _isToday,
 } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
+
+type DateFromStorageFunc = (storageObject: Record<string, any>) => string;
 
 let currentLocale: Locale = ptBR;
 
@@ -42,7 +43,7 @@ export function dateFormatVerbose(date: Date) {
 // Caso o valor não exista retorna false.
 export async function storageIsToday(
   storageId: string,
-  getDateFromStorage?: (storageObject: Record<string, any>) => string,
+  getDateFromStorage?: DateFromStorageFunc,
 ) {
   const storageString = await AsyncStorage.getItem(storageId);
   if (!storageString) {
@@ -53,4 +54,10 @@ export async function storageIsToday(
     storageDate = getDateFromStorage(JSON.parse(storageString));
   }
   return isToday(new Date(storageDate));
+}
+
+// Retorna uma string no formato ISO-8601 ("yyyy-MM-dd'T'HH:mm:ss.SSSxxx"), contendo informação
+// sobre o fuso horário do usuário.
+export function formatISO(date: Date) {
+  return format(date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
 }

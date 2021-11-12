@@ -37,7 +37,10 @@
   "Time": "Horário",
   "UCI": "UCI Neonatal",
   "UTI": "UTI Neonatal",
-  "Video": "Vídeo",
+  "Video": {
+    "one": "Vídeo",
+    "other": "Vídeos"
+  },
   "Yes": "Sim",
   "AcceptTermsOfServicePage": {
     "AccountCreated": "Conta criada com sucesso! Seja muito bem-vinda ao AmamentaCoach!",
@@ -404,11 +407,11 @@
     },
     "TimeFirstStimulusOptions": {
       "Option1": "Em até 1h",
-      "Option2": "1-6h",
-      "Option3": "7-12h",
-      "Option4": "13-24h",
-      "Option5": "2d",
-      "Option6": "3d"
+      "Option2": "De 1 à 6 horas",
+      "Option3": "De 7 à 12 horas",
+      "Option4": "De 13 à 24 horas",
+      "Option5": "2 dias",
+      "Option6": "3 dias"
     },
     "ChildrenAliveOptions": {
       "Option1": "Nenhum filho",
@@ -471,6 +474,9 @@
     "9": "O Papai",
     "10": "Espelho",
     "11": "Retirada do leite"
+  },
+  "PickerComponent": {
+    "DefaultPlaceholder": "Selecione uma opção"
   },
   "Placeholder": {
     "Email": "Insira seu email",

@@ -51,11 +51,7 @@ const Login: React.FC = () => {
       .email(i18n.t('Yup.InvalidEmail'))
       .required(i18n.t('Yup.Required')),
     password: Yup.string()
-      .min(8, i18n.t('Yup.MinLengthError', { min: 8 }))
-      .matches(
-        new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])'),
-        i18n.t('Yup.InvalidPassword'),
-      )
+      .min(4, i18n.t('Yup.MinLengthError', { min: 4 }))
       .required(i18n.t('Yup.Required')),
   }).required();
 

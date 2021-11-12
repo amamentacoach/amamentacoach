@@ -1,4 +1,7 @@
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from '@react-navigation/stack';
 import i18n from 'i18n-js';
 
 import { useIsFirstRun } from 'contexts/firstRun';
@@ -44,7 +47,11 @@ const AuthRoutes: React.FC = () => {
   const { isFirstRun } = useIsFirstRun();
 
   return (
-    <Stack.Navigator screenOptions={{ headerTitleAlign: 'center' }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerTitleAlign: 'center',
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+      }}>
       {isFirstRun.persistent.appIntroduction && (
         <Stack.Screen
           name="Introduction"

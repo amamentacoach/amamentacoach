@@ -1,4 +1,5 @@
 import { Picker } from '@react-native-picker/picker';
+import i18n from 'i18n-js';
 import { useState } from 'react';
 
 import {
@@ -21,7 +22,7 @@ interface FormPickerProps {
 
 const FormPickerInput: React.FC<FormPickerProps> = ({
   fieldName,
-  placeholder = 'Selecione uma opção',
+  placeholder = i18n.t('PickerComponent.DefaultPlaceholder'),
   defaultValue,
   label,
   error,

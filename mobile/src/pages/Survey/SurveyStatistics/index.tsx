@@ -5,10 +5,10 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
 import PieChart from 'components/PieChart';
-import { RootStackProps } from 'routes/app';
 import { listSurveyStatistics } from 'services/survey';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
+import type { RootStackProps } from 'routes/app';
 import type { SurveyStatistics as ISurveyStatistics } from 'services/survey';
 
 import {
@@ -34,7 +34,6 @@ const SurveyStatistics: React.FC = () => {
   // comportamento padrão de voltar a tela anterior.
   useLayoutEffect(() => {
     navigation.setOptions({
-      // headerBackImage: () => <BackIcon />,
       headerBackImage: ({ tintColor }) => (
         <BackIcon
           color={tintColor}
@@ -52,6 +51,7 @@ const SurveyStatistics: React.FC = () => {
         setLoading(false);
       }
     }
+
     function navigateToSurveyPage(event: any) {
       // Impede a ação padrão de retornar a tela anterior.
       event.preventDefault();

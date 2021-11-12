@@ -1,13 +1,15 @@
 import i18n from 'i18n-js';
 
 import ImageWrapper from 'components/ImageWrapper';
-import InformationPages, {
-  InfoPageItem,
-  InfoPageModelProps,
-} from 'components/InformationPages';
+import InformationPages from 'components/InformationPages';
 import MainButton from 'components/MainButton';
 import ProgressDots from 'components/ProgressDots';
 import { useIsFirstRun } from 'contexts/firstRun';
+
+import type {
+  InfoPageItem,
+  InfoPageModelProps,
+} from 'components/InformationPages';
 
 import {
   ColoredText,

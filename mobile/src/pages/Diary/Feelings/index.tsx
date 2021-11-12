@@ -12,11 +12,12 @@ import {
 } from 'components/GenericSurveyPage/styles';
 import MainButton from 'components/MainButton';
 import SecondaryButton from 'components/SecondaryButton';
-import Survey, { SurveyPage } from 'components/Survey';
+import Survey from 'components/Survey';
 import theme from 'config/theme';
 import { dateFormatVerbose } from 'lib/date-fns';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
+import type { SurveyPage } from 'components/Survey';
 import type { RootStackProps } from 'routes/app';
 
 import { Container, Footer, SecondFooterButtonContainer } from './styles';
