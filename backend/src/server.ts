@@ -3,6 +3,7 @@ import path from 'path';
 import routes from './routes';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+const cors = require('cors');
 dotenv.config()
 //import * as schedule from "node-schedule";
 //import sendPushNotification from './utils/sendPushNotification';
@@ -26,6 +27,7 @@ mongoose.connect(mongo_url, {
 });
 
 app.set('view engine','ejs');
+app.use(cors())
 app.use("/",express.static(path.resolve(__dirname, '..', 'public','apidoc')));
 app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')))
 app.use(express.urlencoded({extended:true}))

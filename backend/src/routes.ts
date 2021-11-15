@@ -20,7 +20,8 @@ import RelatorioDiarioController from './controllers/RelatorioDiarioController';
 import RelatorioSemanalController from './controllers/RelatorioSemanalController';
 import AcessosController from './controllers/AcessosController';
 import AltaController from './controllers/AltaController';
-import TelemetriaController from './controllers/TelemetriaController'
+import TelemetriaController from './controllers/TelemetriaController';
+import AdminController from './controllers/AdminController';
 
 
 const maesController = new MaesController();
@@ -39,6 +40,7 @@ const relatorioSemanalController = new RelatorioSemanalController();
 const acessosController = new AcessosController();
 const altaController = new AltaController();
 const telemetriaController = new TelemetriaController();
+const adminController = new AdminController();
 
 const routes = Router()
 const uploadMiddleware = multer(uploadConfig);
@@ -882,6 +884,10 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
     const {password} = req.body
     res.send(password===process.env.ADMIN_PASSWORD)
  })
+
+ routes.post('/admin/auth', adminController.auth);
+
+ routes.post('/admin/verify',verifyJWT, (req, res) => res.send(true))
 
  routes.get('/login', (req,res) => res.render('login'))
 
