@@ -887,7 +887,19 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
 
  routes.post('/admin/auth', adminController.auth);
 
- routes.post('/admin/verify',verifyJWT, (req, res) => res.send(true))
+ routes.post('/admin/verify', verifyJWT, (req, res) => res.send(true))
+
+ routes.get('/admin/mothers', verifyJWT, adminController.showMothers)
+
+ routes.get('/admin/mothers/:id', verifyJWT, adminController.showMother)
+
+ routes.put('/admin/mothers/:id', verifyJWT, adminController.saveMother)
+
+ routes.get('/admin/mothers/:id/babies', verifyJWT, adminController.showBabies)
+
+ routes.get('/admin/babies/:id', verifyJWT, adminController.showBaby)
+
+ routes.put('/admin/babies/:id', verifyJWT, adminController.saveBaby)
 
  routes.get('/login', (req,res) => res.render('login'))
 

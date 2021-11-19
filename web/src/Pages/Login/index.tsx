@@ -30,7 +30,7 @@ const Login: React.FC = () => {
                               <div className="form-group">
                                   <input type="password" value={password} onChange={ e => setPassword(e.target.value)} className="form-control" placeholder="Digite a senha" required autoFocus/>
                               </div>
-                              <button className="btn btn-lg btn-primary btn-block" type="submit" style={{backgroundColor:'#7D5CD7', borderColor:'#7D5CD7', paddingTop:10}}>
+                              <button className="btn btn-lg btn-primary btn-block" type="submit" style={{backgroundColor:'#7D5CD7', borderColor:'#7D5CD7', marginTop:10}}>
                                   Continuar
                               </button>
                           </div>

@@ -2,6 +2,8 @@
 
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import knex from '../database/connection';
+import moment from 'moment'
 require('dotenv/config');
 
 class AdminController{
@@ -16,6 +18,168 @@ class AdminController{
             })
             res.json({token})
         }else res.sendStatus(401);
+    }
+
+    async showMothers(req:Request,res:Response){
+        const {name} = req.query
+        if(name){
+            const mothers = await knex('mae').select('id','nome').where('nome', 'like', `%${name}%`);
+            res.send(mothers)
+        }
+        else{
+            const mothers = await knex('mae').select('id','nome');
+            res.send(mothers)
+        }
+        
+    }
+
+    async showMother(req:Request,res:Response){
+        const {id} = req.params
+        if(id){
+            const mother = await knex('mae').select(
+                'id',
+                'nome',
+                'email',
+                'data_nascimento',
+                'amamentou_antes',
+                'tempo_amamentacao',
+                'companheiro',
+                'moram_juntos',
+                'escolaridade',
+                'gestacao_planejada',
+                'licenca_maternidade',
+                'ocupacao',
+                'orientacao_prenatal',
+                'primeira_visita',
+                'qtd_filhos_vivos',
+                'qtd_gravidez',
+                'renda',
+                'primeiro_estimulo',
+                'tempo_primeiro_estimulo',
+                'whatsapp',
+                )
+                .where('id',id).first();
+            mother['data_nascimento'] = moment(mother['data_nascimento']).format('yyyy-MM-DD')
+            res.send(mother);
+        }else res.sendStatus(404);     
+    }
+
+    async showBaby(req:Request,res:Response){
+        const {id} = req.params
+        if(id){
+            const baby = await knex('bebe').select('*')
+                .where('id',id).first();
+                baby['data_parto'] = moment(baby['data_parto']).format('yyyy-MM-DD')
+                baby['data_alta'] = moment(baby['data_alta']).format('yyyy-MM-DD')
+            res.send(baby);
+        }else res.sendStatus(404);     
+    }
+
+    async showBabies(req:Request,res:Response){
+        const {id} = req.params
+        if(id){
+            const babies = await knex('bebe').select(
+                'id',
+                'nome'
+                )
+                .where('mae_id',id);
+            res.send(babies);
+        }else res.sendStatus(404);     
+    }
+
+
+    async saveMother(req:Request,res:Response){
+        const {id} = req.params
+        if(id){
+            const {
+                id,
+                nome,
+                email,
+                data_nascimento,
+                amamentou_antes,
+                tempo_amamentacao,
+                companheiro,
+                moram_juntos,
+                escolaridade,
+                gestacao_planejada,
+                licenca_maternidade,
+                ocupacao,
+                orientacao_prenatal,
+                primeira_visita,
+                qtd_filhos_vivos,
+                qtd_gravidez,
+                renda,
+                primeiro_estimulo,
+                tempo_primeiro_estimulo,
+                whatsapp
+            } = req.body
+
+            await knex('mae').update({
+                nome,
+                email, 
+                data_nascimento, 
+                amamentou_antes, 
+                tempo_amamentacao,
+                companheiro,
+                moram_juntos,
+                escolaridade,
+                gestacao_planejada,
+                licenca_maternidade,
+                ocupacao,
+                orientacao_prenatal,
+                primeira_visita,
+                qtd_filhos_vivos,
+                qtd_gravidez,
+                renda,
+                primeiro_estimulo,
+                tempo_primeiro_estimulo,
+                whatsapp
+            }).where('id','=',id)
+            res.sendStatus(200)
+        
+        }else res.sendStatus(404);     
+    }
+
+    async saveBaby(req:Request,res:Response){
+        const {id} = req.params
+        if(id){
+            const {
+                id,
+                nome,
+                apgar1,
+                apgar2,
+                complicacoes,
+                contato_pele,
+                data_alta,
+                data_parto,
+                dias_gest,
+                local,
+                local_cadastro,
+                mae_id,
+                peso,
+                semanas_gest,
+                tipo_parto,
+            } = req.body
+
+            await knex('bebe').update({
+                nome,
+                apgar1,
+                apgar2,
+                complicacoes,
+                contato_pele,
+                data_alta,
+                data_parto,
+                dias_gest,
+                local,
+                local_cadastro,
+                mae_id,
+                peso,
+                semanas_gest,
+                tipo_parto,
+            }).where('id','=',id)
+            res.sendStatus(200)
+        
+        }else res.sendStatus(404);     
     }
     
 }

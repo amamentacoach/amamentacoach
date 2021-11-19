@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import logo from '../../Assets/logo.svg';
 
@@ -10,16 +11,16 @@ const Home: React.FC = () => {
                 <div id="logo" style={{display:'flex', justifyContent:'center'}}>
                   <img src={logo} alt="Logo"/>
                 </div>
-                <button>
-                  <div>
-                    <h1>Teste</h1>
-                  </div>
-                </button>
-                <button>
-                  <div>
-                    <h1>Teste</h1>
-                  </div>
-                </button>
+
+                <div style={{display:'flex', justifyContent:'center', marginTop:'50px'}}>
+                  <NavLink className="link-menu" to="/mothers" style={{flex:1, display:'flex'}}>
+                    <button className="btn-menu" style={{flex:1, margin:5, minHeight:100}}>
+                      Maes
+                    </button>
+                  </NavLink>
+                </div>
+
+
             </div>
         </div>
     </div>

@@ -1,5 +1,4 @@
 import {  useState, useEffect, createContext, useContext } from 'react';
-import Routes from '../Routes';
 import api from '../Services/api';
 
 interface AuthContextData {
