@@ -31,7 +31,7 @@ const FormPickerInput: React.FC<FormPickerProps> = ({
 }) => {
   const [selectedItem, setSelectedItem] = useState(defaultValue || '');
 
-  function handleItemSelected(itemValue: string) {
+  function handleItemSelected(itemValue: string): void {
     setSelectedItem(itemValue);
     onChange(fieldName, itemValue);
   }
@@ -42,7 +42,9 @@ const FormPickerInput: React.FC<FormPickerProps> = ({
       <PickerContainer>
         <Picker
           selectedValue={selectedItem}
-          onValueChange={itemValue => handleItemSelected(itemValue.toString())}>
+          onValueChange={(itemValue): void =>
+            handleItemSelected(itemValue.toString())
+          }>
           {[placeholder, ...options]
             .filter(option => option !== '')
             .map(option => (

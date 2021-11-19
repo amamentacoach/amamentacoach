@@ -42,7 +42,12 @@ module.exports = {
     'react/require-default-props': 'off',
     'require-await': 'off',
     '@typescript-eslint/require-await': 'error',
-    '@typescript-eslint/explicit-function-return-type': 'warn',
+    '@typescript-eslint/explicit-function-return-type': [
+      'warn',
+      {
+        allowExpressions: true,
+      },
+    ],
     '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/no-unused-vars-experimental': 'error',
     '@typescript-eslint/no-unused-vars': 'off',

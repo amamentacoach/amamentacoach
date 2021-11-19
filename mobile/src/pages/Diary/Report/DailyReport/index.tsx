@@ -1,5 +1,5 @@
 import i18n from 'i18n-js';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import DiaryBreastfeedEntry from 'components/DiaryBreastfeedEntry';
 import DiaryRegistryEntry from 'components/DiaryRegistryEntry';
@@ -7,7 +7,13 @@ import { getDailyReport } from 'services/report';
 
 import type { DailyReport as IDailyReport } from 'services/report';
 
-import { Container, EntryContainer, Header } from './styles';
+import {
+  Center,
+  Container,
+  EntryContainer,
+  Header,
+  NoRegistriesMessage,
+} from './styles';
 
 interface DailyReportProps {
   isLoading: boolean;
@@ -38,6 +44,14 @@ const DailyReport: React.FC<DailyReportProps> = ({
 
   return (
     <Container>
+      {dailyReport?.registryEntries.length === 0 && (
+        <Center>
+          <NoRegistriesMessage>
+            {i18n.t('DailyReportPage.NoRegistries')}
+          </NoRegistriesMessage>
+        </Center>
+      )}
+
       {dailyReport?.breastfeedEntries.some(baby => baby.entries.length > 0) && (
         <EntryContainer>
           <Header>{i18n.t('DailyReportPage.Breastfeed')}</Header>

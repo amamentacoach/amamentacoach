@@ -207,7 +207,8 @@
   },
   "DailyReportPage": {
     "Breastfeed": "Amamentações",
-    "Extraction": "Retiradas de leite"
+    "Extraction": "Retiradas de leite",
+    "NoRegistries": "Não existem registros no diário hoje"
   },
   "DiaryBreastfeedPage": {
     "CreateBreastfeedingEntry": "Registrar amamentação"

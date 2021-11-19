@@ -207,7 +207,8 @@
   },
   "DailyReportPage": {
     "Breastfeed": "Breastfeeding",
-    "Extraction": "Breast milk pump records"
+    "Extraction": "Breast milk pump records",
+    "NoRegistries": "There are no diary entries today"
   },
   "DiaryBreastfeedPage": {
     "CreateBreastfeedingEntry": "Register breastfeeding"

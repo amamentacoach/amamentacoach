@@ -21,7 +21,7 @@ const Report: React.FC = () => {
   const [selectedReport, setSelectedReport] = useState(Reports.Daily);
   const themeContext = useContext(ThemeContext);
 
-  function handleChangeReport(value: string) {
+  function handleChangeReport(value: string): void {
     if (!value) {
       return;
     }
@@ -47,8 +47,9 @@ const Report: React.FC = () => {
             fieldName="reportSelected"
             label={i18n.t('ReportPage.Placeholder')}
             defaultValue={i18n.t('Diary')}
+            placeholder={''}
             options={[i18n.t('ReportPage.Daily'), i18n.t('ReportPage.Weekly')]}
-            onChange={(_, fieldValue) => handleChangeReport(fieldValue)}
+            onChange={(_, fieldValue): void => handleChangeReport(fieldValue)}
           />
         </View>
         {isLoading && (
