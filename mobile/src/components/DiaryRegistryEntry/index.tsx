@@ -1,12 +1,13 @@
-import React from 'react';
+import i18n from 'i18n-js';
 
-import { format } from '../../lib/date-fns';
-import { ExtractionEntry } from '../../services/diaryRegistry';
+import { format } from 'lib/date-fns';
+
+import type { ExtractionEntry } from 'services/diaryRegistry';
 
 import { Content, Registry, Row, Text, TextContainer } from './styles';
 
 const DiaryRegistryEntry: React.FC<ExtractionEntry> = ({
-  breast,
+  breasts,
   date,
   duration,
   quantity,
@@ -15,21 +16,28 @@ const DiaryRegistryEntry: React.FC<ExtractionEntry> = ({
     <Registry>
       <Row>
         <TextContainer>
-          <Text>Horário: </Text>
-          <Content>{format(new Date(date), 'kk:mm')}</Content>
+          <Text>{i18n.t('Time')}: </Text>
+          <Content>{format(new Date(date), 'HH:mm')}</Content>
         </TextContainer>
         <TextContainer>
-          <Text>Duração: </Text>
+          <Text>{i18n.t('Duration')}: </Text>
           <Content>{duration} min</Content>
         </TextContainer>
       </Row>
       <Row>
         <TextContainer>
-          <Text>Mama: </Text>
-          <Content>{breast === 'E' ? 'Esquerda' : 'Direita'}</Content>
+          <Text>{i18n.t('Breast')}: </Text>
+          <TextContainer>
+            {breasts.map((breast, index) => (
+              <Content key={breast}>
+                {index > 0 && ', '}
+                {breast === 'E' ? i18n.t('Left') : i18n.t('Right')}
+              </Content>
+            ))}
+          </TextContainer>
         </TextContainer>
         <TextContainer>
-          <Text>Quantidade: </Text>
+          <Text>{i18n.t('Quantity')}: </Text>
           <Content>{quantity} ml</Content>
         </TextContainer>
       </Row>

@@ -1,40 +1,44 @@
-import React, { useEffect, useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import {
-  RouteProp,
   useIsFocused,
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
+import i18n from 'i18n-js';
+import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
+import { ThemeContext } from 'styled-components';
 
-import DiaryBreastfeedEntry from '../../../components/DiaryBreastfeedEntry';
-import MainButton from '../../../components/MainButton';
-import { useAuth } from '../../../contexts/auth';
-import { dateFormatVerbose } from '../../../lib/date-fns';
-import {
-  BreastfeedEntry,
-  listBreastfeedEntries,
-} from '../../../services/diaryRegistry';
+import DiaryBreastfeedEntry from 'components/DiaryBreastfeedEntry';
+import MainButton from 'components/MainButton';
+import { useAuth } from 'contexts/auth';
+import { dateFormatVerbose } from 'lib/date-fns';
+import { listBreastfeedEntries } from 'services/diaryRegistry';
+import { createTelemetryAction } from 'utils/telemetryAction';
+
+import type { RootRouteProp, RootStackProps } from 'routes/app';
+import type { BreastfeedEntry } from 'services/diaryRegistry';
 
 import { Container, DateText, ListContainer, ScrollView } from './styles';
 
-type ScreenParams = {
-  DiaryBreastfeed: {
-    date: string;
-  };
-};
-
 const DiaryBreastfeed: React.FC = () => {
-  const { date } = useRoute<
-    RouteProp<ScreenParams, 'DiaryBreastfeed'>
-  >().params;
-
-  const navigation = useNavigation();
+  const { params } = useRoute<RootRouteProp<'DiaryBreastfeed'>>();
+  const navigation = useNavigation<RootStackProps>();
+  const themeContext = useContext(ThemeContext);
   const { motherInfo } = useAuth();
   const isFocused = useIsFocused();
   const [registries, setRegistries] = useState<BreastfeedEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const selectedDate = params?.date ? new Date(params?.date) : new Date();
+
+  async function handleNewBreastfeedEntry(target: string) {
+    await createTelemetryAction({
+      action: Action.Pressed,
+      context: { screen: AppScreen.DiaryBreastfeed, target },
+    });
+    navigation.navigate('NewBreastfeedEntry');
+  }
 
   useEffect(() => {
     async function fetchRegistries() {
@@ -43,7 +47,7 @@ const DiaryBreastfeed: React.FC = () => {
         // Recebe os registros de todos os bebês da mãe.
         const oldRegistries = await Promise.all(
           motherInfo.babies.map(async ({ id }) =>
-            listBreastfeedEntries(id, new Date(date)),
+            listBreastfeedEntries(id, selectedDate),
           ),
         );
         setRegistries(oldRegistries);
@@ -52,18 +56,22 @@ const DiaryBreastfeed: React.FC = () => {
     }
     if (isFocused) {
       fetchRegistries();
+      createTelemetryAction({
+        action: Action.Opened,
+        context: { screen: AppScreen.DiaryBreastfeed },
+      });
     }
   }, [isFocused]);
 
   return (
     <ScrollView>
       <Container>
-        <DateText>{dateFormatVerbose(new Date(date))}</DateText>
+        <DateText>{dateFormatVerbose(selectedDate)}</DateText>
         <ListContainer>
           {isLoading ? (
             <ActivityIndicator
               size="large"
-              color="#7d5cd7"
+              color={themeContext.primary}
               animating={isLoading}
             />
           ) : (
@@ -73,8 +81,12 @@ const DiaryBreastfeed: React.FC = () => {
           )}
         </ListContainer>
         <MainButton
-          text="Registrar amamentação"
-          onPress={() => navigation.navigate('NewBreastfeedEntry')}
+          text={i18n.t('DiaryBreastfeedPage.CreateBreastfeedingEntry')}
+          onPress={() =>
+            handleNewBreastfeedEntry(
+              'DiaryBreastfeedPage.CreateBreastfeedingEntry',
+            )
+          }
         />
       </Container>
     </ScrollView>

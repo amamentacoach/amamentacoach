@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 interface SelectedImageProps {
   width: number;
+  isVisible?: boolean;
 }
 
 export const ScrollView = styled.ScrollView.attrs(() => ({
@@ -21,11 +22,12 @@ export const Text = styled.Text`
 `;
 
 export const SelectedImage = styled.Image<SelectedImageProps>`
-  width: ${({ width }) => width}px;
   flex: 1;
+  width: ${({ width }) => width}px;
+  display: ${({ isVisible = true }) => (isVisible ? 'flex' : 'none')};
 `;
 
-export const FormContainer = styled.View`
+export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;

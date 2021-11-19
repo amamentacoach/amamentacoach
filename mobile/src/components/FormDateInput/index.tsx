@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { useState } from 'react';
 import { Platform, TouchableOpacity } from 'react-native';
 
-import { format } from '../../lib/date-fns';
+import { format } from 'lib/date-fns';
 
 import {
   Container,
@@ -41,9 +40,9 @@ const FormDateInput: React.FC<FormDateProps> = ({
       return '';
     }
     if (mode === 'time') {
-      return format(dateToFormat, 'kk:mm');
+      return format(dateToFormat, 'HH:mm');
     }
-    return format(dateToFormat, 'dd/MM/yyyy');
+    return format(dateToFormat, 'P');
   }
 
   // Formata a data salva para ser armazenada no useState do componente e valor final do formulário.
@@ -52,7 +51,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
       return '';
     }
     if (mode === 'time') {
-      return format(dateToFormat, 'kk:mm');
+      return format(dateToFormat, 'HH:mm');
     }
     return format(dateToFormat, 'yyyy-MM-dd');
   }

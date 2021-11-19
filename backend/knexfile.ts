@@ -6,7 +6,7 @@ module.exports = {
   connection:process.env.DATABASE_URL ||{
       host:'localhost',
       user:'postgres',
-      password:'postgres',
+      password:'joao',
       database:'amamentacoach',
   },
 

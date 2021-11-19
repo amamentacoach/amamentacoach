@@ -1,31 +1,45 @@
-import React from 'react';
+import { Action, AppScreen } from '@common/Telemetria';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
+import { useEffect } from 'react';
 
-import { useNavigation } from '@react-navigation/native';
+import { useAuth } from 'contexts/auth';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
-import { useAuth } from '../../../contexts/auth';
+import type { RootStackProps } from 'routes/app';
 
 import { Line, OptionButton, OptionText, ScrollView } from './styles';
 
-const Profile: React.FC = () => {
-  const navigation = useNavigation();
+const ProfileMenu: React.FC = () => {
+  const navigation = useNavigation<RootStackProps>();
+  const isFocused = useIsFocused();
   const { signOut } = useAuth();
+
+  useEffect(() => {
+    if (isFocused) {
+      createTelemetryAction({
+        action: Action.Opened,
+        context: { screen: AppScreen.ProfileMenu },
+      });
+    }
+  }, [isFocused]);
 
   return (
     <ScrollView>
       <OptionButton onPress={() => navigation.navigate('NewPassword')}>
-        <OptionText>Alterar senha</OptionText>
+        <OptionText>{i18n.t('ProfileMenuPage.ChangePassword')}</OptionText>
       </OptionButton>
       <Line />
       <OptionButton onPress={() => navigation.navigate('MenuTermsOfService')}>
-        <OptionText>Termo de Consentimento</OptionText>
+        <OptionText>{i18n.t('TermsOfService')}</OptionText>
       </OptionButton>
       <Line />
       <OptionButton onPress={signOut}>
-        <OptionText>Sair</OptionText>
+        <OptionText>{i18n.t('Leave')}</OptionText>
       </OptionButton>
       <Line />
     </ScrollView>
   );
 };
 
-export default Profile;
+export default ProfileMenu;

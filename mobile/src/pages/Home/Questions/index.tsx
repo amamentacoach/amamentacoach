@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
+import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { FlatList } from 'react-native';
+import { ThemeContext } from 'styled-components';
 
-import { FAQ, listUserQuestions } from '../../../services/questions';
+import { listUserQuestions } from 'services/questions';
+import { createTelemetryAction } from 'utils/telemetryAction';
+
+import type { RootStackProps } from 'routes/app';
+import type { FAQ } from 'services/questions';
 
 import {
   AddQuestionButton,
@@ -15,7 +20,7 @@ import {
   QuestionContainer,
 } from './styles';
 
-import AddIcon from '../../../../assets/images/icons/ic_add.svg';
+import AddIcon from '@assets/images/icons/ic_add.svg';
 
 interface MessageEntryProps {
   question: string;
@@ -24,13 +29,14 @@ interface MessageEntryProps {
 }
 
 const Questions: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
+  const themeContext = useContext(ThemeContext);
 
   const [questions, setQuestions] = useState<FAQ[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Adiciona um botão na parte superior direita da tela, permitindo registrar uma nova pergunta.
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <AddQuestionButton
@@ -51,6 +57,11 @@ const Questions: React.FC = () => {
         setLoading(false);
       }
     }
+
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.Questions },
+    });
     fetchQuestions();
   }, []);
 
@@ -73,7 +84,11 @@ const Questions: React.FC = () => {
         )}
         keyExtractor={item => item.question}
         ListFooterComponent={() => (
-          <LoadingIndicator size="large" color="#7d5cd7" animating={loading} />
+          <LoadingIndicator
+            size="large"
+            color={themeContext.primary}
+            animating={loading}
+          />
         )}
         showsVerticalScrollIndicator={false}
       />

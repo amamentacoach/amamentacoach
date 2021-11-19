@@ -1,33 +1,40 @@
-import React, { useState } from 'react';
+import { Action, AppScreen } from '@common/Telemetria';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 
-import { useNavigation } from '@react-navigation/native';
+import Modal from 'components/Modal';
+import OptionsList from 'components/OptionList';
+import { useAuth } from 'contexts/auth';
+import { storageIsToday } from 'lib/date-fns';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
-import Modal from '../../../components/Modal';
-import OptionsList, { Options } from '../../../components/OptionList';
-import { useAuth } from '../../../contexts/auth';
-import { storageIsToday } from '../../../lib/date-fns';
+import type { OptionListEntry } from 'components/OptionList';
+import type { RootStackProps } from 'routes/app';
 
 import { Header, HeaderTitle, ScrollView } from './styles';
 
-import SurveysFour from '../../../../assets/images/surveys_four.svg';
-import SurveysOne from '../../../../assets/images/surveys_one.svg';
-import SurveysThree from '../../../../assets/images/surveys_three.svg';
-import SurveysTwo from '../../../../assets/images/surveys_two.svg';
+import SurveysFour from '@assets/images/surveys_four.svg';
+import SurveysOne from '@assets/images/surveys_one.svg';
+import SurveysThree from '@assets/images/surveys_three.svg';
+import SurveysTwo from '@assets/images/surveys_two.svg';
 
 const SurveyMenu: React.FC = () => {
   const { motherInfo } = useAuth();
-  const navigation = useNavigation();
-
+  const navigation = useNavigation<RootStackProps>();
+  const isFocused = useIsFocused();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  let options: Options[] = [
+  let options: OptionListEntry[] = [
     {
       image: SurveysOne,
-      title: 'Amamentar um prematuro',
+      title: i18n.t('PrematureBreastfeed'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (
-          await storageIsToday('@AmamentaCoach:DiarySurveyBreastfeedLastDate')
+          !(await storageIsToday(
+            '@AmamentaCoach:DiarySurveyBreastfeedLastDate',
+          ))
         ) {
           navigation.navigate('SurveyBreastfeed');
         } else {
@@ -37,11 +44,13 @@ const SurveyMenu: React.FC = () => {
     },
     {
       image: SurveysTwo,
-      title: 'Motivação',
+      title: i18n.t('SurveyTitles.SurveyMotivation'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
         if (
-          await storageIsToday('@AmamentaCoach:DiarySurveyMotivationLastDate')
+          !(await storageIsToday(
+            '@AmamentaCoach:DiarySurveyMotivationLastDate',
+          ))
         ) {
           navigation.navigate('SurveyMotivation');
         } else {
@@ -51,10 +60,10 @@ const SurveyMenu: React.FC = () => {
     },
     {
       image: SurveysThree,
-      title: 'Sobre ajuda',
+      title: i18n.t('SurveyTitles.SurveyHelp'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await storageIsToday('@AmamentaCoach:DiarySurveyHelpLastDate')) {
+        if (!(await storageIsToday('@AmamentaCoach:DiarySurveyHelpLastDate'))) {
           navigation.navigate('SurveyHelp');
         } else {
           setIsModalVisible(true);
@@ -69,11 +78,11 @@ const SurveyMenu: React.FC = () => {
       ...options,
       {
         image: SurveysFour,
-        title: 'Sobre a participação do pai',
+        title: i18n.t('SurveyMenuPage.Father'),
         onPress: async () => {
           // Checa se o usuário já respondeu o formulário no dia.
           if (
-            await storageIsToday('@AmamentaCoach:DiarySurveyFatherLastDate')
+            !(await storageIsToday('@AmamentaCoach:DiarySurveyFatherLastDate'))
           ) {
             navigation.navigate('SurveyFather');
           } else {
@@ -84,13 +93,22 @@ const SurveyMenu: React.FC = () => {
     ];
   }
 
+  useEffect(() => {
+    if (isFocused) {
+      createTelemetryAction({
+        action: Action.Opened,
+        context: { screen: AppScreen.SurveyMenu },
+      });
+    }
+  }, [isFocused]);
+
   return (
     <>
       <Modal
-        content="Ops! Você já respondeu a enquete hoje. Volte novamente amanhã."
+        content={i18n.t('ErrorSurveyAlreadyAnswered')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             onPress: () => setIsModalVisible(false),
           },
         ]}
@@ -98,7 +116,7 @@ const SurveyMenu: React.FC = () => {
       />
       <ScrollView>
         <Header>
-          <HeaderTitle>Enquetes</HeaderTitle>
+          <HeaderTitle>{i18n.t('Surveys')}</HeaderTitle>
         </Header>
         <OptionsList options={options} />
       </ScrollView>

@@ -2,9 +2,11 @@ import express  from 'express';
 import path from 'path';
 import routes from './routes';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
+const cors = require('cors');
 dotenv.config()
-import * as schedule from "node-schedule";
-import sendPushNotification from './utils/sendPushNotification';
+//import * as schedule from "node-schedule";
+//import sendPushNotification from './utils/sendPushNotification';
 
 const app = express()
 
@@ -14,8 +16,18 @@ const app = express()
 //rule.hour = 21;
 //rule.minute = 0;
 //schedule.scheduleJob(rule,sendPushNotification)
+const mongo_url = process.env.MONGO_URL || ""
+
+
+mongoose.connect(mongo_url, {
+    useNewUrlParser:true,
+    useUnifiedTopology:true,
+    useCreateIndex:true,
+    useFindAndModify:false
+});
 
 app.set('view engine','ejs');
+app.use(cors())
 app.use("/",express.static(path.resolve(__dirname, '..', 'public','apidoc')));
 app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')))
 app.use(express.urlencoded({extended:true}))

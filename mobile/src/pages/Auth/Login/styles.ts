@@ -1,24 +1,25 @@
 import styled from 'styled-components/native';
 
-import ImageWrapper from '../../../components/ImageWrapper';
+import ImageWrapper from 'components/ImageWrapper';
 
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
+  showsVerticalScrollIndicator: false,
 }))`
   flex: 1;
 `;
 
 export const Header = styled(ImageWrapper)`
-  align-items: center;
-  max-height: 200px;
-  margin: 30px auto 30px auto;
-  justify-content: center;
+  height: 200px;
+  align-self: center;
+  margin-top: 24px;
+  margin-bottom: 6px;
 `;
 
 export const FormContainer = styled.View`
   flex: 1;
-  margin: 0 24px;
+  padding: 24px;
 `;
 
 export const ForgotPasswordText = styled.Text`
@@ -38,7 +39,7 @@ export const SignUpContainer = styled.View`
 `;
 
 export const NoAccountText = styled.Text`
-  font-family: 'OpenSans-Bold';
+  font-family: 'OpenSans-Regular';
   font-size: 16px;
   color: ${props => props.theme.grey};
   margin: 0 auto;

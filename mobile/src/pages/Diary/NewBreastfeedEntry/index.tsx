@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
+import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 
-import FormDateInput from '../../../components/FormDateInput';
-import FormPickerInput from '../../../components/FormPickerInput';
-import FormTextInput from '../../../components/FormTextInput';
-import MainButton from '../../../components/MainButton';
-import { useAuth } from '../../../contexts/auth';
-import { createBreastfeedEntry } from '../../../services/diaryRegistry';
+import FormDateInput from 'components/FormDateInput';
+import FormPickerInput from 'components/FormPickerInput';
+import FormTextInput from 'components/FormTextInput';
+import MainButton from 'components/MainButton';
+import { useAuth } from 'contexts/auth';
+import { createBreastfeedEntry } from 'services/diaryRegistry';
+import { createTelemetryAction } from 'utils/telemetryAction';
+
+import type { RootStackProps } from 'routes/app';
 
 import {
   ErrorContainer,
@@ -17,6 +21,7 @@ import {
   FirstOption,
   FormContainer,
   FormContent,
+  Header,
   MultipleOptionContainer,
   OptionHeader,
   OptionText,
@@ -25,8 +30,8 @@ import {
   SubmitButtonContainer,
 } from './styles';
 
-import CheckedBox from '../../../../assets/images/icons/checkbox_checked.svg';
-import UncheckedBox from '../../../../assets/images/icons/checkbox_unchecked.svg';
+import CheckedBox from '@assets/images/icons/checkbox_checked.svg';
+import UncheckedBox from '@assets/images/icons/checkbox_unchecked.svg';
 
 interface FormValues {
   babyName: string;
@@ -36,11 +41,11 @@ interface FormValues {
   breastRight: string;
 }
 
-const NewDiaryRegistry: React.FC = () => {
-  const navigation = useNavigation();
+const NewBreastfeedEntry: React.FC = () => {
+  const navigation = useNavigation<RootStackProps>();
   const { motherInfo } = useAuth();
-
   const [isSendingForm, setIsSendingForm] = useState(false);
+
   const formInitialValues = {
     babyName: '',
     time: '',
@@ -51,25 +56,21 @@ const NewDiaryRegistry: React.FC = () => {
   const newDiaryRegistrySchema = Yup.object()
     .shape(
       {
-        babyName: Yup.string().required('Campo obrigatório'),
-        time: Yup.string().required('Campo obrigatório'),
+        babyName: Yup.string().required(i18n.t('Yup.Required')),
+        time: Yup.string().required(i18n.t('Yup.Required')),
         duration: Yup.number()
-          .integer('Deve ser um número inteiro')
-          .typeError('Deve ser um número inteiro')
-          .positive('Deve ser maior que 0')
-          .required('Campo obrigatório'),
+          .integer(i18n.t('Yup.MustBeIntegerError'))
+          .typeError(i18n.t('Yup.MustBeIntegerError'))
+          .positive(i18n.t('Yup.MinError', { num: 0 }))
+          .required(i18n.t('Yup.Required')),
         breastLeft: Yup.string().when('breastRight', {
           is: undefined,
-          then: Yup.string().required(
-            'Pelo menos uma opção deve ser selecionada',
-          ),
+          then: Yup.string().required(i18n.t('Yup.NoOptionSelectedError')),
           otherwise: Yup.string(),
         }),
         breastRight: Yup.string().when('breastLeft', {
           is: undefined,
-          then: Yup.string().required(
-            'Pelo menos uma opção deve ser selecionada',
-          ),
+          then: Yup.string().required(i18n.t('Yup.NoOptionSelectedError')),
           otherwise: Yup.string(),
         }),
       },
@@ -105,14 +106,33 @@ const NewDiaryRegistry: React.FC = () => {
     now.setHours(minutes, seconds);
 
     setIsSendingForm(true);
-    await createBreastfeedEntry(
+    const status = await createBreastfeedEntry(
       selectedBaby.id,
       breast,
       parseInt(duration, 10),
       now,
     );
-    navigation.navigate('DiaryBreastfeed');
+
+    if (status) {
+      await createTelemetryAction({
+        action: Action.Pressed,
+        context: {
+          screen: AppScreen.NewBreastfeedEntry,
+          target: 'Actions.Save',
+        },
+      });
+      navigation.navigate('DiaryBreastfeed');
+    } else {
+      setIsSendingForm(false);
+    }
   }
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.NewBreastfeedEntry },
+    });
+  }, []);
 
   return (
     <ScrollView>
@@ -130,34 +150,37 @@ const NewDiaryRegistry: React.FC = () => {
           values,
         }) => (
           <FormContainer>
+            <Header>{i18n.t('NewBreastfeedEntryPage.Header')}</Header>
             <FormContent>
               <FormPickerInput
                 fieldName="babyName"
                 options={motherInfo.babies.map(baby => baby.name.toString())}
-                placeholder="Selecionar bebê"
+                placeholder={i18n.t('NewBreastfeedEntryPage.BabyPlaceholder')}
                 onChange={setFieldValue}
                 error={errors.babyName}
               />
 
               <FormDateInput
-                label="Horário"
+                label={i18n.t('Time')}
                 fieldName="time"
-                placeholder="Insira o horário da mamada"
+                placeholder={i18n.t(
+                  'NewBreastfeedEntryPage.BreastfeedTimePlaceholder',
+                )}
                 mode="time"
                 onChange={setFieldValue}
                 error={errors.time}
               />
 
               <FormTextInput
-                label="Duração"
+                label={i18n.t('Duration')}
                 value={values.duration}
-                placeholder="Insira a duração (min)"
+                placeholder={i18n.t('Placeholder.Duration')}
                 keyboardType="number-pad"
                 onChangeText={handleChange('duration')}
                 error={errors.duration}
               />
 
-              <OptionHeader>Mama</OptionHeader>
+              <OptionHeader>{i18n.t('Breast')}</OptionHeader>
               <MultipleOptionContainer>
                 <FirstOption
                   activeOpacity={1}
@@ -169,7 +192,7 @@ const NewDiaryRegistry: React.FC = () => {
                     }
                   }}>
                   {values.breastLeft ? <CheckedBox /> : <UncheckedBox />}
-                  <OptionText>Esquerda</OptionText>
+                  <OptionText>{i18n.t('Left')}</OptionText>
                 </FirstOption>
                 <SecondOption
                   activeOpacity={1}
@@ -181,7 +204,7 @@ const NewDiaryRegistry: React.FC = () => {
                     }
                   }}>
                   {values.breastRight ? <CheckedBox /> : <UncheckedBox />}
-                  <OptionText>Direita</OptionText>
+                  <OptionText>{i18n.t('Right')}</OptionText>
                 </SecondOption>
               </MultipleOptionContainer>
               <ErrorContainer>
@@ -197,7 +220,11 @@ const NewDiaryRegistry: React.FC = () => {
               <MainButton
                 onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
-                text={isSendingForm ? 'Salvando...' : 'Salvar'}
+                text={
+                  isSendingForm
+                    ? i18n.t('Status.Saving')
+                    : i18n.t('Actions.Save')
+                }
               />
             </SubmitButtonContainer>
           </FormContainer>
@@ -207,4 +234,4 @@ const NewDiaryRegistry: React.FC = () => {
   );
 };
 
-export default NewDiaryRegistry;
+export default NewBreastfeedEntry;

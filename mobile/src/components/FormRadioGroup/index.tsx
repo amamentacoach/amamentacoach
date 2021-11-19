@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 
-import FormTextInput from '../FormTextInput';
+import FormTextInput from 'components/FormTextInput';
 
 import {
   Container,
@@ -42,7 +43,9 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   initialValues,
   onChange,
 }) => {
-  const availableOptions = displayOtherField ? [...options, 'Outro'] : options;
+  const availableOptions = displayOtherField
+    ? [...options, i18n.t('Other')]
+    : options;
 
   // Inicia todas as opções como não selecionadas
   const [selectedIndexes, setSelectedIndexes] = useState<boolean[]>(
@@ -139,7 +142,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
       {displayOtherField && selectedIndexes[selectedIndexes.length - 1] && (
         <OtherInputContainer>
           <FormTextInput
-            placeholder="Resposta para outro "
+            placeholder={i18n.t('RadioGroupComponent.OtherFieldAnswer')}
             onChangeText={handleOtherFieldChange}
           />
         </OtherInputContainer>

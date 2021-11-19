@@ -20,6 +20,8 @@ import RelatorioDiarioController from './controllers/RelatorioDiarioController';
 import RelatorioSemanalController from './controllers/RelatorioSemanalController';
 import AcessosController from './controllers/AcessosController';
 import AltaController from './controllers/AltaController';
+import TelemetriaController from './controllers/TelemetriaController';
+import AdminController from './controllers/AdminController';
 
 
 const maesController = new MaesController();
@@ -37,6 +39,8 @@ const relatorioDiarioController = new RelatorioDiarioController();
 const relatorioSemanalController = new RelatorioSemanalController();
 const acessosController = new AcessosController();
 const altaController = new AltaController();
+const telemetriaController = new TelemetriaController();
+const adminController = new AdminController();
 
 const routes = Router()
 const uploadMiddleware = multer(uploadConfig);
@@ -67,7 +71,8 @@ const uploadMiddleware = multer(uploadConfig);
  *          "qtd_filhos_vivos": 3,
  *          "orientacao_prenatal": true,
  *          "ocupacao": true, // Em casa (do lar) = false | Fora de casa = true
- *          "licenca_maternidade": 6 // Qtd de meses de licenca maternidade - Caso nao tenha: null
+ *          "licenca_maternidade": 6, // Qtd de meses de licenca maternidade - Caso nao tenha: null
+ *          "localizacao:": "HU-UEL"
  *      }
  * 
  * @apiSuccessExample {json} Sucesso
@@ -97,6 +102,7 @@ routes.post('/maes',maesController.create);
  *   "imagem_bebe": null,
  *   "imagem_pai": null,
  *   "companheiro": true,
+ *   "localizacao": "HU-UEL",
  *   "bebes": [
  *       {
  *          "id": 1,
@@ -610,7 +616,6 @@ routes.get('/enviarNotificacoes',async (req,res)=>{
  * [
  *   {
  *     "id": 1,
- *     "pergunta": "Pra você, qual é a melhor parte de dedicar-se a amamentar um bebê prematuro?",
  *     "alternativas": [
  *       {
  *         "descricao": "Sentimento de empoderamento (lidar com este desafio me faz acreditar que sou capaz de outras grandes coisas)",
@@ -636,7 +641,6 @@ routes.get('/enviarNotificacoes',async (req,res)=>{
  *   },
  *   {
  *     "id": 2,
- *     "pergunta": "O que te motiva a continuar tentando amamentar?",
  *     "alternativas": [
  *       {
  *         "descricao": "O incentivo que estou recebendo da minha família",
@@ -654,7 +658,6 @@ routes.get('/enviarNotificacoes',async (req,res)=>{
  *   },
  *   {
  *     "id": 3,
- *     "pergunta": "Você sente que está recebendo toda a ajuda de que precisa para continuar tentando amamentar seu bebê?",
  *     "alternativas": [
  *       {
  *         "descricao": "Parcialmente, tanto dos profissionais quanto da minha família",
@@ -823,8 +826,7 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
  *            ]
  *          }
  *        ],
- *        "ordenhas": [],
- *        "perguntas": []
+ *        "ordenhas": []
  *      }
  *
  */
@@ -844,32 +846,32 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
  *    HTTP/1.1 200 OK
  *  [
  *    {
- *      "pergunta": "Como me senti:",
+ *      "pergunta": 4,
  *      "respostas": [
  *        "Feliz",
  *        "Orgulhosa"
  *      ]
  *    },
  *    {
- *      "pergunta": "Como meu bebê esteve se alimentando:",
+ *      "pergunta": 5,
  *      "respostas": []
  *    },
  *    {
- *      "pergunta": "Minhas Metas para Pensamentos e Sentimentos",
+ *      "pergunta": 8,
  *      "respostas": []
  *    },
  *    {
- *      "pergunta": "Minhas Metas para Ações",
+ *      "pergunta": 9,
  *      "respostas": []
  *    },
  *    {
- *      "pergunta": "Precisei de uma ajuda específica...",
+ *      "pergunta": 10,
  *      "respostas": [
  *        "Sim"
  *      ]
  *    },
  *    {
- *      "pergunta": "Meu ombro amigo da semana:",
+ *      "pergunta": 11,
  *      "respostas": []
  *    }
  *  ]
@@ -882,6 +884,22 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
     const {password} = req.body
     res.send(password===process.env.ADMIN_PASSWORD)
  })
+
+ routes.post('/admin/auth', adminController.auth);
+
+ routes.post('/admin/verify', verifyJWT, (req, res) => res.send(true))
+
+ routes.get('/admin/mothers', verifyJWT, adminController.showMothers)
+
+ routes.get('/admin/mothers/:id', verifyJWT, adminController.showMother)
+
+ routes.put('/admin/mothers/:id', verifyJWT, adminController.saveMother)
+
+ routes.get('/admin/mothers/:id/babies', verifyJWT, adminController.showBabies)
+
+ routes.get('/admin/babies/:id', verifyJWT, adminController.showBaby)
+
+ routes.put('/admin/babies/:id', verifyJWT, adminController.saveBaby)
 
  routes.get('/login', (req,res) => res.render('login'))
 
@@ -969,5 +987,26 @@ routes.get('/politica-de-privacidade',(req,res)=>{
  *
  */
  routes.post('/maes/revogar',verifyJWT,maesController.revogar);
+
+ /**
+ * @api {post} /telemetria Informar acao 
+ * @apiDescription Informa as acoes da mae no App
+ * @apiGroup Telemetria
+ * @apiHeader {String} authorization Token de acesso.
+ * 
+ * @apiParamExample {json} Exemplo Request:
+ *      [
+ *          {
+ *              "action":0,
+ *              "context":{
+ *                  "screen":0,
+ *                  "target":"SUBMIT_BTN"
+ *              },
+ *              "created_at": "2021-09-15T11:38:23.846Z"
+ *          }
+ *      ]
+ *
+ */
+  routes.post('/telemetria',verifyJWT,telemetriaController.create);
 
 export default routes;

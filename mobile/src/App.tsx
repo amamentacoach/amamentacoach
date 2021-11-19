@@ -1,52 +1,32 @@
-import React, { useEffect, useState } from 'react';
-
 import { NavigationContainer } from '@react-navigation/native';
-import { enCA, ptBR } from 'date-fns/locale';
-import i18n from 'i18n-js';
-import { I18nManager, StatusBar } from 'react-native';
+import { useEffect, useState } from 'react';
+import { StatusBar } from 'react-native';
 import * as RNLocalize from 'react-native-localize';
 import { ThemeProvider } from 'styled-components/native';
 
-import theme from './config/theme';
-import { AuthProvider } from './contexts/auth';
-import { IsFirstRunProvider } from './contexts/firstRun';
-import { dateFNSSetLocale } from './lib/date-fns';
-import Routes from './routes/routes';
+import theme from 'config/theme';
+import { AuthProvider } from 'contexts/auth';
+import { IsFirstRunProvider } from 'contexts/firstRun';
+import Routes from 'routes/routes';
+import { setI18nConfig } from 'utils/localize';
+import { submitTelemetryActions } from 'utils/telemetryAction';
 
 const App: React.FC = () => {
   const [isLocalizationLoaded, setIsLocalizationLoaded] = useState(false);
 
-  const setI18nConfig = async () => {
-    const translationPaths: {
-      [key: string]: { translation: object; locale: Locale };
-    } = {
-      pt: { translation: require('./translations/pt.json'), locale: ptBR },
-      en: { translation: require('./translations/en.json'), locale: enCA },
-    };
-
-    // Caso nenhuma língua seja encontrada é utilizado português.
-    const fallback = { languageTag: 'pt', isRTL: false };
-
-    const { languageTag, isRTL } =
-      RNLocalize.findBestAvailableLanguage(Object.keys(translationPaths)) ||
-      fallback;
-
-    I18nManager.forceRTL(isRTL);
-    i18n.translations = {
-      [languageTag]: translationPaths[languageTag].translation,
-    };
-    i18n.locale = languageTag;
-    dateFNSSetLocale(translationPaths[languageTag].locale);
-  };
+  // Tentar enviar todas as ações de telemetria armazenadas no dispositivo.
+  async function submitTelemetry() {
+    let status = true;
+    while (status) {
+      status = await submitTelemetryActions();
+    }
+  }
 
   useEffect(() => {
-    async function setLocale() {
-      await setI18nConfig();
-      RNLocalize.addEventListener('change', setI18nConfig);
-      setIsLocalizationLoaded(true);
-    }
-    setLocale();
-
+    submitTelemetry();
+    setI18nConfig();
+    RNLocalize.addEventListener('change', setI18nConfig);
+    setIsLocalizationLoaded(true);
     return () => {
       RNLocalize.removeEventListener('change', setI18nConfig);
     };

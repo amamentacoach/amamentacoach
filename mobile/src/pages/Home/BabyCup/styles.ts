@@ -9,7 +9,7 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
   keyboardShouldPersistTaps: 'handled',
 }))`
   flex: 1;
-  padding: 24px;
+  padding: 0 24px;
 `;
 
 export const VideoLink = styled.Text`
@@ -17,6 +17,7 @@ export const VideoLink = styled.Text`
   font-family: 'OpenSans-Bold';
   font-size: 18px;
   align-self: center;
+  margin-top: 24px;
 `;
 
 export const LoadingContainer = styled.View`
@@ -36,7 +37,7 @@ export const InstructionContainer = styled.View`
   flex: 1;
   flex-direction: row;
   align-items: flex-start;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 `;
 
 export const Step = styled.Text`

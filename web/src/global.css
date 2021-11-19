@@ -1,0 +1,19 @@
+body{
+    background-color: #7D5CD7;
+}
+
+.btn-menu{
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-menu:hover{
+    background-color: rgba(231, 223, 223, 0.473);
+    border: none;
+    border-radius: 10px;
+}
+
+.link-menu{
+    text-decoration: none;
+}

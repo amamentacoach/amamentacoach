@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
-
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { Formik, FormikErrors } from 'formik';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { Formik } from 'formik';
+import i18n from 'i18n-js';
+import { useState } from 'react';
 import { View } from 'react-native';
 import * as Yup from 'yup';
 
-import FormDateInput from '../../../components/FormDateInput';
-import FormPickerInput from '../../../components/FormPickerInput';
-import FormRadioGroupInput from '../../../components/FormRadioGroup';
-import FormTextInput from '../../../components/FormTextInput';
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
-import SecondaryButton from '../../../components/SecondaryButton';
-import { BabySignUpInfo, MotherSignUpInfo } from '../../../services/auth';
+import FormDateInput from 'components/FormDateInput';
+import FormPickerInput from 'components/FormPickerInput';
+import FormRadioGroupInput from 'components/FormRadioGroup';
+import FormTextInput from 'components/FormTextInput';
+import MainButton from 'components/MainButton';
+import Modal from 'components/Modal';
+import SecondaryButton from 'components/SecondaryButton';
+
+import type { FormikErrors } from 'formik';
+import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
+import type { BabySignUpInfo } from 'services/auth';
 
 import {
   ApgarHelpButton,
@@ -31,90 +34,107 @@ import {
   SubOptionsContainer,
 } from './styles';
 
-import HelpIcon from '../../../../assets/images/icons/ic_question.svg';
+import HelpIcon from '@assets/images/icons/ic_question.svg';
 
 interface Baby {
   id: number;
   name: string;
   birthday: string;
-  weight: string;
-  birthType: string;
-  touched: string;
-  difficulties: string;
+  weight: number | null;
+  birthType: boolean | null;
+  touched: boolean | null;
+  difficulties: boolean | null;
   gestationWeeks: string;
   gestationDays: string;
-  apgar1: string | undefined;
-  apgar2: string | undefined;
+  apgar1?: number | null;
+  apgar2?: number | null;
   birthLocation: string;
 }
 
 interface FormValues {
-  numberOfBabies: string;
+  numberOfBabies: number;
   babies: Baby[];
 }
 
-type ScreenParams = {
-  BabyForm: {
-    motherInfo: MotherSignUpInfo;
-  };
-};
-
-const babyFormSchema = Yup.object({
-  numberOfBabies: Yup.number()
-    .min(0, 'Pelo menos um bebê deve ser registrado')
-    .required('Campo obrigatório'),
-  babies: Yup.array()
-    .of(
-      Yup.object().shape(
-        {
-          id: Yup.number(),
-          name: Yup.string().required('Campo obrigatório'),
-          birthday: Yup.string().required('Campo obrigatório'),
-          weight: Yup.number()
-            .typeError('Deve ser um número')
-            .min(0, 'Deve ser maior ou igual a 0')
-            .required('Campo obrigatório'),
-          birthType: Yup.string().required('Campo obrigatório'),
-          difficulties: Yup.string().required('Campo obrigatório'),
-          gestationWeeks: Yup.string().required('Campo obrigatório'),
-          gestationDays: Yup.string().required('Campo obrigatório'),
-          apgar1: Yup.number()
-            .when('apgar2', {
-              is: undefined,
-              then: Yup.number().typeError('Deve ser um número inteiro'),
-              otherwise: Yup.number()
-                .typeError('Deve ser um número inteiro')
-                .required('Apgar 1 também deve ser fornecido'),
-            })
-            .integer('Deve ser um número inteiro')
-            .min(0, 'Deve ser maior ou igual a 0')
-            .max(10, 'Deve ser menor ou igual a 10'),
-          apgar2: Yup.number()
-            .when('apgar1', {
-              is: undefined,
-              then: Yup.number().typeError('Deve ser um número inteiro'),
-              otherwise: Yup.number()
-                .typeError('Deve ser um número inteiro')
-                .required('Apgar 2 também deve ser fornecido'),
-            })
-            .integer('Deve ser um número inteiro')
-            .min(0, 'Deve ser maior ou igual a 0')
-            .max(10, 'Deve ser menor ou igual a 10'),
-          birthLocation: Yup.string().required('Campo obrigatório'),
-        },
-        [['apgar1', 'apgar2']],
-      ),
-    )
-    .min(1, 'Pelo menos um bebê deve ser cadastrado')
-    .required(),
-}).required();
-
 const BabyForm: React.FC = () => {
-  const navigation = useNavigation();
-  const { motherInfo } = useRoute<RouteProp<ScreenParams, 'BabyForm'>>().params;
+  const navigation = useNavigation<AuthStackProps>();
+  const { motherInfo } = useRoute<AuthRouteProp<'BabyForm'>>().params;
 
   const [isApgarModalVisible, setIsApgarModalVisible] = useState(false);
   const [babyCount, setBabyCount] = useState(0);
+
+  const babyFormSchema: Yup.SchemaOf<FormValues> = Yup.object({
+    numberOfBabies: Yup.number()
+      .min(1, i18n.t('BabyFormPage.Yup.BabyError'))
+      .required(i18n.t('Yup.Required')),
+    babies: Yup.array()
+      .of(
+        Yup.object().shape(
+          {
+            id: Yup.number().required(''),
+            name: Yup.string().required(i18n.t('Yup.Required')),
+            birthday: Yup.string().required(i18n.t('Yup.Required')),
+            weight: Yup.number()
+              .typeError(i18n.t('Yup.MustBeNumberError'))
+              .min(0, i18n.t('Yup.MinEqualError', { num: 0 }))
+              .nullable()
+              .required(i18n.t('Yup.Required')),
+            birthType: Yup.boolean()
+              .nullable()
+              .required(i18n.t('Yup.Required')),
+            touched: Yup.boolean().nullable().required(i18n.t('Yup.Required')),
+            difficulties: Yup.boolean()
+              .nullable()
+              .required(i18n.t('Yup.Required')),
+            gestationWeeks: Yup.string().required(i18n.t('Yup.Required')),
+            gestationDays: Yup.string().required(i18n.t('Yup.Required')),
+            apgar1: Yup.number()
+              .transform((currentValue, originalValue) =>
+                originalValue === '' || Number.isNaN(currentValue)
+                  ? null
+                  : currentValue,
+              )
+              .when('apgar2', {
+                is: (value: any) => !value,
+                then: Yup.number()
+                  .nullable()
+                  .typeError(i18n.t('Yup.MustBeIntegerError')),
+                otherwise: Yup.number()
+                  .nullable()
+                  .required(i18n.t('BabyFormPage.Yup.ApgarError', { num: 1 }))
+                  .typeError(i18n.t('Yup.MustBeIntegerError'))
+                  .integer(i18n.t('Yup.MustBeIntegerError'))
+                  .min(0, i18n.t('Yup.MinEqualError', { num: 0 }))
+                  .max(10, i18n.t('Yup.MaxEqualError', { num: 10 })),
+              }),
+            apgar2: Yup.number()
+              .typeError(i18n.t('Yup.MustBeIntegerError'))
+              .transform((currentValue, originalValue) =>
+                originalValue === '' || Number.isNaN(currentValue)
+                  ? null
+                  : currentValue,
+              )
+              .when('apgar1', {
+                is: (value: any) => !value,
+                then: Yup.number()
+                  .nullable()
+                  .typeError(i18n.t('Yup.MustBeIntegerError')),
+                otherwise: Yup.number()
+                  .nullable()
+                  .required(i18n.t('BabyFormPage.Yup.ApgarError', { num: 2 }))
+                  .typeError(i18n.t('Yup.MustBeIntegerError'))
+                  .integer(i18n.t('Yup.MustBeIntegerError'))
+                  .min(0, i18n.t('Yup.MinEqualError', { num: 0 }))
+                  .max(10, i18n.t('Yup.MaxEqualError', { num: 10 })),
+              }),
+            birthLocation: Yup.string().required(i18n.t('Yup.Required')),
+          },
+          [['apgar1', 'apgar2']],
+        ),
+      )
+      .min(1)
+      .required(),
+  }).required();
 
   // Retorna um novo objeto Baby com um id especificado.
   function newBaby(babyId: number): Baby {
@@ -122,14 +142,14 @@ const BabyForm: React.FC = () => {
       id: babyId,
       name: '',
       birthday: '',
-      weight: '',
-      birthType: '',
-      touched: '',
-      difficulties: '',
+      weight: null,
+      birthType: null,
+      touched: null,
+      difficulties: null,
       gestationWeeks: '',
       gestationDays: '',
-      apgar1: '',
-      apgar2: '',
+      apgar1: null,
+      apgar2: null,
       birthLocation: '',
     };
   }
@@ -182,7 +202,7 @@ const BabyForm: React.FC = () => {
         newBabies.pop();
       }
     }
-    setFieldValue('numberOfBabies', fieldValue);
+    setFieldValue('numberOfBabies', newBabyCount);
     setFieldValue('babies', newBabies);
     setBabyCount(newBabyCount);
   }
@@ -193,32 +213,31 @@ const BabyForm: React.FC = () => {
       name: baby.name,
       birthday: baby.birthday,
       birthLocation: baby.birthLocation,
-      weight: parseFloat(baby.weight),
+      weight: baby.weight!,
       gestationWeeks: parseInt(baby.gestationWeeks, 10),
       gestationDays: parseInt(baby.gestationDays, 10),
-      apgar1: baby.apgar1 ? parseInt(baby.apgar1, 10) : null,
-      apgar2: baby.apgar2 ? parseInt(baby.apgar2, 10) : null,
-      birthType: baby.birthType.toLowerCase() === 'cesária',
-      touched: baby.difficulties.toLowerCase() === 'sim',
-      difficulties: baby.difficulties.toLowerCase() === 'sim',
+      apgar1: baby.apgar1 || null,
+      apgar2: baby.apgar2 || null,
+      birthType: baby.birthType!,
+      touched: baby.difficulties!,
+      difficulties: baby.difficulties!,
     }));
     return babiesInfo;
   }
 
   // Registra a mãe e os bebês.
-  async function handleFormSubmit(formValues: FormValues) {
+  function handleFormSubmit(formValues: FormValues) {
     const babiesInfo = prepareNewBabiesData(formValues);
-    navigation.navigate('TermsOfService', { motherInfo, babiesInfo });
+    navigation.navigate('AcceptTermsOfService', { motherInfo, babiesInfo });
   }
 
   return (
     <ScrollView>
       <Modal
-        content="Apgar é a nota, de 0 a 10, que o bebê recebe de acordo com o estado em que ele se apresenta no momento de nascimento e consta no cartão da criança.
-Se não souber, tudo bem, continue seu cadastro normalmente!"
+        content={i18n.t('BabyFormPage.ApgarPopUp')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => setIsApgarModalVisible(false),
           },
@@ -226,13 +245,14 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
         visible={isApgarModalVisible}
       />
 
-      <HeaderText>Passo 3 de 4</HeaderText>
-      <HeaderSubText>
-        Você está quase lá! Agora faremos algumas perguntas sobre seu bebê:
-      </HeaderSubText>
+      <HeaderText>
+        {i18n.t('Auth.SignUpStep', { current: '3', max: '4' })}
+      </HeaderText>
+
+      <HeaderSubText>{i18n.t('BabyFormPage.Header')}</HeaderSubText>
       <Formik
         initialValues={{
-          numberOfBabies: '1',
+          numberOfBabies: 1,
           babies: [newBaby(0)],
         }}
         validationSchema={babyFormSchema}
@@ -248,9 +268,9 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
         }) => (
           <FormContainer>
             <FormTextInput
-              label="Número de filhos nesta gestação"
-              value={values.numberOfBabies}
-              placeholder="Insira o número de filhos"
+              label={i18n.t('BabyFormPage.1')}
+              value={values.numberOfBabies.toString()}
+              placeholder={i18n.t('BabyFormPage.Placeholder.NumberOfChildren')}
               keyboardType="number-pad"
               onChangeText={(text: string) =>
                 handleNewBaby(text, values.babies, setFieldValue)
@@ -261,56 +281,63 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
             {values.babies.map((baby, index) => (
               <View key={baby.id}>
                 <FormTextInput
-                  label="Nome do seu bebê"
+                  label={i18n.t('BabyFormPage.3')}
                   onChangeText={handleChange(`babies[${index}].name`)}
-                  placeholder="Nome"
+                  placeholder={i18n.t('Name')}
                   value={values.babies[index].name}
                   error={getBabyError(errors, index, 'name')}
                 />
 
                 <FormDateInput
-                  label="Data do parto"
+                  label={i18n.t('BabyFormPage.5')}
                   fieldName={`babies[${index}].birthday`}
-                  placeholder="Insira a data do parto"
+                  placeholder={i18n.t('BabyFormPage.Placeholder.BirthDate')}
                   onChange={setFieldValue}
                   error={getBabyError(errors, index, 'birthday')}
                 />
 
                 <FormTextInput
-                  label="Peso de nascimento"
-                  value={values.babies[index].weight.toString()}
-                  placeholder="Insira o peso do bebê ao nascer (kg)"
+                  label={i18n.t('BabyFormPage.7')}
+                  value={values.babies[index].weight?.toString()}
+                  placeholder={i18n.t('BabyFormPage.Placeholder.BabyWeight')}
                   keyboardType="number-pad"
                   onChangeText={handleChange(`babies[${index}].weight`)}
                   error={getBabyError(errors, index, 'weight')}
                 />
 
                 <FormRadioGroupInput
-                  label="Tipo de parto"
+                  label={i18n.t('BabyFormPage.9')}
                   fieldName={`babies[${index}].birthType`}
-                  options={['Normal', 'Cesária']}
+                  options={[
+                    i18n.t('BabyFormPage.BirthTypeOptions.Option1'),
+                    i18n.t('BabyFormPage.BirthTypeOptions.Option2'),
+                  ]}
                   onChange={(fieldName, fieldValues) =>
-                    setFieldValue(fieldName, fieldValues[0])
+                    setFieldValue(
+                      fieldName,
+                      fieldValues[0] ===
+                        i18n.t('BabyFormPage.BirthTypeOptions.Option2'),
+                    )
                   }
                   error={getBabyError(errors, index, 'birthType')}
                 />
 
                 <FormRadioGroupInput
-                  label="Realizou contato pele a pele na primeira hora de vida?"
+                  label={i18n.t('BabyFormPage.10')}
                   fieldName={`babies[${index}].touched`}
-                  options={['Sim', 'Não']}
+                  options={[i18n.t('Yes'), i18n.t('No')]}
                   onChange={(fieldName, fieldValues) =>
-                    setFieldValue(fieldName, fieldValues[0])
+                    setFieldValue(fieldName, fieldValues[0] === i18n.t('Yes'))
                   }
                   error={getBabyError(errors, index, 'touched')}
                 />
 
                 <FormRadioGroupInput
-                  label="Presença de complicação pós-parto?"
+                  label={i18n.t('BabyFormPage.11')}
                   fieldName={`babies[${index}].difficulties`}
-                  options={['Sim', 'Não']}
+                  options={[i18n.t('Yes'), i18n.t('No')]}
                   onChange={(fieldName, fieldValues) =>
-                    setFieldValue(fieldName, fieldValues[0])
+                    setFieldValue(fieldName, fieldValues[0] === i18n.t('Yes'))
                   }
                   error={getBabyError(errors, index, 'difficulties')}
                 />
@@ -318,7 +345,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                 <SubOptionsContainer>
                   <GestationWeeksContainer>
                     <FormPickerInput
-                      label="Idade gestacional ao nascer"
+                      label={i18n.t('BabyFormPage.12')}
                       fieldName={`babies[${index}].gestationWeeks`}
                       options={[
                         '36',
@@ -335,7 +362,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                         '25',
                         '24',
                       ]}
-                      placeholder="Semanas"
+                      placeholder={i18n.t('BabyFormPage.13')}
                       onChange={setFieldValue}
                       error={getBabyError(errors, index, 'gestationWeeks')}
                     />
@@ -345,14 +372,16 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                       label=""
                       fieldName={`babies[${index}].gestationDays`}
                       options={['6', '5', '4', '3', '2', '1', '0']}
-                      placeholder="Dias"
+                      placeholder={i18n.t('BabyFormPage.15')}
                       onChange={setFieldValue}
                       error={getBabyError(errors, index, 'gestationDays')}
                     />
                   </GestationDaysContainer>
                 </SubOptionsContainer>
 
-                <ApgarTextHeader>Apgar (Opcional)</ApgarTextHeader>
+                <ApgarTextHeader>
+                  {i18n.t('BabyFormPage.Apgar')}
+                </ApgarTextHeader>
                 <SubOptionsContainer>
                   <FirstSubOptionContainer>
                     <FormTextInput
@@ -365,7 +394,7 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                     />
                   </FirstSubOptionContainer>
                   <ApgarTextContainer>
-                    <ApgarText>e</ApgarText>
+                    <ApgarText>{i18n.t('And')}</ApgarText>
                   </ApgarTextContainer>
                   <SecondSubOptionContainer>
                     <FormTextInput
@@ -385,13 +414,9 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
                 </SubOptionsContainer>
 
                 <FormRadioGroupInput
-                  label="Ao nascer, seu bebê foi para:"
+                  label={i18n.t('BabyFormPage.20')}
                   fieldName={`babies[${index}].birthLocation`}
-                  options={[
-                    'Alojamento conjunto',
-                    'UCI Neonatal',
-                    'UTI Neonatal',
-                  ]}
+                  options={[i18n.t('Lodging'), i18n.t('UCI'), i18n.t('UTI')]}
                   onChange={(fieldName, fieldValues) =>
                     setFieldValue(fieldName, fieldValues[0])
                   }
@@ -404,14 +429,14 @@ Se não souber, tudo bem, continue seu cadastro normalmente!"
               <FirstSubOptionContainer>
                 <SecondaryButton
                   onPress={() => navigation.goBack()}
-                  text="Voltar"
+                  text={i18n.t('GoBack')}
                 />
               </FirstSubOptionContainer>
               <SecondSubOptionContainer>
                 <MainButton
                   onPress={handleSubmit}
                   disabled={!dirty}
-                  text="Proximo"
+                  text={i18n.t('Next')}
                 />
               </SecondSubOptionContainer>
             </SubmitButtonContainer>

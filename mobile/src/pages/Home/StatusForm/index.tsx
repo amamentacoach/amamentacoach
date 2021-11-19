@@ -1,24 +1,26 @@
-import React, { useEffect, useRef, useState } from 'react';
-
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { Action, AppScreen } from '@common/Telemetria';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
+import i18n from 'i18n-js';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 
-import FormRadioGroupInput from '../../../components/FormRadioGroup';
+import FormRadioGroupInput from 'components/FormRadioGroup';
 import {
   CurrentPageContainer,
   CurrentPageText,
-} from '../../../components/GenericSurveyPage/styles';
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
-import SecondaryButton from '../../../components/SecondaryButton';
-import theme from '../../../config/theme';
-import { useAuth } from '../../../contexts/auth';
-import { answerFeedingForm, answerStatusForm } from '../../../services/survey';
-import {
-  getSurveyQuestions,
-  SurveyQuestion,
-} from '../../../utils/getSurveyQuestions';
+} from 'components/GenericSurveyPage/styles';
+import MainButton from 'components/MainButton';
+import Modal from 'components/Modal';
+import SecondaryButton from 'components/SecondaryButton';
+import theme from 'config/theme';
+import { useAuth } from 'contexts/auth';
+import { answerFeedingForm, answerStatusForm } from 'services/survey';
+import { getSurveyQuestions } from 'utils/getSurveyQuestions';
+import { createTelemetryAction } from 'utils/telemetryAction';
+
+import type { RootRouteProp, RootStackProps } from 'routes/app';
+import type { SurveyQuestion } from 'utils/getSurveyQuestions';
 
 import {
   ColoredText,
@@ -36,7 +38,7 @@ import {
   TextInfoModal,
 } from './styles';
 
-import QuestionIcon from '../../../../assets/images/icons/ic_question_white.svg';
+import QuestionIcon from '@assets/images/icons/ic_question_white.svg';
 
 // Página do formulário.
 interface PageProps {
@@ -54,19 +56,11 @@ interface PageProps {
   submitForm: () => Promise<number | null>;
 }
 
-type ScreenParams = {
-  StatusForm: {
-    situation: 'ALTA' | '1D' | '15D' | '1M';
-  };
-};
-
 const StatusForm: React.FC = () => {
   const { width } = Dimensions.get('window');
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const { motherInfo } = useAuth();
-  const { situation } = useRoute<
-    RouteProp<ScreenParams, 'StatusForm'>
-  >().params;
+  const { situation } = useRoute<RootRouteProp<'StatusForm'>>().params;
 
   // Não exibe a questão de alimentação se for a primeira vez do usuário respondendo a escala.
   const displayFeedingForm = situation !== '1D';
@@ -83,7 +77,7 @@ const StatusForm: React.FC = () => {
   const [formScore, setFormScore] = useState<number | null>(null);
 
   // Adiciona um botão na parte superior direita da tela para exibir um popup de ajuda.
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <InfoButton
@@ -97,11 +91,13 @@ const StatusForm: React.FC = () => {
 
   useEffect(() => {
     async function fetchQuestions() {
-      const statusQuestions = await getSurveyQuestions(motherInfo, {
+      const statusQuestions = await getSurveyQuestions({
         category: 7,
+        motherInfo,
       });
-      const feedingQuestions = await getSurveyQuestions(motherInfo, {
+      const feedingQuestions = await getSurveyQuestions({
         id: 6,
+        motherInfo,
       });
       if (!statusQuestions || !feedingQuestions) {
         return;
@@ -132,6 +128,10 @@ const StatusForm: React.FC = () => {
     }
 
     fetchQuestions();
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.StatusForm },
+    });
   }, []);
 
   // Envia as respostas do usuário.
@@ -163,7 +163,7 @@ const StatusForm: React.FC = () => {
     let isValid = true;
     questions.forEach(question => {
       if (values[question.id].length <= 0) {
-        setFieldError(question.id.toString(), 'Pergunta obrigatória');
+        setFieldError(question.id.toString(), i18n.t('Yup.AnswerRequired'));
         isValid = false;
       } else {
         setFieldError(question.id.toString(), '');
@@ -172,7 +172,7 @@ const StatusForm: React.FC = () => {
 
     if (currentPageIndex === pageQuestions.length - 1 && displayFeedingForm) {
       if (values.feeding.length <= 0) {
-        setFieldError('feeding', 'Pergunta obrigatória');
+        setFieldError('feeding', i18n.t('Yup.AnswerRequired'));
         isValid = false;
       } else {
         setFieldError('feeding', '');
@@ -208,6 +208,13 @@ const StatusForm: React.FC = () => {
       const score = await submitForm();
       setIsSendingForm(false);
       if (score) {
+        await createTelemetryAction({
+          action: Action.Pressed,
+          context: {
+            screen: AppScreen.StatusForm,
+            target: 'Actions.End',
+          },
+        });
         setFormScore(score);
       } else {
         setIsErrorModalVisible(true);
@@ -282,7 +289,7 @@ const StatusForm: React.FC = () => {
             <FirstButtonContainer>
               <SecondaryButton
                 color={theme.babyBlue}
-                text="Voltar"
+                text={i18n.t('GoBack')}
                 disabled={isSendingForm}
                 onPress={() =>
                   handleChangePage(
@@ -301,7 +308,9 @@ const StatusForm: React.FC = () => {
             <MainButton
               color={theme.babyBlue}
               text={
-                pageIndex >= pageQuestions.length - 1 ? 'Finalizar' : 'Próximo'
+                pageIndex >= pageQuestions.length - 1
+                  ? i18n.t('Actions.End')
+                  : i18n.t('Next')
               }
               disabled={isSendingForm}
               onPress={() =>
@@ -325,7 +334,7 @@ const StatusForm: React.FC = () => {
     return (
       <>
         <HeaderBackground />
-        <HeaderText>Autoconfiança para amamentar</HeaderText>
+        <HeaderText>{i18n.t('StatusFormPage.Header')}</HeaderText>
         <ContentContainer>
           <ActivityIndicator
             size="large"
@@ -340,11 +349,11 @@ const StatusForm: React.FC = () => {
   return (
     <>
       <Modal
-        content={`Obrigada por responder.\nSua pontuação é ${formScore}`}
+        content={i18n.t('StatusFormPage.Score', { score: formScore })}
         color={theme.babyBlue}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => navigation.navigate('Home'),
           },
@@ -353,12 +362,10 @@ const StatusForm: React.FC = () => {
       />
       <Modal
         color={theme.babyBlue}
-        content={
-          'Erro ao enviar suas respostas.\nPor favor tente novamente mais tarde.'
-        }
+        content={i18n.t('SurveyComponent.SubmitError')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => setIsErrorModalVisible(false),
           },
@@ -369,27 +376,27 @@ const StatusForm: React.FC = () => {
         color={theme.babyBlue}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => setIsInfoModalVisible(false),
           },
         ]}
         visible={isInfoModalVisible}>
-        <HeaderInfoModal>Escala</HeaderInfoModal>
+        <HeaderInfoModal>{i18n.t('StatusFormPage.FormName')}</HeaderInfoModal>
         <TextInfoModal>
-          <ColoredText>1</ColoredText> = nada confiante
+          <ColoredText>1</ColoredText> = {i18n.t('StatusFormPage.Value1')}
         </TextInfoModal>
         <TextInfoModal>
-          <ColoredText>2</ColoredText> = muito pouco confiante
+          <ColoredText>2</ColoredText> = {i18n.t('StatusFormPage.Value2')}
         </TextInfoModal>
         <TextInfoModal>
-          <ColoredText>3</ColoredText> = às vezes confiante
+          <ColoredText>3</ColoredText> = {i18n.t('StatusFormPage.Value3')}
         </TextInfoModal>
         <TextInfoModal>
-          <ColoredText>4</ColoredText> = confiante
+          <ColoredText>4</ColoredText> = {i18n.t('StatusFormPage.Value4')}
         </TextInfoModal>
         <TextInfoModal>
-          <ColoredText>5</ColoredText> = muito confiante
+          <ColoredText>5</ColoredText> = {i18n.t('StatusFormPage.Value5')}
         </TextInfoModal>
       </Modal>
 
@@ -404,7 +411,7 @@ const StatusForm: React.FC = () => {
             renderItem={({ item, index }) => (
               <ScrollView width={width}>
                 <HeaderBackground />
-                <HeaderText>Autoconfiança para amamentar</HeaderText>
+                <HeaderText>{i18n.t('StatusFormPage.Header')}</HeaderText>
                 <Page
                   pageIndex={index}
                   questions={item}

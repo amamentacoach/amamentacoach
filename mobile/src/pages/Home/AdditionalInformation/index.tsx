@@ -1,51 +1,63 @@
-import React from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
+import { useEffect } from 'react';
 
-import OptionsList, { Options } from '../../../components/OptionList';
+import OptionsList from 'components/OptionList';
+import { createTelemetryAction } from 'utils/telemetryAction';
+
+import type { OptionListEntry } from 'components/OptionList';
+import type { RootStackProps } from 'routes/app';
 
 import ScrollView from './styles';
 
-import Change from '../../../../assets/images/change.svg';
-import DiarySmile from '../../../../assets/images/diary_smile.svg';
-import EmotionsInfo from '../../../../assets/images/emotions_info.svg';
-import PrematureBaby from '../../../../assets/images/premature_baby.svg';
-import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
+import Change from '@assets/images/change.svg';
+import DiarySmile from '@assets/images/diary_smile.svg';
+import EmotionsInfo from '@assets/images/emotions_info.svg';
+import PrematureBaby from '@assets/images/premature_baby.svg';
+import PrematureBreastfeed from '@assets/images/premature_breastfeed.svg';
 
 const AdditionalInformation: React.FC = () => {
-  const navigation = useNavigation();
-  const options: Options[] = [
+  const navigation = useNavigation<RootStackProps>();
+  const options: OptionListEntry[] = [
     {
       image: PrematureBreastfeed,
-      title: 'Como meu leite é produzido?',
-      subtitle: 'Saiba como seu corpo produz o leite',
+      title: i18n.t('AdditionalInformationPage.1'),
+      subtitle: i18n.t('AdditionalInformationPage.2'),
       onPress: () => navigation.navigate('MilkAdditionalInformation'),
     },
     {
       image: PrematureBaby,
-      title: 'Benefícios do Canguru',
-      subtitle: 'Como o canguru pode ajudar',
+      title: i18n.t('BabySlingPage.PageName'),
+      subtitle: i18n.t('AdditionalInformationPage.4'),
       onPress: () => navigation.navigate('BabySling'),
     },
     {
       image: DiarySmile,
-      title: 'Você sabe o que é Resiliência?',
-      subtitle: 'Explicamos pra você!',
+      title: i18n.t('AdditionalInformationPage.5'),
+      subtitle: i18n.t('AdditionalInformationPage.6'),
       onPress: () => navigation.navigate('Resilience'),
     },
     {
       image: Change,
-      title: 'Reformulando as expectativas',
-      subtitle: 'Troque expectativas que são improváveis por realistas',
+      title: i18n.t('AdditionalInformationPage.7'),
+      subtitle: i18n.t('AdditionalInformationPage.8'),
       onPress: () => navigation.navigate('ManageExpectations'),
     },
     {
       image: EmotionsInfo,
-      title: 'Oferta de leite pelo copinho',
-      subtitle: 'Vídeo Demonstrativo',
+      title: i18n.t('AdditionalInformationPage.9'),
+      subtitle: i18n.t('AdditionalInformationPage.10'),
       onPress: () => navigation.navigate('BabyCup'),
     },
   ];
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.AdditionalInformation },
+    });
+  }, []);
 
   return (
     <ScrollView>

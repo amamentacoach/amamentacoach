@@ -4,22 +4,33 @@ services:
     container_name: amamentacoach-api
     build: ./backend
     env_file:
-      - database.config
+      - database.env
     ports:
       - "8080:8080"
     depends_on:
-      - database
+      - database-mongo
+      - database-postgres
     restart: "always"
 
-  database:
+  database-postgres:
     container_name: amamentacoach-postgres
     image: postgres
     ports:
       - "5432:5432"
     env_file:
-      - database.config
+      - database.env
     volumes:
       - "database-data:/var/lib/postgresql/data/"
+
+  database-mongo:
+    container_name: amamentacoach-mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    env_file:
+      - database.env
+    volumes:
+      - "database-data:/var/lib/mongo/data/"
 
 volumes:
   database-data:

@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import RNBootSplash from 'react-native-bootsplash';
+import { hide } from 'react-native-bootsplash';
 
-import FormPickerInput from '../../../components/FormPickerInput';
-import ImageWrapper from '../../../components/ImageWrapper';
-import Modal from '../../../components/Modal';
-import { Options } from '../../../components/OptionList';
-import theme from '../../../config/theme';
-import { useIsFirstRun } from '../../../contexts/firstRun';
-import { storageIsToday, isToday } from '../../../lib/date-fns';
-import {
-  BabyStatus,
-  checkBabiesLocation,
-  updateBabyLocation,
-} from '../../../services/babyLocation';
-import { setHomePageOpened } from '../../../services/telemetry';
+import FormPickerInput from 'components/FormPickerInput';
+import ImageWrapper from 'components/ImageWrapper';
+import Modal from 'components/Modal';
+import theme from 'config/theme';
+import { useIsFirstRun } from 'contexts/firstRun';
+import { storageIsToday } from 'lib/date-fns';
+import { checkBabiesLocation, updateBabyLocation } from 'services/babyLocation';
+import { setHomePageOpened } from 'services/telemetry';
+import { createTelemetryAction } from 'utils/telemetryAction';
+
+import type { OptionListEntry } from 'components/OptionList';
+import type { RootStackProps } from 'routes/app';
+import type { BabyStatus } from 'services/babyLocation';
 
 import {
   BannerImage,
@@ -42,14 +42,14 @@ import {
   TextModal,
 } from './styles';
 
-import HomeBaby from '../../../../assets/images/home_baby.svg';
-import Banner from '../../../../assets/images/home_banner.png';
-import HomeBreastfeed from '../../../../assets/images/home_breastfeed.svg';
-import HomeCredits from '../../../../assets/images/home_credits.svg';
-import HomeEmotions from '../../../../assets/images/home_emotions.svg';
-import HomeMessage from '../../../../assets/images/home_message.svg';
-import HomeMilk from '../../../../assets/images/home_milk.svg';
-import HomeMoreInformation from '../../../../assets/images/home_more_information.svg';
+import HomeBaby from '@assets/images/home_baby.svg';
+import Banner from '@assets/images/home_banner.png';
+import HomeBreastfeed from '@assets/images/home_breastfeed.svg';
+import HomeCredits from '@assets/images/home_credits.svg';
+import HomeEmotions from '@assets/images/home_emotions.svg';
+import HomeMessage from '@assets/images/home_message.svg';
+import HomeMilk from '@assets/images/home_milk.svg';
+import HomeMoreInformation from '@assets/images/home_more_information.svg';
 
 interface BabyModalOption {
   newLocation: string;
@@ -57,68 +57,64 @@ interface BabyModalOption {
 }
 
 const Home: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
-
+  const isFocused = useIsFocused();
   const [babiesData, setBabiesData] = useState<BabyStatus[]>([]);
-  const [babyModalVisibility, setBabyModalVisibility] = useState<boolean>(
-    false,
-  );
+  const [babyModalVisibility, setBabyModalVisibility] =
+    useState<boolean>(false);
   const [selectedModalOptions, setSelectedModalOptions] = useState<
     BabyModalOption[]
   >([]);
 
-  const [formModalVisibility, setFormModalVisibility] = useState<boolean>(
-    false,
-  );
+  const [formModalVisibility, setFormModalVisibility] =
+    useState<boolean>(false);
   const [formAction, setFormAction] = useState<'1D' | '15D' | '1M' | null>(
     null,
   );
 
-  const [
-    expectationsModalVisibility,
-    setExpectationsModalVisibility,
-  ] = useState<Boolean>(false);
+  const [expectationsModalVisibility, setExpectationsModalVisibility] =
+    useState<Boolean>(false);
 
-  const options: Options[] = [
+  const options: OptionListEntry[] = [
     {
       image: HomeBaby,
-      title: i18n.t('InicioOpcao1'),
+      title: i18n.t('HomePage.Option1'),
       onPress: () => navigation.navigate('Premature'),
     },
     {
       image: HomeBreastfeed,
-      title: i18n.t('InicioOpcao2'),
+      title: i18n.t('HomePage.Option2'),
       onPress: () => navigation.navigate('StepByStepPremature'),
     },
     {
       image: HomeMilk,
-      title: i18n.t('InicioOpcao3'),
+      title: i18n.t('HomePage.Option3'),
       onPress: () => navigation.navigate('Breastfeeding'),
     },
     {
       image: HomeEmotions,
-      title: i18n.t('InicioOpcao4'),
+      title: i18n.t('HomePage.Option4'),
       onPress: () => navigation.navigate('EmotionsAndBreastfeeding'),
     },
     {
       image: HomeMoreInformation,
-      title: i18n.t('InicioOpcao5'),
+      title: i18n.t('HomePage.Option5'),
       onPress: () => navigation.navigate('AdditionalInformation'),
     },
     {
       image: HomeMessage,
-      title: i18n.t('InicioOpcao6'),
+      title: i18n.t('HomePage.Option6'),
       onPress: () => navigation.navigate('Messages'),
     },
     {
       image: HomeMessage,
-      title: i18n.t('InicioOpcao7'),
+      title: i18n.t('HomePage.Option7'),
       onPress: () => navigation.navigate('Questions'),
     },
     {
       image: HomeCredits,
-      title: i18n.t('InicioOpcao8'),
+      title: i18n.t('HomePage.Option8'),
       onPress: () => navigation.navigate('Credits'),
     },
   ];
@@ -151,16 +147,11 @@ const Home: React.FC = () => {
 
     // Verifica se o usuário acessou a tela de expectativas hoje.
     async function checkExpectations() {
-      const expectationsStorage = await AsyncStorage.getItem(
+      const openedToday = await storageIsToday(
         '@AmamentaCoach:alreadySelectedExpectations',
+        storage => storage.lastRunDate,
       );
-      if (!expectationsStorage) {
-        setExpectationsModalVisibility(true);
-        return;
-      }
-
-      const { lastRunDate } = JSON.parse(expectationsStorage);
-      if (!isToday(new Date(lastRunDate))) {
+      if (!openedToday) {
         setExpectationsModalVisibility(true);
       }
     }
@@ -169,7 +160,7 @@ const Home: React.FC = () => {
     // vez abrindo o app é buscado os bebês que podem receber alta.
     async function checkUserActions() {
       // Menos de um dia se passou.
-      if (!storageIsToday('@AmamentaCoach:lastOpenedDate')) {
+      if (await storageIsToday('@AmamentaCoach:lastOpenedDate')) {
         return;
       }
 
@@ -191,8 +182,18 @@ const Home: React.FC = () => {
     if (isFirstRun.temporary.home) {
       checkUserActions();
     }
-    RNBootSplash.hide({ duration: 250 });
+    hide({ duration: 250 });
   }, []);
+
+  useEffect(() => {
+    // Cria um registro de telemetria quando o usuário acessa a página.
+    if (isFocused) {
+      createTelemetryAction({
+        action: Action.Opened,
+        context: { screen: AppScreen.HomeMenu },
+      });
+    }
+  }, [isFocused]);
 
   // Fecha todos os modais.
   function hideAllModals() {
@@ -245,17 +246,17 @@ const Home: React.FC = () => {
     <>
       <Modal
         color={theme.babyPink}
-        content={i18n.t('InicioPopUpExpectativas')}
+        content={i18n.t('HomePage.ExpectationPopUp')}
         options={[
           {
-            text: i18n.t('sim'),
+            text: i18n.t('Yes'),
             onPress: () => {
               hideAllModals();
               navigation.navigate('ManageExpectations');
             },
           },
           {
-            text: i18n.t('nao'),
+            text: i18n.t('No'),
             onPress: () => setExpectationsModalVisibility(false),
           },
         ]}
@@ -269,21 +270,21 @@ const Home: React.FC = () => {
         color={theme.babyPink}
         content={
           formAction === '1D'
-            ? i18n.t('InicioPopUpPrimeiraEscala')
-            : i18n.t('InicioPopUpEscala')
+            ? i18n.t('HomePage.FirstStatusPopup')
+            : i18n.t('HomePage.StatusPopup')
         }
         options={[
           {
-            text: i18n.t('sim'),
+            text: i18n.t('Yes'),
             onPress: () => {
               hideAllModals();
               navigation.navigate('StatusForm', {
-                situation: formAction,
+                situation: formAction!,
               });
             },
           },
           {
-            text: i18n.t('nao'),
+            text: i18n.t('No'),
             onPress: () => setFormModalVisibility(false),
           },
         ]}
@@ -294,18 +295,18 @@ const Home: React.FC = () => {
           color={theme.babyPurple}
           options={[
             {
-              text: i18n.t('sim'),
+              text: i18n.t('Yes'),
               disabled: !validateModalFields(),
               onPress: handleUpdateBabyLocation,
             },
             {
-              text: i18n.t('nao'),
+              text: i18n.t('No'),
               onPress: () => setBabyModalVisibility(false),
             },
           ]}
           visible={babyModalVisibility && !formModalVisibility}>
           <View>
-            <TextModal>{i18n.t('InicioPopUpStatusBebe')}</TextModal>
+            <TextModal>{i18n.t('HomePage.BabyStatusPopUp')}</TextModal>
             {babiesData.map((baby, index) => (
               <View key={baby.id}>
                 <ModalOption
@@ -323,11 +324,11 @@ const Home: React.FC = () => {
                   <LocationContainer>
                     <FormPickerInput
                       fieldName=""
-                      placeholder={i18n.t('InicioLocalizacaoBebe')}
+                      placeholder={i18n.t('HomePage.BabyLocation')}
                       options={[
-                        i18n.t('alojamento'),
-                        i18n.t('casa'),
-                        i18n.t('uci'),
+                        i18n.t('Lodging'),
+                        i18n.t('Home'),
+                        i18n.t('UCI'),
                       ]}
                       onChange={(_, value) =>
                         handleBabyLocationSelected(index, value)
@@ -344,18 +345,18 @@ const Home: React.FC = () => {
       <ScrollView>
         <Header>
           <HeaderBackground>
-            <HeaderText>{i18n.t('InicioCabecalho')}</HeaderText>
+            <HeaderText>{i18n.t('Begin')}</HeaderText>
           </HeaderBackground>
           <BannerImage source={Banner}>
             <HUButton
               onPress={() => navigation.navigate('HU')}
               activeOpacity={0.7}>
-              <HUButtonText>{i18n.t('InicioBotaoHU')}</HUButtonText>
+              <HUButtonText>{i18n.t('HomePage.HUButton')}</HUButtonText>
             </HUButton>
           </BannerImage>
         </Header>
         <ContentContainer>
-          <ContentHeader>{i18n.t('InicioConteudo')}</ContentHeader>
+          <ContentHeader>{i18n.t('Content')}</ContentHeader>
           {options.map(({ image, title, onPress }, index) => (
             <Option key={title}>
               <ContentOption activeOpacity={0.7} onPress={onPress}>

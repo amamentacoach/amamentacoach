@@ -1,11 +1,12 @@
-import { format } from '../lib/date-fns';
+import { formatISO } from 'lib/date-fns';
+import api from 'services/api';
 
-import api from './api';
+type Breast = 'D' | 'E';
 
 export interface ExtractionEntry {
   id: number;
   baby_id: number;
-  breast: 'D' | 'E';
+  breasts: Breast[];
   date: string;
   duration: number;
   quantity: number;
@@ -17,7 +18,7 @@ export interface BreastfeedEntry {
   entries: {
     id: number;
     baby_id: number;
-    breast: 'D' | 'E';
+    breasts: Breast[];
     date: string;
     duration: number;
   }[];
@@ -25,7 +26,7 @@ export interface BreastfeedEntry {
 
 // Cria um novo registro de ordenha no diário.
 export async function createExtractionEntry(
-  breast: string,
+  breasts: string,
   duration: number,
   quantity: number,
   time: Date,
@@ -33,7 +34,7 @@ export async function createExtractionEntry(
   try {
     await api.post('/maes/ordenhas', {
       qtd_leite: quantity,
-      mama: breast,
+      mama: breasts,
       duracao: duration,
       data_hora: time,
     });
@@ -47,29 +48,27 @@ export async function createExtractionEntry(
 export async function listExtractionsEntries(
   date: Date,
 ): Promise<ExtractionEntry[]> {
-  const { data } = await api.get(
-    `/maes/ordenhas/${format(date, 'yyyy-MM-dd')}`,
-  );
-  return data.map((item: any) => ({
-    id: item.id,
-    baby_id: item.bebe_id,
-    breast: item.mama,
-    date: item.data_hora,
-    duration: item.duracao,
-    quantity: item.qtd_leite,
+  const { data } = await api.get(`/maes/ordenhas/${formatISO(date)}`);
+  return data.map((entry: any) => ({
+    id: entry.id,
+    baby_id: entry.bebe_id,
+    breasts: entry.mama.split(','),
+    date: entry.data_hora,
+    duration: entry.duracao,
+    quantity: entry.qtd_leite,
   }));
 }
 
 // Cria um novo registro de amamentação.
 export async function createBreastfeedEntry(
   babyId: number,
-  breast: string,
+  breasts: string,
   duration: number,
   time: Date,
 ): Promise<boolean> {
   try {
     await api.post(`/bebes/${babyId}/mamadas`, {
-      mama: breast,
+      mama: breasts,
       duracao: duration,
       data_hora: time,
     });
@@ -84,9 +83,7 @@ export async function listBreastfeedEntries(
   babyId: number,
   date: Date,
 ): Promise<BreastfeedEntry> {
-  const { data } = await api.get(
-    `/bebes/${babyId}/mamadas/${format(date, 'yyyy-MM-dd')}`,
-  );
+  const { data } = await api.get(`/bebes/${babyId}/mamadas/${formatISO(date)}`);
   return {
     id: data.id,
     name: data.nome,
@@ -95,7 +92,7 @@ export async function listBreastfeedEntries(
       baby_id: entry.bebe_id,
       date: entry.data_hora,
       duration: entry.duracao,
-      breast: entry.mama,
+      breasts: entry.mama.split(','),
     })),
   };
 }

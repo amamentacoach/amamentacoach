@@ -12,7 +12,16 @@ class MaesController{
         if(id==req.mae_id){
 
             const mae = await knex('mae')
-            .select('mae.id', 'email', 'mae.nome', 'ultimo_acesso', 'imagem_mae', 'imagem_bebe', 'imagem_pai', 'companheiro', 'data_nascimento')
+            .select('mae.id', 
+                    'email', 
+                    'mae.nome', 
+                    'ultimo_acesso', 
+                    'imagem_mae', 
+                    'imagem_bebe', 
+                    'imagem_pai', 
+                    'companheiro', 
+                    'data_nascimento', 
+                    'localizacao')
             .where('mae.id',id).first()
 
 
@@ -53,6 +62,7 @@ class MaesController{
             orientacao_prenatal,
             ocupacao,
             licenca_maternidade,
+            localizacao
         } = req.body;
 
         const mae = {
@@ -77,7 +87,8 @@ class MaesController{
             qtd_filhos_vivos,
             orientacao_prenatal,
             ocupacao,
-            licenca_maternidade
+            licenca_maternidade,
+            localizacao
         };
         
         const [id] = await knex('mae').insert(mae).returning('id')

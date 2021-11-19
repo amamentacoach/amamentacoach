@@ -1,22 +1,57 @@
-import React from 'react';
+import {
+  CardStyleInterpolators,
+  createStackNavigator,
+} from '@react-navigation/stack';
+import i18n from 'i18n-js';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import { useIsFirstRun } from 'contexts/firstRun';
+import AcceptTermsOfService from 'pages/Auth/AcceptTermsOfService';
+import BabyForm from 'pages/Auth/BabyForm';
+import ForgotPassword from 'pages/Auth/ForgotPassword';
+import Introduction from 'pages/Auth/Introduction';
+import Login from 'pages/Auth/Login';
+import MotherForm from 'pages/Auth/MotherForm';
+import SignUp from 'pages/Auth/SignUp';
 
-import { useIsFirstRun } from '../contexts/firstRun';
-import TermsOfService from '../pages/Auth/AcceptTermsOfService';
-import BabyForm from '../pages/Auth/BabyForm';
-import ForgotPassword from '../pages/Auth/ForgotPassword';
-import Introduction from '../pages/Auth/Introduction';
-import Login from '../pages/Auth/Login';
-import MotherForm from '../pages/Auth/MotherForm';
-import SignUp from '../pages/Auth/SignUp';
+import type { RouteProp } from '@react-navigation/core';
+import type { StackNavigationProp } from '@react-navigation/stack';
+import type { BabySignUpInfo, MotherSignUpInfo } from 'services/auth';
+
+type AuthStackParamList = {
+  BabyForm: {
+    motherInfo: MotherSignUpInfo;
+  };
+  MotherForm: {
+    email: string;
+    password: string;
+  };
+  DiaryBreastfeed: {
+    date: string;
+  };
+  AcceptTermsOfService: {
+    motherInfo: MotherSignUpInfo;
+    babiesInfo: BabySignUpInfo[];
+  };
+  Login: undefined;
+  ForgotPassword: undefined;
+  SignUp: undefined;
+};
+
+export type AuthStackProps = StackNavigationProp<AuthStackParamList>;
+
+export type AuthRouteProp<RouteName extends keyof AuthStackParamList> =
+  RouteProp<AuthStackParamList, RouteName>;
 
 const AuthRoutes: React.FC = () => {
   const Stack = createStackNavigator();
   const { isFirstRun } = useIsFirstRun();
 
   return (
-    <Stack.Navigator screenOptions={{ headerTitleAlign: 'center' }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerTitleAlign: 'center',
+        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+      }}>
       {isFirstRun.persistent.appIntroduction && (
         <Stack.Screen
           name="Introduction"
@@ -32,27 +67,27 @@ const AuthRoutes: React.FC = () => {
       <Stack.Screen
         name="ForgotPassword"
         component={ForgotPassword}
-        options={{ title: 'Esqueceu a senha?' }}
+        options={{ title: i18n.t('LoginPage.ForgotPassword') }}
       />
       <Stack.Screen
         name="SignUp"
         component={SignUp}
-        options={{ title: 'Cadastro' }}
+        options={{ title: i18n.t('SignUp') }}
       />
       <Stack.Screen
         name="MotherForm"
         component={MotherForm}
-        options={{ title: 'Cadastro' }}
+        options={{ title: i18n.t('SignUp') }}
       />
       <Stack.Screen
         name="BabyForm"
         component={BabyForm}
-        options={{ title: 'Cadastro' }}
+        options={{ title: i18n.t('SignUp') }}
       />
       <Stack.Screen
-        name="TermsOfService"
-        component={TermsOfService}
-        options={{ title: 'Termo de Consentimento' }}
+        name="AcceptTermsOfService"
+        component={AcceptTermsOfService}
+        options={{ title: i18n.t('SignUp') }}
       />
     </Stack.Navigator>
   );

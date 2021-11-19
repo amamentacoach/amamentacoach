@@ -1,13 +1,16 @@
-import api from './api';
-import { BreastfeedEntry, ExtractionEntry } from './diaryRegistry';
+import api from 'services/api';
+import { getSurveyQuestions } from 'utils/getSurveyQuestions';
+
+import type { BreastfeedEntry, ExtractionEntry } from 'services/diaryRegistry';
 
 export interface DailyReport {
   breastfeedEntries: BreastfeedEntry[];
   registryEntries: ExtractionEntry[];
 }
 
-export interface WeeklyReport {
-  question: string;
+export interface WeeklyReportQuestion {
+  id: number;
+  description: string;
   answers: string[];
 }
 
@@ -15,20 +18,20 @@ export interface WeeklyReport {
 export async function getDailyReport(): Promise<DailyReport> {
   const { data } = await api.get('relatorios/diario');
 
-  const breastfeedEntries = data.bebes.map((baby: any) => ({
+  const breastfeedEntries: BreastfeedEntry[] = data.bebes.map((baby: any) => ({
     id: baby.id,
     name: baby.nome,
     entries: baby.mamadas.map((entry: any) => ({
       id: entry.id,
       baby_id: entry.bebe_id,
+      breasts: entry.mama.split(','),
       date: entry.data_hora,
       duration: entry.duracao,
-      breast: entry.mama,
     })),
   }));
-  const registryEntries = data.ordenhas.map((item: any) => ({
+  const registryEntries: ExtractionEntry[] = data.ordenhas.map((item: any) => ({
     id: item.id,
-    breast: item.mama,
+    breasts: item.mama.split(','),
     duration: item.duracao,
     quantity: item.qtd_leite,
     date: item.data_hora,
@@ -41,10 +44,17 @@ export async function getDailyReport(): Promise<DailyReport> {
 }
 
 // Retorna o relatório semanal da mãe
-export async function getWeeklyReport(): Promise<WeeklyReport[]> {
+export async function getWeeklyReport(): Promise<WeeklyReportQuestion[]> {
   const { data } = await api.get('relatorios/semanal');
-  return data.map((entry: any) => ({
-    question: entry.pergunta,
-    answers: entry.respostas,
-  }));
+  return data.map((entry: any) => {
+    // Busca a questão correspondente ao id.
+    let questions = getSurveyQuestions({ id: entry.pergunta });
+    const description = questions.length === 1 ? questions[0].description : '';
+
+    return {
+      id: entry.pergunta,
+      description,
+      answers: entry.respostas,
+    };
+  });
 }

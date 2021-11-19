@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { isToday } from 'date-fns';
+import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
-import SecondaryButton from '../../../components/SecondaryButton';
-import { isToday } from '../../../lib/date-fns';
+import MainButton from 'components/MainButton';
+import Modal from 'components/Modal';
+import SecondaryButton from 'components/SecondaryButton';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import {
   Card,
@@ -18,63 +20,115 @@ import {
 } from './styles';
 
 interface Expectation {
-  id: number;
   old: string;
   new: string;
 }
 
-interface SelectedInfo {
-  lastRunDate: Date;
-  alreadySelected: Expectation[];
+interface History {
+  correctSelected: boolean;
+  expectation: Expectation;
 }
 
-const expectations = [
-  {
-    id: 1,
-    old: 'Dormir como antes',
-    new: 'Aproveitar cada oportunidade de cochilo',
-  },
-  {
-    id: 2,
-    old: 'Dar conta de tudo',
-    new: 'Fazer o que estiver ao meu alcance, com amor',
-  },
-  {
-    id: 3,
-    old: 'Ter um bebê saudável, gorduxo e corado',
-    new: 'Amar meu prematurinho como ele é',
-  },
-  {
-    id: 4,
-    old: 'Suprir todas as necessidades do meu bebê sozinha',
-    new: 'Fazer a minha parte para ajudar o meu bebê',
-  },
-  {
-    id: 5,
-    old: 'Suprir todas as necessidades da minha família como fazia antes',
-    new: 'Mobilizar pessoas que também possam ajudar a minha família',
-  },
-  {
-    id: 6,
-    old: 'Me fechar para me preservar',
-    new: 'Me abrir com pessoas de confiança para preservar minha saúde mental',
-  },
-];
+interface SelectedInfo {
+  lastRunDate: Date;
+  alreadySelected: History[];
+}
 
 const ManageExpectations: React.FC = () => {
-  const [currentExpectation, setCurrentExpectation] = useState<Expectation>({
-    id: -1,
-    old: '',
-    new: '',
+  const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(false);
+  const [isSubmitModalVisible, setIsSubmitModalVisible] = useState(false);
+  const [currentHistory, setCurrentHistory] = useState<History>({
+    correctSelected: false,
+    expectation: {
+      old: '',
+      new: '',
+    },
   });
 
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [isCorrectAnswerSelected, setIsCorrectAnswerSelected] = useState(false);
-  const [isSubmitModalVisible, setIsSubmitModalVisible] = useState(false);
+  const expectations: Expectation[] = [
+    {
+      old: i18n.t('ManageExpectationsPage.OldExpectation1'),
+      new: i18n.t('ManageExpectationsPage.NewExpectation1'),
+    },
+    {
+      old: i18n.t('ManageExpectationsPage.OldExpectation2'),
+      new: i18n.t('ManageExpectationsPage.NewExpectation2'),
+    },
+    {
+      old: i18n.t('ManageExpectationsPage.OldExpectation3'),
+      new: i18n.t('ManageExpectationsPage.NewExpectation3'),
+    },
+    {
+      old: i18n.t('ManageExpectationsPage.OldExpectation4'),
+      new: i18n.t('ManageExpectationsPage.NewExpectation4'),
+    },
+    {
+      old: i18n.t('ManageExpectationsPage.OldExpectation5'),
+      new: i18n.t('ManageExpectationsPage.NewExpectation5'),
+    },
+    {
+      old: i18n.t('ManageExpectationsPage.OldExpectation6'),
+      new: i18n.t('ManageExpectationsPage.NewExpectation6'),
+    },
+  ];
 
-  function selectRandomArrayElement(array: any[]) {
+  function selectRandomArrayElement<T>(array: T[]): T {
     const randomIndex = Math.round(Math.random() * (array.length - 1));
     return array[randomIndex];
+  }
+
+  // Adiciona o id da expectativa atual ao AsyncStorage, para que não possa ser utilizada na próxima
+  // execução.
+  async function updateExpectationsStorage(history?: History) {
+    const selectedStorage = await AsyncStorage.getItem(
+      '@AmamentaCoach:alreadySelectedExpectations',
+    );
+    let alreadySelected: History[] = [];
+    if (selectedStorage) {
+      alreadySelected = JSON.parse(selectedStorage).alreadySelected;
+    }
+
+    let selectedExpectations = [...alreadySelected];
+    if (history) {
+      selectedExpectations = [...alreadySelected, history];
+    }
+
+    await AsyncStorage.setItem(
+      '@AmamentaCoach:alreadySelectedExpectations',
+      JSON.stringify({
+        lastRunDate: new Date(),
+        alreadySelected: selectedExpectations,
+      }),
+    );
+  }
+
+  // Marca que a alternativa atual foi selecionada e não deve ser exibida na próxima execução.
+  async function handleExpectationSelected(isCorrect: boolean) {
+    const newHistoryEntry: History = {
+      correctSelected: isCorrect,
+      expectation: {
+        old: currentHistory.expectation.old,
+        new: currentHistory.expectation.new,
+      },
+    };
+    await createTelemetryAction({
+      action: Action.Pressed,
+      context: {
+        screen: AppScreen.ManageExpectations,
+        target: isCorrect
+          ? 'ManageExpectationsPage.Switch'
+          : 'ManageExpectationsPage.Keep',
+      },
+    });
+    await updateExpectationsStorage(newHistoryEntry);
+    setCurrentHistory(newHistoryEntry);
+    setIsSubmitButtonDisabled(true);
+  }
+
+  // Marca que uma expectativa correta foi selecionada.
+  async function handleCorrectExpectationSelected() {
+    await handleExpectationSelected(true);
+    setIsSubmitModalVisible(true);
   }
 
   useEffect(() => {
@@ -85,26 +139,30 @@ const ManageExpectations: React.FC = () => {
 
       // Caso seja a primeira vez escolhe uma expectativa aleatória.
       if (!selectedStorage) {
-        setCurrentExpectation(selectRandomArrayElement(expectations));
+        setCurrentHistory({
+          expectation: selectRandomArrayElement(expectations),
+          correctSelected: false,
+        });
         return;
       }
 
-      const { lastRunDate, alreadySelected }: SelectedInfo = JSON.parse(
-        selectedStorage,
-      );
+      const { lastRunDate, alreadySelected }: SelectedInfo =
+        JSON.parse(selectedStorage);
 
       // Desativa caso já tenha sido utilizado uma vez no dia e exibe a opção selecionada
       // anteriormente.
-      if (isToday(new Date(lastRunDate))) {
+      if (alreadySelected.length > 0 && isToday(new Date(lastRunDate))) {
         const lastSelectedExpectation =
           alreadySelected[alreadySelected.length - 1];
-        setCurrentExpectation({
-          id: lastSelectedExpectation.id,
-          old: lastSelectedExpectation.old,
-          new: lastSelectedExpectation.new,
+
+        setCurrentHistory({
+          correctSelected: lastSelectedExpectation.correctSelected,
+          expectation: {
+            old: lastSelectedExpectation.expectation.old,
+            new: lastSelectedExpectation.expectation.new,
+          },
         });
-        setIsCorrectAnswerSelected(true);
-        setIsButtonDisabled(true);
+        setIsSubmitButtonDisabled(true);
         return;
       }
 
@@ -114,89 +172,71 @@ const ManageExpectations: React.FC = () => {
         await AsyncStorage.removeItem(
           '@AmamentaCoach:alreadySelectedExpectations',
         );
-        setCurrentExpectation(selectRandomArrayElement(expectations));
+        setCurrentHistory({
+          expectation: selectRandomArrayElement(expectations),
+          correctSelected: false,
+        });
         return;
       }
 
       // Remove as expectativas já escolhidas anteriormente
       const availableExpectations = expectations.filter(
-        expectation => !alreadySelected.includes(expectation),
+        expectation =>
+          !alreadySelected
+            .map(history => history.expectation)
+            .includes(expectation),
       );
       if (availableExpectations) {
-        setCurrentExpectation(selectRandomArrayElement(availableExpectations));
+        setCurrentHistory({
+          expectation: selectRandomArrayElement(availableExpectations),
+          correctSelected: false,
+        });
       }
     }
 
     loadAlreadySelected();
+    updateExpectationsStorage();
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.ManageExpectations },
+    });
   }, []);
-
-  // Adiciona o id da expectativa atual ao AsyncStorage, para que não possa ser utilizada na próxima
-  // execução.
-  async function saveSelectedExpectation() {
-    const selectedStorage = await AsyncStorage.getItem(
-      '@AmamentaCoach:alreadySelectedExpectations',
-    );
-    let alreadySelected: Expectation[] = [];
-    if (selectedStorage) {
-      alreadySelected = JSON.parse(selectedStorage);
-    }
-
-    await AsyncStorage.setItem(
-      '@AmamentaCoach:alreadySelectedExpectations',
-      JSON.stringify({
-        lastRunDate: new Date(),
-        alreadySelected: [...alreadySelected, currentExpectation],
-      }),
-    );
-
-    setIsButtonDisabled(true);
-    setIsSubmitModalVisible(true);
-  }
-
-  async function handleChangeExpectation() {
-    setIsCorrectAnswerSelected(!isCorrectAnswerSelected);
-    await saveSelectedExpectation();
-  }
 
   return (
     <ScrollView>
       <Modal
-        content="Parabéns por trocar essa expectativa improvável pela expectativa realista! Volte amanhã para trocar outras expectativas."
+        content={i18n.t('ManageExpectationsPage.PopUp')}
         visible={isSubmitModalVisible}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => setIsSubmitModalVisible(false),
           },
         ]}
       />
-      <HeaderTitle>
-        Trocar expectativas improváveis por expectativas realistas ajuda na
-        resiliência!{'\n'}Clique em “Trocar”, se desejar ou precisar. Caso não
-        queira, clique em “Manter expectativa”.
-      </HeaderTitle>
+      <HeaderTitle>{i18n.t('ManageExpectationsPage.Header')}</HeaderTitle>
       <Card>
-        <InnerBorder correctAnswer={isCorrectAnswerSelected}>
+        <InnerBorder correctAnswer={currentHistory.correctSelected}>
           <CardText>
-            {isCorrectAnswerSelected
-              ? currentExpectation.new
-              : currentExpectation.old}
+            {currentHistory.correctSelected
+              ? currentHistory.expectation.new
+              : currentHistory.expectation.old}
           </CardText>
         </InnerBorder>
       </Card>
       <Footer>
         <FirstButtonContainer>
           <MainButton
-            text="Trocar"
-            disabled={isButtonDisabled}
-            onPress={handleChangeExpectation}
+            text={i18n.t('ManageExpectationsPage.Switch')}
+            disabled={isSubmitButtonDisabled}
+            onPress={handleCorrectExpectationSelected}
           />
         </FirstButtonContainer>
         <SecondaryButton
-          text="Manter expectativa"
-          disabled={isButtonDisabled}
-          onPress={saveSelectedExpectation}
+          text={i18n.t('ManageExpectationsPage.Keep')}
+          disabled={isSubmitButtonDisabled}
+          onPress={() => handleExpectationSelected(false)}
         />
       </Footer>
     </ScrollView>

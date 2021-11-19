@@ -1,26 +1,38 @@
-import React from 'react';
+import i18n from 'i18n-js';
 
-import { View } from 'react-native';
+import ImageWrapper from 'components/ImageWrapper';
+import ProgressDots from 'components/ProgressDots';
 
-import ImageWrapper from '../ImageWrapper';
-import { InfoModelProps } from '../InformationPages';
-import ProgressDots from '../ProgressDots';
+import type { InfoPageModelProps } from 'components/InformationPages';
 
 import {
   ContentHeaderText,
   ContentText,
   ContentTitleText,
   ContentWrapper,
-  ContinueButton,
   CurrentPageWrapper,
+  EndButton,
   Footer,
+  Header,
+  ImageContainer,
   LastPageButtonWrapper,
-  TextContinueButton,
+  SkipButton,
+  SkipButtonText,
+  TextContainer,
+  TextEndButton,
 } from './styles';
 
+interface GenericInfoPageOptions {
+  displaySkipButton?: boolean;
+  onEnd: () => void;
+}
+
 // Página genérica que pode ser passada a um componente InformationPages.
-const createGenericInfoPage = (onEnd: () => void) => {
-  const InfoModel: React.FC<InfoModelProps> = ({
+const createGenericInfoPage = ({
+  displaySkipButton,
+  onEnd,
+}: GenericInfoPageOptions) => {
+  const InfoModel: React.FC<InfoPageModelProps> = ({
     index,
     pagesLength,
     title,
@@ -29,23 +41,34 @@ const createGenericInfoPage = (onEnd: () => void) => {
     flatListRef,
   }) => (
     <>
-      <ContentTitleText>{title}</ContentTitleText>
-      <ContentWrapper>
-        {image && (
-          <ImageWrapper
-            source={image}
-            width="100%"
-            height="50%"
-            resizeMode="contain"
-          />
+      <Header>
+        {displaySkipButton && (
+          <SkipButton onPress={onEnd}>
+            {index < pagesLength - 1 && (
+              <SkipButtonText>{i18n.t('Skip')}</SkipButtonText>
+            )}
+          </SkipButton>
         )}
-        {content.map(({ sectionHeader, text }) => (
-          <View key={text}>
+      </Header>
+      <ContentWrapper>
+        <ContentTitleText>{title}</ContentTitleText>
+        {image && (
+          <ImageContainer>
+            <ImageWrapper
+              source={image}
+              width={250}
+              height="100%"
+              resizeMode="contain"
+            />
+          </ImageContainer>
+        )}
+        {content.map(({ id, sectionHeader, text }) => (
+          <TextContainer key={id}>
             {sectionHeader && (
               <ContentHeaderText>{sectionHeader}</ContentHeaderText>
             )}
             <ContentText>{text}</ContentText>
-          </View>
+          </TextContainer>
         ))}
       </ContentWrapper>
       <Footer>
@@ -57,9 +80,9 @@ const createGenericInfoPage = (onEnd: () => void) => {
           />
         </CurrentPageWrapper>
         <LastPageButtonWrapper opacity={index === pagesLength - 1 ? 1 : 0}>
-          <ContinueButton onPress={() => onEnd()}>
-            <TextContinueButton>Sair</TextContinueButton>
-          </ContinueButton>
+          <EndButton onPress={() => onEnd()}>
+            <TextEndButton>{i18n.t('Leave')}</TextEndButton>
+          </EndButton>
         </LastPageButtonWrapper>
       </Footer>
     </>

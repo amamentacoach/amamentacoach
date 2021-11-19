@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import i18n from 'i18n-js';
+import React, { useContext, useState } from 'react';
+import { ActivityIndicator, Dimensions } from 'react-native';
+import config from 'react-native-config';
+import ImagePicker from 'react-native-image-picker';
+import { ThemeContext } from 'styled-components';
 
-import { Dimensions } from 'react-native';
-import ImagePicker, { ImagePickerResponse } from 'react-native-image-picker';
+import ImageWrapper from 'components/ImageWrapper';
+import MainButton from 'components/MainButton';
+import SecondaryButton from 'components/SecondaryButton';
+import { useAuth } from 'contexts/auth';
 
-import { useAuth } from '../../contexts/auth';
-import ImageWrapper, { ImageWrapperSourcePropType } from '../ImageWrapper';
-import MainButton from '../MainButton';
-import SecondaryButton from '../SecondaryButton';
+import type { ImageWrapperSourcePropType } from 'components/ImageWrapper';
+import type { ImagePickerResponse } from 'react-native-image-picker';
 
 import {
-  FormContainer,
+  Container,
   ScrollView,
   SelectButtonContainer,
   SelectedImage,
@@ -33,23 +38,32 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
 }) => {
   const { width } = Dimensions.get('window');
   const { motherInfo, updateMotherInfo } = useAuth();
-  const [photo, setPhoto] = useState<ImagePickerResponse | null>(null);
+  const themeContext = useContext(ThemeContext);
 
+  const [photo, setPhoto] = useState<ImagePickerResponse | null>(null);
   const [isSendingForm, setIsSendingForm] = useState(false);
+  const [isLoadingImage, setIsLoadingImage] = useState(true);
   const [formSent, setFormSent] = useState(false);
 
+  // Envia a foto que o usuário selecionou e atualiza as informações locais da mãe.
   async function handleSubmitNewPhoto() {
     if (photo) {
       setIsSendingForm(true);
       const filename = await uploadFunction(photo);
-      motherInfo.images[target] = filename;
-      await updateMotherInfo();
+      if (filename) {
+        // Atualiza o endereço da imagem do bebê nas informações da mãe.
+        await updateMotherInfo({
+          ...motherInfo,
+          images: { ...motherInfo.images, [target]: filename },
+        });
+      }
       setIsSendingForm(false);
       setFormSent(true);
     }
   }
 
-  async function handleSelectPhoto() {
+  // Abre a galeria do usuário.
+  function handleSelectPhoto() {
     ImagePicker.launchImageLibrary({ noData: true }, response => {
       if (response.uri) {
         setPhoto(response);
@@ -60,16 +74,27 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
 
   return (
     <ScrollView>
-      <FormContainer>
+      <Container>
         {/* Usuário já fez o upload de uma foto */}
         {!photo && !formSent && motherInfo.images[target] && (
-          <SelectedImage
-            source={{
-              uri: `https://amamentacoach.herokuapp.com/uploads/${motherInfo.images[target]}`,
-            }}
-            width={width}
-            resizeMode="contain"
-          />
+          <>
+            <SelectedImage
+              source={{
+                uri: `${config.API_URL}/uploads/${motherInfo.images[target]}`,
+              }}
+              width={width}
+              onLoadEnd={() => setIsLoadingImage(false)}
+              resizeMode="contain"
+              isVisible={!isLoadingImage}
+            />
+            {isLoadingImage && (
+              <ActivityIndicator
+                size="large"
+                color={themeContext.primary}
+                animating={isLoadingImage}
+              />
+            )}
+          </>
         )}
         {/* Usuário selecionou uma nova foto */}
         {photo && (
@@ -82,31 +107,31 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
         {/* Usuário ainda não enviou uma foto e não selecionou nenhuma para ser enviada */}
         {!photo && !motherInfo.images[target] && (
           <>
-            {image && (
-              <ImageWrapper
-                source={image}
-                resizeMode="contain"
-                width="100%"
-                height={300}
-              />
-            )}
+            <ImageWrapper
+              source={image}
+              resizeMode="contain"
+              height={250}
+              width={250}
+            />
             <Text>{text}</Text>
           </>
         )}
-      </FormContainer>
+      </Container>
       <SubmitButtonContainer>
         <SelectButtonContainer>
           <SecondaryButton
             onPress={handleSelectPhoto}
             disabled={isSendingForm}
-            text="Selecionar foto"
+            text={i18n.t('Actions.SelectPicture')}
           />
         </SelectButtonContainer>
         <SendButtonContainer>
           <MainButton
             onPress={handleSubmitNewPhoto}
             disabled={!photo || formSent || isSendingForm}
-            text={isSendingForm ? 'Enviando...' : 'Enviar'}
+            text={
+              isSendingForm ? i18n.t('Status.Sending') : i18n.t('Actions.Send')
+            }
           />
         </SendButtonContainer>
       </SubmitButtonContainer>

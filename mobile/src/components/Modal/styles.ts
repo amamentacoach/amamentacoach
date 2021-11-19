@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import ImageWrapper from '../ImageWrapper';
+import ImageWrapper from 'components/ImageWrapper';
 
 interface OptionTextProps {
   color?: string;

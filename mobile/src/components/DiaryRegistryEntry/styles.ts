@@ -14,12 +14,14 @@ export const Row = styled.View`
 
 export const TextContainer = styled.View`
   flex-direction: row;
+  flex-wrap: wrap;
+  flex-shrink: 1;
 `;
 
 export const Text = styled.Text`
   color: ${props => props.theme.primary};
   font-size: 16px;
-  font-family: 'OpenSans-Regular';
+  font-family: 'OpenSans-Bold';
 `;
 
 export const Content = styled.Text`

@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
-
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
+import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
-import RNBootSplash from 'react-native-bootsplash';
+import { hide } from 'react-native-bootsplash';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Yup from 'yup';
 
-import FormTextInput from '../../../components/FormTextInput';
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
-import { useAuth } from '../../../contexts/auth';
-import { LoginStatus } from '../../../services/auth';
+import FormTextInput from 'components/FormTextInput';
+import MainButton from 'components/MainButton';
+import Modal from 'components/Modal';
+import { useAuth } from 'contexts/auth';
+import { LoginStatus } from 'services/auth';
+
+import type { AuthStackProps } from 'routes/auth';
 
 import {
   ForgotPasswordText,
@@ -24,7 +26,7 @@ import {
   SubmitButtonContainer,
 } from './styles';
 
-import Logo from '../../../../assets/images/logo_primary.png';
+import Logo from '@assets/images/logo_primary.png';
 
 interface FormValues {
   email: string;
@@ -32,7 +34,7 @@ interface FormValues {
 }
 
 const Login: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<AuthStackProps>();
   const { signIn } = useAuth();
 
   const [errorModalMessage, setErrorModalMessage] = useState<string | null>(
@@ -45,33 +47,29 @@ const Login: React.FC = () => {
     password: '',
   };
   const loginSchema: Yup.SchemaOf<FormValues> = Yup.object({
-    email: Yup.string().email('Email Inválido').required('Campo obrigatório'),
+    email: Yup.string()
+      .email(i18n.t('Yup.InvalidEmail'))
+      .required(i18n.t('Yup.Required')),
     password: Yup.string()
-      .min(8, 'A senha precisa ter pelo menos 8 caracteres')
-      .matches(
-        new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])'),
-        'Precisa ter letras minúsculas, letras maiúsculas e números',
-      )
-      .required('Campo obrigatório'),
+      .min(4, i18n.t('Yup.MinLengthError', { min: 4 }))
+      .required(i18n.t('Yup.Required')),
   }).required();
 
   useEffect(() => {
-    RNBootSplash.hide({ duration: 250 });
+    hide({ duration: 250 });
   }, []);
 
   async function handleSignIn({ email, password }: FormValues) {
     setIsSendingForm(true);
     const status = await signIn(email, password);
     if (status === LoginStatus.FailedToConnect) {
-      setErrorModalMessage(
-        'Erro ao realizar login.\nPor favor tente novamente mais tarde.',
-      );
+      setErrorModalMessage(i18n.t('LoginPage.GenericError'));
       setIsSendingForm(false);
     } else if (status === LoginStatus.IncorrectLogin) {
-      setErrorModalMessage('E-mail ou senha incorretos!');
+      setErrorModalMessage(i18n.t('LoginPage.WrongInfoError'));
       setIsSendingForm(false);
     } else if (status === LoginStatus.AccountNotAuthorized) {
-      setErrorModalMessage('Conta não autorizada!');
+      setErrorModalMessage(i18n.t('LoginPage.NotAuthorizedError'));
       setIsSendingForm(false);
     }
   }
@@ -92,7 +90,7 @@ const Login: React.FC = () => {
           visible={!!errorModalMessage}
           options={[
             {
-              text: 'Fechar',
+              text: i18n.t('Close'),
               isBold: true,
               onPress: () => setErrorModalMessage(null),
             },
@@ -101,7 +99,7 @@ const Login: React.FC = () => {
       )}
 
       <ScrollView>
-        <Header source={Logo} resizeMode="contain" width="100%" />
+        <Header source={Logo} resizeMode="contain" />
         <Formik
           initialValues={formInitialValues}
           validationSchema={loginSchema}
@@ -111,20 +109,20 @@ const Login: React.FC = () => {
             <FormContainer>
               <View>
                 <FormTextInput
-                  label="Email"
+                  label={i18n.t('Email')}
                   error={errors.email}
                   onChangeText={handleChange('email')}
                   value={values.email}
-                  placeholder="Insira seu email"
+                  placeholder={i18n.t('Placeholder.Email')}
                   keyboardType="email-address"
                 />
 
                 <FormTextInput
-                  label="Senha"
+                  label={i18n.t('Password')}
                   error={errors.password}
                   onChangeText={handleChange('password')}
                   value={values.password}
-                  placeholder="Insira sua senha"
+                  placeholder={i18n.t('LoginPage.PasswordPlaceholder')}
                   secureTextEntry
                 />
               </View>
@@ -132,21 +130,27 @@ const Login: React.FC = () => {
               <TouchableOpacity
                 onPress={handleForgotPassword}
                 activeOpacity={0.7}>
-                <ForgotPasswordText>Esqueceu a senha?</ForgotPasswordText>
+                <ForgotPasswordText>
+                  {i18n.t('LoginPage.ForgotPassword')}
+                </ForgotPasswordText>
               </TouchableOpacity>
 
               <SubmitButtonContainer>
                 <MainButton
                   onPress={handleSubmit}
                   disabled={!dirty || isSendingForm}
-                  text={isSendingForm ? 'Entrando...' : 'Entrar'}
+                  text={
+                    isSendingForm
+                      ? i18n.t('Status.SignIn')
+                      : i18n.t('Actions.SignIn')
+                  }
                 />
               </SubmitButtonContainer>
 
               <SignUpContainer>
-                <NoAccountText>Ainda não possui uma conta?</NoAccountText>
+                <NoAccountText>{i18n.t('LoginPage.NoAccount')}</NoAccountText>
                 <TouchableOpacity onPress={handleSignUp} activeOpacity={0.7}>
-                  <SignUpText>Cadastrar-se</SignUpText>
+                  <SignUpText>{i18n.t('LoginPage.SignUp')}</SignUpText>
                 </TouchableOpacity>
               </SignUpContainer>
             </FormContainer>

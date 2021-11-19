@@ -1,27 +1,35 @@
-import React, { useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import { StackActions, useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 
-import createGenericSurveyPage from '../../../components/GenericSurveyPage';
-import Modal from '../../../components/Modal';
-import Survey from '../../../components/Survey';
-import theme from '../../../config/theme';
+import createGenericSurveyPage from 'components/GenericSurveyPage';
+import Modal from 'components/Modal';
+import Survey from 'components/Survey';
+import theme from 'config/theme';
+import { createTelemetryAction } from 'utils/telemetryAction';
+
+import type { RootStackProps } from 'routes/app';
 
 import { ModalContainer } from './styles';
 
-import Motivation1 from '../../../../assets/images/motivation-1.png';
-import Motivation2 from '../../../../assets/images/motivation-2.png';
-import Motivation3 from '../../../../assets/images/motivation-3.png';
-import Motivation4 from '../../../../assets/images/motivation-4.png';
-import Motivation5 from '../../../../assets/images/motivation-5.png';
+import Motivation1 from '@assets/images/motivation-1.png';
+import Motivation2 from '@assets/images/motivation-2.png';
+import Motivation3 from '@assets/images/motivation-3.png';
+import Motivation4 from '@assets/images/motivation-4.png';
+import Motivation5 from '@assets/images/motivation-5.png';
 
 const Goals: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
 
   const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
   const [isFinishedModalVisible, setIsFinishedModalVisible] = useState(false);
 
-  function onFormEnd() {
+  async function onFormEnd() {
+    await createTelemetryAction({
+      action: Action.Pressed,
+      context: { screen: AppScreen.Goals, target: 'Actions.End' },
+    });
     setIsFinishedModalVisible(true);
   }
 
@@ -38,6 +46,13 @@ const Goals: React.FC = () => {
     return images[randomIndex];
   }
 
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.Goals },
+    });
+  }, []);
+
   return (
     <>
       <ModalContainer
@@ -46,7 +61,7 @@ const Goals: React.FC = () => {
           image={getRandomMotivationImage()}
           options={[
             {
-              text: 'Fechar',
+              text: i18n.t('Close'),
               isBold: true,
               onPress: () => setIsIntroModalVisible(false),
             },
@@ -54,17 +69,17 @@ const Goals: React.FC = () => {
           visible={isIntroModalVisible}
         />
         <Modal
-          content={`Suas metas foram traçadas!\nGostaria de ver o seu desempenho?`}
+          content={i18n.t('GoalsPage.PopupContent')}
           options={[
             {
-              text: 'Mais Tarde',
+              text: i18n.t('Later'),
               onPress: () => {
                 setIsFinishedModalVisible(false);
                 navigation.navigate('Diary');
               },
             },
             {
-              text: 'Ver desempenho',
+              text: i18n.t('GoalsPage.OpenReport'),
               isBold: true,
               onPress: () => {
                 setIsFinishedModalVisible(false);
@@ -77,7 +92,7 @@ const Goals: React.FC = () => {
         />
       </ModalContainer>
       <Survey
-        title="Minhas metas de hoje"
+        title={i18n.t('GoalsPage.Title')}
         color={theme.babyPurple}
         category={3}
         Page={createGenericSurveyPage(onFormEnd)}

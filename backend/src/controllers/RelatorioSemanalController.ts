@@ -2,7 +2,7 @@ import e, { Request, Response } from 'express';
 import knex from '../database/connection';
 
 interface Perguntas{
-    pergunta:String,
+    pergunta:Number,
     respostas:any[]
 }
 
@@ -11,21 +11,21 @@ class RelatorioSemanalController{
         const{mae_id} = req
 
         const perguntas = [4,5,8,9,10,11,12]
-        const titulos = ["Como me senti:",
-            "Como meu bebê esteve se alimentando:",
-            "Minhas Metas para Pensamentos e Sentimentos",
-            "Minhas Metas para Ações",
-            "Precisei de uma ajuda específica...",
-            "Meu ombro amigo da semana:"
-        ]
+        //const titulos = ["Como me senti:",
+        //    "Como meu bebê esteve se alimentando:",
+        //    "Minhas Metas para Pensamentos e Sentimentos",
+        //    "Minhas Metas para Ações",
+        //    "Precisei de uma ajuda específica...",
+        //    "Meu ombro amigo da semana:"
+        //]
 
         const date = new Date()
         date.setDate(date.getDate()-7)
 
         let relatorio : Perguntas[] = [];
 
-        titulos.forEach((titulo) => {
-            relatorio.push({pergunta:titulo,respostas:[]})
+        perguntas.forEach((pergunta) => {
+            relatorio.push({pergunta,respostas:[]})
         });
 
         let index = 0

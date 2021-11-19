@@ -1,9 +1,9 @@
-import React from 'react';
-
+import i18n from 'i18n-js';
 import { View } from 'react-native';
 
-import { format } from '../../lib/date-fns';
-import { BreastfeedEntry } from '../../services/diaryRegistry';
+import { format } from 'lib/date-fns';
+
+import type { BreastfeedEntry } from 'services/diaryRegistry';
 
 import {
   BabyName,
@@ -22,22 +22,27 @@ const DiaryBreastfeedEntry: React.FC<BreastfeedEntry> = ({ name, entries }) => {
   return (
     <View>
       <BabyName>{name}</BabyName>
-      {entries.map(({ id, breast, date, duration }) => (
+      {entries.map(({ id, breasts, date, duration }) => (
         <Breastfeed key={id}>
           <Row>
             <TextContainer>
-              <Text>Horário: </Text>
-              <Content>{format(new Date(date), 'kk:mm')}</Content>
+              <Text>{i18n.t('Time')}: </Text>
+              <Content>{format(new Date(date), 'HH:mm')}</Content>
             </TextContainer>
             <TextContainer>
-              <Text>Duração: </Text>
+              <Text>{i18n.t('Duration')}: </Text>
               <Content>{duration} min</Content>
             </TextContainer>
           </Row>
           <Row>
             <TextContainer>
-              <Text>Mama: </Text>
-              <Content>{breast === 'E' ? 'Esquerda' : 'Direita'}</Content>
+              <Text>{i18n.t('Breast')}: </Text>
+              {breasts.map((breast, index) => (
+                <Content key={breast}>
+                  {index > 0 && ', '}
+                  {breast === 'E' ? i18n.t('Left') : i18n.t('Right')}
+                </Content>
+              ))}
             </TextContainer>
           </Row>
         </Breastfeed>

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-
 import { Picker } from '@react-native-picker/picker';
+import i18n from 'i18n-js';
+import { useState } from 'react';
 
 import {
   Container,
@@ -22,7 +22,7 @@ interface FormPickerProps {
 
 const FormPickerInput: React.FC<FormPickerProps> = ({
   fieldName,
-  placeholder = 'Selecione uma opção',
+  placeholder = i18n.t('PickerComponent.DefaultPlaceholder'),
   defaultValue,
   label,
   error,
@@ -31,7 +31,7 @@ const FormPickerInput: React.FC<FormPickerProps> = ({
 }) => {
   const [selectedItem, setSelectedItem] = useState(defaultValue || '');
 
-  function handleItemSelected(itemValue: string) {
+  function handleItemSelected(itemValue: string): void {
     setSelectedItem(itemValue);
     onChange(fieldName, itemValue);
   }
@@ -42,7 +42,9 @@ const FormPickerInput: React.FC<FormPickerProps> = ({
       <PickerContainer>
         <Picker
           selectedValue={selectedItem}
-          onValueChange={itemValue => handleItemSelected(itemValue.toString())}>
+          onValueChange={(itemValue): void =>
+            handleItemSelected(itemValue.toString())
+          }>
           {[placeholder, ...options]
             .filter(option => option !== '')
             .map(option => (

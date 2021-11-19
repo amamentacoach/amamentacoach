@@ -22,7 +22,7 @@ class RespostasController{
     }
 
     async results(req:Request,res:Response){
-        const perguntas = await knex('pergunta').select('id','descricao as pergunta').where('categoria','=',1)
+        const perguntas = await knex('pergunta').select('id').where('categoria','=',1)
 
         for (let index = 0; index < perguntas.length; index++) {
             perguntas[index]['alternativas'] = await knex('resposta')

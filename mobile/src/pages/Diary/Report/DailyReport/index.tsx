@@ -1,13 +1,19 @@
+import i18n from 'i18n-js';
 import React, { useEffect, useState } from 'react';
 
-import DiaryBreastfeedEntry from '../../../../components/DiaryBreastfeedEntry';
-import DiaryRegistryEntry from '../../../../components/DiaryRegistryEntry';
-import {
-  DailyReport as IDailyReport,
-  getDailyReport,
-} from '../../../../services/report';
+import DiaryBreastfeedEntry from 'components/DiaryBreastfeedEntry';
+import DiaryRegistryEntry from 'components/DiaryRegistryEntry';
+import { getDailyReport } from 'services/report';
 
-import { Container, EntryContainer, Header } from './styles';
+import type { DailyReport as IDailyReport } from 'services/report';
+
+import {
+  Center,
+  Container,
+  EntryContainer,
+  Header,
+  NoRegistriesMessage,
+} from './styles';
 
 interface DailyReportProps {
   isLoading: boolean;
@@ -24,7 +30,7 @@ const DailyReport: React.FC<DailyReportProps> = ({
   });
 
   useEffect(() => {
-    async function fetchRegistries() {
+    async function fetchRegistries(): Promise<void> {
       const data = await getDailyReport();
       setDailyReport(data);
       setIsLoading(false);
@@ -38,9 +44,17 @@ const DailyReport: React.FC<DailyReportProps> = ({
 
   return (
     <Container>
+      {dailyReport?.registryEntries.length === 0 && (
+        <Center>
+          <NoRegistriesMessage>
+            {i18n.t('DailyReportPage.NoRegistries')}
+          </NoRegistriesMessage>
+        </Center>
+      )}
+
       {dailyReport?.breastfeedEntries.some(baby => baby.entries.length > 0) && (
         <EntryContainer>
-          <Header>Amamentações</Header>
+          <Header>{i18n.t('DailyReportPage.Breastfeed')}</Header>
           {dailyReport?.breastfeedEntries.map(entry => (
             <DiaryBreastfeedEntry key={entry.id} {...entry} />
           ))}
@@ -49,7 +63,7 @@ const DailyReport: React.FC<DailyReportProps> = ({
 
       {dailyReport?.registryEntries.length > 0 && (
         <EntryContainer>
-          <Header>Retiradas de leite</Header>
+          <Header>{i18n.t('DailyReportPage.Extraction')}</Header>
           {dailyReport?.registryEntries.map(entry => (
             <DiaryRegistryEntry key={entry.id} {...entry} />
           ))}

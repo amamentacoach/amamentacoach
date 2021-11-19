@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
+import i18n from 'i18n-js';
+import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
+import { ThemeContext } from 'styled-components';
 
-import FormPickerInput from '../../../components/FormPickerInput';
+import FormPickerInput from 'components/FormPickerInput';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import DailyReport from './DailyReport';
 import { Container, ScrollView } from './styles';
@@ -16,17 +19,25 @@ enum Reports {
 const Report: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedReport, setSelectedReport] = useState(Reports.Daily);
+  const themeContext = useContext(ThemeContext);
 
-  function handleChangeReport(value: string) {
+  function handleChangeReport(value: string): void {
     if (!value) {
       return;
     }
-    if (value === 'Semanal') {
+    if (value === i18n.t('ReportPage.Weekly')) {
       setSelectedReport(Reports.Weekly);
     } else {
       setSelectedReport(Reports.Daily);
     }
   }
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.Report },
+    });
+  }, []);
 
   return (
     <ScrollView>
@@ -34,16 +45,17 @@ const Report: React.FC = () => {
         <View>
           <FormPickerInput
             fieldName="reportSelected"
-            label="Período desejado:"
-            defaultValue="Diário"
-            options={['Diário', 'Semanal']}
-            onChange={(_, fieldValue) => handleChangeReport(fieldValue)}
+            label={i18n.t('ReportPage.Placeholder')}
+            defaultValue={i18n.t('Diary')}
+            placeholder={''}
+            options={[i18n.t('ReportPage.Daily'), i18n.t('ReportPage.Weekly')]}
+            onChange={(_, fieldValue): void => handleChangeReport(fieldValue)}
           />
         </View>
         {isLoading && (
           <ActivityIndicator
             size="large"
-            color="#7d5cd7"
+            color={themeContext.primary}
             animating={isLoading}
           />
         )}

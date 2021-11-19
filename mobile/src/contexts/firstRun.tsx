@@ -1,35 +1,25 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createContext, useContext, useEffect, useState } from 'react';
+
+type TemporaryField = 'home';
+type PermanentField =
+  // Usuário já viu a introdução do diário.
+  | 'diaryIntroduction'
+  // Usuário já viu a introdução do app.
+  | 'appIntroduction'
+  // Usuário já viu a introdução do formulário de escala.
+  | 'statusFormIntroduction';
 
 interface IsFirstRunValues {
   // Valores que são salvos permanentemente.
   persistent: {
-    // Usuário já viu a introdução do app.
-    appIntroduction: boolean;
-    // Usuário já viu a introdução do diário.
-    diaryIntroduction: boolean;
-    // Usuário já viu a introdução do formulário de escala.
-    statusFormIntroduction: boolean;
+    [key in PermanentField]: boolean;
   };
-  // Valores que são reiniciados ao reabrir o app.
+  // Valores que são reiniciados ao fechar o app.
   temporary: {
-    // Usuário visitou a tela inicial.
-    home: boolean;
-    // Usuário visitou a tela de ordenhas.
-    extraction: boolean;
-    // Usuário visitou a tela do diário.
-    diary: boolean;
-    // Usuário visitou a tela de mensagens.
-    messages: boolean;
+    [key in TemporaryField]: boolean;
   };
 }
-
-type TemporaryField = 'diary' | 'extraction' | 'home' | 'messages';
-type PermanentField =
-  | 'diaryIntroduction'
-  | 'appIntroduction'
-  | 'statusFormIntroduction';
 
 interface IsFirstRunContextData {
   isFirstRun: IsFirstRunValues;
@@ -50,7 +40,7 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
       diaryIntroduction: true,
       statusFormIntroduction: true,
     },
-    temporary: { home: true, extraction: true, diary: true, messages: true },
+    temporary: { home: true },
   });
   const [isLoading, setIsLoading] = useState(true);
 

@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
+import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { FlatList } from 'react-native';
+import { ThemeContext } from 'styled-components';
 
-import { useIsFirstRun } from '../../../contexts/firstRun';
-import { listMessages, Message as IMessage } from '../../../services/messages';
-import { setMessagesPageOpened } from '../../../services/telemetry';
+import { listMessages } from 'services/messages';
+import { createTelemetryAction } from 'utils/telemetryAction';
+
+import type { RootStackProps } from 'routes/app';
+import type { Message as IMessage } from 'services/messages';
 
 import {
   AddMessageButton,
@@ -17,11 +20,11 @@ import {
   MessageContainer,
 } from './styles';
 
-import AddIcon from '../../../../assets/images/icons/ic_add.svg';
+import AddIcon from '@assets/images/icons/ic_add.svg';
 
 const Messages: React.FC = () => {
-  const navigation = useNavigation();
-  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
+  const navigation = useNavigation<RootStackProps>();
+  const themeContext = useContext(ThemeContext);
 
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [page, setPage] = useState(1);
@@ -29,7 +32,7 @@ const Messages: React.FC = () => {
   const [noMoreMessages, setNoMoreMessages] = useState(false);
 
   // Adiciona um botão na parte superior direita da tela, permitindo registrar uma nova mensagem
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <AddMessageButton
@@ -53,14 +56,6 @@ const Messages: React.FC = () => {
     setLoading(false);
   }
 
-  useEffect(() => {
-    fetchMessages(1);
-    if (isFirstRun.temporary.diary) {
-      setMessagesPageOpened();
-      setTemporaryNotFirstRun('diary');
-    }
-  }, []);
-
   async function fetchOlderMessages() {
     if (loading || noMoreMessages) {
       return;
@@ -68,6 +63,14 @@ const Messages: React.FC = () => {
     await fetchMessages(page + 1);
     setPage(page + 1);
   }
+
+  useEffect(() => {
+    fetchMessages(1);
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.Messages },
+    });
+  }, []);
 
   const Message: React.FC<IMessage> = ({ name, content }) => (
     <MessageContainer>
@@ -86,7 +89,11 @@ const Messages: React.FC = () => {
         onEndReached={fetchOlderMessages}
         onEndReachedThreshold={0.1}
         ListFooterComponent={() => (
-          <LoadingIndicator size="large" color="#7d5cd7" animating={loading} />
+          <LoadingIndicator
+            size="large"
+            color={themeContext.primary}
+            animating={loading}
+          />
         )}
         showsVerticalScrollIndicator={false}
       />

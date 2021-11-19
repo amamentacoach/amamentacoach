@@ -14,3 +14,10 @@
 
 # react-native-config
 -keep class com.amamentacoach.BuildConfig { *; }
+
+# Reanimated
+-keep class com.facebook.react.turbomodule.** { *; }
+
+# Hermes
+-keep class com.facebook.hermes.unicode.** { *; }
+-keep class com.facebook.jni.** { *; }

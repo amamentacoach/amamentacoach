@@ -1,47 +1,57 @@
-import React from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
+import { useEffect } from 'react';
 
-import OptionsList, { Options } from '../../../components/OptionList';
+import OptionsList from 'components/OptionList';
+import { createTelemetryAction } from 'utils/telemetryAction';
+
+import type { OptionListEntry } from 'components/OptionList';
+import type { RootStackProps } from 'routes/app';
 
 import { HeaderText, ScrollView } from './styles';
 
-import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
-import WithdrawalCalendar from '../../../../assets/images/withdrawal_calendar.svg';
-import WithdrawalClock from '../../../../assets/images/withdrawal_clock.svg';
-import WithdrawalQuestion from '../../../../assets/images/withdrawal_question.svg';
+import PrematureBreastfeed from '@assets/images/premature_breastfeed.svg';
+import WithdrawalCalendar from '@assets/images/withdrawal_calendar.svg';
+import WithdrawalClock from '@assets/images/withdrawal_clock.svg';
+import WithdrawalQuestion from '@assets/images/withdrawal_question.svg';
 
 const Breastfeeding: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
 
-  const options: Options[] = [
+  const options: OptionListEntry[] = [
     {
       image: WithdrawalQuestion,
-      title: 'Por que fazer?',
+      title: i18n.t('BreastfeedingPage.1'),
       onPress: () => navigation.navigate('WhyBreastfeed'),
     },
     {
       image: PrematureBreastfeed,
-      title: 'Como fazer?',
+      title: i18n.t('BreastfeedingPage.2'),
       onPress: () => navigation.navigate('HowToBreastfeed'),
     },
     {
       image: WithdrawalCalendar,
-      title: 'Quando fazer?',
+      title: i18n.t('BreastfeedingPage.3'),
       onPress: () => navigation.navigate('WhenToBreastfeed'),
     },
     {
       image: WithdrawalClock,
-      title: 'Por quanto tempo fazer?',
+      title: i18n.t('BreastfeedingPage.4'),
       onPress: () => navigation.navigate('HowLongToBreastfeed'),
     },
   ];
 
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.Breastfeeding },
+    });
+  }, []);
+
   return (
     <ScrollView>
-      <HeaderText>
-        Tudo o que você precisa saber sobre retirada do leite
-      </HeaderText>
+      <HeaderText>{i18n.t('BreastfeedingPage.Header')}</HeaderText>
       <OptionsList options={options} />
     </ScrollView>
   );

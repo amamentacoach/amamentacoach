@@ -1,10 +1,10 @@
-import React from 'react';
+import i18n from 'i18n-js';
 
-import { SvgProps } from 'react-native-svg';
+import FormRadioGroupInput from 'components/FormRadioGroup';
+import MainButton from 'components/MainButton';
 
-import FormRadioGroupInput from '../FormRadioGroup';
-import MainButton from '../MainButton';
-import { SurveyPage } from '../Survey';
+import type { SurveyPage } from 'components/Survey';
+import type { SvgProps } from 'react-native-svg';
 
 import {
   Container,
@@ -60,14 +60,16 @@ const createGenericSurveyPage = (
           options={question.options}
           multipleSelection={question.multipleSelection}
           displayOtherField={question.displayOther}
-          error={isFormValid ? '' : 'Pergunta obrigatória'}
+          error={isFormValid ? '' : i18n.t('Yup.AnswerRequired')}
           onChange={setFieldValue}
         />
 
         <Footer>
           <MainButton
             color={color}
-            text={index >= pagesLength - 1 ? 'Finalizar' : 'Próximo'}
+            text={
+              index >= pagesLength - 1 ? i18n.t('Actions.End') : i18n.t('Next')
+            }
             disabled={!isDirty || isSendingForm}
             onPress={() => handleChangePage(index + 1, onFormEnd)}
           />

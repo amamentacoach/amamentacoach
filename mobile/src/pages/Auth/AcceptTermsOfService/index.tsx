@@ -1,20 +1,17 @@
-import React, { useState } from 'react';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import i18n from 'i18n-js';
+import { useState } from 'react';
 
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
+import MainButton from 'components/MainButton';
+import Modal from 'components/Modal';
 import {
   AdultTermsOfService,
   MinorTermsOfService,
-} from '../../../components/TermsOfService';
-import { differenceInYears } from '../../../lib/date-fns';
-import {
-  BabySignUpInfo,
-  MotherSignUpInfo,
-  signUpBaby,
-  signUpMother,
-} from '../../../services/auth';
+} from 'components/TermsOfService';
+import { differenceInYears } from 'lib/date-fns';
+import { signUpBaby, signUpMother } from 'services/auth';
+
+import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
 
 import {
   FormContainer,
@@ -24,18 +21,10 @@ import {
   SubmitButtonContainer,
 } from './styles';
 
-type ScreenParams = {
-  AcceptTermsOfService: {
-    motherInfo: MotherSignUpInfo;
-    babiesInfo: BabySignUpInfo[];
-  };
-};
-
 const AcceptTermsOfService: React.FC = () => {
-  const navigation = useNavigation();
-  const { motherInfo, babiesInfo } = useRoute<
-    RouteProp<ScreenParams, 'AcceptTermsOfService'>
-  >().params;
+  const navigation = useNavigation<AuthStackProps>();
+  const { motherInfo, babiesInfo } =
+    useRoute<AuthRouteProp<'AcceptTermsOfService'>>().params;
 
   const [isSendingForm, setIsSendingForm] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
@@ -43,27 +32,22 @@ const AcceptTermsOfService: React.FC = () => {
 
   async function handleSubmit() {
     setIsSendingForm(true);
-
     const token = await signUpMother(motherInfo);
     if (token === null) {
       setIsErrorModalVisible(true);
       return;
     }
-
-    babiesInfo.forEach(async baby => {
-      await signUpBaby(token, baby);
-    });
-
+    babiesInfo.forEach(async baby => signUpBaby(token, baby));
     setIsSignUpModalVisible(true);
   }
 
   return (
     <ScrollView>
       <Modal
-        content="Conta criada com sucesso! Seja muito bem-vinda ao AmamentaCoach!"
+        content={i18n.t('AcceptTermsOfServicePage.AccountCreated')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => {
               setIsSignUpModalVisible(false);
@@ -74,10 +58,10 @@ const AcceptTermsOfService: React.FC = () => {
         visible={isSignUpModalVisible}
       />
       <Modal
-        content={'Erro ao registrar.\nPor favor tente novamente mais tarde.'}
+        content={i18n.t('AcceptTermsOfServicePage.ErrorPopUp')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => {
               setIsErrorModalVisible(false);
@@ -88,10 +72,11 @@ const AcceptTermsOfService: React.FC = () => {
         visible={isErrorModalVisible}
       />
       <FormContainer>
-        <HeaderText>Passo 4 de 4</HeaderText>
+        <HeaderText>
+          {i18n.t('Auth.SignUpStep', { current: '4', max: '4' })}
+        </HeaderText>
         <HeaderSubText>
-          Você está quase lá! Por último, você deve aceitar o termo de
-          compromisso:
+          {i18n.t('AcceptTermsOfServicePage.HeaderSubText')}
         </HeaderSubText>
 
         {differenceInYears(new Date(), new Date(motherInfo.birthday)) >= 18 ? (
@@ -106,8 +91,8 @@ const AcceptTermsOfService: React.FC = () => {
             disabled={isSendingForm}
             text={
               isSendingForm
-                ? 'Enviando...'
-                : 'Eu concordo com os Termos de Compromisso'
+                ? i18n.t('Status.Sending')
+                : i18n.t('AcceptTermsOfServicePage.Agree')
             }
           />
         </SubmitButtonContainer>

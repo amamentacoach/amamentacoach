@@ -12,6 +12,14 @@ export const FormContainer = styled.View`
   flex: 1;
 `;
 
+export const Header = styled.Text`
+  font-family: 'OpenSans-Regular';
+  font-size: 16px;
+  color: ${props => props.theme.grey};
+  margin-bottom: 15px;
+  text-align: center;
+`;
+
 export const FormContent = styled.View`
   align-content: flex-start;
 `;

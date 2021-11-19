@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 
-import {
-  getWeeklyReport,
-  WeeklyReport as IWeeklyReport,
-} from '../../../../services/report';
+import { getWeeklyReport } from 'services/report';
+
+import type { WeeklyReportQuestion as WeeklyReportQuestion } from 'services/report';
 
 import {
   Answer,
@@ -24,10 +24,10 @@ const WeeklyReport: React.FC<WeeklyReportProps> = ({
   isLoading,
   setIsLoading,
 }) => {
-  const [weeklyReport, setWeeklyReport] = useState<IWeeklyReport[]>([]);
+  const [weeklyReport, setWeeklyReport] = useState<WeeklyReportQuestion[]>([]);
 
   useEffect(() => {
-    async function fetchRegistries() {
+    async function fetchRegistries(): Promise<void> {
       const data = await getWeeklyReport();
       setWeeklyReport(data);
       setIsLoading(false);
@@ -35,13 +35,22 @@ const WeeklyReport: React.FC<WeeklyReportProps> = ({
     fetchRegistries();
   }, []);
 
-  function ReportEntry({ question, answers }: IWeeklyReport) {
+  function ReportEntry({
+    description,
+    answers,
+  }: WeeklyReportQuestion): JSX.Element {
     return (
       <>
-        <Question>{question}</Question>
-        {answers.length === 0 && <AnswerHeader>Não respondida</AnswerHeader>}
-        {answers.length === 1 && <AnswerHeader>Sua resposta:</AnswerHeader>}
-        {answers.length > 1 && <AnswerHeader>Suas respostas:</AnswerHeader>}
+        <Question>{description}</Question>
+        {answers.length === 0 && (
+          <AnswerHeader>{i18n.t('WeeklyReportPage.NotAnswered')}</AnswerHeader>
+        )}
+        {answers.length === 1 && (
+          <AnswerHeader>{i18n.t('WeeklyReportPage.YourAnswer')}:</AnswerHeader>
+        )}
+        {answers.length > 1 && (
+          <AnswerHeader>{i18n.t('WeeklyReportPage.YourAnswers')}:</AnswerHeader>
+        )}
         {answers.map(answer => (
           <Answer key={answer}>{answer}</Answer>
         ))}
@@ -55,11 +64,11 @@ const WeeklyReport: React.FC<WeeklyReportProps> = ({
 
   return (
     <Container>
-      <Header>Perguntas da semana</Header>
+      <Header>{i18n.t('WeeklyReportPage.Header')}</Header>
       {weeklyReport.map((entry, index) => {
         return (
-          <EntryContainer key={entry.question}>
-            <ReportEntry question={entry.question} answers={entry.answers} />
+          <EntryContainer key={entry.id}>
+            <ReportEntry {...entry} />
             {index < weeklyReport.length - 1 && <Line />}
           </EntryContainer>
         );

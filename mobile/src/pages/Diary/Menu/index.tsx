@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 
-import Modal from '../../../components/Modal';
-import OptionsList, { Options } from '../../../components/OptionList';
-import { useAuth } from '../../../contexts/auth';
-import { useIsFirstRun } from '../../../contexts/firstRun';
-import { storageIsToday, dateFormatVerbose } from '../../../lib/date-fns';
-import { setDiaryPageOpened } from '../../../services/telemetry';
+import Modal from 'components/Modal';
+import OptionsList from 'components/OptionList';
+import { useAuth } from 'contexts/auth';
+import { dateFormatVerbose, storageIsToday } from 'lib/date-fns';
+import { createTelemetryAction } from 'utils/telemetryAction';
+
+import type { OptionListEntry } from 'components/OptionList';
+import type { RootStackProps } from 'routes/app';
 
 import {
   CalendarButton,
@@ -18,28 +21,27 @@ import {
   ScrollView,
 } from './styles';
 
-import Baby from '../../../../assets/images/canguru.svg';
-import DiarySmile from '../../../../assets/images/diary_smile.svg';
-import DiaryStar from '../../../../assets/images/diary_star.svg';
-import Father from '../../../../assets/images/father.svg';
-import CalendarIcon from '../../../../assets/images/icons/ic_calendar.svg';
-import PrematureBreastfeed from '../../../../assets/images/premature_breastfeed.svg';
-import PrematureHeart from '../../../../assets/images/premature_heart.svg';
-import Report from '../../../../assets/images/report.svg';
+import Baby from '@assets/images/canguru.svg';
+import DiarySmile from '@assets/images/diary_smile.svg';
+import DiaryStar from '@assets/images/diary_star.svg';
+import Father from '@assets/images/father.svg';
+import CalendarIcon from '@assets/images/icons/ic_calendar.svg';
+import PrematureBreastfeed from '@assets/images/premature_breastfeed.svg';
+import PrematureHeart from '@assets/images/premature_heart.svg';
+import Report from '@assets/images/report.svg';
 
 const DiaryMenu: React.FC = () => {
   const { motherInfo } = useAuth();
-  const navigation = useNavigation();
-  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
-
+  const navigation = useNavigation<RootStackProps>();
+  const isFocused = useIsFocused();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const options: Options[] = [
+  const options: OptionListEntry[] = [
     {
       image: PrematureBreastfeed,
-      title: 'Registro de amamentação',
+      title: i18n.t('DiaryMenuPage.Option1'),
       onPress: () =>
         navigation.navigate('DiaryBreastfeed', {
           date: selectedDate.toISOString(),
@@ -47,7 +49,7 @@ const DiaryMenu: React.FC = () => {
     },
     {
       image: PrematureBreastfeed,
-      title: 'Registro de retiradas de leite',
+      title: i18n.t('DiaryMenuPage.Option2'),
       onPress: () =>
         navigation.navigate('DiaryRegistry', {
           date: selectedDate.toISOString(),
@@ -55,10 +57,10 @@ const DiaryMenu: React.FC = () => {
     },
     {
       image: DiarySmile,
-      title: 'Sentimentos',
+      title: i18n.t('DiaryMenuPage.Option3'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await storageIsToday('@AmamentaCoach:DiaryFeelingsLastDate')) {
+        if (!(await storageIsToday('@AmamentaCoach:DiaryFeelingsLastDate'))) {
           navigation.navigate('Feelings');
         } else {
           setIsModalVisible(true);
@@ -67,15 +69,17 @@ const DiaryMenu: React.FC = () => {
     },
     {
       image: DiaryStar,
-      title: 'Metas',
+      title: i18n.t('DiaryMenuPage.Option4'),
       onPress: () => navigation.navigate('Goals'),
     },
     {
       image: PrematureHeart,
-      title: 'Ajuda recebida',
+      title: i18n.t('DiaryMenuPage.Option5'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await storageIsToday('@AmamentaCoach:DiaryHelpReceivedLastDate')) {
+        if (
+          !(await storageIsToday('@AmamentaCoach:DiaryHelpReceivedLastDate'))
+        ) {
           navigation.navigate('HelpReceived');
         } else {
           setIsModalVisible(true);
@@ -84,10 +88,10 @@ const DiaryMenu: React.FC = () => {
     },
     {
       image: Baby,
-      title: 'Meu Bebê Hoje',
+      title: i18n.t('DiaryMenuPage.Option6'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await storageIsToday('@AmamentaCoach:DiaryBabyLastDate')) {
+        if (!(await storageIsToday('@AmamentaCoach:DiaryBabyLastDate'))) {
           navigation.navigate('DiaryBaby');
         } else {
           setIsModalVisible(true);
@@ -96,10 +100,10 @@ const DiaryMenu: React.FC = () => {
     },
     {
       image: Baby,
-      title: 'Ações Realizadas com o bebê',
+      title: i18n.t('DiaryMenuPage.Option7'),
       onPress: async () => {
         // Checa se o usuário já respondeu o formulário no dia.
-        if (await storageIsToday('@AmamentaCoach:DiaryActionsLastDate')) {
+        if (!(await storageIsToday('@AmamentaCoach:DiaryActionsLastDate'))) {
           navigation.navigate('DiaryActions');
         } else {
           setIsModalVisible(true);
@@ -108,7 +112,7 @@ const DiaryMenu: React.FC = () => {
     },
     {
       image: Report,
-      title: 'Meu Desempenho',
+      title: i18n.t('DiaryMenuPage.Option8'),
       onPress: () => navigation.navigate('Report'),
     },
   ];
@@ -117,19 +121,11 @@ const DiaryMenu: React.FC = () => {
   if (motherInfo.partner) {
     options.splice(7, 0, {
       image: Father,
-      title: 'Participação do Pai',
-      // @ts-ignore
-      subtitle: 'Registre e acompanhe a participação do papai',
+      title: i18n.t('DiaryMenuPage.Option9'),
+      subtitle: i18n.t('DiaryMenuPage.SubtextOption9'),
       onPress: () => navigation.navigate('UploadFatherPhoto'),
     });
   }
-
-  useEffect(() => {
-    if (isFirstRun.temporary.diary) {
-      setDiaryPageOpened();
-      setTemporaryNotFirstRun('diary');
-    }
-  }, []);
 
   function handleDateSelected(date?: Date) {
     setShowCalendar(false);
@@ -138,13 +134,22 @@ const DiaryMenu: React.FC = () => {
     }
   }
 
+  useEffect(() => {
+    if (isFocused) {
+      createTelemetryAction({
+        action: Action.Opened,
+        context: { screen: AppScreen.DiaryMenu },
+      });
+    }
+  }, [isFocused]);
+
   return (
     <>
       <Modal
-        content="Ops! Você já respondeu a enquete hoje. Volte novamente amanhã."
+        content={i18n.t('ErrorSurveyAlreadyAnswered')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             onPress: () => setIsModalVisible(false),
           },
         ]}
@@ -162,7 +167,7 @@ const DiaryMenu: React.FC = () => {
         )}
 
         <Header>
-          <HeaderTitle>Diário</HeaderTitle>
+          <HeaderTitle>{i18n.t('Diary')}</HeaderTitle>
           <CalendarButton
             onPress={() => setShowCalendar(true)}
             activeOpacity={0.7}>

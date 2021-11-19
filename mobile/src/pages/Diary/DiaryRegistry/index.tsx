@@ -1,44 +1,47 @@
-import React, { useEffect, useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import {
-  RouteProp,
   useIsFocused,
   useNavigation,
   useRoute,
 } from '@react-navigation/native';
+import i18n from 'i18n-js';
+import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
+import { ThemeContext } from 'styled-components';
 
-import DiaryRegistryEntry from '../../../components/DiaryRegistryEntry';
-import MainButton from '../../../components/MainButton';
-import { useIsFirstRun } from '../../../contexts/firstRun';
-import { dateFormatVerbose } from '../../../lib/date-fns';
-import {
-  ExtractionEntry,
-  listExtractionsEntries,
-} from '../../../services/diaryRegistry';
-import { setExtractionPageOpened } from '../../../services/telemetry';
+import DiaryRegistryEntry from 'components/DiaryRegistryEntry';
+import MainButton from 'components/MainButton';
+import { dateFormatVerbose } from 'lib/date-fns';
+import { listExtractionsEntries } from 'services/diaryRegistry';
+import { createTelemetryAction } from 'utils/telemetryAction';
+
+import type { RootRouteProp, RootStackProps } from 'routes/app';
+import type { ExtractionEntry } from 'services/diaryRegistry';
 
 import { Container, DateText, ListContainer } from './styles';
 
-type ScreenParams = {
-  DiaryRegistry: {
-    date: string;
-  };
-};
-
 const DiaryRegistry: React.FC = () => {
-  const { date } = useRoute<RouteProp<ScreenParams, 'DiaryRegistry'>>().params;
-
-  const navigation = useNavigation();
-  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
+  const { params } = useRoute<RootRouteProp<'DiaryRegistry'>>();
+  const themeContext = useContext(ThemeContext);
+  const navigation = useNavigation<RootStackProps>();
   const isFocused = useIsFocused();
   const [registries, setRegistries] = useState<ExtractionEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const selectedDate = params?.date ? new Date(params?.date) : new Date();
+
+  async function handleNewRegistryEntry(target: string) {
+    await createTelemetryAction({
+      action: Action.Pressed,
+      context: { screen: AppScreen.DiaryRegistry, target },
+    });
+    navigation.navigate('NewDiaryRegistry');
+  }
+
   useEffect(() => {
     async function fetchRegistries() {
       setIsLoading(true);
-      const oldRegistries = await listExtractionsEntries(new Date(date));
+      const oldRegistries = await listExtractionsEntries(selectedDate);
       setRegistries(oldRegistries);
       setIsLoading(false);
     }
@@ -46,20 +49,20 @@ const DiaryRegistry: React.FC = () => {
       fetchRegistries();
     }
 
-    if (isFirstRun.temporary.extraction) {
-      setExtractionPageOpened();
-      setTemporaryNotFirstRun('extraction');
-    }
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.DiaryRegistry },
+    });
   }, [isFocused]);
 
   return (
     <Container>
-      <DateText>{dateFormatVerbose(new Date(date))}</DateText>
+      <DateText>{dateFormatVerbose(selectedDate)}</DateText>
       <ListContainer>
         {isLoading ? (
           <ActivityIndicator
             size="large"
-            color="#7d5cd7"
+            color={themeContext.primary}
             animating={isLoading}
           />
         ) : (
@@ -69,8 +72,10 @@ const DiaryRegistry: React.FC = () => {
         )}
       </ListContainer>
       <MainButton
-        text="Registrar retirada"
-        onPress={() => navigation.navigate('NewDiaryRegistry')}
+        text={i18n.t('DiaryRegistryPage.CreateExtractionEntry')}
+        onPress={() =>
+          handleNewRegistryEntry('DiaryRegistryPage.CreateExtractionEntry')
+        }
       />
     </Container>
   );

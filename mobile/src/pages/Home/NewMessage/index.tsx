@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import { Formik } from 'formik';
+import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import * as Yup from 'yup';
 
-import FormTextInput from '../../../components/FormTextInput';
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
-import { createMessage } from '../../../services/messages';
+import FormTextInput from 'components/FormTextInput';
+import MainButton from 'components/MainButton';
+import Modal from 'components/Modal';
+import { createMessage } from 'services/messages';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import {
   FormContainer,
@@ -29,7 +31,7 @@ const NewMessage: React.FC = () => {
     message: '',
   };
   const newMessageSchema: Yup.SchemaOf<FormValues> = Yup.object({
-    message: Yup.string().required('Campo obrigatório'),
+    message: Yup.string().required(i18n.t('Yup.Required')),
   }).required();
 
   async function handleNewMessage({ message }: FormValues) {
@@ -37,26 +39,40 @@ const NewMessage: React.FC = () => {
     const successfulRequest = await createMessage(message);
     setIsSendingForm(false);
     if (successfulRequest) {
+      await createTelemetryAction({
+        action: Action.Pressed,
+        context: {
+          screen: AppScreen.NewMessage,
+          target: 'Actions.Send',
+        },
+      });
       setIsSubmitModalVisible(true);
       setTextInputText('');
     }
   }
 
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.NewMessage },
+    });
+  }, []);
+
   return (
     <ScrollView>
       <Modal
-        content="Mensagem enviada!"
+        content={i18n.t('NewMessagePage.MessageSent')}
         visible={isSubmitModalVisible}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => setIsSubmitModalVisible(false),
           },
         ]}
       />
 
-      <HeaderText>Envie uma mensagem para outras mamães</HeaderText>
+      <HeaderText>{i18n.t('NewMessagePage.Message')}</HeaderText>
       <Formik
         initialValues={formInitialValues}
         validationSchema={newMessageSchema}
@@ -71,7 +87,7 @@ const NewMessage: React.FC = () => {
                   setTextInputText(text);
                 }}
                 value={textInputText}
-                placeholder="Digite aqui sua mensagem..."
+                placeholder={i18n.t('Placeholder.Message')}
                 error={errors.message}
                 multiline
                 numberOfLines={20}
@@ -84,7 +100,11 @@ const NewMessage: React.FC = () => {
               <MainButton
                 onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
-                text={isSendingForm ? 'Enviando...' : 'Enviar'}
+                text={
+                  isSendingForm
+                    ? i18n.t('Status.Sending')
+                    : i18n.t('Actions.Send')
+                }
               />
             </SubmitButtonContainer>
           </FormContainer>

@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import { Formik } from 'formik';
+import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import * as Yup from 'yup';
 
-import FormTextInput from '../../../components/FormTextInput';
-import MainButton from '../../../components/MainButton';
-import Modal from '../../../components/Modal';
-import { createUserQuestion } from '../../../services/questions';
+import FormTextInput from 'components/FormTextInput';
+import MainButton from 'components/MainButton';
+import Modal from 'components/Modal';
+import { createUserQuestion } from 'services/questions';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
 import {
   FormContainer,
@@ -29,7 +31,7 @@ const NewQuestion: React.FC = () => {
     question: '',
   };
   const newPasswordSchema: Yup.SchemaOf<FormValues> = Yup.object({
-    question: Yup.string().required('Campo obrigatório'),
+    question: Yup.string().required(i18n.t('Yup.Required')),
   }).required();
 
   async function handleNewQuestion({ question }: FormValues) {
@@ -37,26 +39,40 @@ const NewQuestion: React.FC = () => {
     const successfulRequest = await createUserQuestion(question);
     setIsSendingForm(false);
     if (successfulRequest) {
+      await createTelemetryAction({
+        action: Action.Pressed,
+        context: {
+          screen: AppScreen.NewQuestion,
+          target: 'Actions.Send',
+        },
+      });
       setIsSubmitModalVisible(true);
       setTextInputText('');
     }
   }
 
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.NewQuestion },
+    });
+  }, []);
+
   return (
     <ScrollView>
       <Modal
-        content="Dúvida enviada!"
+        content={i18n.t('NewQuestionPage.QuestionSent')}
         visible={isSubmitModalVisible}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => setIsSubmitModalVisible(false),
           },
         ]}
       />
 
-      <HeaderText>Envie sua dúvida</HeaderText>
+      <HeaderText>{i18n.t('NewQuestionPage.SubmitYourQuestion')}</HeaderText>
       <Formik
         initialValues={formInitialValues}
         validationSchema={newPasswordSchema}
@@ -71,7 +87,7 @@ const NewQuestion: React.FC = () => {
                   setTextInputText(text);
                 }}
                 value={textInputText}
-                placeholder="Digite aqui sua pergunta..."
+                placeholder={i18n.t('NewQuestionPage.QuestionPlaceholder')}
                 error={errors.question}
                 multiline
                 numberOfLines={20}
@@ -84,7 +100,11 @@ const NewQuestion: React.FC = () => {
               <MainButton
                 onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
-                text={isSendingForm ? 'Enviando...' : 'Enviar'}
+                text={
+                  isSendingForm
+                    ? i18n.t('Status.Sending')
+                    : i18n.t('Actions.Send')
+                }
               />
             </SubmitButtonContainer>
           </FormContainer>

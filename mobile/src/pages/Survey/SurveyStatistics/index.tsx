@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
-import { HeaderBackButton } from '@react-navigation/stack';
+import i18n from 'i18n-js';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
-import PieChart from '../../../components/PieChart';
-import {
-  listSurveyStatistics,
-  SurveyStatistics as ISurveyStatistics,
-} from '../../../services/survey';
+import PieChart from 'components/PieChart';
+import { listSurveyStatistics } from 'services/survey';
+import { createTelemetryAction } from 'utils/telemetryAction';
+
+import type { RootStackProps } from 'routes/app';
+import type { SurveyStatistics as ISurveyStatistics } from 'services/survey';
 
 import {
   ContentContainer,
@@ -22,18 +23,20 @@ import {
   ScrollView,
 } from './styles';
 
+import BackIcon from '@assets/images/icons/ic_back.svg';
+
 const SurveyStatistics: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const [statistics, setStatistics] = useState<ISurveyStatistics[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Faz com que o botão de retorno redirecione para a página de enquetes. Ao contrário do
   // comportamento padrão de voltar a tela anterior.
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: () => (
-        <HeaderBackButton
-          tintColor="#ffffff"
+      headerBackImage: ({ tintColor }) => (
+        <BackIcon
+          color={tintColor}
           onPress={() => navigation.navigate('Survey')}
         />
       ),
@@ -41,13 +44,6 @@ const SurveyStatistics: React.FC = () => {
   }, [navigation]);
 
   useEffect(() => {
-    // Faz com que o gesto de retorno carregue a página de enquetes.
-    navigation.addListener('beforeRemove', e => {
-      // Impede a ação padrão de retornar a tela anterior.
-      e.preventDefault();
-      navigation.navigate('Survey');
-    });
-
     async function fetchStatistics() {
       const stats = await listSurveyStatistics();
       if (stats) {
@@ -55,13 +51,30 @@ const SurveyStatistics: React.FC = () => {
         setLoading(false);
       }
     }
+
+    function navigateToSurveyPage(event: any) {
+      // Impede a ação padrão de retornar a tela anterior.
+      event.preventDefault();
+      navigation.navigate('Survey');
+    }
+
+    // Faz com que o gesto de retorno carregue a página de enquetes.
+    navigation.addListener('beforeRemove', navigateToSurveyPage);
     fetchStatistics();
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.SurveyStatistics },
+    });
+
+    return () => {
+      navigation.removeListener('beforeRemove', navigateToSurveyPage);
+    };
   }, []);
 
   return (
     <ScrollView>
       <HeaderBackground />
-      <HeaderText>Amamentar um prematuro</HeaderText>
+      <HeaderText>{i18n.t('PrematureBreastfeed')}</HeaderText>
 
       <ContentContainer>
         {loading ? (
@@ -69,13 +82,12 @@ const SurveyStatistics: React.FC = () => {
         ) : (
           <>
             <ContentHeader>
-              Obrigada por responder a nossa enquete! Veja abaixo as respostas
-              mais votadas no App pelas mães
+              {i18n.t('SurveyStatisticsPage.FormSubmitted')}
             </ContentHeader>
             {statistics.map(({ id, question, options }, index) => (
               <QuestionContainer key={id}>
                 <QuestionIndex>
-                  Pergunta {(index + 1).toString().padStart(2, '0')}
+                  {i18n.t('Question')} {(index + 1).toString().padStart(2, '0')}
                 </QuestionIndex>
                 <Question>{question}</Question>
 

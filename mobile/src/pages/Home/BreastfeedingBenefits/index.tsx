@@ -1,115 +1,132 @@
-import React from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
+import { useEffect } from 'react';
 
-import createGenericInfoPage from '../../../components/GenericInfoPage';
-import InformationPages, {
-  InfoPage,
-} from '../../../components/InformationPages';
+import createGenericInfoPage from 'components/GenericInfoPage';
+import InformationPages from 'components/InformationPages';
+import { createTelemetryAction } from 'utils/telemetryAction';
 
-import BreastfeedBenefits1 from '../../../../assets/images/breastfeed_benefits_1.png';
-import BreastfeedBenefits2 from '../../../../assets/images/breastfeed_benefits_2.png';
-import BreastfeedBenefits3 from '../../../../assets/images/breastfeed_benefits_3.png';
-import BreastfeedBenefits4 from '../../../../assets/images/breastfeed_benefits_4.png';
-import BreastfeedBenefits5 from '../../../../assets/images/breastfeed_benefits_5.png';
-import BreastfeedBenefits6 from '../../../../assets/images/breastfeed_benefits_6.png';
+import type { InfoPageItem } from 'components/InformationPages';
+import type { RootStackProps } from 'routes/app';
 
-const pages: InfoPage[] = [
-  {
-    id: 1,
-    image: BreastfeedBenefits1,
-    title: 'Benefícios da amamentação para a mãe e o bebê',
-    content: [
-      {
-        text:
-          'A amamentação ajuda na formação do vínculo desde muito cedo.\n\nO leite materno é o alimento mais completo para o bebê, além de oferecer muitas outras vantagens.\n\nNão há nada melhor do que amamentar o bebê somente no peito até o 6º mês de vida, e manter o aleitamento junto com alimentos saudáveis até 2 anos ou mais.',
-      },
-    ],
-  },
-  {
-    id: 2,
-    image: BreastfeedBenefits2,
-    title: 'Benefícios da amamentação para o bebê',
-    content: [
-      {
-        sectionHeader: 'SISTEMA IMUNOLÓGICO',
-        text:
-          'O leite materno ajuda a defender o organismo de várias doenças. O efeito das vacinas é melhor em crianças amamentadas. Diminui o risco de câncer infantil.',
-      },
-    ],
-  },
-  {
-    id: 3,
-    image: BreastfeedBenefits3,
-    title: 'Benefícios da amamentação para o bebê',
-    content: [
-      {
-        sectionHeader: 'BOCA',
-        text: 'Favorece o desenvolvimento da face, da boca e da dentição.',
-      },
-      {
-        sectionHeader: 'INTELIGÊNCIA',
-        text:
-          'Crianças amamentadas por mais de um ano têm coeficiente de inteligência (QI) maior.',
-      },
-    ],
-  },
-  {
-    id: 4,
-    image: BreastfeedBenefits4,
-    title: 'Benefícios da amamentação para o bebê',
-    content: [
-      {
-        sectionHeader: 'PROTEÇÃO',
-        text:
-          'Protege contra uma série de doenças, infecções e problemas como diarreia e prisão de ventre.',
-      },
-      {
-        sectionHeader: 'QUANDO ADULTOS...',
-        text: 'Reduz o risco de ter problemas como diabetes e colesterol.',
-      },
-    ],
-  },
-  {
-    id: 5,
-    image: BreastfeedBenefits5,
-    title: 'Benefícios da amamentação para a mãe',
-    content: [
-      {
-        sectionHeader: 'REDUZ O RISCO',
-        text:
-          'Pesquisas defendem que reduz o risco de câncer de mama, do ovário e de osteoporose.',
-      },
-    ],
-  },
-  {
-    id: 6,
-    image: BreastfeedBenefits6,
-    title: 'Benefícios da amamentação para a mãe',
-    content: [
-      {
-        sectionHeader: 'AJUDA',
-        text: 'Recuperar o peso anterior à gravidez.',
-      },
-      {
-        sectionHeader: 'PREVINE',
-        text: 'Hemorragias no pós-parto.',
-      },
-      {
-        sectionHeader: 'PROMOVE',
-        text:
-          'A involução uterina promove o retorno do útero ao seu tamanho normal.',
-      },
-    ],
-  },
-];
+import BreastfeedBenefits1 from '@assets/images/breastfeed_benefits_1.png';
+import BreastfeedBenefits2 from '@assets/images/breastfeed_benefits_2.png';
+import BreastfeedBenefits3 from '@assets/images/breastfeed_benefits_3.png';
+import BreastfeedBenefits4 from '@assets/images/breastfeed_benefits_4.png';
+import BreastfeedBenefits5 from '@assets/images/breastfeed_benefits_5.png';
+import BreastfeedBenefits6 from '@assets/images/breastfeed_benefits_6.png';
 
 const BreastfeedingBenefits: React.FC = () => {
-  const navigation = useNavigation();
-  const onEnd = () => navigation.goBack();
+  const navigation = useNavigation<RootStackProps>();
+
+  const pages: InfoPageItem[] = [
+    {
+      id: '1',
+      image: BreastfeedBenefits1,
+      title: i18n.t('BreastfeedingBenefitsPage.Page1.Title'),
+      content: [
+        { id: '1', text: i18n.t('BreastfeedingBenefitsPage.Page1.Text1') },
+      ],
+    },
+    {
+      id: '2',
+      image: BreastfeedBenefits2,
+      title: i18n.t('BreastfeedingBenefitsPage.TitleBaby'),
+      content: [
+        {
+          id: '1',
+          sectionHeader: i18n.t('BreastfeedingBenefitsPage.Page2.Section1'),
+          text: i18n.t('BreastfeedingBenefitsPage.Page2.Text1'),
+        },
+      ],
+    },
+    {
+      id: '3',
+      image: BreastfeedBenefits3,
+      title: i18n.t('BreastfeedingBenefitsPage.TitleBaby'),
+      content: [
+        {
+          id: '1',
+          sectionHeader: i18n.t('BreastfeedingBenefitsPage.Page3.Section1'),
+          text: i18n.t('BreastfeedingBenefitsPage.Page3.Text1'),
+        },
+        {
+          id: '2',
+          sectionHeader: i18n.t('BreastfeedingBenefitsPage.Page3.Section2'),
+          text: i18n.t('BreastfeedingBenefitsPage.Page3.Text2'),
+        },
+      ],
+    },
+    {
+      id: '4',
+      image: BreastfeedBenefits4,
+      title: i18n.t('BreastfeedingBenefitsPage.TitleBaby'),
+      content: [
+        {
+          id: '1',
+          sectionHeader: i18n.t('BreastfeedingBenefitsPage.Page4.Section1'),
+          text: i18n.t('BreastfeedingBenefitsPage.Page4.Text1'),
+        },
+        {
+          id: '2',
+          sectionHeader: i18n.t('BreastfeedingBenefitsPage.Page4.Section2'),
+          text: i18n.t('BreastfeedingBenefitsPage.Page4.Text2'),
+        },
+      ],
+    },
+    {
+      id: '5',
+      image: BreastfeedBenefits5,
+      title: i18n.t('BreastfeedingBenefitsPage.TitleMom'),
+      content: [
+        {
+          id: '1',
+          sectionHeader: i18n.t('BreastfeedingBenefitsPage.Page5.Section1'),
+          text: i18n.t('BreastfeedingBenefitsPage.Page5.Text1'),
+        },
+      ],
+    },
+    {
+      id: '6',
+      image: BreastfeedBenefits6,
+      title: i18n.t('BreastfeedingBenefitsPage.TitleMom'),
+      content: [
+        {
+          id: '1',
+          sectionHeader: i18n.t('BreastfeedingBenefitsPage.Page6.Section1'),
+          text: i18n.t('BreastfeedingBenefitsPage.Page6.Text1'),
+        },
+        {
+          id: '2',
+          sectionHeader: i18n.t('BreastfeedingBenefitsPage.Page6.Section2'),
+          text: i18n.t('BreastfeedingBenefitsPage.Page6.Text2'),
+        },
+        {
+          id: '3',
+          sectionHeader: i18n.t('BreastfeedingBenefitsPage.Page6.Section3'),
+          text: i18n.t('BreastfeedingBenefitsPage.Page6.Text3'),
+        },
+      ],
+    },
+  ];
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.BreastfeedingBenefits },
+    });
+  }, []);
+
+  function onEnd() {
+    navigation.goBack();
+  }
 
   return (
-    <InformationPages pages={pages} PageModel={createGenericInfoPage(onEnd)} />
+    <InformationPages
+      data={pages}
+      PageModel={createGenericInfoPage({ onEnd })}
+    />
   );
 };
 

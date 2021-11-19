@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
+import i18n from 'i18n-js';
+import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 
-import FormDateInput from '../../../components/FormDateInput';
-import FormTextInput from '../../../components/FormTextInput';
-import MainButton from '../../../components/MainButton';
-import { createExtractionEntry } from '../../../services/diaryRegistry';
+import FormDateInput from 'components/FormDateInput';
+import FormTextInput from 'components/FormTextInput';
+import MainButton from 'components/MainButton';
+import { createExtractionEntry } from 'services/diaryRegistry';
+import { createTelemetryAction } from 'utils/telemetryAction';
+
+import type { RootStackProps } from 'routes/app';
 
 import {
   ErrorContainer,
@@ -15,6 +19,7 @@ import {
   FirstOption,
   FormContainer,
   FormContent,
+  Header,
   MultipleOptionContainer,
   OptionHeader,
   OptionText,
@@ -23,8 +28,8 @@ import {
   SubmitButtonContainer,
 } from './styles';
 
-import CheckedBox from '../../../../assets/images/icons/checkbox_checked.svg';
-import UncheckedBox from '../../../../assets/images/icons/checkbox_unchecked.svg';
+import CheckedBox from '@assets/images/icons/checkbox_checked.svg';
+import UncheckedBox from '@assets/images/icons/checkbox_unchecked.svg';
 
 interface FormValues {
   time: string;
@@ -35,8 +40,7 @@ interface FormValues {
 }
 
 const NewDiaryRegistry: React.FC = () => {
-  const navigation = useNavigation();
-
+  const navigation = useNavigation<RootStackProps>();
   const [isSendingForm, setIsSendingForm] = useState(false);
   const formInitialValues = {
     time: '',
@@ -45,32 +49,29 @@ const NewDiaryRegistry: React.FC = () => {
     breastLeft: '',
     breastRight: '',
   };
+
   const newDiaryRegistrySchema = Yup.object()
     .shape(
       {
-        time: Yup.string().required('Campo obrigatório'),
+        time: Yup.string().required(i18n.t('Yup.Required')),
         quantity: Yup.number()
-          .integer('Deve ser um número inteiro')
-          .typeError('Deve ser um número inteiro')
-          .positive('Deve ser maior que 0')
-          .required('Campo obrigatório'),
+          .integer(i18n.t('Yup.MustBeIntegerError'))
+          .typeError(i18n.t('Yup.MustBeIntegerError'))
+          .positive(i18n.t('Yup.MinError', { num: 0 }))
+          .required(i18n.t('Yup.Required')),
         duration: Yup.number()
-          .integer('Deve ser um número inteiro')
-          .typeError('Deve ser um número inteiro')
-          .positive('Deve ser maior que 0')
-          .required('Campo obrigatório'),
+          .integer(i18n.t('Yup.MustBeIntegerError'))
+          .typeError(i18n.t('Yup.MustBeIntegerError'))
+          .positive(i18n.t('Yup.MinError', { num: 0 }))
+          .required(i18n.t('Yup.Required')),
         breastLeft: Yup.string().when('breastRight', {
           is: undefined,
-          then: Yup.string().required(
-            'Pelo menos uma opção deve ser selecionada',
-          ),
+          then: Yup.string().required(i18n.t('Yup.NoOptionSelectedError')),
           otherwise: Yup.string(),
         }),
         breastRight: Yup.string().when('breastLeft', {
           is: undefined,
-          then: Yup.string().required(
-            'Pelo menos uma opção deve ser selecionada',
-          ),
+          then: Yup.string().required(i18n.t('Yup.NoOptionSelectedError')),
           otherwise: Yup.string(),
         }),
       },
@@ -102,14 +103,30 @@ const NewDiaryRegistry: React.FC = () => {
     now.setHours(minutes, seconds);
 
     setIsSendingForm(true);
-    await createExtractionEntry(
+    const status = await createExtractionEntry(
       breast,
       parseInt(duration, 10),
       parseFloat(quantity),
       now,
     );
-    navigation.navigate('DiaryRegistry', { shouldUpdateRegistries: true });
+
+    if (status) {
+      await createTelemetryAction({
+        action: Action.Pressed,
+        context: { screen: AppScreen.NewDiaryRegistry, target: 'Actions.Save' },
+      });
+      navigation.navigate('DiaryRegistry');
+    } else {
+      setIsSendingForm(false);
+    }
   }
+
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.NewDiaryRegistry },
+    });
+  }, []);
 
   return (
     <ScrollView>
@@ -127,35 +144,36 @@ const NewDiaryRegistry: React.FC = () => {
           values,
         }) => (
           <FormContainer>
+            <Header>{i18n.t('NewDiaryRegistryPage.Header')}</Header>
             <FormContent>
               <FormDateInput
-                label="Horário"
+                label={i18n.t('Time')}
                 fieldName="time"
-                placeholder="Insira o horário da retirada"
+                placeholder={i18n.t('NewDiaryRegistryPage.TimePlaceholder')}
                 mode="time"
                 onChange={setFieldValue}
                 error={errors.time}
               />
 
               <FormTextInput
-                label="Quantidade"
+                label={i18n.t('Quantity')}
                 value={values.quantity}
-                placeholder="Insira a quantidade (ml)"
+                placeholder={i18n.t('NewDiaryRegistryPage.QuantityPlaceholder')}
                 keyboardType="number-pad"
                 onChangeText={handleChange('quantity')}
                 error={errors.quantity}
               />
 
               <FormTextInput
-                label="Duração"
+                label={i18n.t('Duration')}
                 value={values.duration}
-                placeholder="Insira a duração (min)"
+                placeholder={i18n.t('Placeholder.Duration')}
                 keyboardType="number-pad"
                 onChangeText={handleChange('duration')}
                 error={errors.duration}
               />
 
-              <OptionHeader>Mama</OptionHeader>
+              <OptionHeader>{i18n.t('Breast')}</OptionHeader>
               <MultipleOptionContainer>
                 <FirstOption
                   activeOpacity={1}
@@ -167,7 +185,7 @@ const NewDiaryRegistry: React.FC = () => {
                     }
                   }}>
                   {values.breastLeft ? <CheckedBox /> : <UncheckedBox />}
-                  <OptionText>Esquerda</OptionText>
+                  <OptionText>{i18n.t('Left')}</OptionText>
                 </FirstOption>
                 <SecondOption
                   activeOpacity={1}
@@ -179,7 +197,7 @@ const NewDiaryRegistry: React.FC = () => {
                     }
                   }}>
                   {values.breastRight ? <CheckedBox /> : <UncheckedBox />}
-                  <OptionText>Direita</OptionText>
+                  <OptionText>{i18n.t('Right')}</OptionText>
                 </SecondOption>
               </MultipleOptionContainer>
               <ErrorContainer>
@@ -195,7 +213,11 @@ const NewDiaryRegistry: React.FC = () => {
               <MainButton
                 onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
-                text={isSendingForm ? 'Salvando...' : 'Salvar'}
+                text={
+                  isSendingForm
+                    ? i18n.t('Status.Saving')
+                    : i18n.t('Actions.Save')
+                }
               />
             </SubmitButtonContainer>
           </FormContainer>

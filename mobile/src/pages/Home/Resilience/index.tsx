@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
-
+import { Action, AppScreen } from '@common/Telemetria';
 import { useNavigation } from '@react-navigation/native';
+import i18n from 'i18n-js';
+import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
+import { ThemeContext } from 'styled-components';
 
-import OptionsList, { Options } from '../../../components/OptionList';
+import OptionsList from 'components/OptionList';
+import { createTelemetryAction } from 'utils/telemetryAction';
+
+import type { OptionListEntry } from 'components/OptionList';
+import type { RootStackProps } from 'routes/app';
 
 import {
   Header,
@@ -15,47 +21,55 @@ import {
   VideoContainer,
 } from './styles';
 
-import ErlenmeyerGreen from '../../../../assets/images/erlenmeyer_green.svg';
-import ErlenmeyerPink from '../../../../assets/images/erlenmeyer_pink.svg';
-import ErlenmeyerPrimary from '../../../../assets/images/erlenmeyer_primary.svg';
-import ErlenmeyerYellow from '../../../../assets/images/erlenmeyer_yellow.svg';
+import ErlenmeyerGreen from '@assets/images/erlenmeyer_green.svg';
+import ErlenmeyerPink from '@assets/images/erlenmeyer_pink.svg';
+import ErlenmeyerPrimary from '@assets/images/erlenmeyer_primary.svg';
+import ErlenmeyerYellow from '@assets/images/erlenmeyer_yellow.svg';
 
 const Resilience: React.FC = () => {
   const { height } = Dimensions.get('window');
-  const navigation = useNavigation();
+  const themeContext = useContext(ThemeContext);
+  const navigation = useNavigation<RootStackProps>();
   const [isLoadingVideo, setIsLoadingVideo] = useState(true);
 
-  const options: Options[] = [
+  const options: OptionListEntry[] = [
     {
       image: ErlenmeyerPrimary,
-      title: '1. Manter expectativas realistas',
+      title: i18n.t('ResiliencePage.Option1'),
       onPress: () => navigation.navigate('ManageExpectations'),
     },
     {
       image: ErlenmeyerYellow,
-      title: '2. Buscar apoio social e conexão de grupo',
+      title: i18n.t('ResiliencePage.Option2'),
       onPress: () => navigation.navigate('Messages'),
     },
     {
       image: ErlenmeyerGreen,
-      title: '3. Desenvolver uma maneira positiva de pensar',
+      title: i18n.t('ResiliencePage.Option3'),
       onPress: () => navigation.navigate('Diary'),
     },
     {
       image: ErlenmeyerPink,
-      title: '4. Construir força e autoconfiança',
+      title: i18n.t('ResiliencePage.Option4'),
       onPress: () => navigation.navigate('UploadMotherPhoto'),
     },
   ];
 
+  useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.Resilience },
+    });
+  }, []);
+
   return (
     <ScrollView>
-      <PageHeader>Você sabe o que é Resiliência?</PageHeader>
+      <PageHeader>{i18n.t('ResiliencePage.Header')}</PageHeader>
       {isLoadingVideo && (
         <LoadingContainer>
           <ActivityIndicator
             size="large"
-            color="#7d5cd7"
+            color={themeContext.primary}
             animating={isLoadingVideo}
           />
         </LoadingContainer>
@@ -75,14 +89,8 @@ const Resilience: React.FC = () => {
           }}
         />
       </VideoContainer>
-      <Header>Mamães mais resilientes!</Header>
-      <Text>
-        Cientistas afirmam que é possível AUMENTAR a RESILIÊNCIA adotando pelo
-        menos 4 comportamentos favoráveis.{'\n'}Várias atividades do App
-        contemplam um ou mais desses ingredientes poderosos! Aumente sua força,
-        turbine sua resiliência: escolha por onde quer começar e aproveite todo
-        o conteúdo!
-      </Text>
+      <Header>{i18n.t('ResiliencePage.TextHeader')}</Header>
+      <Text>{i18n.t('ResiliencePage.Text')}</Text>
       <OptionsList options={options} displayArrows />
     </ScrollView>
   );

@@ -1,19 +1,20 @@
-import React from 'react';
-
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import i18n from 'i18n-js';
 
-import theme from '../config/theme';
-import { useIsFirstRun } from '../contexts/firstRun';
-import DiaryIntroduction from '../pages/Diary/DiaryIntroduction';
-import DiaryMenu from '../pages/Diary/Menu';
-import HomeMenu from '../pages/Home/Menu';
-import ProfileMenu from '../pages/Profile/Menu';
-import SurveyMenu from '../pages/Survey/Menu';
+import theme from 'config/theme';
+import { useIsFirstRun } from 'contexts/firstRun';
+import DiaryIntroduction from 'pages/Diary/DiaryIntroduction';
+import DiaryMenu from 'pages/Diary/Menu';
+import HomeMenu from 'pages/Home/Menu';
+import ProfileMenu from 'pages/Profile/Menu';
+import SurveyMenu from 'pages/Survey/Menu';
+import VideosMenu from 'pages/Videos/Menu';
 
-import DiaryIcon from '../../assets/images/icons/ic_diary_grey.svg';
-import HomeIcon from '../../assets/images/icons/ic_home_grey.svg';
-import ProfileIcon from '../../assets/images/icons/ic_profile_grey.svg';
-import SurveyIcon from '../../assets/images/icons/ic_survey_grey.svg';
+import DiaryIcon from '@assets/images/icons/ic_diary_grey.svg';
+import HomeIcon from '@assets/images/icons/ic_home_grey.svg';
+import ProfileIcon from '@assets/images/icons/ic_profile_grey.svg';
+import SurveyIcon from '@assets/images/icons/ic_survey_grey.svg';
+import VideoIcon from '@assets/images/icons/video.svg';
 
 const TabNavigator: React.FC = () => {
   const { isFirstRun } = useIsFirstRun();
@@ -21,15 +22,16 @@ const TabNavigator: React.FC = () => {
 
   return (
     <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: theme.primary,
-        inactiveTintColor: theme.grey,
+      screenOptions={{
+        tabBarActiveTintColor: theme.primary,
+        tabBarInactiveTintColor: theme.grey,
       }}>
       <Tab.Screen
         name="Home"
         component={HomeMenu}
         options={{
-          tabBarLabel: 'Início',
+          tabBarLabel: i18n.t('Begin'),
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <HomeIcon width={size} height={size} fill={color} />
           ),
@@ -43,8 +45,11 @@ const TabNavigator: React.FC = () => {
             : DiaryMenu
         }
         options={{
-          tabBarLabel: 'Diário',
-          tabBarVisible: !isFirstRun.persistent.diaryIntroduction,
+          tabBarLabel: i18n.t('Diary'),
+          headerShown: false,
+          tabBarStyle: {
+            display: isFirstRun.persistent.diaryIntroduction ? 'none' : 'flex',
+          },
           tabBarIcon: ({ color, size }) => (
             <DiaryIcon height={size} width={size} fill={color} />
           ),
@@ -54,9 +59,21 @@ const TabNavigator: React.FC = () => {
         name="Survey"
         component={SurveyMenu}
         options={{
-          tabBarLabel: 'Enquetes',
+          tabBarLabel: i18n.t('Surveys'),
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <SurveyIcon height={size} width={size} fill={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Videos"
+        component={VideosMenu}
+        options={{
+          tabBarLabel: i18n.t('Video', { count: 2 }),
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <VideoIcon height={size} width={size} fill={color} />
           ),
         }}
       />
@@ -64,7 +81,8 @@ const TabNavigator: React.FC = () => {
         name="Profile"
         component={ProfileMenu}
         options={{
-          tabBarLabel: 'Perfil',
+          tabBarLabel: i18n.t('Profile'),
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <ProfileIcon height={size} width={size} fill={color} />
           ),

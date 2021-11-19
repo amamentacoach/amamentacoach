@@ -1,17 +1,18 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createContext, useContext, useEffect, useState } from 'react';
 import OneSignal from 'react-native-onesignal';
 
-import api from '../services/api';
-import * as auth from '../services/auth';
-import { isMotherInfo, LoginStatus, MotherInfo } from '../services/auth';
-import pushNotificationSubscribe from '../services/pushNotification';
+import api from 'services/api';
+import * as auth from 'services/auth';
+import { isMotherInfo, LoginStatus } from 'services/auth';
+import pushNotificationSubscribe from 'services/pushNotification';
+
+import type { MotherInfo } from 'services/auth';
 
 interface AuthContextData {
   isSigned: boolean;
   motherInfo: MotherInfo;
-  updateMotherInfo: () => Promise<void>;
+  updateMotherInfo: (newInfo: MotherInfo) => Promise<void>;
   signIn: (email: string, password: string) => Promise<LoginStatus>;
   signOut: () => Promise<void>;
 }
@@ -34,8 +35,10 @@ export const AuthProvider: React.FC = ({ children }) => {
       '@AmamentaCoach:motherInfo',
     );
     if (storageMotherInfo) {
+      // Mãe já possui informações armazenadas, utiliza os dados salvos.
       const savedMotherInfo: MotherInfo = JSON.parse(storageMotherInfo);
       if (!isMotherInfo(savedMotherInfo)) {
+        // Caso os dados da mãe não possua todos os campos necessário
         await AsyncStorage.removeItem('@AmamentaCoach:motherInfo');
         await initMotherInfo();
         return;
@@ -54,11 +57,12 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   // Atualiza o valor the motherInfo armazenado no AsyncStorage com o valor atual.
-  async function updateMotherInfo() {
+  async function updateMotherInfo(newInfo: MotherInfo) {
     await AsyncStorage.setItem(
       '@AmamentaCoach:motherInfo',
-      JSON.stringify(motherInfo),
+      JSON.stringify(newInfo),
     );
+    setMotherInfo(newInfo);
   }
 
   useEffect(() => {

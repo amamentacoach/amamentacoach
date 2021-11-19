@@ -1,16 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
-
 import { StackActions, useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
+import i18n from 'i18n-js';
+import { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 
-import { useAuth } from '../../contexts/auth';
-import { AnswerFeedback, answerQuestion } from '../../services/survey';
-import {
-  getSurveyQuestions,
-  SurveyQuestion,
-} from '../../utils/getSurveyQuestions';
-import Modal from '../Modal';
+import Modal from 'components/Modal';
+import { useAuth } from 'contexts/auth';
+import { answerQuestion } from 'services/survey';
+import { getSurveyQuestions } from 'utils/getSurveyQuestions';
+
+import type { RootStackProps } from 'routes/app';
+import type { AnswerFeedback } from 'services/survey';
+import type { SurveyQuestion } from 'utils/getSurveyQuestions';
 
 import {
   ContentContainer,
@@ -69,7 +70,7 @@ const Survey: React.FC<SurveyProps> = ({
 }) => {
   const { width } = Dimensions.get('window');
   const { motherInfo } = useAuth();
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackProps>();
   const pageFlatListRef = useRef<FlatList>(null);
 
   const [pages, setPages] = useState<SurveyQuestion[]>([]);
@@ -79,16 +80,14 @@ const Survey: React.FC<SurveyProps> = ({
   const [isFormValid, setIsFormValid] = useState(true);
   const [isSendingForm, setIsSendingForm] = useState(false);
 
-  const [
-    feedbackModalData,
-    setFeedbackModalData,
-  ] = useState<FeedbackModalProps | null>(null);
+  const [feedbackModalData, setFeedbackModalData] =
+    useState<FeedbackModalProps | null>(null);
 
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
 
   useEffect(() => {
     async function fetchQuestions() {
-      const questions = await getSurveyQuestions(motherInfo, { category });
+      const questions = await getSurveyQuestions({ category, motherInfo });
       if (!questions) {
         return;
       }
@@ -115,7 +114,7 @@ const Survey: React.FC<SurveyProps> = ({
   function validateForm(
     question: SurveyQuestion,
     values: {
-      [key: number]: string[];
+      [key: string]: string[];
     },
   ) {
     const atLeastOneSelected = values[question.id].length > 0;
@@ -228,17 +227,16 @@ const Survey: React.FC<SurveyProps> = ({
   return (
     <>
       <Modal
-        content={
-          'Erro ao enviar suas respostas.\nPor favor tente novamente mais tarde.'
-        }
+        content={i18n.t('SurveyComponent.SubmitError')}
         options={[
           {
-            text: 'Fechar',
+            text: i18n.t('Close'),
             isBold: true,
             onPress: () => setIsErrorModalVisible(false),
           },
         ]}
         visible={isErrorModalVisible}
+        color={color}
       />
 
       {!!feedbackModalData && (
@@ -246,14 +244,14 @@ const Survey: React.FC<SurveyProps> = ({
           content={feedbackModalData.content}
           options={[
             {
-              text: 'Mais tarde',
+              text: i18n.t('Later'),
               onPress: () => {
                 setFeedbackModalData(null);
                 feedbackModalData.onExit();
               },
             },
             {
-              text: 'Ver conteúdo',
+              text: i18n.t('SurveyComponent.ReadFeedback'),
               isBold: true,
               onPress: () => {
                 setFeedbackModalData(null);
@@ -269,6 +267,7 @@ const Survey: React.FC<SurveyProps> = ({
             },
           ]}
           visible={!!feedbackModalData}
+          color={color}
         />
       )}
 
@@ -306,7 +305,7 @@ const Survey: React.FC<SurveyProps> = ({
                 </ContentContainer>
               </ScrollView>
             )}
-            keyExtractor={item => item.id.toString()}
+            keyExtractor={item => item.id}
             horizontal
             scrollEnabled={false}
             showsHorizontalScrollIndicator={false}
