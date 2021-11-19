@@ -1,5 +1,5 @@
-import perguntasPt from '@common/perguntas';
-import perguntasEn from '@common/perguntas-en';
+import surveyPt from '@common/perguntas';
+import surveyEn from '@common/perguntas-en';
 
 import { getBestLocale, SupportedLocales } from 'utils/localize';
 
@@ -15,32 +15,42 @@ export interface SurveyQuestion {
   multipleSelection: boolean;
 }
 
+interface GetSurveyQuestionOptions {
+  motherInfo?: MotherInfo;
+  category?: number;
+  id?: number;
+}
+
+type Surveys = Record<SupportedLocales, typeof surveyPt>;
+
 // Retorna todos as perguntas de uma categoria que se aplicam a mãe.
-export async function getSurveyQuestions(
-  motherInfo: MotherInfo,
-  options: { category?: number; id?: number },
-): Promise<SurveyQuestion[]> {
+export function getSurveyQuestions({
+  id,
+  category,
+  motherInfo,
+}: GetSurveyQuestionOptions): SurveyQuestion[] {
   const { languageTag } = getBestLocale();
 
-  const perguntas: Record<SupportedLocales, typeof perguntasPt> = {
-    en: perguntasEn,
-    pt: perguntasPt,
+  const surveys: Surveys = {
+    en: surveyEn,
+    pt: surveyPt,
   };
 
-  return perguntas[languageTag]
-    .filter(pergunta => {
-      if (options.id && options.id !== pergunta.id) {
+  return surveys[languageTag]
+    .filter(question => {
+      if (id && id !== question.id) {
         return false;
       }
-      if (options.category && options.category !== pergunta.categoria) {
+      if (category && category !== question.categoria) {
         return false;
       }
       // Caso o alvo seja UCI ou UTI e a mãe não possua bebês em nenhum dos dois essa pergunta não
       // deve ser retornada.
       if (
-        pergunta.alvo === 'UCI/UTI' &&
+        motherInfo &&
         !motherInfo.babiesBirthLocations.UCI &&
-        !motherInfo.babiesBirthLocations.UTI
+        !motherInfo.babiesBirthLocations.UTI &&
+        question.alvo === 'UCI/UTI'
       ) {
         return false;
       }

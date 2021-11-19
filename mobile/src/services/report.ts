@@ -1,4 +1,5 @@
 import api from 'services/api';
+import { getSurveyQuestions } from 'utils/getSurveyQuestions';
 
 import type { BreastfeedEntry, ExtractionEntry } from 'services/diaryRegistry';
 
@@ -7,8 +8,9 @@ export interface DailyReport {
   registryEntries: ExtractionEntry[];
 }
 
-export interface WeeklyReport {
-  question: string;
+export interface WeeklyReportQuestion {
+  id: number;
+  description: string;
   answers: string[];
 }
 
@@ -42,10 +44,17 @@ export async function getDailyReport(): Promise<DailyReport> {
 }
 
 // Retorna o relatório semanal da mãe
-export async function getWeeklyReport(): Promise<WeeklyReport[]> {
+export async function getWeeklyReport(): Promise<WeeklyReportQuestion[]> {
   const { data } = await api.get('relatorios/semanal');
-  return data.map((entry: any) => ({
-    question: entry.pergunta,
-    answers: entry.respostas,
-  }));
+  return data.map((entry: any) => {
+    // Busca a questão correspondente ao id.
+    let questions = getSurveyQuestions({ id: entry.pergunta });
+    const description = questions.length === 1 ? questions[0].description : '';
+
+    return {
+      id: entry.pergunta,
+      description,
+      answers: entry.respostas,
+    };
+  });
 }
