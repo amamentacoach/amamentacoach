@@ -12,7 +12,7 @@ import type { MotherInfo } from 'services/auth';
 interface AuthContextData {
   isSigned: boolean;
   motherInfo: MotherInfo;
-  updateMotherInfo: () => Promise<void>;
+  updateMotherInfo: (newInfo: MotherInfo) => Promise<void>;
   signIn: (email: string, password: string) => Promise<LoginStatus>;
   signOut: () => Promise<void>;
 }
@@ -35,8 +35,10 @@ export const AuthProvider: React.FC = ({ children }) => {
       '@AmamentaCoach:motherInfo',
     );
     if (storageMotherInfo) {
+      // Mãe já possui informações armazenadas, utiliza os dados salvos.
       const savedMotherInfo: MotherInfo = JSON.parse(storageMotherInfo);
       if (!isMotherInfo(savedMotherInfo)) {
+        // Caso os dados da mãe não possua todos os campos necessário
         await AsyncStorage.removeItem('@AmamentaCoach:motherInfo');
         await initMotherInfo();
         return;
@@ -55,11 +57,12 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   // Atualiza o valor the motherInfo armazenado no AsyncStorage com o valor atual.
-  async function updateMotherInfo() {
+  async function updateMotherInfo(newInfo: MotherInfo) {
     await AsyncStorage.setItem(
       '@AmamentaCoach:motherInfo',
-      JSON.stringify(motherInfo),
+      JSON.stringify(newInfo),
     );
+    setMotherInfo(newInfo);
   }
 
   useEffect(() => {

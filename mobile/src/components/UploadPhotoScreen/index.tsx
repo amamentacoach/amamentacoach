@@ -45,18 +45,25 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
   const [isLoadingImage, setIsLoadingImage] = useState(true);
   const [formSent, setFormSent] = useState(false);
 
+  // Envia a foto que o usuário selecionou e atualiza as informações locais da mãe.
   async function handleSubmitNewPhoto() {
     if (photo) {
       setIsSendingForm(true);
       const filename = await uploadFunction(photo);
-      motherInfo.images[target] = filename;
-      await updateMotherInfo();
+      if (filename) {
+        // Atualiza o endereço da imagem do bebê nas informações da mãe.
+        await updateMotherInfo({
+          ...motherInfo,
+          images: { ...motherInfo.images, [target]: filename },
+        });
+      }
       setIsSendingForm(false);
       setFormSent(true);
     }
   }
 
-  async function handleSelectPhoto() {
+  // Abre a galeria do usuário.
+  function handleSelectPhoto() {
     ImagePicker.launchImageLibrary({ noData: true }, response => {
       if (response.uri) {
         setPhoto(response);

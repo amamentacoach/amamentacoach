@@ -54,6 +54,11 @@ export interface MotherInfo {
   babies: { id: number; name: string }[];
 }
 
+interface LoginResponse {
+  token: string;
+  status: LoginStatus;
+}
+
 export enum LoginStatus {
   Success,
   AccountNotAuthorized,
@@ -126,7 +131,7 @@ export async function signUpBaby(
 export async function signIn(
   email: string,
   password: string,
-): Promise<{ token: string; status: LoginStatus }> {
+): Promise<LoginResponse> {
   const login = {
     token: '',
     status: LoginStatus.FailedToConnect,
@@ -140,32 +145,36 @@ export async function signIn(
     login.token = request.data.token;
     login.status = LoginStatus.Success;
   } catch (error: any) {
-    if (error.response) {
-      if (error.response.status === 401) {
+    switch (error.response?.status) {
+      case 401:
         login.status = LoginStatus.IncorrectLogin;
-      } else if (error.response.status === 404) {
+        break;
+      case 404:
         login.status = LoginStatus.AccountNotAuthorized;
-      }
+        break;
+      default:
+        break;
     }
   }
   return login;
 }
 
-export function isMotherInfo(motherInfo: MotherInfo) {
+// Verifica se um objeto carrega as informações da mãe.
+export function isMotherInfo(object: any): object is MotherInfo {
   return (
-    motherInfo &&
-    motherInfo.name &&
-    motherInfo.birthday &&
-    motherInfo.partner &&
-    motherInfo.images &&
-    motherInfo.images.baby !== undefined &&
-    motherInfo.images.father !== undefined &&
-    motherInfo.images.mother !== undefined &&
-    motherInfo.babiesBirthLocations &&
-    motherInfo.babiesBirthLocations.AC !== undefined &&
-    motherInfo.babiesBirthLocations.UCI !== undefined &&
-    motherInfo.babiesBirthLocations.UTI !== undefined &&
-    motherInfo.babies
+    object &&
+    object.name &&
+    object.birthday &&
+    object.partner &&
+    object.images &&
+    object.images.baby !== undefined &&
+    object.images.father !== undefined &&
+    object.images.mother !== undefined &&
+    object.babiesBirthLocations &&
+    object.babiesBirthLocations.AC !== undefined &&
+    object.babiesBirthLocations.UCI !== undefined &&
+    object.babiesBirthLocations.UTI !== undefined &&
+    object.babies
   );
 }
 

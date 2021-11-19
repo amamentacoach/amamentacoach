@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { getWeeklyReport } from 'services/report';
 
-import type { WeeklyReport as IWeeklyReport } from 'services/report';
+import type { WeeklyReportQuestion as WeeklyReportQuestion } from 'services/report';
 
 import {
   Answer,
@@ -24,10 +24,10 @@ const WeeklyReport: React.FC<WeeklyReportProps> = ({
   isLoading,
   setIsLoading,
 }) => {
-  const [weeklyReport, setWeeklyReport] = useState<IWeeklyReport[]>([]);
+  const [weeklyReport, setWeeklyReport] = useState<WeeklyReportQuestion[]>([]);
 
   useEffect(() => {
-    async function fetchRegistries() {
+    async function fetchRegistries(): Promise<void> {
       const data = await getWeeklyReport();
       setWeeklyReport(data);
       setIsLoading(false);
@@ -35,10 +35,13 @@ const WeeklyReport: React.FC<WeeklyReportProps> = ({
     fetchRegistries();
   }, []);
 
-  function ReportEntry({ question, answers }: IWeeklyReport) {
+  function ReportEntry({
+    description,
+    answers,
+  }: WeeklyReportQuestion): JSX.Element {
     return (
       <>
-        <Question>{question}</Question>
+        <Question>{description}</Question>
         {answers.length === 0 && (
           <AnswerHeader>{i18n.t('WeeklyReportPage.NotAnswered')}</AnswerHeader>
         )}
@@ -64,8 +67,8 @@ const WeeklyReport: React.FC<WeeklyReportProps> = ({
       <Header>{i18n.t('WeeklyReportPage.Header')}</Header>
       {weeklyReport.map((entry, index) => {
         return (
-          <EntryContainer key={entry.question}>
-            <ReportEntry question={entry.question} answers={entry.answers} />
+          <EntryContainer key={entry.id}>
+            <ReportEntry {...entry} />
             {index < weeklyReport.length - 1 && <Line />}
           </EntryContainer>
         );

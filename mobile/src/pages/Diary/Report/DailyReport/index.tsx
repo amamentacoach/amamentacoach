@@ -24,7 +24,7 @@ const DailyReport: React.FC<DailyReportProps> = ({
   });
 
   useEffect(() => {
-    async function fetchRegistries() {
+    async function fetchRegistries(): Promise<void> {
       const data = await getDailyReport();
       setDailyReport(data);
       setIsLoading(false);

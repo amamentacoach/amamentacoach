@@ -87,7 +87,7 @@ const Survey: React.FC<SurveyProps> = ({
 
   useEffect(() => {
     async function fetchQuestions() {
-      const questions = await getSurveyQuestions(motherInfo, { category });
+      const questions = await getSurveyQuestions({ category, motherInfo });
       if (!questions) {
         return;
       }

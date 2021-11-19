@@ -226,7 +226,7 @@ const BabyForm: React.FC = () => {
   }
 
   // Registra a mãe e os bebês.
-  async function handleFormSubmit(formValues: FormValues) {
+  function handleFormSubmit(formValues: FormValues) {
     const babiesInfo = prepareNewBabiesData(formValues);
     navigation.navigate('AcceptTermsOfService', { motherInfo, babiesInfo });
   }

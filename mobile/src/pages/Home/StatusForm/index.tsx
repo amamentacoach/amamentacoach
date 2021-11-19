@@ -91,11 +91,13 @@ const StatusForm: React.FC = () => {
 
   useEffect(() => {
     async function fetchQuestions() {
-      const statusQuestions = await getSurveyQuestions(motherInfo, {
+      const statusQuestions = await getSurveyQuestions({
         category: 7,
+        motherInfo,
       });
-      const feedingQuestions = await getSurveyQuestions(motherInfo, {
+      const feedingQuestions = await getSurveyQuestions({
         id: 6,
+        motherInfo,
       });
       if (!statusQuestions || !feedingQuestions) {
         return;
