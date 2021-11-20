@@ -46,7 +46,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
   const [formSent, setFormSent] = useState(false);
 
   // Envia a foto que o usuário selecionou e atualiza as informações locais da mãe.
-  async function handleSubmitNewPhoto() {
+  async function handleSubmitNewPhoto(): Promise<void> {
     if (photo) {
       setIsSendingForm(true);
       const filename = await uploadFunction(photo);
@@ -63,7 +63,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
   }
 
   // Abre a galeria do usuário.
-  function handleSelectPhoto() {
+  function handleSelectPhoto(): void {
     ImagePicker.launchImageLibrary({ noData: true }, response => {
       if (response.uri) {
         setPhoto(response);

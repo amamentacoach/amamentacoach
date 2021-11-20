@@ -13,7 +13,7 @@ const ProgressDots: React.FC<ProgressDotsProps> = ({
   length,
   flatlistRef,
 }) => {
-  function goToPage(page: number) {
+  function goToPage(page: number): void {
     if (page >= length) {
       return;
     }
@@ -23,7 +23,7 @@ const ProgressDots: React.FC<ProgressDotsProps> = ({
     });
   }
 
-  function createCircles() {
+  function createCircles(): JSX.Element[] {
     const circles = [];
     for (let i = 0; i < length; i++) {
       circles.push(

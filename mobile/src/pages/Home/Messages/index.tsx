@@ -44,7 +44,7 @@ const Messages: React.FC = () => {
     });
   }, [navigation]);
 
-  async function fetchMessages(currentPage: number) {
+  async function fetchMessages(currentPage: number): Promise<void> {
     setLoading(true);
     const newMessages = await listMessages(currentPage);
     if (newMessages) {
@@ -56,7 +56,7 @@ const Messages: React.FC = () => {
     setLoading(false);
   }
 
-  async function fetchOlderMessages() {
+  async function fetchOlderMessages(): Promise<void> {
     if (loading || noMoreMessages) {
       return;
     }

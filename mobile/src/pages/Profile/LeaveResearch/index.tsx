@@ -39,7 +39,7 @@ interface FormValues {
 const Confirm: React.FC<Page> = ({ index, flatListRef }) => {
   const navigation = useNavigation<RootStackProps>();
 
-  function handleNextPage(currentPage: number) {
+  function handleNextPage(currentPage: number): void {
     flatListRef.current?.scrollToIndex({
       animated: true,
       index: currentPage + 1,
@@ -85,7 +85,7 @@ const Leave: React.FC<Page> = () => {
     message: Yup.string().required(i18n.t('Yup.Required')),
   }).required();
 
-  async function handleFormSubmit() {
+  async function handleFormSubmit(): Promise<void> {
     setIsSendingForm(true);
     const success = await leaveResearch(message);
     setIsConfirmModalVisible(false);

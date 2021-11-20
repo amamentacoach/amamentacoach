@@ -10,13 +10,13 @@ type DateFromStorageFunc = (storageObject: Record<string, any>) => string;
 
 let currentLocale: Locale = ptBR;
 
-export function dateFNSSetLocale(locale: Locale) {
+export function dateFNSSetLocale(locale: Locale): void {
   currentLocale = locale;
 }
 
 // Define um locale padrão para todos as funções do date-fns.
 function addDefaultLocale<T extends (...args: any[]) => any>(func: T): T {
-  function localeAdded(...args: Parameters<typeof func>) {
+  function localeAdded(...args: Parameters<typeof func>): T {
     const functionArgs: any[] = [...args];
     const lastParameterIndex = func.length - 1;
     functionArgs[lastParameterIndex] = {
@@ -32,7 +32,7 @@ export const format = addDefaultLocale(_format);
 export const differenceInYears = addDefaultLocale(_differenceInYears);
 
 // Formata uma data no formato $DiaSemana, $DiaMes de $Mes de $Ano
-export function dateFormatVerbose(date: Date) {
+export function dateFormatVerbose(date: Date): string {
   const dateString = format(date, 'PPPP');
   return dateString.charAt(0).toUpperCase() + dateString.slice(1);
 }
@@ -44,7 +44,7 @@ export function dateFormatVerbose(date: Date) {
 export async function storageIsToday(
   storageId: string,
   getDateFromStorage?: DateFromStorageFunc,
-) {
+): Promise<boolean> {
   const storageString = await AsyncStorage.getItem(storageId);
   if (!storageString) {
     return false;
@@ -58,6 +58,6 @@ export async function storageIsToday(
 
 // Retorna uma string no formato ISO-8601 ("yyyy-MM-dd'T'HH:mm:ss.SSSxxx"), contendo informação
 // sobre o fuso horário do usuário.
-export function formatISO(date: Date) {
+export function formatISO(date: Date): string {
   return format(date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
 }

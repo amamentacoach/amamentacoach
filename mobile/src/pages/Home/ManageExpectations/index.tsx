@@ -79,7 +79,7 @@ const ManageExpectations: React.FC = () => {
 
   // Adiciona o id da expectativa atual ao AsyncStorage, para que não possa ser utilizada na próxima
   // execução.
-  async function updateExpectationsStorage(history?: History) {
+  async function updateExpectationsStorage(history?: History): Promise<void> {
     const selectedStorage = await AsyncStorage.getItem(
       '@AmamentaCoach:alreadySelectedExpectations',
     );
@@ -103,7 +103,7 @@ const ManageExpectations: React.FC = () => {
   }
 
   // Marca que a alternativa atual foi selecionada e não deve ser exibida na próxima execução.
-  async function handleExpectationSelected(isCorrect: boolean) {
+  async function handleExpectationSelected(isCorrect: boolean): Promise<void> {
     const newHistoryEntry: History = {
       correctSelected: isCorrect,
       expectation: {
@@ -126,13 +126,13 @@ const ManageExpectations: React.FC = () => {
   }
 
   // Marca que uma expectativa correta foi selecionada.
-  async function handleCorrectExpectationSelected() {
+  async function handleCorrectExpectationSelected(): Promise<void> {
     await handleExpectationSelected(true);
     setIsSubmitModalVisible(true);
   }
 
   useEffect(() => {
-    async function loadAlreadySelected() {
+    async function loadAlreadySelected(): Promise<void> {
       const selectedStorage = await AsyncStorage.getItem(
         '@AmamentaCoach:alreadySelectedExpectations',
       );
@@ -179,7 +179,8 @@ const ManageExpectations: React.FC = () => {
         return;
       }
 
-      // Remove as expectativas já escolhidas anteriormente
+      // Caso ainda possua expectativas que podem ser escolhidas, remove as expectativas já
+      // escolhidas anteriormente
       const availableExpectations = expectations.filter(
         expectation =>
           !alreadySelected

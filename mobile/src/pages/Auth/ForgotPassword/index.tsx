@@ -33,7 +33,7 @@ const ForgotPassword: React.FC = () => {
       .required(i18n.t('Yup.Required')),
   }).required();
 
-  async function handleForgotPassword({ email }: FormValues) {
+  async function handleForgotPassword({ email }: FormValues): Promise<void> {
     setIsSendingForm(true);
     const successfulRequest = await forgotPassword(email);
     setIsSendingForm(false);

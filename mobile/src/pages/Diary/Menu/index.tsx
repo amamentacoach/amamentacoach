@@ -127,7 +127,7 @@ const DiaryMenu: React.FC = () => {
     });
   }
 
-  function handleDateSelected(date?: Date) {
+  function handleDateSelected(date?: Date): void {
     setShowCalendar(false);
     if (date) {
       setSelectedDate(new Date(date));

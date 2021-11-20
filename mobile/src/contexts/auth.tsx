@@ -24,13 +24,13 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [motherInfo, setMotherInfo] = useState<MotherInfo>({} as MotherInfo);
   const [isLoading, setIsLoading] = useState(true);
 
-  async function initPushNotifications() {
+  async function initPushNotifications(): Promise<void> {
     const { userId } = await OneSignal.getDeviceState();
     await pushNotificationSubscribe(userId);
     OneSignal.disablePush(false);
   }
 
-  async function initMotherInfo() {
+  async function initMotherInfo(): Promise<void> {
     const storageMotherInfo = await AsyncStorage.getItem(
       '@AmamentaCoach:motherInfo',
     );
@@ -57,7 +57,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   // Atualiza o valor the motherInfo armazenado no AsyncStorage com o valor atual.
-  async function updateMotherInfo(newInfo: MotherInfo) {
+  async function updateMotherInfo(newInfo: MotherInfo): Promise<void> {
     await AsyncStorage.setItem(
       '@AmamentaCoach:motherInfo',
       JSON.stringify(newInfo),
@@ -66,7 +66,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   useEffect(() => {
-    async function checkLoginDataInStorage() {
+    async function checkLoginDataInStorage(): Promise<void> {
       const storageToken = await AsyncStorage.getItem('@AmamentaCoach:token');
 
       if (storageToken) {
@@ -121,7 +121,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   );
 };
 
-export function useAuth() {
+export function useAuth(): AuthContextData {
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider.');

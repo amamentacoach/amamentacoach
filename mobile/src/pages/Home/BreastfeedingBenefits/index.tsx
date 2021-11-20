@@ -118,7 +118,7 @@ const BreastfeedingBenefits: React.FC = () => {
     });
   }, []);
 
-  function onEnd() {
+  function onEnd(): void {
     navigation.goBack();
   }
 

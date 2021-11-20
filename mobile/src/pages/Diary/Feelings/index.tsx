@@ -27,7 +27,7 @@ const Feelings: React.FC = () => {
   const currentDate = dateFormatVerbose(new Date());
 
   // Marca o formulário como enviado no dia e registra uma ação de telemetria.
-  async function setFormSent(target: string) {
+  async function setFormSent(target: string): Promise<void> {
     await createTelemetryAction({
       action: Action.Pressed,
       context: { screen: AppScreen.Feelings, target },
@@ -39,13 +39,13 @@ const Feelings: React.FC = () => {
   }
 
   // Executada caso o usuário decida traçar suas metas.
-  async function onFormEndGoals() {
+  async function onFormEndGoals(): Promise<void> {
     await setFormSent('FeelingsPage.SaveGoals');
     navigation.dispatch(StackActions.replace('Goals'));
   }
 
   // Executada se o usuário decidir não traçar suas metas.
-  async function onFormEndDiary() {
+  async function onFormEndDiary(): Promise<void> {
     await setFormSent('Actions.SaveAndExit');
     navigation.navigate('Diary');
   }

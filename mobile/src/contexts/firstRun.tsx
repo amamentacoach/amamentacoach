@@ -45,7 +45,7 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function checkDataInStorage() {
+    async function checkDataInStorage(): Promise<void> {
       const persistentFirstRunStorage = await AsyncStorage.getItem(
         '@AmamentaCoach:isFirstRun',
       );
@@ -64,14 +64,16 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
   }, []);
 
   // Marca um campo como já executado até o aplicativo ser iniciado novamente.
-  function setTemporaryNotFirstRun(field: TemporaryField) {
+  function setTemporaryNotFirstRun(field: TemporaryField): void {
     const copy = { ...isFirstRun };
     copy.temporary[field] = false;
     setIsFirstRun(copy);
   }
 
   // Marca um campo como já executado permanentemente.
-  async function setPersistentNotFirstRun(field: PermanentField) {
+  async function setPersistentNotFirstRun(
+    field: PermanentField,
+  ): Promise<void> {
     const copy = { ...isFirstRun };
     copy.persistent[field] = false;
     await AsyncStorage.setItem(
@@ -93,7 +95,7 @@ export const IsFirstRunProvider: React.FC = ({ children }) => {
   );
 };
 
-export function useIsFirstRun() {
+export function useIsFirstRun(): IsFirstRunContextData {
   const context = useContext(IsFirstRun);
   if (!context) {
     throw new Error('useIsFirstRun must be used within an IsFirstRunProvider.');

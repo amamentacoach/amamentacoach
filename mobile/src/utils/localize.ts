@@ -33,7 +33,7 @@ export function getBestLocale(): LocaleInfo {
 }
 
 // Carrega o idioma e locale correto de acordo com a linguagem do usuário.
-export function setI18nConfig() {
+export function setI18nConfig(): void {
   const translationPaths: Translation = {
     pt: {
       getTranslation: () => require('@assets/locales/pt.json'),

@@ -15,7 +15,7 @@ const App: React.FC = () => {
   const [isLocalizationLoaded, setIsLocalizationLoaded] = useState(false);
 
   // Tentar enviar todas as ações de telemetria armazenadas no dispositivo.
-  async function submitTelemetry() {
+  async function submitTelemetry(): Promise<void> {
     let status = true;
     while (status) {
       status = await submitTelemetryActions();

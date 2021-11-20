@@ -30,7 +30,7 @@ const AcceptTermsOfService: React.FC = () => {
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
 
-  async function handleSubmit() {
+  async function handleSubmit(): Promise<void> {
     setIsSendingForm(true);
     const token = await signUpMother(motherInfo);
     if (token === null) {

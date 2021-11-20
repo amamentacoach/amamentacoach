@@ -7,7 +7,7 @@ import ReadTermsOfService from 'pages/Profile/ReadTermsOfService';
 
 import type { StackScreens } from 'routes/config/getNavigatorType';
 
-const CreateProfileRoutes = (Stack: StackScreens) => {
+const CreateProfileRoutes = (Stack: StackScreens): JSX.Element[] => {
   return [
     <Stack.Screen
       key="NewPassword"

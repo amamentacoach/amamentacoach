@@ -43,7 +43,7 @@ const FormSignUp: React.FC = () => {
       .required(i18n.t('Yup.Required')),
   }).required();
 
-  function handleFormSubmit({ email, password }: FormValues) {
+  function handleFormSubmit({ email, password }: FormValues): void {
     navigation.navigate('MotherForm', { email, password });
   }
 

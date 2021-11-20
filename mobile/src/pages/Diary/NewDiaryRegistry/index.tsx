@@ -86,14 +86,13 @@ const NewDiaryRegistry: React.FC = () => {
     duration,
     quantity,
     time,
-  }: FormValues) {
-    let breast = '';
+  }: FormValues): Promise<void> {
+    let breast = breastRight;
     if (breastLeft && breastRight) {
-      breast = `${breastRight},${breastLeft}`;
-    } else if (breastLeft) {
-      breast = breastLeft;
-    } else {
-      breast = breastRight;
+      breast += ',';
+    }
+    if (breastLeft) {
+      breast += breastLeft;
     }
 
     const [minutes, seconds] = time

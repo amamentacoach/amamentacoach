@@ -151,7 +151,7 @@ const MotherForm: React.FC = () => {
   }).required();
 
   // Avança para a próxima página passando as informações do usuário.
-  function handleFormSubmit(formValues: FormValues) {
+  function handleFormSubmit(formValues: FormValues): void {
     const motherInfo: MotherSignUpInfo = {
       email,
       password,

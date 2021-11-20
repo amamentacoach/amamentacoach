@@ -15,7 +15,7 @@ import createColorHeader from 'routes/config/colorHeader';
 
 import type { StackScreens } from 'routes/config/getNavigatorType';
 
-const CreateDiaryRoutes = (Stack: StackScreens) => {
+const CreateDiaryRoutes = (Stack: StackScreens): JSX.Element[] => {
   const headerBabyPurple = createColorHeader(theme.babyPurple);
 
   return [

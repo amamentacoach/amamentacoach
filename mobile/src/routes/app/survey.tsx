@@ -10,7 +10,7 @@ import createColorHeader from 'routes/config/colorHeader';
 
 import type { StackScreens } from 'routes/config/getNavigatorType';
 
-const CreateSurveyRoutes = (Stack: StackScreens) => {
+const CreateSurveyRoutes = (Stack: StackScreens): JSX.Element[] => {
   const headerBabyBlue = createColorHeader(theme.babyBlue);
 
   return [

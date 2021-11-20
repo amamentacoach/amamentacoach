@@ -15,7 +15,7 @@ const SurveyHelp: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
 
   // Marca o formulário como enviado no dia.
-  async function setFormSent() {
+  async function setFormSent(): Promise<void> {
     await createTelemetryAction({
       action: Action.Pressed,
       context: { screen: AppScreen.SurveyHelp, target: 'Actions.End' },
@@ -26,7 +26,7 @@ const SurveyHelp: React.FC = () => {
     );
   }
 
-  async function onFormEnd() {
+  async function onFormEnd(): Promise<void> {
     await setFormSent();
     navigation.navigate('Survey');
   }

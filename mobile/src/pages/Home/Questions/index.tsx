@@ -49,7 +49,7 @@ const Questions: React.FC = () => {
   }, [navigation]);
 
   useEffect(() => {
-    async function fetchQuestions() {
+    async function fetchQuestions(): Promise<void> {
       setLoading(true);
       const oldQuestions = await listUserQuestions();
       if (oldQuestions) {

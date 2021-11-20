@@ -16,6 +16,7 @@ import type { StackNavigationProp } from '@react-navigation/stack';
 
 import BackIcon from '@assets/images/icons/ic_back.svg';
 
+// Parâmetros aceitos por cada tela do aplicativo.
 export type RootStackParamList = {
   AdditionalInformation: undefined;
   BabyCup: undefined;

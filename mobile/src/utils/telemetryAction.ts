@@ -7,7 +7,9 @@ import type { TelemetryPayload } from '@common/Telemetria';
 type PayloadWithoutDate = Omit<TelemetryPayload, 'created_at'>;
 
 // Armazena um novo registro telemetria indicando que o usuário realizou uma ação.
-export async function createTelemetryAction(action: PayloadWithoutDate) {
+export async function createTelemetryAction(
+  action: PayloadWithoutDate,
+): Promise<void> {
   const storageActions = await AsyncStorage.getItem(
     '@AmamentaCoach:telemetryActions',
   );
