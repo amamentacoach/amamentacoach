@@ -99,9 +99,6 @@ const StatusForm: React.FC = () => {
         id: 6,
         motherInfo,
       });
-      if (!statusQuestions || !feedingQuestions) {
-        return;
-      }
 
       // Inicia todas as respostas vazias.
       let initialValues = statusQuestions.reduce(

@@ -1,7 +1,4 @@
-import surveyPt from '@common/perguntas';
-import surveyEn from '@common/perguntas-en';
-
-import { getBestLocale, SupportedLocales } from 'utils/localize';
+import { getBestLocale, getTranslation } from 'utils/localize';
 
 import type { MotherInfo } from 'services/auth';
 
@@ -21,8 +18,6 @@ interface GetSurveyQuestionOptions {
   id?: number;
 }
 
-type Surveys = Record<SupportedLocales, typeof surveyPt>;
-
 // Retorna todos as perguntas de uma categoria que se aplicam a mãe.
 export function getSurveyQuestions({
   id,
@@ -30,13 +25,10 @@ export function getSurveyQuestions({
   motherInfo,
 }: GetSurveyQuestionOptions): SurveyQuestion[] {
   const { languageTag } = getBestLocale();
+  const { getSurvey } = getTranslation(languageTag);
+  const survey = getSurvey();
 
-  const surveys: Surveys = {
-    en: surveyEn,
-    pt: surveyPt,
-  };
-
-  return surveys[languageTag]
+  return survey
     .filter(question => {
       if (id && id !== question.id) {
         return false;

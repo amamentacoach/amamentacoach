@@ -88,9 +88,6 @@ const Survey: React.FC<SurveyProps> = ({
   useEffect(() => {
     function fetchQuestions(): void {
       const questions = getSurveyQuestions({ category, motherInfo });
-      if (!questions) {
-        return;
-      }
 
       // Inicia todas as respostas vazias.
       const initialValues = questions.reduce(
