@@ -3,8 +3,12 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import OneSignal from 'react-native-onesignal';
 
 import api from 'services/api';
-import * as auth from 'services/auth';
-import { isMotherInfo, LoginStatus } from 'services/auth';
+import {
+  getMotherInfo,
+  isMotherInfo,
+  LoginStatus,
+  signIn as authSignIn,
+} from 'services/auth';
 import pushNotificationSubscribe from 'services/pushNotification';
 
 import type { MotherInfo } from 'services/auth';
@@ -30,30 +34,40 @@ export const AuthProvider: React.FC = ({ children }) => {
     OneSignal.disablePush(false);
   }
 
-  async function initMotherInfo(): Promise<void> {
+  // Verifica se os dados da mãe já estão salvos no dispositivo.
+  async function loadMotherInfoFromStorage(): Promise<MotherInfo | null> {
     const storageMotherInfo = await AsyncStorage.getItem(
       '@AmamentaCoach:motherInfo',
     );
-    if (storageMotherInfo) {
-      // Mãe já possui informações armazenadas, utiliza os dados salvos.
-      const savedMotherInfo: MotherInfo = JSON.parse(storageMotherInfo);
-      if (!isMotherInfo(savedMotherInfo)) {
-        // Caso os dados da mãe não possua todos os campos necessário
-        await AsyncStorage.removeItem('@AmamentaCoach:motherInfo');
-        await initMotherInfo();
-        return;
-      }
-      setMotherInfo(savedMotherInfo);
-    } else {
-      const apiMotherInfo = await auth.getMotherInfo();
-      if (apiMotherInfo) {
-        setMotherInfo(apiMotherInfo);
-        await AsyncStorage.setItem(
-          '@AmamentaCoach:motherInfo',
-          JSON.stringify(apiMotherInfo),
-        );
-      }
+    if (!storageMotherInfo) {
+      return null;
     }
+    const savedMotherInfo = JSON.parse(storageMotherInfo);
+    // Verifica se os dados salvos possuem todos os campos necessários.
+    if (!isMotherInfo(savedMotherInfo)) {
+      await AsyncStorage.removeItem('@AmamentaCoach:motherInfo');
+      return null;
+    }
+    return savedMotherInfo;
+  }
+
+  // Carrega os dados da mãe.
+  async function initMotherInfo(): Promise<boolean> {
+    let info = await loadMotherInfoFromStorage();
+    // Não existe dados salvos, consulta a API.
+    if (!info) {
+      const apiMotherInfo = await getMotherInfo();
+      if (!apiMotherInfo) {
+        return false;
+      }
+      info = apiMotherInfo;
+      await AsyncStorage.setItem(
+        '@AmamentaCoach:motherInfo',
+        JSON.stringify(apiMotherInfo),
+      );
+    }
+    setMotherInfo(info);
+    return true;
   }
 
   // Atualiza o valor the motherInfo armazenado no AsyncStorage com o valor atual.
@@ -66,27 +80,38 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   useEffect(() => {
-    async function checkLoginDataInStorage(): Promise<void> {
+    // Carrega o token de identificação e os dados da mãe.
+    async function loadLoginDataInStorage(): Promise<void> {
       const storageToken = await AsyncStorage.getItem('@AmamentaCoach:token');
-
       if (storageToken) {
         api.defaults.headers.common.Authorization = storageToken;
-        await initMotherInfo();
-        setToken(storageToken);
+        const motherInfoStatus = await initMotherInfo();
+        if (motherInfoStatus) {
+          setToken(storageToken);
+        } else {
+          // Os dados da mãe não estão armazenados no dispositivo e não foi possível consultar a
+          // API.
+          await AsyncStorage.removeItem('@AmamentaCoach:token');
+          api.defaults.headers.common.Authorization = null;
+        }
       }
-
       setIsLoading(false);
     }
 
     OneSignal.setAppId('8b92a77f-f327-48be-b2c2-d938aad5a0ab');
-    checkLoginDataInStorage();
+    loadLoginDataInStorage();
   }, []);
 
   async function signIn(email: string, password: string): Promise<LoginStatus> {
-    const { token: newToken, status } = await auth.signIn(email, password);
+    const { token: newToken, status } = await authSignIn(email, password);
     if (status === LoginStatus.Success) {
       api.defaults.headers.common.Authorization = newToken;
-      await initMotherInfo();
+      const motherInfoStatus = await initMotherInfo();
+      // Não foi possível carregar os dados da mãe.
+      if (!motherInfoStatus) {
+        api.defaults.headers.common.Authorization = null;
+        return LoginStatus.FailedToConnect;
+      }
 
       await initPushNotifications();
 
