@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import {
   useIsFocused,
   useNavigation,

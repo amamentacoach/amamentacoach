@@ -1,6 +1,6 @@
 import api from 'services/api';
 
-import type { TelemetryPayload } from '@common/Telemetria';
+import type { TelemetryPayload } from '@common/telemetria';
 
 // Enviar que o usuário começou a assistir um vídeo.
 async function setUserTelemetry(route: string): Promise<boolean> {

@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { isToday } from 'date-fns';
 import i18n from 'i18n-js';
