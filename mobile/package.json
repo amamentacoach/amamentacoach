@@ -1,20 +1,19 @@
 {
-  "name": "amamenta-coach",
+  "name": "amamentacoach",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "android:assemble:development": "yarn run lint && cd android && ENVFILE='../.env.development' ./gradlew assembleDebug",
-    "android:assemble:production": "yarn run lint && cd android && ENVFILE='../.env.production' ./gradlew assembleRelease",
-    "android:bundle:development": "yarn run lint && cd android && ENVFILE='../.env.development' ./gradlew bundleRelease",
-    "android:bundle:production": "yarn run lint && cd android && ENVFILE='../.env.production' ./gradlew bundleRelease",
+    "android:assemble:development": "cd android && ENVFILE='../.env.development' ./gradlew assembleRelease",
+    "android:assemble:production": "cd android && ENVFILE='../.env.production' ./gradlew assembleRelease",
+    "android:bundle:development": "cd android && ENVFILE='../.env.development' ./gradlew bundleRelease",
+    "android:bundle:production": "cd android && ENVFILE='../.env.production' ./gradlew bundleRelease",
     "android": "ENVFILE='.env.development' react-native run-android",
     "ios": "ENVFILE='.env.development' react-native run-ios",
     "android:local": "ENVFILE='.env.local' react-native run-android",
     "ios:local": "ENVFILE='.env.local' react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "yarn run check-types && eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "check-types": "tsc --noemit --skiplibcheck"
+    "lint": "tsc --noemit --skiplibcheck && eslint . --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.7",
