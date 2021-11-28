@@ -133,6 +133,12 @@ def jscFlavor = 'org.webkit:android-jsc-intl:+'
  */
 def enableHermes = project.ext.react.get("enableHermes", false);
 
+def releaseKeystorePropertiesFile = rootProject.file("release.properties");
+def releaseKeystoreProperties = new Properties()
+if (releaseKeystorePropertiesFile.exists()) {
+    releaseKeystoreProperties.load(new FileInputStream(releaseKeystorePropertiesFile))
+}
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
@@ -142,7 +148,7 @@ android {
         applicationId "com.amamentacoach"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10
+        versionCode 13
         versionName "1.17.0"
         multiDexEnabled true
         setProperty("archivesBaseName", "amamentacoach" + "-v" + versionName + "-" + project.env.get("ENV_NAME"))
@@ -163,11 +169,11 @@ android {
             keyPassword 'android'
         }
         release {
-            if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
-                storeFile file(MYAPP_UPLOAD_STORE_FILE)
-                storePassword MYAPP_UPLOAD_STORE_PASSWORD
-                keyAlias MYAPP_UPLOAD_KEY_ALIAS
-                keyPassword MYAPP_UPLOAD_KEY_PASSWORD
+            if (releaseKeystorePropertiesFile.exists() && file(releaseKeystoreProperties['STORE_FILE']).exists()) {
+                storeFile file(releaseKeystoreProperties['STORE_FILE'])
+                storePassword releaseKeystoreProperties['STORE_PASSWORD']
+                keyAlias releaseKeystoreProperties['KEY_ALIAS']
+                keyPassword releaseKeystoreProperties['KEY_PASSWORD']
             }
         }
     }
