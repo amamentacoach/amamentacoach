@@ -29,7 +29,6 @@ function addDefaultLocale<T extends (...args: any[]) => any>(func: T): T {
 }
 
 export const format = addDefaultLocale(_format);
-export const differenceInYears = addDefaultLocale(_differenceInYears);
 
 // Formata uma data no formato $DiaSemana, $DiaMes de $Mes de $Ano
 export function dateFormatVerbose(date: Date): string {

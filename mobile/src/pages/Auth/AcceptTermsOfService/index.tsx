@@ -1,4 +1,5 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { differenceInYears } from 'date-fns';
 import i18n from 'i18n-js';
 import { useState } from 'react';
 
@@ -8,7 +9,6 @@ import {
   AdultTermsOfService,
   MinorTermsOfService,
 } from 'components/TermsOfService';
-import { differenceInYears } from 'lib/date-fns';
 import { signUpBaby, signUpMother } from 'services/auth';
 
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
