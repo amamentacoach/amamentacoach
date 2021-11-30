@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import {
   useIsFocused,
   useNavigation,
@@ -32,7 +32,7 @@ const DiaryBreastfeed: React.FC = () => {
 
   const selectedDate = params?.date ? new Date(params?.date) : new Date();
 
-  async function handleNewBreastfeedEntry(target: string) {
+  async function handleNewBreastfeedEntry(target: string): Promise<void> {
     await createTelemetryAction({
       action: Action.Pressed,
       context: { screen: AppScreen.DiaryBreastfeed, target },
@@ -41,7 +41,7 @@ const DiaryBreastfeed: React.FC = () => {
   }
 
   useEffect(() => {
-    async function fetchRegistries() {
+    async function fetchRegistries(): Promise<void> {
       if (motherInfo.babies) {
         setIsLoading(true);
         // Recebe os registros de todos os bebês da mãe.

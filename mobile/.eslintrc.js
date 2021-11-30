@@ -41,9 +41,9 @@ module.exports = {
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
     'require-await': 'off',
-    '@typescript-eslint/require-await': 'error',
+    '@typescript-eslint/await-thenable': 'error',
     '@typescript-eslint/explicit-function-return-type': [
-      'warn',
+      'error',
       {
         allowExpressions: true,
       },
@@ -52,6 +52,7 @@ module.exports = {
     '@typescript-eslint/no-unused-vars-experimental': 'error',
     '@typescript-eslint/no-unused-vars': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    '@typescript-eslint/require-await': 'error',
     'import/order': [
       'error',
       {

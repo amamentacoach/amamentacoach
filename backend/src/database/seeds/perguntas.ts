@@ -1,6 +1,5 @@
 import * as Knex from "knex";
-import perguntas from '../../../common/perguntas';
-
+import perguntas from "../../../common/perguntas-pt";
 
 export async function seed(knex: Knex): Promise<void> {
     // Deletes ALL existing entries
@@ -9,5 +8,3 @@ export async function seed(knex: Knex): Promise<void> {
     // Inserts seed entries
     await knex("pergunta").insert(perguntas);
 }
-
-  

@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import { StackActions, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
@@ -25,7 +25,7 @@ const Goals: React.FC = () => {
   const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
   const [isFinishedModalVisible, setIsFinishedModalVisible] = useState(false);
 
-  async function onFormEnd() {
+  async function onFormEnd(): Promise<void> {
     await createTelemetryAction({
       action: Action.Pressed,
       context: { screen: AppScreen.Goals, target: 'Actions.End' },
@@ -34,7 +34,7 @@ const Goals: React.FC = () => {
   }
 
   // Retorna uma imagem aleatória para ser exibida no modal.
-  function getRandomMotivationImage() {
+  function getRandomMotivationImage(): typeof Motivation1 {
     const images = [
       Motivation1,
       Motivation2,

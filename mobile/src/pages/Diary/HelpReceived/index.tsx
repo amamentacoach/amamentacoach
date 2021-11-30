@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
@@ -19,7 +19,7 @@ const HelpReceived: React.FC = () => {
   const images = [HelpReceived1, HelpReceived2];
 
   // Marca o formulário como enviado no dia.
-  async function setFormSent() {
+  async function setFormSent(): Promise<void> {
     await createTelemetryAction({
       action: Action.Pressed,
       context: { screen: AppScreen.HelpReceived, target: 'Actions.End' },
@@ -30,7 +30,7 @@ const HelpReceived: React.FC = () => {
     );
   }
 
-  async function onFormEnd() {
+  async function onFormEnd(): Promise<void> {
     await setFormSent();
     navigation.navigate('Diary');
   }

@@ -1,12 +1,4 @@
-interface Pergunta {
-  id: number;
-  categoria: number;
-  descricao: string;
-  alternativas: string;
-  outro: boolean;
-  multiplas: boolean;
-  alvo: "GERAL" | "AC" | "UCI/UTI";
-}
+import type { Pergunta } from "./perguntas";
 
 const perguntas: Pergunta[] = [
   // Categoria 1: Enquete “Amamentar um prematuro”

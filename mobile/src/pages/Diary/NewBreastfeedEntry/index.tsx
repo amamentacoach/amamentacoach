@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
@@ -85,18 +85,17 @@ const NewBreastfeedEntry: React.FC = () => {
     breastLeft,
     duration,
     time,
-  }: FormValues) {
+  }: FormValues): Promise<void> {
     const selectedBaby = motherInfo.babies.find(baby => baby.name === babyName);
     if (!selectedBaby) {
       return;
     }
-    let breast = '';
+    let breast = breastRight;
     if (breastLeft && breastRight) {
-      breast = `${breastRight},${breastLeft}`;
-    } else if (breastLeft) {
-      breast = breastLeft;
-    } else {
-      breast = breastRight;
+      breast += ',';
+    }
+    if (breastLeft) {
+      breast += breastLeft;
     }
 
     const [minutes, seconds] = time

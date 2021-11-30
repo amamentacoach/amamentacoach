@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
@@ -90,18 +90,15 @@ const StatusForm: React.FC = () => {
   }, [navigation]);
 
   useEffect(() => {
-    async function fetchQuestions() {
-      const statusQuestions = await getSurveyQuestions({
+    function fetchQuestions(): void {
+      const statusQuestions = getSurveyQuestions({
         category: 7,
         motherInfo,
       });
-      const feedingQuestions = await getSurveyQuestions({
+      const feedingQuestions = getSurveyQuestions({
         id: 6,
         motherInfo,
       });
-      if (!statusQuestions || !feedingQuestions) {
-        return;
-      }
 
       // Inicia todas as respostas vazias.
       let initialValues = statusQuestions.reduce(
@@ -135,7 +132,9 @@ const StatusForm: React.FC = () => {
   }, []);
 
   // Envia as respostas do usuário.
-  async function handleFormSubmit(values: { [key: string]: string[] }) {
+  async function handleFormSubmit(values: {
+    [key: string]: string[];
+  }): ReturnType<typeof answerStatusForm> {
     const { feeding, ...answers } = values;
 
     const statusAnswers = Object.keys(answers).map(key => ({
@@ -159,7 +158,7 @@ const StatusForm: React.FC = () => {
       [key: string]: string[];
     },
     setFieldError: (field: string, message: string) => void,
-  ) {
+  ): boolean {
     let isValid = true;
     questions.forEach(question => {
       if (values[question.id].length <= 0) {
@@ -193,7 +192,7 @@ const StatusForm: React.FC = () => {
     },
     setFieldError: (field: string, message: string) => void,
     submitForm: () => Promise<number | null>,
-  ) {
+  ): Promise<void> {
     // Verifica se pelo menos uma resposta foi selecionada ao avançar a página.
     if (
       newPage > currentPage &&

@@ -67,7 +67,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
     }
   }, []);
 
-  function handleOptionSelected(selectedIndex: number) {
+  function handleOptionSelected(selectedIndex: number): void {
     const newSelectedIndexes = selectedIndexes;
     // Caso só uma opção possa ser marcada de cada vez, desmarca todos os outro elementos antes
     // de marcar um novo.
@@ -98,7 +98,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
     onChange(fieldName, newSelectedOptions);
   }
 
-  function handleOtherFieldChange(text: string) {
+  function handleOtherFieldChange(text: string): void {
     const newValues = selectedOptions;
     if (!selectedIndexes[selectedIndexes.length - 1] && text !== '') {
       // Caso o valor do campo ainda não tenha sido adicionado, coloca o novo valor no

@@ -36,7 +36,7 @@ import createColorHeader from 'routes/config/colorHeader';
 
 import type { StackScreens } from 'routes/config/getNavigatorType';
 
-const CreateHomeRoutes = (Stack: StackScreens) => {
+const CreateHomeRoutes = (Stack: StackScreens): JSX.Element[] => {
   const { isFirstRun } = useIsFirstRun();
   const headerBabyBlue = createColorHeader(theme.babyBlue, 'black');
   const headerBabyGreen = createColorHeader(theme.babyGreen);

@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
@@ -121,7 +121,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     // Busca bebês que podem receber alta e exibe os modais necessários.
-    async function checkBabies() {
+    async function checkBabies(): Promise<void> {
       const babiesToCheck = await checkBabiesLocation();
       if (babiesToCheck) {
         setSelectedModalOptions(
@@ -137,7 +137,7 @@ const Home: React.FC = () => {
 
     // Envia uma mensagem de telemetria que o usuário abriu o aplicativo e verifica se algum
     // formulário deve ser preenchido.
-    async function checkForms() {
+    async function checkForms(): Promise<void> {
       const action = await setHomePageOpened();
       if (action) {
         setFormAction(action);
@@ -146,7 +146,7 @@ const Home: React.FC = () => {
     }
 
     // Verifica se o usuário acessou a tela de expectativas hoje.
-    async function checkExpectations() {
+    async function checkExpectations(): Promise<void> {
       const openedToday = await storageIsToday(
         '@AmamentaCoach:alreadySelectedExpectations',
         storage => storage.lastRunDate,
@@ -158,7 +158,7 @@ const Home: React.FC = () => {
 
     // Verifica a última data que o aplicativo foi aberto. Se um dia tiver passado ou é a primeira
     // vez abrindo o app é buscado os bebês que podem receber alta.
-    async function checkUserActions() {
+    async function checkUserActions(): Promise<void> {
       // Menos de um dia se passou.
       if (await storageIsToday('@AmamentaCoach:lastOpenedDate')) {
         return;
@@ -196,14 +196,14 @@ const Home: React.FC = () => {
   }, [isFocused]);
 
   // Fecha todos os modais.
-  function hideAllModals() {
+  function hideAllModals(): void {
     setBabyModalVisibility(false);
     setExpectationsModalVisibility(false);
     setFormModalVisibility(false);
   }
 
   // Fecha os modais, marca que os bebês selecionados tiveram alta e navega para o formulário.
-  function handleUpdateBabyLocation() {
+  function handleUpdateBabyLocation(): void {
     hideAllModals();
     babiesData.forEach(async (baby, index) => {
       await updateBabyLocation(
@@ -217,7 +217,7 @@ const Home: React.FC = () => {
   }
 
   // Seleciona um bebê no modal.
-  function handleBabySelected(index: number) {
+  function handleBabySelected(index: number): void {
     const selected = [...selectedModalOptions];
     selected[index].selected = !selected[index].selected;
     if (!selected[index].selected) {
@@ -227,14 +227,14 @@ const Home: React.FC = () => {
   }
 
   // Atualiza o valor da localização de um bebê selecionado.
-  function handleBabyLocationSelected(index: number, value: string) {
+  function handleBabyLocationSelected(index: number, value: string): void {
     const values = [...selectedModalOptions];
     values[index].newLocation = value;
     setSelectedModalOptions(values);
   }
 
   // Checa se pelo menos um bebê foi selecionado e sua nova localização fornecida.
-  function validateModalFields() {
+  function validateModalFields(): boolean {
     const atLeastOneSelected = selectedModalOptions.some(op => op.selected);
     const selectedAreValid = selectedModalOptions.every(op =>
       op.selected ? op.newLocation : !op.selected,

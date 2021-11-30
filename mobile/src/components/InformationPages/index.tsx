@@ -41,7 +41,7 @@ const InformationPages: React.FC<InformationPagesProps> = ({
   const { width } = Dimensions.get('window');
   const flatListRef = useRef<FlatList>(null);
 
-  function goToPage(page: number) {
+  function goToPage(page: number): void {
     if (page >= pages.length || page < 0) {
       return;
     }

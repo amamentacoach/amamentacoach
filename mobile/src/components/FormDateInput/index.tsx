@@ -57,12 +57,12 @@ const FormDateInput: React.FC<FormDateProps> = ({
   }
 
   // Exibe o seletor.
-  function showDatePicker() {
+  function showDatePicker(): void {
     setShow(true);
   }
 
   // Esconde o seletor e salva o valor escolhido.
-  function handleDateSelected(selectedDate?: Date) {
+  function handleDateSelected(selectedDate?: Date): void {
     setShow(Platform.OS === 'ios');
     if (selectedDate) {
       onChange(fieldName, formatStateDate(selectedDate));

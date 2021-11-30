@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation } from '@react-navigation/native';
 import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { FlatList } from 'react-native';
@@ -49,7 +49,7 @@ const Questions: React.FC = () => {
   }, [navigation]);
 
   useEffect(() => {
-    async function fetchQuestions() {
+    async function fetchQuestions(): Promise<void> {
       setLoading(true);
       const oldQuestions = await listUserQuestions();
       if (oldQuestions) {

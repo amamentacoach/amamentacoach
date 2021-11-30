@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
@@ -34,10 +34,10 @@ const NewMessage: React.FC = () => {
     message: Yup.string().required(i18n.t('Yup.Required')),
   }).required();
 
-  async function handleNewMessage({ message }: FormValues) {
+  async function handleNewMessage({ message }: FormValues): Promise<void> {
     setIsSendingForm(true);
     const successfulRequest = await createMessage(message);
-    setIsSendingForm(false);
+
     if (successfulRequest) {
       await createTelemetryAction({
         action: Action.Pressed,
@@ -46,6 +46,8 @@ const NewMessage: React.FC = () => {
           target: 'Actions.Send',
         },
       });
+
+      setIsSendingForm(false);
       setIsSubmitModalVisible(true);
       setTextInputText('');
     }

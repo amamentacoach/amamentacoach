@@ -59,7 +59,7 @@ const Introduction: React.FC = () => {
     hide({ duration: 250 });
   }, []);
 
-  async function onEnd() {
+  async function onEnd(): Promise<void> {
     await setPersistentNotFirstRun('appIntroduction');
   }
 

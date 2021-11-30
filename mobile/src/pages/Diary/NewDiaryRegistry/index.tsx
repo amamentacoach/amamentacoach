@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
@@ -86,14 +86,13 @@ const NewDiaryRegistry: React.FC = () => {
     duration,
     quantity,
     time,
-  }: FormValues) {
-    let breast = '';
+  }: FormValues): Promise<void> {
+    let breast = breastRight;
     if (breastLeft && breastRight) {
-      breast = `${breastRight},${breastLeft}`;
-    } else if (breastLeft) {
-      breast = breastLeft;
-    } else {
-      breast = breastRight;
+      breast += ',';
+    }
+    if (breastLeft) {
+      breast += breastLeft;
     }
 
     const [minutes, seconds] = time

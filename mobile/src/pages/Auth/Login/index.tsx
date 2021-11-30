@@ -59,7 +59,7 @@ const Login: React.FC = () => {
     hide({ duration: 250 });
   }, []);
 
-  async function handleSignIn({ email, password }: FormValues) {
+  async function handleSignIn({ email, password }: FormValues): Promise<void> {
     setIsSendingForm(true);
     const status = await signIn(email, password);
     if (status === LoginStatus.FailedToConnect) {
@@ -74,11 +74,11 @@ const Login: React.FC = () => {
     }
   }
 
-  function handleForgotPassword() {
+  function handleForgotPassword(): void {
     navigation.navigate('ForgotPassword');
   }
 
-  function handleSignUp() {
+  function handleSignUp(): void {
     navigation.navigate('SignUp');
   }
 

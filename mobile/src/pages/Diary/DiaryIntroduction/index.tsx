@@ -50,7 +50,7 @@ const DiaryIntroduction: React.FC = () => {
     },
   ];
 
-  async function onEnd() {
+  async function onEnd(): Promise<void> {
     await setPersistentNotFirstRun('diaryIntroduction');
   }
 

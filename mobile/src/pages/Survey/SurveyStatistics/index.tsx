@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
@@ -44,7 +44,7 @@ const SurveyStatistics: React.FC = () => {
   }, [navigation]);
 
   useEffect(() => {
-    async function fetchStatistics() {
+    async function fetchStatistics(): Promise<void> {
       const stats = await listSurveyStatistics();
       if (stats) {
         setStatistics(stats);
@@ -52,7 +52,7 @@ const SurveyStatistics: React.FC = () => {
       }
     }
 
-    function navigateToSurveyPage(event: any) {
+    function navigateToSurveyPage(event: any): void {
       // Impede a ação padrão de retornar a tela anterior.
       event.preventDefault();
       navigation.navigate('Survey');

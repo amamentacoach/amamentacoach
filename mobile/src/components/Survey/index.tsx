@@ -86,11 +86,8 @@ const Survey: React.FC<SurveyProps> = ({
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
 
   useEffect(() => {
-    async function fetchQuestions() {
-      const questions = await getSurveyQuestions({ category, motherInfo });
-      if (!questions) {
-        return;
-      }
+    function fetchQuestions(): void {
+      const questions = getSurveyQuestions({ category, motherInfo });
 
       // Inicia todas as respostas vazias.
       const initialValues = questions.reduce(
@@ -116,7 +113,7 @@ const Survey: React.FC<SurveyProps> = ({
     values: {
       [key: string]: string[];
     },
-  ) {
+  ): boolean {
     const atLeastOneSelected = values[question.id].length > 0;
     const otherFieldValid =
       values[question.id].find(option => option === '') === undefined;
@@ -125,7 +122,7 @@ const Survey: React.FC<SurveyProps> = ({
   }
 
   // Navega até uma página especificada.
-  function goToPage(page: number) {
+  function goToPage(page: number): void {
     if (page >= pages.length || page < 0) {
       return;
     }
@@ -160,7 +157,7 @@ const Survey: React.FC<SurveyProps> = ({
   async function handleLastPage(
     submitForm: () => Promise<AnswerFeedback | undefined | null>,
     handleFormEnd: () => void,
-  ) {
+  ): Promise<void> {
     setIsSendingForm(true);
     const feedback = await submitForm();
     setIsSendingForm(false);
@@ -196,7 +193,7 @@ const Survey: React.FC<SurveyProps> = ({
     },
     submitForm: () => Promise<AnswerFeedback | undefined | null>,
     handleFormEnd: () => void,
-  ) {
+  ): Promise<void> {
     // Verifica se pelo menos uma resposta foi selecionada
     if (!validateForm(question, values)) {
       setIsFormValid(false);

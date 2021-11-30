@@ -21,7 +21,7 @@ import {
 const createGenericSurveyPage = (
   onFormEnd: () => void,
   Images?: React.FC<SvgProps>[],
-) => {
+): React.FC<SurveyPage> => {
   const Page: React.FC<SurveyPage> = ({
     index,
     pagesLength,

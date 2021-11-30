@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import {
   useIsFocused,
   useNavigation,
@@ -30,7 +30,7 @@ const DiaryRegistry: React.FC = () => {
 
   const selectedDate = params?.date ? new Date(params?.date) : new Date();
 
-  async function handleNewRegistryEntry(target: string) {
+  async function handleNewRegistryEntry(target: string): Promise<void> {
     await createTelemetryAction({
       action: Action.Pressed,
       context: { screen: AppScreen.DiaryRegistry, target },
@@ -39,7 +39,7 @@ const DiaryRegistry: React.FC = () => {
   }
 
   useEffect(() => {
-    async function fetchRegistries() {
+    async function fetchRegistries(): Promise<void> {
       setIsLoading(true);
       const oldRegistries = await listExtractionsEntries(selectedDate);
       setRegistries(oldRegistries);

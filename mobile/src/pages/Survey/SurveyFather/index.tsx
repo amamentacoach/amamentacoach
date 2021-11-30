@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
@@ -18,7 +18,7 @@ const SurveyFather: React.FC = () => {
   const images = [Father];
 
   // Marca o formulário como enviado no dia.
-  async function setFormSent() {
+  async function setFormSent(): Promise<void> {
     await createTelemetryAction({
       action: Action.Pressed,
       context: { screen: AppScreen.SurveyFather, target: 'Actions.End' },
@@ -29,7 +29,7 @@ const SurveyFather: React.FC = () => {
     );
   }
 
-  async function onFormEnd() {
+  async function onFormEnd(): Promise<void> {
     await setFormSent();
     navigation.navigate('Survey');
   }

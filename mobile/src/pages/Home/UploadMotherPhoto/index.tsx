@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
 

@@ -31,7 +31,7 @@ interface GenericInfoPageOptions {
 const createGenericInfoPage = ({
   displaySkipButton,
   onEnd,
-}: GenericInfoPageOptions) => {
+}: GenericInfoPageOptions): React.FC<InfoPageModelProps> => {
   const InfoModel: React.FC<InfoPageModelProps> = ({
     index,
     pagesLength,

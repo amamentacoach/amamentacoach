@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useEffect } from 'react';
@@ -17,8 +17,6 @@ import WhyMilkWithdrawalTwo from '@assets/images/why_milk_withdrawal_two.png';
 
 const WhyBreastfeed: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
-  const onEnd = () => navigation.goBack();
-
   const pages: InfoPageItem[] = [
     {
       id: '1',
@@ -79,6 +77,10 @@ const WhyBreastfeed: React.FC = () => {
       ],
     },
   ];
+
+  function onEnd(): void {
+    navigation.goBack();
+  }
 
   useEffect(() => {
     createTelemetryAction({

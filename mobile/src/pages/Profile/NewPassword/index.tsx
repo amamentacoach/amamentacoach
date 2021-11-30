@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
@@ -41,7 +41,7 @@ const NewPassword: React.FC = () => {
       .required(i18n.t('Yup.Required')),
   }).required();
 
-  async function handleNewPassword({ password }: FormValues) {
+  async function handleNewPassword({ password }: FormValues): Promise<void> {
     setIsSendingForm(true);
     const successfulRequest = await newPassword(password);
     setIsSendingForm(false);

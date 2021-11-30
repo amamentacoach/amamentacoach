@@ -2,12 +2,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { registerUserAction } from 'services/telemetry';
 
-import type { TelemetryPayload } from '@common/Telemetria';
+import type { TelemetryPayload } from '@common/telemetria';
 
 type PayloadWithoutDate = Omit<TelemetryPayload, 'created_at'>;
 
 // Armazena um novo registro telemetria indicando que o usuário realizou uma ação.
-export async function createTelemetryAction(action: PayloadWithoutDate) {
+export async function createTelemetryAction(
+  action: PayloadWithoutDate,
+): Promise<void> {
   const storageActions = await AsyncStorage.getItem(
     '@AmamentaCoach:telemetryActions',
   );

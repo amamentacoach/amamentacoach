@@ -159,7 +159,7 @@ const BabyForm: React.FC = () => {
     errors: FormikErrors<FormValues>,
     index: number,
     field: string,
-  ) {
+  ): string {
     if (errors?.babies && errors?.babies[index]) {
       return (errors.babies[index] as { [key: string]: any })[field];
     }
@@ -171,7 +171,7 @@ const BabyForm: React.FC = () => {
     fieldValue: string,
     babies: Baby[],
     setFieldValue: (field: string, value: any) => void,
-  ) {
+  ): void {
     // Caso o texto possua caracteres não numéricos ele é ignorado.
     if (fieldValue !== '' && !new RegExp('^\\d+$').test(fieldValue)) {
       return;
@@ -208,7 +208,7 @@ const BabyForm: React.FC = () => {
   }
 
   // Prepara os valores dos bebês para serem enviados ao backend.
-  function prepareNewBabiesData(formValues: FormValues) {
+  function prepareNewBabiesData(formValues: FormValues): BabySignUpInfo[] {
     const babiesInfo: BabySignUpInfo[] = formValues.babies.map(baby => ({
       name: baby.name,
       birthday: baby.birthday,
@@ -226,7 +226,7 @@ const BabyForm: React.FC = () => {
   }
 
   // Registra a mãe e os bebês.
-  function handleFormSubmit(formValues: FormValues) {
+  function handleFormSubmit(formValues: FormValues): void {
     const babiesInfo = prepareNewBabiesData(formValues);
     navigation.navigate('AcceptTermsOfService', { motherInfo, babiesInfo });
   }

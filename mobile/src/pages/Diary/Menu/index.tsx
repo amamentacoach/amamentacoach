@@ -1,4 +1,4 @@
-import { Action, AppScreen } from '@common/Telemetria';
+import { Action, AppScreen } from '@common/telemetria';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
@@ -127,7 +127,7 @@ const DiaryMenu: React.FC = () => {
     });
   }
 
-  function handleDateSelected(date?: Date) {
+  function handleDateSelected(date?: Date): void {
     setShowCalendar(false);
     if (date) {
       setSelectedDate(new Date(date));

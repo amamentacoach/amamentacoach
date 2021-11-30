@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import { Action, AppScreen } from '../../../common/Telemetria'
+import { Action, AppScreen } from '../../../common/telemetria'
 
 export interface ITelemetry {
   mae_id?: String;

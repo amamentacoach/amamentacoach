@@ -57,7 +57,7 @@ const IntroductionStatusForm: React.FC = () => {
     },
   ];
 
-  async function handleEndIntroduction() {
+  async function handleEndIntroduction(): Promise<void> {
     await setPersistentNotFirstRun('statusFormIntroduction');
   }
 
