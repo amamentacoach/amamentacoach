@@ -18,7 +18,7 @@ interface Translation {
   // Tradução das enquetes.
   getSurvey: () => Pergunta[];
   // Tradução das telas do aplicativo.
-  getTranslation: () => object;
+  getAppTranslation: () => object;
 }
 
 type Translations = {
@@ -30,17 +30,17 @@ const translations: Translations = {
   en: {
     getDateLocale: () => require('date-fns/locale/en-CA'),
     getSurvey: () => require('@common/perguntas-en').default,
-    getTranslation: () => require('@assets/locales/en'),
+    getAppTranslation: () => require('@assets/locales/en'),
   },
   pt: {
     getDateLocale: () => require('date-fns/locale/pt-BR'),
     getSurvey: () => require('@common/perguntas-pt').default,
-    getTranslation: () => require('@assets/locales/pt'),
+    getAppTranslation: () => require('@assets/locales/pt'),
   },
 };
 
 // Idioma usado caso o usuário não utilize um idioma suportado pelo aplicativo.
-const fallbackLanguage: SupportedLocales = SupportedLocales.PT;
+const fallbackLanguage: SupportedLocales = SupportedLocales.EN;
 
 interface LocaleInfo {
   languageTag: SupportedLocales;
@@ -48,7 +48,7 @@ interface LocaleInfo {
 }
 
 // Retorna a linguagem suportada pelo app apropriada para o usuário.
-// Caso nenhuma língua seja encontrada é utilizado português.
+// Caso nenhuma língua suportada pelo app seja encontrada é retornado o idioma de fallback.
 export function getBestLocale(): LocaleInfo {
   const fallbackLocale = { languageTag: fallbackLanguage, isRTL: false };
   const bestMatch = RNLocalize.findBestAvailableLanguage(
@@ -63,14 +63,15 @@ export function setI18nConfig(): void {
   I18nManager.forceRTL(isRTL);
   // Define o idioma do aplicativo.
   i18n.translations = {
-    [languageTag]: translations[languageTag].getTranslation(),
+    [languageTag]: translations[languageTag].getAppTranslation(),
   };
   i18n.locale = languageTag;
   // Define o formato de data utilizado pelo date-fns.
   dateFNSSetLocale(translations[languageTag].getDateLocale());
 }
 
-// Retorna um objeto de tradução.
-export function getTranslation(key: SupportedLocales): Translation {
-  return translations[key] || translations[fallbackLanguage];
+// Retorna o objeto de tradução para o idioma do usuário.
+export function getTranslationFiles(): Translation {
+  const { languageTag } = getBestLocale();
+  return translations[languageTag];
 }
