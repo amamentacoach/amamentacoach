@@ -1,4 +1,4 @@
-import { getBestLocale, getTranslation } from 'utils/localize';
+import { getTranslationFiles } from 'utils/localize';
 
 import type { MotherInfo } from 'services/auth';
 
@@ -24,8 +24,7 @@ export function getSurveyQuestions({
   category,
   motherInfo,
 }: GetSurveyQuestionOptions): SurveyQuestion[] {
-  const { languageTag } = getBestLocale();
-  const { getSurvey } = getTranslation(languageTag);
+  const { getSurvey } = getTranslationFiles();
   const survey = getSurvey();
 
   return survey
