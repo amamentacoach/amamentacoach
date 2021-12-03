@@ -58,8 +58,6 @@ class RespostasMaeController{
 
             const dias_uso = moment.duration(diff).asDays()
 
-            console.log(dias_uso);
-
             for(const resposta of respostas){
                 const {pergunta_id, descricao} = resposta
                 score += parseInt(descricao);
