@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import knex from '../database/connection';
+import moment from 'moment';
 
 
 interface Resposta{
@@ -51,6 +52,14 @@ class RespostasMaeController{
         
         await knex.transaction(async trx =>{
 
+            const mae = await knex('mae').select('score_1d', 'score_alta', 'score_15d','score_1m', 'primeiro_acesso').where('id', mae_id).first();
+
+            const diff = moment(new Date()).diff(mae.primeiro_acesso);
+
+            const dias_uso = moment.duration(diff).asDays()
+
+            console.log(dias_uso);
+
             for(const resposta of respostas){
                 const {pergunta_id, descricao} = resposta
                 score += parseInt(descricao);
@@ -74,8 +83,18 @@ class RespostasMaeController{
                     break;
             
                 default:
-                    res.sendStatus(400)
-                    break;
+                    if(!mae.score_1d && dias_uso<15){
+                        await trx('mae').update({score_1d:score}).where({id:mae_id})
+                        break;
+                    }else if(!mae.score_15d && dias_uso>=15){
+                        await trx('mae').update({score_15d:score}).where({id:mae_id})
+                        break;
+                    }else if(!mae.score_1m && dias_uso>=30){
+                        await trx('mae').update({score_1m:score}).where({id:mae_id})
+                        break;
+                    }else{
+                        break;
+                    }
             }  
                      
         })
