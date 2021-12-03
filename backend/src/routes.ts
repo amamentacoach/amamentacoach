@@ -72,7 +72,12 @@ const uploadMiddleware = multer(uploadConfig);
  *          "orientacao_prenatal": true,
  *          "ocupacao": true, // Em casa (do lar) = false | Fora de casa = true
  *          "licenca_maternidade": 6, // Qtd de meses de licenca maternidade - Caso nao tenha: null
- *          "localizacao:": "HU-UEL"
+ *          "localizacao": "HU-UEL",
+ *          "telefone2": "(43) 999999999",
+ *          "qtd_abortos": 1,
+ *          "numero_filhos_gestacao": 1,
+ *          "consultas_prenatal": 5, // 0 caso não tenha realizado prenatal 
+ *          "complicacoes_gestacao": "Sim, relacionadas ao COVID-19"
  *      }
  * 
  * @apiSuccessExample {json} Sucesso
