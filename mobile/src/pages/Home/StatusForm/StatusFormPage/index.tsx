@@ -1,4 +1,3 @@
-import { Action, AppScreen } from '@common/telemetria';
 import i18n from 'i18n-js';
 import React, { memo, useState } from 'react';
 import { Dimensions, FlatList, View } from 'react-native';
@@ -11,7 +10,6 @@ import {
 import MainButton from 'components/MainButton';
 import SecondaryButton from 'components/SecondaryButton';
 import theme from 'config/theme';
-import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { SurveyQuestion } from 'utils/getSurveyQuestions';
 
@@ -27,7 +25,7 @@ import {
 } from './styles';
 
 export interface StatusFormQuestion extends SurveyQuestion {
-  isHorizontal: boolean;
+  direction: React.ComponentProps<typeof FormRadioGroupInput>['direction'];
 }
 
 // Página do formulário de escala.
@@ -54,10 +52,6 @@ interface PageProps {
   setFieldValue: (field: string, value: any) => void;
   // Envia o formulário.
   submitForm: () => Promise<number | null>;
-  // Exibe o modal de erro.
-  setIsErrorModalVisible: (isVisible: boolean) => void;
-  // Exibe o modal com o score da mãe.
-  setFormScore: (score: number) => void;
 }
 
 // Página do formulário.
@@ -71,8 +65,6 @@ const StatusFormPage: React.FC<PageProps> = ({
   setFieldValue,
   setFieldError,
   submitForm,
-  setIsErrorModalVisible,
-  setFormScore,
 }) => {
   const { width } = Dimensions.get('window');
   const [isSendingForm, setIsSendingForm] = useState(false);
@@ -113,21 +105,8 @@ const StatusFormPage: React.FC<PageProps> = ({
 
     // Envia o formulário caso seja a última página
     setIsSendingForm(true);
-    const score = await submitForm();
+    await submitForm();
     setIsSendingForm(false);
-    if (!score) {
-      setIsErrorModalVisible(true);
-      return;
-    }
-
-    await createTelemetryAction({
-      action: Action.Pressed,
-      context: {
-        screen: AppScreen.StatusForm,
-        target: 'Actions.End',
-      },
-    });
-    setFormScore(score);
   }
 
   return (
@@ -157,7 +136,7 @@ const StatusFormPage: React.FC<PageProps> = ({
                 error={errors[question.id]}
                 initialValues={values[question.id]}
                 onChange={setFieldValue}
-                isHorizontal={question.isHorizontal}
+                direction={question.direction}
               />
             </View>
           ))}
