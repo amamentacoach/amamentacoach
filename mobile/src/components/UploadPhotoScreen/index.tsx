@@ -1,5 +1,5 @@
 import i18n from 'i18n-js';
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import config from 'react-native-config';
 import ImagePicker from 'react-native-image-picker';

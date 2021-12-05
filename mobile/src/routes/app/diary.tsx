@@ -23,13 +23,13 @@ const CreateDiaryRoutes = (Stack: StackScreens): JSX.Element[] => {
       key="DiaryActions"
       name="DiaryActions"
       component={DiaryActions}
-      options={{ title: i18n.t('Survey'), ...headerBabyPurple }}
+      options={{ title: i18n.t('Survey', { count: 1 }), ...headerBabyPurple }}
     />,
     <Stack.Screen
       key="DiaryBaby"
       name="DiaryBaby"
       component={DiaryBaby}
-      options={{ title: i18n.t('Survey'), ...headerBabyPurple }}
+      options={{ title: i18n.t('Survey', { count: 1 }), ...headerBabyPurple }}
     />,
     <Stack.Screen
       key="DiaryBreastfeed"

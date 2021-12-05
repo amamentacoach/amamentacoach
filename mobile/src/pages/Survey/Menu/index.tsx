@@ -116,7 +116,7 @@ const SurveyMenu: React.FC = () => {
       />
       <ScrollView>
         <Header>
-          <HeaderTitle>{i18n.t('Surveys')}</HeaderTitle>
+          <HeaderTitle>{i18n.t('Surveys', { count: 2 })}</HeaderTitle>
         </Header>
         <OptionsList options={options} />
       </ScrollView>

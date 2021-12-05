@@ -7,7 +7,7 @@ import { dateFNSSetLocale } from 'lib/date-fns';
 import type { Pergunta } from '@common/perguntas';
 
 // Idiomas suportados pelo app.
-export enum SupportedLocales {
+enum SupportedLocales {
   EN = 'en',
   PT = 'pt',
 }
@@ -49,7 +49,7 @@ interface LocaleInfo {
 
 // Retorna a linguagem suportada pelo app apropriada para o usuário.
 // Caso nenhuma língua suportada pelo app seja encontrada é retornado o idioma de fallback.
-export function getBestLocale(): LocaleInfo {
+function getBestLocale(): LocaleInfo {
   const fallbackLocale = { languageTag: fallbackLanguage, isRTL: false };
   const bestMatch = RNLocalize.findBestAvailableLanguage(
     Object.values(SupportedLocales),
