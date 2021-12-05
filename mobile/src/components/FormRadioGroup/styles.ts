@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 interface OptionProps {
   color?: string;
   selected?: boolean;
-  isHorizontal?: boolean;
+  direction?: 'row' | 'column';
 }
 
 export const Container = styled.View`
@@ -18,7 +18,7 @@ export const LabelText = styled.Text`
 
 export const OptionsContainer = styled.View<OptionProps>`
   flex: 1;
-  flex-direction: ${({ isHorizontal }) => (isHorizontal ? 'column' : 'row')};
+  flex-direction: ${({ direction }) => direction};
 `;
 
 const OptionButton = styled.TouchableOpacity<OptionProps>`
@@ -29,7 +29,6 @@ const OptionButton = styled.TouchableOpacity<OptionProps>`
       }
       return color || theme.primary;
     }};
-
   flex-direction: row;
   border-radius: 3.6px;
   align-items: center;
@@ -80,8 +79,8 @@ export const InnerCircle = styled.View<OptionProps>`
 `;
 
 export const TextOption = styled.Text<OptionProps>`
-  color: ${({ theme, color, isHorizontal, selected }) => {
-    if (!selected || isHorizontal) {
+  color: ${({ theme, color, direction, selected }) => {
+    if (!selected || direction === 'column') {
       return theme.grey;
     }
     return color || theme.primary;
