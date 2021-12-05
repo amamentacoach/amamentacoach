@@ -4,14 +4,6 @@ interface InnerBorderProps {
   correctAnswer: boolean;
 }
 
-export const ScrollView = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: { flexGrow: 1 },
-  keyboardShouldPersistTaps: 'handled',
-}))`
-  flex: 1;
-  padding: 24px;
-`;
-
 export const HeaderTitle = styled.Text`
   color: ${props => props.theme.grey};
   font-family: 'OpenSans-Regular';

@@ -12,8 +12,6 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
   color: ${props => props.theme.white};
 `;
 
-export const QuestionContainer = styled.View``;
-
 export const HeaderBackground = styled.View`
   background-color: ${props => props.theme.babyBlue};
   align-items: center;

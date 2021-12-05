@@ -59,7 +59,7 @@ const TabNavigator: React.FC = () => {
         name="Survey"
         component={SurveyMenu}
         options={{
-          tabBarLabel: i18n.t('Surveys', { count: 2 }),
+          tabBarLabel: i18n.t('Survey', { count: 2 }),
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <SurveyIcon height={size} width={size} fill={color} />

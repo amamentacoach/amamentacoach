@@ -8,15 +8,11 @@ import * as Yup from 'yup';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
+import { ScrollView } from 'lib/SharedStyles';
 import { createUserQuestion } from 'services/questions';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
-import {
-  FormContainer,
-  HeaderText,
-  ScrollView,
-  SubmitButtonContainer,
-} from './styles';
+import { FormContainer, HeaderText, SubmitButtonContainer } from './styles';
 
 interface FormValues {
   question: string;

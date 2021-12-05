@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import SecondaryButton from 'components/SecondaryButton';
+import { PaddedScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import {
@@ -16,7 +17,6 @@ import {
   Footer,
   HeaderTitle,
   InnerBorder,
-  ScrollView,
 } from './styles';
 
 interface Expectation {
@@ -204,7 +204,7 @@ const ManageExpectations: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <Modal
         content={i18n.t('ManageExpectationsPage.PopUp')}
         visible={isSubmitModalVisible}
@@ -240,7 +240,7 @@ const ManageExpectations: React.FC = () => {
           onPress={() => handleExpectationSelected(false)}
         />
       </Footer>
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

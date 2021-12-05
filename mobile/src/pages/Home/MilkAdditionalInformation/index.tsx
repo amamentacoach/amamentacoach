@@ -3,9 +3,10 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import ImageWrapper from 'components/ImageWrapper';
+import { ScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
-import { ContentText, ContentWrapper, ScrollView } from './styles';
+import { ContentText, ContentWrapper } from './styles';
 
 import MilkAdditionalInfoOne from '@assets/images/milk_additional_info_one.png';
 import MilkAdditionalInfoThree from '@assets/images/milk_additional_info_three.png';

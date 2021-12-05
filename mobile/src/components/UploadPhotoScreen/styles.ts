@@ -1,15 +1,13 @@
 import styled from 'styled-components/native';
 
+import { ScrollView as SharedScrollView } from 'lib/SharedStyles';
+
 interface SelectedImageProps {
   width: number;
   isVisible?: boolean;
 }
 
-export const ScrollView = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: { flexGrow: 1 },
-  keyboardShouldPersistTaps: 'handled',
-}))`
-  flex: 1;
+export const ScrollView = styled(SharedScrollView)`
   padding: 0 24px;
 `;
 

@@ -5,10 +5,11 @@ import { ActivityIndicator, View } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
 import FormPickerInput from 'components/FormPickerInput';
+import { ScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import DailyReport from './DailyReport';
-import { Container, ScrollView } from './styles';
+import { Center, Container } from './styles';
 import WeeklyReport from './WeeklyReport';
 
 enum Reports {
@@ -53,11 +54,13 @@ const Report: React.FC = () => {
           />
         </View>
         {isLoading && (
-          <ActivityIndicator
-            size="large"
-            color={themeContext.primary}
-            animating={isLoading}
-          />
+          <Center>
+            <ActivityIndicator
+              size="large"
+              color={themeContext.primary}
+              animating={isLoading}
+            />
+          </Center>
         )}
         {selectedReport === Reports.Daily && (
           <DailyReport isLoading={isLoading} setIsLoading={setIsLoading} />

@@ -4,12 +4,13 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import OptionsList from 'components/OptionList';
+import { PaddedScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
 
-import { HeaderText, ScrollView } from './styles';
+import { HeaderText } from './styles';
 
 import PrematureBreastfeed from '@assets/images/premature_breastfeed.svg';
 import WithdrawalCalendar from '@assets/images/withdrawal_calendar.svg';
@@ -50,10 +51,10 @@ const Breastfeeding: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <HeaderText>{i18n.t('BreastfeedingPage.Header')}</HeaderText>
       <OptionsList options={options} />
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

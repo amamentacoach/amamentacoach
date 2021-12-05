@@ -5,13 +5,13 @@ import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { ThemeContext } from 'styled-components';
 
+import { PaddedScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import {
   Instruction,
   InstructionContainer,
   LoadingContainer,
-  ScrollView,
   Step,
   VideoContainer,
   VideoLink,
@@ -37,7 +37,7 @@ const BabyCup: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <VideoLink>{i18n.t('BabyCupPage.Header')}</VideoLink>
       {isLoadingVideo && (
         <LoadingContainer>
@@ -69,7 +69,7 @@ const BabyCup: React.FC = () => {
           <Instruction>{step}</Instruction>
         </InstructionContainer>
       ))}
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

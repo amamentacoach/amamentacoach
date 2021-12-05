@@ -8,18 +8,13 @@ import Modal from 'components/Modal';
 import OptionsList from 'components/OptionList';
 import { useAuth } from 'contexts/auth';
 import { dateFormatVerbose, storageIsToday } from 'lib/date-fns';
+import { PaddedScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
 
-import {
-  CalendarButton,
-  DateText,
-  Header,
-  HeaderTitle,
-  ScrollView,
-} from './styles';
+import { CalendarButton, DateText, Header, HeaderTitle } from './styles';
 
 import Baby from '@assets/images/canguru.svg';
 import DiarySmile from '@assets/images/diary_smile.svg';
@@ -155,7 +150,7 @@ const DiaryMenu: React.FC = () => {
         ]}
         visible={isModalVisible}
       />
-      <ScrollView>
+      <PaddedScrollView>
         {showCalendar && (
           <DateTimePicker
             testID="dateTimePicker"
@@ -176,7 +171,7 @@ const DiaryMenu: React.FC = () => {
         </Header>
         <DateText>{dateFormatVerbose(selectedDate)}</DateText>
         <OptionsList options={options} />
-      </ScrollView>
+      </PaddedScrollView>
     </>
   );
 };

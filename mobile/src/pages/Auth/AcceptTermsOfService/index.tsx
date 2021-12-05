@@ -9,6 +9,7 @@ import {
   AdultTermsOfService,
   MinorTermsOfService,
 } from 'components/TermsOfService';
+import { PaddedScrollView } from 'lib/SharedStyles';
 import { signUpBaby, signUpMother } from 'services/auth';
 
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
@@ -17,7 +18,6 @@ import {
   FormContainer,
   HeaderSubText,
   HeaderText,
-  ScrollView,
   SubmitButtonContainer,
 } from './styles';
 
@@ -42,7 +42,7 @@ const AcceptTermsOfService: React.FC = () => {
   }
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <Modal
         content={i18n.t('AcceptTermsOfServicePage.AccountCreated')}
         options={[
@@ -97,7 +97,7 @@ const AcceptTermsOfService: React.FC = () => {
           />
         </SubmitButtonContainer>
       </FormContainer>
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

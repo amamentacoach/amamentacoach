@@ -3,6 +3,7 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import ImageWrapper from 'components/ImageWrapper';
+import { ScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import {
@@ -10,7 +11,6 @@ import {
   ContentText,
   ContentTitleText,
   ContentWrapper,
-  ScrollView,
 } from './styles';
 
 import Withdrawal1 from '@assets/images/withdrawal_premature_1.png';

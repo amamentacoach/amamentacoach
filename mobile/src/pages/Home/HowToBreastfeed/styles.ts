@@ -4,14 +4,6 @@ interface LastPageButtonWrapperProps {
   opacity: number;
 }
 
-export const Header = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  min-height: 22px;
-  margin-top: 30px;
-`;
-
 export const CurrentPageContainer = styled.View`
   background-color: ${props => props.theme.babyPurple};
   border-radius: 3.6px;

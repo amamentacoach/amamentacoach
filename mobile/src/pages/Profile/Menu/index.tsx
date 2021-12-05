@@ -4,11 +4,12 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import { useAuth } from 'contexts/auth';
+import { PaddedScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 
-import { Line, OptionButton, OptionText, ScrollView } from './styles';
+import { Line, OptionButton, OptionText } from './styles';
 
 const ProfileMenu: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
@@ -25,7 +26,7 @@ const ProfileMenu: React.FC = () => {
   }, [isFocused]);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <OptionButton onPress={() => navigation.navigate('NewPassword')}>
         <OptionText>{i18n.t('ProfileMenuPage.ChangePassword')}</OptionText>
       </OptionButton>
@@ -38,7 +39,7 @@ const ProfileMenu: React.FC = () => {
         <OptionText>{i18n.t('Leave')}</OptionText>
       </OptionButton>
       <Line />
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

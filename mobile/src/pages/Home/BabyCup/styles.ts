@@ -4,39 +4,28 @@ interface VideoContainerProps {
   display: boolean;
 }
 
-export const ScrollView = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: { flexGrow: 1 },
-  keyboardShouldPersistTaps: 'handled',
-}))`
-  flex: 1;
-  padding: 0 24px;
-`;
-
 export const VideoLink = styled.Text`
   color: ${props => props.theme.primary};
   font-family: 'OpenSans-Bold';
   font-size: 18px;
   align-self: center;
-  margin-top: 24px;
 `;
 
 export const LoadingContainer = styled.View`
-  flex: 1;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  margin: 60px 0;
 `;
 
 export const VideoContainer = styled.View<VideoContainerProps>`
   justify-content: center;
   display: ${({ display }) => (display ? 'flex' : 'none')};
-  margin: 30px 0 30px 0;
+  margin: 30px 0;
 `;
 
 export const InstructionContainer = styled.View`
   flex: 1;
   flex-direction: row;
-  align-items: flex-start;
   margin-bottom: 24px;
 `;
 

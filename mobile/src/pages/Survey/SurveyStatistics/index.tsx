@@ -5,6 +5,7 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
 import PieChart from 'components/PieChart';
+import { ScrollView } from 'lib/SharedStyles';
 import { listSurveyStatistics } from 'services/survey';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -20,7 +21,6 @@ import {
   Question,
   QuestionContainer,
   QuestionIndex,
-  ScrollView,
 } from './styles';
 
 import BackIcon from '@assets/images/icons/ic_back.svg';

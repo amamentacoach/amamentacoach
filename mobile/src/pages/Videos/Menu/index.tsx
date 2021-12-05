@@ -4,12 +4,13 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import OptionsList from 'components/OptionList';
+import { PaddedScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
 
-import { Header, HeaderTitle, ScrollView } from './styles';
+import { Header, HeaderTitle } from './styles';
 
 import IcVideo from '@assets/images/ic_video.svg';
 
@@ -69,12 +70,12 @@ const VideosMenu: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <Header>
         <HeaderTitle>{i18n.t('Video', { count: 2 })}</HeaderTitle>
       </Header>
       <OptionsList options={options} />
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

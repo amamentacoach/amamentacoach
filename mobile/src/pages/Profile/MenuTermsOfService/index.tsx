@@ -3,11 +3,12 @@ import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
+import { PaddedScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 
-import { Line, OptionButton, OptionText, ScrollView } from './styles';
+import { Line, OptionButton, OptionText } from './styles';
 
 const MenuTermsOfService: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
@@ -20,7 +21,7 @@ const MenuTermsOfService: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <OptionButton onPress={() => navigation.navigate('ReadTermsOfService')}>
         <OptionText>
           {i18n.t('MenuTermsOfServicePage.ReadTermsOfService')}
@@ -33,7 +34,7 @@ const MenuTermsOfService: React.FC = () => {
         </OptionText>
       </OptionButton>
       <Line />
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

@@ -12,6 +12,7 @@ import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import SecondaryButton from 'components/SecondaryButton';
+import { PaddedScrollView } from 'lib/SharedStyles';
 
 import type { FormikErrors } from 'formik';
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
@@ -28,7 +29,6 @@ import {
   GestationWeeksContainer,
   HeaderSubText,
   HeaderText,
-  ScrollView,
   SecondSubOptionContainer,
   SubmitButtonContainer,
   SubOptionsContainer,
@@ -232,7 +232,7 @@ const BabyForm: React.FC = () => {
   }
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <Modal
         content={i18n.t('BabyFormPage.ApgarPopUp')}
         options={[
@@ -443,7 +443,7 @@ const BabyForm: React.FC = () => {
           </FormContainer>
         )}
       </Formik>
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 
