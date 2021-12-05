@@ -32,6 +32,7 @@ module.exports = {
     'import/namespace': 'off',
     'import/no-extraneous-dependencies': ['off'],
     'import/no-unresolved': 'error',
+    'import/no-unused-modules': [2, { unusedExports: true }],
     'no-plusplus': 'off',
     'no-shadow': 'off',
     'no-unused-vars': 'off',

@@ -178,8 +178,11 @@ const CreateHomeRoutes = (Stack: StackScreens): JSX.Element[] => {
       }
       options={
         isFirstRun.persistent.statusFormIntroduction
-          ? { title: i18n.t('Survey') }
-          : { title: i18n.t('Survey'), ...headerBabyBlue }
+          ? { title: i18n.t('StatusFormPage.FormName', { count: 1 }) }
+          : {
+              title: i18n.t('StatusFormPage.FormName', { count: 1 }),
+              ...headerBabyBlue,
+            }
       }
     />,
     <Stack.Screen

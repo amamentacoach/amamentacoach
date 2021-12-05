@@ -31,17 +31,19 @@
   "Right": "Right",
   "SignUp": "Registration",
   "Skip": "Skip",
-  "Survey": "Survey",
-  "Surveys": "Polls",
   "TermsOfService": "Consent Form",
   "Time": "Time",
   "UCI": "Neonatal Intermediate Care Unit",
   "UTI": "Neonatal Intensive Care Unit",
+  "Yes": "Yes",
+  "Survey": {
+    "one": "Survey",
+    "other": "Polls"
+  },
   "Video": {
     "one": "Video",
     "other": "Videos"
   },
-  "Yes": "Yes",
   "AcceptTermsOfServicePage": {
     "AccountCreated": "Account created successfully! Welcome to AmamentaCoach!",
     "HeaderSubText": "You're almost there! Finally, you must accept the term of commitment:",
@@ -521,7 +523,7 @@
     "SignIn": "Entering..."
   },
   "StatusFormPage": {
-    "Header": "Breastfeeding self-confidence",
+    "Header": "Breastfeeding self-efficiency",
     "Score": "Thank you for answering.\nYour score is %{score}",
     "FormName": "Scale",
     "Value1": "not at all confident",
