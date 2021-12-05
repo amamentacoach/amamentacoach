@@ -27,8 +27,9 @@ const DiaryRegistry: React.FC = () => {
   const isFocused = useIsFocused();
   const [registries, setRegistries] = useState<ExtractionEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const selectedDate = params?.date ? new Date(params?.date) : new Date();
+  const [date, setDate] = useState(
+    params?.date ? new Date(params.date) : new Date(),
+  );
 
   async function handleNewRegistryEntry(target: string): Promise<void> {
     await createTelemetryAction({
@@ -39,25 +40,29 @@ const DiaryRegistry: React.FC = () => {
   }
 
   useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.DiaryRegistry },
+    });
+  }, []);
+
+  useEffect(() => {
     async function fetchRegistries(): Promise<void> {
+      const selectedDate = params?.date ? new Date(params.date) : new Date();
       setIsLoading(true);
       const oldRegistries = await listExtractionsEntries(selectedDate);
       setRegistries(oldRegistries);
+      setDate(selectedDate);
       setIsLoading(false);
     }
     if (isFocused) {
       fetchRegistries();
     }
-
-    createTelemetryAction({
-      action: Action.Opened,
-      context: { screen: AppScreen.DiaryRegistry },
-    });
   }, [isFocused]);
 
   return (
     <Container>
-      <DateText>{dateFormatVerbose(selectedDate)}</DateText>
+      <DateText>{dateFormatVerbose(date)}</DateText>
       <ListContainer>
         {isLoading ? (
           <ActivityIndicator

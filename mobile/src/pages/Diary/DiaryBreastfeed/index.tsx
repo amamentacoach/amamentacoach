@@ -13,13 +13,14 @@ import DiaryBreastfeedEntry from 'components/DiaryBreastfeedEntry';
 import MainButton from 'components/MainButton';
 import { useAuth } from 'contexts/auth';
 import { dateFormatVerbose } from 'lib/date-fns';
+import { ScrollView } from 'lib/SharedStyles';
 import { listBreastfeedEntries } from 'services/diaryRegistry';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootRouteProp, RootStackProps } from 'routes/app';
 import type { BreastfeedEntry } from 'services/diaryRegistry';
 
-import { Container, DateText, ListContainer, ScrollView } from './styles';
+import { Container, DateText, ListContainer } from './styles';
 
 const DiaryBreastfeed: React.FC = () => {
   const { params } = useRoute<RootRouteProp<'DiaryBreastfeed'>>();
@@ -29,8 +30,9 @@ const DiaryBreastfeed: React.FC = () => {
   const isFocused = useIsFocused();
   const [registries, setRegistries] = useState<BreastfeedEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  const selectedDate = params?.date ? new Date(params?.date) : new Date();
+  const [date, setDate] = useState(
+    params?.date ? new Date(params.date) : new Date(),
+  );
 
   async function handleNewBreastfeedEntry(target: string): Promise<void> {
     await createTelemetryAction({
@@ -41,32 +43,35 @@ const DiaryBreastfeed: React.FC = () => {
   }
 
   useEffect(() => {
+    createTelemetryAction({
+      action: Action.Opened,
+      context: { screen: AppScreen.DiaryBreastfeed },
+    });
+  }, []);
+
+  useEffect(() => {
     async function fetchRegistries(): Promise<void> {
-      if (motherInfo.babies) {
-        setIsLoading(true);
-        // Recebe os registros de todos os bebês da mãe.
-        const oldRegistries = await Promise.all(
-          motherInfo.babies.map(async ({ id }) =>
-            listBreastfeedEntries(id, selectedDate),
-          ),
-        );
-        setRegistries(oldRegistries);
-      }
+      const selectedDate = params?.date ? new Date(params.date) : new Date();
+      setIsLoading(true);
+      // Recebe os registros de todos os bebês da mãe.
+      const oldRegistries = await Promise.all(
+        motherInfo.babies.map(async ({ id }) =>
+          listBreastfeedEntries(id, selectedDate),
+        ),
+      );
+      setRegistries(oldRegistries);
+      setDate(selectedDate);
       setIsLoading(false);
     }
     if (isFocused) {
       fetchRegistries();
-      createTelemetryAction({
-        action: Action.Opened,
-        context: { screen: AppScreen.DiaryBreastfeed },
-      });
     }
   }, [isFocused]);
 
   return (
     <ScrollView>
       <Container>
-        <DateText>{dateFormatVerbose(selectedDate)}</DateText>
+        <DateText>{dateFormatVerbose(date)}</DateText>
         <ListContainer>
           {isLoading ? (
             <ActivityIndicator
