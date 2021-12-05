@@ -13,6 +13,7 @@ import TabNavigator from 'routes/tabNavigator';
 
 import type { RouteProp } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
+import type { StatusFormSituation } from 'services/survey';
 
 import BackIcon from '@assets/images/icons/ic_back.svg';
 
@@ -56,7 +57,7 @@ export type RootStackParamList = {
   ReadTermsOfService: undefined;
   Report: undefined;
   Resilience: undefined;
-  StatusForm: { situation: 'ALTA' | '1D' | '15D' | '1M' };
+  StatusForm: { situation: StatusFormSituation };
   StepByStepPremature: undefined;
   SurveyBreastfeed: undefined;
   SurveyFather: undefined;

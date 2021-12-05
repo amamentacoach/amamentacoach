@@ -1,7 +1,7 @@
 import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import OptionsList from 'components/OptionList';
 import { createTelemetryAction } from 'utils/telemetryAction';

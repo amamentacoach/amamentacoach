@@ -1,7 +1,7 @@
 import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
 import PieChart from 'components/PieChart';
