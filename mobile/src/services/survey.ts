@@ -1,5 +1,7 @@
 import api from 'services/api';
 
+export type StatusFormSituation = 'ALTA' | '1D' | '15D' | '1M' | null;
+
 export interface SurveyStatistics {
   id: number;
   question: string;
@@ -51,7 +53,7 @@ export async function listSurveyStatistics(): Promise<
 
 // Envia as resposta do usuário para o formulário de escala.
 export async function answerStatusForm(
-  situation: 'ALTA' | '1D' | '15D' | '1M',
+  situation: StatusFormSituation,
   answers: { id: number; content: string }[],
 ): Promise<number | null> {
   try {
@@ -70,7 +72,7 @@ export async function answerStatusForm(
 
 // Envia as resposta do usuário para o formulário de alimentação.
 export async function answerFeedingForm(
-  situation: 'ALTA' | '15D' | '1M',
+  situation: Exclude<StatusFormSituation, '1D'>,
   answer: string,
 ): Promise<boolean> {
   try {

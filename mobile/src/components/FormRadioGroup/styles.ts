@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 interface OptionProps {
   color?: string;
   selected?: boolean;
-  horizontal?: boolean;
+  isHorizontal?: boolean;
 }
 
 export const Container = styled.View`
@@ -18,23 +18,10 @@ export const LabelText = styled.Text`
 
 export const OptionsContainer = styled.View<OptionProps>`
   flex: 1;
-  flex-direction: ${({ horizontal }) => (horizontal ? 'row' : 'column')};
+  flex-direction: ${({ isHorizontal }) => (isHorizontal ? 'column' : 'row')};
 `;
 
-// Regras que são aplicadas caso a opção deve ser apresentada horizontalmente.
-const horizontalRadioButtonStyle = `
-  flex: 1;
-  justify-content: center;
-  min-height: 50px;
-  margin-left: 5px;
-`;
-
-// Regras que são aplicadas caso a opção deve ser apresentada verticalmente.
-const verticalRadioButtonStyle = `
-  padding: 12px;
-`;
-
-export const OptionButton = styled.TouchableOpacity<OptionProps>`
+const OptionButton = styled.TouchableOpacity<OptionProps>`
   border: 1.4px solid
     ${({ theme, color, selected }) => {
       if (!selected) {
@@ -47,11 +34,19 @@ export const OptionButton = styled.TouchableOpacity<OptionProps>`
   border-radius: 3.6px;
   align-items: center;
   margin-top: 5px;
-  // Caso a opção horizontal tenha sido passada ao componente as regras definidas em
-  // horizontalRadioButtonStyle são aplicadas, caso contrário as regras de verticalRadioButtonStyle
-  // são aplicadas.
-  ${({ horizontal }) =>
-    horizontal ? horizontalRadioButtonStyle : verticalRadioButtonStyle}
+`;
+
+// Regras que são aplicadas caso a opção deve ser apresentada horizontalmente.
+export const HorizontalOptionButton = styled(OptionButton)`
+  padding: 12px 0;
+`;
+
+// Regras que são aplicadas caso a opção deve ser apresentada verticalmente.
+export const VerticalOptionButton = styled(OptionButton)`
+  flex: 1;
+  justify-content: center;
+  min-height: 50px;
+  margin: 0 6px;
 `;
 
 export const OuterCircle = styled.View<OptionProps>`
@@ -85,16 +80,14 @@ export const InnerCircle = styled.View<OptionProps>`
 `;
 
 export const TextOption = styled.Text<OptionProps>`
-  color: ${({ theme, color, horizontal, selected }) => {
-    if (!selected || !horizontal) {
+  color: ${({ theme, color, isHorizontal, selected }) => {
+    if (!selected || isHorizontal) {
       return theme.grey;
     }
     return color || theme.primary;
   }};
-
   font-family: 'OpenSans-Regular';
-  margin-left: 15px;
-  margin-right: 15px;
+  margin: 0 15px;
   font-size: 16px;
 `;
 

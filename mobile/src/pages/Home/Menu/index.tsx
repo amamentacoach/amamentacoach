@@ -103,6 +103,11 @@ const Home: React.FC = () => {
       onPress: () => navigation.navigate('AdditionalInformation'),
     },
     {
+      image: HomeCredits,
+      title: i18n.t('StatusFormPage.FormName', { count: 1 }),
+      onPress: () => navigation.navigate('StatusForm', { situation: null }),
+    },
+    {
       image: HomeMessage,
       title: i18n.t('HomePage.Option6'),
       onPress: () => navigation.navigate('Messages'),

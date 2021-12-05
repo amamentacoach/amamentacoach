@@ -31,17 +31,19 @@
   "Right": "Direita",
   "SignUp": "Cadastro",
   "Skip": "Pular",
-  "Survey": "Enquete",
-  "Surveys": "Enquetes",
   "TermsOfService": "Termo de Consentimento",
   "Time": "Horário",
   "UCI": "UCI Neonatal",
   "UTI": "UTI Neonatal",
+  "Yes": "Sim",
+  "Survey": {
+    "one": "Enquete",
+    "other": "Enquetes"
+  },
   "Video": {
     "one": "Vídeo",
     "other": "Vídeos"
   },
-  "Yes": "Sim",
   "AcceptTermsOfServicePage": {
     "AccountCreated": "Conta criada com sucesso! Seja muito bem-vinda ao AmamentaCoach!",
     "HeaderSubText": "Você está quase lá! Por último, você deve aceitar o termo de compromisso:",
@@ -521,7 +523,7 @@
     "SignIn": "Entrando..."
   },
   "StatusFormPage": {
-    "Header": "Autoconfiança para amamentar",
+    "Header": "Autoeficácia para amamentar",
     "Score": "Obrigada por responder.\nSua pontuação é %{score}",
     "FormName": "Escala",
     "Value1": "nada confiante",

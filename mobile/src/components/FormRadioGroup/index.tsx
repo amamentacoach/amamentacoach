@@ -7,13 +7,14 @@ import {
   Container,
   ErrorContainer,
   ErrorText,
+  HorizontalOptionButton,
   InnerCircle,
   LabelText,
-  OptionButton,
   OptionsContainer,
   OtherInputContainer,
   OuterCircle,
   TextOption,
+  VerticalOptionButton,
 } from './styles';
 
 interface FormRadioGroupProps {
@@ -26,7 +27,7 @@ interface FormRadioGroupProps {
   initialValues?: string[];
   error?: string | string[];
   // Define se as opções são apresentadas horizontalmente ou verticalmente.
-  horizontal?: boolean;
+  isHorizontal?: boolean;
   color?: string;
   onChange: (fieldName: string, fieldValue: string[]) => void;
 }
@@ -36,7 +37,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   label,
   options,
   error,
-  horizontal,
+  isHorizontal,
   color,
   multipleSelection,
   displayOtherField,
@@ -114,29 +115,38 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   return (
     <Container>
       {label !== undefined && <LabelText>{label}</LabelText>}
-      <OptionsContainer horizontal={horizontal}>
-        {availableOptions.map((option, index) => (
-          <OptionButton
-            key={option}
-            color={color}
-            selected={selectedIndexes[index]}
-            activeOpacity={1}
-            horizontal={horizontal}
-            onPress={() => handleOptionSelected(index)}>
-            {!horizontal && (
-              <OuterCircle color={color} selected={selectedIndexes[index]}>
-                <InnerCircle color={color} selected={selectedIndexes[index]} />
-              </OuterCircle>
-            )}
+      <OptionsContainer isHorizontal={isHorizontal}>
+        {availableOptions.map((option, index) => {
+          const RadioButtonComponent = isHorizontal
+            ? HorizontalOptionButton
+            : VerticalOptionButton;
 
-            <TextOption
+          return (
+            <RadioButtonComponent
+              key={option}
+              color={color}
               selected={selectedIndexes[index]}
-              horizontal={horizontal}
-              color={color}>
-              {option}
-            </TextOption>
-          </OptionButton>
-        ))}
+              activeOpacity={1}
+              isHorizontal={isHorizontal}
+              onPress={() => handleOptionSelected(index)}>
+              {isHorizontal && (
+                <OuterCircle color={color} selected={selectedIndexes[index]}>
+                  <InnerCircle
+                    color={color}
+                    selected={selectedIndexes[index]}
+                  />
+                </OuterCircle>
+              )}
+
+              <TextOption
+                selected={selectedIndexes[index]}
+                isHorizontal={isHorizontal}
+                color={color}>
+                {option}
+              </TextOption>
+            </RadioButtonComponent>
+          );
+        })}
       </OptionsContainer>
 
       {displayOtherField && selectedIndexes[selectedIndexes.length - 1] && (
