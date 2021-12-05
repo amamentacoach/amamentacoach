@@ -5,8 +5,9 @@ import {
   MinorTermsOfService,
 } from 'components/TermsOfService';
 import { useAuth } from 'contexts/auth';
+import { ScrollView } from 'lib/SharedStyles';
 
-import { ScrollView, Container } from './styles';
+import { Container } from './styles';
 
 const AcceptTermsOfService: React.FC = () => {
   const { motherInfo } = useAuth();

@@ -4,13 +4,6 @@ interface ContentContainerProps {
   display: boolean;
 }
 
-export const ScrollView = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: { flexGrow: 1 },
-  keyboardShouldPersistTaps: 'handled',
-}))`
-  flex: 1;
-`;
-
 export const ContentContainer = styled.View<ContentContainerProps>`
   flex: 1;
   justify-content: center;

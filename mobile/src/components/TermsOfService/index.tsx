@@ -1,7 +1,7 @@
 import i18n from 'i18n-js';
 import { View } from 'react-native';
 
-import { format } from 'lib/date-fns';
+import { formatWithLocale } from 'lib/date-fns';
 
 import { BoldMainText, Container, MainText, Title } from './styles';
 
@@ -9,7 +9,7 @@ interface Props {
   name: string;
 }
 
-const date = format(new Date(), 'PPP');
+const date = formatWithLocale(new Date(), 'PPP');
 
 export const AdultTermsOfService: React.FC<Props> = ({ name }) => {
   return (

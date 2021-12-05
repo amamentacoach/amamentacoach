@@ -102,5 +102,3 @@ export function useIsFirstRun(): IsFirstRunContextData {
   }
   return context;
 }
-
-export default IsFirstRun;

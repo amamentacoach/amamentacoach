@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
+import { ScrollView } from 'lib/SharedStyles';
 
 import type { AuthStackProps } from 'routes/auth';
 
@@ -14,7 +15,6 @@ import {
   Header,
   HeaderSubText,
   HeaderText,
-  ScrollView,
   SubmitButtonContainer,
 } from './styles';
 

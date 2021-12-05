@@ -10,6 +10,7 @@ import FormPickerInput from 'components/FormPickerInput';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import { useAuth } from 'contexts/auth';
+import { PaddedScrollView } from 'lib/SharedStyles';
 import { createBreastfeedEntry } from 'services/diaryRegistry';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -25,7 +26,6 @@ import {
   MultipleOptionContainer,
   OptionHeader,
   OptionText,
-  ScrollView,
   SecondOption,
   SubmitButtonContainer,
 } from './styles';
@@ -134,7 +134,7 @@ const NewBreastfeedEntry: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <Formik
         initialValues={formInitialValues}
         validationSchema={newDiaryRegistrySchema}
@@ -229,7 +229,7 @@ const NewBreastfeedEntry: React.FC = () => {
           </FormContainer>
         )}
       </Formik>
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

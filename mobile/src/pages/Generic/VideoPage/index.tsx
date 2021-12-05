@@ -4,16 +4,12 @@ import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { ThemeContext } from 'styled-components';
 
+import { ScrollView } from 'lib/SharedStyles';
 import { setUserVideoSeen, setUserVideoStarted } from 'services/telemetry';
 
 import type { RootRouteProp } from 'routes/app';
 
-import {
-  ContentContainer,
-  LoadingContainer,
-  ScrollView,
-  VideoContainer,
-} from './styles';
+import { ContentContainer, LoadingContainer, VideoContainer } from './styles';
 
 const VideoPage: React.FC = () => {
   const { videos } = useRoute<RootRouteProp<'VideoPage'>>().params;

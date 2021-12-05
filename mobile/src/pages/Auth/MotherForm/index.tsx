@@ -9,6 +9,7 @@ import FormRadioGroupInput from 'components/FormRadioGroup';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import SecondaryButton from 'components/SecondaryButton';
+import { PaddedScrollView } from 'lib/SharedStyles';
 
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
 import type { MotherSignUpInfo } from 'services/auth';
@@ -21,7 +22,6 @@ import {
   HeaderText,
   OptionPickerContainer,
   PhoneInputContainer,
-  ScrollView,
   SecondSubOptionContainer,
   SubmitButtonContainer,
   SubOptionsContainer,
@@ -182,7 +182,7 @@ const MotherForm: React.FC = () => {
   }
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <HeaderText>
         {i18n.t('Auth.SignUpStep', { current: '2', max: '4' })}
       </HeaderText>
@@ -563,7 +563,7 @@ const MotherForm: React.FC = () => {
           </FormContainer>
         )}
       </Formik>
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

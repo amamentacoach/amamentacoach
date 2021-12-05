@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { ScrollView as SharedScrollView } from 'lib/SharedStyles';
+
 interface ScrollViewProps {
   width: number;
 }
@@ -8,11 +10,7 @@ interface HeaderProps {
   color: string;
 }
 
-export const ScrollView = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: { flexGrow: 1 },
-  keyboardShouldPersistTaps: 'handled',
-}))<ScrollViewProps>`
-  flex: 1;
+export const ScrollView = styled(SharedScrollView)<ScrollViewProps>`
   width: ${({ width }) => width}px;
 `;
 

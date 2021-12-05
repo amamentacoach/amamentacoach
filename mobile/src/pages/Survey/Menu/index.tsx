@@ -7,12 +7,13 @@ import Modal from 'components/Modal';
 import OptionsList from 'components/OptionList';
 import { useAuth } from 'contexts/auth';
 import { storageIsToday } from 'lib/date-fns';
+import { PaddedScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
 
-import { Header, HeaderTitle, ScrollView } from './styles';
+import { Header, HeaderTitle } from './styles';
 
 import SurveysFour from '@assets/images/surveys_four.svg';
 import SurveysOne from '@assets/images/surveys_one.svg';
@@ -114,12 +115,12 @@ const SurveyMenu: React.FC = () => {
         ]}
         visible={isModalVisible}
       />
-      <ScrollView>
+      <PaddedScrollView>
         <Header>
-          <HeaderTitle>{i18n.t('Surveys', { count: 2 })}</HeaderTitle>
+          <HeaderTitle>{i18n.t('Survey', { count: 2 })}</HeaderTitle>
         </Header>
         <OptionsList options={options} />
-      </ScrollView>
+      </PaddedScrollView>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import i18n from 'i18n-js';
 
-import { format } from 'lib/date-fns';
+import { formatWithLocale } from 'lib/date-fns';
 
 import type { ExtractionEntry } from 'services/diaryRegistry';
 
@@ -17,7 +17,7 @@ const DiaryRegistryEntry: React.FC<ExtractionEntry> = ({
       <Row>
         <TextContainer>
           <Text>{i18n.t('Time')}: </Text>
-          <Content>{format(new Date(date), 'HH:mm')}</Content>
+          <Content>{formatWithLocale(new Date(date), 'HH:mm')}</Content>
         </TextContainer>
         <TextContainer>
           <Text>{i18n.t('Duration')}: </Text>

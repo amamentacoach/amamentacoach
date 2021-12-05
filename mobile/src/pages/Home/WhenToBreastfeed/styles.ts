@@ -1,10 +1,8 @@
 import styled from 'styled-components/native';
 
-export const ScrollView = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: { flexGrow: 1 },
-  keyboardShouldPersistTaps: 'handled',
-}))`
-  flex: 1;
+import { ScrollView as SharedScrollView } from 'lib/SharedStyles';
+
+export const ScrollView = styled(SharedScrollView)`
   padding: 0 24px;
 `;
 

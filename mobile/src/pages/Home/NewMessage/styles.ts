@@ -1,12 +1,5 @@
 import styled from 'styled-components/native';
 
-export const ScrollView = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: { flexGrow: 1 },
-  keyboardShouldPersistTaps: 'handled',
-}))`
-  flex: 1;
-`;
-
 export const HeaderText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;

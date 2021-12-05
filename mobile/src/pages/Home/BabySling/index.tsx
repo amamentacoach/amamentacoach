@@ -6,12 +6,13 @@ import { View } from 'react-native';
 
 import ImageWrapper from 'components/ImageWrapper';
 import OptionsList from 'components/OptionList';
+import { PaddedScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
 
-import { Container, ScrollView, Text } from './styles';
+import { Container, Text } from './styles';
 
 import Banner from '@assets/images/banner_canguru.png';
 import IcVideo from '@assets/images/ic_video.svg';
@@ -48,7 +49,7 @@ const BabySling: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <Container>
         <View>
           <ImageWrapper
@@ -61,7 +62,7 @@ const BabySling: React.FC = () => {
         <Text>{i18n.t('BabySlingPage.Header')}</Text>
       </Container>
       <OptionsList options={options} displayArrows />
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

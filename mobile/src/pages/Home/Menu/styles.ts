@@ -4,13 +4,6 @@ interface OptionProps {
   selected: boolean;
 }
 
-export const ScrollView = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: { flexGrow: 1 },
-  keyboardShouldPersistTaps: 'handled',
-}))`
-  flex: 1;
-`;
-
 export const Header = styled.View`
   width: 100%;
   height: 274px;

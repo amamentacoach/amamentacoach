@@ -3,9 +3,10 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 import { Linking, TouchableOpacity } from 'react-native';
 
+import { ScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
-import { Container, Link, ScrollView, Text, TextContainer } from './styles';
+import { Container, Link, Text, TextContainer } from './styles';
 
 interface ItemProps {
   texts: string[];

@@ -13,5 +13,3 @@ export const ModalContainer = styled.View<ContainerProps>`
     modalVisible ? '#000000' : 'transparent'};
   opacity: ${({ modalVisible }) => (modalVisible ? 0.4 : 1)};
 `;
-
-export default ModalContainer;

@@ -1,14 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {
-  differenceInYears as _differenceInYears,
-  format as _format,
-  isToday,
-} from 'date-fns';
-import { ptBR } from 'date-fns/locale';
+import { format as _format, isToday } from 'date-fns';
+import { enCA } from 'date-fns/locale';
 
 type DateFromStorageFunc = (storageObject: Record<string, any>) => string;
 
-let currentLocale: Locale = ptBR;
+let currentLocale: Locale = enCA;
 
 export function dateFNSSetLocale(locale: Locale): void {
   currentLocale = locale;
@@ -28,12 +24,18 @@ function addDefaultLocale<T extends (...args: any[]) => any>(func: T): T {
   return localeAdded as T;
 }
 
-export const format = addDefaultLocale(_format);
+export const formatWithLocale = addDefaultLocale(_format);
 
 // Formata uma data no formato $DiaSemana, $DiaMes de $Mes de $Ano
 export function dateFormatVerbose(date: Date): string {
-  const dateString = format(date, 'PPPP');
+  const dateString = formatWithLocale(date, 'PPPP');
   return dateString.charAt(0).toUpperCase() + dateString.slice(1);
+}
+
+// Retorna uma string no formato ISO-8601 ("yyyy-MM-dd'T'HH:mm:ss.SSSxxx"), contendo informação
+// sobre o fuso horário do usuário.
+export function formatISOWithTimezone(date: Date): string {
+  return formatWithLocale(date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
 }
 
 // Verifica se a diferença entra a data atual e uma data armazenada no AsyncStorage é maior ou igual
@@ -53,10 +55,4 @@ export async function storageIsToday(
     storageDate = getDateFromStorage(JSON.parse(storageString));
   }
   return isToday(new Date(storageDate));
-}
-
-// Retorna uma string no formato ISO-8601 ("yyyy-MM-dd'T'HH:mm:ss.SSSxxx"), contendo informação
-// sobre o fuso horário do usuário.
-export function formatISO(date: Date): string {
-  return format(date, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
 }

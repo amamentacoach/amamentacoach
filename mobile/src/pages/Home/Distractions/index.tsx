@@ -5,12 +5,13 @@ import { useEffect } from 'react';
 import { Linking } from 'react-native';
 
 import OptionsList from 'components/OptionList';
+import { PaddedScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
 
-import { HeaderText, ScrollView } from './styles';
+import { HeaderText } from './styles';
 
 import Crosswords from '@assets/images/crosswords.svg';
 import Music from '@assets/images/music.svg';
@@ -48,10 +49,10 @@ const Distractions: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <HeaderText>{i18n.t('DistractionsPage.Header')}</HeaderText>
       <OptionsList options={options} displayArrows />
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

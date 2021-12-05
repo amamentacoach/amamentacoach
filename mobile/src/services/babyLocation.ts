@@ -37,5 +37,3 @@ export async function updateBabyLocation(
     return false;
   }
 }
-
-export default checkBabiesLocation;

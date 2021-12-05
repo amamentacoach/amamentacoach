@@ -7,14 +7,10 @@ import * as Yup from 'yup';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
+import { PaddedScrollView } from 'lib/SharedStyles';
 import { forgotPassword } from 'services/auth';
 
-import {
-  FormContainer,
-  HeaderText,
-  ScrollView,
-  SubmitButtonContainer,
-} from './styles';
+import { FormContainer, HeaderText, SubmitButtonContainer } from './styles';
 
 interface FormValues {
   email: string;
@@ -43,7 +39,7 @@ const ForgotPassword: React.FC = () => {
   }
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <Modal
         content={i18n.t('ForgotPasswordPage.PopUp')}
         options={[
@@ -84,7 +80,7 @@ const ForgotPassword: React.FC = () => {
           </FormContainer>
         )}
       </Formik>
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

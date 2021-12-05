@@ -7,6 +7,7 @@ import YoutubePlayer from 'react-native-youtube-iframe';
 import { ThemeContext } from 'styled-components';
 
 import OptionsList from 'components/OptionList';
+import { PaddedScrollView } from 'lib/SharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
@@ -16,7 +17,6 @@ import {
   Header,
   LoadingContainer,
   PageHeader,
-  ScrollView,
   Text,
   VideoContainer,
 } from './styles';
@@ -63,7 +63,7 @@ const Resilience: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <PageHeader>{i18n.t('ResiliencePage.Header')}</PageHeader>
       {isLoadingVideo && (
         <LoadingContainer>
@@ -92,7 +92,7 @@ const Resilience: React.FC = () => {
       <Header>{i18n.t('ResiliencePage.TextHeader')}</Header>
       <Text>{i18n.t('ResiliencePage.Text')}</Text>
       <OptionsList options={options} displayArrows />
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

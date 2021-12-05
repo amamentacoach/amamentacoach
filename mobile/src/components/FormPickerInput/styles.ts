@@ -16,12 +16,6 @@ export const PickerContainer = styled.View`
   margin-bottom: 5px;
 `;
 
-export const TextOption = styled.Text`
-  font-family: 'OpenSans-Regular';
-  margin-left: 15px;
-  font-size: 16px;
-`;
-
 export const ErrorContainer = styled.View`
   flex: 1;
   min-height: 20px;
