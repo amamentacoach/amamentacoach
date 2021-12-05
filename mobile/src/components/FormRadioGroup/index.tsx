@@ -27,7 +27,7 @@ interface FormRadioGroupProps {
   initialValues?: string[];
   error?: string | string[];
   // Define se as opções são apresentadas horizontalmente ou verticalmente.
-  isHorizontal?: boolean;
+  direction?: 'row' | 'column';
   color?: string;
   onChange: (fieldName: string, fieldValue: string[]) => void;
 }
@@ -37,7 +37,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   label,
   options,
   error,
-  isHorizontal,
+  direction = 'column',
   color,
   multipleSelection,
   displayOtherField,
@@ -115,11 +115,12 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   return (
     <Container>
       {label !== undefined && <LabelText>{label}</LabelText>}
-      <OptionsContainer isHorizontal={isHorizontal}>
+      <OptionsContainer direction={direction}>
         {availableOptions.map((option, index) => {
-          const RadioButtonComponent = isHorizontal
-            ? HorizontalOptionButton
-            : VerticalOptionButton;
+          const RadioButtonComponent =
+            direction === 'column'
+              ? HorizontalOptionButton
+              : VerticalOptionButton;
 
           return (
             <RadioButtonComponent
@@ -127,9 +128,9 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
               color={color}
               selected={selectedIndexes[index]}
               activeOpacity={1}
-              isHorizontal={isHorizontal}
+              direction={direction}
               onPress={() => handleOptionSelected(index)}>
-              {isHorizontal && (
+              {direction === 'column' && (
                 <OuterCircle color={color} selected={selectedIndexes[index]}>
                   <InnerCircle
                     color={color}
@@ -140,7 +141,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
 
               <TextOption
                 selected={selectedIndexes[index]}
-                isHorizontal={isHorizontal}
+                direction={direction}
                 color={color}>
                 {option}
               </TextOption>
