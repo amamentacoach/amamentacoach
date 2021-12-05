@@ -62,10 +62,16 @@ const StatusForm: React.FC = () => {
   // Envia as respostas do usuário.
   async function handleFormSubmit(values: {
     [key: string]: string[];
-  }): ReturnType<typeof answerStatusForm> {
+  }): Promise<void> {
     if (displayFeedingForm) {
-      // await answerFeedingForm(situation, values[feedingQuestionId][0]);
-      await answerFeedingForm(null, values[feedingQuestionId][0]);
+      const status = await answerFeedingForm(
+        situation,
+        values[feedingQuestionId][0],
+      );
+      if (!status) {
+        setIsErrorModalVisible(true);
+        return;
+      }
       delete values[feedingQuestionId];
     }
 
@@ -75,14 +81,26 @@ const StatusForm: React.FC = () => {
       content: values[key][0],
     }));
     const statusFormScore = await answerStatusForm(situation, answers);
-    return statusFormScore;
+    if (!statusFormScore === null) {
+      setIsErrorModalVisible(true);
+      return;
+    }
+    setFormScore(statusFormScore);
+
+    await createTelemetryAction({
+      action: Action.Pressed,
+      context: {
+        screen: AppScreen.StatusForm,
+        target: 'Actions.End',
+      },
+    });
   }
 
   function fetchQuestions(): StatusFormQuestion[][] {
-    const questions = getSurveyQuestions({
+    const questions: StatusFormQuestion[] = getSurveyQuestions({
       category: 7,
       motherInfo,
-    }).map(question => ({ ...question, isHorizontal: false }));
+    }).map(question => ({ ...question, direction: 'row' }));
 
     let pages = [];
     // Separa 3 perguntas por página.
@@ -91,9 +109,9 @@ const StatusForm: React.FC = () => {
     }
     // Adiciona a pergunta de alimentação caso necessário.
     if (displayFeedingForm) {
-      const feedingQuestions = getSurveyQuestions({
+      const feedingQuestions: StatusFormQuestion[] = getSurveyQuestions({
         id: feedingQuestionId,
-      }).map(question => ({ ...question, isHorizontal: true }));
+      }).map(question => ({ ...question, direction: 'column' }));
 
       pages[pages.length - 1] = [
         ...pages[pages.length - 1],
@@ -178,8 +196,6 @@ const StatusForm: React.FC = () => {
                 setFieldValue={setFieldValue}
                 setFieldError={setFieldError}
                 submitForm={submitForm}
-                setIsErrorModalVisible={setIsErrorModalVisible}
-                setFormScore={setFormScore}
               />
             )}
             keyExtractor={item => item[0].id.toString()}
