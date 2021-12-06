@@ -9,7 +9,7 @@ import {
   AdultTermsOfService,
   MinorTermsOfService,
 } from 'components/TermsOfService';
-import { PaddedScrollView } from 'lib/SharedStyles';
+import { PaddedScrollView } from 'lib/sharedStyles';
 import { signUpBaby, signUpMother } from 'services/auth';
 
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';

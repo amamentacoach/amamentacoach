@@ -10,7 +10,7 @@ import FormPickerInput from 'components/FormPickerInput';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import { useAuth } from 'contexts/auth';
-import { PaddedScrollView } from 'lib/SharedStyles';
+import { PaddedScrollView } from 'lib/sharedStyles';
 import { createBreastfeedEntry } from 'services/diaryRegistry';
 import { createTelemetryAction } from 'utils/telemetryAction';
 

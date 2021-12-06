@@ -12,7 +12,7 @@ import Modal from 'components/Modal';
 import theme from 'config/theme';
 import { useIsFirstRun } from 'contexts/firstRun';
 import { storageIsToday } from 'lib/date-fns';
-import { ScrollView } from 'lib/SharedStyles';
+import { ScrollView } from 'lib/sharedStyles';
 import { checkBabiesLocation, updateBabyLocation } from 'services/babyLocation';
 import { setHomePageOpened } from 'services/telemetry';
 import { createTelemetryAction } from 'utils/telemetryAction';

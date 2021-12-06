@@ -4,7 +4,7 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import { useAuth } from 'contexts/auth';
-import { PaddedScrollView } from 'lib/SharedStyles';
+import { PaddedScrollView } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';

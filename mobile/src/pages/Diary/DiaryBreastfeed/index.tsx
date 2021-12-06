@@ -13,7 +13,7 @@ import DiaryBreastfeedEntry from 'components/DiaryBreastfeedEntry';
 import MainButton from 'components/MainButton';
 import { useAuth } from 'contexts/auth';
 import { dateFormatVerbose } from 'lib/date-fns';
-import { ScrollView } from 'lib/SharedStyles';
+import { ScrollView } from 'lib/sharedStyles';
 import { listBreastfeedEntries } from 'services/diaryRegistry';
 import { createTelemetryAction } from 'utils/telemetryAction';
 

@@ -32,6 +32,7 @@ export const ContentContainer = styled.View`
   padding: 0 24px;
   background-color: ${props => props.theme.white};
   border-radius: 5px;
+  flex: 1;
 `;
 
 export const QuestionText = styled.Text`

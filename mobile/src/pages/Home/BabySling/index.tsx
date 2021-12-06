@@ -6,7 +6,7 @@ import { View } from 'react-native';
 
 import ImageWrapper from 'components/ImageWrapper';
 import OptionsList from 'components/OptionList';
-import { PaddedScrollView } from 'lib/SharedStyles';
+import { PaddedScrollView } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';

@@ -5,7 +5,7 @@ import {
   MinorTermsOfService,
 } from 'components/TermsOfService';
 import { useAuth } from 'contexts/auth';
-import { ScrollView } from 'lib/SharedStyles';
+import { ScrollView } from 'lib/sharedStyles';
 
 import { Container } from './styles';
 

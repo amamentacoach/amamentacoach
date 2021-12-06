@@ -5,7 +5,7 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
 import PieChart from 'components/PieChart';
-import { ScrollView } from 'lib/SharedStyles';
+import { ScrollView } from 'lib/sharedStyles';
 import { listSurveyStatistics } from 'services/survey';
 import { createTelemetryAction } from 'utils/telemetryAction';
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { ScrollView as SharedScrollView } from 'lib/SharedStyles';
+import { ScrollView as SharedScrollView } from 'lib/sharedStyles';
 
 interface SelectedImageProps {
   width: number;

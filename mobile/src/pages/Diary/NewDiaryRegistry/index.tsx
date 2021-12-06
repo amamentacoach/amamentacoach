@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import FormDateInput from 'components/FormDateInput';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
-import { PaddedScrollView } from 'lib/SharedStyles';
+import { PaddedScrollView } from 'lib/sharedStyles';
 import { createExtractionEntry } from 'services/diaryRegistry';
 import { createTelemetryAction } from 'utils/telemetryAction';
 

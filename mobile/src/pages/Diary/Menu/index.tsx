@@ -8,7 +8,7 @@ import Modal from 'components/Modal';
 import OptionsList from 'components/OptionList';
 import { useAuth } from 'contexts/auth';
 import { dateFormatVerbose, storageIsToday } from 'lib/date-fns';
-import { PaddedScrollView } from 'lib/SharedStyles';
+import { PaddedScrollView } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';

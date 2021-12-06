@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { Linking } from 'react-native';
 
 import OptionsList from 'components/OptionList';
-import { PaddedScrollView } from 'lib/SharedStyles';
+import { PaddedScrollView } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';

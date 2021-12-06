@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { ScrollView } from 'lib/SharedStyles';
+import { ScrollView } from 'lib/sharedStyles';
 
 interface ContainerProps {
   width: number;

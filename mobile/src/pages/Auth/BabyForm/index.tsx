@@ -12,7 +12,7 @@ import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import SecondaryButton from 'components/SecondaryButton';
-import { PaddedScrollView } from 'lib/SharedStyles';
+import { PaddedScrollView } from 'lib/sharedStyles';
 
 import type { FormikErrors } from 'formik';
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';

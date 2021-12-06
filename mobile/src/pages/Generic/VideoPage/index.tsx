@@ -4,7 +4,7 @@ import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { ThemeContext } from 'styled-components';
 
-import { ScrollView } from 'lib/SharedStyles';
+import { ScrollView } from 'lib/sharedStyles';
 import { setUserVideoSeen, setUserVideoStarted } from 'services/telemetry';
 
 import type { RootRouteProp } from 'routes/app';

@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
-import { PaddedScrollView } from 'lib/SharedStyles';
+import { PaddedScrollView } from 'lib/sharedStyles';
 import { forgotPassword } from 'services/auth';
 
 import { FormContainer, HeaderText, SubmitButtonContainer } from './styles';

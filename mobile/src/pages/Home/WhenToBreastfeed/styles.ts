@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { ScrollView as SharedScrollView } from 'lib/SharedStyles';
+import { ScrollView as SharedScrollView } from 'lib/sharedStyles';
 
 export const ScrollView = styled(SharedScrollView)`
   padding: 0 24px;

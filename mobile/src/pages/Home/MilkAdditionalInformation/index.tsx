@@ -3,7 +3,7 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import ImageWrapper from 'components/ImageWrapper';
-import { ScrollView } from 'lib/SharedStyles';
+import { ScrollView } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import { ContentText, ContentWrapper } from './styles';
