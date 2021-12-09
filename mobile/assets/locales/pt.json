@@ -679,6 +679,10 @@
     "BestMother": "VOCÊ é a melhor mãe do mundo para o seu bebê! Isso simplesmente porque VOCÊ deu a vida a ele, o que ninguém mais poderia fazer! O SEU LEITE é o melhor alimento que ele pode receber!",
     "Mirror": "Espelho, espelho meu... existe alguém mais capaz de amamentar do que eu?”\nClique no botão abaixo e faça o upload de uma foto sua!"
   },
+  "UploadPhotoScreen": {
+    "ModalSuccessText": "Imagem enviada com sucesso",
+    "ErrorModalText": "Falha ao enviar a imagem!\nPor favor, tente novamente mais tarde..."
+  },
   "WeeklyReportPage": {
     "Header": "Perguntas da semana",
     "NotAnswered": "Não respondida",

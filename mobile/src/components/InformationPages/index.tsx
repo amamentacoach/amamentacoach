@@ -16,15 +16,15 @@ interface InfoPage {
   }[];
 }
 
+export interface InfoPageItem extends InfoPage {
+  id: string;
+}
+
 export interface InfoPageModelProps extends InfoPage {
-  flatListRef: React.RefObject<FlatList<any>>;
+  flatListRef: React.RefObject<FlatList<InfoPageItem>>;
   index: number;
   pagesLength: number;
   goToPage: (page: number) => void;
-}
-
-export interface InfoPageItem extends InfoPage {
-  id: string;
 }
 
 interface InformationPagesProps

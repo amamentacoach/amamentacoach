@@ -19,8 +19,8 @@ const UploadBabyPhoto: React.FC = () => {
   return (
     <UploadPhotoScreen
       target="baby"
-      image={HeartArrow}
-      text={i18n.t('UploadBabyPhotoPage.SelectPhoto')}
+      imagePlaceholder={HeartArrow}
+      textPlaceholder={i18n.t('UploadBabyPhotoPage.SelectPhoto')}
       uploadFunction={uploadBabyPhoto}
     />
   );

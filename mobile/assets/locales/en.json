@@ -679,6 +679,10 @@
     "BestMother": "YOU are the best mom in the world for your baby! This is simply because YOU gave him life, which no one else could! YOUR MILK is the best food he can get!",
     "Mirror": "Mirror, mirror on the wall... who's the most able to breastfeed of all?\nClick on the button below and upload a picture of yourself!"
   },
+  "UploadPhotoScreen": {
+    "ModalSuccessText": "Image uploaded successfully",
+    "ErrorModalText": "Failed to upload image!\nPlease, try again later..."
+  },
   "WeeklyReportPage": {
     "Header": "Questions of the week",
     "NotAnswered": "Unanswered",
