@@ -10,7 +10,6 @@ import { setUserVideoSeen, setUserVideoStarted } from 'services/telemetry';
 import type { RootRouteProp } from 'routes/app';
 
 import { ContentContainer, LoadingContainer, VideoContainer } from './styles';
-import theme from 'config/theme';
 
 const VideoPage: React.FC = () => {
   const { videos } = useRoute<RootRouteProp<'VideoPage'>>().params;

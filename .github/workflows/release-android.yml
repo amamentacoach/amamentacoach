@@ -10,8 +10,8 @@ defaults:
     working-directory: mobile
 
 jobs:
-  lint:
-    name: Lint
+  setup:
+    name: Setup build
     runs-on: ubuntu-latest
     outputs:
       tag: ${{ steps.version.outputs.tag }}
