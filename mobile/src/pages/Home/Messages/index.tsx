@@ -4,6 +4,7 @@ import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
+import { formatWithLocale } from 'lib/date-fns';
 import { listMessages } from 'services/messages';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -13,6 +14,7 @@ import type { Message as IMessage } from 'services/messages';
 import {
   AddMessageButton,
   Author,
+  DateText,
   Content,
   FlatlistContainer,
   Line,
@@ -86,9 +88,10 @@ const Messages: React.FC = () => {
     }
   }, [isFocused]);
 
-  const Message: React.FC<IMessage> = ({ name, content }) => (
+  const Message: React.FC<IMessage> = ({ name, content, date }) => (
     <MessageContainer>
       <Author>{name}</Author>
+      <DateText>{formatWithLocale(new Date(date), 'P')}</DateText>
       <Content>{content}</Content>
       <Line />
     </MessageContainer>

@@ -13,11 +13,19 @@ export const MessageContainer = styled.View`
   flex: 1;
 `;
 
-export const Author = styled.Text`
-  font-family: 'OpenSans-Bold';
+const StyledText = styled.Text`
   font-size: 14px;
-  color: ${props => props.theme.primary};
   margin-bottom: 5px;
+`;
+
+export const Author = styled(StyledText)`
+  font-family: 'OpenSans-Bold';
+  color: ${props => props.theme.primary};
+`;
+
+export const DateText = styled(StyledText)`
+  font-family: 'OpenSans-Regular';
+  color: ${props => props.theme.grey};
 `;
 
 export const Content = styled.Text`
@@ -26,12 +34,13 @@ export const Content = styled.Text`
   color: ${props => props.theme.grey};
 `;
 
+// TODO Replace with shared style.
 export const Line = styled.View`
-  width: 100%;
+  background-color: ${props => props.theme.grey};
   height: 1px;
   margin: 20px 0;
-  background-color: ${props => props.theme.grey};
   opacity: 0.2;
+  width: 100%;
 `;
 
 export const LoadingIndicator = styled.ActivityIndicator`
