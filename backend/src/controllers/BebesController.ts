@@ -27,7 +27,8 @@ class BebesController{
             tipo_parto, 
             local,
             complicacoes,
-            contato_pele
+            contato_pele,
+            primeiro_estimulo
         } = req.body;
 
         const bebe = {
@@ -41,8 +42,9 @@ class BebesController{
             tipo_parto,
             local,
             local_cadastro:local,
-            complicacoes:complicacoes || false,
+            complicacoes:complicacoes || '',
             contato_pele,
+            primeiro_estimulo: primeiro_estimulo.join('|'),
             mae_id:id_mae
         };
         

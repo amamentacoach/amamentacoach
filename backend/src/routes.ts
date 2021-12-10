@@ -62,7 +62,7 @@ const uploadMiddleware = multer(uploadConfig);
  *          "escolaridade":"Ensino Medio Completo",
  *          "renda":"Entre 1 e 3 salarios minimos",
  *          "qtd_gravidez":2,
- *          "tempo_amamentacao":"2,3", // tempo de amamentacao total | formato: ano,meses
+ *          "tempo_amamentacao": ["2,3", "1,0"], // tempo de amamentacao total de cada gestação | formato: ano,meses
  *          "whatsapp":"(43) 999999999",
  *          "gestacao_planejada": true,
  *          "primeira_visita": "12h",
@@ -160,13 +160,14 @@ routes.get('/maes', verifyJWT,maesController.show);
  *          "data_parto":"2020-08-28",
  *          "semanas_gest": 35,
  *          "dias_gest":5,
- *          "complicacoes":true,
+ *          "complicacoes": "Sim, relacionadas ao COVID-19",
  *          "peso":2.5,
  *          "apgar1":8,
  *          "apgar2":10,
  *          "tipo_parto":true, // false: parto normal | true: cesaria
  *          "local":"UCI Neonatal",
- *          "contato_pele": true
+ *          "contato_pele": true,
+ *          "primeiro_estimulo": ["Massagem/ordenha", "Sucção"]
  *      }
  * 
  * @apiSuccessExample {json} Sucesso
