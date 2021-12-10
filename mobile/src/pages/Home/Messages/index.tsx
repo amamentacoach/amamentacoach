@@ -1,9 +1,9 @@
 import { Action, AppScreen } from '@common/telemetria';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
-import { useContext, useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { FlatList } from 'react-native';
-import { ThemeContext } from 'styled-components';
 
+import theme from 'config/theme';
 import { formatWithLocale } from 'lib/date-fns';
 import { Flex, Line } from 'lib/sharedStyles';
 import { listMessages } from 'services/messages';
@@ -25,7 +25,6 @@ import AddIcon from '@assets/images/icons/ic_add.svg';
 
 const Messages: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
-  const themeContext = useContext(ThemeContext);
   const isFocused = useIsFocused();
 
   const [messages, setMessages] = useState<IMessage[]>([]);
@@ -107,7 +106,7 @@ const Messages: React.FC = () => {
         ListFooterComponent={() => (
           <LoadingIndicator
             size="large"
-            color={themeContext.primary}
+            color={theme.primary}
             animating={loading}
           />
         )}

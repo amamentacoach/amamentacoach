@@ -1,12 +1,12 @@
 import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { ThemeContext } from 'styled-components';
 
 import OptionsList from 'components/OptionList';
+import theme from 'config/theme';
 import { PaddedScrollView } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -28,7 +28,6 @@ import ErlenmeyerYellow from '@assets/images/erlenmeyer_yellow.svg';
 
 const Resilience: React.FC = () => {
   const { height } = Dimensions.get('window');
-  const themeContext = useContext(ThemeContext);
   const navigation = useNavigation<RootStackProps>();
   const [isLoadingVideo, setIsLoadingVideo] = useState(true);
 
@@ -69,7 +68,7 @@ const Resilience: React.FC = () => {
         <LoadingContainer>
           <ActivityIndicator
             size="large"
-            color={themeContext.primary}
+            color={theme.primary}
             animating={isLoadingVideo}
           />
         </LoadingContainer>

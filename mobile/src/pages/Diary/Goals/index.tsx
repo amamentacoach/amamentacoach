@@ -21,7 +21,6 @@ import Motivation5 from '@assets/images/motivation-5.png';
 
 const Goals: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
-
   const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
   const [isFinishedModalVisible, setIsFinishedModalVisible] = useState(false);
 

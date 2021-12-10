@@ -5,12 +5,12 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import i18n from 'i18n-js';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
-import { ThemeContext } from 'styled-components';
 
 import DiaryRegistryEntry from 'components/DiaryRegistryEntry';
 import MainButton from 'components/MainButton';
+import theme from 'config/theme';
 import { dateFormatVerbose } from 'lib/date-fns';
 import { listExtractionsEntries } from 'services/diaryRegistry';
 import { createTelemetryAction } from 'utils/telemetryAction';
@@ -22,7 +22,6 @@ import { Container, DateText, ListContainer } from './styles';
 
 const DiaryRegistry: React.FC = () => {
   const { params } = useRoute<RootRouteProp<'DiaryRegistry'>>();
-  const themeContext = useContext(ThemeContext);
   const navigation = useNavigation<RootStackProps>();
   const isFocused = useIsFocused();
   const [registries, setRegistries] = useState<ExtractionEntry[]>([]);
@@ -67,7 +66,7 @@ const DiaryRegistry: React.FC = () => {
         {isLoading ? (
           <ActivityIndicator
             size="large"
-            color={themeContext.primary}
+            color={theme.primary}
             animating={isLoading}
           />
         ) : (

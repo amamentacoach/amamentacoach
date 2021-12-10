@@ -2,7 +2,6 @@ import { useRoute } from '@react-navigation/native';
 import { useCallback, useRef, useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
-import { ThemeContext } from 'styled-components';
 
 import theme from 'config/theme';
 import { ScrollView } from 'lib/sharedStyles';
@@ -11,12 +10,12 @@ import { setUserVideoSeen, setUserVideoStarted } from 'services/telemetry';
 import type { RootRouteProp } from 'routes/app';
 
 import { ContentContainer, LoadingContainer, VideoContainer } from './styles';
+import theme from 'config/theme';
 
 const VideoPage: React.FC = () => {
   const { videos } = useRoute<RootRouteProp<'VideoPage'>>().params;
   const { height } = Dimensions.get('window');
   const [isLoading, setIsLoading] = useState(true);
-  const themeContext = useContext(ThemeContext);
   const playedOnce = useRef(false);
   const endedOnce = useRef(false);
 
@@ -37,7 +36,7 @@ const VideoPage: React.FC = () => {
         <LoadingContainer>
           <ActivityIndicator
             size="large"
-            color={themeContext.primary}
+            color={theme.primary}
             animating={isLoading}
           />
         </LoadingContainer>

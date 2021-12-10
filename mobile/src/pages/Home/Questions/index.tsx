@@ -1,9 +1,9 @@
 import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation } from '@react-navigation/native';
-import { useContext, useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { FlatList } from 'react-native';
-import { ThemeContext } from 'styled-components';
 
+import theme from 'config/theme';
 import { Flex, Line } from 'lib/sharedStyles';
 import { listUserQuestions } from 'services/questions';
 import { createTelemetryAction } from 'utils/telemetryAction';
@@ -29,7 +29,6 @@ interface MessageEntryProps {
 
 const Questions: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
-  const themeContext = useContext(ThemeContext);
 
   const [questions, setQuestions] = useState<FAQ[]>([]);
   const [loading, setLoading] = useState(true);
@@ -85,7 +84,7 @@ const Questions: React.FC = () => {
         ListFooterComponent={() => (
           <LoadingIndicator
             size="large"
-            color={themeContext.primary}
+            color={theme.primary}
             animating={loading}
           />
         )}

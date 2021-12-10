@@ -1,10 +1,10 @@
 import { Action, AppScreen } from '@common/telemetria';
 import i18n from 'i18n-js';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
-import { ThemeContext } from 'styled-components';
 
 import FormPickerInput from 'components/FormPickerInput';
+import theme from 'config/theme';
 import { ScrollView, Center } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -20,7 +20,6 @@ enum Reports {
 const Report: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedReport, setSelectedReport] = useState(Reports.Daily);
-  const themeContext = useContext(ThemeContext);
 
   function handleChangeReport(value: string): void {
     if (!value) {
@@ -57,7 +56,7 @@ const Report: React.FC = () => {
           <Center>
             <ActivityIndicator
               size="large"
-              color={themeContext.primary}
+              color={theme.primary}
               animating={isLoading}
             />
           </Center>

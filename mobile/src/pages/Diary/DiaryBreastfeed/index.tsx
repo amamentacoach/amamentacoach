@@ -5,12 +5,12 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import i18n from 'i18n-js';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
-import { ThemeContext } from 'styled-components';
 
 import DiaryBreastfeedEntry from 'components/DiaryBreastfeedEntry';
 import MainButton from 'components/MainButton';
+import theme from 'config/theme';
 import { useAuth } from 'contexts/auth';
 import { dateFormatVerbose } from 'lib/date-fns';
 import { ScrollView } from 'lib/sharedStyles';
@@ -25,7 +25,6 @@ import { Container, DateText, ListContainer } from './styles';
 const DiaryBreastfeed: React.FC = () => {
   const { params } = useRoute<RootRouteProp<'DiaryBreastfeed'>>();
   const navigation = useNavigation<RootStackProps>();
-  const themeContext = useContext(ThemeContext);
   const { motherInfo } = useAuth();
   const isFocused = useIsFocused();
   const [registries, setRegistries] = useState<BreastfeedEntry[]>([]);
@@ -76,7 +75,7 @@ const DiaryBreastfeed: React.FC = () => {
           {isLoading ? (
             <ActivityIndicator
               size="large"
-              color={themeContext.primary}
+              color={theme.primary}
               animating={isLoading}
             />
           ) : (

@@ -1,14 +1,14 @@
 import i18n from 'i18n-js';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import config from 'react-native-config';
 import ImagePicker from 'react-native-image-picker';
-import { ThemeContext } from 'styled-components';
 
 import ImageWrapper from 'components/ImageWrapper';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import SecondaryButton from 'components/SecondaryButton';
+import theme from 'config/theme';
 import { useAuth } from 'contexts/auth';
 import { Flex, Center } from 'lib/sharedStyles';
 
@@ -46,7 +46,6 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
 }) => {
   const { width } = Dimensions.get('window');
   const { motherInfo, updateMotherInfo } = useAuth();
-  const themeContext = useContext(ThemeContext);
 
   const [photo, setPhoto] = useState<ImagePickerResponse | null>(null);
   const [isSendingForm, setIsSendingForm] = useState(false);
@@ -112,7 +111,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
               {isLoadingImage && (
                 <ActivityIndicator
                   size="large"
-                  color={themeContext.primary}
+                  color={theme.primary}
                   animating={isLoadingImage}
                 />
               )}
