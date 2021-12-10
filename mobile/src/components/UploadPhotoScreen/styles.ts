@@ -25,12 +25,6 @@ export const SelectedImage = styled.Image<SelectedImageProps>`
   display: ${({ isVisible = true }) => (isVisible ? 'flex' : 'none')};
 `;
 
-export const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
-
 export const SubmitButtonContainer = styled.View`
   margin-bottom: 15px;
   justify-content: flex-end;
@@ -39,9 +33,5 @@ export const SubmitButtonContainer = styled.View`
 
 export const SelectButtonContainer = styled.View`
   margin-right: 5px;
-  flex: 1;
-`;
-
-export const SendButtonContainer = styled.View`
   flex: 1;
 `;

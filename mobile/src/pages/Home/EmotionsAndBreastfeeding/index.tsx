@@ -19,12 +19,12 @@ const EmotionsAndBreastfeeding: React.FC = () => {
 
   const options: OptionListEntry[] = [
     {
-      image: EmotionsBox,
+      image: { source: EmotionsBox },
       title: i18n.t('EmotionsAndBreastfeedingPage.1'),
       onPress: () => navigation.navigate('Distractions'),
     },
     {
-      image: EmotionsJacobson,
+      image: { source: EmotionsJacobson },
       title: i18n.t('EmotionsAndBreastfeedingPage.2'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['C2hFGeJj48k'] }),

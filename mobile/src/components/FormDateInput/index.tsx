@@ -3,14 +3,9 @@ import { useState } from 'react';
 import { Platform, TouchableOpacity } from 'react-native';
 
 import { formatWithLocale } from 'lib/date-fns';
+import { Flex } from 'lib/sharedStyles';
 
-import {
-  Container,
-  ErrorContainer,
-  ErrorText,
-  LabelText,
-  TextInput,
-} from './styles';
+import { ErrorContainer, ErrorText, LabelText, TextInput } from './styles';
 
 interface FormDateProps {
   fieldName: string;
@@ -71,7 +66,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
   }
 
   return (
-    <Container>
+    <Flex>
       {label !== undefined && <LabelText>{label}</LabelText>}
       <TouchableOpacity onPress={showDatePicker} activeOpacity={1}>
         <TextInput
@@ -98,7 +93,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
           }
         />
       )}
-    </Container>
+    </Flex>
   );
 };
 

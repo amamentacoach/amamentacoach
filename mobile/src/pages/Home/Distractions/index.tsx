@@ -21,21 +21,21 @@ const Distractions: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const options: OptionListEntry[] = [
     {
-      image: Puzzle,
+      image: { source: Puzzle },
       title: i18n.t('DistractionsPage.1'),
-      onPress: async () =>
+      onPress: () =>
         Linking.openURL('https://www.geniol.com.br/raciocinio/quebra-cabeca'),
     },
     {
-      image: Crosswords,
+      image: { source: Crosswords },
       title: i18n.t('DistractionsPage.2'),
-      onPress: async () =>
+      onPress: () =>
         Linking.openURL(
           'https://cruzadasclube.com.br/jogo/categoria/id/1/n/cruzadas-classicas',
         ),
     },
     {
-      image: Music,
+      image: { source: Music },
       title: i18n.t('DistractionsPage.3'),
       onPress: () => navigation.navigate('MusicPlaylists'),
     },

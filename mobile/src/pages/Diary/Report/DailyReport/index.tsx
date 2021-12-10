@@ -3,17 +3,12 @@ import { useEffect, useState } from 'react';
 
 import DiaryBreastfeedEntry from 'components/DiaryBreastfeedEntry';
 import DiaryRegistryEntry from 'components/DiaryRegistryEntry';
+import { Flex, Center } from 'lib/sharedStyles';
 import { getDailyReport } from 'services/report';
 
 import type { DailyReport as IDailyReport } from 'services/report';
 
-import {
-  Center,
-  Container,
-  EntryContainer,
-  Header,
-  NoRegistriesMessage,
-} from './styles';
+import { EntryContainer, Header, NoRegistriesMessage } from './styles';
 
 interface DailyReportProps {
   isLoading: boolean;
@@ -43,7 +38,7 @@ const DailyReport: React.FC<DailyReportProps> = ({
   }
 
   return (
-    <Container>
+    <Flex>
       {dailyReport?.registryEntries.length === 0 && (
         <Center>
           <NoRegistriesMessage>
@@ -69,7 +64,7 @@ const DailyReport: React.FC<DailyReportProps> = ({
           ))}
         </EntryContainer>
       )}
-    </Container>
+    </Flex>
   );
 };
 

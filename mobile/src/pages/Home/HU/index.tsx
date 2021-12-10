@@ -19,14 +19,14 @@ const HU: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const options: OptionListEntry[] = [
     {
-      image: IcVideo,
+      image: { source: IcVideo },
       title: i18n.t('HUPage.5'),
       subtitle: i18n.t('HUPage.6'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['z9V26A0Lipg'] }),
     },
     {
-      image: IcVideo,
+      image: { source: IcVideo },
       title: i18n.t('HUPage.7'),
       subtitle: i18n.t('HUPage.8'),
       onPress: () =>

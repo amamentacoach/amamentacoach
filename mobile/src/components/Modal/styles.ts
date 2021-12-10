@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 import ImageWrapper from 'components/ImageWrapper';
+import { Line as SharedLine } from 'lib/sharedStyles';
 
 interface OptionTextProps {
   color?: string;
@@ -23,17 +24,12 @@ export const Content = styled.Text`
   text-align: center;
 `;
 
-export const MaxHeightImage = styled(ImageWrapper)`
+export const MaxWidthImage = styled(ImageWrapper)`
   max-width: 300px;
 `;
 
-export const Line = styled.View`
-  width: 100%;
-  height: 1px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  background-color: ${props => props.theme.grey};
-  opacity: 0.2;
+export const Line = styled(SharedLine)`
+  margin: 10px 0;
 `;
 
 export const OptionsContainer = styled.View`

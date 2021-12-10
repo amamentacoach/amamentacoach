@@ -1,22 +1,27 @@
+import { View } from 'react-native';
+
 import ImageWrapper from 'components/ImageWrapper';
+import { Line } from 'lib/sharedStyles';
 
 import type { ImageWrapperSourcePropType } from 'components/ImageWrapper';
 
 import {
-  ContentContainer,
-  ContentHeader,
-  ContentOptionButton,
-  ContentSeparator,
-  ContentSubtitle,
-  ContentTextContainer,
-  ContentTitle,
-  Option,
+  Container,
+  Header,
+  OptionButton,
+  Subtitle,
+  TextContainer,
+  Title,
 } from './styles';
 
 import NextIcon from '@assets/images/icons/ic_next.svg';
 
 export interface OptionListEntry {
-  image?: ImageWrapperSourcePropType;
+  image?: {
+    source: ImageWrapperSourcePropType;
+    width?: number;
+    height?: number;
+  };
   title: string;
   subtitle?: string;
   onPress: () => void;
@@ -34,24 +39,30 @@ const OptionsList: React.FC<OptionListProps> = ({
   displayArrows = false,
 }) => {
   return (
-    <ContentContainer>
-      {label && <ContentHeader>{label}</ContentHeader>}
+    <Container>
+      {label && <Header>{label}</Header>}
       {options.map(({ image, title, subtitle, onPress }, index) => (
-        <Option key={title}>
-          <ContentOptionButton activeOpacity={0.7} onPress={onPress}>
-            {image && <ImageWrapper source={image} width={70} height={70} />}
+        <View key={title}>
+          <OptionButton activeOpacity={0.7} onPress={onPress}>
+            {image?.source && (
+              <ImageWrapper
+                source={image.source}
+                height={image.height ?? 70}
+                width={image.width ?? 70}
+              />
+            )}
 
-            <ContentTextContainer>
-              <ContentTitle>{title}</ContentTitle>
-              {subtitle && <ContentSubtitle>{subtitle}</ContentSubtitle>}
-            </ContentTextContainer>
+            <TextContainer>
+              <Title>{title}</Title>
+              {subtitle && <Subtitle>{subtitle}</Subtitle>}
+            </TextContainer>
 
             {displayArrows && <NextIcon height={15} width={20} />}
-          </ContentOptionButton>
-          {index < options.length - 1 && <ContentSeparator />}
-        </Option>
+          </OptionButton>
+          {index < options.length - 1 && <Line />}
+        </View>
       ))}
-    </ContentContainer>
+    </Container>
   );
 };
 

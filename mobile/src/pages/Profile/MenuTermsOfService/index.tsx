@@ -2,13 +2,14 @@ import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useEffect } from 'react';
+import { TouchableOpacity } from 'react-native';
 
-import { PaddedScrollView } from 'lib/sharedStyles';
+import { PaddedScrollView, Line } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 
-import { Line, OptionButton, OptionText } from './styles';
+import { OptionText } from './styles';
 
 const MenuTermsOfService: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
@@ -22,17 +23,18 @@ const MenuTermsOfService: React.FC = () => {
 
   return (
     <PaddedScrollView>
-      <OptionButton onPress={() => navigation.navigate('ReadTermsOfService')}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('ReadTermsOfService')}>
         <OptionText>
           {i18n.t('MenuTermsOfServicePage.ReadTermsOfService')}
         </OptionText>
-      </OptionButton>
+      </TouchableOpacity>
       <Line />
-      <OptionButton onPress={() => navigation.navigate('LeaveResearch')}>
+      <TouchableOpacity onPress={() => navigation.navigate('LeaveResearch')}>
         <OptionText>
           {i18n.t('MenuTermsOfServicePage.LeaveResearch')}
         </OptionText>
-      </OptionButton>
+      </TouchableOpacity>
       <Line />
     </PaddedScrollView>
   );

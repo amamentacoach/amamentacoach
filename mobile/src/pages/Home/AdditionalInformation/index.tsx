@@ -21,31 +21,31 @@ const AdditionalInformation: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const options: OptionListEntry[] = [
     {
-      image: PrematureBreastfeed,
+      image: { source: PrematureBreastfeed },
       title: i18n.t('AdditionalInformationPage.1'),
       subtitle: i18n.t('AdditionalInformationPage.2'),
       onPress: () => navigation.navigate('MilkAdditionalInformation'),
     },
     {
-      image: PrematureBaby,
+      image: { source: PrematureBaby },
       title: i18n.t('BabySlingPage.PageName'),
       subtitle: i18n.t('AdditionalInformationPage.4'),
       onPress: () => navigation.navigate('BabySling'),
     },
     {
-      image: DiarySmile,
+      image: { source: DiarySmile },
       title: i18n.t('AdditionalInformationPage.5'),
       subtitle: i18n.t('AdditionalInformationPage.6'),
       onPress: () => navigation.navigate('Resilience'),
     },
     {
-      image: Change,
+      image: { source: Change },
       title: i18n.t('AdditionalInformationPage.7'),
       subtitle: i18n.t('AdditionalInformationPage.8'),
       onPress: () => navigation.navigate('ManageExpectations'),
     },
     {
-      image: EmotionsInfo,
+      image: { source: EmotionsInfo },
       title: i18n.t('AdditionalInformationPage.9'),
       subtitle: i18n.t('AdditionalInformationPage.10'),
       onPress: () => navigation.navigate('BabyCup'),

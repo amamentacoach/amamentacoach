@@ -4,6 +4,7 @@ import { useContext, useEffect, useLayoutEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
+import { Flex, Line } from 'lib/sharedStyles';
 import { listUserQuestions } from 'services/questions';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -14,10 +15,8 @@ import {
   AddQuestionButton,
   Answer,
   FlatlistContainer,
-  Line,
   LoadingIndicator,
   Question,
-  QuestionContainer,
 } from './styles';
 
 import AddIcon from '@assets/images/icons/ic_add.svg';
@@ -67,11 +66,11 @@ const Questions: React.FC = () => {
 
   const Entry: React.FC<MessageEntryProps> = ({ question, answer, index }) => {
     return (
-      <QuestionContainer>
+      <Flex>
         <Question>{question}</Question>
         <Answer>{answer}</Answer>
         {index < questions.length - 1 && <Line />}
-      </QuestionContainer>
+      </Flex>
     );
   };
 

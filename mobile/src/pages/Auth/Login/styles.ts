@@ -34,10 +34,6 @@ export const SubmitButtonContainer = styled.View`
   margin-bottom: 40px;
 `;
 
-export const SignUpContainer = styled.View`
-  flex: 1;
-`;
-
 export const NoAccountText = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;

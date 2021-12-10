@@ -5,10 +5,6 @@ interface DescriptionColorProps {
   color: string;
 }
 
-export const Container = styled.View`
-  flex: 1;
-`;
-
 export const PieChartWrapper = styled(PieChart)`
   flex: 1;
   height: 230px;

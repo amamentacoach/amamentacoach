@@ -12,7 +12,7 @@ import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import SecondaryButton from 'components/SecondaryButton';
-import { PaddedScrollView } from 'lib/sharedStyles';
+import { Flex, PaddedScrollView } from 'lib/sharedStyles';
 
 import type { FormikErrors } from 'formik';
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
@@ -25,7 +25,6 @@ import {
   ApgarTextHeader,
   FirstSubOptionContainer,
   FormContainer,
-  GestationDaysContainer,
   GestationWeeksContainer,
   HeaderSubText,
   HeaderText,
@@ -367,7 +366,7 @@ const BabyForm: React.FC = () => {
                       error={getBabyError(errors, index, 'gestationWeeks')}
                     />
                   </GestationWeeksContainer>
-                  <GestationDaysContainer>
+                  <Flex>
                     <FormPickerInput
                       label=""
                       fieldName={`babies[${index}].gestationDays`}
@@ -376,7 +375,7 @@ const BabyForm: React.FC = () => {
                       onChange={setFieldValue}
                       error={getBabyError(errors, index, 'gestationDays')}
                     />
-                  </GestationDaysContainer>
+                  </Flex>
                 </SubOptionsContainer>
 
                 <ApgarTextHeader>

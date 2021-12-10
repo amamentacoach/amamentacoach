@@ -8,10 +8,6 @@ export const HeaderText = styled.Text`
   margin: 25px 0;
 `;
 
-export const FormContainer = styled.View`
-  flex: 1;
-`;
-
 export const SubmitButtonContainer = styled.View`
   flex: 1;
   margin-bottom: 15px;

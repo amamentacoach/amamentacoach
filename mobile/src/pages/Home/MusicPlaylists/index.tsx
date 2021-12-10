@@ -15,40 +15,36 @@ import Music from '@assets/images/music.svg';
 const MusicPlaylists: React.FC = () => {
   const options: OptionListEntry[] = [
     {
-      image: Music,
+      image: { source: Music },
       title: i18n.t('MusicPlaylistsPage.1'),
-      onPress: async () => {
-        await Linking.openURL(
+      onPress: () =>
+        Linking.openURL(
           'https://youtube.com/playlist?list=PLK7oeiGgzDtiNeJduFPY8Kep7mq9wRQ7l',
-        );
-      },
+        ),
     },
     {
-      image: Music,
+      image: { source: Music },
       title: i18n.t('MusicPlaylistsPage.2'),
-      onPress: async () => {
-        await Linking.openURL(
+      onPress: () =>
+        Linking.openURL(
           'https://youtube.com/playlist?list=PLK7oeiGgzDthw88gK7lCBtoYxdX4XhqvJ',
-        );
-      },
+        ),
     },
     {
-      image: Music,
+      image: { source: Music },
       title: i18n.t('MusicPlaylistsPage.3'),
-      onPress: async () => {
-        await Linking.openURL(
+      onPress: () =>
+        Linking.openURL(
           'https://youtube.com/playlist?list=PLK7oeiGgzDtitdfAYT5bQNWTpsBOqiWc7',
-        );
-      },
+        ),
     },
     {
-      image: Music,
+      image: { source: Music },
       title: i18n.t('MusicPlaylistsPage.4'),
-      onPress: async () => {
-        await Linking.openURL(
+      onPress: () =>
+        Linking.openURL(
           'https://youtube.com/playlist?list=PLK7oeiGgzDtj2PhNH_958pOx30vfuZ8ZS',
-        );
-      },
+        ),
     },
   ];
 

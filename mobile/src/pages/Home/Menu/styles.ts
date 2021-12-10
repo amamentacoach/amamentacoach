@@ -92,35 +92,3 @@ export const ContentHeader = styled.Text`
   font-size: 20px;
   margin-bottom: 20px;
 `;
-
-export const Option = styled.View`
-  margin-bottom: 20px;
-`;
-
-export const ContentOption = styled.TouchableOpacity`
-  width: 100%;
-  flex-direction: row;
-  align-items: center;
-`;
-
-export const ContentTextContainer = styled.View`
-  flex: 1;
-  justify-content: space-around;
-  margin-left: 15px;
-`;
-
-export const ContentTitle = styled.Text`
-  color: ${props => props.theme.black};
-  font-family: 'OpenSans-Bold';
-  font-size: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 3px;
-`;
-
-export const ContentSeparator = styled.View`
-  height: 1px;
-  width: 100%;
-  background-color: ${props => props.theme.brightGrey};
-  opacity: 0.25;
-  margin-top: 20px;
-`;

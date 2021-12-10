@@ -1,19 +1,13 @@
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
+import { View } from 'react-native';
 
+import { Line, Flex } from 'lib/sharedStyles';
 import { getWeeklyReport } from 'services/report';
 
 import type { WeeklyReportQuestion as WeeklyReportQuestion } from 'services/report';
 
-import {
-  Answer,
-  AnswerHeader,
-  Container,
-  EntryContainer,
-  Header,
-  Line,
-  Question,
-} from './styles';
+import { Answer, AnswerHeader, Header, Question } from './styles';
 
 interface WeeklyReportProps {
   isLoading: boolean;
@@ -63,17 +57,17 @@ const WeeklyReport: React.FC<WeeklyReportProps> = ({
   }
 
   return (
-    <Container>
+    <Flex>
       <Header>{i18n.t('WeeklyReportPage.Header')}</Header>
       {weeklyReport.map((entry, index) => {
         return (
-          <EntryContainer key={entry.id}>
+          <View key={entry.id}>
             <ReportEntry {...entry} />
             {index < weeklyReport.length - 1 && <Line />}
-          </EntryContainer>
+          </View>
         );
       })}
-    </Container>
+    </Flex>
   );
 };
 

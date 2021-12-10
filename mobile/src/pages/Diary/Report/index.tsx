@@ -5,11 +5,11 @@ import { ActivityIndicator, View } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
 import FormPickerInput from 'components/FormPickerInput';
-import { ScrollView } from 'lib/sharedStyles';
+import { ScrollView, Center } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import DailyReport from './DailyReport';
-import { Center, Container } from './styles';
+import { Container } from './styles';
 import WeeklyReport from './WeeklyReport';
 
 enum Reports {

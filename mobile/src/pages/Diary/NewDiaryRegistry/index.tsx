@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import FormDateInput from 'components/FormDateInput';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
-import { PaddedScrollView } from 'lib/sharedStyles';
+import { PaddedScrollView, Flex } from 'lib/sharedStyles';
 import { createExtractionEntry } from 'services/diaryRegistry';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -18,7 +18,6 @@ import {
   ErrorContainer,
   ErrorText,
   FirstOption,
-  FormContainer,
   FormContent,
   Header,
   MultipleOptionContainer,
@@ -142,7 +141,7 @@ const NewDiaryRegistry: React.FC = () => {
           errors,
           values,
         }) => (
-          <FormContainer>
+          <Flex>
             <Header>{i18n.t('NewDiaryRegistryPage.Header')}</Header>
             <FormContent>
               <FormDateInput
@@ -219,7 +218,7 @@ const NewDiaryRegistry: React.FC = () => {
                 }
               />
             </SubmitButtonContainer>
-          </FormContainer>
+          </Flex>
         )}
       </Formik>
     </PaddedScrollView>

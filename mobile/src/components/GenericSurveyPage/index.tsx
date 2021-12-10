@@ -2,12 +2,12 @@ import i18n from 'i18n-js';
 
 import FormRadioGroupInput from 'components/FormRadioGroup';
 import MainButton from 'components/MainButton';
+import { Flex } from 'lib/sharedStyles';
 
 import type { SurveyPage } from 'components/Survey';
 import type { SvgProps } from 'react-native-svg';
 
 import {
-  Container,
   CurrentPageContainer,
   CurrentPageText,
   Footer,
@@ -36,7 +36,7 @@ const createGenericSurveyPage = (
     const Image = Images ? Images[index] : undefined;
 
     return (
-      <Container>
+      <Flex>
         <CurrentPageContainer color={color}>
           <CurrentPageText>
             {index + 1}/{pagesLength}
@@ -74,7 +74,7 @@ const createGenericSurveyPage = (
             onPress={() => handleChangePage(index + 1, onFormEnd)}
           />
         </Footer>
-      </Container>
+      </Flex>
     );
   };
 

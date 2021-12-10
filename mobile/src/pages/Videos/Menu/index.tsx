@@ -19,43 +19,43 @@ const VideosMenu: React.FC = () => {
 
   let options: OptionListEntry[] = [
     {
-      image: IcVideo,
+      image: { source: IcVideo },
       title: i18n.t('BabySlingPage.1'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['IhKyaqGX_MQ'] }),
     },
     {
-      image: IcVideo,
+      image: { source: IcVideo },
       title: i18n.t('BabySlingPage.2'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['rdTTyKGrq_s'] }),
     },
     {
-      image: IcVideo,
+      image: { source: IcVideo },
       title: i18n.t('BabySlingPage.3'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['wx1ofoCZw9w'] }),
     },
     {
-      image: IcVideo,
+      image: { source: IcVideo },
       title: i18n.t('EmotionsAndBreastfeedingPage.2'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['C2hFGeJj48k'] }),
     },
     {
-      image: IcVideo,
+      image: { source: IcVideo },
       title: i18n.t('ThePrematurePage.Option1'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['w2rbi3aW-rA'] }),
     },
     {
-      image: IcVideo,
+      image: { source: IcVideo },
       title: i18n.t('HUPage.5'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['z9V26A0Lipg'] }),
     },
     {
-      image: IcVideo,
+      image: { source: IcVideo },
       title: i18n.t('HUPage.7'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['CLOZL3N_QXs'] }),

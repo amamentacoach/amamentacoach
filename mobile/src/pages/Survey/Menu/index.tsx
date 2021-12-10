@@ -11,7 +11,7 @@ import { PaddedScrollView } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
-import type { RootStackProps } from 'routes/app';
+import type { RootStackParamList, RootStackProps } from 'routes/app';
 
 import { Header, HeaderTitle } from './styles';
 
@@ -26,50 +26,44 @@ const SurveyMenu: React.FC = () => {
   const isFocused = useIsFocused();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  async function navigateIfFirstRun(
+    storageId: string,
+    pageName: keyof RootStackParamList,
+  ): Promise<void> {
+    if (!(await storageIsToday(storageId))) {
+      navigation.navigate(pageName);
+    } else {
+      setIsModalVisible(true);
+    }
+  }
+
   let options: OptionListEntry[] = [
     {
-      image: SurveysOne,
+      image: { source: SurveysOne },
       title: i18n.t('PrematureBreastfeed'),
-      onPress: async () => {
-        // Checa se o usuário já respondeu o formulário no dia.
-        if (
-          !(await storageIsToday(
-            '@AmamentaCoach:DiarySurveyBreastfeedLastDate',
-          ))
-        ) {
-          navigation.navigate('SurveyBreastfeed');
-        } else {
-          setIsModalVisible(true);
-        }
-      },
+      onPress: () =>
+        navigateIfFirstRun(
+          '@AmamentaCoach:DiarySurveyBreastfeedLastDate',
+          'SurveyBreastfeed',
+        ),
     },
     {
-      image: SurveysTwo,
+      image: { source: SurveysTwo },
       title: i18n.t('SurveyTitles.SurveyMotivation'),
-      onPress: async () => {
-        // Checa se o usuário já respondeu o formulário no dia.
-        if (
-          !(await storageIsToday(
-            '@AmamentaCoach:DiarySurveyMotivationLastDate',
-          ))
-        ) {
-          navigation.navigate('SurveyMotivation');
-        } else {
-          setIsModalVisible(true);
-        }
-      },
+      onPress: () =>
+        navigateIfFirstRun(
+          '@AmamentaCoach:DiarySurveyMotivationLastDate',
+          'SurveyMotivation',
+        ),
     },
     {
-      image: SurveysThree,
+      image: { source: SurveysThree },
       title: i18n.t('SurveyTitles.SurveyHelp'),
-      onPress: async () => {
-        // Checa se o usuário já respondeu o formulário no dia.
-        if (!(await storageIsToday('@AmamentaCoach:DiarySurveyHelpLastDate'))) {
-          navigation.navigate('SurveyHelp');
-        } else {
-          setIsModalVisible(true);
-        }
-      },
+      onPress: () =>
+        navigateIfFirstRun(
+          '@AmamentaCoach:DiarySurveyHelpLastDate',
+          'SurveyHelp',
+        ),
     },
   ];
 
@@ -78,18 +72,13 @@ const SurveyMenu: React.FC = () => {
     options = [
       ...options,
       {
-        image: SurveysFour,
+        image: { source: SurveysFour },
         title: i18n.t('SurveyMenuPage.Father'),
-        onPress: async () => {
-          // Checa se o usuário já respondeu o formulário no dia.
-          if (
-            !(await storageIsToday('@AmamentaCoach:DiarySurveyFatherLastDate'))
-          ) {
-            navigation.navigate('SurveyFather');
-          } else {
-            setIsModalVisible(true);
-          }
-        },
+        onPress: () =>
+          navigateIfFirstRun(
+            '@AmamentaCoach:DiarySurveyFatherLastDate',
+            'SurveyFather',
+          ),
       },
     ];
   }

@@ -31,10 +31,6 @@ export const ContentHeader = styled.Text`
   margin-bottom: 25px;
 `;
 
-export const QuestionContainer = styled.View`
-  flex: 1;
-`;
-
 export const QuestionIndex = styled.Text`
   color: ${props => props.theme.black};
   text-align: center;

@@ -9,7 +9,7 @@ import FormRadioGroupInput from 'components/FormRadioGroup';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import SecondaryButton from 'components/SecondaryButton';
-import { PaddedScrollView } from 'lib/SharedStyles';
+import { Flex, PaddedScrollView } from 'lib/sharedStyles';
 
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
 import type { MotherSignUpInfo } from 'services/auth';
@@ -20,9 +20,7 @@ import {
   FormContainer,
   HeaderSubText,
   HeaderText,
-  OptionPickerContainer,
   PhoneInputContainer,
-  SecondSubOptionContainer,
   SubmitButtonContainer,
   SubOptionsContainer,
 } from './styles';
@@ -299,7 +297,7 @@ const MotherForm: React.FC = () => {
                     ]}
                   />
                 </FirstSubOptionContainer>
-                <SecondSubOptionContainer>
+                <Flex>
                   <FormPickerInput
                     label={i18n.t('MotherFormPage.MonthsSpentBreastFeeding')}
                     fieldName="monthsSpentBreastFeeding"
@@ -322,7 +320,7 @@ const MotherForm: React.FC = () => {
                       '12',
                     ]}
                   />
-                </SecondSubOptionContainer>
+                </Flex>
               </SubOptionsContainer>
             )}
 
@@ -367,7 +365,7 @@ const MotherForm: React.FC = () => {
                 />
 
                 {values.liveTogether && (
-                  <OptionPickerContainer>
+                  <Flex>
                     <FormPickerInput
                       label={i18n.t('MotherFormPage.PartnerTime')}
                       fieldName="partnerTime"
@@ -379,12 +377,12 @@ const MotherForm: React.FC = () => {
                         i18n.t('MotherFormPage.LiveTogetherOptions.Option3'),
                       ]}
                     />
-                  </OptionPickerContainer>
+                  </Flex>
                 )}
               </>
             )}
 
-            <OptionPickerContainer>
+            <Flex>
               <FormPickerInput
                 label={i18n.t('MotherFormPage.Education')}
                 fieldName="education"
@@ -399,9 +397,9 @@ const MotherForm: React.FC = () => {
                   i18n.t('MotherFormPage.EducationOptions.Option6'),
                 ]}
               />
-            </OptionPickerContainer>
+            </Flex>
 
-            <OptionPickerContainer>
+            <Flex>
               <FormPickerInput
                 label={i18n.t('MotherFormPage.Wage')}
                 fieldName="wage"
@@ -413,9 +411,9 @@ const MotherForm: React.FC = () => {
                   i18n.t('MotherFormPage.WageOptions.Option3'),
                 ]}
               />
-            </OptionPickerContainer>
+            </Flex>
 
-            <OptionPickerContainer>
+            <Flex>
               <FormPickerInput
                 label={i18n.t('MotherFormPage.PlannedPregnancy')}
                 fieldName="plannedPregnancy"
@@ -425,9 +423,9 @@ const MotherForm: React.FC = () => {
                 error={errors.plannedPregnancy}
                 options={[i18n.t('Yes'), i18n.t('No')]}
               />
-            </OptionPickerContainer>
+            </Flex>
 
-            <OptionPickerContainer>
+            <Flex>
               <FormPickerInput
                 label={i18n.t('MotherFormPage.FirstVisit')}
                 fieldName="firstVisit"
@@ -440,9 +438,9 @@ const MotherForm: React.FC = () => {
                   i18n.t('MotherFormPage.FirstVisitOptions.Option4'),
                 ]}
               />
-            </OptionPickerContainer>
+            </Flex>
 
-            <OptionPickerContainer>
+            <Flex>
               <FormPickerInput
                 label={i18n.t('MotherFormPage.FirstStimulus')}
                 fieldName="firstStimulus"
@@ -454,9 +452,9 @@ const MotherForm: React.FC = () => {
                   i18n.t('MotherFormPage.FirstStimulusOptions.Option3'),
                 ]}
               />
-            </OptionPickerContainer>
+            </Flex>
 
-            <OptionPickerContainer>
+            <Flex>
               <FormPickerInput
                 label={i18n.t('MotherFormPage.TimeFirstStimulus')}
                 fieldName="timeFirstStimulus"
@@ -471,9 +469,9 @@ const MotherForm: React.FC = () => {
                   i18n.t('MotherFormPage.TimeFirstStimulusOptions.Option6'),
                 ]}
               />
-            </OptionPickerContainer>
+            </Flex>
 
-            <OptionPickerContainer>
+            <Flex>
               <FormPickerInput
                 label={i18n.t('MotherFormPage.ChildrenAlive')}
                 fieldName="childrenAlive"
@@ -485,9 +483,9 @@ const MotherForm: React.FC = () => {
                   i18n.t('MotherFormPage.ChildrenAliveOptions.Option3'),
                 ]}
               />
-            </OptionPickerContainer>
+            </Flex>
 
-            <OptionPickerContainer>
+            <Flex>
               <FormPickerInput
                 label={i18n.t('MotherFormPage.ReceivedPreNatalGuidance')}
                 fieldName="receivedPreNatalGuidance"
@@ -497,9 +495,9 @@ const MotherForm: React.FC = () => {
                 error={errors.receivedPreNatalGuidance}
                 options={[i18n.t('Yes'), i18n.t('No')]}
               />
-            </OptionPickerContainer>
+            </Flex>
 
-            <OptionPickerContainer>
+            <Flex>
               <FormPickerInput
                 label={i18n.t('MotherFormPage.Occupation')}
                 fieldName="occupation"
@@ -516,9 +514,9 @@ const MotherForm: React.FC = () => {
                   i18n.t('MotherFormPage.OccupationOptions.Option2'),
                 ]}
               />
-            </OptionPickerContainer>
+            </Flex>
 
-            <OptionPickerContainer>
+            <Flex>
               <FormPickerInput
                 label={i18n.t('MotherFormPage.MaternityLeave')}
                 fieldName="maternityLeave"
@@ -528,10 +526,10 @@ const MotherForm: React.FC = () => {
                 error={errors.maternityLeave}
                 options={[i18n.t('Yes'), i18n.t('No')]}
               />
-            </OptionPickerContainer>
+            </Flex>
 
             {values.maternityLeave && (
-              <OptionPickerContainer>
+              <Flex>
                 <FormTextInput
                   label={i18n.t('MotherFormPage.MaternityLeaveCount')}
                   placeholder={i18n.t(
@@ -542,7 +540,7 @@ const MotherForm: React.FC = () => {
                   error={errors.maternityLeaveCount}
                   keyboardType="number-pad"
                 />
-              </OptionPickerContainer>
+              </Flex>
             )}
 
             <SubmitButtonContainer>
@@ -552,13 +550,13 @@ const MotherForm: React.FC = () => {
                   text={i18n.t('GoBack')}
                 />
               </FirstSubOptionContainer>
-              <SecondSubOptionContainer>
+              <Flex>
                 <MainButton
                   onPress={handleSubmit}
                   disabled={!dirty}
                   text={i18n.t('Next')}
                 />
-              </SecondSubOptionContainer>
+              </Flex>
             </SubmitButtonContainer>
           </FormContainer>
         )}

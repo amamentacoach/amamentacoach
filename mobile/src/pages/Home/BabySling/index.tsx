@@ -22,19 +22,19 @@ const BabySling: React.FC = () => {
 
   const options: OptionListEntry[] = [
     {
-      image: IcVideo,
+      image: { source: IcVideo },
       title: i18n.t('BabySlingPage.1'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['IhKyaqGX_MQ'] }),
     },
     {
-      image: IcVideo,
+      image: { source: IcVideo },
       title: i18n.t('BabySlingPage.2'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['rdTTyKGrq_s'] }),
     },
     {
-      image: IcVideo,
+      image: { source: IcVideo },
       title: i18n.t('BabySlingPage.3'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['wx1ofoCZw9w'] }),

@@ -30,10 +30,6 @@ export const GestationWeeksContainer = styled.View`
   margin-right: 4px;
 `;
 
-export const GestationDaysContainer = styled.View`
-  flex: 1;
-`;
-
 export const FirstSubOptionContainer = styled.View`
   flex: 1;
   margin-right: 4px;

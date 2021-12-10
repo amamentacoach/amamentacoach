@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { processColor } from 'react-native';
 
+import { Flex } from 'lib/sharedStyles';
+
 import {
-  Container,
   DescriptionColor,
   DescriptionContainer,
   DescriptionLabel,
@@ -19,7 +20,7 @@ const PieChart: React.FC<PieChartProps> = ({ label, data }) => {
   const colors = ['#D75C5C', '#85E43A', '#30D2F5', '#E5D43B', '#FA931A'];
 
   return (
-    <Container>
+    <Flex>
       <PieChartWrapper
         data={{
           dataSets: [
@@ -58,7 +59,7 @@ const PieChart: React.FC<PieChartProps> = ({ label, data }) => {
           </DescriptionContainer>
         ))}
       </Descriptions>
-    </Container>
+    </Flex>
   );
 };
 

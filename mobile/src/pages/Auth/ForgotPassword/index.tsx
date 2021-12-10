@@ -7,10 +7,10 @@ import * as Yup from 'yup';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
-import { PaddedScrollView } from 'lib/sharedStyles';
+import { Flex, PaddedScrollView } from 'lib/sharedStyles';
 import { forgotPassword } from 'services/auth';
 
-import { FormContainer, HeaderText, SubmitButtonContainer } from './styles';
+import { HeaderText, SubmitButtonContainer } from './styles';
 
 interface FormValues {
   email: string;
@@ -58,7 +58,7 @@ const ForgotPassword: React.FC = () => {
         validateOnChange={false}
         onSubmit={values => handleForgotPassword(values)}>
         {({ handleChange, handleSubmit, dirty, errors, values }) => (
-          <FormContainer>
+          <Flex>
             <View>
               <FormTextInput
                 label={i18n.t('Email')}
@@ -77,7 +77,7 @@ const ForgotPassword: React.FC = () => {
                 disabled={!dirty || isSendingForm}
               />
             </SubmitButtonContainer>
-          </FormContainer>
+          </Flex>
         )}
       </Formik>
     </PaddedScrollView>

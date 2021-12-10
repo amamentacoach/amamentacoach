@@ -7,8 +7,8 @@ import { View } from 'react-native';
 import { hide } from 'react-native-bootsplash';
 
 import FormPickerInput from 'components/FormPickerInput';
-import ImageWrapper from 'components/ImageWrapper';
 import Modal from 'components/Modal';
+import OptionsList from 'components/OptionList';
 import theme from 'config/theme';
 import { useIsFirstRun } from 'contexts/firstRun';
 import { storageIsToday } from 'lib/date-fns';
@@ -25,10 +25,6 @@ import {
   BannerImage,
   ContentContainer,
   ContentHeader,
-  ContentOption,
-  ContentSeparator,
-  ContentTextContainer,
-  ContentTitle,
   Header,
   HeaderBackground,
   HeaderText,
@@ -37,7 +33,6 @@ import {
   InnerCircle,
   LocationContainer,
   ModalOption,
-  Option,
   OuterCircle,
   TextModal,
 } from './styles';
@@ -78,47 +73,47 @@ const Home: React.FC = () => {
 
   const options: OptionListEntry[] = [
     {
-      image: HomeBaby,
+      image: { source: HomeBaby, height: 100, width: 100 },
       title: i18n.t('HomePage.Option1'),
       onPress: () => navigation.navigate('Premature'),
     },
     {
-      image: HomeBreastfeed,
+      image: { source: HomeBreastfeed, height: 100, width: 100 },
       title: i18n.t('HomePage.Option2'),
       onPress: () => navigation.navigate('StepByStepPremature'),
     },
     {
-      image: HomeMilk,
+      image: { source: HomeMilk, height: 100, width: 100 },
       title: i18n.t('HomePage.Option3'),
       onPress: () => navigation.navigate('Breastfeeding'),
     },
     {
-      image: HomeEmotions,
+      image: { source: HomeEmotions, height: 100, width: 100 },
       title: i18n.t('HomePage.Option4'),
       onPress: () => navigation.navigate('EmotionsAndBreastfeeding'),
     },
     {
-      image: HomeMoreInformation,
+      image: { source: HomeMoreInformation, height: 100, width: 100 },
       title: i18n.t('HomePage.Option5'),
       onPress: () => navigation.navigate('AdditionalInformation'),
     },
     {
-      image: HomeCredits,
+      image: { source: HomeCredits, height: 100, width: 100 },
       title: i18n.t('StatusFormPage.FormName', { count: 1 }),
       onPress: () => navigation.navigate('StatusForm', { situation: null }),
     },
     {
-      image: HomeMessage,
+      image: { source: HomeMessage, height: 100, width: 100 },
       title: i18n.t('HomePage.Option6'),
       onPress: () => navigation.navigate('Messages'),
     },
     {
-      image: HomeMessage,
+      image: { source: HomeMessage, height: 100, width: 100 },
       title: i18n.t('HomePage.Option7'),
       onPress: () => navigation.navigate('Questions'),
     },
     {
-      image: HomeCredits,
+      image: { source: HomeCredits, height: 100, width: 100 },
       title: i18n.t('HomePage.Option8'),
       onPress: () => navigation.navigate('Credits'),
     },
@@ -362,19 +357,7 @@ const Home: React.FC = () => {
         </Header>
         <ContentContainer>
           <ContentHeader>{i18n.t('Content')}</ContentHeader>
-          {options.map(({ image, title, onPress }, index) => (
-            <Option key={title}>
-              <ContentOption activeOpacity={0.7} onPress={onPress}>
-                {image && (
-                  <ImageWrapper source={image} width={100} height={100} />
-                )}
-                <ContentTextContainer>
-                  <ContentTitle>{title}</ContentTitle>
-                </ContentTextContainer>
-              </ContentOption>
-              {index < options.length - 1 && <ContentSeparator />}
-            </Option>
-          ))}
+          <OptionsList options={options} />
         </ContentContainer>
       </ScrollView>
     </>

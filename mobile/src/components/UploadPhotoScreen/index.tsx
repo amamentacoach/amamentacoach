@@ -10,16 +10,15 @@ import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import SecondaryButton from 'components/SecondaryButton';
 import { useAuth } from 'contexts/auth';
+import { Flex, Center } from 'lib/sharedStyles';
 
 import type { ImageWrapperSourcePropType } from 'components/ImageWrapper';
 import type { ImagePickerResponse } from 'react-native-image-picker';
 
 import {
-  Container,
   ScrollView,
   SelectButtonContainer,
   SelectedImage,
-  SendButtonContainer,
   SubmitButtonContainer,
   Text,
 } from './styles';
@@ -97,7 +96,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
         ]}
       />
       <ScrollView>
-        <Container>
+        <Center>
           {/* Usuário já fez o upload de uma foto e não tem nenhuma foto selecionada atualmente*/}
           {!photo && motherInfo.images[target] && (
             <>
@@ -139,7 +138,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
               <Text>{textPlaceholder}</Text>
             </>
           )}
-        </Container>
+        </Center>
         <SubmitButtonContainer>
           <SelectButtonContainer>
             <SecondaryButton
@@ -148,7 +147,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
               text={i18n.t('Actions.SelectPicture')}
             />
           </SelectButtonContainer>
-          <SendButtonContainer>
+          <Flex>
             <MainButton
               onPress={handleSubmitNewPhoto}
               disabled={!photo || isSendingForm}
@@ -158,7 +157,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
                   : i18n.t('Actions.Send')
               }
             />
-          </SendButtonContainer>
+          </Flex>
         </SubmitButtonContainer>
       </ScrollView>
     </>

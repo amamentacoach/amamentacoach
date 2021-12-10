@@ -19,18 +19,18 @@ const ThePremature: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const options: OptionListEntry[] = [
     {
-      image: IcVideo,
+      image: { source: IcVideo },
       title: i18n.t('ThePrematurePage.Option1'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['w2rbi3aW-rA'] }),
     },
     {
-      image: PrematureSurvey,
+      image: { source: PrematureSurvey },
       title: i18n.t('ThePrematurePage.Option2'),
       onPress: () => navigation.navigate('SurveyBreastfeed'),
     },
     {
-      image: PrematureBreastfeed,
+      image: { source: PrematureBreastfeed },
       title: i18n.t('ThePrematurePage.Option3'),
       onPress: () => navigation.navigate('StepByStepPremature'),
     },

@@ -12,7 +12,7 @@ import { PaddedScrollView } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
-import type { RootStackProps } from 'routes/app';
+import type { RootStackParamList, RootStackProps } from 'routes/app';
 
 import { CalendarButton, DateText, Header, HeaderTitle } from './styles';
 
@@ -33,9 +33,20 @@ const DiaryMenu: React.FC = () => {
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
 
+  async function navigateIfFirstRun(
+    storageId: string,
+    pageName: keyof RootStackParamList,
+  ): Promise<void> {
+    if (!(await storageIsToday(storageId))) {
+      navigation.navigate(pageName);
+    } else {
+      setIsModalVisible(true);
+    }
+  }
+
   const options: OptionListEntry[] = [
     {
-      image: PrematureBreastfeed,
+      image: { source: PrematureBreastfeed },
       title: i18n.t('DiaryMenuPage.Option1'),
       onPress: () =>
         navigation.navigate('DiaryBreastfeed', {
@@ -43,7 +54,7 @@ const DiaryMenu: React.FC = () => {
         }),
     },
     {
-      image: PrematureBreastfeed,
+      image: { source: PrematureBreastfeed },
       title: i18n.t('DiaryMenuPage.Option2'),
       onPress: () =>
         navigation.navigate('DiaryRegistry', {
@@ -51,62 +62,42 @@ const DiaryMenu: React.FC = () => {
         }),
     },
     {
-      image: DiarySmile,
+      image: { source: DiarySmile },
       title: i18n.t('DiaryMenuPage.Option3'),
-      onPress: async () => {
-        // Checa se o usuário já respondeu o formulário no dia.
-        if (!(await storageIsToday('@AmamentaCoach:DiaryFeelingsLastDate'))) {
-          navigation.navigate('Feelings');
-        } else {
-          setIsModalVisible(true);
-        }
-      },
+      onPress: () =>
+        navigateIfFirstRun('@AmamentaCoach:DiaryFeelingsLastDate', 'Feelings'),
     },
     {
-      image: DiaryStar,
+      image: { source: DiaryStar },
       title: i18n.t('DiaryMenuPage.Option4'),
       onPress: () => navigation.navigate('Goals'),
     },
     {
-      image: PrematureHeart,
+      image: { source: PrematureHeart },
       title: i18n.t('DiaryMenuPage.Option5'),
-      onPress: async () => {
-        // Checa se o usuário já respondeu o formulário no dia.
-        if (
-          !(await storageIsToday('@AmamentaCoach:DiaryHelpReceivedLastDate'))
-        ) {
-          navigation.navigate('HelpReceived');
-        } else {
-          setIsModalVisible(true);
-        }
-      },
+      onPress: () =>
+        navigateIfFirstRun(
+          '@AmamentaCoach:DiaryHelpReceivedLastDate',
+          'HelpReceived',
+        ),
     },
     {
-      image: Baby,
+      image: { source: Baby },
       title: i18n.t('DiaryMenuPage.Option6'),
-      onPress: async () => {
-        // Checa se o usuário já respondeu o formulário no dia.
-        if (!(await storageIsToday('@AmamentaCoach:DiaryBabyLastDate'))) {
-          navigation.navigate('DiaryBaby');
-        } else {
-          setIsModalVisible(true);
-        }
-      },
+      onPress: () =>
+        navigateIfFirstRun('@AmamentaCoach:DiaryBabyLastDate', 'DiaryBaby'),
     },
     {
-      image: Baby,
+      image: { source: Baby },
       title: i18n.t('DiaryMenuPage.Option7'),
-      onPress: async () => {
-        // Checa se o usuário já respondeu o formulário no dia.
-        if (!(await storageIsToday('@AmamentaCoach:DiaryActionsLastDate'))) {
-          navigation.navigate('DiaryActions');
-        } else {
-          setIsModalVisible(true);
-        }
-      },
+      onPress: () =>
+        navigateIfFirstRun(
+          '@AmamentaCoach:DiaryActionsLastDate',
+          'DiaryActions',
+        ),
     },
     {
-      image: Report,
+      image: { source: Report },
       title: i18n.t('DiaryMenuPage.Option8'),
       onPress: () => navigation.navigate('Report'),
     },
@@ -115,7 +106,7 @@ const DiaryMenu: React.FC = () => {
   // Exibe o upload de imagem do pai apenas se a mãe tem um companheiro.
   if (motherInfo.partner) {
     options.splice(7, 0, {
-      image: Father,
+      image: { source: Father },
       title: i18n.t('DiaryMenuPage.Option9'),
       subtitle: i18n.t('DiaryMenuPage.SubtextOption9'),
       onPress: () => navigation.navigate('UploadFatherPhoto'),

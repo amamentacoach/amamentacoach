@@ -5,7 +5,7 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 
 import PieChart from 'components/PieChart';
-import { ScrollView } from 'lib/sharedStyles';
+import { ScrollView, Flex } from 'lib/sharedStyles';
 import { listSurveyStatistics } from 'services/survey';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -19,7 +19,6 @@ import {
   HeaderBackground,
   HeaderText,
   Question,
-  QuestionContainer,
   QuestionIndex,
 } from './styles';
 
@@ -85,7 +84,7 @@ const SurveyStatistics: React.FC = () => {
               {i18n.t('SurveyStatisticsPage.FormSubmitted')}
             </ContentHeader>
             {statistics.map(({ id, question, options }, index) => (
-              <QuestionContainer key={id}>
+              <Flex key={id}>
                 <QuestionIndex>
                   {i18n.t('Question')} {(index + 1).toString().padStart(2, '0')}
                 </QuestionIndex>
@@ -93,7 +92,7 @@ const SurveyStatistics: React.FC = () => {
 
                 <PieChart label={question} data={options} />
                 {index !== statistics.length - 1 && <ContentSeparator />}
-              </QuestionContainer>
+              </Flex>
             ))}
           </>
         )}

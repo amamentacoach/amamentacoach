@@ -11,6 +11,7 @@ import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import SecondaryButton from 'components/SecondaryButton';
 import { useAuth } from 'contexts/auth';
+import { Flex } from 'lib/sharedStyles';
 import leaveResearch from 'services/leaveResearch';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -23,7 +24,6 @@ import {
   LeaveText,
   MainText,
   ScrollView,
-  SecondSubOptionContainer,
   SubmitButtonContainer,
 } from './styles';
 
@@ -58,12 +58,12 @@ const Confirm: React.FC<Page> = ({ index, flatListRef }) => {
             onPress={() => navigation.goBack()}
           />
         </FirstSubOptionContainer>
-        <SecondSubOptionContainer>
+        <Flex>
           <MainButton
             text={i18n.t('Next')}
             onPress={() => handleNextPage(index)}
           />
-        </SecondSubOptionContainer>
+        </Flex>
       </SubmitButtonContainer>
     </>
   );
@@ -159,13 +159,13 @@ const Leave: React.FC<Page> = () => {
                   onPress={() => navigation.goBack()}
                 />
               </FirstSubOptionContainer>
-              <SecondSubOptionContainer>
+              <Flex>
                 <MainButton
                   text={i18n.t('LeaveResearchPage.Leave')}
                   onPress={handleSubmit}
                   disabled={!dirty}
                 />
-              </SecondSubOptionContainer>
+              </Flex>
             </SubmitButtonContainer>
           </>
         )}

@@ -2,14 +2,15 @@ import { Action, AppScreen } from '@common/telemetria';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useEffect } from 'react';
+import { TouchableOpacity } from 'react-native';
 
 import { useAuth } from 'contexts/auth';
-import { PaddedScrollView } from 'lib/sharedStyles';
+import { PaddedScrollView, Line } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 
-import { Line, OptionButton, OptionText } from './styles';
+import { OptionText } from './styles';
 
 const ProfileMenu: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
@@ -27,17 +28,18 @@ const ProfileMenu: React.FC = () => {
 
   return (
     <PaddedScrollView>
-      <OptionButton onPress={() => navigation.navigate('NewPassword')}>
+      <TouchableOpacity onPress={() => navigation.navigate('NewPassword')}>
         <OptionText>{i18n.t('ProfileMenuPage.ChangePassword')}</OptionText>
-      </OptionButton>
+      </TouchableOpacity>
       <Line />
-      <OptionButton onPress={() => navigation.navigate('MenuTermsOfService')}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('MenuTermsOfService')}>
         <OptionText>{i18n.t('TermsOfService')}</OptionText>
-      </OptionButton>
+      </TouchableOpacity>
       <Line />
-      <OptionButton onPress={signOut}>
+      <TouchableOpacity onPress={signOut}>
         <OptionText>{i18n.t('Leave')}</OptionText>
-      </OptionButton>
+      </TouchableOpacity>
       <Line />
     </PaddedScrollView>
   );

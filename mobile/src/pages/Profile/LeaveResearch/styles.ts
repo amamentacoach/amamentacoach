@@ -41,10 +41,6 @@ export const FirstSubOptionContainer = styled.View`
   margin-right: 4px;
 `;
 
-export const SecondSubOptionContainer = styled.View`
-  flex: 1;
-`;
-
 export const SubmitButtonContainer = styled.View`
   flex: 1;
   flex-direction: row;

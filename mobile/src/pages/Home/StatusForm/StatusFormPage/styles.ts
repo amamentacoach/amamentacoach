@@ -54,7 +54,3 @@ export const FirstButtonContainer = styled.View`
   flex: 1;
   margin-right: 15px;
 `;
-
-export const SecondButtonContainer = styled.View`
-  flex: 1;
-`;

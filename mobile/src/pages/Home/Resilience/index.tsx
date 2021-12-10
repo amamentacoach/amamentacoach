@@ -34,22 +34,22 @@ const Resilience: React.FC = () => {
 
   const options: OptionListEntry[] = [
     {
-      image: ErlenmeyerPrimary,
+      image: { source: ErlenmeyerPrimary },
       title: i18n.t('ResiliencePage.Option1'),
       onPress: () => navigation.navigate('ManageExpectations'),
     },
     {
-      image: ErlenmeyerYellow,
+      image: { source: ErlenmeyerYellow },
       title: i18n.t('ResiliencePage.Option2'),
       onPress: () => navigation.navigate('Messages'),
     },
     {
-      image: ErlenmeyerGreen,
+      image: { source: ErlenmeyerGreen },
       title: i18n.t('ResiliencePage.Option3'),
       onPress: () => navigation.navigate('Diary'),
     },
     {
-      image: ErlenmeyerPink,
+      image: { source: ErlenmeyerPink },
       title: i18n.t('ResiliencePage.Option4'),
       onPress: () => navigation.navigate('UploadMotherPhoto'),
     },

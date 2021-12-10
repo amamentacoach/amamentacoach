@@ -20,22 +20,22 @@ const Premature: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const options: OptionListEntry[] = [
     {
-      image: PrematureBirth,
+      image: { source: PrematureBirth },
       title: i18n.t('PrematurePage.Header1'),
       onPress: () => navigation.navigate('NotWhatIExpected'),
     },
     {
-      image: PrematureBaby,
+      image: { source: PrematureBaby },
       title: i18n.t('PrematurePage.Header2'),
       onPress: () => navigation.navigate('ThePremature'),
     },
     {
-      image: PrematureHeart,
+      image: { source: PrematureHeart },
       title: i18n.t('PrematurePage.Header3'),
       onPress: () => navigation.navigate('UploadBabyPhoto'),
     },
     {
-      image: PrematureTrophy,
+      image: { source: PrematureTrophy },
       title: i18n.t('PrematurePage.Header4'),
       subtitle: i18n.t('PrematurePage.Subtitle5'),
       onPress: () => navigation.navigate('BreastfeedingBenefits'),

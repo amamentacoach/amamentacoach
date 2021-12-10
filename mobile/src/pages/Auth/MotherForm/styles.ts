@@ -34,17 +34,9 @@ export const SubOptionsContainer = styled.View`
   flex-direction: row;
 `;
 
-export const OptionPickerContainer = styled.View`
-  flex: 1;
-`;
-
 export const FirstSubOptionContainer = styled.View`
   flex: 1;
   margin-right: 4px;
-`;
-
-export const SecondSubOptionContainer = styled.View`
-  flex: 1;
 `;
 
 export const SubmitButtonContainer = styled.View`

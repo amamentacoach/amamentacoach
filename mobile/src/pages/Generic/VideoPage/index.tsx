@@ -1,9 +1,10 @@
 import { useRoute } from '@react-navigation/native';
-import { useCallback, useContext, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import { ThemeContext } from 'styled-components';
 
+import theme from 'config/theme';
 import { ScrollView } from 'lib/sharedStyles';
 import { setUserVideoSeen, setUserVideoStarted } from 'services/telemetry';
 

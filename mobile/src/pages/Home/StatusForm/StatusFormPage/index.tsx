@@ -10,6 +10,7 @@ import {
 import MainButton from 'components/MainButton';
 import SecondaryButton from 'components/SecondaryButton';
 import theme from 'config/theme';
+import { Flex } from 'lib/sharedStyles';
 
 import type { SurveyQuestion } from 'utils/getSurveyQuestions';
 
@@ -21,7 +22,6 @@ import {
   HeaderText,
   QuestionText,
   ScrollView,
-  SecondButtonContainer,
 } from './styles';
 
 export interface StatusFormQuestion extends SurveyQuestion {
@@ -153,7 +153,7 @@ const StatusFormPage: React.FC<PageProps> = ({
               />
             </FirstButtonContainer>
           )}
-          <SecondButtonContainer>
+          <Flex>
             <MainButton
               color={theme.babyBlue}
               text={
@@ -164,7 +164,7 @@ const StatusFormPage: React.FC<PageProps> = ({
               disabled={isSendingForm}
               onPress={() => handleChangePage(pageIndex, pageIndex + 1)}
             />
-          </SecondButtonContainer>
+          </Flex>
         </Footer>
       </ContentContainer>
     </ScrollView>

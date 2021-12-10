@@ -9,10 +9,6 @@ export const FlatlistContainer = styled.View`
   margin: 24px 24px 0px 24px;
 `;
 
-export const QuestionContainer = styled.View`
-  flex: 1;
-`;
-
 export const Question = styled.Text`
   font-family: 'OpenSans-Bold';
   font-size: 18px;
@@ -24,14 +20,6 @@ export const Answer = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
   color: ${props => props.theme.grey};
-`;
-
-export const Line = styled.View`
-  width: 100%;
-  height: 1px;
-  margin: 20px 0;
-  background-color: ${props => props.theme.grey};
-  opacity: 0.2;
 `;
 
 export const LoadingIndicator = styled.ActivityIndicator`

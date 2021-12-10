@@ -11,6 +11,7 @@ import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import { useAuth } from 'contexts/auth';
+import { Flex } from 'lib/sharedStyles';
 import { LoginStatus } from 'services/auth';
 
 import type { AuthStackProps } from 'routes/auth';
@@ -21,7 +22,6 @@ import {
   Header,
   NoAccountText,
   ScrollView,
-  SignUpContainer,
   SignUpText,
   SubmitButtonContainer,
 } from './styles';
@@ -147,12 +147,12 @@ const Login: React.FC = () => {
                 />
               </SubmitButtonContainer>
 
-              <SignUpContainer>
+              <Flex>
                 <NoAccountText>{i18n.t('LoginPage.NoAccount')}</NoAccountText>
                 <TouchableOpacity onPress={handleSignUp} activeOpacity={0.7}>
                   <SignUpText>{i18n.t('LoginPage.SignUp')}</SignUpText>
                 </TouchableOpacity>
-              </SignUpContainer>
+              </Flex>
             </FormContainer>
           )}
         </Formik>

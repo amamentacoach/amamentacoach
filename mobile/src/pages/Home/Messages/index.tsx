@@ -5,6 +5,7 @@ import { FlatList } from 'react-native';
 import { ThemeContext } from 'styled-components';
 
 import { formatWithLocale } from 'lib/date-fns';
+import { Flex, Line } from 'lib/sharedStyles';
 import { listMessages } from 'services/messages';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -17,9 +18,7 @@ import {
   DateText,
   Content,
   FlatlistContainer,
-  Line,
   LoadingIndicator,
-  MessageContainer,
 } from './styles';
 
 import AddIcon from '@assets/images/icons/ic_add.svg';
@@ -89,12 +88,12 @@ const Messages: React.FC = () => {
   }, [isFocused]);
 
   const Message: React.FC<IMessage> = ({ name, content, date }) => (
-    <MessageContainer>
+    <Flex>
       <Author>{name}</Author>
       <DateText>{formatWithLocale(new Date(date), 'P')}</DateText>
       <Content>{content}</Content>
       <Line />
-    </MessageContainer>
+    </Flex>
   );
 
   return (

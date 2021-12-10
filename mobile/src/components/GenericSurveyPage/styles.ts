@@ -6,10 +6,6 @@ interface CurrentPageContainerProps {
   color: string;
 }
 
-export const Container = styled.View`
-  flex: 1;
-`;
-
 export const CurrentPageContainer = styled.View<CurrentPageContainerProps>`
   background-color: ${({ color }) => color};
   border-radius: 3.6px;

@@ -15,12 +15,13 @@ import SecondaryButton from 'components/SecondaryButton';
 import Survey from 'components/Survey';
 import theme from 'config/theme';
 import { dateFormatVerbose } from 'lib/date-fns';
+import { Flex } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { SurveyPage } from 'components/Survey';
 import type { RootStackProps } from 'routes/app';
 
-import { Container, Footer, SecondFooterButtonContainer } from './styles';
+import { Footer, SecondFooterButtonContainer } from './styles';
 
 const Feelings: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
@@ -68,7 +69,7 @@ const Feelings: React.FC = () => {
     setFieldValue,
     handleChangePage,
   }) => (
-    <Container>
+    <Flex>
       <CurrentPageContainer color={color}>
         <CurrentPageText>
           {index + 1}/{pagesLength}
@@ -108,7 +109,7 @@ const Feelings: React.FC = () => {
           </SecondFooterButtonContainer>
         )}
       </Footer>
-    </Container>
+    </Flex>
   );
 
   return (

@@ -22,22 +22,22 @@ const Breastfeeding: React.FC = () => {
 
   const options: OptionListEntry[] = [
     {
-      image: WithdrawalQuestion,
+      image: { source: WithdrawalQuestion },
       title: i18n.t('BreastfeedingPage.1'),
       onPress: () => navigation.navigate('WhyBreastfeed'),
     },
     {
-      image: PrematureBreastfeed,
+      image: { source: PrematureBreastfeed },
       title: i18n.t('BreastfeedingPage.2'),
       onPress: () => navigation.navigate('HowToBreastfeed'),
     },
     {
-      image: WithdrawalCalendar,
+      image: { source: WithdrawalCalendar },
       title: i18n.t('BreastfeedingPage.3'),
       onPress: () => navigation.navigate('WhenToBreastfeed'),
     },
     {
-      image: WithdrawalClock,
+      image: { source: WithdrawalClock },
       title: i18n.t('BreastfeedingPage.4'),
       onPress: () => navigation.navigate('HowLongToBreastfeed'),
     },

@@ -10,7 +10,7 @@ import FormPickerInput from 'components/FormPickerInput';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import { useAuth } from 'contexts/auth';
-import { PaddedScrollView } from 'lib/sharedStyles';
+import { Flex, PaddedScrollView } from 'lib/sharedStyles';
 import { createBreastfeedEntry } from 'services/diaryRegistry';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -20,7 +20,6 @@ import {
   ErrorContainer,
   ErrorText,
   FirstOption,
-  FormContainer,
   FormContent,
   Header,
   MultipleOptionContainer,
@@ -148,7 +147,7 @@ const NewBreastfeedEntry: React.FC = () => {
           errors,
           values,
         }) => (
-          <FormContainer>
+          <Flex>
             <Header>{i18n.t('NewBreastfeedEntryPage.Header')}</Header>
             <FormContent>
               <FormPickerInput
@@ -183,25 +182,17 @@ const NewBreastfeedEntry: React.FC = () => {
               <MultipleOptionContainer>
                 <FirstOption
                   activeOpacity={1}
-                  onPress={() => {
-                    if (values.breastLeft) {
-                      setFieldValue('breastLeft', '');
-                    } else {
-                      setFieldValue('breastLeft', 'E');
-                    }
-                  }}>
+                  onPress={() =>
+                    setFieldValue('breastRight', values.breastRight ? '' : 'E')
+                  }>
                   {values.breastLeft ? <CheckedBox /> : <UncheckedBox />}
                   <OptionText>{i18n.t('Left')}</OptionText>
                 </FirstOption>
                 <SecondOption
                   activeOpacity={1}
-                  onPress={() => {
-                    if (values.breastRight) {
-                      setFieldValue('breastRight', '');
-                    } else {
-                      setFieldValue('breastRight', 'D');
-                    }
-                  }}>
+                  onPress={() =>
+                    setFieldValue('breastRight', values.breastRight ? '' : 'D')
+                  }>
                   {values.breastRight ? <CheckedBox /> : <UncheckedBox />}
                   <OptionText>{i18n.t('Right')}</OptionText>
                 </SecondOption>
@@ -226,7 +217,7 @@ const NewBreastfeedEntry: React.FC = () => {
                 }
               />
             </SubmitButtonContainer>
-          </FormContainer>
+          </Flex>
         )}
       </Formik>
     </PaddedScrollView>

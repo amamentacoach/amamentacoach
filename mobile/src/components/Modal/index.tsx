@@ -5,7 +5,7 @@ import {
   Container,
   Content,
   Line,
-  MaxHeightImage,
+  MaxWidthImage,
   Option,
   OptionsContainer,
   OptionText,
@@ -44,7 +44,7 @@ const Modal: React.FC<MainModalProps> = ({
       <Container>
         {content && <Content>{content}</Content>}
         {image && (
-          <MaxHeightImage
+          <MaxWidthImage
             source={image}
             resizeMode="contain"
             width="100%"

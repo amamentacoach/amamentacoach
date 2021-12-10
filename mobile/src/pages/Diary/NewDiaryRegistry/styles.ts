@@ -1,9 +1,5 @@
 import styled from 'styled-components/native';
 
-export const FormContainer = styled.View`
-  flex: 1;
-`;
-
 export const Header = styled.Text`
   font-family: 'OpenSans-Regular';
   font-size: 16px;
