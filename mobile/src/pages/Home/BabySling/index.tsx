@@ -53,10 +53,10 @@ const BabySling: React.FC = () => {
       <Container>
         <View>
           <ImageWrapper
-            source={Banner}
-            resizeMode="contain"
-            width={200}
             height={200}
+            resizeMode="contain"
+            source={Banner}
+            width={200}
           />
         </View>
         <Text>{i18n.t('BabySlingPage.Header')}</Text>

@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { ManjariRegular, OpenSansRegular } from 'lib/sharedStyles';
+
 export const HeaderBackground = styled.View`
   background-color: ${props => props.theme.babyGreen};
   align-items: center;
@@ -20,16 +22,13 @@ export const ImageContainer = styled.View`
   max-height: 250px;
 `;
 
-export const ContentHeader = styled.Text`
+export const ContentHeader = styled(ManjariRegular)`
   align-items: center;
   text-align: center;
-  font-family: 'Manjari-Regular';
-  font-size: 18px;
   margin: 20px;
 `;
 
-export const ContentText = styled.Text`
-  font-family: 'OpenSans-Regular';
+export const ContentText = styled(OpenSansRegular)`
   font-size: 14px;
   text-align: center;
   color: ${props => props.theme.grey};

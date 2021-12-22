@@ -60,7 +60,6 @@ const NewQuestion: React.FC = () => {
     <ScrollView>
       <Modal
         content={i18n.t('NewQuestionPage.QuestionSent')}
-        visible={isSubmitModalVisible}
         options={[
           {
             text: i18n.t('Close'),
@@ -68,41 +67,42 @@ const NewQuestion: React.FC = () => {
             onPress: () => setIsSubmitModalVisible(false),
           },
         ]}
+        visible={isSubmitModalVisible}
       />
 
       <HeaderText>{i18n.t('NewQuestionPage.SubmitYourQuestion')}</HeaderText>
       <Formik
         initialValues={formInitialValues}
-        validationSchema={newPasswordSchema}
         validateOnChange={false}
+        validationSchema={newPasswordSchema}
         onSubmit={values => handleNewQuestion(values)}>
         {({ setFieldValue, handleSubmit, dirty, errors }) => (
           <FormContainer>
             <View>
               <FormTextInput
+                error={errors.question}
+                maxLength={255}
+                numberOfLines={20}
+                placeholder={i18n.t('NewQuestionPage.QuestionPlaceholder')}
+                textAlignVertical="top"
+                value={textInputText}
+                multiline
                 onChangeText={(text: string) => {
                   setFieldValue('question', text);
                   setTextInputText(text);
                 }}
-                value={textInputText}
-                placeholder={i18n.t('NewQuestionPage.QuestionPlaceholder')}
-                error={errors.question}
-                multiline
-                numberOfLines={20}
-                maxLength={255}
-                textAlignVertical="top"
               />
             </View>
 
             <SubmitButtonContainer>
               <MainButton
-                onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
                 text={
                   isSendingForm
                     ? i18n.t('Status.Sending')
                     : i18n.t('Actions.Send')
                 }
+                onPress={handleSubmit}
               />
             </SubmitButtonContainer>
           </FormContainer>

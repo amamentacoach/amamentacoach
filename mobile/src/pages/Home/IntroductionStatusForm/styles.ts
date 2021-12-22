@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
+
 interface LastPageButtonWrapperProps {
   opacity: number;
 }
@@ -22,10 +24,8 @@ export const ImageContainer = styled.View`
   margin: 70px 0;
 `;
 
-export const ContentText = styled.Text`
+export const ContentText = styled(OpenSansRegular)`
   flex: 1;
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
   text-align: center;
   color: ${props => props.theme.grey};
 `;
@@ -48,19 +48,12 @@ export const LastPageBox = styled.View`
   border-radius: 3.6px;
 `;
 
-export const HeaderLastPageBox = styled.Text`
-  color: ${props => props.theme.primary};
+export const ColoredText = styled(OpenSansBold)`
   text-align: center;
-  font-family: 'OpenSans-Bold';
-  font-size: 16px;
-  margin: 10px 0;
 `;
 
-export const ColoredText = styled.Text`
-  color: ${props => props.theme.primary};
-  text-align: center;
-  font-family: 'OpenSans-Bold';
-  font-size: 16px;
+export const HeaderLastPageBox = styled(ColoredText)`
+  margin: 10px 0;
 `;
 
 export const LastPageButtonWrapper = styled.View<LastPageButtonWrapperProps>`

@@ -27,23 +27,23 @@ const TabNavigator: React.FC = () => {
         tabBarInactiveTintColor: theme.grey,
       }}>
       <Tab.Screen
-        name="Home"
         component={HomeMenu}
+        name="Home"
         options={{
           tabBarLabel: i18n.t('Begin'),
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <HomeIcon width={size} height={size} fill={color} />
+            <HomeIcon fill={color} height={size} width={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Diary"
         component={
           isFirstRun.persistent.diaryIntroduction
             ? DiaryIntroduction
             : DiaryMenu
         }
+        name="Diary"
         options={{
           tabBarLabel: i18n.t('Diary'),
           headerShown: false,
@@ -51,40 +51,40 @@ const TabNavigator: React.FC = () => {
             display: isFirstRun.persistent.diaryIntroduction ? 'none' : 'flex',
           },
           tabBarIcon: ({ color, size }) => (
-            <DiaryIcon height={size} width={size} fill={color} />
+            <DiaryIcon fill={color} height={size} width={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Survey"
         component={SurveyMenu}
+        name="Survey"
         options={{
           tabBarLabel: i18n.t('Survey', { count: 2 }),
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <SurveyIcon height={size} width={size} fill={color} />
+            <SurveyIcon fill={color} height={size} width={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Videos"
         component={VideosMenu}
+        name="Videos"
         options={{
           tabBarLabel: i18n.t('Video', { count: 2 }),
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <VideoIcon height={size} width={size} fill={color} />
+            <VideoIcon fill={color} height={size} width={size} />
           ),
         }}
       />
       <Tab.Screen
-        name="Profile"
         component={ProfileMenu}
+        name="Profile"
         options={{
           tabBarLabel: i18n.t('Profile'),
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <ProfileIcon height={size} width={size} fill={color} />
+            <ProfileIcon fill={color} height={size} width={size} />
           ),
         }}
       />

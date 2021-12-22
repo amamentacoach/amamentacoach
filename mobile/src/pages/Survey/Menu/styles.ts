@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { ManjariBold } from 'lib/sharedStyles';
+
 export const Header = styled.View`
   flex-direction: row;
   justify-content: center;
@@ -7,9 +9,6 @@ export const Header = styled.View`
   margin-bottom: 20px;
 `;
 
-export const HeaderTitle = styled.Text`
-  color: ${props => props.theme.black};
-  font-family: 'Manjari-Bold';
-  font-size: 18px;
+export const HeaderTitle = styled(ManjariBold)`
   text-align: center;
 `;

@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
+
 interface BackgroundProps {
   color: string;
 }
@@ -30,9 +32,7 @@ export const Foreground = styled.View<ForegroundProps>`
   align-items: center;
 `;
 
-export const ContentTitleText = styled.Text`
-  font-family: 'OpenSans-Bold';
-  color: ${props => props.theme.primary};
+export const ContentTitleText = styled(OpenSansBold)`
   font-size: 20px;
   text-align: center;
   margin: 24px;
@@ -46,17 +46,13 @@ export const ContentWrapper = styled.View<ContentProps>`
   margin-top: ${({ index }) => (index === 0 ? 10 : -200)}px;
 `;
 
-export const ContentHeaderText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
+export const ContentHeaderText = styled(OpenSansRegular)`
   text-align: center;
   color: ${props => props.theme.primary};
   margin-top: 20px;
 `;
 
-export const ContentText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
+export const ContentText = styled(OpenSansRegular)`
   text-align: center;
   color: ${props => props.theme.grey};
 `;
@@ -86,8 +82,7 @@ export const ContinueButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export const TextContinueButton = styled.Text`
+export const TextContinueButton = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
-  font-family: 'OpenSans-Regular';
   font-size: 18px;
 `;

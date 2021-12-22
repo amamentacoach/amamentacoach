@@ -2,17 +2,11 @@ import i18n from 'i18n-js';
 import { View } from 'react-native';
 
 import { formatWithLocale } from 'lib/date-fns';
+import { OpenSansRegular, OpenSansBold } from 'lib/sharedStyles';
 
 import type { BreastfeedEntry } from 'services/diaryRegistry';
 
-import {
-  BabyName,
-  Breastfeed,
-  Content,
-  Row,
-  Text,
-  TextContainer,
-} from './styles';
+import { BabyName, Breastfeed, Row, TextContainer } from './styles';
 
 const DiaryBreastfeedEntry: React.FC<BreastfeedEntry> = ({ name, entries }) => {
   if (entries.length <= 0) {
@@ -26,22 +20,24 @@ const DiaryBreastfeedEntry: React.FC<BreastfeedEntry> = ({ name, entries }) => {
         <Breastfeed key={id}>
           <Row>
             <TextContainer>
-              <Text>{i18n.t('Time')}: </Text>
-              <Content>{formatWithLocale(new Date(date), 'HH:mm')}</Content>
+              <OpenSansBold>{i18n.t('Time')}: </OpenSansBold>
+              <OpenSansRegular>
+                {formatWithLocale(new Date(date), 'HH:mm')}
+              </OpenSansRegular>
             </TextContainer>
             <TextContainer>
-              <Text>{i18n.t('Duration')}: </Text>
-              <Content>{duration} min</Content>
+              <OpenSansBold>{i18n.t('Duration')}: </OpenSansBold>
+              <OpenSansRegular>{duration} min</OpenSansRegular>
             </TextContainer>
           </Row>
           <Row>
             <TextContainer>
-              <Text>{i18n.t('Breast')}: </Text>
+              <OpenSansBold>{i18n.t('Breast')}: </OpenSansBold>
               {breasts.map((breast, index) => (
-                <Content key={breast}>
+                <OpenSansRegular key={breast}>
                   {index > 0 && ', '}
                   {breast === 'E' ? i18n.t('Left') : i18n.t('Right')}
-                </Content>
+                </OpenSansRegular>
               ))}
             </TextContainer>
           </Row>

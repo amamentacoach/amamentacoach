@@ -43,139 +43,139 @@ const CreateHomeRoutes = (Stack: StackScreens): JSX.Element[] => {
 
   return [
     <Stack.Screen
+      component={AdditionalInformation}
       key="AdditionalInformation"
       name="AdditionalInformation"
-      component={AdditionalInformation}
       options={{ title: i18n.t('HomePage.Option5') }}
     />,
     <Stack.Screen
+      component={BabyCup}
       key="BabyCup"
       name="BabyCup"
-      component={BabyCup}
       options={{ title: i18n.t('PageTitles.2') }}
     />,
     <Stack.Screen
+      component={BabySling}
       key="BabySling"
       name="BabySling"
-      component={BabySling}
       options={{ title: i18n.t('BabySlingPage.PageName') }}
     />,
     <Stack.Screen
+      component={Breastfeeding}
       key="Breastfeeding"
       name="Breastfeeding"
-      component={Breastfeeding}
       options={{ title: i18n.t('PageTitles.11') }}
     />,
     <Stack.Screen
+      component={BreastfeedingBenefits}
       key="BreastfeedingBenefits"
       name="BreastfeedingBenefits"
-      component={BreastfeedingBenefits}
       options={{ title: i18n.t('Infograph') }}
     />,
     <Stack.Screen
+      component={Distractions}
       key="Distractions"
       name="Distractions"
-      component={Distractions}
       options={{ title: i18n.t('EmotionsAndBreastfeedingPage.1') }}
     />,
     <Stack.Screen
+      component={EmotionsAndBreastfeeding}
       key="EmotionsAndBreastfeeding"
       name="EmotionsAndBreastfeeding"
-      component={EmotionsAndBreastfeeding}
       options={{ title: i18n.t('HomePage.Option4') }}
     />,
     <Stack.Screen
+      component={HowLongToBreastfeed}
       key="HowLongToBreastfeed"
       name="HowLongToBreastfeed"
-      component={HowLongToBreastfeed}
       options={{ title: i18n.t('PageTitles.11') }}
     />,
     <Stack.Screen
+      component={HowToBreastfeed}
       key="HowToBreastfeed"
       name="HowToBreastfeed"
-      component={HowToBreastfeed}
       options={{ title: i18n.t('PageTitles.11') }}
     />,
     <Stack.Screen
+      component={HU}
       key="HU"
       name="HU"
-      component={HU}
       options={{ title: i18n.t('PageTitles.1') }}
     />,
     <Stack.Screen
+      component={ManageExpectations}
       key="ManageExpectations"
       name="ManageExpectations"
-      component={ManageExpectations}
       options={{ title: i18n.t('Expectations') }}
     />,
     <Stack.Screen
+      component={Messages}
       key="Messages"
       name="Messages"
-      component={Messages}
       options={{ title: i18n.t('PageTitles.3') }}
     />,
     <Stack.Screen
+      component={MilkAdditionalInformation}
       key="MilkAdditionalInformation"
       name="MilkAdditionalInformation"
-      component={MilkAdditionalInformation}
       options={{ title: i18n.t('PageTitles.4') }}
     />,
     <Stack.Screen
+      component={MusicPlaylists}
       key="MusicPlaylists"
       name="MusicPlaylists"
-      component={MusicPlaylists}
       options={{ title: i18n.t('DistractionsPage.3') }}
     />,
     <Stack.Screen
+      component={NewMessage}
       key="NewMessage"
       name="NewMessage"
-      component={NewMessage}
       options={{ title: i18n.t('NewMessagePage.SendMessage') }}
     />,
     <Stack.Screen
+      component={NewQuestion}
       key="NewQuestion"
       name="NewQuestion"
-      component={NewQuestion}
       options={{ title: i18n.t('Actions.SendQuestion') }}
     />,
     <Stack.Screen
+      component={Credits}
       key="Credits"
       name="Credits"
-      component={Credits}
       options={{ title: i18n.t('HomePage.Option8') }}
     />,
     <Stack.Screen
+      component={NotWhatIExpected}
       key="NotWhatIExpected"
       name="NotWhatIExpected"
-      component={NotWhatIExpected}
       options={{ title: i18n.t('PageTitles.5'), ...headerBabyGreen }}
     />,
     <Stack.Screen
+      component={Premature}
       key="Premature"
       name="Premature"
-      component={Premature}
       options={{ title: i18n.t('PageTitles.5') }}
     />,
     <Stack.Screen
+      component={Questions}
       key="Questions"
       name="Questions"
-      component={Questions}
       options={{ title: i18n.t('HomePage.Option7') }}
     />,
     <Stack.Screen
+      component={Resilience}
       key="Resilience"
       name="Resilience"
-      component={Resilience}
       options={{ title: i18n.t('PageTitles.6') }}
     />,
     <Stack.Screen
-      key="StatusForm"
-      name="StatusForm"
       component={
         isFirstRun.persistent.statusFormIntroduction
           ? IntroductionStatusForm
           : StatusForm
       }
+      key="StatusForm"
+      name="StatusForm"
       options={
         isFirstRun.persistent.statusFormIntroduction
           ? { title: i18n.t('StatusFormPage.FormName', { count: 1 }) }
@@ -186,45 +186,45 @@ const CreateHomeRoutes = (Stack: StackScreens): JSX.Element[] => {
       }
     />,
     <Stack.Screen
+      component={StepByStepPremature}
       key="StepByStepPremature"
       name="StepByStepPremature"
-      component={StepByStepPremature}
       options={{ title: i18n.t('Infograph') }}
     />,
     <Stack.Screen
+      component={ThePremature}
       key="ThePremature"
       name="ThePremature"
-      component={ThePremature}
       options={{ title: i18n.t('PageTitles.7') }}
     />,
     <Stack.Screen
+      component={UploadBabyPhoto}
       key="UploadBabyPhoto"
       name="UploadBabyPhoto"
-      component={UploadBabyPhoto}
       options={{ title: i18n.t('PageTitles.8') }}
     />,
     <Stack.Screen
+      component={UploadFatherPhoto}
       key="UploadFatherPhoto"
       name="UploadFatherPhoto"
-      component={UploadFatherPhoto}
       options={{ title: i18n.t('PageTitles.9') }}
     />,
     <Stack.Screen
+      component={UploadMotherPhoto}
       key="UploadMotherPhoto"
       name="UploadMotherPhoto"
-      component={UploadMotherPhoto}
       options={{ title: i18n.t('PageTitles.10') }}
     />,
     <Stack.Screen
+      component={WhenToBreastfeed}
       key="WhenToBreastfeed"
       name="WhenToBreastfeed"
-      component={WhenToBreastfeed}
       options={{ title: i18n.t('PageTitles.11') }}
     />,
     <Stack.Screen
+      component={WhyBreastfeed}
       key="WhyBreastfeed"
       name="WhyBreastfeed"
-      component={WhyBreastfeed}
       options={{ title: i18n.t('PageTitles.11') }}
     />,
   ];

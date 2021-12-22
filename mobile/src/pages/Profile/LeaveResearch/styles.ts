@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { OpenSansRegular } from 'lib/sharedStyles';
+
 interface ContainerProps {
   width: number;
 }
@@ -17,16 +19,12 @@ export const Container = styled.View`
   padding: 24px;
 `;
 
-export const LeaveText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
+export const LeaveText = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
   text-align: center;
 `;
 
-export const MainText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
+export const MainText = styled(OpenSansRegular)`
   text-align: center;
   line-height: 22px;
   margin-top: 8px;

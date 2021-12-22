@@ -2,6 +2,7 @@ import i18n from 'i18n-js';
 
 import ImageWrapper from 'components/ImageWrapper';
 import ProgressDots from 'components/ProgressDots';
+import { OpenSansRegular } from 'lib/sharedStyles';
 
 import type { InfoPageModelProps } from 'components/InformationPages';
 
@@ -17,7 +18,6 @@ import {
   ImageContainer,
   LastPageButtonWrapper,
   SkipButton,
-  SkipButtonText,
   TextContainer,
   TextEndButton,
 } from './styles';
@@ -45,7 +45,7 @@ const createGenericInfoPage = ({
         {displaySkipButton && (
           <SkipButton onPress={onEnd}>
             {index < pagesLength - 1 && (
-              <SkipButtonText>{i18n.t('Skip')}</SkipButtonText>
+              <OpenSansRegular>{i18n.t('Skip')}</OpenSansRegular>
             )}
           </SkipButton>
         )}
@@ -55,10 +55,10 @@ const createGenericInfoPage = ({
         {image && (
           <ImageContainer>
             <ImageWrapper
-              source={image}
-              width={250}
               height="100%"
               resizeMode="contain"
+              source={image}
+              width={250}
             />
           </ImageContainer>
         )}
@@ -75,8 +75,8 @@ const createGenericInfoPage = ({
         <CurrentPageWrapper>
           <ProgressDots
             flatlistRef={flatListRef}
-            selectedIndex={index}
             length={pagesLength}
+            selectedIndex={index}
           />
         </CurrentPageWrapper>
         <LastPageButtonWrapper opacity={index === pagesLength - 1 ? 1 : 0}>

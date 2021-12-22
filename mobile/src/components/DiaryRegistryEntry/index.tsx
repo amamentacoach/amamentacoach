@@ -1,10 +1,11 @@
 import i18n from 'i18n-js';
 
 import { formatWithLocale } from 'lib/date-fns';
+import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
 
 import type { ExtractionEntry } from 'services/diaryRegistry';
 
-import { Content, Registry, Row, Text, TextContainer } from './styles';
+import { Registry, Row, TextContainer } from './styles';
 
 const DiaryRegistryEntry: React.FC<ExtractionEntry> = ({
   breasts,
@@ -16,29 +17,31 @@ const DiaryRegistryEntry: React.FC<ExtractionEntry> = ({
     <Registry>
       <Row>
         <TextContainer>
-          <Text>{i18n.t('Time')}: </Text>
-          <Content>{formatWithLocale(new Date(date), 'HH:mm')}</Content>
+          <OpenSansBold>{i18n.t('Time')}: </OpenSansBold>
+          <OpenSansRegular>
+            {formatWithLocale(new Date(date), 'HH:mm')}
+          </OpenSansRegular>
         </TextContainer>
         <TextContainer>
-          <Text>{i18n.t('Duration')}: </Text>
-          <Content>{duration} min</Content>
+          <OpenSansBold>{i18n.t('Duration')}: </OpenSansBold>
+          <OpenSansRegular>{duration} min</OpenSansRegular>
         </TextContainer>
       </Row>
       <Row>
         <TextContainer>
-          <Text>{i18n.t('Breast')}: </Text>
+          <OpenSansBold>{i18n.t('Breast')}: </OpenSansBold>
           <TextContainer>
             {breasts.map((breast, index) => (
-              <Content key={breast}>
+              <OpenSansRegular key={breast}>
                 {index > 0 && ', '}
                 {breast === 'E' ? i18n.t('Left') : i18n.t('Right')}
-              </Content>
+              </OpenSansRegular>
             ))}
           </TextContainer>
         </TextContainer>
         <TextContainer>
-          <Text>{i18n.t('Quantity')}: </Text>
-          <Content>{quantity} ml</Content>
+          <OpenSansBold>{i18n.t('Quantity')}: </OpenSansBold>
+          <OpenSansRegular>{quantity} ml</OpenSansRegular>
         </TextContainer>
       </Row>
     </Registry>

@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { OpenSansRegular } from 'lib/sharedStyles';
+
 interface ScrollViewProps {
   width: number;
 }
@@ -19,10 +21,8 @@ export const HeaderBackground = styled.View`
   height: 170px;
 `;
 
-export const HeaderText = styled.Text`
-  color: ${props => props.theme.black};
+export const HeaderText = styled(OpenSansRegular)`
   text-align: center;
-  font-family: 'OpenSans-Regular';
   font-size: 18px;
   margin: -150px 24px 10px 24px;
 `;
@@ -35,12 +35,9 @@ export const ContentContainer = styled.View`
   flex: 1;
 `;
 
-export const QuestionText = styled.Text`
+export const QuestionText = styled(OpenSansRegular)`
   text-align: center;
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
   margin: 15px 0;
-  color: ${props => props.theme.black};
 `;
 
 export const Footer = styled.View`

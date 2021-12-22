@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 
-export const Header = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
+import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
+
+export const Header = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
   margin-bottom: 15px;
   text-align: center;
@@ -31,16 +31,12 @@ export const SecondOption = styled.TouchableOpacity`
   flex-direction: row;
 `;
 
-export const OptionHeader = styled.Text`
-  font-family: 'OpenSans-Bold';
-  font-size: 16px;
+export const OptionHeader = styled(OpenSansBold)`
   color: ${props => props.theme.grey};
   margin-bottom: 15px;
 `;
 
-export const OptionText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
+export const OptionText = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
   margin-left: 15px;
 `;
@@ -48,10 +44,4 @@ export const OptionText = styled.Text`
 export const ErrorContainer = styled.View`
   flex: 1;
   min-height: 20px;
-`;
-
-export const ErrorText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  color: ${props => props.theme.error};
-  font-size: 14px;
 `;

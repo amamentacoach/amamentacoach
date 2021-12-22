@@ -310,8 +310,8 @@ const Home: React.FC = () => {
             {babiesData.map((baby, index) => (
               <View key={baby.id}>
                 <ModalOption
-                  onPress={() => handleBabySelected(index)}
-                  activeOpacity={0.7}>
+                  activeOpacity={0.7}
+                  onPress={() => handleBabySelected(index)}>
                   <OuterCircle selected={selectedModalOptions[index].selected}>
                     <InnerCircle
                       selected={selectedModalOptions[index].selected}
@@ -324,12 +324,12 @@ const Home: React.FC = () => {
                   <LocationContainer>
                     <FormPickerInput
                       fieldName=""
-                      placeholder={i18n.t('HomePage.BabyLocation')}
                       options={[
                         i18n.t('Lodging'),
                         i18n.t('Home'),
                         i18n.t('UCI'),
                       ]}
+                      placeholder={i18n.t('HomePage.BabyLocation')}
                       onChange={(_, value) =>
                         handleBabyLocationSelected(index, value)
                       }
@@ -349,8 +349,8 @@ const Home: React.FC = () => {
           </HeaderBackground>
           <BannerImage source={Banner}>
             <HUButton
-              onPress={() => navigation.navigate('HU')}
-              activeOpacity={0.7}>
+              activeOpacity={0.7}
+              onPress={() => navigation.navigate('HU')}>
               <HUButtonText>{i18n.t('HomePage.HUButton')}</HUButtonText>
             </HUButton>
           </BannerImage>

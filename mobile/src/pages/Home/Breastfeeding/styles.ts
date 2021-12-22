@@ -1,9 +1,9 @@
 import styled from 'styled-components/native';
 
-export const HeaderText = styled.Text`
+import { OpenSansRegular } from 'lib/sharedStyles';
+
+export const HeaderText = styled(OpenSansRegular)`
   margin-bottom: 12px;
   color: ${props => props.theme.grey};
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
   text-align: center;
 `;

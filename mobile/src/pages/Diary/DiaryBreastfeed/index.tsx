@@ -74,9 +74,9 @@ const DiaryBreastfeed: React.FC = () => {
         <ListContainer>
           {isLoading ? (
             <ActivityIndicator
-              size="large"
-              color={theme.primary}
               animating={isLoading}
+              color={theme.primary}
+              size="large"
             />
           ) : (
             registries.map(entry => (

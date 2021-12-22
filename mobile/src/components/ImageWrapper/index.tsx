@@ -35,8 +35,8 @@ const ImageWrapper: React.FC<WrapperImageType> = ({
     // Arquivo png
     <ReactImage
       {...props}
-      style={[style, { ...size[0] }, { ...size[1] }]}
       source={File}
+      style={[style, { ...size[0] }, { ...size[1] }]}
     />
   );
 };

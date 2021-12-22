@@ -1,20 +1,19 @@
 import styled from 'styled-components/native';
 
+import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
+
 export const Header = styled.View`
   margin: 0 auto;
   padding: 20px;
 `;
 
-export const HeaderText = styled.Text`
+export const HeaderText = styled(OpenSansBold)`
   font-size: 18px;
-  font-family: 'OpenSans-Bold';
-  color: ${props => props.theme.primary};
   text-align: center;
 `;
 
-export const HeaderSubText = styled.Text`
+export const HeaderSubText = styled(OpenSansRegular)`
   font-size: 14px;
-  font-family: 'OpenSans-Regular';
   margin: 0 auto;
   text-align: center;
   padding-top: 20px;

@@ -54,39 +54,39 @@ const AuthRoutes: React.FC = () => {
       }}>
       {isFirstRun.persistent.appIntroduction && (
         <Stack.Screen
-          name="Introduction"
           component={Introduction}
+          name="Introduction"
           options={{ headerShown: false }}
         />
       )}
       <Stack.Screen
-        name="Login"
         component={Login}
+        name="Login"
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="ForgotPassword"
         component={ForgotPassword}
+        name="ForgotPassword"
         options={{ title: i18n.t('LoginPage.ForgotPassword') }}
       />
       <Stack.Screen
-        name="SignUp"
         component={SignUp}
+        name="SignUp"
         options={{ title: i18n.t('SignUp') }}
       />
       <Stack.Screen
-        name="MotherForm"
         component={MotherForm}
+        name="MotherForm"
         options={{ title: i18n.t('SignUp') }}
       />
       <Stack.Screen
-        name="BabyForm"
         component={BabyForm}
+        name="BabyForm"
         options={{ title: i18n.t('SignUp') }}
       />
       <Stack.Screen
-        name="AcceptTermsOfService"
         component={AcceptTermsOfService}
+        name="AcceptTermsOfService"
         options={{ title: i18n.t('SignUp') }}
       />
     </Stack.Navigator>

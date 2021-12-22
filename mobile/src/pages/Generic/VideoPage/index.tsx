@@ -34,9 +34,9 @@ const VideoPage: React.FC = () => {
       {isLoading && (
         <LoadingContainer>
           <ActivityIndicator
-            size="large"
-            color={theme.primary}
             animating={isLoading}
+            color={theme.primary}
+            size="large"
           />
         </LoadingContainer>
       )}
@@ -45,10 +45,10 @@ const VideoPage: React.FC = () => {
           <VideoContainer key={id}>
             <YoutubePlayer
               height={height / 3}
-              videoId={id}
               initialPlayerParams={{ loop: false }}
-              onReady={() => setIsLoading(false)}
+              videoId={id}
               onChangeState={onStateChange}
+              onReady={() => setIsLoading(false)}
             />
           </VideoContainer>
         ))}

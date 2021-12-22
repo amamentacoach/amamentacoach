@@ -41,18 +41,17 @@ const BabyCup: React.FC = () => {
       {isLoadingVideo && (
         <LoadingContainer>
           <ActivityIndicator
-            size="large"
-            color={theme.primary}
             animating={isLoadingVideo}
+            color={theme.primary}
+            size="large"
           />
         </LoadingContainer>
       )}
       <VideoContainer display={!isLoadingVideo}>
         <YoutubePlayer
           height={height / 3}
-          videoId="-VBk8v8TOrE"
           initialPlayerParams={{ loop: false }}
-          onReady={() => setIsLoadingVideo(false)}
+          videoId="-VBk8v8TOrE"
           webViewProps={{
             injectedJavaScript: `
             var element = document.getElementsByClassName('container')[0];
@@ -60,6 +59,7 @@ const BabyCup: React.FC = () => {
             true;
           `,
           }}
+          onReady={() => setIsLoadingVideo(false)}
         />
       </VideoContainer>
       {steps.map((step, index) => (

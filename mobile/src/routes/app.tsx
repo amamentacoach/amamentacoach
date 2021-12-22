@@ -93,9 +93,9 @@ const AppRoutes: React.FC = () => {
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}>
       <Stack.Screen
+        component={TabNavigator}
         key="TabNavigator"
         name="TabNavigator"
-        component={TabNavigator}
         options={{ headerShown: false }}
       />
       {createHomeRoutes(Stack)}
@@ -103,9 +103,9 @@ const AppRoutes: React.FC = () => {
       {createSurveyRoutes(Stack)}
       {createProfileRoutes(Stack)}
       <Stack.Screen
+        component={VideoPage}
         key="VideoPage"
         name="VideoPage"
-        component={VideoPage}
         options={{ title: i18n.t('Video', { count: 1 }) }}
       />
     </Stack.Navigator>

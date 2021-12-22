@@ -1,12 +1,12 @@
 import styled from 'styled-components/native';
 
+import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
+
 interface VideoContainerProps {
   display: boolean;
 }
 
-export const VideoLink = styled.Text`
-  color: ${props => props.theme.primary};
-  font-family: 'OpenSans-Bold';
+export const VideoLink = styled(OpenSansBold)`
   font-size: 18px;
   align-self: center;
 `;
@@ -29,17 +29,13 @@ export const InstructionContainer = styled.View`
   margin-bottom: 24px;
 `;
 
-export const Step = styled.Text`
-  color: ${props => props.theme.primary};
-  font-family: 'OpenSans-Bold';
+export const Step = styled(OpenSansBold)`
   font-size: 18px;
   margin-right: 5px;
 `;
 
-export const Instruction = styled.Text`
+export const Instruction = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
   text-align: justify;
   flex-shrink: 1;
 `;

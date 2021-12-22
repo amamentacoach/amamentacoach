@@ -109,22 +109,22 @@ const IntroductionStatusForm: React.FC = () => {
         <CurrentPageWrapper>
           <ProgressDots
             flatlistRef={flatListRef}
-            selectedIndex={index}
             length={pagesLength}
+            selectedIndex={index}
           />
         </CurrentPageWrapper>
         <LastPageButtonWrapper opacity={index === pagesLength - 1 ? 1 : 0}>
           <MainButton
+            disabled={index !== pagesLength - 1}
             text={i18n.t('LetsStart')}
             onPress={handleEndIntroduction}
-            disabled={index !== pagesLength - 1}
           />
         </LastPageButtonWrapper>
       </Footer>
     </>
   );
 
-  return <InformationPages data={pages} PageModel={InfoModel} />;
+  return <InformationPages PageModel={InfoModel} data={pages} />;
 };
 
 export default IntroductionStatusForm;

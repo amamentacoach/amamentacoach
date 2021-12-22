@@ -79,31 +79,31 @@ const Feelings: React.FC = () => {
 
       <FormRadioGroupInput
         color={color}
-        fieldName={`${question.id}`}
-        options={question.options}
-        multipleSelection={question.multipleSelection}
         displayOtherField={question.displayOther}
         error={isFormValid ? '' : i18n.t('Yup.AnswerRequired')}
+        fieldName={`${question.id}`}
+        multipleSelection={question.multipleSelection}
+        options={question.options}
         onChange={setFieldValue}
       />
 
       <Footer>
         <MainButton
           color={color}
+          disabled={!isDirty || isSendingForm}
           text={
             index === pagesLength - 1
               ? i18n.t('FeelingsPage.SaveGoals')
               : i18n.t('Next')
           }
-          disabled={!isDirty || isSendingForm}
           onPress={() => handleChangePage(index + 1, onFormEndGoals)}
         />
         {index === pagesLength - 1 && (
           <SecondFooterButtonContainer>
             <SecondaryButton
               color={color}
-              text={i18n.t('Actions.SaveAndExit')}
               disabled={!isDirty || isSendingForm}
+              text={i18n.t('Actions.SaveAndExit')}
               onPress={() => handleChangePage(index + 1, onFormEndDiary)}
             />
           </SecondFooterButtonContainer>
@@ -114,10 +114,10 @@ const Feelings: React.FC = () => {
 
   return (
     <Survey
-      title={currentDate}
-      color={theme.babyPurple}
-      category={2}
       Page={FormPage}
+      category={2}
+      color={theme.babyPurple}
+      title={currentDate}
       onFeedbackAccepted={() => setFormSent('SurveyComponent.ReadFeedback')}
     />
   );

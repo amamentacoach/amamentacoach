@@ -144,10 +144,10 @@ const DiaryMenu: React.FC = () => {
       <PaddedScrollView>
         {showCalendar && (
           <DateTimePicker
+            maximumDate={new Date()}
+            mode="date"
             testID="dateTimePicker"
             value={selectedDate}
-            mode="date"
-            maximumDate={new Date()}
             onChange={(_: Event, date?: Date) => handleDateSelected(date)}
           />
         )}
@@ -155,8 +155,8 @@ const DiaryMenu: React.FC = () => {
         <Header>
           <HeaderTitle>{i18n.t('Diary')}</HeaderTitle>
           <CalendarButton
-            onPress={() => setShowCalendar(true)}
-            activeOpacity={0.7}>
+            activeOpacity={0.7}
+            onPress={() => setShowCalendar(true)}>
             <CalendarIcon />
           </CalendarButton>
         </Header>

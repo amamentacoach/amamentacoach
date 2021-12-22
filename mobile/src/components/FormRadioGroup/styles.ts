@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { OpenSansRegular } from 'lib/sharedStyles';
+
 interface OptionProps {
   color?: string;
   selected?: boolean;
@@ -10,9 +12,7 @@ export const Container = styled.View`
   width: 100%;
 `;
 
-export const LabelText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  color: ${props => props.theme.black};
+export const LabelText = styled(OpenSansRegular)`
   font-size: 14px;
 `;
 
@@ -63,6 +63,7 @@ export const OuterCircle = styled.View<OptionProps>`
   border-radius: 9px;
   align-items: center;
   justify-content: center;
+  margin-left: 6px;
 `;
 
 export const InnerCircle = styled.View<OptionProps>`
@@ -92,16 +93,4 @@ export const TextOption = styled.Text<OptionProps>`
 
 export const OtherInputContainer = styled.View`
   margin-top: 10px;
-`;
-
-export const ErrorContainer = styled.View`
-  flex: 1;
-  min-height: 20px;
-  margin-top: 5px;
-`;
-
-export const ErrorText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  color: ${props => props.theme.error};
-  font-size: 14px;
 `;

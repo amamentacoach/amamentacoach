@@ -46,8 +46,8 @@ const OptionsList: React.FC<OptionListProps> = ({
           <OptionButton activeOpacity={0.7} onPress={onPress}>
             {image?.source && (
               <ImageWrapper
-                source={image.source}
                 height={image.height ?? 70}
+                source={image.source}
                 width={image.width ?? 70}
               />
             )}

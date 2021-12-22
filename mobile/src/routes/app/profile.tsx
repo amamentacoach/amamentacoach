@@ -10,27 +10,27 @@ import type { StackScreens } from 'routes/config/getNavigatorType';
 const CreateProfileRoutes = (Stack: StackScreens): JSX.Element[] => {
   return [
     <Stack.Screen
+      component={NewPassword}
       key="NewPassword"
       name="NewPassword"
-      component={NewPassword}
       options={{ title: i18n.t('ProfileMenuPage.ChangePassword') }}
     />,
     <Stack.Screen
+      component={MenuTermsOfService}
       key="MenuTermsOfService"
       name="MenuTermsOfService"
-      component={MenuTermsOfService}
       options={{ title: i18n.t('TermsOfService') }}
     />,
     <Stack.Screen
+      component={ReadTermsOfService}
       key="ReadTermsOfService"
       name="ReadTermsOfService"
-      component={ReadTermsOfService}
       options={{ title: i18n.t('TermsOfService') }}
     />,
     <Stack.Screen
+      component={LeaveResearch}
       key="LeaveResearch"
       name="LeaveResearch"
-      component={LeaveResearch}
       options={{ title: i18n.t('LeaveResearchPage.Text') }}
     />,
   ];

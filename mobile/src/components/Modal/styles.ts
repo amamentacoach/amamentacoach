@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 import ImageWrapper from 'components/ImageWrapper';
-import { Line as SharedLine } from 'lib/sharedStyles';
+import { Line as SharedLine, OpenSansRegular } from 'lib/sharedStyles';
 
 interface OptionTextProps {
   color?: string;
@@ -18,9 +18,7 @@ export const Container = styled.View`
   border-radius: 3.6px;
 `;
 
-export const Content = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
+export const Content = styled(OpenSansRegular)`
   text-align: center;
 `;
 

@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
+
 export const HeaderBackground = styled.View`
   background-color: ${props => props.theme.babyBlue};
   align-items: center;
@@ -7,10 +9,8 @@ export const HeaderBackground = styled.View`
   height: 170px;
 `;
 
-export const HeaderText = styled.Text`
-  color: ${props => props.theme.black};
+export const HeaderText = styled(OpenSansRegular)`
   text-align: center;
-  font-family: 'OpenSans-Regular';
   font-size: 18px;
   margin: -150px 24px 10px 24px;
 `;
@@ -23,26 +23,21 @@ export const ContentContainer = styled.View`
   flex: 1;
 `;
 
-export const ContentHeader = styled.Text`
+export const ContentHeader = styled(OpenSansBold)`
   color: ${props => props.theme.black};
   text-align: center;
-  font-family: 'OpenSans-Bold';
-  font-size: 16px;
   margin-bottom: 25px;
 `;
 
-export const QuestionIndex = styled.Text`
+export const QuestionIndex = styled(OpenSansBold)`
   color: ${props => props.theme.black};
   text-align: center;
-  font-family: 'OpenSans-Bold';
-  font-size: 16px;
   margin-bottom: 10px;
 `;
 
-export const Question = styled.Text`
+export const Question = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
   text-align: center;
-  font-family: 'OpenSans-Normal';
   font-size: 14px;
   margin-bottom: 12px;
 `;

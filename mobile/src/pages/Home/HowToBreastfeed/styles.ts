@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
+
 interface LastPageButtonWrapperProps {
   opacity: number;
 }
@@ -13,16 +15,12 @@ export const CurrentPageContainer = styled.View`
   min-width: 70px;
 `;
 
-export const CurrentPageText = styled.Text`
+export const CurrentPageText = styled(OpenSansBold)`
   text-align: center;
-  font-family: 'OpenSans-Bold';
-  font-size: 16px;
   color: ${props => props.theme.black};
 `;
 
-export const ContentTitleText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  color: ${props => props.theme.black};
+export const ContentTitleText = styled(OpenSansRegular)`
   font-size: 18px;
   text-align: center;
   margin: 20px 24px 0 24px;
@@ -35,9 +33,7 @@ export const ContentWrapper = styled.View`
   margin: 24px 24px 0 24px;
 `;
 
-export const ContentText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
+export const ContentText = styled(OpenSansRegular)`
   text-align: center;
   color: ${props => props.theme.grey};
 `;
@@ -64,8 +60,7 @@ export const ContinueButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export const TextContinueButton = styled.Text`
+export const TextContinueButton = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
-  font-family: 'OpenSans-Regular';
   font-size: 18px;
 `;

@@ -77,7 +77,7 @@ const SurveyStatistics: React.FC = () => {
 
       <ContentContainer>
         {loading ? (
-          <ActivityIndicator size="large" color="#7d5cd7" animating={loading} />
+          <ActivityIndicator animating={loading} color="#7d5cd7" size="large" />
         ) : (
           <>
             <ContentHeader>
@@ -90,7 +90,7 @@ const SurveyStatistics: React.FC = () => {
                 </QuestionIndex>
                 <Question>{question}</Question>
 
-                <PieChart label={question} data={options} />
+                <PieChart data={options} label={question} />
                 {index !== statistics.length - 1 && <ContentSeparator />}
               </Flex>
             ))}

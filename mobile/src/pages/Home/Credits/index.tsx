@@ -21,8 +21,8 @@ const Item: React.FC<ItemProps> = ({ texts, link }) => {
       ))}
       {link && (
         <TouchableOpacity
-          onPress={() => Linking.openURL(link)}
-          activeOpacity={0.7}>
+          activeOpacity={0.7}
+          onPress={() => Linking.openURL(link)}>
           <Link>{link}</Link>
         </TouchableOpacity>
       )}
@@ -42,13 +42,13 @@ const Credits: React.FC = () => {
     <ScrollView>
       <Container>
         <Item
+          link={'https://www.nice.org.uk/guidance/cg93'}
           texts={[
             i18n.t('CreditsPage.Item1.1'),
             i18n.t('CreditsPage.Item1.2'),
             i18n.t('CreditsPage.Item1.3'),
             i18n.t('CreditsPage.AvailableIn'),
           ]}
-          link={'https://www.nice.org.uk/guidance/cg93'}
         />
         <Item
           link={'https://storyset.com/illustration/motherhood/pana'}

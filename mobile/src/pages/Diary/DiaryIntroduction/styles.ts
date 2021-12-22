@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { OpenSansRegular } from 'lib/sharedStyles';
+
 export const ContentWrapper = styled.View`
   flex: 1;
   align-items: center;
@@ -7,9 +9,7 @@ export const ContentWrapper = styled.View`
   margin: 0px 24px;
 `;
 
-export const ContentText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
+export const ContentText = styled(OpenSansRegular)`
   text-align: center;
   color: ${props => props.theme.grey};
 `;
@@ -36,8 +36,7 @@ export const ContinueButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export const TextContinueButton = styled.Text`
+export const TextContinueButton = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
-  font-family: 'OpenSans-Regular';
   font-size: 18px;
 `;

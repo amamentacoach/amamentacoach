@@ -18,10 +18,10 @@ const UploadMotherPhoto: React.FC = () => {
 
   return (
     <UploadPhotoScreen
-      target="mother"
       imagePlaceholder={Mirror}
-      textPlaceholder={i18n.t('UploadMotherPhotoPage.Mirror')}
       modalSuccessText={i18n.t('UploadMotherPhotoPage.BestMother')}
+      target="mother"
+      textPlaceholder={i18n.t('UploadMotherPhotoPage.Mirror')}
       uploadFunction={uploadMotherPhoto}
     />
   );

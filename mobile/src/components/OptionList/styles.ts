@@ -1,12 +1,13 @@
 import styled from 'styled-components/native';
 
+import { OpenSansRegular, OpenSansBold, ManjariBold } from 'lib/sharedStyles';
+
 export const Container = styled.View`
   flex: 1;
   margin-bottom: 20px;
 `;
 
-export const Header = styled.Text`
-  font-family: 'Manjari-Bold';
+export const Header = styled(ManjariBold)`
   font-size: 20px;
   margin-bottom: 12px;
 `;
@@ -24,17 +25,13 @@ export const TextContainer = styled.View`
   margin: 0 15px;
 `;
 
-export const Title = styled.Text`
+export const Title = styled(OpenSansBold)`
   color: ${props => props.theme.black};
-  font-family: 'OpenSans-Bold';
-  font-size: 16px;
   flex-wrap: wrap;
   margin-bottom: 3px;
 `;
 
-export const Subtitle = styled.Text`
+export const Subtitle = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
   flex-wrap: wrap;
 `;

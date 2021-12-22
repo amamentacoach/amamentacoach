@@ -1,25 +1,18 @@
 import styled from 'styled-components/native';
 
-export const HeaderInfoModal = styled.Text`
+import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
+
+export const ColoredText = styled(OpenSansBold)`
   color: ${props => props.theme.babyBlue};
   text-align: center;
-  font-family: 'OpenSans-Bold';
-  font-size: 16px;
+`;
+
+export const HeaderInfoModal = styled(ColoredText)`
   margin-bottom: 10px;
 `;
 
-export const TextInfoModal = styled.Text`
-  color: black;
+export const TextInfoModal = styled(OpenSansRegular)`
   text-align: center;
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
-`;
-
-export const ColoredText = styled.Text`
-  color: ${props => props.theme.babyBlue};
-  text-align: center;
-  font-family: 'OpenSans-Bold';
-  font-size: 16px;
 `;
 
 export const InfoButton = styled.TouchableOpacity`

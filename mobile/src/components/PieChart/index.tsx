@@ -22,6 +22,7 @@ const PieChart: React.FC<PieChartProps> = ({ label, data }) => {
   return (
     <Flex>
       <PieChartWrapper
+        chartDescription={{ text: '' }}
         data={{
           dataSets: [
             {
@@ -37,18 +38,17 @@ const PieChart: React.FC<PieChartProps> = ({ label, data }) => {
             },
           ],
         }}
+        dragDecelerationEnabled={false}
+        highlightPerTapEnabled={false}
+        holeRadius={0}
         legend={{
           enabled: false,
         }}
-        chartDescription={{ text: '' }}
-        usePercentValues
-        rotationEnabled={false}
-        dragDecelerationEnabled={false}
-        highlightPerTapEnabled={false}
-        touchEnabled={false}
         logEnabled={false}
-        holeRadius={0}
+        rotationEnabled={false}
+        touchEnabled={false}
         transparentCircleRadius={0}
+        usePercentValues
       />
 
       <Descriptions>

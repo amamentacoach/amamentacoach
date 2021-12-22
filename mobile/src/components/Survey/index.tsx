@@ -215,7 +215,7 @@ const Survey: React.FC<SurveyProps> = ({
         <HeaderBackground color={color} />
         <HeaderText>{title}</HeaderText>
         <ContentContainer>
-          <ActivityIndicator size="large" color={color} animating={isLoading} />
+          <ActivityIndicator animating={isLoading} color={color} size="large" />
         </ContentContainer>
       </>
     );
@@ -224,6 +224,7 @@ const Survey: React.FC<SurveyProps> = ({
   return (
     <>
       <Modal
+        color={color}
         content={i18n.t('SurveyComponent.SubmitError')}
         options={[
           {
@@ -233,11 +234,11 @@ const Survey: React.FC<SurveyProps> = ({
           },
         ]}
         visible={isErrorModalVisible}
-        color={color}
       />
 
       {!!feedbackModalData && (
         <Modal
+          color={color}
           content={feedbackModalData.content}
           options={[
             {
@@ -264,7 +265,6 @@ const Survey: React.FC<SurveyProps> = ({
             },
           ]}
           visible={!!feedbackModalData}
-          color={color}
         />
       )}
 
@@ -273,22 +273,17 @@ const Survey: React.FC<SurveyProps> = ({
         onSubmit={async values => handleFormSubmit(values)}>
         {({ values, dirty, submitForm, setFieldValue }) => (
           <FlatList
-            ref={pageFlatListRef}
             data={pages}
+            keyExtractor={item => item.id}
+            keyboardShouldPersistTaps="handled"
+            ref={pageFlatListRef}
             renderItem={({ item, index }) => (
               <ScrollView width={width}>
                 <HeaderBackground color={color} />
                 <HeaderText>{title}</HeaderText>
                 <ContentContainer>
                   <Page
-                    index={index}
-                    pagesLength={pages.length}
-                    question={item}
-                    isFormValid={isFormValid}
-                    isSendingForm={isSendingForm}
-                    isDirty={dirty}
                     color={color}
-                    setFieldValue={setFieldValue}
                     handleChangePage={(newPage, handleFormEnd) =>
                       handleChangePage(
                         newPage,
@@ -298,15 +293,20 @@ const Survey: React.FC<SurveyProps> = ({
                         handleFormEnd,
                       )
                     }
+                    index={index}
+                    isDirty={dirty}
+                    isFormValid={isFormValid}
+                    isSendingForm={isSendingForm}
+                    pagesLength={pages.length}
+                    question={item}
+                    setFieldValue={setFieldValue}
                   />
                 </ContentContainer>
               </ScrollView>
             )}
-            keyExtractor={item => item.id}
-            horizontal
             scrollEnabled={false}
             showsHorizontalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled"
+            horizontal
           />
         )}
       </Formik>

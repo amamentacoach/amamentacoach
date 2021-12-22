@@ -28,9 +28,9 @@ const ProgressDots: React.FC<ProgressDotsProps> = ({
     for (let i = 0; i < length; i++) {
       circles.push(
         <CircleShape
-          onPress={() => goToPage(i)}
           key={i}
           selected={i === selectedIndex}
+          onPress={() => goToPage(i)}
         />,
       );
     }

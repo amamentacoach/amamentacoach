@@ -17,14 +17,3 @@ export const TextContainer = styled.View`
   flex-wrap: wrap;
   flex-shrink: 1;
 `;
-
-export const Text = styled.Text`
-  color: ${props => props.theme.primary};
-  font-size: 16px;
-  font-family: 'OpenSans-Bold';
-`;
-
-export const Content = styled.Text`
-  font-size: 16px;
-  font-family: 'OpenSans-Regular';
-`;

@@ -92,10 +92,10 @@ const NotWhatIExpected: React.FC = () => {
         {image && (
           <ImageContainer>
             <ImageWrapper
-              source={image}
               height="100%"
-              width={250}
               resizeMode="contain"
+              source={image}
+              width={250}
             />
           </ImageContainer>
         )}
@@ -132,8 +132,8 @@ const NotWhatIExpected: React.FC = () => {
 
   return (
     <InformationPages
-      data={pages}
       PageModel={InfoModel}
+      data={pages}
       scrollEnabled={false}
     />
   );

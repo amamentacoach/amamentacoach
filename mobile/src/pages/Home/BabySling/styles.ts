@@ -1,14 +1,14 @@
 import styled from 'styled-components/native';
 
+import { OpenSansRegular } from 'lib/sharedStyles';
+
 export const Container = styled.View`
   align-items: center;
 `;
 
-export const Text = styled.Text`
+export const Text = styled(OpenSansRegular)`
   margin-bottom: 30px;
   color: ${props => props.theme.grey};
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
   text-align: center;
   margin-top: 20px;
 `;

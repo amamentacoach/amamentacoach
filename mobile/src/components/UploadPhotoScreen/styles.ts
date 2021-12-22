@@ -1,6 +1,9 @@
 import styled from 'styled-components/native';
 
-import { ScrollView as SharedScrollView } from 'lib/sharedStyles';
+import {
+  ScrollView as SharedScrollView,
+  OpenSansRegular,
+} from 'lib/sharedStyles';
 
 interface SelectedImageProps {
   width: number;
@@ -11,9 +14,7 @@ export const ScrollView = styled(SharedScrollView)`
   padding: 0 24px;
 `;
 
-export const Text = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
+export const Text = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
   text-align: center;
   margin: 25px 0;

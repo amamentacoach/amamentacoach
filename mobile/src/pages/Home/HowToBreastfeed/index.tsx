@@ -158,8 +158,8 @@ const HowToBreastfeed: React.FC = () => {
         <CurrentPageWrapper>
           <ProgressDots
             flatlistRef={flatListRef}
-            selectedIndex={index}
             length={pagesLength}
+            selectedIndex={index}
           />
         </CurrentPageWrapper>
         <LastPageButtonWrapper opacity={index === pagesLength - 1 ? 1 : 0}>
@@ -171,7 +171,7 @@ const HowToBreastfeed: React.FC = () => {
     </>
   );
 
-  return <InformationPages data={pages} PageModel={InfoModel} />;
+  return <InformationPages PageModel={InfoModel} data={pages} />;
 };
 
 export default HowToBreastfeed;

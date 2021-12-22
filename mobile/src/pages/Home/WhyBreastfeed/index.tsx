@@ -91,8 +91,8 @@ const WhyBreastfeed: React.FC = () => {
 
   return (
     <InformationPages
-      data={pages}
       PageModel={createGenericInfoPage({ onEnd })}
+      data={pages}
     />
   );
 };

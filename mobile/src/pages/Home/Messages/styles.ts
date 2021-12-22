@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { OpenSansRegular } from 'lib/sharedStyles';
+
 export const AddMessageButton = styled.TouchableOpacity`
   margin-right: 18px;
 `;
@@ -24,9 +26,7 @@ export const DateText = styled(StyledText)`
   color: ${props => props.theme.grey};
 `;
 
-export const Content = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
+export const Content = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
 `;
 

@@ -91,10 +91,10 @@ const Goals: React.FC = () => {
         />
       </ModalContainer>
       <Survey
-        title={i18n.t('GoalsPage.Title')}
-        color={theme.babyPurple}
-        category={3}
         Page={createGenericSurveyPage(onFormEnd)}
+        category={3}
+        color={theme.babyPurple}
+        title={i18n.t('GoalsPage.Title')}
       />
     </>
   );

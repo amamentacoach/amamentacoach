@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
+
 export const AddQuestionButton = styled.TouchableOpacity`
   margin-right: 18px;
 `;
@@ -9,16 +11,12 @@ export const FlatlistContainer = styled.View`
   margin: 24px 24px 0px 24px;
 `;
 
-export const Question = styled.Text`
-  font-family: 'OpenSans-Bold';
+export const Question = styled(OpenSansBold)`
   font-size: 18px;
-  color: ${props => props.theme.primary};
   margin-bottom: 5px;
 `;
 
-export const Answer = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
+export const Answer = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
 `;
 

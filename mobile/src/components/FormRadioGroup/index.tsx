@@ -2,11 +2,10 @@ import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
 
 import FormTextInput from 'components/FormTextInput';
+import { ErrorContainer, ErrorText } from 'lib/sharedStyles';
 
 import {
   Container,
-  ErrorContainer,
-  ErrorText,
   HorizontalOptionButton,
   InnerCircle,
   LabelText,
@@ -124,11 +123,11 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
 
           return (
             <RadioButtonComponent
-              key={option}
-              color={color}
-              selected={selectedIndexes[index]}
               activeOpacity={1}
+              color={color}
               direction={direction}
+              key={option}
+              selected={selectedIndexes[index]}
               onPress={() => handleOptionSelected(index)}>
               {direction === 'column' && (
                 <OuterCircle color={color} selected={selectedIndexes[index]}>
@@ -140,9 +139,9 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
               )}
 
               <TextOption
-                selected={selectedIndexes[index]}
+                color={color}
                 direction={direction}
-                color={color}>
+                selected={selectedIndexes[index]}>
                 {option}
               </TextOption>
             </RadioButtonComponent>

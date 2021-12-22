@@ -66,7 +66,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
         setPhoto(null);
         setSubmitModalMessage(modalSuccessText);
       } else {
-        setSubmitModalMessage(i18n.t('UploadPhotoScreen.ErrorModalText'));
+        setSubmitModalMessage(i18n.t('UploadPhotoScreen.ModalErrorText'));
       }
       setIsSendingForm(false);
     }
@@ -85,7 +85,6 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
     <>
       <Modal
         content={submitModalMessage}
-        visible={!!submitModalMessage}
         options={[
           {
             text: i18n.t('Close'),
@@ -93,6 +92,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
             isBold: true,
           },
         ]}
+        visible={!!submitModalMessage}
       />
       <ScrollView>
         <Center>
@@ -100,19 +100,19 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
           {!photo && motherInfo.images[target] && (
             <>
               <SelectedImage
+                isVisible={!isLoadingImage}
+                resizeMode="contain"
                 source={{
                   uri: `${config.API_URL}/uploads/${motherInfo.images[target]}`,
                 }}
                 width={width}
                 onLoadEnd={() => setIsLoadingImage(false)}
-                resizeMode="contain"
-                isVisible={!isLoadingImage}
               />
               {isLoadingImage && (
                 <ActivityIndicator
-                  size="large"
-                  color={theme.primary}
                   animating={isLoadingImage}
+                  color={theme.primary}
+                  size="large"
                 />
               )}
             </>
@@ -120,18 +120,18 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
           {/* Usuário selecionou uma foto da galeria */}
           {photo && (
             <SelectedImage
+              resizeMode="contain"
               source={{ uri: photo.uri }}
               width={width}
-              resizeMode="contain"
             />
           )}
           {/* Usuário ainda não enviou uma foto e não selecionou nenhuma para ser enviada */}
           {!photo && !motherInfo.images[target] && (
             <>
               <ImageWrapper
-                source={imagePlaceholder}
-                resizeMode="contain"
                 height={250}
+                resizeMode="contain"
+                source={imagePlaceholder}
                 width={250}
               />
               <Text>{textPlaceholder}</Text>
@@ -141,20 +141,20 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
         <SubmitButtonContainer>
           <SelectButtonContainer>
             <SecondaryButton
-              onPress={handleSelectPhoto}
               disabled={isSendingForm}
               text={i18n.t('Actions.SelectPicture')}
+              onPress={handleSelectPhoto}
             />
           </SelectButtonContainer>
           <Flex>
             <MainButton
-              onPress={handleSubmitNewPhoto}
               disabled={!photo || isSendingForm}
               text={
                 isSendingForm
                   ? i18n.t('Status.Sending')
                   : i18n.t('Actions.Send')
               }
+              onPress={handleSubmitNewPhoto}
             />
           </Flex>
         </SubmitButtonContainer>

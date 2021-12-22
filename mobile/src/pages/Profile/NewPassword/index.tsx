@@ -64,7 +64,6 @@ const NewPassword: React.FC = () => {
     <ScrollView>
       <Modal
         content={i18n.t('NewPasswordPage.PasswordChanged')}
-        visible={isSubmitModalVisible}
         options={[
           {
             text: i18n.t('Close'),
@@ -72,44 +71,45 @@ const NewPassword: React.FC = () => {
             onPress: () => setIsSubmitModalVisible(false),
           },
         ]}
+        visible={isSubmitModalVisible}
       />
 
       <HeaderText>{i18n.t('NewPasswordPage.Header')}</HeaderText>
       <Formik
         initialValues={formInitialValues}
-        validationSchema={newPasswordSchema}
         validateOnChange={false}
+        validationSchema={newPasswordSchema}
         onSubmit={values => handleNewPassword(values)}>
         {({ handleChange, handleSubmit, dirty, errors, values }) => (
           <FormContainer>
             <View>
               <FormTextInput
-                label={i18n.t('NewPasswordPage.2')}
-                onChangeText={handleChange('password')}
-                value={values.password}
-                placeholder={i18n.t('NewPasswordPage.5')}
                 error={errors.password}
+                label={i18n.t('NewPasswordPage.2')}
+                placeholder={i18n.t('NewPasswordPage.5')}
+                value={values.password}
                 secureTextEntry
+                onChangeText={handleChange('password')}
               />
               <FormTextInput
-                label={i18n.t('NewPasswordPage.4')}
-                onChangeText={handleChange('password_confirmation')}
-                value={values.password_confirmation}
-                placeholder={i18n.t('NewPasswordPage.5')}
                 error={errors.password_confirmation}
+                label={i18n.t('NewPasswordPage.4')}
+                placeholder={i18n.t('NewPasswordPage.5')}
+                value={values.password_confirmation}
                 secureTextEntry
+                onChangeText={handleChange('password_confirmation')}
               />
             </View>
 
             <SubmitButtonContainer>
               <MainButton
-                onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
                 text={
                   isSendingForm
                     ? i18n.t('Status.Saving')
                     : i18n.t('Actions.Save')
                 }
+                onPress={handleSubmit}
               />
             </SubmitButtonContainer>
           </FormContainer>

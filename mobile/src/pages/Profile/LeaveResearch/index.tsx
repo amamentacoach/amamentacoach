@@ -134,22 +134,22 @@ const Leave: React.FC<Page> = () => {
       <LeaveText>{i18n.t('LeaveResearchPage.Reason')}</LeaveText>
       <Formik
         initialValues={formInitialValues}
-        validationSchema={newMessageSchema}
         validateOnChange={false}
+        validationSchema={newMessageSchema}
         onSubmit={() => setIsConfirmModalVisible(true)}>
         {({ setFieldValue, handleSubmit, dirty, errors }) => (
           <>
             <FormTextInput
+              error={errors.message}
+              numberOfLines={20}
+              placeholder={i18n.t('Placeholder.Message')}
+              textAlignVertical="top"
+              value={message}
+              multiline
               onChangeText={(text: string) => {
                 setFieldValue('message', text);
                 setMessage(text);
               }}
-              value={message}
-              placeholder={i18n.t('Placeholder.Message')}
-              error={errors.message}
-              multiline
-              numberOfLines={20}
-              textAlignVertical="top"
             />
 
             <SubmitButtonContainer>
@@ -161,9 +161,9 @@ const Leave: React.FC<Page> = () => {
               </FirstSubOptionContainer>
               <Flex>
                 <MainButton
+                  disabled={!dirty}
                   text={i18n.t('LeaveResearchPage.Leave')}
                   onPress={handleSubmit}
-                  disabled={!dirty}
                 />
               </Flex>
             </SubmitButtonContainer>
@@ -198,21 +198,21 @@ const LeaveResearch: React.FC = () => {
 
   return (
     <FlatList
-      ref={flatListRef}
       data={pages}
+      keyExtractor={item => item.id}
+      keyboardShouldPersistTaps="handled"
+      ref={flatListRef}
       renderItem={({ item, index }) => (
         <ScrollView width={width}>
           <Container>
-            <item.Component index={index} flatListRef={flatListRef} />
+            <item.Component flatListRef={flatListRef} index={index} />
           </Container>
         </ScrollView>
       )}
-      keyExtractor={item => item.id}
+      scrollEnabled={false}
+      showsHorizontalScrollIndicator={false}
       horizontal
       pagingEnabled
-      showsHorizontalScrollIndicator={false}
-      scrollEnabled={false}
-      keyboardShouldPersistTaps="handled"
     />
   );
 };

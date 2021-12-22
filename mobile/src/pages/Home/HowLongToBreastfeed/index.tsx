@@ -31,20 +31,20 @@ const HowLongToBreastfeed: React.FC = () => {
       </ContentTitleText>
       <ContentWrapper>
         <ImageWrapper
-          source={Withdrawal1}
-          resizeMode="contain"
-          width="100%"
           height={190}
+          resizeMode="contain"
+          source={Withdrawal1}
+          width="100%"
         />
         <ContentText>
           {i18n.t('HowLongToBreastfeedPage.Text1')}{' '}
           <ColoredText>{i18n.t('HowLongToBreastfeedPage.Text2')}</ColoredText>.
         </ContentText>
         <ImageWrapper
-          source={Withdrawal2}
-          resizeMode="contain"
-          width="100%"
           height={190}
+          resizeMode="contain"
+          source={Withdrawal2}
+          width="100%"
         />
         <ContentText>
           {i18n.t('HowLongToBreastfeedPage.Text3')}{' '}

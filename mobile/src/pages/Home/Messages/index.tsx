@@ -37,8 +37,8 @@ const Messages: React.FC = () => {
     navigation.setOptions({
       headerRight: () => (
         <AddMessageButton
-          onPress={() => navigation.navigate('NewMessage')}
-          activeOpacity={0.7}>
+          activeOpacity={0.7}
+          onPress={() => navigation.navigate('NewMessage')}>
           <AddIcon />
         </AddMessageButton>
       ),
@@ -48,8 +48,10 @@ const Messages: React.FC = () => {
   async function fetchMessages(currentPage: number): Promise<IMessage[]> {
     const newMessages = await listMessages(currentPage);
     if (!newMessages) {
-      setNoMoreMessages(true);
       return [];
+    }
+    if (newMessages.length === 0) {
+      setNoMoreMessages(true);
     }
     return newMessages;
   }
@@ -98,19 +100,19 @@ const Messages: React.FC = () => {
   return (
     <FlatlistContainer>
       <FlatList
-        data={messages}
-        renderItem={({ item }) => <Message {...item} />}
-        keyExtractor={item => item.id}
-        onEndReached={fetchOlderMessages}
-        onEndReachedThreshold={0.1}
         ListFooterComponent={() => (
           <LoadingIndicator
-            size="large"
-            color={theme.primary}
             animating={loading}
+            color={theme.primary}
+            size="large"
           />
         )}
+        data={messages}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => <Message {...item} />}
         showsVerticalScrollIndicator={false}
+        onEndReached={fetchOlderMessages}
+        onEndReachedThreshold={0.1}
       />
     </FlatlistContainer>
   );

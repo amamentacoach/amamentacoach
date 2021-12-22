@@ -9,6 +9,7 @@ import MainButton from 'components/MainButton';
 import { ScrollView } from 'lib/sharedStyles';
 
 import type { AuthStackProps } from 'routes/auth';
+import type { MotherSignUpInfo } from 'services/auth';
 
 import {
   FormContainer,
@@ -18,10 +19,10 @@ import {
   SubmitButtonContainer,
 } from './styles';
 
-interface FormValues {
-  email: string;
-  password: string;
-  password_confirmation: string;
+type FilteredMotherValues = Pick<MotherSignUpInfo, 'email' | 'password'>;
+
+interface FormValues extends FilteredMotherValues {
+  password_confirmation: FilteredMotherValues['password'];
 }
 
 const FormSignUp: React.FC = () => {
@@ -59,45 +60,45 @@ const FormSignUp: React.FC = () => {
       </Header>
       <Formik
         initialValues={formInitialValues}
-        validationSchema={signUpSchema}
         validateOnChange={false}
+        validationSchema={signUpSchema}
         onSubmit={values => handleFormSubmit(values)}>
         {({ handleChange, handleSubmit, dirty, errors, values }) => (
           <FormContainer>
             <View>
               <FormTextInput
-                label={i18n.t('Email')}
                 error={errors.email}
-                onChangeText={handleChange('email')}
-                value={values.email}
-                placeholder={i18n.t('Email')}
                 keyboardType="email-address"
+                label={i18n.t('Email')}
+                placeholder={i18n.t('Email')}
+                value={values.email}
+                onChangeText={handleChange('email')}
               />
 
               <FormTextInput
-                label={i18n.t('Password')}
                 error={errors.password}
-                onChangeText={handleChange('password')}
-                value={values.password}
+                label={i18n.t('Password')}
                 placeholder={i18n.t('Password')}
+                value={values.password}
                 secureTextEntry
+                onChangeText={handleChange('password')}
               />
 
               <FormTextInput
-                label={i18n.t('SignUpPage.ConfirmPassword')}
                 error={errors.password_confirmation}
-                onChangeText={handleChange('password_confirmation')}
-                value={values.password_confirmation}
+                label={i18n.t('SignUpPage.ConfirmPassword')}
                 placeholder={i18n.t('SignUpPage.ConfirmPassword')}
+                value={values.password_confirmation}
                 secureTextEntry
+                onChangeText={handleChange('password_confirmation')}
               />
             </View>
 
             <SubmitButtonContainer>
               <MainButton
-                onPress={handleSubmit}
                 disabled={!dirty}
                 text={i18n.t('Next')}
+                onPress={handleSubmit}
               />
             </SubmitButtonContainer>
           </FormContainer>

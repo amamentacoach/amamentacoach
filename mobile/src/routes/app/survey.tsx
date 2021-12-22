@@ -15,33 +15,33 @@ const CreateSurveyRoutes = (Stack: StackScreens): JSX.Element[] => {
 
   return [
     <Stack.Screen
+      component={SurveyBreastfeed}
       key="SurveyBreastfeed"
       name="SurveyBreastfeed"
-      component={SurveyBreastfeed}
       options={{ title: i18n.t('Survey', { count: 1 }), ...headerBabyBlue }}
     />,
     <Stack.Screen
+      component={SurveyFather}
       key="SurveyFather"
       name="SurveyFather"
-      component={SurveyFather}
       options={{ title: i18n.t('Survey', { count: 1 }), ...headerBabyBlue }}
     />,
     <Stack.Screen
+      component={SurveyHelp}
       key="SurveyHelp"
       name="SurveyHelp"
-      component={SurveyHelp}
       options={{ title: i18n.t('Survey', { count: 1 }), ...headerBabyBlue }}
     />,
     <Stack.Screen
+      component={SurveyMotivation}
       key="SurveyMotivation"
       name="SurveyMotivation"
-      component={SurveyMotivation}
       options={{ title: i18n.t('Survey', { count: 1 }), ...headerBabyBlue }}
     />,
     <Stack.Screen
+      component={SurveyStatistics}
       key="SurveyStatistics"
       name="SurveyStatistics"
-      component={SurveyStatistics}
       options={{ title: i18n.t('Survey', { count: 1 }), ...headerBabyBlue }}
     />,
   ];

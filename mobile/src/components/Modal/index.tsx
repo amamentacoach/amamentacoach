@@ -40,15 +40,15 @@ const Modal: React.FC<MainModalProps> = ({
   children,
 }) => {
   return (
-    <ReactNativeModal animationType="fade" transparent visible={visible}>
+    <ReactNativeModal animationType="fade" visible={visible} transparent>
       <Container>
         {content && <Content>{content}</Content>}
         {image && (
           <MaxWidthImage
-            source={image}
-            resizeMode="contain"
-            width="100%"
             height={300}
+            resizeMode="contain"
+            source={image}
+            width="100%"
           />
         )}
         {children}
@@ -56,11 +56,11 @@ const Modal: React.FC<MainModalProps> = ({
         <OptionsContainer>
           {options.map(({ text, isBold, disabled, onPress }) => (
             <Option
-              key={text}
-              onPress={onPress}
+              activeOpacity={0.7}
               disabled={disabled}
-              activeOpacity={0.7}>
-              <OptionText color={color} isBold={isBold} disabled={disabled}>
+              key={text}
+              onPress={onPress}>
+              <OptionText color={color} disabled={disabled} isBold={isBold}>
                 {text}
               </OptionText>
             </Option>

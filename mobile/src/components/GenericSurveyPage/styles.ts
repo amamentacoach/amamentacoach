@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 
 import ImageWrapper from 'components/ImageWrapper';
+import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
 
 interface CurrentPageContainerProps {
   color: string;
@@ -24,19 +25,14 @@ export const FullWidthImage = styled(ImageWrapper)`
   max-height: 180px;
 `;
 
-export const CurrentPageText = styled.Text`
+export const CurrentPageText = styled(OpenSansBold)`
   text-align: center;
-  font-family: 'OpenSans-Bold';
-  font-size: 16px;
   color: ${props => props.theme.black};
 `;
 
-export const QuestionText = styled.Text`
+export const QuestionText = styled(OpenSansRegular)`
   text-align: center;
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
   margin: 15px 0;
-  color: ${props => props.theme.black};
 `;
 
 export const Footer = styled.View`

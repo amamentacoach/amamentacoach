@@ -124,8 +124,8 @@ const BreastfeedingBenefits: React.FC = () => {
 
   return (
     <InformationPages
-      data={pages}
       PageModel={createGenericInfoPage({ onEnd })}
+      data={pages}
     />
   );
 };

@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { ManjariBold, OpenSansRegular } from 'lib/sharedStyles';
+
 export const Header = styled.View`
   flex-direction: row;
   justify-content: center;
@@ -7,10 +9,7 @@ export const Header = styled.View`
   margin-bottom: 20px;
 `;
 
-export const HeaderTitle = styled.Text`
-  color: ${props => props.theme.black};
-  font-family: 'Manjari-Bold';
-  font-size: 18px;
+export const HeaderTitle = styled(ManjariBold)`
   text-align: center;
 `;
 
@@ -21,10 +20,8 @@ export const CalendarButton = styled.TouchableOpacity`
   bottom: auto;
 `;
 
-export const DateText = styled.Text`
+export const DateText = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
   text-align: center;
   margin-bottom: 25px;
 `;

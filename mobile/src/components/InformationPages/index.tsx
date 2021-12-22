@@ -53,27 +53,27 @@ const InformationPages: React.FC<InformationPagesProps> = ({
 
   return (
     <FlatList
+      data={pages}
+      keyExtractor={item => item.id}
+      keyboardShouldPersistTaps="handled"
+      ref={flatListRef}
       renderItem={({ item, index }) => (
         <PageContainer width={width}>
           <PageModel
+            content={item.content}
+            flatListRef={flatListRef}
+            goToPage={goToPage}
+            image={item.image}
             index={index}
             pagesLength={pages.length}
             title={item.title}
-            content={item.content}
-            image={item.image}
-            flatListRef={flatListRef}
-            goToPage={goToPage}
           />
         </PageContainer>
       )}
-      ref={flatListRef}
-      data={pages}
-      keyExtractor={item => item.id}
-      horizontal
-      pagingEnabled
       showsHorizontalScrollIndicator={false}
-      keyboardShouldPersistTaps="handled"
+      horizontal
       nestedScrollEnabled
+      pagingEnabled
       {...props}
     />
   );

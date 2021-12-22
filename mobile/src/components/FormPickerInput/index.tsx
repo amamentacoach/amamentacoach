@@ -2,13 +2,9 @@ import { Picker } from '@react-native-picker/picker';
 import i18n from 'i18n-js';
 import { useState } from 'react';
 
-import {
-  Container,
-  ErrorContainer,
-  ErrorText,
-  LabelText,
-  PickerContainer,
-} from './styles';
+import { ErrorContainer, ErrorText } from 'lib/sharedStyles';
+
+import { Container, LabelText, PickerContainer } from './styles';
 
 interface FormPickerProps {
   fieldName: string;

@@ -7,6 +7,7 @@ import InformationPages from 'components/InformationPages';
 import MainButton from 'components/MainButton';
 import ProgressDots from 'components/ProgressDots';
 import { useIsFirstRun } from 'contexts/firstRun';
+import { OpenSansRegular } from 'lib/sharedStyles';
 
 import type {
   InfoPageItem,
@@ -21,7 +22,6 @@ import {
   Header,
   LastPageButtonWrapper,
   SkipButton,
-  SkipButtonText,
 } from './styles';
 
 import IntroChart from '@assets/images/intro_chart.svg';
@@ -74,13 +74,13 @@ const Introduction: React.FC = () => {
       <Header>
         <SkipButton onPress={onEnd}>
           {index < pagesLength - 1 && (
-            <SkipButtonText>{i18n.t('Skip')}</SkipButtonText>
+            <OpenSansRegular>{i18n.t('Skip')}</OpenSansRegular>
           )}
         </SkipButton>
       </Header>
       <ContentWrapper>
         {image && (
-          <ImageWrapper source={image} resizeMode="contain" width="100%" />
+          <ImageWrapper resizeMode="contain" source={image} width="100%" />
         )}
         {content.map(({ id, text }) => (
           <ContentText key={id}>{text}</ContentText>
@@ -90,22 +90,22 @@ const Introduction: React.FC = () => {
         <CurrentPageWrapper>
           <ProgressDots
             flatlistRef={flatListRef}
-            selectedIndex={index}
             length={pagesLength}
+            selectedIndex={index}
           />
         </CurrentPageWrapper>
         <LastPageButtonWrapper opacity={index === pagesLength - 1 ? 1 : 0}>
           <MainButton
+            disabled={index !== pagesLength - 1}
             text={i18n.t('LetsStart')}
             onPress={onEnd}
-            disabled={index !== pagesLength - 1}
           />
         </LastPageButtonWrapper>
       </Footer>
     </>
   );
 
-  return <InformationPages data={pages} PageModel={InfoModel} />;
+  return <InformationPages PageModel={InfoModel} data={pages} />;
 };
 
 export default Introduction;

@@ -10,7 +10,7 @@ import FormPickerInput from 'components/FormPickerInput';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import { useAuth } from 'contexts/auth';
-import { Flex, PaddedScrollView } from 'lib/sharedStyles';
+import { Flex, PaddedScrollView, ErrorText } from 'lib/sharedStyles';
 import { createBreastfeedEntry } from 'services/diaryRegistry';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -18,7 +18,6 @@ import type { RootStackProps } from 'routes/app';
 
 import {
   ErrorContainer,
-  ErrorText,
   FirstOption,
   FormContent,
   Header,
@@ -136,8 +135,8 @@ const NewBreastfeedEntry: React.FC = () => {
     <PaddedScrollView>
       <Formik
         initialValues={formInitialValues}
-        validationSchema={newDiaryRegistrySchema}
         validateOnChange={false}
+        validationSchema={newDiaryRegistrySchema}
         onSubmit={handleFormSubmit}>
         {({
           handleChange,
@@ -151,31 +150,31 @@ const NewBreastfeedEntry: React.FC = () => {
             <Header>{i18n.t('NewBreastfeedEntryPage.Header')}</Header>
             <FormContent>
               <FormPickerInput
+                error={errors.babyName}
                 fieldName="babyName"
                 options={motherInfo.babies.map(baby => baby.name.toString())}
                 placeholder={i18n.t('NewBreastfeedEntryPage.BabyPlaceholder')}
                 onChange={setFieldValue}
-                error={errors.babyName}
               />
 
               <FormDateInput
-                label={i18n.t('Time')}
+                error={errors.time}
                 fieldName="time"
+                label={i18n.t('Time')}
+                mode="time"
                 placeholder={i18n.t(
                   'NewBreastfeedEntryPage.BreastfeedTimePlaceholder',
                 )}
-                mode="time"
                 onChange={setFieldValue}
-                error={errors.time}
               />
 
               <FormTextInput
-                label={i18n.t('Duration')}
-                value={values.duration}
-                placeholder={i18n.t('Placeholder.Duration')}
-                keyboardType="number-pad"
-                onChangeText={handleChange('duration')}
                 error={errors.duration}
+                keyboardType="number-pad"
+                label={i18n.t('Duration')}
+                placeholder={i18n.t('Placeholder.Duration')}
+                value={values.duration}
+                onChangeText={handleChange('duration')}
               />
 
               <OptionHeader>{i18n.t('Breast')}</OptionHeader>
@@ -208,13 +207,13 @@ const NewBreastfeedEntry: React.FC = () => {
 
             <SubmitButtonContainer>
               <MainButton
-                onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
                 text={
                   isSendingForm
                     ? i18n.t('Status.Saving')
                     : i18n.t('Actions.Save')
                 }
+                onPress={handleSubmit}
               />
             </SubmitButtonContainer>
           </Flex>

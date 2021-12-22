@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { OpenSansBold } from 'lib/sharedStyles';
+
 export const Breastfeed = styled.View`
   border: 2px ${props => props.theme.brightGrey} solid;
   border-radius: 3.6px;
@@ -7,9 +9,7 @@ export const Breastfeed = styled.View`
   margin-bottom: 10px;
 `;
 
-export const BabyName = styled.Text`
-  color: ${props => props.theme.primary};
-  font-family: 'OpenSans-Bold';
+export const BabyName = styled(OpenSansBold)`
   font-size: 18px;
 `;
 
@@ -20,15 +20,4 @@ export const Row = styled.View`
 
 export const TextContainer = styled.View`
   flex-direction: row;
-`;
-
-export const Text = styled.Text`
-  color: ${props => props.theme.primary};
-  font-size: 16px;
-  font-family: 'OpenSans-Bold';
-`;
-
-export const Content = styled.Text`
-  font-size: 16px;
-  font-family: 'OpenSans-Regular';
 `;

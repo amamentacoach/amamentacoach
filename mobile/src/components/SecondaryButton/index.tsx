@@ -15,10 +15,10 @@ const SecondaryButton: React.FC<SecondaryButtonProps> = ({
 }) => {
   return (
     <Button
+      activeOpacity={0.9}
       color={color}
-      onPress={onPress}
       disabled={disabled}
-      activeOpacity={0.9}>
+      onPress={onPress}>
       <TextButton color={color} disabled={disabled}>
         {text}
       </TextButton>

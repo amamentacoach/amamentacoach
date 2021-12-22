@@ -67,18 +67,17 @@ const Resilience: React.FC = () => {
       {isLoadingVideo && (
         <LoadingContainer>
           <ActivityIndicator
-            size="large"
-            color={theme.primary}
             animating={isLoadingVideo}
+            color={theme.primary}
+            size="large"
           />
         </LoadingContainer>
       )}
       <VideoContainer display={!isLoadingVideo}>
         <YoutubePlayer
           height={height / 3}
-          videoId="KGedLLSN0FU"
           initialPlayerParams={{ loop: false }}
-          onReady={() => setIsLoadingVideo(false)}
+          videoId="KGedLLSN0FU"
           webViewProps={{
             injectedJavaScript: `
             var element = document.getElementsByClassName('container')[0];
@@ -86,6 +85,7 @@ const Resilience: React.FC = () => {
             true;
           `,
           }}
+          onReady={() => setIsLoadingVideo(false)}
         />
       </VideoContainer>
       <Header>{i18n.t('ResiliencePage.TextHeader')}</Header>

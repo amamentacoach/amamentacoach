@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { ManjariBold, OpenSansRegular } from 'lib/sharedStyles';
+
 interface OptionProps {
   selected: boolean;
 }
@@ -15,11 +17,8 @@ export const ModalOption = styled.TouchableOpacity`
   margin-top: 15px;
 `;
 
-export const TextModal = styled.Text`
-  color: ${props => props.theme.black};
+export const TextModal = styled(OpenSansRegular)`
   text-align: left;
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
 `;
 
 export const OuterCircle = styled.View<OptionProps>`
@@ -53,8 +52,7 @@ export const HeaderBackground = styled.View`
   height: 70%;
 `;
 
-export const HeaderText = styled.Text`
-  font-family: 'Manjari-Bold';
+export const HeaderText = styled(ManjariBold)`
   font-size: 24px;
   color: ${props => props.theme.white};
   margin-top: 30px;
@@ -76,8 +74,7 @@ export const HUButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
-export const HUButtonText = styled.Text`
-  font-family: 'Manjari-Bold';
+export const HUButtonText = styled(ManjariBold)`
   font-size: 14px;
   color: ${props => props.theme.white};
 `;
@@ -87,8 +84,7 @@ export const ContentContainer = styled.View`
   margin: 80px 24px 0 24px;
 `;
 
-export const ContentHeader = styled.Text`
-  font-family: 'Manjari-Bold';
+export const ContentHeader = styled(ManjariBold)`
   font-size: 20px;
   margin-bottom: 20px;
 `;

@@ -44,8 +44,8 @@ const StatusForm: React.FC = () => {
     navigation.setOptions({
       headerRight: () => (
         <InfoButton
-          onPress={() => setIsInfoModalVisible(true)}
-          activeOpacity={0.7}>
+          activeOpacity={0.7}
+          onPress={() => setIsInfoModalVisible(true)}>
           <QuestionIcon />
         </InfoButton>
       ),
@@ -126,6 +126,7 @@ const StatusForm: React.FC = () => {
   return (
     <>
       <Modal
+        color={theme.babyBlue}
         content={i18n.t('StatusFormPage.Score', { score: formScore })}
         options={[
           {
@@ -135,9 +136,9 @@ const StatusForm: React.FC = () => {
           },
         ]}
         visible={!!formScore}
-        color={theme.babyBlue}
       />
       <Modal
+        color={theme.babyBlue}
         content={i18n.t('SurveyComponent.SubmitError')}
         options={[
           {
@@ -147,9 +148,9 @@ const StatusForm: React.FC = () => {
           },
         ]}
         visible={isErrorModalVisible}
-        color={theme.babyBlue}
       />
       <Modal
+        color={theme.babyBlue}
         options={[
           {
             text: i18n.t('Close'),
@@ -157,8 +158,7 @@ const StatusForm: React.FC = () => {
             onPress: () => setIsInfoModalVisible(false),
           },
         ]}
-        visible={isInfoModalVisible}
-        color={theme.babyBlue}>
+        visible={isInfoModalVisible}>
         <HeaderInfoModal>{i18n.t('StatusFormPage.FormName')}</HeaderInfoModal>
         <TextInfoModal>
           <ColoredText>1</ColoredText> = {i18n.t('StatusFormPage.Value1')}
@@ -183,27 +183,27 @@ const StatusForm: React.FC = () => {
         onSubmit={values => handleFormSubmit(values)}>
         {({ values, errors, setFieldError, submitForm, setFieldValue }) => (
           <FlatList<StatusFormQuestion[]>
-            ref={pagesFlatListRef}
             data={pagesQuestions}
+            keyExtractor={item => item[0].id.toString()}
+            keyboardShouldPersistTaps="handled"
+            ref={pagesFlatListRef}
             renderItem={({ item, index }) => (
               <StatusFormPage
-                pageIndex={index}
-                numberOfPages={pagesQuestions.length}
-                questions={item}
-                values={values}
                 errors={errors}
                 flatListRef={pagesFlatListRef}
-                setFieldValue={setFieldValue}
+                numberOfPages={pagesQuestions.length}
+                pageIndex={index}
+                questions={item}
                 setFieldError={setFieldError}
+                setFieldValue={setFieldValue}
                 submitForm={submitForm}
+                values={values}
               />
             )}
-            keyExtractor={item => item[0].id.toString()}
-            horizontal
             scrollEnabled={false}
-            pagingEnabled
             showsHorizontalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled"
+            horizontal
+            pagingEnabled
           />
         )}
       </Formik>

@@ -1,14 +1,14 @@
 import styled from 'styled-components/native';
 
+import { ManjariBold, OpenSansRegular } from 'lib/sharedStyles';
+
 interface VideoContainerProps {
   display: boolean;
 }
 
-export const PageHeader = styled.Text`
+export const PageHeader = styled(OpenSansRegular)`
   margin-bottom: 20px;
   color: ${props => props.theme.grey};
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
   text-align: center;
 `;
 
@@ -24,17 +24,12 @@ export const LoadingContainer = styled.View`
   height: 200px;
 `;
 
-export const Header = styled.Text`
+export const Header = styled(ManjariBold)`
   margin-top: 26px;
   margin-bottom: 6px;
-  color: ${props => props.theme.black};
-  font-family: 'Manjari-Bold';
-  font-size: 18px;
 `;
 
-export const Text = styled.Text`
+export const Text = styled(OpenSansRegular)`
   margin-bottom: 30px;
   color: ${props => props.theme.grey};
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
 `;

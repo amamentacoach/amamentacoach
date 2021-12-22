@@ -24,10 +24,10 @@ const MilkAdditionalInformation: React.FC = () => {
     <ScrollView>
       <ContentWrapper>
         <ImageWrapper
-          source={MilkAdditionalInfoOne}
-          resizeMode="contain"
-          width="100%"
           height={200}
+          resizeMode="contain"
+          source={MilkAdditionalInfoOne}
+          width="100%"
         />
         <ContentText>
           {i18n.t('MilkAdditionalInformationPage.Text1')}
@@ -38,10 +38,10 @@ const MilkAdditionalInformation: React.FC = () => {
       </ContentWrapper>
       <ContentWrapper>
         <ImageWrapper
-          source={MilkAdditionalInfoTwo}
-          resizeMode="contain"
-          width="100%"
           height={200}
+          resizeMode="contain"
+          source={MilkAdditionalInfoTwo}
+          width="100%"
         />
         <ContentText>
           {i18n.t('MilkAdditionalInformationPage.Text3')}
@@ -52,10 +52,10 @@ const MilkAdditionalInformation: React.FC = () => {
       </ContentWrapper>
       <ContentWrapper>
         <ImageWrapper
-          source={MilkAdditionalInfoThree}
-          resizeMode="contain"
-          width="100%"
           height={200}
+          resizeMode="contain"
+          source={MilkAdditionalInfoThree}
+          width="100%"
         />
         <ContentText>
           {i18n.t('MilkAdditionalInformationPage.Text5')}

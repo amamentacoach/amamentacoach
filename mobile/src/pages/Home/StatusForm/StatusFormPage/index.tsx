@@ -1,5 +1,5 @@
 import i18n from 'i18n-js';
-import React, { memo, useState } from 'react';
+import { memo, useState } from 'react';
 import { Dimensions, FlatList, View } from 'react-native';
 
 import FormRadioGroupInput from 'components/FormRadioGroup';
@@ -12,6 +12,7 @@ import SecondaryButton from 'components/SecondaryButton';
 import theme from 'config/theme';
 import { Flex } from 'lib/sharedStyles';
 
+import type { ComponentProps } from 'react';
 import type { SurveyQuestion } from 'utils/getSurveyQuestions';
 
 import {
@@ -25,7 +26,7 @@ import {
 } from './styles';
 
 export interface StatusFormQuestion extends SurveyQuestion {
-  direction: React.ComponentProps<typeof FormRadioGroupInput>['direction'];
+  direction: ComponentProps<typeof FormRadioGroupInput>['direction'];
 }
 
 // Página do formulário de escala.
@@ -51,7 +52,7 @@ interface PageProps {
   // Define o valor de uma resposta.
   setFieldValue: (field: string, value: any) => void;
   // Envia o formulário.
-  submitForm: () => Promise<number | null>;
+  submitForm: () => Promise<void>;
 }
 
 // Página do formulário.
@@ -129,14 +130,14 @@ const StatusFormPage: React.FC<PageProps> = ({
 
               <FormRadioGroupInput
                 color={theme.babyBlue}
-                fieldName={question.id}
-                options={question.options}
-                multipleSelection={question.multipleSelection}
+                direction={question.direction}
                 displayOtherField={question.displayOther}
                 error={errors[question.id]}
+                fieldName={question.id}
                 initialValues={values[question.id]}
+                multipleSelection={question.multipleSelection}
+                options={question.options}
                 onChange={setFieldValue}
-                direction={question.direction}
               />
             </View>
           ))}
@@ -147,8 +148,8 @@ const StatusFormPage: React.FC<PageProps> = ({
             <FirstButtonContainer>
               <SecondaryButton
                 color={theme.babyBlue}
-                text={i18n.t('GoBack')}
                 disabled={isSendingForm}
+                text={i18n.t('GoBack')}
                 onPress={() => handleChangePage(pageIndex, pageIndex - 1)}
               />
             </FirstButtonContainer>
@@ -156,12 +157,12 @@ const StatusFormPage: React.FC<PageProps> = ({
           <Flex>
             <MainButton
               color={theme.babyBlue}
+              disabled={isSendingForm}
               text={
                 pageIndex >= numberOfPages - 1
                   ? i18n.t('Actions.End')
                   : i18n.t('Next')
               }
-              disabled={isSendingForm}
               onPress={() => handleChangePage(pageIndex, pageIndex + 1)}
             />
           </Flex>

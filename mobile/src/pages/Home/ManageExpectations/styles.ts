@@ -1,13 +1,13 @@
 import styled from 'styled-components/native';
 
+import { ManjariBold, OpenSansRegular } from 'lib/sharedStyles';
+
 interface InnerBorderProps {
   correctAnswer: boolean;
 }
 
-export const HeaderTitle = styled.Text`
+export const HeaderTitle = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
   text-align: center;
   margin-bottom: 20px;
 `;
@@ -29,9 +29,7 @@ export const InnerBorder = styled.View<InnerBorderProps>`
   padding: 20px;
 `;
 
-export const CardText = styled.Text`
-  color: ${props => props.theme.black};
-  font-family: 'Manjari-Bold';
+export const CardText = styled(ManjariBold)`
   font-size: 24px;
   text-align: center;
 `;

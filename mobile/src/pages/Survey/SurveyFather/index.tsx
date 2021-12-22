@@ -43,10 +43,10 @@ const SurveyFather: React.FC = () => {
 
   return (
     <Survey
-      title={i18n.t('SurveyTitles.SurveyFather')}
-      color={theme.babyBlue}
-      category={5}
       Page={createGenericSurveyPage(onFormEnd, images)}
+      category={5}
+      color={theme.babyBlue}
+      title={i18n.t('SurveyTitles.SurveyFather')}
       onFeedbackAccepted={setFormSent}
     />
   );

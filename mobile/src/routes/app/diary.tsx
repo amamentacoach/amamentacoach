@@ -20,63 +20,63 @@ const CreateDiaryRoutes = (Stack: StackScreens): JSX.Element[] => {
 
   return [
     <Stack.Screen
+      component={DiaryActions}
       key="DiaryActions"
       name="DiaryActions"
-      component={DiaryActions}
       options={{ title: i18n.t('Survey', { count: 1 }), ...headerBabyPurple }}
     />,
     <Stack.Screen
+      component={DiaryBaby}
       key="DiaryBaby"
       name="DiaryBaby"
-      component={DiaryBaby}
       options={{ title: i18n.t('Survey', { count: 1 }), ...headerBabyPurple }}
     />,
     <Stack.Screen
+      component={DiaryBreastfeed}
       key="DiaryBreastfeed"
       name="DiaryBreastfeed"
-      component={DiaryBreastfeed}
       options={{ title: i18n.t('Diary') }}
     />,
     <Stack.Screen
+      component={DiaryRegistry}
       key="DiaryRegistry"
       name="DiaryRegistry"
-      component={DiaryRegistry}
       options={{ title: i18n.t('Diary') }}
     />,
     <Stack.Screen
+      component={Feelings}
       key="Feelings"
       name="Feelings"
-      component={Feelings}
       options={{ title: i18n.t('Diary'), ...headerBabyPurple }}
     />,
     <Stack.Screen
+      component={Goals}
       key="Goals"
       name="Goals"
-      component={Goals}
       options={{ title: i18n.t('Diary'), ...headerBabyPurple }}
     />,
     <Stack.Screen
+      component={HelpReceived}
       key="HelpReceived"
       name="HelpReceived"
-      component={HelpReceived}
       options={{ title: i18n.t('Diary'), ...headerBabyPurple }}
     />,
     <Stack.Screen
+      component={NewBreastfeedEntry}
       key="NewBreastfeedEntry"
       name="NewBreastfeedEntry"
-      component={NewBreastfeedEntry}
       options={{ title: i18n.t('Diary') }}
     />,
     <Stack.Screen
+      component={NewDiaryRegistry}
       key="NewDiaryRegistry"
       name="NewDiaryRegistry"
-      component={NewDiaryRegistry}
       options={{ title: i18n.t('Diary') }}
     />,
     <Stack.Screen
+      component={Report}
       key="Report"
       name="Report"
-      component={Report}
       options={{ title: i18n.t('DiaryMenuPage.Option8') }}
     />,
   ];

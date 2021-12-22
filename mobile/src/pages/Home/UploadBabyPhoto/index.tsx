@@ -18,8 +18,8 @@ const UploadBabyPhoto: React.FC = () => {
 
   return (
     <UploadPhotoScreen
-      target="baby"
       imagePlaceholder={HeartArrow}
+      target="baby"
       textPlaceholder={i18n.t('UploadBabyPhotoPage.SelectPhoto')}
       uploadFunction={uploadBabyPhoto}
     />

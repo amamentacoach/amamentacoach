@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import FormDateInput from 'components/FormDateInput';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
-import { PaddedScrollView, Flex } from 'lib/sharedStyles';
+import { PaddedScrollView, Flex, ErrorText } from 'lib/sharedStyles';
 import { createExtractionEntry } from 'services/diaryRegistry';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -16,7 +16,6 @@ import type { RootStackProps } from 'routes/app';
 
 import {
   ErrorContainer,
-  ErrorText,
   FirstOption,
   FormContent,
   Header,
@@ -130,8 +129,8 @@ const NewDiaryRegistry: React.FC = () => {
     <PaddedScrollView>
       <Formik
         initialValues={formInitialValues}
-        validationSchema={newDiaryRegistrySchema}
         validateOnChange={false}
+        validationSchema={newDiaryRegistrySchema}
         onSubmit={handleFormSubmit}>
         {({
           handleChange,
@@ -145,30 +144,30 @@ const NewDiaryRegistry: React.FC = () => {
             <Header>{i18n.t('NewDiaryRegistryPage.Header')}</Header>
             <FormContent>
               <FormDateInput
-                label={i18n.t('Time')}
-                fieldName="time"
-                placeholder={i18n.t('NewDiaryRegistryPage.TimePlaceholder')}
-                mode="time"
-                onChange={setFieldValue}
                 error={errors.time}
+                fieldName="time"
+                label={i18n.t('Time')}
+                mode="time"
+                placeholder={i18n.t('NewDiaryRegistryPage.TimePlaceholder')}
+                onChange={setFieldValue}
               />
 
               <FormTextInput
-                label={i18n.t('Quantity')}
-                value={values.quantity}
-                placeholder={i18n.t('NewDiaryRegistryPage.QuantityPlaceholder')}
-                keyboardType="number-pad"
-                onChangeText={handleChange('quantity')}
                 error={errors.quantity}
+                keyboardType="number-pad"
+                label={i18n.t('Quantity')}
+                placeholder={i18n.t('NewDiaryRegistryPage.QuantityPlaceholder')}
+                value={values.quantity}
+                onChangeText={handleChange('quantity')}
               />
 
               <FormTextInput
-                label={i18n.t('Duration')}
-                value={values.duration}
-                placeholder={i18n.t('Placeholder.Duration')}
-                keyboardType="number-pad"
-                onChangeText={handleChange('duration')}
                 error={errors.duration}
+                keyboardType="number-pad"
+                label={i18n.t('Duration')}
+                placeholder={i18n.t('Placeholder.Duration')}
+                value={values.duration}
+                onChangeText={handleChange('duration')}
               />
 
               <OptionHeader>{i18n.t('Breast')}</OptionHeader>
@@ -209,13 +208,13 @@ const NewDiaryRegistry: React.FC = () => {
 
             <SubmitButtonContainer>
               <MainButton
-                onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
                 text={
                   isSendingForm
                     ? i18n.t('Status.Saving')
                     : i18n.t('Actions.Save')
                 }
+                onPress={handleSubmit}
               />
             </SubmitButtonContainer>
           </Flex>

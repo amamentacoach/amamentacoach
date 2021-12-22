@@ -40,10 +40,10 @@ const SurveyHelp: React.FC = () => {
 
   return (
     <Survey
-      title={i18n.t('SurveyTitles.SurveyHelp')}
-      color={theme.babyBlue}
-      category={9}
       Page={createGenericSurveyPage(onFormEnd)}
+      category={9}
+      color={theme.babyBlue}
+      title={i18n.t('SurveyTitles.SurveyHelp')}
       onFeedbackAccepted={setFormSent}
     />
   );

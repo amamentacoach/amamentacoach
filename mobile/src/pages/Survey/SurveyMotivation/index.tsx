@@ -40,10 +40,10 @@ const SurveyMotivation: React.FC = () => {
 
   return (
     <Survey
-      title={i18n.t('SurveyTitles.SurveyMotivation')}
-      color={theme.babyBlue}
-      category={8}
       Page={createGenericSurveyPage(onFormEnd)}
+      category={8}
+      color={theme.babyBlue}
+      title={i18n.t('SurveyTitles.SurveyMotivation')}
       onFeedbackAccepted={setFormSent}
     />
   );

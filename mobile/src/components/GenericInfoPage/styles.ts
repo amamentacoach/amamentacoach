@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
+
 interface LastPageButtonWrapperProps {
   opacity: number;
 }
@@ -17,11 +19,6 @@ export const SkipButton = styled.TouchableOpacity`
   margin-right: 30px;
 `;
 
-export const SkipButtonText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
-`;
-
 export const ContentWrapper = styled.View`
   flex: 1;
   align-items: center;
@@ -29,9 +26,7 @@ export const ContentWrapper = styled.View`
   margin: 0px 24px;
 `;
 
-export const ContentTitleText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  color: ${props => props.theme.black};
+export const ContentTitleText = styled(OpenSansRegular)`
   font-size: 18px;
   text-align: center;
   margin: 0 24px;
@@ -46,16 +41,11 @@ export const TextContainer = styled.View`
   margin-bottom: 20px;
 `;
 
-export const ContentHeaderText = styled.Text`
-  font-family: 'OpenSans-Bold';
-  font-size: 16px;
+export const ContentHeaderText = styled(OpenSansBold)`
   text-align: center;
-  color: ${props => props.theme.primary};
 `;
 
-export const ContentText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
+export const ContentText = styled(OpenSansRegular)`
   text-align: center;
   color: ${props => props.theme.grey};
 `;
@@ -83,8 +73,7 @@ export const EndButton = styled.TouchableOpacity`
   justify-content: center;
 `;
 
-export const TextEndButton = styled.Text`
+export const TextEndButton = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
-  font-family: 'OpenSans-Regular';
   font-size: 18px;
 `;

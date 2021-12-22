@@ -1,6 +1,8 @@
 import { PieChart } from 'react-native-charts-wrapper';
 import styled from 'styled-components/native';
 
+import { OpenSansRegular } from 'lib/sharedStyles';
+
 interface DescriptionColorProps {
   color: string;
 }
@@ -28,9 +30,8 @@ export const DescriptionColor = styled.View<DescriptionColorProps>`
   margin-right: 10px;
 `;
 
-export const DescriptionLabel = styled.Text`
+export const DescriptionLabel = styled(OpenSansRegular)`
   flex: 1;
-  font-family: 'OpenSans-Regular';
   font-size: 14px;
   color: ${props => props.theme.grey};
 `;

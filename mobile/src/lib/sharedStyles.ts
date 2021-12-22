@@ -21,10 +21,51 @@ export const Center = styled.View`
   justify-content: center;
 `;
 
+export const Row = styled.View`
+  flex: 1;
+  flex-direction: row;
+`;
+
 export const Line = styled.View`
   background-color: ${props => props.theme.grey};
   height: 1px;
   margin: 20px 0;
   opacity: 0.25;
   width: 100%;
+`;
+
+export const OpenSansBold = styled.Text`
+  color: ${({ theme }) => theme.primary};
+  font-family: 'OpenSans-Bold';
+  font-size: 16px;
+`;
+
+export const OpenSansRegular = styled.Text`
+  color: ${({ theme }) => theme.black};
+  font-family: 'OpenSans-Regular';
+  font-size: 16px;
+`;
+
+export const ManjariBold = styled.Text`
+  color: ${({ theme }) => theme.black};
+  font-family: 'Manjari-Bold';
+  font-size: 18px;
+`;
+
+export const ManjariRegular = styled.Text`
+  color: ${({ theme }) => theme.black};
+  font-family: 'Manjari-Regular';
+  font-size: 18px;
+`;
+
+export const ErrorContainer = styled.View`
+  flex: 1;
+  min-height: 20px;
+  margin-top: 5px;
+`;
+
+export const ErrorText = styled.Text`
+  font-family: 'OpenSans-Regular';
+  color: ${({ theme }) => theme.error};
+  font-size: 14px;
 `;

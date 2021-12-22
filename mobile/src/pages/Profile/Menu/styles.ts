@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
 
-export const OptionText = styled.Text`
+import { OpenSansRegular } from 'lib/sharedStyles';
+
+export const OptionText = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
-  font-family: 'OpenSans-Regular';
   font-size: 18px;
 `;

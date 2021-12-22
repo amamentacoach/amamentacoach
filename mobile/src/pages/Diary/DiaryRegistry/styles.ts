@@ -1,14 +1,14 @@
 import styled from 'styled-components/native';
 
+import { OpenSansRegular } from 'lib/sharedStyles';
+
 export const Container = styled.View`
   flex: 1;
   padding: 24px;
 `;
 
-export const DateText = styled.Text`
+export const DateText = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
   text-align: center;
   margin-bottom: 24px;
 `;

@@ -130,7 +130,7 @@ const StepByStepPremature: React.FC = () => {
         <Foreground color={colors[index].foreground} height={height} />
       )}
       <ContentWrapper index={index}>
-        {image && <ImageWrapper source={image} height={300} />}
+        {image && <ImageWrapper height={300} source={image} />}
         {index !== 0 && <ContentTitleText>{title}</ContentTitleText>}
         {content.map(({ id, sectionHeader, text }) => (
           <View key={id}>
@@ -146,8 +146,8 @@ const StepByStepPremature: React.FC = () => {
         <CurrentPageWrapper>
           <ProgressDots
             flatlistRef={flatListRef}
-            selectedIndex={index}
             length={pagesLength}
+            selectedIndex={index}
           />
         </CurrentPageWrapper>
         <LastPageButtonWrapper opacity={index === pagesLength - 1 ? 1 : 0}>
@@ -159,7 +159,7 @@ const StepByStepPremature: React.FC = () => {
     </Background>
   );
 
-  return <InformationPages data={pages} PageModel={InfoModel} />;
+  return <InformationPages PageModel={InfoModel} data={pages} />;
 };
 
 export default StepByStepPremature;

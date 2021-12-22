@@ -38,8 +38,8 @@ const Questions: React.FC = () => {
     navigation.setOptions({
       headerRight: () => (
         <AddQuestionButton
-          onPress={() => navigation.navigate('NewQuestion')}
-          activeOpacity={0.7}>
+          activeOpacity={0.7}
+          onPress={() => navigation.navigate('NewQuestion')}>
           <AddIcon />
         </AddQuestionButton>
       ),
@@ -76,17 +76,17 @@ const Questions: React.FC = () => {
   return (
     <FlatlistContainer>
       <FlatList
-        data={questions}
-        renderItem={({ item, index }) => (
-          <Entry question={item.question} answer={item.answer} index={index} />
-        )}
-        keyExtractor={item => item.question}
         ListFooterComponent={() => (
           <LoadingIndicator
-            size="large"
-            color={theme.primary}
             animating={loading}
+            color={theme.primary}
+            size="large"
           />
+        )}
+        data={questions}
+        keyExtractor={item => item.question}
+        renderItem={({ item, index }) => (
+          <Entry answer={item.answer} index={index} question={item.question} />
         )}
         showsVerticalScrollIndicator={false}
       />

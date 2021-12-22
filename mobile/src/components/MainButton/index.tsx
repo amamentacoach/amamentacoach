@@ -15,10 +15,10 @@ const MainButton: React.FC<MainButtonProps> = ({
 }) => {
   return (
     <Button
+      activeOpacity={0.9}
       color={color}
       disabled={disabled}
-      onPress={onPress}
-      activeOpacity={0.9}>
+      onPress={onPress}>
       <TextButton color={color} disabled={disabled}>
         {text}
       </TextButton>

@@ -1,6 +1,9 @@
 import styled from 'styled-components/native';
 
-import { ScrollView as SharedScrollView } from 'lib/sharedStyles';
+import {
+  OpenSansRegular,
+  ScrollView as SharedScrollView,
+} from 'lib/sharedStyles';
 
 interface ScrollViewProps {
   width: number;
@@ -21,10 +24,8 @@ export const HeaderBackground = styled.View<HeaderProps>`
   height: 170px;
 `;
 
-export const HeaderText = styled.Text`
-  color: ${props => props.theme.black};
+export const HeaderText = styled(OpenSansRegular)`
   text-align: center;
-  font-family: 'OpenSans-Regular';
   font-size: 18px;
   margin: -150px 24px 10px 24px;
 `;

@@ -45,10 +45,10 @@ const createGenericSurveyPage = (
         {Image && (
           <ImageContainer>
             <FullWidthImage
-              source={Image}
-              resizeMode="contain"
-              width="100%"
               height={180}
+              resizeMode="contain"
+              source={Image}
+              width="100%"
             />
           </ImageContainer>
         )}
@@ -56,21 +56,21 @@ const createGenericSurveyPage = (
 
         <FormRadioGroupInput
           color={color}
-          fieldName={`${question.id}`}
-          options={question.options}
-          multipleSelection={question.multipleSelection}
           displayOtherField={question.displayOther}
           error={isFormValid ? '' : i18n.t('Yup.AnswerRequired')}
+          fieldName={`${question.id}`}
+          multipleSelection={question.multipleSelection}
+          options={question.options}
           onChange={setFieldValue}
         />
 
         <Footer>
           <MainButton
             color={color}
+            disabled={!isDirty || isSendingForm}
             text={
               index >= pagesLength - 1 ? i18n.t('Actions.End') : i18n.t('Next')
             }
-            disabled={!isDirty || isSendingForm}
             onPress={() => handleChangePage(index + 1, onFormEnd)}
           />
         </Footer>

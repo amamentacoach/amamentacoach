@@ -60,7 +60,6 @@ const NewMessage: React.FC = () => {
     <ScrollView>
       <Modal
         content={i18n.t('NewMessagePage.MessageSent')}
-        visible={isSubmitModalVisible}
         options={[
           {
             text: i18n.t('Close'),
@@ -68,41 +67,42 @@ const NewMessage: React.FC = () => {
             onPress: () => setIsSubmitModalVisible(false),
           },
         ]}
+        visible={isSubmitModalVisible}
       />
 
       <HeaderText>{i18n.t('NewMessagePage.Message')}</HeaderText>
       <Formik
         initialValues={formInitialValues}
-        validationSchema={newMessageSchema}
         validateOnChange={false}
+        validationSchema={newMessageSchema}
         onSubmit={values => handleNewMessage(values)}>
         {({ setFieldValue, handleSubmit, dirty, errors }) => (
           <FormContainer>
             <View>
               <FormTextInput
+                error={errors.message}
+                maxLength={255}
+                numberOfLines={20}
+                placeholder={i18n.t('Placeholder.Message')}
+                textAlignVertical="top"
+                value={textInputText}
+                multiline
                 onChangeText={(text: string) => {
                   setFieldValue('message', text);
                   setTextInputText(text);
                 }}
-                value={textInputText}
-                placeholder={i18n.t('Placeholder.Message')}
-                error={errors.message}
-                multiline
-                numberOfLines={20}
-                maxLength={255}
-                textAlignVertical="top"
               />
             </View>
 
             <SubmitButtonContainer>
               <MainButton
-                onPress={handleSubmit}
                 disabled={!dirty || isSendingForm}
                 text={
                   isSendingForm
                     ? i18n.t('Status.Sending')
                     : i18n.t('Actions.Send')
                 }
+                onPress={handleSubmit}
               />
             </SubmitButtonContainer>
           </FormContainer>

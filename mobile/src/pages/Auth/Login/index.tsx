@@ -87,7 +87,6 @@ const Login: React.FC = () => {
       {!!errorModalMessage && (
         <Modal
           content={errorModalMessage}
-          visible={!!errorModalMessage}
           options={[
             {
               text: i18n.t('Close'),
@@ -95,41 +94,42 @@ const Login: React.FC = () => {
               onPress: () => setErrorModalMessage(null),
             },
           ]}
+          visible={!!errorModalMessage}
         />
       )}
 
       <ScrollView>
-        <Header source={Logo} resizeMode="contain" />
+        <Header resizeMode="contain" source={Logo} />
         <Formik
           initialValues={formInitialValues}
-          validationSchema={loginSchema}
           validateOnChange={false}
+          validationSchema={loginSchema}
           onSubmit={values => handleSignIn(values)}>
           {({ handleChange, handleSubmit, dirty, errors, values }) => (
             <FormContainer>
               <View>
                 <FormTextInput
-                  label={i18n.t('Email')}
                   error={errors.email}
-                  onChangeText={handleChange('email')}
-                  value={values.email}
-                  placeholder={i18n.t('Placeholder.Email')}
                   keyboardType="email-address"
+                  label={i18n.t('Email')}
+                  placeholder={i18n.t('Placeholder.Email')}
+                  value={values.email}
+                  onChangeText={handleChange('email')}
                 />
 
                 <FormTextInput
-                  label={i18n.t('Password')}
                   error={errors.password}
-                  onChangeText={handleChange('password')}
-                  value={values.password}
+                  label={i18n.t('Password')}
                   placeholder={i18n.t('LoginPage.PasswordPlaceholder')}
+                  value={values.password}
                   secureTextEntry
+                  onChangeText={handleChange('password')}
                 />
               </View>
 
               <TouchableOpacity
-                onPress={handleForgotPassword}
-                activeOpacity={0.7}>
+                activeOpacity={0.7}
+                onPress={handleForgotPassword}>
                 <ForgotPasswordText>
                   {i18n.t('LoginPage.ForgotPassword')}
                 </ForgotPasswordText>
@@ -137,19 +137,19 @@ const Login: React.FC = () => {
 
               <SubmitButtonContainer>
                 <MainButton
-                  onPress={handleSubmit}
                   disabled={!dirty || isSendingForm}
                   text={
                     isSendingForm
                       ? i18n.t('Status.SignIn')
                       : i18n.t('Actions.SignIn')
                   }
+                  onPress={handleSubmit}
                 />
               </SubmitButtonContainer>
 
               <Flex>
                 <NoAccountText>{i18n.t('LoginPage.NoAccount')}</NoAccountText>
-                <TouchableOpacity onPress={handleSignUp} activeOpacity={0.7}>
+                <TouchableOpacity activeOpacity={0.7} onPress={handleSignUp}>
                   <SignUpText>{i18n.t('LoginPage.SignUp')}</SignUpText>
                 </TouchableOpacity>
               </Flex>

@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { OpenSansRegular } from 'lib/sharedStyles';
+
 interface LastPageButtonWrapperProps {
   opacity: number;
 }
@@ -16,11 +18,6 @@ export const SkipButton = styled.TouchableOpacity`
   margin: 0px 30px 0 0;
 `;
 
-export const SkipButtonText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
-`;
-
 export const ContentWrapper = styled.View`
   flex: 1;
   align-items: center;
@@ -28,9 +25,7 @@ export const ContentWrapper = styled.View`
   margin: 24px 24px 0 24px;
 `;
 
-export const ContentText = styled.Text`
-  font-family: 'OpenSans-Regular';
-  font-size: 16px;
+export const ContentText = styled(OpenSansRegular)`
   text-align: center;
   color: ${props => props.theme.grey};
 `;

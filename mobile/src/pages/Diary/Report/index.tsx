@@ -44,20 +44,20 @@ const Report: React.FC = () => {
       <Container>
         <View>
           <FormPickerInput
+            defaultValue={i18n.t('Diary')}
             fieldName="reportSelected"
             label={i18n.t('ReportPage.Placeholder')}
-            defaultValue={i18n.t('Diary')}
-            placeholder={''}
             options={[i18n.t('ReportPage.Daily'), i18n.t('ReportPage.Weekly')]}
+            placeholder={''}
             onChange={(_, fieldValue): void => handleChangeReport(fieldValue)}
           />
         </View>
         {isLoading && (
           <Center>
             <ActivityIndicator
-              size="large"
-              color={theme.primary}
               animating={isLoading}
+              color={theme.primary}
+              size="large"
             />
           </Center>
         )}

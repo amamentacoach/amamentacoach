@@ -87,13 +87,13 @@ const AcceptTermsOfService: React.FC = () => {
 
         <SubmitButtonContainer>
           <MainButton
-            onPress={handleSubmit}
             disabled={isSendingForm}
             text={
               isSendingForm
                 ? i18n.t('Status.Sending')
                 : i18n.t('AcceptTermsOfServicePage.Agree')
             }
+            onPress={handleSubmit}
           />
         </SubmitButtonContainer>
       </FormContainer>

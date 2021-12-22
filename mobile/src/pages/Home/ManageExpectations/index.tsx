@@ -207,7 +207,6 @@ const ManageExpectations: React.FC = () => {
     <PaddedScrollView>
       <Modal
         content={i18n.t('ManageExpectationsPage.PopUp')}
-        visible={isSubmitModalVisible}
         options={[
           {
             text: i18n.t('Close'),
@@ -215,6 +214,7 @@ const ManageExpectations: React.FC = () => {
             onPress: () => setIsSubmitModalVisible(false),
           },
         ]}
+        visible={isSubmitModalVisible}
       />
       <HeaderTitle>{i18n.t('ManageExpectationsPage.Header')}</HeaderTitle>
       <Card>
@@ -229,14 +229,14 @@ const ManageExpectations: React.FC = () => {
       <Footer>
         <FirstButtonContainer>
           <MainButton
-            text={i18n.t('ManageExpectationsPage.Switch')}
             disabled={isSubmitButtonDisabled}
+            text={i18n.t('ManageExpectationsPage.Switch')}
             onPress={handleCorrectExpectationSelected}
           />
         </FirstButtonContainer>
         <SecondaryButton
-          text={i18n.t('ManageExpectationsPage.Keep')}
           disabled={isSubmitButtonDisabled}
+          text={i18n.t('ManageExpectationsPage.Keep')}
           onPress={() => handleExpectationSelected(false)}
         />
       </Footer>

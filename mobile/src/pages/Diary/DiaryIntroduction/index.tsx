@@ -72,13 +72,13 @@ const DiaryIntroduction: React.FC = () => {
         <CurrentPageWrapper>
           <ProgressDots
             flatlistRef={flatListRef}
-            selectedIndex={index}
             length={pagesLength}
+            selectedIndex={index}
           />
         </CurrentPageWrapper>
         <FooterButtonWrapper>
           {index === pagesLength - 1 ? (
-            <MainButton onPress={onEnd} text={i18n.t('LetsStart')} />
+            <MainButton text={i18n.t('LetsStart')} onPress={onEnd} />
           ) : (
             <ContinueButton activeOpacity={0.7} onPress={onEnd}>
               <TextContinueButton>{i18n.t('Skip')}</TextContinueButton>
@@ -89,7 +89,7 @@ const DiaryIntroduction: React.FC = () => {
     </>
   );
 
-  return <InformationPages data={pages} PageModel={InfoModel} />;
+  return <InformationPages PageModel={InfoModel} data={pages} />;
 };
 
 export default DiaryIntroduction;

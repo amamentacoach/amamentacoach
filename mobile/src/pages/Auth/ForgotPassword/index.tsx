@@ -54,27 +54,27 @@ const ForgotPassword: React.FC = () => {
       <HeaderText>{i18n.t('ForgotPasswordPage.Header')}</HeaderText>
       <Formik
         initialValues={formInitialValues}
-        validationSchema={signUpSchema}
         validateOnChange={false}
+        validationSchema={signUpSchema}
         onSubmit={values => handleForgotPassword(values)}>
         {({ handleChange, handleSubmit, dirty, errors, values }) => (
           <Flex>
             <View>
               <FormTextInput
-                label={i18n.t('Email')}
-                onChangeText={handleChange('email')}
-                value={values.email}
-                placeholder={i18n.t('Placeholder.Email')}
-                keyboardType="email-address"
                 error={errors.email}
+                keyboardType="email-address"
+                label={i18n.t('Email')}
+                placeholder={i18n.t('Placeholder.Email')}
+                value={values.email}
+                onChangeText={handleChange('email')}
               />
             </View>
 
             <SubmitButtonContainer>
               <MainButton
+                disabled={!dirty || isSendingForm}
                 text={i18n.t('Actions.Send')}
                 onPress={handleSubmit}
-                disabled={!dirty || isSendingForm}
               />
             </SubmitButtonContainer>
           </Flex>
