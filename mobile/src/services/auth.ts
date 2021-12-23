@@ -1,69 +1,87 @@
+import i18n from 'i18n-js';
+
 import api from 'services/api';
 
 export interface MotherSignUpInfo {
-  email: string;
-  password: string;
-  name: string;
-  phone: string;
-  pregnantCount: number;
+  abortionCount: number;
   alreadyBreastfeed: boolean;
-  timeSpentBreastFeeding: string;
   birthday: string;
-  partner: boolean;
-  liveTogether: string | null;
-  education: string;
-  wage: string;
-  plannedPregnancy: boolean;
-  firstVisit: string;
-  firstStimulus: string;
-  timeFirstStimulus: string;
   childrenAlive: string;
-  receivedPreNatalGuidance: boolean;
-  occupation: boolean;
+  currentGestationCount: number;
+  education: string;
+  email: string;
+  hasPartner: boolean;
+  timeLivingWithPartner: string | null;
+  location: string;
   maternityLeave: number | null;
+  name: string;
+  occupation: boolean;
+  password: string;
+  phone1: string;
+  phone2: string;
+  plannedPregnancy: boolean;
+  pregnantCount: number;
+  preNatalCheckupCount: string;
+  problemsDuringPregnancy: string;
+  receivedBreastfeedingGuidance: boolean;
+  timeSpentBreastFeeding: string[];
+  wage: string;
 }
 
 export interface BabySignUpInfo {
-  name: string;
-  birthday: string;
-  gestationWeeks: number;
-  gestationDays: number;
-  weight: number;
   apgar1: number | null;
   apgar2: number | null;
-  birthType: boolean;
-  touched: boolean;
+  birthday: string;
   birthLocation: string;
-  difficulties: boolean;
+  birthType: boolean;
+  gestationDays: number;
+  gestationWeeks: number;
+  hadFirstContact: boolean;
+  hadFirstStimulus: string[];
+  hadPostPartumComplications: string;
+  name: string;
+  timeFirstStimulus: string | null;
+  timeFirstVisit: string | null;
+  weight: number;
+}
+
+enum BirthLocation {
+  HU_UEL,
+  MATERNITY,
 }
 
 export interface MotherInfo {
-  name: string;
   birthday: string;
+  birthLocation: BirthLocation;
+  name: string;
+  partner: boolean;
+  babies: {
+    id: number;
+    name: string;
+  }[];
+  babiesBirthLocations: {
+    AC: boolean;
+    UCI: boolean;
+    UCIN: boolean;
+    UTI: boolean;
+  };
   images: {
     mother: string | null;
     baby: string | null;
     father: string | null;
   };
-  babiesBirthLocations: {
-    AC: boolean;
-    UCI: boolean;
-    UTI: boolean;
-  };
-  partner: boolean;
-  babies: { id: number; name: string }[];
 }
 
 interface LoginResponse {
-  token: string;
   status: LoginStatus;
+  token: string;
 }
 
 export enum LoginStatus {
-  Success,
   AccountNotAuthorized,
-  IncorrectLogin,
   FailedToConnect,
+  IncorrectLogin,
+  Success,
 }
 
 // Cadastra uma mãe no sistema.
@@ -72,26 +90,28 @@ export async function signUpMother(
 ): Promise<string | null> {
   try {
     const request = await api.post('/maes', {
-      email: motherInfo.email,
-      senha: motherInfo.password,
-      nome: motherInfo.name,
-      data_nascimento: motherInfo.birthday,
-      whatsapp: motherInfo.phone,
       amamentou_antes: motherInfo.alreadyBreastfeed,
-      companheiro: motherInfo.partner,
-      moram_juntos: motherInfo.liveTogether,
+      companheiro: motherInfo.hasPartner,
+      complicacoes_gestacao: motherInfo.problemsDuringPregnancy,
+      consultas_prenatal: motherInfo.preNatalCheckupCount,
+      data_nascimento: motherInfo.birthday,
+      email: motherInfo.email,
       escolaridade: motherInfo.education,
-      renda: motherInfo.wage,
-      qtd_gravidez: motherInfo.pregnantCount,
-      tempo_amamentacao: motherInfo.timeSpentBreastFeeding,
       gestacao_planejada: motherInfo.plannedPregnancy,
-      primeira_visita: motherInfo.firstVisit,
-      primeiro_estimulo: motherInfo.firstStimulus,
-      tempo_primeiro_estimulo: motherInfo.timeFirstStimulus,
-      qtd_filhos_vivos: motherInfo.childrenAlive,
-      orientacao_prenatal: motherInfo.receivedPreNatalGuidance,
-      ocupacao: motherInfo.occupation,
       licenca_maternidade: motherInfo.maternityLeave,
+      localizacao: motherInfo.location,
+      moram_juntos: motherInfo.timeLivingWithPartner,
+      nome: motherInfo.name,
+      ocupacao: motherInfo.occupation,
+      orientacao_prenatal: motherInfo.receivedBreastfeedingGuidance,
+      qtd_abortos: motherInfo.abortionCount,
+      qtd_filhos_vivos: motherInfo.childrenAlive,
+      qtd_gravidez: motherInfo.pregnantCount,
+      renda: motherInfo.wage,
+      senha: motherInfo.password,
+      telefone2: motherInfo.phone2,
+      tempo_amamentacao: motherInfo.timeSpentBreastFeeding,
+      whatsapp: motherInfo.phone1,
     });
     return request.data.token;
   } catch (error) {
@@ -107,17 +127,20 @@ export async function signUpBaby(
   await api.post(
     '/bebes',
     {
-      nome: babyInfo.name,
-      data_parto: babyInfo.birthday,
-      semanas_gest: babyInfo.gestationWeeks,
-      dias_gest: babyInfo.gestationDays,
-      complicacoes: babyInfo.difficulties,
-      contato_pele: babyInfo.touched,
-      peso: babyInfo.weight,
       apgar1: babyInfo.apgar1,
       apgar2: babyInfo.apgar2,
-      tipo_parto: babyInfo.birthType,
+      complicacoes: babyInfo.hadPostPartumComplications,
+      contato_pele: babyInfo.hadFirstContact,
+      data_parto: babyInfo.birthday,
+      dias_gest: babyInfo.gestationDays,
       local: babyInfo.birthLocation,
+      nome: babyInfo.name,
+      peso: babyInfo.weight,
+      primeira_visita: babyInfo.timeFirstVisit,
+      primeiro_estimulo: babyInfo.hadFirstStimulus,
+      semanas_gest: babyInfo.gestationWeeks,
+      tempo_primeiro_estimulo: babyInfo.timeFirstStimulus,
+      tipo_parto: babyInfo.birthType,
     },
     {
       headers: {
@@ -163,18 +186,19 @@ export async function signIn(
 export function isMotherInfo(object: any): object is MotherInfo {
   return (
     object &&
-    object.name &&
-    object.birthday &&
-    object.partner &&
-    object.images &&
-    object.images.baby !== undefined &&
-    object.images.father !== undefined &&
-    object.images.mother !== undefined &&
+    object.babies &&
     object.babiesBirthLocations &&
     object.babiesBirthLocations.AC !== undefined &&
     object.babiesBirthLocations.UCI !== undefined &&
     object.babiesBirthLocations.UTI !== undefined &&
-    object.babies
+    object.birthday &&
+    object.images &&
+    object.images.baby !== undefined &&
+    object.images.father !== undefined &&
+    object.images.mother !== undefined &&
+    object.location &&
+    object.name &&
+    object.partner
   );
 }
 
@@ -193,6 +217,7 @@ export async function getMotherInfo(): Promise<MotherInfo | null> {
     const babiesBirthLocations = {
       AC: false,
       UCI: false,
+      UCIN: false,
       UTI: false,
     };
     // Recebe todos os locais de nascimento dos bebês e marca como verdadeiro os valores
@@ -200,13 +225,16 @@ export async function getMotherInfo(): Promise<MotherInfo | null> {
     Object.values(data.bebes).forEach((baby: any) => {
       const babyBirthPlace: string = baby.local.toLowerCase();
       switch (babyBirthPlace) {
-        case 'alojamento conjunto':
+        case i18n.t('Lodging').toLowerCase():
           babiesBirthLocations.AC = true;
           break;
-        case 'uci neonatal':
+        case i18n.t('UCI').toLowerCase():
           babiesBirthLocations.UCI = true;
           break;
-        case 'uti neonatal':
+        case i18n.t('UCIN Kangaroo').toLowerCase():
+          babiesBirthLocations.UCIN = true;
+          break;
+        case i18n.t('UTI').toLowerCase():
           babiesBirthLocations.UTI = true;
           break;
         default:
@@ -214,17 +242,31 @@ export async function getMotherInfo(): Promise<MotherInfo | null> {
       }
     });
 
+    const dataBirthLocation = data.localizacao.toLowerCase();
+    let birthLocation = BirthLocation.HU_UEL;
+    switch (dataBirthLocation) {
+      case i18n.t('MotherFormPage.LocationOptions.HU').toLowerCase():
+        birthLocation = BirthLocation.HU_UEL;
+        break;
+      case i18n.t('MotherFormPage.LocationOptions.Maternity').toLowerCase():
+        birthLocation = BirthLocation.MATERNITY;
+        break;
+      default:
+        break;
+    }
+
     return {
-      name: data.nome,
+      babies,
+      babiesBirthLocations,
+      birthLocation,
       birthday: data.data_nascimento,
+      name: data.nome,
       partner: data.companheiro,
       images: {
         mother: data.imagem_mae,
         baby: data.imagem_bebe,
         father: data.imagem_pai,
       },
-      babiesBirthLocations,
-      babies,
     };
   } catch (error) {
     return null;

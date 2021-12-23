@@ -37,7 +37,7 @@ const AcceptTermsOfService: React.FC = () => {
       setIsErrorModalVisible(true);
       return;
     }
-    babiesInfo.forEach(async baby => signUpBaby(token, baby));
+    await Promise.all(babiesInfo.map(async baby => signUpBaby(token, baby)));
     setIsSignUpModalVisible(true);
   }
 

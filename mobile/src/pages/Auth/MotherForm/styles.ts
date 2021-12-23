@@ -1,14 +1,13 @@
 import styled from 'styled-components/native';
 
-export const HeaderText = styled.Text`
-  font-family: 'OpenSans-Bold';
+import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
+
+export const HeaderText = styled(OpenSansBold)`
   font-size: 18px;
-  color: ${props => props.theme.primary};
   text-align: center;
 `;
 
-export const HeaderSubText = styled.Text`
-  font-family: 'OpenSans-Regular';
+export const HeaderSubText = styled(OpenSansRegular)`
   font-size: 14px;
   margin: 0 auto 15px auto;
   text-align: center;
@@ -18,20 +17,6 @@ export const HeaderSubText = styled.Text`
 export const FormContainer = styled.View`
   flex: 1;
   margin-bottom: 20px;
-`;
-
-export const DDDContainer = styled.View`
-  margin-right: 4px;
-  width: 70px;
-`;
-
-export const PhoneInputContainer = styled.View`
-  flex: 4;
-`;
-
-export const SubOptionsContainer = styled.View`
-  flex: 1;
-  flex-direction: row;
 `;
 
 export const FirstSubOptionContainer = styled.View`

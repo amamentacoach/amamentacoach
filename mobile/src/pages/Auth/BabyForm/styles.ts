@@ -1,14 +1,13 @@
 import styled from 'styled-components/native';
 
-export const HeaderText = styled.Text`
-  font-family: 'OpenSans-Bold';
+import { OpenSansRegular, OpenSansBold } from 'lib/sharedStyles';
+
+export const HeaderText = styled(OpenSansBold)`
   font-size: 18px;
-  color: ${props => props.theme.primary};
   text-align: center;
 `;
 
-export const HeaderSubText = styled.Text`
-  font-family: 'OpenSans-Regular';
+export const HeaderSubText = styled(OpenSansRegular)`
   font-size: 14px;
   margin: 0 auto 15px auto;
   text-align: center;
@@ -20,9 +19,9 @@ export const FormContainer = styled.View`
   margin-bottom: 20px;
 `;
 
-export const SubOptionsContainer = styled.View`
-  flex: 1;
-  flex-direction: row;
+export const GestationTimeText = styled(OpenSansRegular)`
+  font-size: 14px;
+  margin-bottom: 5px;
 `;
 
 export const GestationWeeksContainer = styled.View`
@@ -35,14 +34,7 @@ export const FirstSubOptionContainer = styled.View`
   margin-right: 4px;
 `;
 
-export const SecondSubOptionContainer = styled.View`
-  flex: 1;
-  align-content: center;
-  justify-content: center;
-`;
-
-export const ApgarTextHeader = styled.Text`
-  font-family: 'OpenSans-Regular';
+export const ApgarTextHeader = styled(OpenSansRegular)`
   font-size: 14px;
   margin-bottom: -16px;
 `;
@@ -52,8 +44,7 @@ export const ApgarTextContainer = styled.View`
   justify-content: center;
 `;
 
-export const ApgarText = styled.Text`
-  font-family: 'OpenSans-Regular';
+export const ApgarText = styled(OpenSansRegular)`
   margin-right: 4px;
 `;
 

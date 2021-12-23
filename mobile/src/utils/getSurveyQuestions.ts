@@ -40,6 +40,7 @@ export function getSurveyQuestions({
       if (
         motherInfo &&
         !motherInfo.babiesBirthLocations.UCI &&
+        !motherInfo.babiesBirthLocations.UCIN &&
         !motherInfo.babiesBirthLocations.UTI &&
         question.alvo === 'UCI/UTI'
       ) {

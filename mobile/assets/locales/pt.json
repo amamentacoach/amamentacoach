@@ -1,5 +1,6 @@
 {
   "And": "e",
+  "Baby": "Bebê",
   "Begin": "Início",
   "Breast": "Mama",
   "Cancel": "Cancelar",
@@ -18,6 +19,7 @@
   "Left": "Esquerda",
   "LetsStart": "Vamos começar!",
   "Lodging": "Alojamento Conjunto",
+  "Months": "Meses",
   "Name": "Nome",
   "Next": "Próximo",
   "No": "Não",
@@ -35,7 +37,13 @@
   "Time": "Horário",
   "UCI": "UCI Neonatal",
   "UTI": "UTI Neonatal",
+  "UCIN Kangaroo": "UCIN Canguru",
+  "Years": "Anos",
   "Yes": "Sim",
+  "Day": {
+    "one": "Dia",
+    "other": "Dias"
+  },
   "Survey": {
     "one": "Enquete",
     "other": "Enquetes"
@@ -43,6 +51,10 @@
   "Video": {
     "one": "Vídeo",
     "other": "Vídeos"
+  },
+  "Week": {
+    "one": "Semana",
+    "other": "Semanas"
   },
   "AcceptTermsOfServicePage": {
     "AccountCreated": "Conta criada com sucesso! Seja muito bem-vinda ao AmamentaCoach!",
@@ -87,31 +99,49 @@
     "Step4": "O bebê fará movimentos de lambida do leite seguidos de deglutição, cuida para não despejar o leite na boca do bebê."
   },
   "BabyFormPage": {
-    "1": "Número de filhos nesta gestação",
-    "3": "Nome do seu bebê",
-    "5": "Data do parto",
-    "7": "Peso de nascimento",
-    "9": "Tipo de parto",
-    "10": "Realizou contato pele a pele na primeira hora de vida?",
-    "11": "Presença de complicação pós-parto?",
-    "12": "Idade gestacional ao nascer",
-    "13": "Semanas",
-    "15": "Dias",
-    "20": "Ao nascer, seu bebê foi para:",
-    "Header": "Você está quase lá! Agora faremos algumas perguntas sobre seu bebê:",
-    "ApgarPopUp": "Apgar é a nota, de 0 a 10, que o bebê recebe de acordo com o estado em que ele se apresenta no momento de nascimento e consta no cartão da criança.\nSe não souber, tudo bem, continue seu cadastro normalmente!",
     "Apgar": "Apgar (Opcional)",
+    "ApgarPopUp": "Apgar é a nota, de 0 a 10, que o bebê recebe de acordo com o estado em que ele se apresenta no momento de nascimento e consta no cartão da criança.\nSe não souber, tudo bem, continue seu cadastro normalmente!",
+    "BirthDate": "Data do parto",
+    "BirthLocation": "Ao nascer, seu bebê foi para:",
+    "BirthType": "Tipo de parto",
+    "GestationWeeks": "Idade gestacional ao nascer do %{nome}",
+    "HadFirstContact": "Realizou contato pele a pele na primeira hora de vida?",
+    "HadFirstStimulus": "Qual foi o primeiro estímulo realizado em suas mamas?",
+    "HadPostPartumComplications": "Presença de complicação pós-parto?",
+    "Header": "Você está quase lá! Agora faremos algumas perguntas sobre seu parto e seu bebê.",
+    "Name": "Nome do seu bebê",
+    "TimeFirstStimulus": "Quanto tempo após o nascimento do bebê foi realizado o primeiro estímulo?",
+    "TimeFirstVisit": "Quanto tempo após o parto você fez a primeira visita ao seu bebe?",
+    "Weight": "Peso de nascimento",
     "BirthTypeOptions": {
       "Option1": "Normal",
       "Option2": "Cesária"
     },
+    "FirstStimulusOptions": {
+      "Option1": "Ainda não realizou nenhum estímulo",
+      "Option2": "Massagem/Ordenha",
+      "Option3": "Sucção"
+    },
+    "TimeFirstVisitOptions": {
+      "Option1": "12h",
+      "Option2": "13-24h",
+      "Option3": "2 dias",
+      "Option4": "3 dias",
+      "Option5": "4 dias ou mais"
+    },
     "Placeholder": {
       "BabyWeight": "Insira o peso do bebê ao nascer (kg)",
-      "BirthDate": "Insira a data do parto",
-      "NumberOfChildren": "Insira o número de filhos"
+      "BirthDate": "Insira a data do parto"
+    },
+    "TimeFirstStimulusOptions": {
+      "Option1": "Em até 1h",
+      "Option2": "De 1 à 6 horas",
+      "Option3": "De 7 à 12 horas",
+      "Option4": "De 13 à 24 horas",
+      "Option5": "2 dias",
+      "Option6": "3 dias"
     },
     "Yup": {
-      "BabyError": "Pelo menos um bebê deve ser registrado",
       "ApgarError": "Apgar %{num} também deve ser fornecido"
     }
   },
@@ -353,36 +383,37 @@
     "Text7": "Fonte: Adaptado do site https://bebe.abril.com.br/amamentacao/leite-materno-infografico-mostra-como-ele-e-produzido/"
   },
   "MotherFormPage": {
-    "HeaderSubText": "Agora, faremos uma série de perguntas sobre você, mamãe, para trazer o conteúdo mais adequado para a sua realidade:",
-    "Name": "Seu Nome",
+    "AbortionCount": "Quantos abortos você já teve?",
+    "AlreadyBreastfeed": "Você já amamentou antes?",
     "Birthday": "Sua data de nascimento",
     "BirthdayPlaceholder": "Data de nascimento",
-    "DDD": "DDD",
-    "Phone": "Telefone",
-    "PregnantCount": "Quantas vezes já esteve grávida? (contando abortos)",
-    "PregnantCountPlaceholder": "Insira o número de vezes",
-    "AlreadyBreastfeed": "Você já amamentou antes?",
-    "YearsSpentBreastFeeding": "Por quantos anos?",
-    "MonthsSpentBreastFeeding": "Por quantos meses?",
-    "Partner": "Tem companheiro?",
-    "LiveTogether": "Moram juntos?",
-    "PartnerTime": "Há quanto tempo moram juntos?",
+    "BreastfeedingTime": "Por quantos anos/meses você alimentou seu %{num}º filho?",
+    "ChildrenAlive": "Você já possui algum filho vivo de gestação anterior?",
+    "CountPlaceholder": "Insira o número de vezes",
+    "CurrentGestationCount": "Número de filhos nessa gestação?",
     "Education": "Qual sua escolaridade?",
-    "Wage": "Em qual faixa sua renda familiar se encaixa?",
-    "PlannedPregnancy": "A gestação foi planejada?",
-    "FirstVisit": "Quanto tempo após o parto você fez a primeira visita ao seu bebe?",
-    "FirstStimulus": "Qual foi o primeiro estímulo realizado em suas mamas?",
-    "TimeFirstStimulus": "Quanto tempo após o nascimento do bebê foi realizado o primeiro estímulo?",
-    "ChildrenAlive": "Você possui quantos filhos vivos?",
-    "ReceivedPreNatalGuidance": "Você recebeu orientações no pré-natal sobre aleitamento materno?",
-    "Occupation": "Você trabalha:",
+    "HeaderSubText": "Agora, faremos uma série de perguntas sobre você, mamãe, para trazer o conteúdo mais adequado para a sua realidade:",
+    "LiveTogether": "Moram juntos?",
+    "Location": "Local do parto",
     "MaternityLeave": "Possui licença maternidade:",
     "MaternityLeaveCount": "Quantos meses?",
     "MaternityLeaveCountPlaceholder": "Número de meses",
-    "LiveTogetherOptions": {
-      "Option1": "Até 1 ano",
-      "Option2": "2 a 4 anos",
-      "Option3": "Mais que 5 anos"
+    "Name": "Seu Nome",
+    "Occupation": "Você trabalha:",
+    "Partner": "Tem companheiro?",
+    "PartnerTime": "Há quanto tempo moram juntos?",
+    "Phone": "Telefone %{num}",
+    "PlannedPregnancy": "A gestação foi planejada?",
+    "PregnantCount": "Quantas vezes já esteve grávida?",
+    "PreNatalCheckupCount": "Quantas consultas?",
+    "ProblemsDuringPregnancy": "Teve complicações na gestação?",
+    "ReceivedBreastfeedingGuidance": "Você recebeu orientações no pré-natal sobre aleitamento materno?",
+    "ReceivedPreNatalGuidance": "Você realizou pré-natal?",
+    "Wage": "Em qual faixa sua renda familiar se encaixa?",
+    "ChildrenAliveOptions": {
+      "Option1": "Nenhum filho",
+      "Option2": "1 ou 2 filhos",
+      "Option3": "3 ou mais filhos"
     },
     "EducationOptions": {
       "Option1": "Fundamental incompleto",
@@ -392,38 +423,31 @@
       "Option5": "Superior incompleto",
       "Option6": "Superior completo"
     },
+    "LiveTogetherOptions": {
+      "Option1": "Até 1 ano",
+      "Option2": "2 a 4 anos",
+      "Option3": "Mais que 5 anos"
+    },
+    "LocationOptions": {
+      "HU": "HU",
+      "Maternity": "Maternidade Dona Íris"
+    },
+    "OccupationOptions": {
+      "Option1": "Em casa (do lar)",
+      "Option2": "Fora de casa (alguma outra ocupação)"
+    },
+    "ProblemsDuringPregnancyOptions": {
+      "Option1": "Sim, relacionadas ao COVID-19",
+      "Option2": "Sim, mas não relacionadas ao COVID-19"
+    },
     "WageOptions": {
       "Option1": "Até 1 salário",
       "Option2": "De 2 e 3 salários",
       "Option3": "4 ou mais salários"
     },
-    "FirstVisitOptions": {
-      "Option1": "12h",
-      "Option2": "13-24h",
-      "Option3": "2 dias",
-      "Option4": "3 dias"
-    },
-    "FirstStimulusOptions": {
-      "Option1": "Ainda não realizou nenhum estímulo",
-      "Option2": "Massagem/Ordenha",
-      "Option3": "Sucção"
-    },
-    "TimeFirstStimulusOptions": {
-      "Option1": "Em até 1h",
-      "Option2": "De 1 à 6 horas",
-      "Option3": "De 7 à 12 horas",
-      "Option4": "De 13 à 24 horas",
-      "Option5": "2 dias",
-      "Option6": "3 dias"
-    },
-    "ChildrenAliveOptions": {
-      "Option1": "Nenhum filho",
-      "Option2": "1 ou 2 filhos",
-      "Option3": "3 ou mais filhos"
-    },
-    "OccupationOptions": {
-      "Option1": "Em casa (do lar)",
-      "Option2": "Fora de casa (alguma outra ocupação)"
+    "Yup": {
+      "Phone": "Telefone inválido",
+      "RepeatedPhone": "Números de telefone devem ser diferentes"
     }
   },
   "MusicPlaylistsPage": {
@@ -539,7 +563,7 @@
     },
     "Page2": {
       "Title": "1.  Procure a serenidade",
-      "Text": "Parto prematuro: expectativas frustradas, incertezas, medo... quem espera que seu bebê nasça antes da hora?\nRecupere-se do susto, respire fundo, deixe a nova realidade se encaixar na sua cabeça e no seu coração, e então, abrace‑a!"
+      "Text": "Parto prematuro: expectativas frustradas, incertezas, medo... quem espera que seu bebê nasça antes da hora?\nRecupere-se do susto, respire fundo, deixe a nova realidade se encaixar na sua cabeça e no seu coração, e então, abrace-a!"
     },
     "Page3": {
       "Title": "2. Estimule a produção láctea",
@@ -681,7 +705,7 @@
   },
   "UploadPhotoScreen": {
     "ModalSuccessText": "Imagem enviada com sucesso",
-    "ErrorModalText": "Falha ao enviar a imagem!\nPor favor, tente novamente mais tarde..."
+    "ModalErrorText": "Falha ao enviar a imagem!\nPor favor, tente novamente mais tarde..."
   },
   "WeeklyReportPage": {
     "Header": "Perguntas da semana",
@@ -715,19 +739,20 @@
     }
   },
   "Yup": {
-    "Required": "Campo obrigatório",
-    "MustBeNumberError": "Deve ser um número",
+    "AnswerRequired": "Pergunta obrigatória",
     "InvalidEmail": "Email Inválido",
-    "PasswordMustMatch": "As senhas precisam ser iguais",
-    "MinLengthError": "Precisa ter pelo menos %{min} caracteres",
-    "LengthError": "Precisa ter %{num} caracteres",
+    "InvalidOptionsCombination": "Opções incompatíveis",
     "InvalidPassword": "Precisa ter letras minúsculas, letras maiúsculas e números",
-    "MustBeIntegerError": "Deve ser um número inteiro",
-    "NoOptionSelectedError": "Pelo menos uma opção deve ser selecionada",
-    "MinEqualError": "Deve ser maior ou igual a %{num}",
+    "LengthError": "Precisa ter %{num} caracteres",
     "MaxEqualError": "Deve ser menor ou igual a %{num}",
-    "MinError": "Deve ser maior que %{num}",
     "MaxError": "Deve ser menor que %{num}",
-    "AnswerRequired": "Pergunta obrigatória"
+    "MinEqualError": "Deve ser maior ou igual a %{num}",
+    "MinError": "Deve ser maior que %{num}",
+    "MinLengthError": "Precisa ter pelo menos %{min} caracteres",
+    "MustBeIntegerError": "Deve ser um número inteiro",
+    "MustBeNumberError": "Deve ser um número",
+    "NoOptionSelectedError": "Pelo menos uma opção deve ser selecionada",
+    "PasswordMustMatch": "As senhas precisam ser iguais",
+    "Required": "Campo obrigatório"
   }
 }
