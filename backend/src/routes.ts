@@ -65,9 +65,6 @@ const uploadMiddleware = multer(uploadConfig);
  *          "tempo_amamentacao": ["2,3", "1,0"], // tempo de amamentacao total de cada gestação | formato: ano,meses
  *          "whatsapp":"(43) 999999999",
  *          "gestacao_planejada": true,
- *          "primeira_visita": "12h",
- *          "primeiro_estimulo": true, // Massagem/ordenha = false | Sucção = true
- *          "tempo_primeiro_estimulo": "7-12h",
  *          "qtd_filhos_vivos": 3,
  *          "orientacao_prenatal": true,
  *          "ocupacao": true, // Em casa (do lar) = false | Fora de casa = true
@@ -76,7 +73,7 @@ const uploadMiddleware = multer(uploadConfig);
  *          "telefone2": "(43) 999999999",
  *          "qtd_abortos": 1,
  *          "numero_filhos_gestacao": 1,
- *          "consultas_prenatal": 5, // 0 caso não tenha realizado prenatal 
+ *          "consultas_prenatal": "5", // 0 caso não tenha realizado prenatal 
  *          "complicacoes_gestacao": "Sim, relacionadas ao COVID-19"
  *      }
  * 
@@ -167,7 +164,9 @@ routes.get('/maes', verifyJWT,maesController.show);
  *          "tipo_parto":true, // false: parto normal | true: cesaria
  *          "local":"UCI Neonatal",
  *          "contato_pele": true,
- *          "primeiro_estimulo": ["Massagem/ordenha", "Sucção"]
+ *          "primeira_visita": "12h",
+ *          "primeiro_estimulo": ["Massagem/ordenha", "Sucção"],
+ *          "tempo_primeiro_estimulo": "7-12h"
  *      }
  * 
  * @apiSuccessExample {json} Sucesso

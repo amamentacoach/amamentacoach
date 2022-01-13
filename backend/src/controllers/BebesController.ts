@@ -28,7 +28,9 @@ class BebesController{
             local,
             complicacoes,
             contato_pele,
-            primeiro_estimulo
+            primeiro_estimulo,
+            tempo_primeiro_estimulo,
+            primeira_visita
         } = req.body;
 
         const bebe = {
@@ -45,6 +47,8 @@ class BebesController{
             complicacoes:complicacoes || '',
             contato_pele,
             primeiro_estimulo: primeiro_estimulo.join('|'),
+            tempo_primeiro_estimulo,
+            primeira_visita,
             mae_id:id_mae
         };
         
