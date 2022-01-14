@@ -3,10 +3,6 @@ import { memo, useState } from 'react';
 import { Dimensions, FlatList, View } from 'react-native';
 
 import FormRadioGroupInput from 'components/FormRadioGroup';
-import {
-  CurrentPageContainer,
-  CurrentPageText,
-} from 'components/GenericSurveyPage/styles';
 import MainButton from 'components/MainButton';
 import SecondaryButton from 'components/SecondaryButton';
 import theme from 'config/theme';
@@ -23,6 +19,9 @@ import {
   HeaderText,
   QuestionText,
   ScrollView,
+  ColoredInfoText,
+  ValuesInfoText,
+  InfoContainer,
 } from './styles';
 
 export interface StatusFormQuestion extends SurveyQuestion {
@@ -115,17 +114,35 @@ const StatusFormPage: React.FC<PageProps> = ({
       <HeaderBackground />
       <HeaderText>{i18n.t('StatusFormPage.Header')}</HeaderText>
       <ContentContainer>
-        <CurrentPageContainer color={theme.babyBlue}>
-          <CurrentPageText>
-            {pageIndex + 1}/{numberOfPages}
-          </CurrentPageText>
-        </CurrentPageContainer>
+        <InfoContainer>
+          <ValuesInfoText>
+            <ColoredInfoText>1</ColoredInfoText> ={' '}
+            {i18n.t('StatusFormPage.Value1')}
+          </ValuesInfoText>
+          <ValuesInfoText>
+            <ColoredInfoText>2</ColoredInfoText> ={' '}
+            {i18n.t('StatusFormPage.Value2')}
+          </ValuesInfoText>
+          <ValuesInfoText>
+            <ColoredInfoText>3</ColoredInfoText> ={' '}
+            {i18n.t('StatusFormPage.Value3')}
+          </ValuesInfoText>
+          <ValuesInfoText>
+            <ColoredInfoText>4</ColoredInfoText> ={' '}
+            {i18n.t('StatusFormPage.Value4')}
+          </ValuesInfoText>
+          <ValuesInfoText>
+            <ColoredInfoText>5</ColoredInfoText> ={' '}
+            {i18n.t('StatusFormPage.Value5')}
+          </ValuesInfoText>
+        </InfoContainer>
 
         <View>
           {questions.map((question, questionIndex) => (
             <View key={question.id}>
               <QuestionText>
-                {pageIndex * 3 + questionIndex + 1} - {question.description}
+                {pageIndex * questions.length + questionIndex + 1} -{' '}
+                {question.description}
               </QuestionText>
 
               <FormRadioGroupInput

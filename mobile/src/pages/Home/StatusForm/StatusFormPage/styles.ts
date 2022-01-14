@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { OpenSansRegular } from 'lib/sharedStyles';
+import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
 
 interface ScrollViewProps {
   width: number;
@@ -35,9 +35,22 @@ export const ContentContainer = styled.View`
   flex: 1;
 `;
 
+export const InfoContainer = styled.View`
+  margin: 20px 0;
+`;
+
+export const ColoredInfoText = styled(OpenSansBold)`
+  color: ${props => props.theme.darkBlue};
+  text-align: center;
+`;
+
+export const ValuesInfoText = styled(OpenSansRegular)`
+  text-align: center;
+`;
+
 export const QuestionText = styled(OpenSansRegular)`
   text-align: center;
-  margin: 15px 0;
+  margin-bottom: 15px;
 `;
 
 export const Footer = styled.View`

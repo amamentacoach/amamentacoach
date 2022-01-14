@@ -2,7 +2,7 @@ import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FlatList } from 'react-native';
 
 import Modal from 'components/Modal';
@@ -16,21 +16,12 @@ import type { StatusFormQuestion } from './StatusFormPage';
 import type { RootRouteProp, RootStackProps } from 'routes/app';
 
 import StatusFormPage from './StatusFormPage';
-import {
-  ColoredText,
-  HeaderInfoModal,
-  InfoButton,
-  TextInfoModal,
-} from './styles';
-
-import QuestionIcon from '@assets/images/icons/ic_question_white.svg';
 
 const StatusForm: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const { motherInfo } = useAuth();
   const { situation } = useRoute<RootRouteProp<'StatusForm'>>().params;
   const pagesFlatListRef = useRef<FlatList>(null);
-  const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [formScore, setFormScore] = useState<number | null>(null);
 
@@ -38,19 +29,6 @@ const StatusForm: React.FC = () => {
   const displayFeedingForm = situation && situation !== '1D';
   // Id da pergunta de alimentação.
   const feedingQuestionId = 6;
-
-  // Adiciona um botão na parte superior direita da tela para exibir um popup de ajuda.
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <InfoButton
-          activeOpacity={0.7}
-          onPress={() => setIsInfoModalVisible(true)}>
-          <QuestionIcon />
-        </InfoButton>
-      ),
-    });
-  }, [navigation]);
 
   useEffect(() => {
     createTelemetryAction({
@@ -149,33 +127,6 @@ const StatusForm: React.FC = () => {
         ]}
         visible={isErrorModalVisible}
       />
-      <Modal
-        color={theme.babyBlue}
-        options={[
-          {
-            text: i18n.t('Close'),
-            isBold: true,
-            onPress: () => setIsInfoModalVisible(false),
-          },
-        ]}
-        visible={isInfoModalVisible}>
-        <HeaderInfoModal>{i18n.t('StatusFormPage.FormName')}</HeaderInfoModal>
-        <TextInfoModal>
-          <ColoredText>1</ColoredText> = {i18n.t('StatusFormPage.Value1')}
-        </TextInfoModal>
-        <TextInfoModal>
-          <ColoredText>2</ColoredText> = {i18n.t('StatusFormPage.Value2')}
-        </TextInfoModal>
-        <TextInfoModal>
-          <ColoredText>3</ColoredText> = {i18n.t('StatusFormPage.Value3')}
-        </TextInfoModal>
-        <TextInfoModal>
-          <ColoredText>4</ColoredText> = {i18n.t('StatusFormPage.Value4')}
-        </TextInfoModal>
-        <TextInfoModal>
-          <ColoredText>5</ColoredText> = {i18n.t('StatusFormPage.Value5')}
-        </TextInfoModal>
-      </Modal>
 
       <Formik
         initialValues={{}}
