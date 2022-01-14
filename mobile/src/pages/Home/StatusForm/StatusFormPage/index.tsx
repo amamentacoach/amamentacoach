@@ -9,7 +9,7 @@ import theme from 'config/theme';
 import { Flex } from 'lib/sharedStyles';
 
 import type { ComponentProps } from 'react';
-import type { SurveyQuestion } from 'utils/getSurveyQuestions';
+import type { SurveyQuestion } from 'utils/surveyQuestionsRepository';
 
 import {
   ContentContainer,
@@ -117,23 +117,23 @@ const StatusFormPage: React.FC<PageProps> = ({
         <InfoContainer>
           <ValuesInfoText>
             <ColoredInfoText>1</ColoredInfoText> ={' '}
-            {i18n.t('StatusFormPage.Value1')}
+            {i18n.t('StatusFormPage.InfoValue1')}
           </ValuesInfoText>
           <ValuesInfoText>
             <ColoredInfoText>2</ColoredInfoText> ={' '}
-            {i18n.t('StatusFormPage.Value2')}
+            {i18n.t('StatusFormPage.InfoValue2')}
           </ValuesInfoText>
           <ValuesInfoText>
             <ColoredInfoText>3</ColoredInfoText> ={' '}
-            {i18n.t('StatusFormPage.Value3')}
+            {i18n.t('StatusFormPage.InfoValue3')}
           </ValuesInfoText>
           <ValuesInfoText>
             <ColoredInfoText>4</ColoredInfoText> ={' '}
-            {i18n.t('StatusFormPage.Value4')}
+            {i18n.t('StatusFormPage.InfoValue4')}
           </ValuesInfoText>
           <ValuesInfoText>
             <ColoredInfoText>5</ColoredInfoText> ={' '}
-            {i18n.t('StatusFormPage.Value5')}
+            {i18n.t('StatusFormPage.InfoValue5')}
           </ValuesInfoText>
         </InfoContainer>
 
@@ -150,7 +150,7 @@ const StatusFormPage: React.FC<PageProps> = ({
                 direction={question.direction}
                 displayOtherField={question.displayOther}
                 error={errors[question.id]}
-                fieldName={question.id}
+                fieldName={question.id.toString()}
                 initialValues={values[question.id]}
                 multipleSelection={question.multipleSelection}
                 options={question.options}

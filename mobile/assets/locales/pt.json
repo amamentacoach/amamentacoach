@@ -530,16 +530,16 @@
   },
   "ResiliencePage": {
     "Header": "Você sabe o que é Resiliência?",
-    "TextHeader": "Mamães mais resilientes!",
-    "Text": "Cientistas afirmam que é possível AUMENTAR a RESILIÊNCIA adotando pelo menos 4 comportamentos favoráveis.'\n'Várias atividades do App contemplam um ou mais desses ingredientes poderosos! Aumente sua força, turbine sua resiliência: escolha por onde quer começar e aproveite todo o conteúdo!",
     "Option1": "1. Manter expectativas realistas",
     "Option2": "2. Buscar apoio social e conexão de grupo",
     "Option3": "3. Desenvolver uma maneira positiva de pensar",
-    "Option4": "4. Construir força e autoconfiança"
+    "Option4": "4. Construir força e autoconfiança",
+    "Text": "Cientistas afirmam que é possível AUMENTAR a RESILIÊNCIA adotando pelo menos 4 comportamentos favoráveis.'\n'Várias atividades do App contemplam um ou mais desses ingredientes poderosos! Aumente sua força, turbine sua resiliência: escolha por onde quer começar e aproveite todo o conteúdo!",
+    "TextHeader": "Mamães mais resilientes!"
   },
   "SignUpPage": {
-    "Header": "Primeiro, precisamos dos seguintes dados para que você possa acessar nossa plataforma:",
-    "ConfirmPassword": "Confirme sua senha"
+    "ConfirmPassword": "Confirme sua senha",
+    "Header": "Primeiro, precisamos dos seguintes dados para que você possa acessar nossa plataforma:"
   },
   "Status": {
     "Saving": "Salvando...",
@@ -547,14 +547,17 @@
     "SignIn": "Entrando..."
   },
   "StatusFormPage": {
-    "Header": "Autoeficácia para amamentar",
-    "Score": "Obrigada por responder.\nSua pontuação é %{score}",
+    "AverageEfficacy": "moderada",
     "FormName": "Escala",
-    "Value1": "nada confiante",
-    "Value2": "muito pouco confiante",
-    "Value3": "às vezes confiante",
-    "Value4": "confiante",
-    "Value5": "muito confiante"
+    "Header": "Autoeficácia para amamentar",
+    "HighEfficacy": "elevada",
+    "InfoValue1": "nada confiante",
+    "InfoValue2": "muito pouco confiante",
+    "InfoValue3": "às vezes confiante",
+    "InfoValue4": "confiante",
+    "InfoValue5": "muito confiante",
+    "LowEfficacy": "baixa",
+    "Score": "Obrigada por responder.\nSua pontuação é %{score}, que significa que sua autoconfiança é %{meaning}."
   },
   "StepByStepPrematurePage": {
     "Page1": {

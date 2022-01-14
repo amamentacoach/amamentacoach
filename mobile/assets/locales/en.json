@@ -530,16 +530,16 @@
   },
   "ResiliencePage": {
     "Header": "Do you know what Resilience is?",
-    "TextHeader": "More Resilient Moms!",
-    "Text": "Scientists claim that it is possible to INCREASE RESILIENCE by adopting at least 4 favorable behaviors.'\n'Various App activities feature one or more of these powerful ingredients! Increase your strength, boost your resilience: choose where you want to start and enjoy all the content!",
     "Option1": "1. Keep realistic expectations",
     "Option2": "2. Seek social support and group connection",
     "Option3": "3. Develop a positive way of thinking",
-    "Option4": "4. Build strength and self-confidence"
+    "Option4": "4. Build strength and self-confidence",
+    "Text": "Scientists claim that it is possible to INCREASE RESILIENCE by adopting at least 4 favorable behaviors.'\n'Various App activities feature one or more of these powerful ingredients! Increase your strength, boost your resilience: choose where you want to start and enjoy all the content!",
+    "TextHeader": "More Resilient Moms!"
   },
   "SignUpPage": {
-    "Header": "First, we need the following data for you to access our platform:",
-    "ConfirmPassword": "Confirm your password"
+    "ConfirmPassword": "Confirm your password",
+    "Header": "First, we need the following data for you to access our platform:"
   },
   "Status": {
     "Saving": "Saving...",
@@ -547,14 +547,17 @@
     "SignIn": "Entering..."
   },
   "StatusFormPage": {
-    "Header": "Breastfeeding self-efficiency",
-    "Score": "Thank you for answering.\nYour score is %{score}",
+    "AverageEfficacy": "average self-effectiveness",
     "FormName": "Scale",
-    "Value1": "not at all confident",
-    "Value2": "not very confident",
-    "Value3": "sometimes confident",
-    "Value4": "confident",
-    "Value5": "very confident"
+    "Header": "Breastfeeding self-efficiency",
+    "HighEfficacy": "high self-efficacy",
+    "InfoValue1": "not at all confident",
+    "InfoValue2": "not very confident",
+    "InfoValue3": "sometimes confident",
+    "InfoValue4": "confident",
+    "InfoValue5": "very confident",
+    "LowEfficacy": "low self-efficacy",
+    "Score": "Thank you for answering.\nYour score is %{score}, which means you have %{meaning}."
   },
   "StepByStepPrematurePage": {
     "Page1": {

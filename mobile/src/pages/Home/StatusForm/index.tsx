@@ -23,7 +23,7 @@ const StatusForm: React.FC = () => {
   const { situation } = useRoute<RootRouteProp<'StatusForm'>>().params;
   const pagesFlatListRef = useRef<FlatList>(null);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
-  const [formScore, setFormScore] = useState<number | null>(null);
+  const [feedbackMessage, setFeedbackMessage] = useState('');
 
   // Não exibe a questão de alimentação se for a primeira vez do usuário respondendo a escala.
   const displayFeedingForm = situation && situation !== '1D';
@@ -42,6 +42,7 @@ const StatusForm: React.FC = () => {
     [key: string]: string[];
   }): Promise<void> {
     if (displayFeedingForm) {
+      // TODO Enviar todas as perguntas de uma vez.
       const status = await answerFeedingForm(
         situation,
         values[feedingQuestionId][0],
@@ -59,11 +60,24 @@ const StatusForm: React.FC = () => {
       content: values[key][0],
     }));
     const statusFormScore = await answerStatusForm(situation, answers);
-    if (!statusFormScore === null) {
+    if (statusFormScore === null) {
       setIsErrorModalVisible(true);
       return;
     }
-    setFormScore(statusFormScore);
+
+    let meaning = '';
+    if (statusFormScore < 14 && statusFormScore <= 32) {
+      meaning = i18n.t('StatusFormPage.LowEfficacy');
+    } else if (statusFormScore < 33 && statusFormScore <= 51) {
+      meaning = i18n.t('StatusFormPage.AverageEfficacy');
+    } else {
+      meaning = i18n.t('StatusFormPage.HighEfficacy');
+    }
+    const feedback = i18n.t('StatusFormPage.Score', {
+      score: statusFormScore,
+      meaning,
+    });
+    setFeedbackMessage(feedback);
 
     await createTelemetryAction({
       action: Action.Pressed,
@@ -105,7 +119,7 @@ const StatusForm: React.FC = () => {
     <>
       <Modal
         color={theme.babyBlue}
-        content={i18n.t('StatusFormPage.Score', { score: formScore })}
+        content={feedbackMessage}
         options={[
           {
             text: i18n.t('Close'),
@@ -113,7 +127,7 @@ const StatusForm: React.FC = () => {
             onPress: () => navigation.navigate('Home'),
           },
         ]}
-        visible={!!formScore}
+        visible={!!feedbackMessage}
       />
       <Modal
         color={theme.babyBlue}
