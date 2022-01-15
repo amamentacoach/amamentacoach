@@ -242,7 +242,7 @@ export async function getMotherInfo(): Promise<MotherInfo | null> {
       }
     });
 
-    const dataBirthLocation = data.localizacao.toLowerCase();
+    const dataBirthLocation = data.localizacao?.toLowerCase();
     let birthLocation = BirthLocation.HU_UEL;
     switch (dataBirthLocation) {
       case i18n.t('MotherFormPage.LocationOptions.HU').toLowerCase():
