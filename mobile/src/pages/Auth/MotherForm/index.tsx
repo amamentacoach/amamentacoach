@@ -415,9 +415,11 @@ const MotherForm: React.FC = () => {
               onChange={(fieldName: string, fieldValues: string[]) => {
                 const hasPartner = fieldValues[0] === i18n.t('Yes');
                 setFieldValue(fieldName, hasPartner);
-                if (!hasPartner) {
-                  setFieldValue('timeLivingWithPartner', '');
+                if (hasPartner) {
+                  setFieldValue('livesTogetherWithPartner', undefined);
+                } else {
                   setFieldValue('livesTogetherWithPartner', false);
+                  setFieldValue('timeLivingWithPartner', '');
                 }
               }}
             />
@@ -530,9 +532,12 @@ const MotherForm: React.FC = () => {
               onChange={(fieldName, fieldValues) => {
                 const hadPreNatalCheckups = fieldValues[0] === i18n.t('Yes');
                 setFieldValue(fieldName, hadPreNatalCheckups);
-                if (!hadPreNatalCheckups) {
-                  setFieldValue('receivedBreastfeedingGuidance', false);
+                if (hadPreNatalCheckups) {
+                  setFieldValue('preNatalCheckupCount', '');
+                  setFieldValue('receivedBreastfeedingGuidance', undefined);
+                } else {
                   setFieldValue('preNatalCheckupCount', '0');
+                  setFieldValue('receivedBreastfeedingGuidance', false);
                 }
               }}
             />
