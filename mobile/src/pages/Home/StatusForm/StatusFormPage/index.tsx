@@ -9,7 +9,7 @@ import theme from 'config/theme';
 import { Flex } from 'lib/sharedStyles';
 
 import type { ComponentProps } from 'react';
-import type { SurveyQuestion } from 'utils/surveyQuestionsRepository';
+import type { SurveyQuestion } from 'utils/getSurveyQuestions';
 
 import {
   ContentContainer,
