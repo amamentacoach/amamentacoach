@@ -16,7 +16,7 @@ const perguntas: Pergunta[] = [
     multiplas: true,
     alvo: "GERAL",
   },
-  // Categoria 8: Enquete “Motivacao”
+  // Categoria 8: Enquete “Motivação”
   {
     id: 2,
     categoria: 8,
@@ -81,11 +81,11 @@ const perguntas: Pergunta[] = [
     descricao: "Como meu bebê está se alimentando:",
     alternativas:
       "Apenas no meu peito|" +
-      "No meu peito, c/ complemento por copinho|" +
+      "No meu peito, e também recebendo complemento|" +
       "Por relactação/translactação|" +
       "Apenas por copinho|" +
-      "Por chuca|" +
-      "Por sonda",
+      "Apenas por chuca|" +
+      "Apenas por sonda",
     outro: false,
     multiplas: false,
     alvo: "GERAL",

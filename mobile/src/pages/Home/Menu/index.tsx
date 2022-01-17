@@ -279,7 +279,7 @@ const Home: React.FC = () => {
             onPress: () => {
               hideAllModals();
               navigation.navigate('StatusForm', {
-                situation: formAction!,
+                situation: formAction,
               });
             },
           },
