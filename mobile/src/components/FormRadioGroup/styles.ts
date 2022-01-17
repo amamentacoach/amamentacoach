@@ -89,6 +89,8 @@ export const TextOption = styled.Text<OptionProps>`
   font-family: 'OpenSans-Regular';
   margin: 0 15px;
   font-size: 16px;
+  flex: ${({ direction }) => (direction === 'column' ? 1 : 'none')};
+  flex-wrap: wrap;
 `;
 
 export const OtherInputContainer = styled.View`

@@ -82,19 +82,24 @@ const IntroductionStatusForm: React.FC = () => {
               {i18n.t('StatusFormPage.FormName')}
             </HeaderLastPageBox>
             <ContentText>
-              <ColoredText>1</ColoredText> = {i18n.t('StatusFormPage.Value1')}
+              <ColoredText>1</ColoredText> ={' '}
+              {i18n.t('StatusFormPage.InfoValue1')}
             </ContentText>
             <ContentText>
-              <ColoredText>2</ColoredText> = {i18n.t('StatusFormPage.Value2')}
+              <ColoredText>2</ColoredText> ={' '}
+              {i18n.t('StatusFormPage.InfoValue2')}
             </ContentText>
             <ContentText>
-              <ColoredText>3</ColoredText> = {i18n.t('StatusFormPage.Value3')}
+              <ColoredText>3</ColoredText> ={' '}
+              {i18n.t('StatusFormPage.InfoValue3')}
             </ContentText>
             <ContentText>
-              <ColoredText>4</ColoredText> = {i18n.t('StatusFormPage.Value4')}
+              <ColoredText>4</ColoredText> ={' '}
+              {i18n.t('StatusFormPage.InfoValue4')}
             </ContentText>
             <ContentText>
-              <ColoredText>5</ColoredText> = {i18n.t('StatusFormPage.Value5')}
+              <ColoredText>5</ColoredText> ={' '}
+              {i18n.t('StatusFormPage.InfoValue5')}
             </ContentText>
           </LastPageBox>
         ) : (
