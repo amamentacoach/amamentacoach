@@ -1,5 +1,6 @@
 import knex from '../database/connection';
 import api from '../config/api';
+import { request } from 'express';
 
 interface ConsultaRaw{
     rows:any[]
@@ -29,11 +30,12 @@ async function sendPushNotification(){
         };
         
         const response = await api.post('/notifications',data,config)
-        if(response.status===200)
+        if(response.status===200){
             console.log("Notificacoes enviadas")
-        else{
+        }else{
             console.log("Erro!", response.data)
         }
+        return response
     }else{
         console.log("Ninguem foi notificado!")
     }

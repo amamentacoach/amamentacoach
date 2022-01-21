@@ -646,8 +646,8 @@ routes.post('/recuperar/:token',verifyJWT,maesController.recuperarSenha)
  * 
  */
 routes.get('/enviarNotificacoes',async (req,res)=>{
-    await sendPushNotification()
-    res.sendStatus(200)
+    const resp = await sendPushNotification()
+    res.send(resp?.data)
 })
 
 /**
