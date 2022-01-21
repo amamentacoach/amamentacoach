@@ -12,25 +12,22 @@ class MaesController{
         if(id==req.mae_id){
 
             const mae = await knex('mae')
-            .select('mae.id', 
-                    'email', 
-                    'mae.nome', 
-                    'ultimo_acesso', 
-                    'imagem_mae', 
-                    'imagem_bebe', 
-                    'imagem_pai', 
-                    'companheiro', 
-                    'data_nascimento', 
-                    'localizacao')
+            .select('*')
             .where('mae.id',id).first()
+
+            mae['senha'] = null;
+
+            mae['tempo_amamentacao'] = mae['tempo_amamentacao'].split('|')
 
 
             const bebes = await knex('bebe').select('*').where('mae_id',id)
             const ordenhas = await knex('ordenha').select('*').where('mae_id',id)
 
-            for (let index = 0; index < bebes.length; index++)
+            for (let index = 0; index < bebes.length; index++){
+                bebes[index].primeiro_estimulo = bebes[index].primeiro_estimulo.split('|')
                 bebes[index].mamadas = await knex('mamada').select('id','data_hora','mama','duracao').where('bebe_id','=',`${bebes[index].id}`)
-                
+            }
+               
             mae.bebes=bebes
             mae.ordenhas=ordenhas
             return res.json(mae);
