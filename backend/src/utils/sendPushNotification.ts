@@ -15,8 +15,10 @@ async function sendPushNotification(){
         'OR (SELECT COUNT(*) FROM RESPOSTA where RESPOSTA.mae_id=mae.id) = 0)');
     if(users.rows.length>0){
         const include_player_ids:string[] = [];
-        users.rows.map((value,i)=>include_player_ids.push(value.user_id))
-
+        users.rows.map((value,i)=>{
+            if(value.user_id) include_player_ids.push(value.user_id)
+        })
+        console.log(include_player_ids.length + " pessoas notificadas...")
         const data = {
             app_id:process.env.OS_APP_ID,
             include_player_ids,
