@@ -17,14 +17,14 @@ class MaesController{
 
             mae['senha'] = null;
 
-            mae['tempo_amamentacao'] = mae['tempo_amamentacao'].split('|')
+            mae['tempo_amamentacao'] = mae['tempo_amamentacao'] ? mae['tempo_amamentacao'].split('|') : null
 
 
             const bebes = await knex('bebe').select('*').where('mae_id',id)
             const ordenhas = await knex('ordenha').select('*').where('mae_id',id)
 
             for (let index = 0; index < bebes.length; index++){
-                bebes[index].primeiro_estimulo = bebes[index].primeiro_estimulo.split('|')
+                bebes[index].primeiro_estimulo = bebes[index].primeiro_estimulo?.split('|')
                 bebes[index].mamadas = await knex('mamada').select('id','data_hora','mama','duracao').where('bebe_id','=',`${bebes[index].id}`)
             }
                

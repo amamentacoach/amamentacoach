@@ -6,7 +6,7 @@ class BebesController{
         const id_mae = req.mae_id;
         const bebes = await knex('bebe').select('*').where('mae_id',id_mae);  
         for (let index = 0; index < bebes.length; index++){
-            bebes[index].primeiro_estimulo = bebes[index].primeiro_estimulo.split('|')
+            bebes[index].primeiro_estimulo = bebes[index].primeiro_estimulo?.split('|')
             bebes[index].mamadas = await knex('mamada').select('id','data_hora','mama','duracao').where('bebe_id','=',`${bebes[index].id}`)
         }
         return res.json(bebes)
@@ -15,7 +15,7 @@ class BebesController{
     async show(req:Request, res:Response){
         const {id} = req.params;
         const bebe = await knex('bebe').select('*').where('id',id).first()
-        bebe['primeiro_estimulo'] = bebe['primeiro_estimulo'].split('|')
+        bebe['primeiro_estimulo'] = bebe['primeiro_estimulo']?.split('|')
         return res.json(bebe);
     }
 
