@@ -1,6 +1,6 @@
 import knex from '../database/connection';
 import api from '../config/api';
-import { request } from 'express';
+import { request, response } from 'express';
 
 interface ConsultaRaw{
     rows:any[]
@@ -28,25 +28,32 @@ async function sendPushNotification(){
         const config = {
             headers:{Authorization:'Basic '+process.env.OS_API_KEY}
         };
-        
-        let response = await api.post('/notifications',data,config)
-        if(response.status===200){
-            if(response.data.errors?.invalid_player_ids){
-                const {invalid_player_ids} = response.data.errors
-                data["include_player_ids"] = include_player_ids.filter(value => !invalid_player_ids.includes(value))
-                response = await api.post('/notifications',data,config)
-                if(response.status===200){
-                    console.log("Notificacoes enviadas")
+
+        try{
+            let response = await api.post('/notifications',data,config)
+            if(response.status===200){
+                if(response.data.errors?.invalid_player_ids){
+                    const {invalid_player_ids} = response.data.errors
+                    data["include_player_ids"] = include_player_ids.filter(value => !invalid_player_ids.includes(value))
+                    response = await api.post('/notifications',data,config)
+                    if(response.status===200){
+                        console.log("Notificacoes enviadas")
+                    }else{
+                        console.log("Erro!", response.data)
+                    }
                 }else{
-                    console.log("Erro!", response.data)
+                    console.log("Notificacoes enviadas")
                 }
             }else{
-                console.log("Notificacoes enviadas")
+                console.log("Erro!", response.data)
             }
-        }else{
-            console.log("Erro!", response.data)
+        }catch(error){
+            console.log(error)
+        }finally{
+            return response
         }
-        return response
+        
+        
     }else{
         console.log("Ninguem foi notificado!")
     }
