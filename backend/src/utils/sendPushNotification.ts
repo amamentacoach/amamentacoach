@@ -29,9 +29,20 @@ async function sendPushNotification(){
             headers:{Authorization:'Basic '+process.env.OS_API_KEY}
         };
         
-        const response = await api.post('/notifications',data,config)
+        let response = await api.post('/notifications',data,config)
         if(response.status===200){
-            console.log("Notificacoes enviadas")
+            if(response.data.errors?.invalid_player_ids){
+                const {invalid_player_ids} = response.data.errors
+                data["include_player_ids"] = include_player_ids.filter(value => !invalid_player_ids.includes(value))
+                response = await api.post('/notifications',data,config)
+                if(response.status===200){
+                    console.log("Notificacoes enviadas")
+                }else{
+                    console.log("Erro!", response.data)
+                }
+            }else{
+                console.log("Notificacoes enviadas")
+            }
         }else{
             console.log("Erro!", response.data)
         }
