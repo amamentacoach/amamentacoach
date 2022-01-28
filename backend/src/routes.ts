@@ -96,49 +96,83 @@ routes.post('/maes',maesController.create);
  * 
  * @apiSuccessExample {json} Sucesso:
  *   {
- *   "id": 1,
- *   "email": "fulana@email.com",
- *   "nome": "Fulana de Tal",
- *   "ultimo_acesso": "2021-03-06T20:21:12.824Z",
- *   "imagem_mae": null,
- *   "imagem_bebe": null,
- *   "imagem_pai": null,
- *   "companheiro": true,
- *   "localizacao": "HU-UEL",
- *   "bebes": [
- *       {
- *          "id": 1,
- *          "nome": "Sabrina",
- *          "data_parto": "2020-08-28T03:00:00.000Z",
- *          "semanas_gest": 35,
- *          "dias_gest": 5,
- *          "peso": 2.5,
- *          "apgar1": 8,
- *          "apgar2": 10,
- *          "tipo_parto": true,
- *          "local": "UCI Neonatal",
- *          "mae_id": 1,
- *          "complicacoes": true,
- *          "mamadas": [
- *              {
- *              "id": 1,
- *              "data_hora": "2020-09-24T17:40:31.501Z",
- *              "mama": "D",
- *              "duracao": 10
- *              }
- *          ]
- *       }
- *   ],
- *   "ordenhas": [
- *       {
- *         "id": 2,
- *         "data_hora": "2020-09-24T17:40:31.501Z",
- *         "qtd_leite": 100,
- *         "mama": "D",
- *         "duracao": 5,
- *         "mae_id": 1
- *       }
- *   ]
+ *       "id": 1,
+ *       "email": "fulana@email.com",
+ *       "nome": "Fulana de Tal",
+ *       "data_nascimento": "1990-05-05T03:00:00.000Z",
+ *       "amamentou_antes": false,
+ *       "tempo_amamentacao": [
+ *           "2,3",
+ *           "1,0"
+ *       ],
+ *       "companheiro": true,
+ *       "moram_juntos": "2,0",
+ *       "escolaridade": "Ensino Medio Completo",
+ *       "renda": "Entre 1 e 3 salarios minimos",
+ *       "qtd_gravidez": 2,
+ *       "ultimo_acesso": "2022-01-21T13:33:20.297Z",
+ *       "primeiro_acesso": "2022-01-21T13:33:20.297Z",
+ *       "imagem_mae": null,
+ *       "imagem_pai": null,
+ *       "imagem_bebe": null,
+ *       "gestacao_planejada": true,
+ *       "primeira_visita": null,
+ *       "primeiro_estimulo": "false",
+ *       "tempo_primeiro_estimulo": null,
+ *       "qtd_filhos_vivos": "3",
+ *       "orientacao_prenatal": true,
+ *       "ocupacao": true,
+ *       "licenca_maternidade": 6,
+ *       "acesso_videos": false,
+ *       "acessos_app": 1,
+ *       "acessos_diario": 0,
+ *       "user_id": null,
+ *       "whatsapp": "(43) 999999999",
+ *       "score_1d": null,
+ *       "score_15d": null,
+ *       "score_alta": null,
+ *       "score_1m": null,
+ *       "alim_15d": null,
+ *       "alim_alta": null,
+ *       "alim_1m": null,
+ *       "acessos_msg": 0,
+ *       "acessos_ordenha": 0,
+ *       "acesso_inicio_videos": false,
+ *       "status": 0,
+ *       "motivo_revogacao": null,
+ *       "localizacao": "HU-UEL",
+ *       "telefone2": "(43) 999999999",
+ *       "qtd_abortos": 1,
+ *       "numero_filhos_gestacao": 1,
+ *       "consultas_prenatal": "5",
+ *       "complicacoes_gestacao": "Sim, relacionadas ao COVID-19",
+ *       "bebes": [
+ *       	{
+ *       		"id": 1,
+ *       		"nome": "Enzo Gabriel",
+ *       		"data_parto": "2020-08-28T03:00:00.000Z",
+ *       		"semanas_gest": 35,
+ *       		"dias_gest": 5,
+ *       		"peso": 2.5,
+ *       		"apgar1": 8,
+ *       		"apgar2": 10,
+ *       		"tipo_parto": true,
+ *       		"local": "UCI Neonatal",
+ *       		"mae_id": 1,
+ *       		"complicacoes": "Sim, relacionadas ao COVID-19",
+ *       		"data_alta": null,
+ *       		"local_cadastro": "UCI Neonatal",
+ *       		"contato_pele": true,
+ *       		"primeiro_estimulo": [
+ *       			"Massagem/ordenha",
+ *       			"Sucção"
+ *       		],
+ *       		"primeira_visita": "12h",
+ *       		"tempo_primeiro_estimulo": "7-12h",
+ *       		"mamadas": []
+ *       	}
+ *       ],
+ *       "ordenhas": []
  *   }
  *
  */
@@ -211,27 +245,31 @@ routes.post('/bebes', verifyJWT, bebesController.create);
  * @apiSuccessExample {json} Sucesso
  *    HTTP/1.1 200 OK
  *    [
- *      {
- *          "id_bebe":7,
- *          "nome":"Enzo Gabriel",
- *          "data_parto":"2020-08-28",
- *          "semanas_gest": 35,
- *          "dias_gest":5,
- *          "peso":2.5,
- *          "tipo_parto":true, // false: parto normal | true: cesaria
- *          "local":"UCI",
- *      },
- *      {
- *          "id_bebe":8,
- *          "nome":"Valentina",
- *          "data_parto":"2020-08-28",
- *          "semanas_gest": 35,
- *          "dias_gest":5,
- *          "peso":2.7,
- *          "tipo_parto":true, // false: parto normal | true: cesaria
- *          "local":"UCI"
- *      }
- *    ]
+ *       {
+ *           "id": 1,
+ *           "nome": "Enzo Gabriel",
+ *           "data_parto": "2020-08-28T03:00:00.000Z",
+ *           "semanas_gest": 35,
+ *           "dias_gest": 5,
+ *           "peso": 2.5,
+ *           "apgar1": 8,
+ *           "apgar2": 10,
+ *           "tipo_parto": true,
+ *           "local": "UCI Neonatal",
+ *           "mae_id": 1,
+ *           "complicacoes": "Sim, relacionadas ao COVID-19",
+ *           "data_alta": null,
+ *           "local_cadastro": "UCI Neonatal",
+ *           "contato_pele": true,
+ *           "primeiro_estimulo": [
+ *               "Massagem/ordenha",
+ *               "Sucção"
+ *           ],
+ *           "primeira_visita": "12h",
+ *           "tempo_primeiro_estimulo": "7-12h",
+ *           "mamadas": []
+ *       }
+ *   ]
  *
  */
 
@@ -608,8 +646,8 @@ routes.post('/recuperar/:token',verifyJWT,maesController.recuperarSenha)
  * 
  */
 routes.get('/enviarNotificacoes',async (req,res)=>{
-    await sendPushNotification()
-    res.sendStatus(200)
+    const resp = await sendPushNotification()
+    return res.send(resp)
 })
 
 /**
