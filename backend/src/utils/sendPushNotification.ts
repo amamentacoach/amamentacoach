@@ -30,27 +30,27 @@ async function sendPushNotification(){
         };
 
         try{
-            let response = await api.post('/notifications',data,config)
-            if(response.status===200){
-                if(response.data.errors?.invalid_player_ids){
-                    const {invalid_player_ids} = response.data.errors
+            let resp = await api.post('/notifications',data,config)
+            if(resp.status===200){
+                if(resp.data.errors?.invalid_player_ids){
+                    const {invalid_player_ids} = resp.data.errors
                     data["include_player_ids"] = include_player_ids.filter(value => !invalid_player_ids.includes(value))
-                    response = await api.post('/notifications',data,config)
-                    if(response.status===200){
+                    resp = await api.post('/notifications',data,config)
+                    if(resp.status===200){
                         console.log("Notificacoes enviadas")
                     }else{
-                        console.log("Erro!", response.data)
+                        console.log("Erro!", resp.data)
                     }
                 }else{
                     console.log("Notificacoes enviadas")
                 }
             }else{
-                console.log("Erro!", response.data)
+                console.log("Erro!", resp.data)
             }
+            return resp.data
         }catch(error){
             console.log(error)
-        }finally{
-            return response
+            return error
         }
         
         
