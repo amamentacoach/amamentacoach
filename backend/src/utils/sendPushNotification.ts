@@ -35,11 +35,13 @@ async function sendPushNotification(){
                 if(resp.data.errors?.invalid_player_ids){
                     const {invalid_player_ids} = resp.data.errors
                     data["include_player_ids"] = include_player_ids.filter(value => !invalid_player_ids.includes(value))
-                    resp = await api.post('/notifications',data,config)
-                    if(resp.status===200){
-                        console.log("Notificacoes enviadas")
-                    }else{
-                        console.log("Erro!", resp.data)
+                    if(data["include_player_ids"].length>0){
+                        resp = await api.post('/notifications',data,config)
+                        if(resp.status===200){
+                            console.log("Notificacoes enviadas")
+                        }else{
+                            console.log("Erro!", resp.data)
+                        }
                     }
                 }else{
                     console.log("Notificacoes enviadas")
