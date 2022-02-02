@@ -99,50 +99,12 @@
     "Step4": "The baby will lick the milk followed by swallowing, taking care not to spill the milk into the baby's mouth."
   },
   "BabyFormPage": {
-    "Apgar": "Apgar (Optional)",
-    "ApgarPopUp": "Apgar is the score, from 0 to 10, that the baby receives according to his her vitality state at the moment of birth and appears in the child's health card.\nIf you do not know, fine, continue your registration normally!",
     "BirthDate": "Date of childbirth",
     "BirthLocation": "At birth, your baby went to:",
-    "BirthType": "Type of delivery",
-    "GestationWeeks": "Gestational age at birth of %{nome}",
-    "HadFirstContact": "Did you and your baby have skin-to-skin contact in the first hour of life?",
-    "HadFirstStimulus": "What was the first stimulus performed on your breasts, after delivery?",
-    "HadPostPartumComplications": "Were there any postpartum complications?",
     "Header": "You are almost there! Now we're going to ask you a few questions about your birth and your baby.",
     "Name": "Your baby's name",
-    "TimeFirstStimulus": "How long after the baby's birth was the first stimulus performed?",
-    "TimeFirstVisit": "How long after delivery did you make the first visit to your baby?",
-    "Weight": "Birth weight",
-    "BirthTypeOptions": {
-      "Option1": "Natural",
-      "Option2": "Cesarean delivery"
-    },
-    "FirstStimulusOptions": {
-      "Option1": "Has not performed any stimulus yet",
-      "Option2": "Massage/Pump",
-      "Option3": "Suction"
-    },
-    "TimeFirstVisitOptions": {
-      "Option1": "12 hours",
-      "Option2": "13 to 24 hours",
-      "Option3": "2 days",
-      "Option4": "3 days",
-      "Option5": "4 days or more"
-    },
     "Placeholder": {
-      "BabyWeight": "Enter the baby's birth weight",
       "BirthDate": "Enter the date of childbirth"
-    },
-    "TimeFirstStimulusOptions": {
-      "Option1": "Within 1h",
-      "Option2": "From 1 to 6 hours",
-      "Option3": "From 7 to 12 hours",
-      "Option4": "From 13 to 24 hours",
-      "Option5": "2 days",
-      "Option6": "3 days"
-    },
-    "Yup": {
-      "ApgarError": "Apgar %{num} should also be provided"
     }
   },
   "BabySlingPage": {
@@ -383,71 +345,17 @@
     "Text7": "Source: Adapted from the website https://bebe.abril.com.br/amamentacao/leite materno-infografico-mostra-como-ele-e-produtor/"
   },
   "MotherFormPage": {
-    "AbortionCount": "How many abortions have you had?",
-    "AlreadyBreastfeed": "Have you ever breastfed before?",
     "Birthday": "Your date of birth",
     "BirthdayPlaceholder": "Date of birth",
-    "BreastfeedingTime": "How many years did you breastfeed your %{num}º child?",
-    "ChildrenAlive": "How many living children do you have?",
     "CountPlaceholder": "Enter the number of times",
     "CurrentGestationCount": "What is the number of children in this pregnancy?",
-    "Education": "What is your education?",
     "HeaderSubText": "Now, we will ask a series of questions about you, Mom, to bring the most appropriate content to your reality:",
-    "LiveTogether": "Do you live together?",
     "Location": "Place of delivery",
-    "MaternityLeave": "Have maternity leave:",
-    "MaternityLeaveCount": "How many months?",
-    "MaternityLeaveCountPlaceholder": "Number of months",
     "Name": "Your name",
-    "Occupation": "Do you work:",
     "Partner": "Do you have a partner?",
-    "PartnerTime": "How long have you lived together?",
-    "Phone": "Phone number %{num}",
-    "PlannedPregnancy": "Was the pregnancy planned?",
-    "PregnantCount": "How many times have you been pregnant?",
-    "PreNatalCheckupCount": "How many prenatal care appointments have you had?",
-    "ProblemsDuringPregnancy": "Did you have complications during pregnancy?",
-    "ReceivedBreastfeedingGuidance": "Did you receive prenatal guidance on breastfeeding?",
-    "ReceivedPreNatalGuidance": "Did you have prenatal care?",
-    "Wage": "What band does your household income fall into?",
-    "ChildrenAliveOptions": {
-      "Option1": "No children",
-      "Option2": "1 or 2 children",
-      "Option3": "3 or more children"
-    },
-    "EducationOptions": {
-      "Option1": "Elementary incomplete",
-      "Option2": "Elementary complete",
-      "Option3": "Incomplete high school",
-      "Option4": "Complete high school",
-      "Option5": "Incomplete higher education",
-      "Option6": "Complete higher education"
-    },
-    "LiveTogetherOptions": {
-      "Option1": "Up to 1 year",
-      "Option2": "2 to 4 years",
-      "Option3": "More than 5 years"
-    },
     "LocationOptions": {
       "HU": "HU",
       "Maternity": "Maternidade Dona Íris"
-    },
-    "OccupationOptions": {
-      "Option1": "At home (housewife)",
-      "Option2": "Out of home (any other occupation)"
-    },
-    "ProblemsDuringPregnancyOptions": {
-      "Option1": "Yes, related to COVID-19",
-      "Option2": "Yes, but not related to COVID-19"
-    },
-    "WageOptions": {
-      "Option1": "Up to 1 salary",
-      "Option2": "2 to 3 salaries",
-      "Option3": "4 or more salaries"
-    },
-    "Yup": {
-      "Phone": "Invalid phone number",
-      "RepeatedPhone": "Phone numbers must be different"
     }
   },
   "MusicPlaylistsPage": {

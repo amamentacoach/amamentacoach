@@ -9,7 +9,7 @@ import MainButton from 'components/MainButton';
 import { ScrollView } from 'lib/sharedStyles';
 
 import type { AuthStackProps } from 'routes/auth';
-import type { MotherSignUpInfo } from 'services/auth';
+import type { MotherSignUpInfo } from 'services/signUp';
 
 import {
   FormContainer,

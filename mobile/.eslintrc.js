@@ -82,6 +82,10 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-use-before-define': 'off',
     'react-hooks/exhaustive-deps': 'off',
+    'react/jsx-curly-brace-presence': [
+      'error',
+      { props: 'never', children: 'never' },
+    ],
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-sort-props': [
       'error',

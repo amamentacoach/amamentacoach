@@ -58,10 +58,9 @@ const createGenericSurveyPage = (
           color={color}
           displayOtherField={question.displayOther}
           error={isFormValid ? '' : i18n.t('Yup.AnswerRequired')}
-          fieldName={`${question.id}`}
           multipleSelection={question.multipleSelection}
           options={question.options}
-          onChange={setFieldValue}
+          onChange={fieldValues => setFieldValue(`${question.id}`, fieldValues)}
         />
 
         <Footer>

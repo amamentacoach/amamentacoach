@@ -1,5 +1,5 @@
 import api from 'services/api';
-import { getSurveyQuestions } from 'utils/getSurveyQuestions';
+import SurveyQuestionsRepository from 'utils/surveyQuestionsRepository';
 
 import type { BreastfeedEntry, ExtractionEntry } from 'services/diaryRegistry';
 
@@ -45,11 +45,12 @@ export async function getDailyReport(): Promise<DailyReport> {
 
 // Retorna o relatório semanal da mãe
 export async function getWeeklyReport(): Promise<WeeklyReportQuestion[]> {
+  const surveyQuestionsRepo = new SurveyQuestionsRepository();
   const { data } = await api.get('relatorios/semanal');
   return data.map((entry: any) => {
     // Busca a questão correspondente ao id.
-    let questions = getSurveyQuestions({ id: entry.pergunta });
-    const description = questions.length === 1 ? questions[0].description : '';
+    let question = surveyQuestionsRepo.findById(entry.pergunta);
+    const description = question ? question.description : '';
 
     return {
       id: entry.pergunta,

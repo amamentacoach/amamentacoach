@@ -9,7 +9,7 @@ import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import { ScrollView } from 'lib/sharedStyles';
-import { newPassword } from 'services/auth';
+import { newPassword } from 'services/forgotPassword';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import { FormContainer, HeaderText, SubmitButtonContainer } from './styles';

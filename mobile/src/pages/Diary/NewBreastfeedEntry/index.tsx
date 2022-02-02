@@ -151,21 +151,19 @@ const NewBreastfeedEntry: React.FC = () => {
             <FormContent>
               <FormPickerInput
                 error={errors.babyName}
-                fieldName="babyName"
                 options={motherInfo.babies.map(baby => baby.name.toString())}
                 placeholder={i18n.t('NewBreastfeedEntryPage.BabyPlaceholder')}
-                onChange={setFieldValue}
+                onChange={handleChange('babyName')}
               />
 
               <FormDateInput
                 error={errors.time}
-                fieldName="time"
                 label={i18n.t('Time')}
                 mode="time"
                 placeholder={i18n.t(
                   'NewBreastfeedEntryPage.BreastfeedTimePlaceholder',
                 )}
-                onChange={setFieldValue}
+                onChange={handleChange('time')}
               />
 
               <FormTextInput
@@ -187,6 +185,7 @@ const NewBreastfeedEntry: React.FC = () => {
                   {values.breastLeft ? <CheckedBox /> : <UncheckedBox />}
                   <OptionText>{i18n.t('Left')}</OptionText>
                 </FirstOption>
+
                 <SecondOption
                   activeOpacity={1}
                   onPress={() =>
@@ -196,6 +195,7 @@ const NewBreastfeedEntry: React.FC = () => {
                   <OptionText>{i18n.t('Right')}</OptionText>
                 </SecondOption>
               </MultipleOptionContainer>
+
               <ErrorContainer>
                 {(errors.breastLeft || errors.breastRight) && (
                   <ErrorText>

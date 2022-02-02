@@ -12,7 +12,7 @@ import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import { useAuth } from 'contexts/auth';
 import { Flex } from 'lib/sharedStyles';
-import { LoginStatus } from 'services/auth';
+import { LoginStatus } from 'services/signIn';
 
 import type { AuthStackProps } from 'routes/auth';
 

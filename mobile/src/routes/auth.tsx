@@ -15,7 +15,7 @@ import SignUp from 'pages/Auth/SignUp';
 
 import type { RouteProp } from '@react-navigation/core';
 import type { StackNavigationProp } from '@react-navigation/stack';
-import type { BabySignUpInfo, MotherSignUpInfo } from 'services/auth';
+import type { BabySignUpInfo, MotherSignUpInfo } from 'services/signUp';
 
 type AuthStackParamList = {
   BabyForm: {

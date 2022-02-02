@@ -10,7 +10,7 @@ import {
   MinorTermsOfService,
 } from 'components/TermsOfService';
 import { PaddedScrollView } from 'lib/sharedStyles';
-import { signUpBaby, signUpMother } from 'services/auth';
+import signUp from 'services/signUp';
 
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
 
@@ -32,13 +32,19 @@ const AcceptTermsOfService: React.FC = () => {
 
   async function handleSubmit(): Promise<void> {
     setIsSendingForm(true);
-    const token = await signUpMother(motherInfo);
-    if (token === null) {
-      setIsErrorModalVisible(true);
-      return;
-    }
-    await Promise.all(babiesInfo.map(async baby => signUpBaby(token, baby)));
-    setIsSignUpModalVisible(true);
+    const status = await signUp(motherInfo, babiesInfo);
+    setIsErrorModalVisible(!status);
+    setIsSignUpModalVisible(status);
+  }
+
+  function hideSubmitModal(): void {
+    setIsSignUpModalVisible(false);
+    navigation.navigate('Login');
+  }
+
+  function hideErrorModal(): void {
+    setIsErrorModalVisible(false);
+    setIsSendingForm(false);
   }
 
   return (
@@ -49,10 +55,7 @@ const AcceptTermsOfService: React.FC = () => {
           {
             text: i18n.t('Close'),
             isBold: true,
-            onPress: () => {
-              setIsSignUpModalVisible(false);
-              navigation.navigate('Login');
-            },
+            onPress: hideSubmitModal,
           },
         ]}
         visible={isSignUpModalVisible}
@@ -63,10 +66,7 @@ const AcceptTermsOfService: React.FC = () => {
           {
             text: i18n.t('Close'),
             isBold: true,
-            onPress: () => {
-              setIsErrorModalVisible(false);
-              setIsSendingForm(false);
-            },
+            onPress: hideErrorModal,
           },
         ]}
         visible={isErrorModalVisible}
