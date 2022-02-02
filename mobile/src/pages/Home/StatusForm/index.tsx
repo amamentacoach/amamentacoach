@@ -26,7 +26,7 @@ const StatusForm: React.FC = () => {
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
   // Não exibe a questão de alimentação se for a primeira vez do usuário respondendo a escala.
-  const displayFeedingForm = situation && situation !== '1D';
+  const displayFeedingForm = situation !== '1D';
   // Id da pergunta de alimentação.
   const feedingQuestionId = 6;
 
