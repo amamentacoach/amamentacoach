@@ -419,7 +419,7 @@
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"ocasiao\": \"15D\", // Esta respondendo a alimentacao quando bebe completou 15 dias\n    \"descricao\":\"Por relactação/translactação\"\n}",
+          "content": "{\n    \"ocasiao\": \"15D\", // Esta respondendo a alimentacao quando bebe completou 15 dias\n    \"respostas\": [\"Por relactação/translactação\", \"Apenas por chuca\"]\n}",
           "type": "json"
         }
       ]

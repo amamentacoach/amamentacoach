@@ -515,7 +515,7 @@ routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadCont
  * @apiParamExample {json} Exemplo Request:
  *      {
  *          "ocasiao": "15D", // Esta respondendo a alimentacao quando bebe completou 15 dias
- *          "descricao":"Por relactação/translactação"
+ *          "respostas": ["Por relactação/translactação", "Apenas por chuca"]
  *      }
  * 
  *
