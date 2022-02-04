@@ -455,17 +455,17 @@
     "SignIn": "Entering..."
   },
   "StatusFormPage": {
-    "AverageEfficacy": "average self-effectiveness",
+    "AverageEfficacy": "moderate",
     "FormName": "Scale",
     "Header": "Breastfeeding self-efficiency",
-    "HighEfficacy": "high self-efficacy",
+    "HighEfficacy": "high",
     "InfoValue1": "not at all confident",
     "InfoValue2": "not very confident",
     "InfoValue3": "sometimes confident",
     "InfoValue4": "confident",
     "InfoValue5": "very confident",
-    "LowEfficacy": "low self-efficacy",
-    "Score": "Thank you for answering.\nYour score is %{score}, which means you have %{meaning}."
+    "LowEfficacy": "low",
+    "Score": "Thank you for replying.\nYour score is %{score}, which means your self-confidence is %{meaning}."
   },
   "StepByStepPrematurePage": {
     "Page1": {
