@@ -7,11 +7,11 @@ import { ActivityIndicator, Dimensions, FlatList } from 'react-native';
 import Modal from 'components/Modal';
 import { useAuth } from 'contexts/auth';
 import { answerQuestion } from 'services/survey';
-import { getSurveyQuestions } from 'utils/getSurveyQuestions';
+import SurveyQuestionsRepository from 'utils/surveyQuestionsRepository';
 
 import type { RootStackProps } from 'routes/app';
 import type { AnswerFeedback } from 'services/survey';
-import type { SurveyQuestion } from 'utils/getSurveyQuestions';
+import type { SurveyQuestion } from 'utils/surveyQuestionsRepository';
 
 import {
   ContentContainer,
@@ -87,7 +87,8 @@ const Survey: React.FC<SurveyProps> = ({
 
   useEffect(() => {
     function fetchQuestions(): void {
-      const questions = getSurveyQuestions({ category, motherInfo });
+      const surveyQuestionsRepo = new SurveyQuestionsRepository(motherInfo);
+      const questions = surveyQuestionsRepo.findByCategory(category);
 
       // Inicia todas as respostas vazias.
       const initialValues = questions.reduce(
