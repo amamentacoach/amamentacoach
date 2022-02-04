@@ -27,8 +27,8 @@ export type RootStackParamList = {
   Credits: undefined;
   DiaryActions: undefined;
   DiaryBaby: undefined;
-  DiaryBreastfeed: { date: string } | undefined;
-  DiaryRegistry: { date: string } | undefined;
+  DiaryBreastfeed: { date: string };
+  DiaryRegistry: { date: string };
   Diary: undefined;
   Distractions: undefined;
   EmotionsAndBreastfeeding: undefined;
@@ -45,8 +45,8 @@ export type RootStackParamList = {
   Messages: undefined;
   MilkAdditionalInformation: undefined;
   MusicPlaylists: undefined;
-  NewBreastfeedEntry: undefined;
-  NewDiaryRegistry: undefined;
+  NewBreastfeedEntry: { date: string };
+  NewDiaryRegistry: { date: string };
   NewMessage: undefined;
   NewPassword: undefined;
   NewQuestion: undefined;

@@ -1,5 +1,5 @@
 import { Action, AppScreen } from '@common/telemetria';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ import { PaddedScrollView, Flex, ErrorText } from 'lib/sharedStyles';
 import { createExtractionEntry } from 'services/diaryRegistry';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
-import type { RootStackProps } from 'routes/app';
+import type { RootRouteProp, RootStackProps } from 'routes/app';
 
 import {
   ErrorContainer,
@@ -39,6 +39,7 @@ interface FormValues {
 
 const NewDiaryRegistry: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
+  const { params } = useRoute<RootRouteProp<'NewDiaryRegistry'>>();
   const [isSendingForm, setIsSendingForm] = useState(false);
   const formInitialValues = {
     time: '',
@@ -112,7 +113,7 @@ const NewDiaryRegistry: React.FC = () => {
         action: Action.Pressed,
         context: { screen: AppScreen.NewDiaryRegistry, target: 'Actions.Save' },
       });
-      navigation.navigate('DiaryRegistry');
+      navigation.navigate('DiaryRegistry', { date: params.date });
     } else {
       setIsSendingForm(false);
     }
@@ -182,7 +183,7 @@ const NewDiaryRegistry: React.FC = () => {
                 <SecondOption
                   activeOpacity={1}
                   onPress={() =>
-                    setFieldValue('breastLeft', values.breastRight ? '' : 'D')
+                    setFieldValue('breastRight', values.breastRight ? '' : 'D')
                   }>
                   {values.breastRight ? <CheckedBox /> : <UncheckedBox />}
                   <OptionText>{i18n.t('Right')}</OptionText>
