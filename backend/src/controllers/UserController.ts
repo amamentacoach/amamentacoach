@@ -18,7 +18,7 @@ class UserController{
         } = req.body;
 
         await knex.transaction(async trx =>{
-            const mae = {email, senha, nome, companheiro, localizacao, data_nascimento, ultimo_acesso:new Date(), primeiro_acesso: new Date()};
+            const mae = {email, senha:await bcrypt.hash(senha,10), nome, companheiro, localizacao, data_nascimento, ultimo_acesso:new Date(), primeiro_acesso: new Date()};
             const [id] = await trx('mae').insert(mae).returning('id')
 
             for (const bebe of bebes) {
