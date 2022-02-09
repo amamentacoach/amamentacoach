@@ -3,15 +3,15 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import OneSignal from 'react-native-onesignal';
 
 import api from 'services/api';
+import pushNotificationSubscribe from 'services/pushNotification';
 import {
   getMotherInfo,
   isMotherInfo,
   LoginStatus,
   signIn as authSignIn,
-} from 'services/auth';
-import pushNotificationSubscribe from 'services/pushNotification';
+} from 'services/signIn';
 
-import type { MotherInfo } from 'services/auth';
+import type { MotherInfo } from 'services/signIn';
 
 interface AuthContextData {
   isSigned: boolean;

@@ -57,7 +57,7 @@ export const Footer = styled.View`
   flex-direction: row;
   align-items: flex-end;
   margin: 10px 0;
-  flex: 1;
+  flex-shrink: 1;
 `;
 
 export const FirstButtonContainer = styled.View`

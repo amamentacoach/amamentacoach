@@ -73,12 +73,12 @@ export async function answerStatusForm(
 // Envia as resposta do usuário para o formulário de alimentação.
 export async function answerFeedingForm(
   situation: Exclude<StatusFormSituation, '1D'>,
-  answer: string,
+  answers: string[],
 ): Promise<boolean> {
   try {
     await api.post('/responder/alimentacao', {
       ocasiao: situation,
-      descricao: answer,
+      respostas: answers,
     });
     return true;
   } catch (error) {

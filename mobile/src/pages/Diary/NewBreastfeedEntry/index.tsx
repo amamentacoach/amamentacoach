@@ -1,5 +1,5 @@
 import { Action, AppScreen } from '@common/telemetria';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
@@ -14,7 +14,7 @@ import { Flex, PaddedScrollView, ErrorText } from 'lib/sharedStyles';
 import { createBreastfeedEntry } from 'services/diaryRegistry';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
-import type { RootStackProps } from 'routes/app';
+import type { RootRouteProp, RootStackProps } from 'routes/app';
 
 import {
   ErrorContainer,
@@ -41,6 +41,7 @@ interface FormValues {
 
 const NewBreastfeedEntry: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
+  const { params } = useRoute<RootRouteProp<'NewBreastfeedEntry'>>();
   const { motherInfo } = useAuth();
   const [isSendingForm, setIsSendingForm] = useState(false);
 
@@ -118,7 +119,7 @@ const NewBreastfeedEntry: React.FC = () => {
           target: 'Actions.Save',
         },
       });
-      navigation.navigate('DiaryBreastfeed');
+      navigation.navigate('DiaryBreastfeed', { date: params?.date });
     } else {
       setIsSendingForm(false);
     }
@@ -151,21 +152,19 @@ const NewBreastfeedEntry: React.FC = () => {
             <FormContent>
               <FormPickerInput
                 error={errors.babyName}
-                fieldName="babyName"
                 options={motherInfo.babies.map(baby => baby.name.toString())}
                 placeholder={i18n.t('NewBreastfeedEntryPage.BabyPlaceholder')}
-                onChange={setFieldValue}
+                onChange={handleChange('babyName')}
               />
 
               <FormDateInput
                 error={errors.time}
-                fieldName="time"
                 label={i18n.t('Time')}
                 mode="time"
                 placeholder={i18n.t(
                   'NewBreastfeedEntryPage.BreastfeedTimePlaceholder',
                 )}
-                onChange={setFieldValue}
+                onChange={handleChange('time')}
               />
 
               <FormTextInput
@@ -182,11 +181,12 @@ const NewBreastfeedEntry: React.FC = () => {
                 <FirstOption
                   activeOpacity={1}
                   onPress={() =>
-                    setFieldValue('breastRight', values.breastRight ? '' : 'E')
+                    setFieldValue('breastLeft', values.breastLeft ? '' : 'E')
                   }>
                   {values.breastLeft ? <CheckedBox /> : <UncheckedBox />}
                   <OptionText>{i18n.t('Left')}</OptionText>
                 </FirstOption>
+
                 <SecondOption
                   activeOpacity={1}
                   onPress={() =>
@@ -196,6 +196,7 @@ const NewBreastfeedEntry: React.FC = () => {
                   <OptionText>{i18n.t('Right')}</OptionText>
                 </SecondOption>
               </MultipleOptionContainer>
+
               <ErrorContainer>
                 {(errors.breastLeft || errors.breastRight) && (
                   <ErrorText>

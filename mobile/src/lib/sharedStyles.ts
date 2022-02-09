@@ -21,11 +21,6 @@ export const Center = styled.View`
   justify-content: center;
 `;
 
-export const Row = styled.View`
-  flex: 1;
-  flex-direction: row;
-`;
-
 export const Line = styled.View`
   background-color: ${props => props.theme.grey};
   height: 1px;

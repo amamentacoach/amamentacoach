@@ -9,13 +9,17 @@ import Modal from 'components/Modal';
 import theme from 'config/theme';
 import { useAuth } from 'contexts/auth';
 import { answerFeedingForm, answerStatusForm } from 'services/survey';
-import { getSurveyQuestions } from 'utils/getSurveyQuestions';
+import SurveyQuestionsRepository from 'utils/surveyQuestionsRepository';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { StatusFormQuestion } from './StatusFormPage';
 import type { RootRouteProp, RootStackProps } from 'routes/app';
 
 import StatusFormPage from './StatusFormPage';
+
+type FormValues = {
+  [key: string]: string;
+};
 
 const StatusForm: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
@@ -26,9 +30,9 @@ const StatusForm: React.FC = () => {
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
   // Não exibe a questão de alimentação se for a primeira vez do usuário respondendo a escala.
-  const displayFeedingForm = situation && situation !== '1D';
+  const displayFeedingForm = situation !== '1D';
   // Id da pergunta de alimentação.
-  const feedingQuestionId = 6;
+  const feedingQuestionsIds = [6];
 
   useEffect(() => {
     createTelemetryAction({
@@ -38,26 +42,24 @@ const StatusForm: React.FC = () => {
   }, []);
 
   // Envia as respostas do usuário.
-  async function handleFormSubmit(values: {
-    [key: string]: string[];
-  }): Promise<void> {
+  async function handleFormSubmit(values: FormValues): Promise<void> {
     if (displayFeedingForm) {
-      // TODO Enviar todas as perguntas de uma vez.
-      const status = await answerFeedingForm(
-        situation,
-        values[feedingQuestionId][0],
-      );
+      const feedingAnswers = Object.keys(values)
+        .filter(id => feedingQuestionsIds.includes(Number(id)))
+        .map(id => values[id]);
+
+      const status = await answerFeedingForm(situation, feedingAnswers);
       if (!status) {
         setIsErrorModalVisible(true);
         return;
       }
-      delete values[feedingQuestionId];
+      feedingQuestionsIds.forEach(id => delete values[id]);
     }
 
     // Envia as respostas do usuário para cada a pergunta.
-    const answers = Object.keys(values).map(key => ({
-      id: parseInt(key, 10),
-      content: values[key][0],
+    const answers = Object.keys(values).map(id => ({
+      id: Number(id),
+      content: values[id],
     }));
     const statusFormScore = await answerStatusForm(situation, answers);
     if (statusFormScore === null) {
@@ -66,9 +68,9 @@ const StatusForm: React.FC = () => {
     }
 
     let meaning = '';
-    if (statusFormScore < 14 && statusFormScore <= 32) {
+    if (statusFormScore <= 32) {
       meaning = i18n.t('StatusFormPage.LowEfficacy');
-    } else if (statusFormScore < 33 && statusFormScore <= 51) {
+    } else if (statusFormScore > 32 && statusFormScore <= 51) {
       meaning = i18n.t('StatusFormPage.AverageEfficacy');
     } else {
       meaning = i18n.t('StatusFormPage.HighEfficacy');
@@ -89,10 +91,10 @@ const StatusForm: React.FC = () => {
   }
 
   function fetchQuestions(): StatusFormQuestion[][] {
-    const questions: StatusFormQuestion[] = getSurveyQuestions({
-      category: 7,
-      motherInfo,
-    }).map(question => ({ ...question, direction: 'row' }));
+    const surveyQuestionsRepo = new SurveyQuestionsRepository(motherInfo);
+    const questions: StatusFormQuestion[] = surveyQuestionsRepo
+      .findByCategory(7)
+      .map(question => ({ ...question, direction: 'row' }));
 
     let pages = [];
     // Separa 3 perguntas por página.
@@ -101,9 +103,9 @@ const StatusForm: React.FC = () => {
     }
     // Adiciona a pergunta de alimentação caso necessário.
     if (displayFeedingForm) {
-      const feedingQuestions: StatusFormQuestion[] = getSurveyQuestions({
-        id: feedingQuestionId,
-      }).map(question => ({ ...question, direction: 'column' }));
+      const feedingQuestions: StatusFormQuestion[] = surveyQuestionsRepo
+        .findByIds(feedingQuestionsIds)
+        .map(question => ({ ...question, direction: 'column' }));
 
       pages[pages.length - 1] = [
         ...pages[pages.length - 1],
