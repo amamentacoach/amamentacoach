@@ -16,27 +16,25 @@ type WrapperImageType = Omit<ImageProps, 'source' | 'height' | 'width'> &
 
 const ImageWrapper: React.FC<WrapperImageType> = ({
   source: File,
-  height,
-  width,
+  height: heightProp,
+  width: widthProp,
   style,
   ...props
 }: WrapperImageType) => {
-  // Evita passar a props height e width caso não seja necessário, já que se forem passadas como
+  // Evita passar as props height e width caso não seja necessário, já que se forem passadas como
   // undefined as imagens são alteradas.
-  const size = [
-    { ...(height ? { height } : {}) },
-    { ...(width ? { width } : {}) },
-  ];
+  const height = heightProp ? { height: heightProp } : {};
+  const width = widthProp ? { width: widthProp } : {};
 
   return typeof File === 'function' ? (
     // Arquivo svg
-    <File {...props} {...size[0]} {...size[1]} />
+    <File {...props} {...height} {...width} />
   ) : (
     // Arquivo png
     <ReactImage
       {...props}
       source={File}
-      style={[style, { ...size[0] }, { ...size[1] }]}
+      style={[style, { ...height }, { ...width }]}
     />
   );
 };
