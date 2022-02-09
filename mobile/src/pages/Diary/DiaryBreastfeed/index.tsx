@@ -38,7 +38,7 @@ const DiaryBreastfeed: React.FC = () => {
       action: Action.Pressed,
       context: { screen: AppScreen.DiaryBreastfeed, target },
     });
-    navigation.navigate('NewBreastfeedEntry');
+    navigation.navigate('NewBreastfeedEntry', { date: params.date });
   }
 
   useEffect(() => {
@@ -58,6 +58,7 @@ const DiaryBreastfeed: React.FC = () => {
           listBreastfeedEntries(id, selectedDate),
         ),
       );
+
       setRegistries(oldRegistries);
       setDate(selectedDate);
       setIsLoading(false);

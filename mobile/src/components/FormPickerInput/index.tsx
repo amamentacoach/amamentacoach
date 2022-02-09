@@ -7,40 +7,34 @@ import { ErrorContainer, ErrorText } from 'lib/sharedStyles';
 import { Container, LabelText, PickerContainer } from './styles';
 
 interface FormPickerProps {
-  fieldName: string;
   options: string[];
   placeholder?: string;
-  defaultValue?: string;
+  value?: string;
   label?: string;
   error?: string;
-  onChange: (fieldName: string, fieldValue: string) => void;
+  onChange: (fieldValue: string) => void;
 }
 
 const FormPickerInput: React.FC<FormPickerProps> = ({
-  fieldName,
   placeholder = i18n.t('PickerComponent.DefaultPlaceholder'),
-  defaultValue,
+  value,
   label,
   error,
   options,
   onChange,
 }) => {
-  const [selectedItem, setSelectedItem] = useState(defaultValue || '');
+  const [selectedItem, setSelectedItem] = useState(value);
 
   function handleItemSelected(itemValue: string): void {
     setSelectedItem(itemValue);
-    onChange(fieldName, itemValue);
+    onChange(itemValue);
   }
 
   return (
     <Container>
       {label !== undefined && <LabelText>{label}</LabelText>}
       <PickerContainer>
-        <Picker
-          selectedValue={selectedItem}
-          onValueChange={(itemValue): void =>
-            handleItemSelected(itemValue.toString())
-          }>
+        <Picker selectedValue={selectedItem} onValueChange={handleItemSelected}>
           {[placeholder, ...options]
             .filter(option => option !== '')
             .map(option => (

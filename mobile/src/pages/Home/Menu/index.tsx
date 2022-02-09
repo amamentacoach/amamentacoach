@@ -323,14 +323,13 @@ const Home: React.FC = () => {
                 {selectedModalOptions[index].selected && (
                   <LocationContainer>
                     <FormPickerInput
-                      fieldName=""
                       options={[
                         i18n.t('Lodging'),
                         i18n.t('Home'),
                         i18n.t('UCI'),
                       ]}
                       placeholder={i18n.t('HomePage.BabyLocation')}
-                      onChange={(_, value) =>
+                      onChange={value =>
                         handleBabyLocationSelected(index, value)
                       }
                     />

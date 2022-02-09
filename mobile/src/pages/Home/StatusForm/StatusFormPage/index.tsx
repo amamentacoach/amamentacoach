@@ -1,6 +1,6 @@
 import i18n from 'i18n-js';
 import { memo, useState } from 'react';
-import { Dimensions, FlatList, View } from 'react-native';
+import { Dimensions, FlatList } from 'react-native';
 
 import FormRadioGroupInput from 'components/FormRadioGroup';
 import MainButton from 'components/MainButton';
@@ -9,7 +9,7 @@ import theme from 'config/theme';
 import { Flex } from 'lib/sharedStyles';
 
 import type { ComponentProps } from 'react';
-import type { SurveyQuestion } from 'utils/getSurveyQuestions';
+import type { SurveyQuestion } from 'utils/surveyQuestionsRepository';
 
 import {
   ContentContainer,
@@ -137,9 +137,9 @@ const StatusFormPage: React.FC<PageProps> = ({
           </ValuesInfoText>
         </InfoContainer>
 
-        <View>
+        <Flex>
           {questions.map((question, questionIndex) => (
-            <View key={question.id}>
+            <Flex key={question.id}>
               <QuestionText>
                 {pageIndex * questions.length + questionIndex + 1} -{' '}
                 {question.description}
@@ -150,15 +150,15 @@ const StatusFormPage: React.FC<PageProps> = ({
                 direction={question.direction}
                 displayOtherField={question.displayOther}
                 error={errors[question.id]}
-                fieldName={question.id.toString()}
-                initialValues={values[question.id]}
-                multipleSelection={question.multipleSelection}
                 options={question.options}
-                onChange={setFieldValue}
+                values={values[question.id]}
+                onChange={fieldValues =>
+                  setFieldValue(question.id.toString(), fieldValues[0])
+                }
               />
-            </View>
+            </Flex>
           ))}
-        </View>
+        </Flex>
 
         <Footer>
           {pageIndex > 0 && (

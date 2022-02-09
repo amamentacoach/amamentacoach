@@ -99,50 +99,12 @@
     "Step4": "O bebê fará movimentos de lambida do leite seguidos de deglutição, cuida para não despejar o leite na boca do bebê."
   },
   "BabyFormPage": {
-    "Apgar": "Apgar (Opcional)",
-    "ApgarPopUp": "Apgar é a nota, de 0 a 10, que o bebê recebe de acordo com o estado em que ele se apresenta no momento de nascimento e consta no cartão da criança.\nSe não souber, tudo bem, continue seu cadastro normalmente!",
     "BirthDate": "Data do parto",
     "BirthLocation": "Ao nascer, seu bebê foi para:",
-    "BirthType": "Tipo de parto",
-    "GestationWeeks": "Idade gestacional ao nascer do %{nome}",
-    "HadFirstContact": "Realizou contato pele a pele na primeira hora de vida?",
-    "HadFirstStimulus": "Qual foi o primeiro estímulo realizado em suas mamas?",
-    "HadPostPartumComplications": "Presença de complicação pós-parto?",
     "Header": "Você está quase lá! Agora faremos algumas perguntas sobre seu parto e seu bebê.",
     "Name": "Nome do seu bebê",
-    "TimeFirstStimulus": "Quanto tempo após o nascimento do bebê foi realizado o primeiro estímulo?",
-    "TimeFirstVisit": "Quanto tempo após o parto você fez a primeira visita ao seu bebe?",
-    "Weight": "Peso de nascimento",
-    "BirthTypeOptions": {
-      "Option1": "Normal",
-      "Option2": "Cesária"
-    },
-    "FirstStimulusOptions": {
-      "Option1": "Ainda não realizou nenhum estímulo",
-      "Option2": "Massagem/Ordenha",
-      "Option3": "Sucção"
-    },
-    "TimeFirstVisitOptions": {
-      "Option1": "12h",
-      "Option2": "13-24h",
-      "Option3": "2 dias",
-      "Option4": "3 dias",
-      "Option5": "4 dias ou mais"
-    },
     "Placeholder": {
-      "BabyWeight": "Insira o peso do bebê ao nascer (kg)",
       "BirthDate": "Insira a data do parto"
-    },
-    "TimeFirstStimulusOptions": {
-      "Option1": "Em até 1h",
-      "Option2": "De 1 à 6 horas",
-      "Option3": "De 7 à 12 horas",
-      "Option4": "De 13 à 24 horas",
-      "Option5": "2 dias",
-      "Option6": "3 dias"
-    },
-    "Yup": {
-      "ApgarError": "Apgar %{num} também deve ser fornecido"
     }
   },
   "BabySlingPage": {
@@ -383,71 +345,17 @@
     "Text7": "Fonte: Adaptado do site https://bebe.abril.com.br/amamentacao/leite-materno-infografico-mostra-como-ele-e-produzido/"
   },
   "MotherFormPage": {
-    "AbortionCount": "Quantos abortos você já teve?",
-    "AlreadyBreastfeed": "Você já amamentou antes?",
     "Birthday": "Sua data de nascimento",
     "BirthdayPlaceholder": "Data de nascimento",
-    "BreastfeedingTime": "Por quantos anos/meses você alimentou seu %{num}º filho?",
-    "ChildrenAlive": "Você já possui algum filho vivo de gestação anterior?",
     "CountPlaceholder": "Insira o número de vezes",
     "CurrentGestationCount": "Número de filhos nessa gestação?",
-    "Education": "Qual sua escolaridade?",
     "HeaderSubText": "Agora, faremos uma série de perguntas sobre você, mamãe, para trazer o conteúdo mais adequado para a sua realidade:",
-    "LiveTogether": "Moram juntos?",
     "Location": "Local do parto",
-    "MaternityLeave": "Possui licença maternidade:",
-    "MaternityLeaveCount": "Quantos meses?",
-    "MaternityLeaveCountPlaceholder": "Número de meses",
     "Name": "Seu Nome",
-    "Occupation": "Você trabalha:",
     "Partner": "Tem companheiro?",
-    "PartnerTime": "Há quanto tempo moram juntos?",
-    "Phone": "Telefone %{num}",
-    "PlannedPregnancy": "A gestação foi planejada?",
-    "PregnantCount": "Quantas vezes já esteve grávida?",
-    "PreNatalCheckupCount": "Quantas consultas?",
-    "ProblemsDuringPregnancy": "Teve complicações na gestação?",
-    "ReceivedBreastfeedingGuidance": "Você recebeu orientações no pré-natal sobre aleitamento materno?",
-    "ReceivedPreNatalGuidance": "Você realizou pré-natal?",
-    "Wage": "Em qual faixa sua renda familiar se encaixa?",
-    "ChildrenAliveOptions": {
-      "Option1": "Nenhum filho",
-      "Option2": "1 ou 2 filhos",
-      "Option3": "3 ou mais filhos"
-    },
-    "EducationOptions": {
-      "Option1": "Fundamental incompleto",
-      "Option2": "Fundamental completo",
-      "Option3": "Ensino médio incompleto",
-      "Option4": "Ensino médio completo",
-      "Option5": "Superior incompleto",
-      "Option6": "Superior completo"
-    },
-    "LiveTogetherOptions": {
-      "Option1": "Até 1 ano",
-      "Option2": "2 a 4 anos",
-      "Option3": "Mais que 5 anos"
-    },
     "LocationOptions": {
       "HU": "HU",
       "Maternity": "Maternidade Dona Íris"
-    },
-    "OccupationOptions": {
-      "Option1": "Em casa (do lar)",
-      "Option2": "Fora de casa (alguma outra ocupação)"
-    },
-    "ProblemsDuringPregnancyOptions": {
-      "Option1": "Sim, relacionadas ao COVID-19",
-      "Option2": "Sim, mas não relacionadas ao COVID-19"
-    },
-    "WageOptions": {
-      "Option1": "Até 1 salário",
-      "Option2": "De 2 e 3 salários",
-      "Option3": "4 ou mais salários"
-    },
-    "Yup": {
-      "Phone": "Telefone inválido",
-      "RepeatedPhone": "Números de telefone devem ser diferentes"
     }
   },
   "MusicPlaylistsPage": {

@@ -1,5 +1,5 @@
 import i18n from 'i18n-js';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import FormTextInput from 'components/FormTextInput';
 import { ErrorContainer, ErrorText } from 'lib/sharedStyles';
@@ -17,22 +17,20 @@ import {
 } from './styles';
 
 interface FormRadioGroupProps {
-  fieldName: string;
   options: string[];
   label?: string;
   multipleSelection?: boolean;
   displayOtherField?: boolean;
   // Elementos selecionados inicialmente. Devem estar presentes em options.
-  initialValues?: string[];
+  values?: string[];
   error?: string | string[];
   // Define se as opções são apresentadas horizontalmente ou verticalmente.
   direction?: 'row' | 'column';
   color?: string;
-  onChange: (fieldName: string, fieldValue: string[]) => void;
+  onChange: (fieldValue: string[]) => void;
 }
 
 const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
-  fieldName,
   label,
   options,
   error,
@@ -40,36 +38,24 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   color,
   multipleSelection,
   displayOtherField,
-  initialValues,
+  values,
   onChange,
 }) => {
   const availableOptions = displayOtherField
     ? [...options, i18n.t('Other')]
     : options;
 
-  // Inicia todas as opções como não selecionadas
   const [selectedIndexes, setSelectedIndexes] = useState<boolean[]>(
-    availableOptions.map(() => false),
+    availableOptions.map(option => values?.includes(option) ?? false),
   );
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
-    initialValues || [],
+    values || [],
   );
   const [otherValue, setOtherValue] = useState('');
 
-  useEffect(() => {
-    if (initialValues) {
-      initialValues?.forEach(value => {
-        const index = options.findIndex(element => element === value);
-        const selected = [...selectedIndexes];
-        selected[index] = true;
-        setSelectedIndexes(selected);
-      });
-    }
-  }, []);
-
   function handleOptionSelected(selectedIndex: number): void {
     const newSelectedIndexes = selectedIndexes;
-    // Caso só uma opção possa ser marcada de cada vez, desmarca todos os outro elementos antes
+    // Caso só uma opção possa ser marcada de cada vez, desmarca todos os outros elementos antes
     // de marcar um novo.
     if (!multipleSelection) {
       newSelectedIndexes.forEach((_, index) => {
@@ -95,7 +81,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
       newSelectedOptions[newSelectedOptions.length - 1] = otherValue;
     }
     setSelectedOptions(newSelectedOptions);
-    onChange(fieldName, newSelectedOptions);
+    onChange(newSelectedOptions);
   }
 
   function handleOtherFieldChange(text: string): void {
@@ -107,7 +93,7 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
     } else if (selectedIndexes[selectedIndexes.length - 1]) {
       newValues[newValues.length - 1] = text;
     }
-    onChange(fieldName, newValues);
+    onChange(newValues);
     setOtherValue(text);
   }
 

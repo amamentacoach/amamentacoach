@@ -4,7 +4,9 @@ import type { ComponentProps } from 'react';
 
 import { Container, LabelText, TextInput } from './styles';
 
-interface FormTextProps extends ComponentProps<typeof TextInput> {
+type TextInputProps = ComponentProps<typeof TextInput>;
+
+interface FormTextProps extends TextInputProps {
   label?: string;
   error?: string;
 }

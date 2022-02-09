@@ -42,7 +42,7 @@ const Credits: React.FC = () => {
     <ScrollView>
       <Container>
         <Item
-          link={'https://www.nice.org.uk/guidance/cg93'}
+          link="https://www.nice.org.uk/guidance/cg93"
           texts={[
             i18n.t('CreditsPage.Item1.1'),
             i18n.t('CreditsPage.Item1.2'),
@@ -51,7 +51,7 @@ const Credits: React.FC = () => {
           ]}
         />
         <Item
-          link={'https://storyset.com/illustration/motherhood/pana'}
+          link="https://storyset.com/illustration/motherhood/pana"
           texts={[
             i18n.t('CreditsPage.Item2.1'),
             i18n.t('CreditsPage.Item2.2'),
@@ -60,9 +60,7 @@ const Credits: React.FC = () => {
           ]}
         />
         <Item
-          link={
-            'https://www.saoraimundo.com/amamentar-entenda-os-beneficios-e-sua-importancia/'
-          }
+          link="https://www.saoraimundo.com/amamentar-entenda-os-beneficios-e-sua-importancia/"
           texts={[
             i18n.t('CreditsPage.Item3.1'),
             i18n.t('CreditsPage.Item3.2'),
@@ -71,9 +69,7 @@ const Credits: React.FC = () => {
           ]}
         />
         <Item
-          link={
-            'https://www.saoraimundo.com/amamentar-entenda-os-beneficios-e-sua-importancia/'
-          }
+          link="https://www.saoraimundo.com/amamentar-entenda-os-beneficios-e-sua-importancia/"
           texts={[
             i18n.t('CreditsPage.Item4.1'),
             i18n.t('CreditsPage.Item4.2'),
@@ -82,9 +78,7 @@ const Credits: React.FC = () => {
           ]}
         />
         <Item
-          link={
-            'https://guacui.es.gov.br/noticia/2018/10/doacao-de-leite-materno-pode-ser-feita-em-guacui.html'
-          }
+          link="https://guacui.es.gov.br/noticia/2018/10/doacao-de-leite-materno-pode-ser-feita-em-guacui.html"
           texts={[
             i18n.t('CreditsPage.Item5.1'),
             i18n.t('CreditsPage.Item5.2'),
@@ -96,9 +90,7 @@ const Credits: React.FC = () => {
           texts={[i18n.t('CreditsPage.Item6.1'), i18n.t('CreditsPage.Item6.2')]}
         />
         <Item
-          link={
-            'https://guacui.es.gov.br/noticia/2018/10/doacao-de-leite-materno-pode-ser-feita-em-guacui.html'
-          }
+          link="https://guacui.es.gov.br/noticia/2018/10/doacao-de-leite-materno-pode-ser-feita-em-guacui.html"
           texts={[
             i18n.t('CreditsPage.Item7.1'),
             i18n.t('CreditsPage.Item7.2'),
@@ -107,9 +99,7 @@ const Credits: React.FC = () => {
           ]}
         />
         <Item
-          link={
-            'https://bebe.abril.com.br/amamentacao/leite-materno-infografico-mostra-como-ele-e-produzido/'
-          }
+          link="https://bebe.abril.com.br/amamentacao/leite-materno-infografico-mostra-como-ele-e-produzido/"
           texts={[
             i18n.t('CreditsPage.Item8.1'),
             i18n.t('CreditsPage.Item8.2'),

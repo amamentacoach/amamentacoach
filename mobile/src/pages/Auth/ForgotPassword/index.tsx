@@ -8,7 +8,7 @@ import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import { Flex, PaddedScrollView } from 'lib/sharedStyles';
-import { forgotPassword } from 'services/auth';
+import { forgotPassword } from 'services/forgotPassword';
 
 import { HeaderText, SubmitButtonContainer } from './styles';
 

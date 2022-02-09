@@ -22,6 +22,7 @@ import AcessosController from './controllers/AcessosController';
 import AltaController from './controllers/AltaController';
 import TelemetriaController from './controllers/TelemetriaController';
 import AdminController from './controllers/AdminController';
+import UserController from './controllers/UserController';
 
 
 const maesController = new MaesController();
@@ -41,6 +42,7 @@ const acessosController = new AcessosController();
 const altaController = new AltaController();
 const telemetriaController = new TelemetriaController();
 const adminController = new AdminController();
+const userController = new UserController()
 
 const routes = Router()
 const uploadMiddleware = multer(uploadConfig);
@@ -85,6 +87,36 @@ const uploadMiddleware = multer(uploadConfig);
  *
  */
 routes.post('/maes',maesController.create);
+
+/**
+ * @api {post} /user Cadastro
+ * @apiGroup Usuário
+ *
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "email":"fulana@email.com",
+ *          "senha":"abc123",
+ *          "nome": "Fulana de Tal",
+ *          "data_nascimento":"1990-05-05",
+ *          "companheiro":true,
+ *          "localizacao": "HU-UEL",
+ *          "bebes": [
+ *               {
+ *                   "nome":"Enzo Gabriel",
+ *                   "data_parto":"2020-08-28",
+ *                   "local":"UCI Neonatal"
+ *               }                
+ *          ]
+ *      }
+ * 
+ * @apiSuccessExample {json} Sucesso
+ *    HTTP/1.1 200 OK
+ *      {
+ *          "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjAyNjczMDA5LCJleHAiOjE2MDUyNjUwMDl9.wFrGTEfQ3s_7DNlsFDV88NDYGtXPMrpT-mlWvSAEomg"
+ *      }
+ *
+ */
+ routes.post('/user', userController.create);
 
 
 /**
@@ -515,7 +547,7 @@ routes.post('/upload/:tipo',verifyJWT,uploadMiddleware.single('foto'),uploadCont
  * @apiParamExample {json} Exemplo Request:
  *      {
  *          "ocasiao": "15D", // Esta respondendo a alimentacao quando bebe completou 15 dias
- *          "descricao":"Por relactação/translactação"
+ *          "respostas": ["Por relactação/translactação", "Apenas por chuca"]
  *      }
  * 
  *

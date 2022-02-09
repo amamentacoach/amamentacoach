@@ -8,17 +8,15 @@ import { Flex, ErrorContainer, ErrorText } from 'lib/sharedStyles';
 import { LabelText, TextInput } from './styles';
 
 interface FormDateProps {
-  fieldName: string;
   placeholder: string;
   label?: string;
   error?: string;
   mode?: string;
   maxDate?: Date;
-  onChange: (fieldName: string, fieldValue: string) => void;
+  onChange: (fieldValue: string) => void;
 }
 
 const FormDateInput: React.FC<FormDateProps> = ({
-  fieldName,
   label,
   error,
   placeholder,
@@ -30,10 +28,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
   const [date, setDate] = useState<Date | undefined>();
 
   // Formata a data salva para ser exibida no TextInput do componente.
-  function formatDisplayDate(dateToFormat?: Date): string {
-    if (!dateToFormat) {
-      return '';
-    }
+  function formatDisplayDate(dateToFormat: Date): string {
     if (mode === 'time') {
       return formatWithLocale(dateToFormat, 'HH:mm');
     }
@@ -41,10 +36,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
   }
 
   // Formata a data salva para ser armazenada no useState do componente e valor final do formulário.
-  function formatStateDate(dateToFormat?: Date): string {
-    if (!dateToFormat) {
-      return '';
-    }
+  function formatStateDate(dateToFormat: Date): string {
     if (mode === 'time') {
       return formatWithLocale(dateToFormat, 'HH:mm');
     }
@@ -57,10 +49,10 @@ const FormDateInput: React.FC<FormDateProps> = ({
   }
 
   // Esconde o seletor e salva o valor escolhido.
-  function handleDateSelected(selectedDate?: Date): void {
+  function handleDateSelected(_: Event, selectedDate?: Date): void {
     setShow(Platform.OS === 'ios');
     if (selectedDate) {
-      onChange(fieldName, formatStateDate(selectedDate));
+      onChange(formatStateDate(selectedDate));
       setDate(selectedDate);
     }
   }
@@ -73,7 +65,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
           editable={false}
           placeholder={placeholder}
           placeholderTextColor="#acaab2"
-          value={formatDisplayDate(date)}
+          value={date ? formatDisplayDate(date) : ''}
         />
       </TouchableOpacity>
       <ErrorContainer>
@@ -88,9 +80,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
           mode={mode}
           testID="dateTimePicker"
           value={date || maxDate}
-          onChange={(_: Event, selectedDate?: Date) =>
-            handleDateSelected(selectedDate)
-          }
+          onChange={handleDateSelected}
         />
       )}
     </Flex>
