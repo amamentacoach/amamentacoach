@@ -10,7 +10,7 @@ export async function up(knex: Knex): Promise<void> {
         table.string('renda').nullable().alter();
         table.integer('qtd_gravidez').nullable().alter();
         table.boolean('gestacao_planejada').nullable().alter();
-        table.boolean('primeiro_estimulo').nullable().alter();
+        table.string('primeiro_estimulo').nullable().alter();
         table.string('tempo_primeiro_estimulo').nullable().alter();
         table.string('qtd_filhos_vivos').nullable().alter();
         table.boolean('orientacao_prenatal').nullable().alter();
