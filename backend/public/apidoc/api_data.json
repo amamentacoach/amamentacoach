@@ -1276,5 +1276,33 @@
     "filename": "./src/routes.ts",
     "groupTitle": "Uploads",
     "name": "PostUploadPai"
+  },
+  {
+    "type": "post",
+    "url": "/user",
+    "title": "Cadastro",
+    "group": "Usuário",
+    "parameter": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "{\n    \"email\":\"fulana@email.com\",\n    \"senha\":\"abc123\",\n    \"nome\": \"Fulana de Tal\",\n    \"data_nascimento\":\"1990-05-05\",\n    \"companheiro\":true,\n    \"localizacao\": \"HU-UEL\",\n    \"bebes\": [\n         {\n             \"nome\":\"Enzo Gabriel\",\n             \"data_parto\":\"2020-08-28\",\n             \"local\":\"UCI Neonatal\"\n         }                \n    ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Sucesso",
+          "content": "HTTP/1.1 200 OK\n  {\n      \"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjAyNjczMDA5LCJleHAiOjE2MDUyNjUwMDl9.wFrGTEfQ3s_7DNlsFDV88NDYGtXPMrpT-mlWvSAEomg\"\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Usuário",
+    "name": "PostUser"
   }
 ]
