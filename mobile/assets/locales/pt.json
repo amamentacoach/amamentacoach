@@ -220,8 +220,8 @@
     "Option6": "Meu Bebê Hoje",
     "Option7": "Ações Realizadas com o bebê",
     "Option8": "Meu Desempenho",
-    "Option9": "Participação do Pai",
-    "SubtextOption9": "Registre e acompanhe a participação do papai"
+    "Option9": "Participação do Companheiro(a)",
+    "SubtextOption9": "Registre e acompanhe a participação do companheiro(a)"
   },
   "DiaryRegistryPage": {
     "CreateExtractionEntry": "Registrar retirada"
@@ -406,7 +406,7 @@
     "6": "Resiliência",
     "7": "Sou o Prematuro",
     "8": "Minha maior motivação",
-    "9": "O Papai",
+    "9": "O Companheiro(a)",
     "10": "Espelho",
     "11": "Retirada do leite"
   },
@@ -502,7 +502,7 @@
     "ReadFeedback": "Ver conteúdo"
   },
   "SurveyMenuPage": {
-    "Father": "Sobre a participação do pai"
+    "Father": "Sobre a participação do companheiro(a)"
   },
   "SurveyStatisticsPage": {
     "FormSubmitted": "Obrigada por responder a nossa enquete! Veja abaixo as respostas mais votadas no App pelas mães"
@@ -512,7 +512,7 @@
     "DiaryBaby": "Meu Bebê Hoje",
     "HelpReceived": "Minha rede de apoio",
     "SurveyBreastfeed": "Amamentar um prematuro",
-    "SurveyFather": "Participação do Pai",
+    "SurveyFather": "Participação do Companheiro(a)",
     "SurveyHelp": "Sobre ajuda",
     "SurveyMotivation": "Motivação"
   },
@@ -608,7 +608,7 @@
     "SelectPhoto": "Escolha uma foto de seu(s) bebê(s) na galeria e deixe aqui para lembrar qual a sua grande motivação para amamentar."
   },
   "UploadFatherPhotoPage": {
-    "Text": "Envolver o pai do bebê nessa jornada faz toda a diferença! Clique no botão abaixo e envie uma foto de um momento legal do papai com o bebê.\nCaso não seja possível envolver o pai, você pode escolher outra pessoa importante pra ser esse apoio fundamental a você e seu bebê!"
+    "Text": "Envolver o companheiro(a) nessa jornada faz toda a diferença! Clique no botão abaixo e envie uma foto de um momento legal do companheiro(a) com o bebê.\nCaso não seja possível envolver o companheiro(a), você pode escolher outra pessoa importante pra ser esse apoio fundamental a você e seu bebê!"
   },
   "UploadMotherPhotoPage": {
     "BestMother": "VOCÊ é a melhor mãe do mundo para o seu bebê! Isso simplesmente porque VOCÊ deu a vida a ele, o que ninguém mais poderia fazer! O SEU LEITE é o melhor alimento que ele pode receber!",
