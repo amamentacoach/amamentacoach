@@ -47,7 +47,7 @@ const Credits: React.FC = () => {
             i18n.t('CreditsPage.Item1.1'),
             i18n.t('CreditsPage.Item1.2'),
             i18n.t('CreditsPage.Item1.3'),
-            i18n.t('CreditsPage.AvailableIn'),
+            i18n.t('CreditsPage.AvailableAt'),
           ]}
         />
         <Item
@@ -56,7 +56,7 @@ const Credits: React.FC = () => {
             i18n.t('CreditsPage.Item2.1'),
             i18n.t('CreditsPage.Item2.2'),
             i18n.t('CreditsPage.Item2.3'),
-            i18n.t('CreditsPage.AvailableIn'),
+            i18n.t('CreditsPage.AvailableAt'),
           ]}
         />
         <Item
@@ -65,7 +65,7 @@ const Credits: React.FC = () => {
             i18n.t('CreditsPage.Item3.1'),
             i18n.t('CreditsPage.Item3.2'),
             i18n.t('CreditsPage.Item3.3'),
-            i18n.t('CreditsPage.AvailableIn'),
+            i18n.t('CreditsPage.AvailableAt'),
           ]}
         />
         <Item
@@ -74,7 +74,7 @@ const Credits: React.FC = () => {
             i18n.t('CreditsPage.Item4.1'),
             i18n.t('CreditsPage.Item4.2'),
             i18n.t('CreditsPage.Item4.3'),
-            i18n.t('CreditsPage.AvailableIn'),
+            i18n.t('CreditsPage.AvailableAt'),
           ]}
         />
         <Item
@@ -83,7 +83,7 @@ const Credits: React.FC = () => {
             i18n.t('CreditsPage.Item5.1'),
             i18n.t('CreditsPage.Item5.2'),
             i18n.t('CreditsPage.Item5.3'),
-            i18n.t('CreditsPage.AvailableIn'),
+            i18n.t('CreditsPage.AvailableAt'),
           ]}
         />
         <Item
@@ -95,7 +95,7 @@ const Credits: React.FC = () => {
             i18n.t('CreditsPage.Item7.1'),
             i18n.t('CreditsPage.Item7.2'),
             i18n.t('CreditsPage.Item7.3'),
-            i18n.t('CreditsPage.AvailableIn'),
+            i18n.t('CreditsPage.AvailableAt'),
           ]}
         />
         <Item
@@ -104,7 +104,7 @@ const Credits: React.FC = () => {
             i18n.t('CreditsPage.Item8.1'),
             i18n.t('CreditsPage.Item8.2'),
             i18n.t('CreditsPage.Item8.3'),
-            i18n.t('CreditsPage.AvailableIn'),
+            i18n.t('CreditsPage.AvailableAt'),
           ]}
         />
       </Container>

@@ -26,7 +26,6 @@
   "OrMore": "ou mais",
   "Other": "Outro",
   "Password": "Senha",
-  "PrematureBreastfeed": "Amamentar um prematuro",
   "Profile": "Perfil",
   "Quantity": "Quantidade",
   "Question": "Pergunta",
@@ -158,7 +157,7 @@
     "Header": "Tudo o que você precisa saber sobre retirada do leite"
   },
   "CreditsPage": {
-    "AvailableIn": "Disponível em",
+    "AvailableAt": "Disponível em",
     "Item1": {
       "1": "[1] Donor milk banks: service operation",
       "2": "Clinical guideline",
