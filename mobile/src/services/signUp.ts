@@ -16,56 +16,29 @@ export interface BabySignUpInfo {
   name: string;
 }
 
-// Cadastra uma mãe no sistema.
-async function signUpMother(
+// Cadastra uma mãe e seus bebês.
+async function signUp(
   motherInfo: MotherSignUpInfo,
-): Promise<string | null> {
+  babiesInfo: BabySignUpInfo[],
+): Promise<boolean> {
   try {
-    const request = await api.post('/maes', {
+    const { data } = await api.post('/user', {
       companheiro: motherInfo.hasPartner,
       data_nascimento: motherInfo.birthday,
       email: motherInfo.email,
       localizacao: motherInfo.location,
       nome: motherInfo.name,
       senha: motherInfo.password,
+      bebes: babiesInfo.map(info => ({
+        data_parto: info.birthday,
+        local: info.birthLocation,
+        nome: info.name,
+      })),
     });
-    return request.data.token;
+    return !!data.token;
   } catch (error) {
-    return null;
-  }
-}
-
-// Cadastra um bebê no sistema.
-async function signUpBaby(
-  token: string,
-  babyInfo: BabySignUpInfo,
-): Promise<void> {
-  await api.post(
-    '/bebes',
-    {
-      data_parto: babyInfo.birthday,
-      local: babyInfo.birthLocation,
-      nome: babyInfo.name,
-    },
-    {
-      headers: {
-        Authorization: token,
-      },
-    },
-  );
-}
-
-// Cadastra uma mãe e seus bebês.
-async function signUp(
-  motherInfo: MotherSignUpInfo,
-  babiesInfo: BabySignUpInfo[],
-): Promise<boolean> {
-  const token = await signUpMother(motherInfo);
-  if (token === null) {
     return false;
   }
-  await Promise.all(babiesInfo.map(async baby => signUpBaby(token, baby)));
-  return true;
 }
 
 export default signUp;
