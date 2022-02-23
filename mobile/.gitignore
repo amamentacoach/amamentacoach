@@ -38,7 +38,16 @@ release.properties
 #
 node_modules/
 npm-debug.log
+
+# Yarn
 yarn-error.log
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 # BUCK
 buck-out/
@@ -62,3 +71,4 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
