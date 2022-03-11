@@ -73,7 +73,7 @@ const SurveyStatistics: React.FC = () => {
   return (
     <ScrollView>
       <HeaderBackground />
-      <HeaderText>{i18n.t('PrematureBreastfeed')}</HeaderText>
+      <HeaderText>{i18n.t('SurveyTitles.SurveyBreastfeed')}</HeaderText>
 
       <ContentContainer>
         {loading ? (

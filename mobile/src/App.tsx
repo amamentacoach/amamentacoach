@@ -39,15 +39,15 @@ const App: React.FC = () => {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <IsFirstRunProvider>
-        <AuthProvider>
-          <NavigationContainer>
+      <NavigationContainer>
+        <IsFirstRunProvider>
+          <AuthProvider>
             <ThemeProvider theme={theme}>
               <Routes />
             </ThemeProvider>
-          </NavigationContainer>
-        </AuthProvider>
-      </IsFirstRunProvider>
+          </AuthProvider>
+        </IsFirstRunProvider>
+      </NavigationContainer>
     </>
   );
 };
