@@ -128,7 +128,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"local\":\"Casa\" // locais de alta: \"UCI Neonatal\", \"Alojamento Conjunto\" e \"Casa\"\n}",
+          "content": "{\n    \"local\":\"Casa\" // locais de alta: \"UCI Neonatal\", \"Alojamento Conjunto\", \"Casa\" e \"Não se aplica\",\n    \"data\":'2022-01-04' // data da alta\n}",
           "type": "json"
         }
       ]
@@ -903,13 +903,24 @@ define({ "api": [
   {
     "type": "get",
     "url": "/enviarNotificacoes",
-    "title": "Teste de push",
+    "title": "Notificações diárias",
     "description": "<p>Envia notificacao para todas as maes que nao preencheram o diario nesse dia</br></p>",
     "group": "Notificação",
     "version": "0.0.0",
     "filename": "./src/routes.ts",
     "groupTitle": "Notificação",
     "name": "GetEnviarnotificacoes"
+  },
+  {
+    "type": "get",
+    "url": "/enviarNotificacoesAlta",
+    "title": "Notificação de alta",
+    "description": "<p>Envia notificacao de alta para as mães de bebes internados</br></p>",
+    "group": "Notificação",
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Notificação",
+    "name": "GetEnviarnotificacoesalta"
   },
   {
     "type": "get",
@@ -1304,5 +1315,46 @@ define({ "api": [
     "filename": "./src/routes.ts",
     "groupTitle": "Usuário",
     "name": "PostUser"
+  },
+  {
+    "type": "put",
+    "url": "/user",
+    "title": "Alteração de Cadastro",
+    "group": "Usuário",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "authorization",
+            "description": "<p>Token de acesso.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "examples": [
+        {
+          "title": "Exemplo Request:",
+          "content": "{\n    \"email\":\"fulana@email.com\",\n    \"nome\": \"Fulana de Tal\",\n    \"data_nascimento\":\"1990-05-05\",\n    \"companheiro\":true,\n    \"localizacao\": \"HU-UEL\",\n    \"bebes\": [\n         {\n             \"id\": 1,\n             \"nome\":\"Enzo Gabriel\",\n             \"data_parto\":\"2020-08-28\",\n             \"local\":\"UCI Neonatal\"\n         }                \n    ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Sucesso:",
+          "content": "{\n    \"id\": 1,\n    \"email\": \"fulana@email.com\",\n    \"nome\": \"Fulana de Tal\",\n    \"data_nascimento\": \"1990-05-05T03:00:00.000Z\",\n    \"amamentou_antes\": false,\n    \"tempo_amamentacao\": [\n        \"2,3\",\n        \"1,0\"\n    ],\n    \"companheiro\": true,\n    \"moram_juntos\": \"2,0\",\n    \"escolaridade\": \"Ensino Medio Completo\",\n    \"renda\": \"Entre 1 e 3 salarios minimos\",\n    \"qtd_gravidez\": 2,\n    \"ultimo_acesso\": \"2022-01-21T13:33:20.297Z\",\n    \"primeiro_acesso\": \"2022-01-21T13:33:20.297Z\",\n    \"imagem_mae\": null,\n    \"imagem_pai\": null,\n    \"imagem_bebe\": null,\n    \"gestacao_planejada\": true,\n    \"primeira_visita\": null,\n    \"primeiro_estimulo\": \"false\",\n    \"tempo_primeiro_estimulo\": null,\n    \"qtd_filhos_vivos\": \"3\",\n    \"orientacao_prenatal\": true,\n    \"ocupacao\": true,\n    \"licenca_maternidade\": 6,\n    \"acesso_videos\": false,\n    \"acessos_app\": 1,\n    \"acessos_diario\": 0,\n    \"user_id\": null,\n    \"whatsapp\": \"(43) 999999999\",\n    \"score_1d\": null,\n    \"score_15d\": null,\n    \"score_alta\": null,\n    \"score_1m\": null,\n    \"alim_15d\": null,\n    \"alim_alta\": null,\n    \"alim_1m\": null,\n    \"acessos_msg\": 0,\n    \"acessos_ordenha\": 0,\n    \"acesso_inicio_videos\": false,\n    \"status\": 0,\n    \"motivo_revogacao\": null,\n    \"localizacao\": \"HU-UEL\",\n    \"telefone2\": \"(43) 999999999\",\n    \"qtd_abortos\": 1,\n    \"numero_filhos_gestacao\": 1,\n    \"consultas_prenatal\": \"5\",\n    \"complicacoes_gestacao\": \"Sim, relacionadas ao COVID-19\",\n    \"bebes\": [\n    \t{\n    \t\t\"id\": 1,\n    \t\t\"nome\": \"Enzo Gabriel\",\n    \t\t\"data_parto\": \"2020-08-28T03:00:00.000Z\",\n    \t\t\"semanas_gest\": 35,\n    \t\t\"dias_gest\": 5,\n    \t\t\"peso\": 2.5,\n    \t\t\"apgar1\": 8,\n    \t\t\"apgar2\": 10,\n    \t\t\"tipo_parto\": true,\n    \t\t\"local\": \"UCI Neonatal\",\n    \t\t\"mae_id\": 1,\n    \t\t\"complicacoes\": \"Sim, relacionadas ao COVID-19\",\n    \t\t\"data_alta\": null,\n    \t\t\"local_cadastro\": \"UCI Neonatal\",\n    \t\t\"contato_pele\": true,\n    \t\t\"primeiro_estimulo\": [\n    \t\t\t\"Massagem/ordenha\",\n    \t\t\t\"Sucção\"\n    \t\t],\n    \t\t\"primeira_visita\": \"12h\",\n    \t\t\"tempo_primeiro_estimulo\": \"7-12h\",\n    \t\t\"mamadas\": []\n    \t}\n    ],\n    \"ordenhas\": []\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Usuário",
+    "name": "PutUser"
   }
 ] });

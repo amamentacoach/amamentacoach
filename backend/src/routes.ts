@@ -12,7 +12,7 @@ import RespostasMaeController from './controllers/RespostasMaeController';
 import RespostasController from './controllers/RespostasController';
 import UploadController from './controllers/UploadController';
 import BebesController from './controllers/BebesController';
-import sendPushNotification from './utils/sendPushNotification';
+import sendPushNotification, { sendPushNotificationAlta } from './utils/sendPushNotification';
 import ResultController from './controllers/ResultController';
 import MamadasController from './controllers/MamadasController';
 import DuvidasController from './controllers/DuvidasController';
@@ -117,6 +117,113 @@ routes.post('/maes',maesController.create);
  *
  */
  routes.post('/user', userController.create);
+
+ /**
+ * @api {put} /user Alteração de Cadastro
+ * @apiGroup Usuário
+ * 
+ * @apiHeader {String} authorization Token de acesso.
+ *
+ * @apiParamExample {json} Exemplo Request:
+ *      {
+ *          "email":"fulana@email.com",
+ *          "nome": "Fulana de Tal",
+ *          "data_nascimento":"1990-05-05",
+ *          "companheiro":true,
+ *          "localizacao": "HU-UEL",
+ *          "bebes": [
+ *               {
+ *                   "id": 1,
+ *                   "nome":"Enzo Gabriel",
+ *                   "data_parto":"2020-08-28",
+ *                   "local":"UCI Neonatal"
+ *               }                
+ *          ]
+ *      }
+ * 
+* @apiSuccessExample {json} Sucesso:
+ *   {
+ *       "id": 1,
+ *       "email": "fulana@email.com",
+ *       "nome": "Fulana de Tal",
+ *       "data_nascimento": "1990-05-05T03:00:00.000Z",
+ *       "amamentou_antes": false,
+ *       "tempo_amamentacao": [
+ *           "2,3",
+ *           "1,0"
+ *       ],
+ *       "companheiro": true,
+ *       "moram_juntos": "2,0",
+ *       "escolaridade": "Ensino Medio Completo",
+ *       "renda": "Entre 1 e 3 salarios minimos",
+ *       "qtd_gravidez": 2,
+ *       "ultimo_acesso": "2022-01-21T13:33:20.297Z",
+ *       "primeiro_acesso": "2022-01-21T13:33:20.297Z",
+ *       "imagem_mae": null,
+ *       "imagem_pai": null,
+ *       "imagem_bebe": null,
+ *       "gestacao_planejada": true,
+ *       "primeira_visita": null,
+ *       "primeiro_estimulo": "false",
+ *       "tempo_primeiro_estimulo": null,
+ *       "qtd_filhos_vivos": "3",
+ *       "orientacao_prenatal": true,
+ *       "ocupacao": true,
+ *       "licenca_maternidade": 6,
+ *       "acesso_videos": false,
+ *       "acessos_app": 1,
+ *       "acessos_diario": 0,
+ *       "user_id": null,
+ *       "whatsapp": "(43) 999999999",
+ *       "score_1d": null,
+ *       "score_15d": null,
+ *       "score_alta": null,
+ *       "score_1m": null,
+ *       "alim_15d": null,
+ *       "alim_alta": null,
+ *       "alim_1m": null,
+ *       "acessos_msg": 0,
+ *       "acessos_ordenha": 0,
+ *       "acesso_inicio_videos": false,
+ *       "status": 0,
+ *       "motivo_revogacao": null,
+ *       "localizacao": "HU-UEL",
+ *       "telefone2": "(43) 999999999",
+ *       "qtd_abortos": 1,
+ *       "numero_filhos_gestacao": 1,
+ *       "consultas_prenatal": "5",
+ *       "complicacoes_gestacao": "Sim, relacionadas ao COVID-19",
+ *       "bebes": [
+ *       	{
+ *       		"id": 1,
+ *       		"nome": "Enzo Gabriel",
+ *       		"data_parto": "2020-08-28T03:00:00.000Z",
+ *       		"semanas_gest": 35,
+ *       		"dias_gest": 5,
+ *       		"peso": 2.5,
+ *       		"apgar1": 8,
+ *       		"apgar2": 10,
+ *       		"tipo_parto": true,
+ *       		"local": "UCI Neonatal",
+ *       		"mae_id": 1,
+ *       		"complicacoes": "Sim, relacionadas ao COVID-19",
+ *       		"data_alta": null,
+ *       		"local_cadastro": "UCI Neonatal",
+ *       		"contato_pele": true,
+ *       		"primeiro_estimulo": [
+ *       			"Massagem/ordenha",
+ *       			"Sucção"
+ *       		],
+ *       		"primeira_visita": "12h",
+ *       		"tempo_primeiro_estimulo": "7-12h",
+ *       		"mamadas": []
+ *       	}
+ *       ],
+ *       "ordenhas": []
+ *   }
+ *
+ */
+  routes.put('/user', verifyJWT, userController.update);
 
 
 /**
@@ -254,7 +361,8 @@ routes.post('/bebes', verifyJWT, bebesController.create);
  * 
  * @apiParamExample {json} Exemplo Request:
  *      {
- *          "local":"Casa" // locais de alta: "UCI Neonatal", "Alojamento Conjunto" e "Casa"
+ *          "local":"Casa" // locais de alta: "UCI Neonatal", "Alojamento Conjunto", "Casa" e "Não se aplica",
+ *          "data":'2022-01-04' // data da alta
  *      }
  * 
  * @apiSuccessExample {json} Sucesso
@@ -672,13 +780,24 @@ routes.get('/recuperar/:token',(req,res)=>{
 routes.post('/recuperar/:token',verifyJWT,maesController.recuperarSenha)
 
 /**
- * @api {get} /enviarNotificacoes Teste de push
+ * @api {get} /enviarNotificacoes Notificações diárias
  * @apiDescription Envia notificacao para todas as maes que nao preencheram o diario nesse dia</br>
  * @apiGroup Notificação
  * 
  */
 routes.get('/enviarNotificacoes',async (req,res)=>{
     const resp = await sendPushNotification()
+    return res.send(resp)
+})
+
+/**
+ * @api {get} /enviarNotificacoesAlta Notificação de alta
+ * @apiDescription Envia notificacao de alta para as mães de bebes internados</br>
+ * @apiGroup Notificação
+ * 
+ */
+ routes.get('/enviarNotificacoesAlta',async (req,res)=>{
+    const resp = await sendPushNotificationAlta()
     return res.send(resp)
 })
 

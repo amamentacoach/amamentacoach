@@ -40,7 +40,7 @@ const SurveyMenu: React.FC = () => {
   let options: OptionListEntry[] = [
     {
       image: { source: SurveysOne },
-      title: i18n.t('PrematureBreastfeed'),
+      title: i18n.t('SurveyTitles.SurveyBreastfeed'),
       onPress: () =>
         navigateIfFirstRun(
           '@AmamentaCoach:DiarySurveyBreastfeedLastDate',

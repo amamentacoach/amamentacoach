@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 import { createContext, useContext, useEffect, useState } from 'react';
 import OneSignal from 'react-native-onesignal';
 
@@ -27,10 +28,25 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
   const [motherInfo, setMotherInfo] = useState<MotherInfo>({} as MotherInfo);
   const [isLoading, setIsLoading] = useState(true);
+  const navigation = useNavigation();
 
   async function initPushNotifications(): Promise<void> {
     const { userId } = await OneSignal.getDeviceState();
     await pushNotificationSubscribe(userId);
+
+    OneSignal.setNotificationOpenedHandler(openedEvent => {
+      const {
+        notification: { launchURL },
+      } = openedEvent;
+      if (launchURL) {
+        const [, , action, target] = launchURL.split('/');
+        switch (action) {
+          case 'screen':
+            navigation.navigate(target as any);
+            break;
+        }
+      }
+    });
     OneSignal.disablePush(false);
   }
 
