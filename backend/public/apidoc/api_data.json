@@ -128,7 +128,7 @@
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"local\":\"Casa\" // locais de alta: \"UCI Neonatal\", \"Alojamento Conjunto\" e \"Casa\"\n}",
+          "content": "{\n    \"local\":\"Casa\" // locais de alta: \"UCI Neonatal\", \"Alojamento Conjunto\", \"Casa\" e \"Não se aplica\",\n    \"data\":'2022-01-04' // data da alta\n}",
           "type": "json"
         }
       ]
