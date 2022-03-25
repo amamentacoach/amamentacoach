@@ -903,13 +903,24 @@ define({ "api": [
   {
     "type": "get",
     "url": "/enviarNotificacoes",
-    "title": "Teste de push",
+    "title": "Notificações diárias",
     "description": "<p>Envia notificacao para todas as maes que nao preencheram o diario nesse dia</br></p>",
     "group": "Notificação",
     "version": "0.0.0",
     "filename": "./src/routes.ts",
     "groupTitle": "Notificação",
     "name": "GetEnviarnotificacoes"
+  },
+  {
+    "type": "get",
+    "url": "/enviarNotificacoesAlta",
+    "title": "Notificação de alta",
+    "description": "<p>Envia notificacao de alta para as mães de bebes internados</br></p>",
+    "group": "Notificação",
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Notificação",
+    "name": "GetEnviarnotificacoesalta"
   },
   {
     "type": "get",
@@ -1327,7 +1338,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"email\":\"fulana@email.com\",\n    \"nome\": \"Fulana de Tal\",\n    \"data_nascimento\":\"1990-05-05\",\n    \"companheiro\":true,\n    \"localizacao\": \"HU-UEL\",\n    \"bebes\": [\n         {\n             \"id\": 1\n             \"nome\":\"Enzo Gabriel\",\n             \"data_parto\":\"2020-08-28\",\n             \"local\":\"UCI Neonatal\"\n         }                \n    ]\n}",
+          "content": "{\n    \"email\":\"fulana@email.com\",\n    \"nome\": \"Fulana de Tal\",\n    \"data_nascimento\":\"1990-05-05\",\n    \"companheiro\":true,\n    \"localizacao\": \"HU-UEL\",\n    \"bebes\": [\n         {\n             \"id\": 1,\n             \"nome\":\"Enzo Gabriel\",\n             \"data_parto\":\"2020-08-28\",\n             \"local\":\"UCI Neonatal\"\n         }                \n    ]\n}",
           "type": "json"
         }
       ]
