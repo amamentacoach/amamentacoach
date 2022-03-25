@@ -361,7 +361,8 @@ routes.post('/bebes', verifyJWT, bebesController.create);
  * 
  * @apiParamExample {json} Exemplo Request:
  *      {
- *          "local":"Casa" // locais de alta: "UCI Neonatal", "Alojamento Conjunto" e "Casa"
+ *          "local":"Casa" // locais de alta: "UCI Neonatal", "Alojamento Conjunto", "Casa" e "Não se aplica",
+ *          "data":'2022-01-04' // data da alta
  *      }
  * 
  * @apiSuccessExample {json} Sucesso

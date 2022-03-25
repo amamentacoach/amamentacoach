@@ -11,12 +11,11 @@ class AltaController{
     async create(req:Request, res:Response){
         const {id} = req.params;
         const {
-            local
+            local,
+            data
         } = req.body;
-
-        const data_alta = new Date();
         
-        await knex('bebe').update({local, data_alta}).where('id',id)
+        await knex('bebe').update({local, data_alta:data}).where('id',id)
 
         return res.sendStatus(200);
 

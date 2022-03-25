@@ -118,7 +118,7 @@ async function sendPushNotification(){
 export async function sendPushNotificationAlta(){
     console.log("Enviando notificacoes de alta...")
 
-    const internados = await knex('bebe').distinct('mae_id').where('local','<>','Casa')
+    const internados = await knex('bebe').distinct('mae_id').where('local','<>','Casa').andWhere('local','<>','Não se aplica')
 
     let include_player_ids_alta:string[] = [];
 
