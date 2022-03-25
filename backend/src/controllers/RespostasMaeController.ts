@@ -107,7 +107,15 @@ class RespostasMaeController{
         const {respostas} = req.body
 
         
+
+        
         await knex.transaction(async trx =>{
+
+            const mae = await knex('mae').select('alim_15d', 'alim_1m', 'primeiro_acesso').where('id', mae_id).first();
+
+            const bebe = await knex('bebe').select('data_parto').where('mae_id', '=', mae_id).first()
+            const diff = moment(new Date()).diff(bebe.data_parto);
+            const dias_vida = Math.trunc(moment.duration(diff).asDays())
 
             for(const resposta of respostas){
                 await trx('resposta').insert({mae_id,pergunta_id:6,descricao:resposta,data:new Date()});
@@ -127,7 +135,15 @@ class RespostasMaeController{
                     break;
             
                 default:
-                    //res.sendStatus(400)
+                    if(!mae.alim_15d && dias_vida>=13){
+                        await trx('mae').update({alim_15d:respostas.join('|')}).where({id:mae_id})
+                        break;
+                    }else if(!mae.alim_1m && dias_vida>=27){
+                        await trx('mae').update({alim_1m:respostas.join('|')}).where({id:mae_id})
+                        break;
+                    }else{
+                        break;
+                    }
                     break;
             }  
                      
