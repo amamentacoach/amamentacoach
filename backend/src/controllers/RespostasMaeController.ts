@@ -54,9 +54,9 @@ class RespostasMaeController{
 
             const mae = await knex('mae').select('score_1d', 'score_alta', 'score_15d','score_1m', 'primeiro_acesso').where('id', mae_id).first();
 
-            const diff = moment(new Date()).diff(mae.primeiro_acesso);
-
-            const dias_uso = moment.duration(diff).asDays()
+            const bebe = await knex('bebe').select('data_parto').where('mae_id', '=', mae_id).first()
+            const diff = moment(new Date()).diff(bebe.data_parto);
+            const dias_vida = Math.trunc(moment.duration(diff).asDays())
 
             for(const resposta of respostas){
                 const {pergunta_id, descricao} = resposta
@@ -81,13 +81,13 @@ class RespostasMaeController{
                     break;
             
                 default:
-                    if(!mae.score_1d && dias_uso<15){
+                    if(!mae.score_1d && dias_vida<13){
                         await trx('mae').update({score_1d:score}).where({id:mae_id})
                         break;
-                    }else if(!mae.score_15d && dias_uso>=15){
+                    }else if(!mae.score_15d && dias_vida>=13){
                         await trx('mae').update({score_15d:score}).where({id:mae_id})
                         break;
-                    }else if(!mae.score_1m && dias_uso>=30){
+                    }else if(!mae.score_1m && dias_vida>=27){
                         await trx('mae').update({score_1m:score}).where({id:mae_id})
                         break;
                     }else{

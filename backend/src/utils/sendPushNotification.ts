@@ -49,13 +49,15 @@ async function sendPushNotification(){
 
     const maes = await knex('mae').select('id',  'user_id', 'score_15d', 'score_1m').whereNull('score_15d').orWhereNull('score_1m')
 
+    console.log(maes)
+
     let include_player_ids_escala:string[] = [];
 
     for(const mae of maes){
         const bebe = await knex('bebe').select('data_parto').where('mae_id', '=', mae.id).first()
         const diff = moment(new Date()).diff(bebe.data_parto);
         const dias_vida = Math.trunc(moment.duration(diff).asDays())
-        if(mae.score_15d === null && dias_vida === 15 ? true : mae.score_1m === null && dias_vida === 30 ? true : false){
+        if(mae.score_15d === null && dias_vida>=13 ? true : mae.score_1m === null && dias_vida >= 27 ? true : false){
             if(mae.user_id) include_player_ids_escala.push(mae.user_id)
         }
     }
@@ -109,6 +111,40 @@ async function sendPushNotification(){
         } 
     }else{
         console.log("Ninguem foi notificado sobre o diário!")
+    }
+}
+
+
+export async function sendPushNotificationAlta(){
+    console.log("Enviando notificacoes de alta...")
+
+    const internados = await knex('bebe').distinct('mae_id').where('local','<>','Casa')
+
+    let include_player_ids_alta:string[] = [];
+
+    for(const bebe of internados){
+        const mae = await knex('mae').select('user_id').where('id','=', bebe.mae_id).first()
+        if(mae.user_id) include_player_ids_alta.push(mae.user_id)
+    }
+
+    if(include_player_ids_alta.length>0){
+        
+        console.log(include_player_ids_alta.length + " pessoas notificadas sobre a alta...")
+        const data: OneSignalData = {
+            app_id:process.env.OS_APP_ID || '',
+            include_player_ids: include_player_ids_alta,
+            template_id:'97d90fb4-31c2-413c-a957-d1d05002cd0f'
+        };
+
+        try {
+            await sendOneSignalNotification(data, include_player_ids_alta)
+        }catch(error){
+            console.log(error)
+            return error
+        }
+
+    }else{
+        console.log("Ninguem foi notificado sobre a alta!")
     }
 }
 

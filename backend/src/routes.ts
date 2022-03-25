@@ -12,7 +12,7 @@ import RespostasMaeController from './controllers/RespostasMaeController';
 import RespostasController from './controllers/RespostasController';
 import UploadController from './controllers/UploadController';
 import BebesController from './controllers/BebesController';
-import sendPushNotification from './utils/sendPushNotification';
+import sendPushNotification, { sendPushNotificationAlta } from './utils/sendPushNotification';
 import ResultController from './controllers/ResultController';
 import MamadasController from './controllers/MamadasController';
 import DuvidasController from './controllers/DuvidasController';
@@ -779,13 +779,24 @@ routes.get('/recuperar/:token',(req,res)=>{
 routes.post('/recuperar/:token',verifyJWT,maesController.recuperarSenha)
 
 /**
- * @api {get} /enviarNotificacoes Teste de push
+ * @api {get} /enviarNotificacoes Notificações diárias
  * @apiDescription Envia notificacao para todas as maes que nao preencheram o diario nesse dia</br>
  * @apiGroup Notificação
  * 
  */
 routes.get('/enviarNotificacoes',async (req,res)=>{
     const resp = await sendPushNotification()
+    return res.send(resp)
+})
+
+/**
+ * @api {get} /enviarNotificacoesAlta Notificação de alta
+ * @apiDescription Envia notificacao de alta para as mães de bebes internados</br>
+ * @apiGroup Notificação
+ * 
+ */
+ routes.get('/enviarNotificacoesAlta',async (req,res)=>{
+    const resp = await sendPushNotificationAlta()
     return res.send(resp)
 })
 
