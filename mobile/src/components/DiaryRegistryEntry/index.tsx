@@ -1,11 +1,11 @@
 import i18n from 'i18n-js';
 
 import { formatWithLocale } from 'lib/date-fns';
-import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
+import { OpenSansBold, OpenSansRegular, Row } from 'lib/sharedStyles';
 
 import type { ExtractionEntry } from 'services/diaryRegistry';
 
-import { Registry, Row, TextContainer } from './styles';
+import { Registry, TextContainer } from './styles';
 
 const DiaryRegistryEntry: React.FC<ExtractionEntry> = ({
   breasts,

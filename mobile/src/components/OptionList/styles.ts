@@ -5,6 +5,7 @@ import { OpenSansRegular, OpenSansBold, ManjariBold } from 'lib/sharedStyles';
 export const Container = styled.View`
   flex: 1;
   margin-bottom: 20px;
+  padding-bottom: 20px;
 `;
 
 export const Header = styled(ManjariBold)`

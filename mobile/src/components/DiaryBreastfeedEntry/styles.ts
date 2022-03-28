@@ -13,11 +13,6 @@ export const BabyName = styled(OpenSansBold)`
   font-size: 18px;
 `;
 
-export const Row = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
 export const TextContainer = styled.View`
   flex-direction: row;
 `;
