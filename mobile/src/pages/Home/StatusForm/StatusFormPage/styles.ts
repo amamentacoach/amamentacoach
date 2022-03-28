@@ -31,7 +31,6 @@ export const ContentContainer = styled.View`
   margin: 0 24px;
   padding: 0 24px;
   background-color: ${props => props.theme.white};
-  border-radius: 5px;
   flex: 1;
 `;
 

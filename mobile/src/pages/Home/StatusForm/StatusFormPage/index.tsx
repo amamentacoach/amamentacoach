@@ -8,7 +8,6 @@ import SecondaryButton from 'components/SecondaryButton';
 import theme from 'config/theme';
 import { Flex } from 'lib/sharedStyles';
 
-import type { ComponentProps } from 'react';
 import type { SurveyQuestion } from 'utils/surveyQuestionsRepository';
 
 import {
@@ -24,10 +23,6 @@ import {
   InfoContainer,
 } from './styles';
 
-export interface StatusFormQuestion extends SurveyQuestion {
-  direction: ComponentProps<typeof FormRadioGroupInput>['direction'];
-}
-
 // Página do formulário de escala.
 interface PageProps {
   // Índice da página atual.
@@ -35,7 +30,7 @@ interface PageProps {
   // Número de páginas no formulário.
   numberOfPages: number;
   // Questões da página.
-  questions: StatusFormQuestion[];
+  questions: SurveyQuestion[];
   // Respostas do usuário para cada pergunta.
   values: {
     [key: string]: string[];
@@ -147,7 +142,7 @@ const StatusFormPage: React.FC<PageProps> = ({
 
               <FormRadioGroupInput
                 color={theme.babyBlue}
-                direction={question.direction}
+                direction="row"
                 displayOtherField={question.displayOther}
                 error={errors[question.id]}
                 options={question.options}

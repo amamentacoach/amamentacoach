@@ -9,14 +9,14 @@ const perguntas: Pergunta[] = [
       "For you, what's the best part about breastfeeding a premature baby?",
     alternativas:
       "Feeling of empowerment (dealing with this challenge makes me believe that I am capable of other great things)|" +
-      "Gratitude for the opportunity (I think many women, for many reasons, can’t even try)|" +
+      "Gratitude for the opportunity (I think many women, for many reasons, can't even try)|" +
       "The formation of a powerful bond when fighting a battle in partnership with my tiny partner|" +
       "I can't identify anything good",
     outro: true,
     multiplas: true,
     alvo: "GERAL",
   },
-  // Categoria 8: Enquete “Motivacao”
+  // Categoria 8: Enquete “Motivação”
   {
     id: 2,
     categoria: 8,
@@ -104,8 +104,8 @@ const perguntas: Pergunta[] = [
       "I brought my pumped milk|" +
       "I pumped my breast milk in the NICU|" +
       "I offered fresh milk for my baby|" +
-      "I cleaned my baby’s eyes and mouth|" +
-      "I changed my baby’s diapers|" +
+      "I cleaned my baby's eyes and mouth|" +
+      "I changed my baby's diapers|" +
       "I bathed my baby|" +
       "I gave some oral medication to my baby (or I trained the administration of oral medication using milk)|" +
       "I put my baby in my breast to training breastfeed|" +
@@ -183,7 +183,7 @@ const perguntas: Pergunta[] = [
     categoria: 4,
     descricao: "My biggest source of support for the day was:",
     alternativas:
-      "my husband/boyfriend/partner|" +
+      "My husband/boyfriend/partner|" +
       "My mother|" +
       "My mother-in-law|" +
       "A friend|" +
@@ -414,7 +414,7 @@ const perguntas: Pergunta[] = [
     id: 32,
     categoria: 7,
     descricao:
-      "I will be able to manage to keep up with my baby’s breastfeeding demands.",
+      "I will be able to manage to keep up with my baby's breastfeeding demands.",
     alternativas: "1|2|3|4|5",
     outro: false,
     multiplas: false,

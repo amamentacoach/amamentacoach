@@ -8,12 +8,12 @@ import { FlatList } from 'react-native';
 import Modal from 'components/Modal';
 import theme from 'config/theme';
 import { useAuth } from 'contexts/auth';
-import { answerFeedingForm, answerStatusForm } from 'services/survey';
+import { answerStatusForm } from 'services/survey';
 import SurveyQuestionsRepository from 'utils/surveyQuestionsRepository';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
-import type { StatusFormQuestion } from './StatusFormPage';
 import type { RootRouteProp, RootStackProps } from 'routes/app';
+import type { SurveyQuestion } from 'utils/surveyQuestionsRepository';
 
 import StatusFormPage from './StatusFormPage';
 
@@ -29,11 +29,6 @@ const StatusForm: React.FC = () => {
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState('');
 
-  // Não exibe a questão de alimentação se for a primeira vez do usuário respondendo a escala.
-  const displayFeedingForm = situation !== '1D';
-  // Id da pergunta de alimentação.
-  const feedingQuestionsIds = [6];
-
   useEffect(() => {
     createTelemetryAction({
       action: Action.Opened,
@@ -43,19 +38,6 @@ const StatusForm: React.FC = () => {
 
   // Envia as respostas do usuário.
   async function handleFormSubmit(values: FormValues): Promise<void> {
-    if (displayFeedingForm) {
-      const feedingAnswers = Object.keys(values)
-        .filter(id => feedingQuestionsIds.includes(Number(id)))
-        .map(id => values[id]);
-
-      const status = await answerFeedingForm(situation, feedingAnswers);
-      if (!status) {
-        setIsErrorModalVisible(true);
-        return;
-      }
-      feedingQuestionsIds.forEach(id => delete values[id]);
-    }
-
     // Envia as respostas do usuário para cada a pergunta.
     const answers = Object.keys(values).map(id => ({
       id: Number(id),
@@ -90,27 +72,13 @@ const StatusForm: React.FC = () => {
     });
   }
 
-  function fetchQuestions(): StatusFormQuestion[][] {
+  function fetchQuestions(): SurveyQuestion[][] {
     const surveyQuestionsRepo = new SurveyQuestionsRepository(motherInfo);
-    const questions: StatusFormQuestion[] = surveyQuestionsRepo
-      .findByCategory(7)
-      .map(question => ({ ...question, direction: 'row' }));
-
+    const questions = surveyQuestionsRepo.findByCategory(7);
     let pages = [];
     // Separa 3 perguntas por página.
     for (let i = 0; i < questions.length; i += 3) {
       pages.push(questions.slice(i, i + 3));
-    }
-    // Adiciona a pergunta de alimentação caso necessário.
-    if (displayFeedingForm) {
-      const feedingQuestions: StatusFormQuestion[] = surveyQuestionsRepo
-        .findByIds(feedingQuestionsIds)
-        .map(question => ({ ...question, direction: 'column' }));
-
-      pages[pages.length - 1] = [
-        ...pages[pages.length - 1],
-        ...feedingQuestions,
-      ];
     }
     return pages;
   }
@@ -126,7 +94,7 @@ const StatusForm: React.FC = () => {
           {
             text: i18n.t('Close'),
             isBold: true,
-            onPress: () => navigation.navigate('Home'),
+            onPress: () => navigation.navigate('FeedingForm', { situation }),
           },
         ]}
         visible={!!feedbackMessage}
@@ -149,7 +117,7 @@ const StatusForm: React.FC = () => {
         validateOnChange={false}
         onSubmit={values => handleFormSubmit(values)}>
         {({ values, errors, setFieldError, submitForm, setFieldValue }) => (
-          <FlatList<StatusFormQuestion[]>
+          <FlatList<SurveyQuestion[]>
             data={pagesQuestions}
             keyExtractor={item => item[0].id.toString()}
             keyboardShouldPersistTaps="handled"

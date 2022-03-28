@@ -1,6 +1,7 @@
 import api from 'services/api';
 
 export type StatusFormSituation = 'ALTA' | '1D' | '15D' | '1M' | null;
+type StatusFormAnswer = { id: number; content: string };
 
 export interface SurveyStatistics {
   id: number;
@@ -54,7 +55,7 @@ export async function listSurveyStatistics(): Promise<
 // Envia as resposta do usuário para o formulário de escala.
 export async function answerStatusForm(
   situation: StatusFormSituation,
-  answers: { id: number; content: string }[],
+  answers: StatusFormAnswer[],
 ): Promise<number | null> {
   try {
     const response = await api.post('/responder/escala', {
@@ -72,7 +73,7 @@ export async function answerStatusForm(
 
 // Envia as resposta do usuário para o formulário de alimentação.
 export async function answerFeedingForm(
-  situation: Exclude<StatusFormSituation, '1D'>,
+  situation: StatusFormSituation,
   answers: string[],
 ): Promise<boolean> {
   try {
