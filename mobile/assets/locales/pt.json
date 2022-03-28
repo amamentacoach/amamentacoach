@@ -701,6 +701,9 @@
     "ModalSuccessText": "Imagem enviada com sucesso",
     "ModalErrorText": "Falha ao enviar a imagem!\nPor favor, tente novamente mais tarde..."
   },
+  "VideoMenuPage": {
+    "Tutorial": "Vídeo tutorial"
+  },
   "WeeklyReportPage": {
     "Header": "Perguntas da semana",
     "NotAnswered": "Não respondida",

@@ -630,6 +630,9 @@
     "ModalSuccessText": "Image uploaded successfully",
     "ModalErrorText": "Failed to upload image!\nPlease, try again later..."
   },
+  "VideoMenuPage": {
+    "Tutorial": "Tutorial video"
+  },
   "WeeklyReportPage": {
     "Header": "Questions of the week",
     "NotAnswered": "Unanswered",

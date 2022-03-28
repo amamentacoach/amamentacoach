@@ -60,6 +60,12 @@ const VideosMenu: React.FC = () => {
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['CLOZL3N_QXs'] }),
     },
+    {
+      image: { source: IcVideo },
+      title: i18n.t('VideoMenuPage.Tutorial'),
+      onPress: () =>
+        navigation.navigate('VideoPage', { videos: ['-B6OZnuG8gw'] }),
+    },
   ];
 
   useEffect(() => {
