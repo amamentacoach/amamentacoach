@@ -89,9 +89,20 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
     { setSubmitting }: FormikHelpers<FormValues>,
   ): Promise<void> {
     setSubmitting(true);
-    const answers = Object.values(values).map(value =>
-      Array.isArray(value) ? value.join('|') : value,
-    );
+    const answers = [
+      values.currentMoment,
+      values.feedingType.join('|'),
+      values.feedingMethod.join('|'),
+      values.milkExtractionPeriod,
+      values.extractionTechnique || 'null',
+      values.largestVolume || 'null',
+      values.currentFelling,
+      values.alreadyBreastfeed,
+      `${values.weeksFirstBreastfeed || 'null'},${
+        values.daysFirstBreastfeed || 'null'
+      }`,
+      values.skinToSkinContactPeriod,
+    ];
     const status = await answerFeedingForm(situation, answers);
     setSubmitting(false);
     if (status) {
@@ -176,14 +187,13 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
             onChange={selectedValues => {
               const value = selectedValues[0];
               setFieldValue('milkExtractionPeriod', value);
-              let extractionTechnique = null;
-              let largestVolume = null;
-              if (value !== i18n.t('StatusFormPage.Questions.4.Options.4')) {
-                extractionTechnique = '';
-                largestVolume = '';
+              if (value === i18n.t('StatusFormPage.Questions.4.Options.4')) {
+                setFieldValue('extractionTechnique', null);
+                setFieldValue('largestVolume', null);
+              } else if (!values.extractionTechnique && !values.largestVolume) {
+                setFieldValue('extractionTechnique', '');
+                setFieldValue('largestVolume', '');
               }
-              setFieldValue('extractionTechnique', extractionTechnique);
-              setFieldValue('largestVolume', largestVolume);
             }}
           />
           {values.milkExtractionPeriod !==
