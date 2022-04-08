@@ -45,7 +45,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
   uploadFunction,
 }) => {
   const { width } = Dimensions.get('window');
-  const { motherInfo, updateMotherInfo } = useAuth();
+  const { motherInfo, refreshMotherInfo } = useAuth();
 
   const [photo, setPhoto] = useState<ImagePickerResponse | null>(null);
   const [isSendingForm, setIsSendingForm] = useState(false);
@@ -54,22 +54,21 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
 
   // Envia a foto que o usuário selecionou e atualiza as informações locais da mãe.
   async function handleSubmitNewPhoto(): Promise<void> {
-    if (photo) {
-      setIsSendingForm(true);
-      const filename = await uploadFunction(photo);
-      if (filename) {
-        // Atualiza o endereço da imagem do alvo (bebê/mãe/pai) nas informações da mãe.
-        await updateMotherInfo({
-          ...motherInfo,
-          images: { ...motherInfo.images, [target]: filename },
-        });
-        setPhoto(null);
-        setSubmitModalMessage(modalSuccessText);
-      } else {
-        setSubmitModalMessage(i18n.t('UploadPhotoScreen.ModalErrorText'));
-      }
-      setIsSendingForm(false);
+    if (!photo) {
+      return;
     }
+
+    setIsSendingForm(true);
+    const filename = await uploadFunction(photo);
+    if (filename) {
+      // Atualiza o endereço da imagem do alvo (bebê/mãe/pai) nas informações da mãe.
+      await refreshMotherInfo();
+      setPhoto(null);
+      setSubmitModalMessage(modalSuccessText);
+    } else {
+      setSubmitModalMessage(i18n.t('UploadPhotoScreen.ModalErrorText'));
+    }
+    setIsSendingForm(false);
   }
 
   // Abre a galeria do usuário.

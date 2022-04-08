@@ -23,6 +23,7 @@ interface FormRadioGroupProps {
   // Define se as opções são apresentadas horizontalmente ou verticalmente.
   direction?: 'row' | 'column';
   color?: string;
+  disabled?: boolean;
   onChange: (fieldValue: string[]) => void;
 }
 
@@ -35,14 +36,15 @@ const FormRadioGroup: React.FC<FormRadioGroupProps> = ({
   multipleSelection = false,
   displayOtherField = false,
   values,
+  disabled,
   onChange,
 }) => {
   const availableOptions = displayOtherField
     ? [...options, i18n.t('Other')]
     : options;
 
-  const [selectedIndexes, setSelectedIndexes] = useState<boolean[]>(
-    availableOptions.map(option => values?.includes(option) ?? false),
+  const [selectedIndexes, setSelectedIndexes] = useState(
+    availableOptions.map(option => values?.includes(option)),
   );
   const [selectedOptions, setSelectedOptions] = useState<string[]>(
     values || [],
@@ -50,6 +52,10 @@ const FormRadioGroup: React.FC<FormRadioGroupProps> = ({
   const [otherValue, setOtherValue] = useState('');
 
   function handleOptionSelected(selectedIndex: number): void {
+    if (disabled) {
+      return;
+    }
+
     const newSelectedIndexes = selectedIndexes;
     // Caso só uma opção possa ser marcada de cada vez, desmarca todos os outros elementos antes
     // de marcar um novo.

@@ -26,7 +26,7 @@ interface FormValues {
   birthday: string;
   currentGestationCount: string;
   hasPartner: boolean | undefined;
-  location: string;
+  birthLocation: string;
   name: string;
 }
 
@@ -37,7 +37,7 @@ const MotherForm: React.FC = () => {
   const formInitialValues: FormValues = {
     birthday: '',
     currentGestationCount: '',
-    location: '',
+    birthLocation: '',
     name: '',
     hasPartner: undefined,
   };
@@ -50,7 +50,7 @@ const MotherForm: React.FC = () => {
       .min(1, i18n.t('Yup.MinEqualError', { num: 1 }))
       .required(i18n.t('Yup.Required')),
     hasPartner: Yup.boolean().required(i18n.t('Yup.Required')),
-    location: Yup.string().required(i18n.t('Yup.Required')),
+    birthLocation: Yup.string().required(i18n.t('Yup.Required')),
     name: Yup.string().required(i18n.t('Yup.Required')),
   }).required();
 
@@ -61,7 +61,7 @@ const MotherForm: React.FC = () => {
       currentGestationCount: Number(formValues.currentGestationCount),
       email,
       hasPartner: formValues.hasPartner!,
-      location: formValues.location,
+      birthLocation: formValues.birthLocation,
       name: formValues.name,
       password,
     };
@@ -114,13 +114,13 @@ const MotherForm: React.FC = () => {
 
             <Flex>
               <FormPickerInput
-                error={errors.location}
+                error={errors.birthLocation}
                 label={i18n.t('MotherFormPage.Location')}
                 options={[
                   i18n.t('MotherFormPage.LocationOptions.HU'),
                   i18n.t('MotherFormPage.LocationOptions.Maternity'),
                 ]}
-                onChange={handleChange('location')}
+                onChange={handleChange('birthLocation')}
               />
             </Flex>
 

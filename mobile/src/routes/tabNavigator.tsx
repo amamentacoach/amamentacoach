@@ -79,7 +79,7 @@ const TabNavigator: React.FC = () => {
       />
       <Tab.Screen
         component={ProfileMenu}
-        name="Profile"
+        name="ProfileMenu"
         options={{
           tabBarLabel: i18n.t('Profile'),
           headerShown: false,

@@ -31,6 +31,7 @@
   "Question": "Question",
   "Right": "Right",
   "SignUp": "Registration",
+  "SelectBaby": "Select baby",
   "Skip": "Skip",
   "TermsOfService": "Consent Form",
   "Time": "Time",
@@ -365,7 +366,6 @@
   },
   "NewBreastfeedEntryPage": {
     "Header": "Register breastfeeding",
-    "BabyPlaceholder": "Select baby",
     "BreastfeedTimePlaceholder": "Enter the time feeding took place"
   },
   "NewDiaryRegistryPage": {
@@ -425,7 +425,12 @@
     "Subtitle5": "Benefits of breastfeeding"
   },
   "ProfileMenuPage": {
-    "ChangePassword": "Change Password"
+    "ChangePassword": "Change Password",
+    "MyBabies": {
+      "one": "My baby",
+      "other": "My babies"
+    },
+    "MyProfile": "My profile"
   },
   "RadioGroupComponent": {
     "OtherFieldAnswer": "Answer for another"

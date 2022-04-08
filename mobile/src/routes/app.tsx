@@ -46,6 +46,7 @@ export type RootStackParamList = {
   Messages: undefined;
   MilkAdditionalInformation: undefined;
   MusicPlaylists: undefined;
+  MyBabies: undefined;
   NewBreastfeedEntry: { date: string };
   NewDiaryRegistry: { date: string };
   NewMessage: undefined;
@@ -54,6 +55,7 @@ export type RootStackParamList = {
   NotWhatIExpected: undefined;
   Premature: undefined;
   Profile: undefined;
+  ProfileMenu: undefined;
   Questions: undefined;
   ReadTermsOfService: undefined;
   Report: undefined;

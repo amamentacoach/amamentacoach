@@ -153,7 +153,7 @@ const NewBreastfeedEntry: React.FC = () => {
               <FormPickerInput
                 error={errors.babyName}
                 options={motherInfo.babies.map(baby => baby.name.toString())}
-                placeholder={i18n.t('NewBreastfeedEntryPage.BabyPlaceholder')}
+                placeholder={i18n.t('SelectBaby')}
                 onChange={handleChange('babyName')}
               />
 

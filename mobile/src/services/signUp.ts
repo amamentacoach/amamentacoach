@@ -2,17 +2,17 @@ import api from 'services/api';
 
 export interface MotherSignUpInfo {
   birthday: string;
+  birthLocation: string;
   currentGestationCount: number;
   email: string;
   hasPartner: boolean;
-  location: string;
   name: string;
   password: string;
 }
 
 export interface BabySignUpInfo {
   birthday: string;
-  birthLocation: string;
+  postBirthLocation: string;
   name: string;
 }
 
@@ -26,12 +26,12 @@ async function signUp(
       companheiro: motherInfo.hasPartner,
       data_nascimento: motherInfo.birthday,
       email: motherInfo.email,
-      localizacao: motherInfo.location,
+      localizacao: motherInfo.birthLocation,
       nome: motherInfo.name,
       senha: motherInfo.password,
       bebes: babiesInfo.map(info => ({
         data_parto: info.birthday,
-        local: info.birthLocation,
+        local: info.postBirthLocation,
         nome: info.name,
       })),
     });

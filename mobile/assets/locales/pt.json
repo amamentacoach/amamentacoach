@@ -30,6 +30,7 @@
   "Quantity": "Quantidade",
   "Question": "Pergunta",
   "Right": "Direita",
+  "SelectBaby": "Selecionar bebê",
   "SignUp": "Cadastro",
   "Skip": "Pular",
   "TermsOfService": "Termo de Consentimento",
@@ -365,7 +366,6 @@
   },
   "NewBreastfeedEntryPage": {
     "Header": "Registrar amamentação",
-    "BabyPlaceholder": "Selecionar bebê",
     "BreastfeedTimePlaceholder": "Insira o horário da mamada"
   },
   "NewDiaryRegistryPage": {
@@ -425,7 +425,12 @@
     "Subtitle5": "Benefícios da amamentação"
   },
   "ProfileMenuPage": {
-    "ChangePassword": "Alterar senha"
+    "ChangePassword": "Alterar senha",
+    "MyBabies": {
+      "one": "Meu bebê",
+      "other": "Meus bebês"
+    },
+    "MyProfile": "Meus dados"
   },
   "RadioGroupComponent": {
     "OtherFieldAnswer": "Resposta para outro"
