@@ -61,10 +61,6 @@ class SurveyQuestionsRepository {
     return matchingQuestions[0];
   }
 
-  findByIds(ids: number[]): SurveyQuestion[] {
-    return this.survey.filter(question => ids.includes(question.id));
-  }
-
   findByCategory(category: number): SurveyQuestion[] {
     return this.survey.filter(question => question.category === category);
   }

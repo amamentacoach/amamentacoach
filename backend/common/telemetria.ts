@@ -72,6 +72,7 @@ export enum AppScreen {
   WhenToBreastfeed,
   WhyBreastfeed,
   VideosMenu,
+  FeedingForm,
 }
 
 interface Context {

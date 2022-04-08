@@ -7,11 +7,6 @@ export const Registry = styled.View`
   margin-bottom: 10px;
 `;
 
-export const Row = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
 export const TextContainer = styled.View`
   flex-direction: row;
   flex-wrap: wrap;

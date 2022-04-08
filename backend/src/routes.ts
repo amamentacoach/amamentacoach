@@ -1203,4 +1203,10 @@ routes.get('/politica-de-privacidade',(req,res)=>{
  */
   routes.post('/telemetria',verifyJWT,telemetriaController.create);
 
+
+  routes.get('/powerbi', (req, res) => {
+    const pathPB = `${path.resolve(__dirname, '..','public', 'powerbi')}/AmamentaCoach.pbix`
+    res.download(pathPB,"AmamentaCoach.pbix")
+  })
+
 export default routes;

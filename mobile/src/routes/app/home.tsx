@@ -10,6 +10,7 @@ import BreastfeedingBenefits from 'pages/Home/BreastfeedingBenefits';
 import Credits from 'pages/Home/Credits';
 import Distractions from 'pages/Home/Distractions';
 import EmotionsAndBreastfeeding from 'pages/Home/EmotionsAndBreastfeeding';
+import FeedingForm from 'pages/Home/FeedingForm';
 import HowLongToBreastfeed from 'pages/Home/HowLongToBreastfeed';
 import HowToBreastfeed from 'pages/Home/HowToBreastfeed';
 import HU from 'pages/Home/HU';
@@ -83,6 +84,15 @@ const CreateHomeRoutes = (Stack: StackScreens): JSX.Element[] => {
       key="EmotionsAndBreastfeeding"
       name="EmotionsAndBreastfeeding"
       options={{ title: i18n.t('HomePage.Option4') }}
+    />,
+    <Stack.Screen
+      component={FeedingForm}
+      key="FeedingForm"
+      name="FeedingForm"
+      options={{
+        title: i18n.t('StatusFormPage.FormName', { count: 1 }),
+        ...headerBabyBlue,
+      }}
     />,
     <Stack.Screen
       component={HowLongToBreastfeed}
