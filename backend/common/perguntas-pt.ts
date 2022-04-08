@@ -442,6 +442,124 @@ const perguntas: Pergunta[] = [
     multiplas: false,
     alvo: "GERAL",
   },
+  // Categoria 11: Perguntas de Alimentação.
+  {
+    id: 35,
+    categoria: 11,
+    descricao: "Em qual desses momentos você está?",
+    alternativas:
+      "Até 72h pós parto|" +
+      "13-17 dias após o nascimento do bebê|" +
+      "Alta hospitalar do bebê (ou o bebê recebeu alta há pelo menos 2 dias)|" +
+      "15-30 dias pós alta hospitalar do bebê",
+    outro: false,
+    multiplas: false,
+    alvo: "GERAL",
+  },
+  {
+    id: 36,
+    categoria: 11,
+    descricao:
+      "Que tipo de alimentação o seu bebê está recebendo neste momento? (escolha uma ou mais opções)",
+    alternativas:
+      "Meu leite|" +
+      "Leite humano do banco de leite|" +
+      "Fórmula artificial (leite em pó)|" +
+      "Está em jejum (dieta oral zero)",
+    outro: false,
+    multiplas: true,
+    alvo: "GERAL",
+  },
+  {
+    id: 37,
+    categoria: 11,
+    descricao:
+      "Por qual dessas vias seu bebê está recebendo alimentação? (escolha uma ou mais opções)",
+    alternativas:
+      "Seio materno|" +
+      "Sonda gástrica|" +
+      "Copinho|" +
+      "Colher dosadora ou seringa|" +
+      "Mamadeira ou chuca|" +
+      "Translactação|" +
+      "Está de jejum (dieta oral zero)",
+    outro: false,
+    multiplas: true,
+    alvo: "GERAL",
+  },
+  {
+    id: 38,
+    categoria: 11,
+    descricao: "Quantas vezes por dia você realiza a retirada de seu leite?",
+    alternativas:
+      "1 – 2 vezes por dia|" +
+      "3 – 4 vezes por dia|" +
+      "5 vezes por dia ou mais|" +
+      "Não tenho retirado meu leite",
+    outro: false,
+    multiplas: false,
+    alvo: "GERAL",
+  },
+  {
+    id: 39,
+    categoria: 11,
+    descricao:
+      "Qual técnica você utiliza para retirada do seu leite? (escolha uma ou mais opções)",
+    alternativas:
+      "Retiro manualmente o meu leite|" + "Utilizo a bomba elétrica",
+    outro: false,
+    multiplas: true,
+    alvo: "GERAL",
+  },
+  {
+    id: 40,
+    categoria: 11,
+    descricao:
+      "Qual foi o maior volume de leite que você conseguiu retirar nas últimas 24h?",
+    alternativas: "",
+    outro: false,
+    multiplas: true,
+    alvo: "GERAL",
+  },
+  {
+    id: 41,
+    categoria: 11,
+    descricao:
+      "Em relação a sua produção de leite materno, como você está se sentindo neste momento?",
+    alternativas: "",
+    outro: false,
+    multiplas: true,
+    alvo: "GERAL",
+  },
+  {
+    id: 42,
+    categoria: 11,
+    descricao: "Seu bebê já mamou em você alguma vez?",
+    alternativas: "",
+    outro: false,
+    multiplas: true,
+    alvo: "GERAL",
+  },
+  {
+    id: 43,
+    categoria: 11,
+    descricao:
+      "Com quantos dias de vida seu bebê mamou em você pela primeira vez? Na ocasião, ele tinha qual idade gestacional corrigida?",
+    alternativas: "",
+    outro: false,
+    multiplas: true,
+    alvo: "GERAL",
+  },
+  {
+    id: 44,
+    categoria: 11,
+    descricao:
+      "Na última semana, qual foi a frequência com que você e seu bebê permaneceram em contato pele a pele (sem nenhum tipo de tecido entre vocês), durante, no mínimo, 1 hora, sem interrupções?",
+    alternativas: "",
+    outro: false,
+    multiplas: true,
+    alvo: "GERAL",
+  },
 ];
 
 export default perguntas;

@@ -49,7 +49,7 @@ interface LocaleInfo {
 
 // Retorna a linguagem suportada pelo app apropriada para o usuário.
 // Caso nenhuma língua suportada pelo app seja encontrada é retornado o idioma de fallback.
-function getBestLocale(): LocaleInfo {
+export function getBestLocale(): LocaleInfo {
   const fallbackLocale = { languageTag: fallbackLanguage, isRTL: false };
   const bestMatch = RNLocalize.findBestAvailableLanguage(
     Object.values(SupportedLocales),

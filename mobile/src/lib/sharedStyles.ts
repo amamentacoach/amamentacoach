@@ -1,5 +1,9 @@
 import styled from 'styled-components/native';
 
+interface SpacerProps {
+  width: number;
+}
+
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
@@ -13,6 +17,15 @@ export const PaddedScrollView = styled(ScrollView)`
 
 export const Flex = styled.View`
   flex: 1;
+`;
+
+export const Row = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const Spacer = styled.View<SpacerProps>`
+  width: ${({ width }) => width}px;
 `;
 
 export const Center = styled.View`

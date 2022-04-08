@@ -464,7 +464,91 @@
     "InfoValue4": "confiante",
     "InfoValue5": "muito confiante",
     "LowEfficacy": "baixa",
-    "Score": "Obrigada por responder.\nSua pontuação é %{score}, que significa que sua autoconfiança é %{meaning}."
+    "Score": "Obrigada por responder.\nSua pontuação é %{score}, que significa que sua autoconfiança é %{meaning}.",
+    "Questions": {
+      "1": {
+        "Description": "Em qual desses momentos você está?",
+        "Options": {
+          "1": "Até 72h pós parto",
+          "2": "13-17 dias após o nascimento do bebê",
+          "3": "Alta hospitalar do bebê (ou o bebê recebeu alta há pelo menos 2 dias)",
+          "4": "15-30 dias pós alta hospitalar do bebê"
+        }
+      },
+      "2": {
+        "Description": "Que tipo de alimentação o seu bebê está recebendo neste momento? (escolha uma ou mais opções)",
+        "Options": {
+          "1": "Meu leite",
+          "2": "Leite humano do banco de leite",
+          "3": "Fórmula artificial (leite em pó)",
+          "4": "Está em jejum (dieta oral zero)"
+        }
+      },
+      "3": {
+        "Description": "Por qual dessas vias seu bebê está recebendo alimentação? (escolha uma ou mais opções)",
+        "Options": {
+          "1": "Seio materno",
+          "2": "Sonda gástrica",
+          "3": "Copinho",
+          "4": "Colher dosadora ou seringa",
+          "5": "Mamadeira ou chuca",
+          "6": "Translactação",
+          "7": "Está de jejum (dieta oral zero)"
+        }
+      },
+      "4": {
+        "Description": "Quantas vezes por dia você realiza a retirada de seu leite?",
+        "Options": {
+          "1": "1 - 2 vezes por dia",
+          "2": "3 - 4 vezes por dia",
+          "3": "5 vezes por dia ou mais",
+          "4": "Não tenho retirado meu leite"
+        }
+      },
+      "5": {
+        "Description": "Qual técnica você utiliza para retirada do seu leite? (escolha uma ou mais opções)",
+        "Options": {
+          "1": "Retiro manualmente o meu leite",
+          "2": "Utilizo a bomba elétrica"
+        }
+      },
+      "6": {
+        "Description": "Qual foi o maior volume de leite que você conseguiu retirar nas últimas 24h?"
+      },
+      "7": {
+        "Description": "Em relação a sua produção de leite materno, como você está se sentindo neste momento?",
+        "Options": {
+          "1": "Muito insatisfeita",
+          "2": "Um pouco insatisfeita",
+          "3": "Nem insatisfeita, nem satisfeita",
+          "4": "Um pouco satisfeita",
+          "5": "Muito satisfeita"
+        }
+      },
+      "8": {
+        "Description": "Seu bebê já mamou em você alguma vez?",
+        "Options": {
+          "1": "Sim",
+          "2": "Ainda não"
+        }
+      },
+      "9": {
+        "Description": "Com quantos dias de vida seu bebê mamou em você pela primeira vez? Na ocasião, ele tinha qual idade gestacional corrigida?",
+        "Options": {
+          "1": "Não sei informar"
+        }
+      },
+      "10": {
+        "Description": "Na última semana, qual foi a frequência com que você e seu bebê permaneceram em contato pele a pele (sem nenhum tipo de tecido entre vocês), durante, no mínimo, 1 hora, sem interrupções?",
+        "Options": {
+          "1": "Nenhuma",
+          "2": "Uma vez",
+          "3": "2-3 vezes",
+          "4": "4-5 vezes",
+          "5": "Mais de 7 vezes na semana"
+        }
+      }
+    }
   },
   "StepByStepPrematurePage": {
     "Page1": {
@@ -616,6 +700,9 @@
   "UploadPhotoScreen": {
     "ModalSuccessText": "Imagem enviada com sucesso",
     "ModalErrorText": "Falha ao enviar a imagem!\nPor favor, tente novamente mais tarde..."
+  },
+  "VideoMenuPage": {
+    "Tutorial": "Vídeo tutorial"
   },
   "WeeklyReportPage": {
     "Header": "Perguntas da semana",

@@ -4,16 +4,12 @@ import { useState } from 'react';
 import FormTextInput from 'components/FormTextInput';
 import { ErrorContainer, ErrorText } from 'lib/sharedStyles';
 
+import RadioOption from './RadioOption';
 import {
   Container,
-  HorizontalOptionButton,
-  InnerCircle,
   LabelText,
   OptionsContainer,
   OtherInputContainer,
-  OuterCircle,
-  TextOption,
-  VerticalOptionButton,
 } from './styles';
 
 interface FormRadioGroupProps {
@@ -30,14 +26,14 @@ interface FormRadioGroupProps {
   onChange: (fieldValue: string[]) => void;
 }
 
-const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
+const FormRadioGroup: React.FC<FormRadioGroupProps> = ({
   label,
   options,
   error,
-  direction = 'column',
   color,
-  multipleSelection,
-  displayOtherField,
+  direction = 'column',
+  multipleSelection = false,
+  displayOtherField = false,
   values,
   onChange,
 }) => {
@@ -101,38 +97,16 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
     <Container>
       {label !== undefined && <LabelText>{label}</LabelText>}
       <OptionsContainer direction={direction}>
-        {availableOptions.map((option, index) => {
-          const RadioButtonComponent =
-            direction === 'column'
-              ? HorizontalOptionButton
-              : VerticalOptionButton;
-
-          return (
-            <RadioButtonComponent
-              activeOpacity={1}
-              color={color}
-              direction={direction}
-              key={option}
-              selected={selectedIndexes[index]}
-              onPress={() => handleOptionSelected(index)}>
-              {direction === 'column' && (
-                <OuterCircle color={color} selected={selectedIndexes[index]}>
-                  <InnerCircle
-                    color={color}
-                    selected={selectedIndexes[index]}
-                  />
-                </OuterCircle>
-              )}
-
-              <TextOption
-                color={color}
-                direction={direction}
-                selected={selectedIndexes[index]}>
-                {option}
-              </TextOption>
-            </RadioButtonComponent>
-          );
-        })}
+        {availableOptions.map((option, index) => (
+          <RadioOption
+            color={color}
+            direction={direction}
+            isSelected={selectedIndexes[index]}
+            key={option}
+            text={option}
+            onPress={() => handleOptionSelected(index)}
+          />
+        ))}
       </OptionsContainer>
 
       {displayOtherField && selectedIndexes[selectedIndexes.length - 1] && (
@@ -150,4 +124,4 @@ const FormRadioGroupInput: React.FC<FormRadioGroupProps> = ({
   );
 };
 
-export default FormRadioGroupInput;
+export default FormRadioGroup;

@@ -21,5 +21,6 @@ export const TextInput = styled.TextInput.attrs(() => ({
   background-color: ${props => props.theme.white};
   color: ${props => props.theme.black};
   border-radius: 3.6px;
+  border: 1px ${props => props.theme.brightGrey} solid;
   padding-left: 16px;
 `;

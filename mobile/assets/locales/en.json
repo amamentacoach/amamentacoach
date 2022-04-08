@@ -260,7 +260,7 @@
     "BabyStatusPopUp": "Have any of your babies been discharged?",
     "FirstStatusPopup": "The time has come to evaluate your self-confidence level regarding breastfeed. Let's go?",
     "StatusPopup": "The time has come to evaluate your self-confidence level regarding breastfeed. Again Let's go?",
-    "Option1": "Hello, I’m the “Preemie” baby",
+    "Option1": "Hello, I'm the “Preemie” baby",
     "Option2": "Step-by-step guide to breastfeed the premature baby",
     "Option3": "Pumping milk",
     "Option4": "Emotions and Breastfeeding",
@@ -464,7 +464,20 @@
     "InfoValue4": "confident",
     "InfoValue5": "very confident",
     "LowEfficacy": "low",
-    "Score": "Thank you for replying.\nYour score is %{score}, which means your self-confidence is %{meaning}."
+    "Score": "Thank you for replying.\nYour score is %{score}, which means your self-confidence is %{meaning}.",
+    "Questions": {
+      "1": {
+        "Description": "How my baby is feeding:",
+        "Options": {
+          "1": "Only on my chest - exclusively breastfeeding",
+          "2": "Breastfeeding, with complement by cup",
+          "3": "By relactation/translactation",
+          "4": "Only per cup",
+          "5": "By baby bottle",
+          "6": "By nasogastric/orogastric tube"
+        }
+      }
+    }
   },
   "StepByStepPrematurePage": {
     "Page1": {
@@ -616,6 +629,9 @@
   "UploadPhotoScreen": {
     "ModalSuccessText": "Image uploaded successfully",
     "ModalErrorText": "Failed to upload image!\nPlease, try again later..."
+  },
+  "VideoMenuPage": {
+    "Tutorial": "Tutorial video"
   },
   "WeeklyReportPage": {
     "Header": "Questions of the week",
