@@ -94,7 +94,10 @@ const StatusForm: React.FC = () => {
           {
             text: i18n.t('Close'),
             isBold: true,
-            onPress: () => navigation.navigate('FeedingForm', { situation }),
+            onPress: () => {
+              setFeedbackMessage('');
+              navigation.navigate('FeedingForm', { situation });
+            },
           },
         ]}
         visible={!!feedbackMessage}
