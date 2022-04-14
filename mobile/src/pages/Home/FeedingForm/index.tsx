@@ -10,11 +10,7 @@ import { StatusFormSituation } from 'services/survey';
 import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
-import {
-  ContentContainer,
-  HeaderBackground,
-  HeaderText,
-} from '../StatusForm/StatusFormPage/styles';
+import { ContentContainer } from '../StatusForm/StatusFormPage/styles';
 
 import type { RootRouteProp, RootStackProps } from 'routes/app';
 
@@ -62,8 +58,6 @@ const FeedingForm: React.FC = () => {
         visible={isErrorModalVisible}
       />
       <ScrollView>
-        <HeaderBackground />
-        <HeaderText>{i18n.t('StatusFormPage.Header')}</HeaderText>
         <ContentContainer>
           {languageTag === 'pt' ? (
             <PortugueseStatusForm

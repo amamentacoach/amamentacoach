@@ -57,7 +57,7 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
   const milkExtractionPeriodOptionalQuestions = Yup.string().when(
     'milkExtractionPeriod',
     {
-      is: i18n.t('StatusFormPage.Questions.4.Options.4'),
+      is: i18n.t('FeedingFormPage.Questions.4.Options.4'),
       then: Yup.string().nullable(),
       otherwise: Yup.string().required(i18n.t('Yup.Required')),
     },
@@ -65,7 +65,7 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
   const alreadyBreastfeedOptionalQuestions = Yup.number()
     .typeError(i18n.t('Yup.MustBeANumberError'))
     .when('alreadyBreastfeed', {
-      is: i18n.t('StatusFormPage.Questions.8.Options.1'),
+      is: i18n.t('FeedingFormPage.Questions.8.Options.1'),
       then: Yup.number().nullable().defined(i18n.t('Yup.Required')),
       otherwise: Yup.number(),
     });
@@ -137,12 +137,12 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
           <FormRadioGroupInput
             color={theme.babyBlue}
             error={errors.currentMoment}
-            label={i18n.t('StatusFormPage.Questions.1.Description')}
+            label={i18n.t('FeedingFormPage.Questions.1.Description')}
             options={[
-              i18n.t('StatusFormPage.Questions.1.Options.1'),
-              i18n.t('StatusFormPage.Questions.1.Options.2'),
-              i18n.t('StatusFormPage.Questions.1.Options.3'),
-              i18n.t('StatusFormPage.Questions.1.Options.4'),
+              i18n.t('FeedingFormPage.Questions.1.Options.1'),
+              i18n.t('FeedingFormPage.Questions.1.Options.2'),
+              i18n.t('FeedingFormPage.Questions.1.Options.3'),
+              i18n.t('FeedingFormPage.Questions.1.Options.4'),
             ]}
             onChange={selectedValues =>
               setFieldValue('currentMoment', selectedValues[0])
@@ -151,12 +151,12 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
           <FormRadioGroupInput
             color={theme.babyBlue}
             error={errors.feedingType}
-            label={i18n.t('StatusFormPage.Questions.2.Description')}
+            label={i18n.t('FeedingFormPage.Questions.2.Description')}
             options={[
-              i18n.t('StatusFormPage.Questions.2.Options.1'),
-              i18n.t('StatusFormPage.Questions.2.Options.2'),
-              i18n.t('StatusFormPage.Questions.2.Options.3'),
-              i18n.t('StatusFormPage.Questions.2.Options.4'),
+              i18n.t('FeedingFormPage.Questions.2.Options.1'),
+              i18n.t('FeedingFormPage.Questions.2.Options.2'),
+              i18n.t('FeedingFormPage.Questions.2.Options.3'),
+              i18n.t('FeedingFormPage.Questions.2.Options.4'),
             ]}
             multipleSelection
             onChange={selectedValues =>
@@ -166,15 +166,15 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
           <FormRadioGroupInput
             color={theme.babyBlue}
             error={errors.feedingMethod}
-            label={i18n.t('StatusFormPage.Questions.3.Description')}
+            label={i18n.t('FeedingFormPage.Questions.3.Description')}
             options={[
-              i18n.t('StatusFormPage.Questions.3.Options.1'),
-              i18n.t('StatusFormPage.Questions.3.Options.2'),
-              i18n.t('StatusFormPage.Questions.3.Options.3'),
-              i18n.t('StatusFormPage.Questions.3.Options.4'),
-              i18n.t('StatusFormPage.Questions.3.Options.5'),
-              i18n.t('StatusFormPage.Questions.3.Options.6'),
-              i18n.t('StatusFormPage.Questions.3.Options.7'),
+              i18n.t('FeedingFormPage.Questions.3.Options.1'),
+              i18n.t('FeedingFormPage.Questions.3.Options.2'),
+              i18n.t('FeedingFormPage.Questions.3.Options.3'),
+              i18n.t('FeedingFormPage.Questions.3.Options.4'),
+              i18n.t('FeedingFormPage.Questions.3.Options.5'),
+              i18n.t('FeedingFormPage.Questions.3.Options.6'),
+              i18n.t('FeedingFormPage.Questions.3.Options.7'),
             ]}
             multipleSelection
             onChange={selectedValues =>
@@ -184,17 +184,17 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
           <FormRadioGroupInput
             color={theme.babyBlue}
             error={errors.milkExtractionPeriod}
-            label={i18n.t('StatusFormPage.Questions.4.Description')}
+            label={i18n.t('FeedingFormPage.Questions.4.Description')}
             options={[
-              i18n.t('StatusFormPage.Questions.4.Options.1'),
-              i18n.t('StatusFormPage.Questions.4.Options.2'),
-              i18n.t('StatusFormPage.Questions.4.Options.3'),
-              i18n.t('StatusFormPage.Questions.4.Options.4'),
+              i18n.t('FeedingFormPage.Questions.4.Options.1'),
+              i18n.t('FeedingFormPage.Questions.4.Options.2'),
+              i18n.t('FeedingFormPage.Questions.4.Options.3'),
+              i18n.t('FeedingFormPage.Questions.4.Options.4'),
             ]}
             onChange={selectedValues => {
               const value = selectedValues[0];
               setFieldValue('milkExtractionPeriod', value);
-              if (value === i18n.t('StatusFormPage.Questions.4.Options.4')) {
+              if (value === i18n.t('FeedingFormPage.Questions.4.Options.4')) {
                 setFieldValue('extractionTechnique', null);
                 setFieldValue('largestVolume', null);
               } else if (!values.extractionTechnique && !values.largestVolume) {
@@ -204,15 +204,15 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
             }}
           />
           {values.milkExtractionPeriod !==
-            i18n.t('StatusFormPage.Questions.4.Options.4') && (
+            i18n.t('FeedingFormPage.Questions.4.Options.4') && (
             <>
               <FormRadioGroupInput
                 color={theme.babyBlue}
                 error={errors.extractionTechnique}
-                label={i18n.t('StatusFormPage.Questions.5.Description')}
+                label={i18n.t('FeedingFormPage.Questions.5.Description')}
                 options={[
-                  i18n.t('StatusFormPage.Questions.5.Options.1'),
-                  i18n.t('StatusFormPage.Questions.5.Options.2'),
+                  i18n.t('FeedingFormPage.Questions.5.Options.1'),
+                  i18n.t('FeedingFormPage.Questions.5.Options.2'),
                 ]}
                 multipleSelection
                 onChange={selectedValues =>
@@ -223,7 +223,7 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
                 color={theme.babyBlue}
                 error={errors.largestVolume}
                 keyboardType="numeric"
-                label={i18n.t('StatusFormPage.Questions.6.Description')}
+                label={i18n.t('FeedingFormPage.Questions.6.Description')}
                 placeholder="ml"
                 onChangeText={handleChange('largestVolume')}
               />
@@ -232,13 +232,13 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
           <FormRadioGroupInput
             color={theme.babyBlue}
             error={errors.currentFelling}
-            label={i18n.t('StatusFormPage.Questions.7.Description')}
+            label={i18n.t('FeedingFormPage.Questions.7.Description')}
             options={[
-              i18n.t('StatusFormPage.Questions.7.Options.1'),
-              i18n.t('StatusFormPage.Questions.7.Options.2'),
-              i18n.t('StatusFormPage.Questions.7.Options.3'),
-              i18n.t('StatusFormPage.Questions.7.Options.4'),
-              i18n.t('StatusFormPage.Questions.7.Options.5'),
+              i18n.t('FeedingFormPage.Questions.7.Options.1'),
+              i18n.t('FeedingFormPage.Questions.7.Options.2'),
+              i18n.t('FeedingFormPage.Questions.7.Options.3'),
+              i18n.t('FeedingFormPage.Questions.7.Options.4'),
+              i18n.t('FeedingFormPage.Questions.7.Options.5'),
             ]}
             onChange={selectedValues =>
               setFieldValue('currentFelling', selectedValues[0])
@@ -247,22 +247,22 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
           <FormRadioGroupInput
             color={theme.babyBlue}
             error={errors.alreadyBreastfeed}
-            label={i18n.t('StatusFormPage.Questions.8.Description')}
+            label={i18n.t('FeedingFormPage.Questions.8.Description')}
             options={[
-              i18n.t('StatusFormPage.Questions.8.Options.1'),
-              i18n.t('StatusFormPage.Questions.8.Options.2'),
+              i18n.t('FeedingFormPage.Questions.8.Options.1'),
+              i18n.t('FeedingFormPage.Questions.8.Options.2'),
             ]}
             onChange={selectedValues =>
               setFieldValue('alreadyBreastfeed', selectedValues[0])
             }
           />
           {values.alreadyBreastfeed ===
-            i18n.t('StatusFormPage.Questions.8.Options.1') && (
+            i18n.t('FeedingFormPage.Questions.8.Options.1') && (
             <>
               <FormRadioGroupInput
                 color={theme.babyBlue}
-                label={i18n.t('StatusFormPage.Questions.9.Description')}
-                options={[i18n.t('StatusFormPage.Questions.9.Options.1')]}
+                label={i18n.t('FeedingFormPage.Questions.9.Description')}
+                options={[i18n.t('FeedingFormPage.Questions.9.Options.1')]}
                 onChange={_ => {
                   let value = null;
                   // Alterna a ativação dos campos abaixo (inserção de semanas e dias).
@@ -296,7 +296,7 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
                     color={theme.babyBlue}
                     error={errors.gestationalAge}
                     keyboardType="numeric"
-                    label={i18n.t('StatusFormPage.Questions.10.Description')}
+                    label={i18n.t('FeedingFormPage.Questions.10.Description')}
                     onChangeText={handleChange('gestationalAge')}
                   />
                 </>
@@ -306,13 +306,13 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
           <FormRadioGroupInput
             color={theme.babyBlue}
             error={errors.skinToSkinContactPeriod}
-            label={i18n.t('StatusFormPage.Questions.11.Description')}
+            label={i18n.t('FeedingFormPage.Questions.11.Description')}
             options={[
-              i18n.t('StatusFormPage.Questions.11.Options.1'),
-              i18n.t('StatusFormPage.Questions.11.Options.2'),
-              i18n.t('StatusFormPage.Questions.11.Options.3'),
-              i18n.t('StatusFormPage.Questions.11.Options.4'),
-              i18n.t('StatusFormPage.Questions.11.Options.5'),
+              i18n.t('FeedingFormPage.Questions.11.Options.1'),
+              i18n.t('FeedingFormPage.Questions.11.Options.2'),
+              i18n.t('FeedingFormPage.Questions.11.Options.3'),
+              i18n.t('FeedingFormPage.Questions.11.Options.4'),
+              i18n.t('FeedingFormPage.Questions.11.Options.5'),
             ]}
             onChange={selectedValues =>
               setFieldValue('skinToSkinContactPeriod', selectedValues[0])

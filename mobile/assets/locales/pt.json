@@ -470,7 +470,10 @@
     "InfoValue4": "confiante",
     "InfoValue5": "muito confiante",
     "LowEfficacy": "baixa",
-    "Score": "Obrigada por responder.\nSua pontuação é %{score}, que significa que sua autoconfiança é %{meaning}.",
+    "Score": "Obrigada por responder.\nSua pontuação é %{score}, que significa que sua autoconfiança é %{meaning}."
+  },
+  "FeedingFormPage": {
+    "FormName": "Informações sobre a alimentação",
     "Questions": {
       "1": {
         "Description": "Em qual desses momentos você está?",
