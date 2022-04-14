@@ -25,6 +25,7 @@ interface FormValues {
   alreadyBreastfeed: string;
   daysFirstBreastfeed: string;
   weeksFirstBreastfeed: string;
+  gestationalAge: string;
   skinToSkinContactPeriod: string;
 }
 
@@ -45,42 +46,48 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
     alreadyBreastfeed: '',
     daysFirstBreastfeed: '',
     weeksFirstBreastfeed: '',
+    gestationalAge: '',
     skinToSkinContactPeriod: '',
   };
 
+  const radioGroupSchema = Yup.array()
+    .of(Yup.string())
+    .min(1, i18n.t('Yup.NoOptionSelectedError'))
+    .required(i18n.t('Yup.Required'));
+  const milkExtractionPeriodOptionalQuestions = Yup.string().when(
+    'milkExtractionPeriod',
+    {
+      is: i18n.t('StatusFormPage.Questions.4.Options.4'),
+      then: Yup.string().nullable(),
+      otherwise: Yup.string().required(i18n.t('Yup.Required')),
+    },
+  );
+  const alreadyBreastfeedOptionalQuestions = Yup.number()
+    .typeError(i18n.t('Yup.MustBeANumberError'))
+    .when('alreadyBreastfeed', {
+      is: i18n.t('StatusFormPage.Questions.8.Options.1'),
+      then: Yup.number().nullable().defined(i18n.t('Yup.Required')),
+      otherwise: Yup.number(),
+    });
+
   const formValidationSchema = Yup.object({
     currentMoment: Yup.string().required(i18n.t('Yup.Required')),
-    feedingType: Yup.array()
-      .of(Yup.string())
-      .min(1, i18n.t('Yup.NoOptionSelectedError'))
-      .required(i18n.t('Yup.Required')),
-    feedingMethod: Yup.array()
-      .of(Yup.string())
-      .min(1, i18n.t('Yup.NoOptionSelectedError'))
-      .required(i18n.t('Yup.Required')),
+    feedingType: radioGroupSchema,
+    feedingMethod: radioGroupSchema,
     milkExtractionPeriod: Yup.string().required(i18n.t('Yup.Required')),
-    extractionTechnique: Yup.string().when('milkExtractionPeriod', {
-      is: i18n.t('StatusFormPage.Questions.4.Options.4'),
-      then: Yup.string().nullable(),
-      otherwise: Yup.string().required(i18n.t('Yup.Required')),
-    }),
-    largestVolume: Yup.string().when('milkExtractionPeriod', {
-      is: i18n.t('StatusFormPage.Questions.4.Options.4'),
-      then: Yup.string().nullable(),
-      otherwise: Yup.string().required(i18n.t('Yup.Required')),
-    }),
+    extractionTechnique: milkExtractionPeriodOptionalQuestions,
+    largestVolume: milkExtractionPeriodOptionalQuestions,
     currentFelling: Yup.string().required(i18n.t('Yup.Required')),
     alreadyBreastfeed: Yup.string().required(i18n.t('Yup.Required')),
-    daysFirstBreastfeed: Yup.string().when('alreadyBreastfeed', {
-      is: i18n.t('StatusFormPage.Questions.8.Options.1'),
-      then: Yup.string().nullable().defined(i18n.t('Yup.Required')),
-      otherwise: Yup.string(),
-    }),
-    weeksFirstBreastfeed: Yup.string().when('alreadyBreastfeed', {
-      is: i18n.t('StatusFormPage.Questions.8.Options.1'),
-      then: Yup.string().nullable().defined(i18n.t('Yup.Required')),
-      otherwise: Yup.string(),
-    }),
+    daysFirstBreastfeed: alreadyBreastfeedOptionalQuestions
+      .min(0, i18n.t('Yup.MinEqualError', { num: 0 }))
+      .max(6, i18n.t('Yup.MaxEqualError', { num: 6 })),
+    weeksFirstBreastfeed: alreadyBreastfeedOptionalQuestions
+      .min(30, i18n.t('Yup.MinEqualError', { num: 30 }))
+      .max(40, i18n.t('Yup.MaxEqualError', { num: 40 })),
+    gestationalAge: alreadyBreastfeedOptionalQuestions
+      .min(0, i18n.t('Yup.MinEqualError', { num: 0 }))
+      .max(6, i18n.t('Yup.MaxEqualError', { num: 6 })),
     skinToSkinContactPeriod: Yup.string().required(i18n.t('Yup.Required')),
   });
 
@@ -207,6 +214,7 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
                   i18n.t('StatusFormPage.Questions.5.Options.1'),
                   i18n.t('StatusFormPage.Questions.5.Options.2'),
                 ]}
+                multipleSelection
                 onChange={selectedValues =>
                   setFieldValue('extractionTechnique', selectedValues[0])
                 }
@@ -266,36 +274,45 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
                 }}
               />
               {values.weeksFirstBreastfeed !== null && (
-                <Row>
+                <>
+                  <Row>
+                    <FormTextInput
+                      color={theme.babyBlue}
+                      error={errors.weeksFirstBreastfeed}
+                      keyboardType="numeric"
+                      label={i18n.t('Week', { count: 2 })}
+                      onChangeText={handleChange('weeksFirstBreastfeed')}
+                    />
+                    <Spacer width={4} />
+                    <FormTextInput
+                      color={theme.babyBlue}
+                      error={errors.daysFirstBreastfeed}
+                      keyboardType="numeric"
+                      label={i18n.t('Day', { count: 2 })}
+                      onChangeText={handleChange('daysFirstBreastfeed')}
+                    />
+                  </Row>
                   <FormTextInput
                     color={theme.babyBlue}
-                    error={errors.weeksFirstBreastfeed}
+                    error={errors.gestationalAge}
                     keyboardType="numeric"
-                    label="Semanas"
-                    onChangeText={handleChange('weeksFirstBreastfeed')}
+                    label={i18n.t('StatusFormPage.Questions.10.Description')}
+                    onChangeText={handleChange('gestationalAge')}
                   />
-                  <Spacer width={4} />
-                  <FormTextInput
-                    color={theme.babyBlue}
-                    error={errors.daysFirstBreastfeed}
-                    keyboardType="numeric"
-                    label="Dias"
-                    onChangeText={handleChange('daysFirstBreastfeed')}
-                  />
-                </Row>
+                </>
               )}
             </>
           )}
           <FormRadioGroupInput
             color={theme.babyBlue}
             error={errors.skinToSkinContactPeriod}
-            label={i18n.t('StatusFormPage.Questions.10.Description')}
+            label={i18n.t('StatusFormPage.Questions.11.Description')}
             options={[
-              i18n.t('StatusFormPage.Questions.10.Options.1'),
-              i18n.t('StatusFormPage.Questions.10.Options.2'),
-              i18n.t('StatusFormPage.Questions.10.Options.3'),
-              i18n.t('StatusFormPage.Questions.10.Options.4'),
-              i18n.t('StatusFormPage.Questions.10.Options.5'),
+              i18n.t('StatusFormPage.Questions.11.Options.1'),
+              i18n.t('StatusFormPage.Questions.11.Options.2'),
+              i18n.t('StatusFormPage.Questions.11.Options.3'),
+              i18n.t('StatusFormPage.Questions.11.Options.4'),
+              i18n.t('StatusFormPage.Questions.11.Options.5'),
             ]}
             onChange={selectedValues =>
               setFieldValue('skinToSkinContactPeriod', selectedValues[0])

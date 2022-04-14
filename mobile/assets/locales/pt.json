@@ -462,6 +462,7 @@
     "AverageEfficacy": "moderada",
     "FormName": "Escala",
     "Header": "Autoeficácia para amamentar",
+    "Intro": "Para cada uma das afirmações a seguir, por favor, escolha a resposta que melhor descreve sua autoconfiança em amamentar seu bebê. Por favor, marque sua resposta circulando o número que melhor descreve como você se sente.  Não há respostas certas ou erradas.",
     "HighEfficacy": "elevada",
     "InfoValue1": "nada confiante",
     "InfoValue2": "muito pouco confiante",
@@ -538,12 +539,15 @@
         }
       },
       "9": {
-        "Description": "Com quantos dias de vida seu bebê mamou em você pela primeira vez? Na ocasião, ele tinha qual idade gestacional corrigida?",
+        "Description": "Com quantos dias de vida seu bebê mamou em você pela primeira vez?",
         "Options": {
           "1": "Não sei informar"
         }
       },
       "10": {
+        "Description": "Na ocasião, ele tinha qual idade gestacional corrigida?"
+      },
+      "11": {
         "Description": "Na última semana, qual foi a frequência com que você e seu bebê permaneceram em contato pele a pele (sem nenhum tipo de tecido entre vocês), durante, no mínimo, 1 hora, sem interrupções?",
         "Options": {
           "1": "Nenhuma",
