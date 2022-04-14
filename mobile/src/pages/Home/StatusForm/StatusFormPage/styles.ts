@@ -29,13 +29,9 @@ export const HeaderText = styled(OpenSansRegular)`
 
 export const ContentContainer = styled.View`
   margin: 0 24px;
-  padding: 0 24px;
+  padding: 24px;
   background-color: ${props => props.theme.white};
   flex: 1;
-`;
-
-export const InfoContainer = styled.View`
-  margin: 20px 0;
 `;
 
 export const ColoredInfoText = styled(OpenSansBold)`
@@ -45,6 +41,7 @@ export const ColoredInfoText = styled(OpenSansBold)`
 
 export const ValuesInfoText = styled(OpenSansRegular)`
   text-align: center;
+  margin-bottom: 2px;
 `;
 
 export const QuestionText = styled(OpenSansRegular)`
@@ -55,7 +52,6 @@ export const QuestionText = styled(OpenSansRegular)`
 export const Footer = styled.View`
   flex-direction: row;
   align-items: flex-end;
-  margin: 10px 0;
   flex-shrink: 1;
 `;
 

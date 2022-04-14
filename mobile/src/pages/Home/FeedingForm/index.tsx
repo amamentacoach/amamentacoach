@@ -1,5 +1,5 @@
 import { Action, AppScreen } from '@common/telemetria';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import React, { useEffect, useState } from 'react';
 
@@ -16,7 +16,7 @@ import {
   HeaderText,
 } from '../StatusForm/StatusFormPage/styles';
 
-import type { RootRouteProp } from 'routes/app';
+import type { RootRouteProp, RootStackProps } from 'routes/app';
 
 import EnglishStatusForm from './EnglishForm';
 import PortugueseStatusForm from './PortugueseForm';
@@ -28,6 +28,7 @@ export interface GenericFeedingFormProps {
 
 const FeedingForm: React.FC = () => {
   const { situation } = useRoute<RootRouteProp<'FeedingForm'>>().params;
+  const navigation = useNavigation<RootStackProps>();
   const { languageTag } = getBestLocale();
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
 
@@ -37,6 +38,14 @@ const FeedingForm: React.FC = () => {
       context: { screen: AppScreen.FeedingForm },
     });
   }, []);
+
+  React.useEffect(() => {
+    // Quando o usuário tenta retornar a tela anterior ele é levado a tela inicial.
+    navigation.addListener('beforeRemove', e => {
+      e.preventDefault();
+      navigation.navigate('Home');
+    });
+  }, [navigation]);
 
   return (
     <>

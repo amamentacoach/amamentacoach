@@ -20,7 +20,6 @@ import {
   ScrollView,
   ColoredInfoText,
   ValuesInfoText,
-  InfoContainer,
 } from './styles';
 
 // Página do formulário de escala.
@@ -109,28 +108,27 @@ const StatusFormPage: React.FC<PageProps> = ({
       <HeaderBackground />
       <HeaderText>{i18n.t('StatusFormPage.Header')}</HeaderText>
       <ContentContainer>
-        <InfoContainer>
-          <ValuesInfoText>
-            <ColoredInfoText>1</ColoredInfoText> ={' '}
-            {i18n.t('StatusFormPage.InfoValue1')}
-          </ValuesInfoText>
-          <ValuesInfoText>
-            <ColoredInfoText>2</ColoredInfoText> ={' '}
-            {i18n.t('StatusFormPage.InfoValue2')}
-          </ValuesInfoText>
-          <ValuesInfoText>
-            <ColoredInfoText>3</ColoredInfoText> ={' '}
-            {i18n.t('StatusFormPage.InfoValue3')}
-          </ValuesInfoText>
-          <ValuesInfoText>
-            <ColoredInfoText>4</ColoredInfoText> ={' '}
-            {i18n.t('StatusFormPage.InfoValue4')}
-          </ValuesInfoText>
-          <ValuesInfoText>
-            <ColoredInfoText>5</ColoredInfoText> ={' '}
-            {i18n.t('StatusFormPage.InfoValue5')}
-          </ValuesInfoText>
-        </InfoContainer>
+        <ValuesInfoText>{i18n.t('StatusFormPage.Intro')}</ValuesInfoText>
+        <ValuesInfoText>
+          <ColoredInfoText>1</ColoredInfoText> ={' '}
+          {i18n.t('StatusFormPage.InfoValue1')}
+        </ValuesInfoText>
+        <ValuesInfoText>
+          <ColoredInfoText>2</ColoredInfoText> ={' '}
+          {i18n.t('StatusFormPage.InfoValue2')}
+        </ValuesInfoText>
+        <ValuesInfoText>
+          <ColoredInfoText>3</ColoredInfoText> ={' '}
+          {i18n.t('StatusFormPage.InfoValue3')}
+        </ValuesInfoText>
+        <ValuesInfoText>
+          <ColoredInfoText>4</ColoredInfoText> ={' '}
+          {i18n.t('StatusFormPage.InfoValue4')}
+        </ValuesInfoText>
+        <ValuesInfoText>
+          <ColoredInfoText>5</ColoredInfoText> ={' '}
+          {i18n.t('StatusFormPage.InfoValue5')}
+        </ValuesInfoText>
 
         <Flex>
           {questions.map((question, questionIndex) => (
