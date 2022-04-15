@@ -111,7 +111,7 @@ const ManageExpectations: React.FC = () => {
         new: currentHistory.expectation.new,
       },
     };
-    await createTelemetryAction({
+    createTelemetryAction({
       action: Action.Pressed,
       context: {
         screen: AppScreen.ManageExpectations,

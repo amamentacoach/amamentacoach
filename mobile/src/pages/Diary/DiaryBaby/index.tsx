@@ -16,7 +16,7 @@ const DiaryBaby: React.FC = () => {
 
   // Marca o formulário como enviado no dia.
   async function setFormSent(): Promise<void> {
-    await createTelemetryAction({
+    createTelemetryAction({
       action: Action.Pressed,
       context: { screen: AppScreen.DiaryBaby, target: 'Actions.End' },
     });

@@ -24,8 +24,8 @@ const Goals: React.FC = () => {
   const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
   const [isFinishedModalVisible, setIsFinishedModalVisible] = useState(false);
 
-  async function onFormEnd(): Promise<void> {
-    await createTelemetryAction({
+  function onFormEnd(): void {
+    createTelemetryAction({
       action: Action.Pressed,
       context: { screen: AppScreen.Goals, target: 'Actions.End' },
     });

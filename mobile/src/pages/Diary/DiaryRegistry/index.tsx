@@ -30,8 +30,8 @@ const DiaryRegistry: React.FC = () => {
     params?.date ? new Date(params.date) : new Date(),
   );
 
-  async function handleNewRegistryEntry(target: string): Promise<void> {
-    await createTelemetryAction({
+  function handleNewRegistryEntry(target: string): void {
+    createTelemetryAction({
       action: Action.Pressed,
       context: { screen: AppScreen.DiaryRegistry, target },
     });

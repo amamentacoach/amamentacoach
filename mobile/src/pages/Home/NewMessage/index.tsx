@@ -35,7 +35,7 @@ const NewMessage: React.FC = () => {
     const successfulRequest = await createMessage(message);
 
     if (successfulRequest) {
-      await createTelemetryAction({
+      createTelemetryAction({
         action: Action.Pressed,
         context: {
           screen: AppScreen.NewMessage,

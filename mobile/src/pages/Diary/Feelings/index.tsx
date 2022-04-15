@@ -29,7 +29,7 @@ const Feelings: React.FC = () => {
 
   // Marca o formulário como enviado no dia e registra uma ação de telemetria.
   async function setFormSent(target: string): Promise<void> {
-    await createTelemetryAction({
+    createTelemetryAction({
       action: Action.Pressed,
       context: { screen: AppScreen.Feelings, target },
     });

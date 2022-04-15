@@ -112,7 +112,7 @@ const NewBreastfeedEntry: React.FC = () => {
     );
 
     if (status) {
-      await createTelemetryAction({
+      createTelemetryAction({
         action: Action.Pressed,
         context: {
           screen: AppScreen.NewBreastfeedEntry,

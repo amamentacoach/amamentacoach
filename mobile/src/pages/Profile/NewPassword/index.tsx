@@ -42,7 +42,7 @@ const NewPassword: React.FC = () => {
     const successfulRequest = await newPassword(password);
     setIsSendingForm(false);
     if (successfulRequest) {
-      await createTelemetryAction({
+      createTelemetryAction({
         action: Action.Pressed,
         context: {
           screen: AppScreen.NewPassword,

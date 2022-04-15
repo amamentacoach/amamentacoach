@@ -35,7 +35,7 @@ const NewQuestion: React.FC = () => {
     const successfulRequest = await createUserQuestion(question);
 
     if (successfulRequest) {
-      await createTelemetryAction({
+      createTelemetryAction({
         action: Action.Pressed,
         context: {
           screen: AppScreen.NewQuestion,
