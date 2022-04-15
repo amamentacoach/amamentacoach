@@ -10,7 +10,7 @@ import { StatusFormSituation } from 'services/survey';
 import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
-import { ContentContainer } from '../StatusForm/StatusFormPage/styles';
+import { ContentContainer } from '../StatusForm/styles';
 
 import type { RootRouteProp, RootStackProps } from 'routes/app';
 
@@ -37,10 +37,11 @@ const FeedingForm: React.FC = () => {
 
   React.useEffect(() => {
     // Quando o usuário tenta retornar a tela anterior ele é levado a tela inicial.
-    navigation.addListener('beforeRemove', e => {
+    const unsubscribe = navigation.addListener('beforeRemove', e => {
       e.preventDefault();
       navigation.navigate('Home');
     });
+    return unsubscribe;
   }, [navigation]);
 
   return (

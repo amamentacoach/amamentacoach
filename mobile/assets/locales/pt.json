@@ -470,7 +470,64 @@
     "InfoValue4": "confiante",
     "InfoValue5": "muito confiante",
     "LowEfficacy": "baixa",
-    "Score": "Obrigada por responder.\nSua pontuação é %{score}, que significa que sua autoconfiança é %{meaning}."
+    "WhenMyBaby": "Quando meu bebê estiver realmente pronto para mamar no peito:",
+    "Score": "Obrigada por responder.\nSua pontuação é %{score}, que significa que sua autoconfiança é %{meaning}.",
+    "Questions": {
+      "1": {
+        "Description": "Eu consigo retirar leite da mama suficiente para o meu bebê."
+      },
+      "2": {
+        "Description": "Eu consigo lidar com o fato de que retirar leite da mama e/ou amamentar podem ser demorados."
+      },
+      "3": {
+        "Description": "Eu consigo lidar bem com qualquer situação da amamentação (retirada de leite da mama e a amamentação em si) da mesma forma que faço com outras tarefas difíceis."
+      },
+      "4": {
+        "Description": "Eu consigo lidar com a amamentação de forma que eu me sinta satisfeita."
+      },
+      "5": {
+        "Description": "Eu continuo querendo amamentar"
+      },
+      "6": {
+        "Description": "Eu estou satisfeita com a minha experiência de amamentar."
+      },
+      "7": {
+        "Description": "Eu consigo obter ajuda com a amamentação se eu precisar (ou quando precisar)."
+      },
+      "8": {
+        "Description": "Eu serei capaz de saber quando meu bebê precisa ser amamentado."
+      },
+      "9": {
+        "Description": "Eu serei capaz de garantir que meu bebê está pegando o meu peito corretamente durante toda a mamada."
+      },
+      "10": {
+        "Description": "Eu serei capaz de saber se meu bebê está recebendo leite suficiente no meu peito."
+      },
+      "11": {
+        "Description": "Eu serei capaz de amamentar mesmo que meu bebê esteja chorando."
+      },
+      "12": {
+        "Description": "Eu serei capaz de amamentar meu bebê sem usar outros tipos de leite como complemento."
+      },
+      "13": {
+        "Description": "Eu serei capaz de amamentar confortavelmente na frente de pessoas da minha família."
+      },
+      "14": {
+        "Description": "Eu serei capaz de amamentar meu bebê até esvaziar o peito antes de mudar para o outro."
+      },
+      "15": {
+        "Description": "Eu serei capaz de amamentar meu bebê em todas as mamadas."
+      },
+      "16": {
+        "Description": "Eu serei capaz de atender as necessidades de amamentação do meu bebê."
+      },
+      "17": {
+        "Description": "Eu serei capaz de reconhecer quando meu bebê estiver satisfeito."
+      },
+      "18": {
+        "Description": "Eu serei capaz de substituir a retirada do leite das mamas pela amamentação, na maioria das mamadas ou em todas elas."
+      }
+    }
   },
   "FeedingFormPage": {
     "FormName": "Informações sobre a alimentação",

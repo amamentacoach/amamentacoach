@@ -2,32 +2,63 @@ import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
-import { useEffect, useRef, useState } from 'react';
-import { FlatList } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import * as Yup from 'yup';
 
+import FormRadioGroup from 'components/FormRadioGroup';
+import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import theme from 'config/theme';
-import { useAuth } from 'contexts/auth';
+import { Flex, ScrollView } from 'lib/sharedStyles';
 import { answerStatusForm } from 'services/survey';
-import SurveyQuestionsRepository from 'utils/surveyQuestionsRepository';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
+import type { FormikHelpers } from 'formik';
 import type { RootRouteProp, RootStackProps } from 'routes/app';
-import type { SurveyQuestion } from 'utils/surveyQuestionsRepository';
 
-import StatusFormPage from './StatusFormPage';
+import {
+  CenterAlignedText,
+  ContentContainer,
+  Footer,
+  HeaderBackground,
+  HeaderText,
+  HighlightedText,
+  TextContainer,
+  ValuesInfoText,
+} from './styles';
 
 type FormValues = {
   [key: string]: string;
 };
 
+type FormValuesKey = keyof FormValues;
+
 const StatusForm: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
-  const { motherInfo } = useAuth();
   const { situation } = useRoute<RootRouteProp<'StatusForm'>>().params;
-  const pagesFlatListRef = useRef<FlatList>(null);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState('');
+
+  // Perguntas da escala possuem id entre 17-34 (veja perguntas.ts).
+  const questionsIds = Array.from(new Array(18), (_, i) => i + 17);
+  // Inicia todas as respostas vazias.
+  const initialValues: FormValues = questionsIds.reduce(
+    (previous, current) => ({
+      ...previous,
+      [current]: '',
+    }),
+    {},
+  );
+  // Todas as perguntas da escala são obrigatórias.
+  const validationSchema = Yup.object().shape(
+    questionsIds.reduce(
+      (previous, current) => ({
+        ...previous,
+        [current]: Yup.string().required(i18n.t('Yup.Required')),
+      }),
+      {},
+    ),
+  );
 
   useEffect(() => {
     createTelemetryAction({
@@ -37,11 +68,16 @@ const StatusForm: React.FC = () => {
   }, []);
 
   // Envia as respostas do usuário.
-  async function handleFormSubmit(values: FormValues): Promise<void> {
+  async function handleFormSubmit(
+    values: FormValues,
+    { setSubmitting }: FormikHelpers<FormValues>,
+  ): Promise<void> {
+    setSubmitting(true);
+
     // Envia as respostas do usuário para cada a pergunta.
     const answers = Object.keys(values).map(id => ({
       id: Number(id),
-      content: values[id],
+      content: values[id as unknown as FormValuesKey],
     }));
     const statusFormScore = await answerStatusForm(situation, answers);
     if (statusFormScore === null) {
@@ -61,9 +97,10 @@ const StatusForm: React.FC = () => {
       score: statusFormScore,
       meaning,
     });
+    setSubmitting(false);
     setFeedbackMessage(feedback);
 
-    await createTelemetryAction({
+    createTelemetryAction({
       action: Action.Pressed,
       context: {
         screen: AppScreen.StatusForm,
@@ -71,19 +108,6 @@ const StatusForm: React.FC = () => {
       },
     });
   }
-
-  function fetchQuestions(): SurveyQuestion[][] {
-    const surveyQuestionsRepo = new SurveyQuestionsRepository(motherInfo);
-    const questions = surveyQuestionsRepo.findByCategory(7);
-    let pages = [];
-    // Separa 3 perguntas por página.
-    for (let i = 0; i < questions.length; i += 3) {
-      pages.push(questions.slice(i, i + 3));
-    }
-    return pages;
-  }
-
-  const pagesQuestions = fetchQuestions();
 
   return (
     <>
@@ -116,33 +140,93 @@ const StatusForm: React.FC = () => {
       />
 
       <Formik
-        initialValues={{}}
+        initialValues={initialValues}
         validateOnChange={false}
-        onSubmit={values => handleFormSubmit(values)}>
-        {({ values, errors, setFieldError, submitForm, setFieldValue }) => (
-          <FlatList<SurveyQuestion[]>
-            data={pagesQuestions}
-            keyExtractor={item => item[0].id.toString()}
-            keyboardShouldPersistTaps="handled"
-            ref={pagesFlatListRef}
-            renderItem={({ item, index }) => (
-              <StatusFormPage
-                errors={errors}
-                flatListRef={pagesFlatListRef}
-                numberOfPages={pagesQuestions.length}
-                pageIndex={index}
-                questions={item}
-                setFieldError={setFieldError}
-                setFieldValue={setFieldValue}
-                submitForm={submitForm}
-                values={values}
-              />
-            )}
-            scrollEnabled={false}
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            pagingEnabled
-          />
+        validationSchema={validationSchema}
+        onSubmit={handleFormSubmit}>
+        {({ errors, isSubmitting, submitForm, setFieldValue }) => (
+          <ScrollView>
+            <HeaderBackground />
+            <HeaderText>{i18n.t('StatusFormPage.Header')}</HeaderText>
+            <ContentContainer>
+              <ValuesInfoText>{i18n.t('StatusFormPage.Intro')}</ValuesInfoText>
+              <ValuesInfoText>
+                <HighlightedText>1</HighlightedText> ={' '}
+                {i18n.t('StatusFormPage.InfoValue1')}
+              </ValuesInfoText>
+              <ValuesInfoText>
+                <HighlightedText>2</HighlightedText> ={' '}
+                {i18n.t('StatusFormPage.InfoValue2')}
+              </ValuesInfoText>
+              <ValuesInfoText>
+                <HighlightedText>3</HighlightedText> ={' '}
+                {i18n.t('StatusFormPage.InfoValue3')}
+              </ValuesInfoText>
+              <ValuesInfoText>
+                <HighlightedText>4</HighlightedText> ={' '}
+                {i18n.t('StatusFormPage.InfoValue4')}
+              </ValuesInfoText>
+              <ValuesInfoText>
+                <HighlightedText>5</HighlightedText> ={' '}
+                {i18n.t('StatusFormPage.InfoValue5')}
+              </ValuesInfoText>
+
+              <Flex>
+                {Object.keys(initialValues)
+                  .slice(0, 7)
+                  .map((questionId, index) => (
+                    <FormRadioGroup
+                      color={theme.babyBlue}
+                      direction="row"
+                      displayOtherField={false}
+                      error={errors[questionId as unknown as FormValuesKey]}
+                      key={questionId}
+                      label={`${index + 1} - ${i18n.t(
+                        `StatusFormPage.Questions.${index + 1}.Description`,
+                      )}`}
+                      options={['1', '2', '3', '4', '5']}
+                      onChange={fieldValues =>
+                        setFieldValue(questionId, fieldValues[0])
+                      }
+                    />
+                  ))}
+
+                <TextContainer>
+                  <CenterAlignedText>
+                    {i18n.t('StatusFormPage.WhenMyBaby')}
+                  </CenterAlignedText>
+                </TextContainer>
+
+                {Object.keys(initialValues)
+                  .slice(7, 18)
+                  .map((questionId, index) => (
+                    <FormRadioGroup
+                      color={theme.babyBlue}
+                      direction="row"
+                      displayOtherField={false}
+                      error={errors[questionId as unknown as FormValuesKey]}
+                      key={questionId}
+                      label={`${index + 8} - ${i18n.t(
+                        `StatusFormPage.Questions.${index + 8}.Description`,
+                      )}`}
+                      options={['1', '2', '3', '4', '5']}
+                      onChange={fieldValues =>
+                        setFieldValue(questionId, fieldValues[0])
+                      }
+                    />
+                  ))}
+              </Flex>
+
+              <Footer>
+                <MainButton
+                  color={theme.babyBlue}
+                  disabled={isSubmitting}
+                  text={i18n.t('Actions.End')}
+                  onPress={submitForm}
+                />
+              </Footer>
+            </ContentContainer>
+          </ScrollView>
         )}
       </Formik>
     </>

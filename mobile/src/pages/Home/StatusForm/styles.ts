@@ -2,18 +2,6 @@ import styled from 'styled-components/native';
 
 import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
 
-interface ScrollViewProps {
-  width: number;
-}
-
-export const ScrollView = styled.ScrollView.attrs(() => ({
-  contentContainerStyle: { flexGrow: 1 },
-  keyboardShouldPersistTaps: 'handled',
-}))<ScrollViewProps>`
-  flex: 1;
-  color: ${props => props.theme.white};
-`;
-
 export const HeaderBackground = styled.View`
   background-color: ${props => props.theme.babyBlue};
   align-items: center;
@@ -34,9 +22,18 @@ export const ContentContainer = styled.View`
   flex: 1;
 `;
 
-export const ColoredInfoText = styled(OpenSansBold)`
+export const HighlightedText = styled(OpenSansBold)`
   color: ${props => props.theme.darkBlue};
   text-align: center;
+`;
+
+export const TextContainer = styled.View`
+  margin-bottom: 20px;
+`;
+
+export const CenterAlignedText = styled(OpenSansRegular)`
+  text-align: center;
+  font-size: 14;
 `;
 
 export const ValuesInfoText = styled(OpenSansRegular)`
@@ -44,18 +41,8 @@ export const ValuesInfoText = styled(OpenSansRegular)`
   margin-bottom: 2px;
 `;
 
-export const QuestionText = styled(OpenSansRegular)`
-  text-align: center;
-  margin-bottom: 15px;
-`;
-
 export const Footer = styled.View`
   flex-direction: row;
   align-items: flex-end;
   flex-shrink: 1;
-`;
-
-export const FirstButtonContainer = styled.View`
-  flex: 1;
-  margin-right: 15px;
 `;
