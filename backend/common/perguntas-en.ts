@@ -6,11 +6,11 @@ const perguntas: Pergunta[] = [
     id: 1,
     categoria: 1,
     descricao:
-      "For you, what's the best part about breastfeeding a premature baby?",
+      "For you personally, what's the best part about breastfeeding a premature baby? (Select as many responses as you’d like",
     alternativas:
-      "Feeling of empowerment (dealing with this challenge makes me believe that I am capable of other great things)|" +
-      "Gratitude for the opportunity (I think many women, for many reasons, can't even try)|" +
-      "The formation of a powerful bond when fighting a battle in partnership with my tiny partner|" +
+      "The feeling of empowerment (dealing with this challenge makes me believe that I am capable of other great things)|" +
+      "Gratitude for the opportunity (I think many women, for many reasons, don’t have the opportunity to even try)|" +
+      "The formation of a powerful bond while taking on this challenge in partnership with my baby|" +
       "I can't identify anything good",
     outro: true,
     multiplas: true,
@@ -20,12 +20,13 @@ const perguntas: Pergunta[] = [
   {
     id: 2,
     categoria: 8,
-    descricao: "What motivates you to keep trying to breastfeed??",
+    descricao:
+      "What motivates you to keep trying to breastfeed? (Select as many responses as you’d like)",
     alternativas:
-      "Thinking it's best for my baby|" +
-      "The incentive I'm getting from professionals|" +
-      "The encouragement I'm getting from my family|" +
-      "Thinking about the cost of the formula|" +
+      "Thinking it's what’s best for my baby|" +
+      "The encouragement I'm receiving from professionals|" +
+      "The encouragement I'm receiving from my family|" +
+      "Considering the cost of the formula|" +
       "Other motivations|" +
       "I'm not too motivated to continue",
     outro: false,
@@ -37,13 +38,13 @@ const perguntas: Pergunta[] = [
     id: 3,
     categoria: 9,
     descricao:
-      "Do you feel like you're getting all the help you need to keep trying to breastfeed your baby??",
+      "Do you feel like you're getting all the help you need to keep trying to breastfeed your baby?",
     alternativas:
       "Yes, both from professionals and from my family|" +
       "Only from my family|" +
       "Only from professionals|" +
-      "Partially, both professionals and of my family|" +
-      "I'm not getting help",
+      "Partially, both from professionals and from my family|" +
+      "I'm not receiving any help",
     outro: false,
     multiplas: false,
     alvo: "GERAL",
@@ -81,12 +82,13 @@ const perguntas: Pergunta[] = [
     categoria: 10,
     descricao: "How my baby is feeding:",
     alternativas:
-      "Only on my chest - exclusively breastfeeding|" +
-      "Breastfeeding, with complement by cup|" +
-      "By relactation/translactation|" +
-      "Only per cup|" +
-      "By baby bottle|" +
-      "By nasogastric/orogastric tube",
+      "Exclusively breastfeeding|" +
+      "Mostly breastfeeding|" +
+      "About half the time breastfeeding and half the time receiving supplement|" +
+      "Mostly receiving supplement|" +
+      "Receiving supplement at every feed|" +
+      "My baby is still not receiving formula or milk, only parenteral nutrition|" +
+      "I don't know",
     outro: false,
     multiplas: false,
     alvo: "GERAL",
@@ -99,16 +101,16 @@ const perguntas: Pergunta[] = [
       "I have being staying in the NICU almost 1 hour|" +
       "I have being staying in the NICU between 1 and 3  hours|" +
       "I have being staying in the NICU more than 3  hours|" +
-      "I have being staying in kangaroo for 1 hour period|" +
-      "I have being staying in kangaroo for more than 1 hour|" +
+      "I have being staying in 'kangaroo' for 1 hour period|" +
+      "I have being staying in 'kangaroo' for more than 1 hour|" +
       "I brought my pumped milk|" +
       "I pumped my breast milk in the NICU|" +
       "I offered fresh milk for my baby|" +
       "I cleaned my baby's eyes and mouth|" +
       "I changed my baby's diapers|" +
       "I bathed my baby|" +
-      "I gave some oral medication to my baby (or I trained the administration of oral medication using milk)|" +
-      "I put my baby in my breast to training breastfeed|" +
+      "I gave some oral medication to my baby (or I trained in the administration of oral medication using milk)|" +
+      "I brought my baby to my breast to suckle|" +
       "Today I stayed home",
     outro: false,
     multiplas: true,
@@ -122,7 +124,7 @@ const perguntas: Pergunta[] = [
     alternativas:
       "Think more about positive things|" +
       "Value the little things more|" +
-      "Increase my security|" +
+      "Increase my confidence|" +
       "Live one day at a time|" +
       "Master my anxiety or concern|" +
       "Think less about things that are out of my control",
@@ -135,12 +137,12 @@ const perguntas: Pergunta[] = [
     categoria: 3,
     descricao: "Goals for actions",
     alternativas:
-      "Stay in kangaroo with my baby|" +
+      'Engage in skin-to-skin "kangaroo" care with my baby|' +
       "Pump whenever necessary|" +
-      "Offer my fresh milk to my baby whenever necessary as a complement|" +
-      "Take care by my baby by feeling confident|" +
+      "Offer my fresh milk to my baby whenever necessary as a supplement|" +
+      "Being confident in caring for my baby|" +
       "Have the courage to ask for help|" +
-      "Have the courage to drive away people who may be harming me in some way",
+      "Have the courage to distance myself from people who may be harming me in some way",
     outro: false,
     multiplas: true,
     alvo: "AC",
@@ -151,13 +153,12 @@ const perguntas: Pergunta[] = [
     descricao: "Goals for actions",
     alternativas:
       "Stay longer in the NICU|" +
-      "Stay more in kangaroo with my baby|" +
-      "Pump more times a day|" +
+      'Engage in more skin-to-skin "kangaroo" care with my baby |' +
       "Bring my breast milk|" +
       "Offer my fresh breast milk to my baby|" +
-      "Perform more care with my baby|" +
+      "Perform more care tasks with my baby|" +
       "Have the courage to ask for help|" +
-      "Seek for more information about my baby with the physicians and nurses",
+      "Seek more information about my baby from the physicians and nurses",
     outro: false,
     multiplas: true,
     alvo: "UCI/UTI",
@@ -168,12 +169,12 @@ const perguntas: Pergunta[] = [
     categoria: 4,
     descricao: "I needed a specific help...",
     alternativas:
-      "of nurses|" +
-      "of physicians|" +
-      "of psychologist|" +
-      "of Social Assistant|" +
-      "of speech therapist|" +
-      "of physiotherapist",
+      "nurses|" +
+      "physicians|" +
+      "a psychologist|" +
+      "social services|" +
+      "lactation consultant|" +
+      "a physiotherapist",
     outro: false,
     multiplas: true,
     alvo: "GERAL",
@@ -183,7 +184,7 @@ const perguntas: Pergunta[] = [
     categoria: 4,
     descricao: "My biggest source of support for the day was:",
     alternativas:
-      "My husband/boyfriend/partner|" +
+      "My partner|" +
       "My mother|" +
       "My mother-in-law|" +
       "A friend|" +
@@ -198,37 +199,37 @@ const perguntas: Pergunta[] = [
   {
     id: 13,
     categoria: 5,
-    descricao: "This week, what has your baby's daddy been doing for him??",
+    descricao: "This week, what has your partner been doing for your baby?",
     alternativas:
       "Visit in the NICU 1 to 2 times|" +
       "Visit the NICU more than 2 times|" +
-      "Kangaroo|" +
+      'Skin-to-skin "Kangaroo" care|' +
       "Helped me with pumping|" +
       "Offered milk to the baby|" +
       "Cleaned the baby's eyes and mouth|" +
-      "Diaper Exchanges|" +
-      "Bathed baby|" +
-      "Helped more at home so I could be more in the Neonatal Unit|" +
-      "None of the alternatives",
-    outro: false,
+      "Diaper changes|" +
+      "Bathed the baby|" +
+      "Helped more at home so I could spend more time in the NICU|" +
+      "None of the above",
+    outro: true,
     multiplas: true,
     alvo: "UCI/UTI",
   },
   {
     id: 14,
     categoria: 5,
-    descricao: "This week, what has your baby's daddy been doing for him??",
+    descricao: "This week, what has your partner been doing for your baby?",
     alternativas:
-      "Kangaroo|" +
+      'Skin-to-skin "Kangaroo" care|' +
       "Helped me with pumping|" +
       "Cleaned the baby's eyes and mouth|" +
-      "Diaper Exchanges|" +
-      "Bathed baby|" +
-      "Made baby sleep|" +
-      "Stimulated and joked|" +
-      "Accompanied the baby to medical appointments|" +
+      "Diaper changes|" +
+      "Bathed the baby|" +
+      "Put baby to sleep|" +
+      "Stimulated and played with them|" +
+      "Accompanied consultations|" +
       "Helped more at home so I could rest|" +
-      "None of the alternatives",
+      "None of the above",
     outro: false,
     multiplas: true,
     alvo: "AC",
@@ -237,14 +238,14 @@ const perguntas: Pergunta[] = [
   {
     id: 15,
     categoria: 6,
-    descricao: "Actions taken with my baby",
+    descricao: "Goals for Actions",
     alternativas:
-      "I stayed in a kangaroo position with my baby|" +
-      "I pumped the milk whenever I needed it|" +
-      "I offered my fresh milk to my baby whenever he needed a supplement|" +
-      "I performed the baby's cares feeling safe|" +
-      "I had the courage to ask for help|" +
-      "I had the courage to push people away who might be in the way in some way",
+      'Engage in  skin-to-skin "kangaroo" care with my baby|' +
+      "Pump whenever necessary|" +
+      "Offer my fresh milk to my baby whenever necessary as a supplement|" +
+      "Being confident in caring for my baby|" +
+      "Have the courage to ask for help|" +
+      "Have the courage to distance myself from people who may be harming me in some way",
     outro: false,
     multiplas: true,
     alvo: "AC",
@@ -252,16 +253,16 @@ const perguntas: Pergunta[] = [
   {
     id: 16,
     categoria: 6,
-    descricao: "Actions taken with my baby",
+    descricao: "Goals for Actions",
     alternativas:
-      "I stayed longer in the Neonatal Unit|" +
-      "I spent more time in a kangaroo position with my baby|" +
-      "I pumped the milk more times a day|" +
-      "I brought my pumped milk|" +
-      "I offered fresh milk for my baby ao meu bebê|" +
-      "I performed more care with my baby|" +
-      "I had the courage to ask for help|" +
-      "I looked for more information about my baby with the doctors and nurses",
+      "Stay longer in the NICU|" +
+      'Engage in  more skin-to-skin "kangaroo" care with my baby|' +
+      "Pump more often daily|" +
+      "Bring my breast milk|" +
+      "Offer my fresh breast milk to my baby|" +
+      "Perform more care tasks with my baby|" +
+      " Have the courage to ask for help|" +
+      "Seek more information about my baby from the physicians and nurses",
     outro: false,
     multiplas: true,
     alvo: "UCI/UTI",

@@ -538,12 +538,13 @@
       "1": {
         "Description": "How my baby is feeding:",
         "Options": {
-          "1": "Only on my chest - exclusively breastfeeding",
-          "2": "Breastfeeding, with complement by cup",
-          "3": "By relactation/translactation",
-          "4": "Only per cup",
-          "5": "By baby bottle",
-          "6": "By nasogastric/orogastric tube"
+          "1": "Exclusively breastfeeding",
+          "2": "Mostly breastfeeding",
+          "3": "About half the time breastfeeding and half the time receiving supplement ",
+          "4": "Mostly receiving supplement",
+          "5": "Receiving supplement at every feed",
+          "6": "My baby is still not receiving formula or milk, only parenteral nutrition",
+          "7": "I don't know"
         }
       }
     }
