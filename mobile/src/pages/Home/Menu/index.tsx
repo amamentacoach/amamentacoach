@@ -7,6 +7,7 @@ import { View } from 'react-native';
 import { hide } from 'react-native-bootsplash';
 
 import FormPickerInput from 'components/FormPickerInput';
+import ImageWrapper from 'components/ImageWrapper';
 import Modal from 'components/Modal';
 import OptionsList from 'components/OptionList';
 import theme from 'config/theme';
@@ -15,6 +16,7 @@ import { storageIsToday } from 'lib/date-fns';
 import { ScrollView } from 'lib/sharedStyles';
 import { checkBabiesLocation, updateBabyLocation } from 'services/babyLocation';
 import { setHomePageOpened } from 'services/telemetry';
+import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
@@ -22,14 +24,14 @@ import type { RootStackProps } from 'routes/app';
 import type { BabyStatus } from 'services/babyLocation';
 
 import {
-  BannerImage,
   ContentContainer,
   ContentHeader,
   Header,
   HeaderBackground,
   HeaderText,
-  HUButton,
-  HUButtonText,
+  Banner,
+  BannerButton,
+  BannerButtonText,
   InnerCircle,
   LocationContainer,
   ModalOption,
@@ -38,13 +40,14 @@ import {
 } from './styles';
 
 import HomeBaby from '@assets/images/home_baby.svg';
-import Banner from '@assets/images/home_banner.png';
 import HomeBreastfeed from '@assets/images/home_breastfeed.svg';
 import HomeCredits from '@assets/images/home_credits.svg';
 import HomeEmotions from '@assets/images/home_emotions.svg';
 import HomeMessage from '@assets/images/home_message.svg';
 import HomeMilk from '@assets/images/home_milk.svg';
 import HomeMoreInformation from '@assets/images/home_more_information.svg';
+import LogoEN from '@assets/images/logo_white_en.svg';
+import LogoPT from '@assets/images/logo_white_pt.svg';
 
 interface BabyModalOption {
   newLocation: string;
@@ -54,7 +57,9 @@ interface BabyModalOption {
 const Home: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
+  const { languageTag } = getBestLocale();
   const isFocused = useIsFocused();
+
   const [babiesData, setBabiesData] = useState<BabyStatus[]>([]);
   const [babyModalVisibility, setBabyModalVisibility] =
     useState<boolean>(false);
@@ -70,6 +75,8 @@ const Home: React.FC = () => {
 
   const [expectationsModalVisibility, setExpectationsModalVisibility] =
     useState<Boolean>(false);
+
+  const Logo = languageTag === 'pt' ? LogoPT : LogoEN;
 
   const options: OptionListEntry[] = [
     {
@@ -345,14 +352,18 @@ const Home: React.FC = () => {
         <Header>
           <HeaderBackground>
             <HeaderText>{i18n.t('Begin')}</HeaderText>
+            <Banner>
+              <ImageWrapper height={100} resizeMode="contain" source={Logo} />
+              <BannerButton
+                activeOpacity={0.7}
+                onPress={() => navigation.navigate('HU')}>
+                <BannerButtonText>
+                  {i18n.t('HomePage.BannerButton')}
+                </BannerButtonText>
+              </BannerButton>
+            </Banner>
           </HeaderBackground>
-          <BannerImage source={Banner}>
-            <HUButton
-              activeOpacity={0.7}
-              onPress={() => navigation.navigate('HU')}>
-              <HUButtonText>{i18n.t('HomePage.HUButton')}</HUButtonText>
-            </HUButton>
-          </BannerImage>
+          {/* </BannerImage> */}
         </Header>
         <ContentContainer>
           <ContentHeader>{i18n.t('Content')}</ContentHeader>

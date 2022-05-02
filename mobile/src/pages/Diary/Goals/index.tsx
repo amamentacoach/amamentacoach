@@ -7,20 +7,29 @@ import createGenericSurveyPage from 'components/GenericSurveyPage';
 import Modal from 'components/Modal';
 import Survey from 'components/Survey';
 import theme from 'config/theme';
+import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 
 import { ModalContainer } from './styles';
 
-import Motivation1 from '@assets/images/motivation-1.png';
-import Motivation2 from '@assets/images/motivation-2.png';
-import Motivation3 from '@assets/images/motivation-3.png';
-import Motivation4 from '@assets/images/motivation-4.png';
-import Motivation5 from '@assets/images/motivation-5.png';
+import ENMotivation1 from '@assets/images/motivation_1_en.png';
+import PTMotivation1 from '@assets/images/motivation_1_pt.png';
+import ENMotivation2 from '@assets/images/motivation_2_en.png';
+import PTMotivation2 from '@assets/images/motivation_2_pt.png';
+import ENMotivation3 from '@assets/images/motivation_3_en.png';
+import PTMotivation3 from '@assets/images/motivation_3_pt.png';
+import ENMotivation4 from '@assets/images/motivation_4_en.png';
+import PTMotivation4 from '@assets/images/motivation_4_pt.png';
+import ENMotivation5 from '@assets/images/motivation_5_en.png';
+import PTMotivation5 from '@assets/images/motivation_5_pt.png';
+import ENMotivation6 from '@assets/images/motivation_6_en.png';
+import ENMotivation7 from '@assets/images/motivation_7_en.png';
 
 const Goals: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
+  const { languageTag } = getBestLocale();
   const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
   const [isFinishedModalVisible, setIsFinishedModalVisible] = useState(false);
 
@@ -33,14 +42,24 @@ const Goals: React.FC = () => {
   }
 
   // Retorna uma imagem aleatória para ser exibida no modal.
-  function getRandomMotivationImage(): typeof Motivation1 {
-    const images = [
-      Motivation1,
-      Motivation2,
-      Motivation3,
-      Motivation4,
-      Motivation5,
+  function getRandomMotivationImage(): typeof PTMotivation1 {
+    const imagesPT = [
+      PTMotivation1,
+      PTMotivation2,
+      PTMotivation3,
+      PTMotivation4,
+      PTMotivation5,
     ];
+    const imagesEN = [
+      ENMotivation1,
+      ENMotivation2,
+      ENMotivation3,
+      ENMotivation4,
+      ENMotivation5,
+      ENMotivation6,
+      ENMotivation7,
+    ];
+    const images = languageTag === 'pt' ? imagesPT : imagesEN;
     const randomIndex = Math.round(Math.random() * (images.length - 1));
     return images[randomIndex];
   }

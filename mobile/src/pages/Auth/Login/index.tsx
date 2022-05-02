@@ -1,32 +1,34 @@
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { hide } from 'react-native-bootsplash';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Yup from 'yup';
 
 import FormTextInput from 'components/FormTextInput';
+import ImageWrapper from 'components/ImageWrapper';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import { useAuth } from 'contexts/auth';
-import { Flex } from 'lib/sharedStyles';
+import { Center, Flex } from 'lib/sharedStyles';
 import { LoginStatus } from 'services/signIn';
+import { getBestLocale } from 'utils/localize';
 
 import type { AuthStackProps } from 'routes/auth';
 
 import {
   ForgotPasswordText,
   FormContainer,
-  Header,
   NoAccountText,
   ScrollView,
   SignUpText,
   SubmitButtonContainer,
 } from './styles';
 
-import Logo from '@assets/images/logo_primary.png';
+import LogoEN from '@assets/images/logo_primary_en.svg';
+import LogoPT from '@assets/images/logo_primary_pt.svg';
 
 interface FormValues {
   email: string;
@@ -36,6 +38,8 @@ interface FormValues {
 const Login: React.FC = () => {
   const navigation = useNavigation<AuthStackProps>();
   const { signIn } = useAuth();
+  const { languageTag } = getBestLocale();
+  const Logo = languageTag === 'pt' ? LogoPT : LogoEN;
 
   const [errorModalMessage, setErrorModalMessage] = useState<string | null>(
     null,
@@ -99,7 +103,9 @@ const Login: React.FC = () => {
       )}
 
       <ScrollView>
-        <Header resizeMode="contain" source={Logo} />
+        <Center>
+          <ImageWrapper resizeMode="contain" source={Logo} />
+        </Center>
         <Formik
           initialValues={formInitialValues}
           validateOnChange={false}

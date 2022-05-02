@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
 
-import ImageWrapper from 'components/ImageWrapper';
 import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
 
 export const ScrollView = styled.ScrollView.attrs(() => ({
@@ -9,13 +8,6 @@ export const ScrollView = styled.ScrollView.attrs(() => ({
   showsVerticalScrollIndicator: false,
 }))`
   flex: 1;
-`;
-
-export const Header = styled(ImageWrapper)`
-  height: 200px;
-  align-self: center;
-  margin-top: 24px;
-  margin-bottom: 6px;
 `;
 
 export const FormContainer = styled.View`
