@@ -1,5 +1,5 @@
 import { Action, AppScreen } from '@common/telemetria';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import React, { useEffect, useState } from 'react';
 
@@ -10,13 +10,9 @@ import { StatusFormSituation } from 'services/survey';
 import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
-import {
-  ContentContainer,
-  HeaderBackground,
-  HeaderText,
-} from '../StatusForm/StatusFormPage/styles';
+import { ContentContainer } from '../StatusForm/styles';
 
-import type { RootRouteProp } from 'routes/app';
+import type { RootRouteProp, RootStackProps } from 'routes/app';
 
 import EnglishStatusForm from './EnglishForm';
 import PortugueseStatusForm from './PortugueseForm';
@@ -28,6 +24,7 @@ export interface GenericFeedingFormProps {
 
 const FeedingForm: React.FC = () => {
   const { situation } = useRoute<RootRouteProp<'FeedingForm'>>().params;
+  const navigation = useNavigation<RootStackProps>();
   const { languageTag } = getBestLocale();
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
 
@@ -37,6 +34,15 @@ const FeedingForm: React.FC = () => {
       context: { screen: AppScreen.FeedingForm },
     });
   }, []);
+
+  React.useEffect(() => {
+    // Quando o usuário tenta retornar a tela anterior ele é levado a tela inicial.
+    const unsubscribe = navigation.addListener('beforeRemove', e => {
+      e.preventDefault();
+      navigation.navigate('Home');
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   return (
     <>
@@ -53,8 +59,6 @@ const FeedingForm: React.FC = () => {
         visible={isErrorModalVisible}
       />
       <ScrollView>
-        <HeaderBackground />
-        <HeaderText>{i18n.t('StatusFormPage.Header')}</HeaderText>
         <ContentContainer>
           {languageTag === 'pt' ? (
             <PortugueseStatusForm

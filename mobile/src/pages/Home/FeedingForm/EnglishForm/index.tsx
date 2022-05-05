@@ -56,13 +56,13 @@ const EnglishStatusForm: React.FC<GenericFeedingFormProps> = ({
           <FormRadioGroupInput
             color={theme.babyBlue}
             error={errors.howMyBabyIsFeeding}
-            label={i18n.t('StatusFormPage.Questions.1.Description')}
+            label={i18n.t('FeedingFormPage.Questions.1.Description')}
             options={[
-              i18n.t('StatusFormPage.Questions.1.Options.1'),
-              i18n.t('StatusFormPage.Questions.1.Options.2'),
-              i18n.t('StatusFormPage.Questions.1.Options.3'),
-              i18n.t('StatusFormPage.Questions.1.Options.4'),
-              i18n.t('StatusFormPage.Questions.1.Options.5'),
+              i18n.t('FeedingFormPage.Questions.1.Options.1'),
+              i18n.t('FeedingFormPage.Questions.1.Options.2'),
+              i18n.t('FeedingFormPage.Questions.1.Options.3'),
+              i18n.t('FeedingFormPage.Questions.1.Options.4'),
+              i18n.t('FeedingFormPage.Questions.1.Options.5'),
             ]}
             onChange={selectedValues =>
               setFieldValue('howMyBabyIsFeeding', selectedValues[0])

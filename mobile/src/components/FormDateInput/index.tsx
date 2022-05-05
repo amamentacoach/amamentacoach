@@ -13,6 +13,7 @@ interface FormDateProps {
   error?: string;
   mode?: string;
   maxDate?: Date;
+  value?: string;
   onChange: (fieldValue: string) => void;
 }
 
@@ -20,12 +21,12 @@ const FormDateInput: React.FC<FormDateProps> = ({
   label,
   error,
   placeholder,
+  value,
   mode = 'date',
   maxDate = new Date(),
   onChange,
 }) => {
   const [show, setShow] = useState(false);
-  const [date, setDate] = useState<Date | undefined>();
 
   // Formata a data salva para ser exibida no TextInput do componente.
   function formatDisplayDate(dateToFormat: Date): string {
@@ -47,6 +48,10 @@ const FormDateInput: React.FC<FormDateProps> = ({
   function showDatePicker(): void {
     setShow(true);
   }
+
+  const [date, setDate] = useState<Date | undefined>(
+    value ? new Date(value) : undefined,
+  );
 
   // Esconde o seletor e salva o valor escolhido.
   function handleDateSelected(_: Event, selectedDate?: Date): void {

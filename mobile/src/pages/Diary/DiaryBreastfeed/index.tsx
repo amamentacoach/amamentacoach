@@ -33,8 +33,8 @@ const DiaryBreastfeed: React.FC = () => {
     params?.date ? new Date(params.date) : new Date(),
   );
 
-  async function handleNewBreastfeedEntry(target: string): Promise<void> {
-    await createTelemetryAction({
+  function handleNewBreastfeedEntry(target: string): void {
+    createTelemetryAction({
       action: Action.Pressed,
       context: { screen: AppScreen.DiaryBreastfeed, target },
     });

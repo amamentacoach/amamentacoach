@@ -109,7 +109,7 @@ const NewDiaryRegistry: React.FC = () => {
     );
 
     if (status) {
-      await createTelemetryAction({
+      createTelemetryAction({
         action: Action.Pressed,
         context: { screen: AppScreen.NewDiaryRegistry, target: 'Actions.Save' },
       });

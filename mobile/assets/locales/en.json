@@ -31,6 +31,7 @@
   "Question": "Question",
   "Right": "Right",
   "SignUp": "Registration",
+  "SelectBaby": "Select baby",
   "Skip": "Skip",
   "TermsOfService": "Consent Form",
   "Time": "Time",
@@ -56,7 +57,7 @@
     "other": "Weeks"
   },
   "AcceptTermsOfServicePage": {
-    "AccountCreated": "Account created successfully! Welcome to AmamentaCoach!",
+    "AccountCreated": "Account created successfully! Welcome to The BreastfeedingCoach app!",
     "HeaderSubText": "You're almost there! Lastly, you must review and accept the terms of commitment:",
     "Agree": "I agree to the terms of commitment.",
     "ErrorPopUp": "Registration error.\nPlease try again later."
@@ -84,7 +85,7 @@
   "AppIntroductionPage": {
     "1": "Welcome! The Breastfeeding Coach app was created to assist you in the challenging journey of breastfeeding a baby born prematurely.",
     "2": "Explore each icon and discover how the App makes for a great ally!",
-    "3": "The more you use AmamentaCoach, the more resources you will have to breastfeed your preterm baby!",
+    "3": "The more you use The BreastfeedingCoach app, the more resources you will have to breastfeed your preterm baby!",
     "4": "You'll record your daily advances and have access to exclusive content to instruct and motivate you!"
   },
   "Auth": {
@@ -248,8 +249,8 @@
     "PopupContent": "Your goals have been set!\nWould you like to see your performance?"
   },
   "HUPage": {
-    "5": "AmamentaCoach video",
-    "6": "Meet AmamentaCoach",
+    "5": "The BreastfeedingCoach app video",
+    "6": "Meet The BreastfeedingCoach app",
     "7": "University Hospital of Londrina Video",
     "8": "Discover the University Hospital of Londrina"
   },
@@ -365,7 +366,6 @@
   },
   "NewBreastfeedEntryPage": {
     "Header": "Register breastfeeding",
-    "BabyPlaceholder": "Select baby",
     "BreastfeedTimePlaceholder": "Enter the time feeding took place"
   },
   "NewDiaryRegistryPage": {
@@ -425,7 +425,12 @@
     "Subtitle5": "Benefits of breastfeeding"
   },
   "ProfileMenuPage": {
-    "ChangePassword": "Change Password"
+    "ChangePassword": "Change Password",
+    "MyBabies": {
+      "one": "My baby",
+      "other": "My babies"
+    },
+    "MyProfile": "My profile"
   },
   "RadioGroupComponent": {
     "OtherFieldAnswer": "Answer for another"
@@ -456,7 +461,9 @@
   "StatusFormPage": {
     "AverageEfficacy": "moderate",
     "FormName": "Scale",
-    "Header": "Breastfeeding self-efficiency",
+    "Header": "Breastfeeding self-efficacy",
+    // TODO Translate.
+    "Intro": "Para cada uma das afirmações a seguir, por favor, escolha a resposta que melhor descreve sua autoconfiança em amamentar seu bebê. Por favor, marque sua resposta circulando o número que melhor descreve como você se sente.  Não há respostas certas ou erradas.",
     "HighEfficacy": "high",
     "InfoValue1": "not at all confident",
     "InfoValue2": "not very confident",
@@ -465,16 +472,79 @@
     "InfoValue5": "very confident",
     "LowEfficacy": "low",
     "Score": "Thank you for replying.\nYour score is %{score}, which means your self-confidence is %{meaning}.",
+    // TODO Translate
+    "WhenMyBaby": "Quando meu bebê estiver realmente pronto para mamar no peito:",
+    "Questions": {
+      "1": {
+        "Description": "I can pump enough milk for my baby."
+      },
+      "2": {
+        "Description": "I can deal with the fact that breast pumping and breastfeeding can be time consuming."
+      },
+      "3": {
+        "Description": "I can successfully cope with the breastfeeding situation (pumping and actual breastfeeding) like I have with other challenging tasks."
+      },
+      "4": {
+        "Description": "I can manage the breastfeeding situation to my satisfaction."
+      },
+      "5": {
+        "Description": "I can keep wanting to breastfeed"
+      },
+      "6": {
+        "Description": "I can be satisfied with my breastfeeding experience."
+      },
+      "7": {
+        "Description": "I can get help with breastfeeding if and/or when I need it."
+      },
+      "8": {
+        "Description": "I will be able to determine when my baby needs to be fed."
+      },
+      "9": {
+        "Description": "I will be able to ensure that my baby is properly latched on for the whole feeding."
+      },
+      "10": {
+        "Description": "I will be able to determine that my baby is getting enough milk."
+      },
+      "11": {
+        "Description": "I will be able to manage to breastfeed even if my baby is crying."
+      },
+      "12": {
+        "Description": "I will be able to breastfeed my baby without using formula as a supplement."
+      },
+      "13": {
+        "Description": "I will be able to comfortably breastfeed with my family members present."
+      },
+      "14": {
+        "Description": "I will be able to finish feeding my baby on one breast before switching to the other breast."
+      },
+      "15": {
+        "Description": "I will be able to breastfeed my baby for every feeding."
+      },
+      "16": {
+        "Description": "I will be able to manage to keep up with my baby's breastfeeding demands."
+      },
+      "17": {
+        "Description": "I will be able to tell when my baby is finished breastfeeding."
+      },
+      "18": {
+        "Description": "I will be able to switch from mostly pumping to mostly or completely breastfeeding my baby."
+      }
+    }
+  },
+  "FeedingFormPage": {
+    // TODO Translate.
+    "FormName": "Informações sobre a alimentação",
     "Questions": {
       "1": {
         "Description": "How my baby is feeding:",
         "Options": {
-          "1": "Only on my chest - exclusively breastfeeding",
-          "2": "Breastfeeding, with complement by cup",
-          "3": "By relactation/translactation",
-          "4": "Only per cup",
-          "5": "By baby bottle",
-          "6": "By nasogastric/orogastric tube"
+          "1": "Exclusively breastfeeding",
+          "2": "Mostly breastfeeding",
+          "3": "About half the time breastfeeding and half the time receiving supplement ",
+          "4": "Mostly receiving supplement",
+          "5": "Receiving supplement at every feed",
+          "6": "My baby is still not receiving formula or milk, only parenteral nutrition",
+          "7": "I don't know"
         }
       }
     }

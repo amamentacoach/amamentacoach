@@ -25,7 +25,7 @@ import {
 
 interface FormBabyInfo {
   birthday: string;
-  birthLocation: string;
+  postBirthLocation: string;
   name: string;
 }
 
@@ -40,14 +40,14 @@ const BabyForm: React.FC = () => {
   ].map(_ => ({
     name: '',
     birthday: '',
-    birthLocation: '',
+    postBirthLocation: '',
   }));
 
   const babyFormSchema = Yup.array()
     .of(
       Yup.object().shape({
         birthday: Yup.string().required(i18n.t('Yup.Required')),
-        birthLocation: Yup.string().required(i18n.t('Yup.Required')),
+        postBirthLocation: Yup.string().required(i18n.t('Yup.Required')),
         name: Yup.string().required(i18n.t('Yup.Required')),
       }),
     )
@@ -67,7 +67,7 @@ const BabyForm: React.FC = () => {
   function prepareNewBabiesData(formValues: FormValues): BabySignUpInfo[] {
     const babiesInfo: BabySignUpInfo[] = formValues.map(baby => ({
       birthday: baby.birthday,
-      birthLocation: baby.birthLocation,
+      postBirthLocation: baby.postBirthLocation,
       name: baby.name,
     }));
     return babiesInfo;
@@ -117,7 +117,7 @@ const BabyForm: React.FC = () => {
                 />
 
                 <FormRadioGroupInput
-                  error={getBabyError(errors, index, 'birthLocation')}
+                  error={getBabyError(errors, index, 'postBirthLocation')}
                   label={i18n.t('BabyFormPage.BirthLocation')}
                   options={[
                     i18n.t('Lodging'),
@@ -126,7 +126,7 @@ const BabyForm: React.FC = () => {
                     i18n.t('UTI'),
                   ]}
                   onChange={fieldValues =>
-                    setFieldValue(`${index}.birthLocation`, fieldValues[0])
+                    setFieldValue(`${index}.postBirthLocation`, fieldValues[0])
                   }
                 />
               </View>

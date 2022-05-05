@@ -1,6 +1,6 @@
 import { getTranslationFiles } from 'utils/localize';
 
-import type { MotherInfo } from 'services/signIn';
+import type { MotherInfo } from 'services/user';
 
 export interface SurveyQuestion {
   id: number;

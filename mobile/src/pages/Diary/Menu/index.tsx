@@ -104,7 +104,7 @@ const DiaryMenu: React.FC = () => {
   ];
 
   // Exibe o upload de imagem do pai apenas se a mãe tem um companheiro.
-  if (motherInfo.partner) {
+  if (motherInfo.hasPartner) {
     options.splice(7, 0, {
       image: { source: Father },
       title: i18n.t('DiaryMenuPage.Option9'),

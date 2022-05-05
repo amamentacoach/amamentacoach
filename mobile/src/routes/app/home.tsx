@@ -90,7 +90,7 @@ const CreateHomeRoutes = (Stack: StackScreens): JSX.Element[] => {
       key="FeedingForm"
       name="FeedingForm"
       options={{
-        title: i18n.t('StatusFormPage.FormName', { count: 1 }),
+        title: i18n.t('FeedingFormPage.FormName', { count: 1 }),
         ...headerBabyBlue,
       }}
     />,

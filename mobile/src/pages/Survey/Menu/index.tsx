@@ -68,7 +68,7 @@ const SurveyMenu: React.FC = () => {
   ];
 
   // Exibe o formulário de participação do pai apenas se a mãe tem um companheiro.
-  if (motherInfo.partner) {
+  if (motherInfo.hasPartner) {
     options = [
       ...options,
       {

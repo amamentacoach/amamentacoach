@@ -9,7 +9,7 @@ import {
 interface FormRadioGroupProps {
   // Define se a opção é apresentada horizontalmente ou verticalmente.
   text: string;
-  isSelected: boolean;
+  isSelected?: boolean;
   direction?: 'row' | 'column';
   color?: string;
   onPress: () => void;
