@@ -55,7 +55,7 @@ async function sendPushNotification(){
 
     for(const mae of maes){
         const bebe = await knex('bebe').select('data_parto').where('mae_id', '=', mae.id).first()
-        if(bebe != null || bebe != undefined){
+        if(bebe != null && bebe != undefined){
             const diff = moment(new Date()).diff(bebe.data_parto);
             const dias_vida = Math.trunc(moment.duration(diff).asDays())
             if(mae.score_15d === null && dias_vida>=13 ? true : mae.score_1m === null && dias_vida >= 27 ? true : false){
