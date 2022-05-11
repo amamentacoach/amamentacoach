@@ -2,9 +2,11 @@ import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useEffect } from 'react';
+import { Linking } from 'react-native';
 
 import OptionsList from 'components/OptionList';
 import { PaddedScrollView } from 'lib/sharedStyles';
+import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
@@ -18,6 +20,7 @@ import WithdrawalClock from '@assets/images/withdrawal_clock.svg';
 import WithdrawalQuestion from '@assets/images/withdrawal_question.svg';
 
 const Breastfeeding: React.FC = () => {
+  const { languageTag } = getBestLocale();
   const navigation = useNavigation<RootStackProps>();
 
   const options: OptionListEntry[] = [
@@ -42,6 +45,16 @@ const Breastfeeding: React.FC = () => {
       onPress: () => navigation.navigate('HowLongToBreastfeed'),
     },
   ];
+  if (languageTag === 'en') {
+    options.push({
+      image: { source: WithdrawalQuestion },
+      title: i18n.t('BreastfeedingPage.5'),
+      onPress: () =>
+        Linking.openURL(
+          'https://www.healthlinkbc.ca/pregnancy-parenting/parenting-babies-0-12-months/breastfeeding/video-hand-expressing-breastmilk',
+        ),
+    });
+  }
 
   useEffect(() => {
     createTelemetryAction({

@@ -23,14 +23,7 @@ const HU: React.FC = () => {
       title: i18n.t('HUPage.5'),
       subtitle: i18n.t('HUPage.6'),
       onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['z9V26A0Lipg'] }),
-    },
-    {
-      image: { source: IcVideo },
-      title: i18n.t('HUPage.7'),
-      subtitle: i18n.t('HUPage.8'),
-      onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['CLOZL3N_QXs'] }),
+        navigation.navigate('VideoPage', { videos: ['-B6OZnuG8gw'] }),
     },
   ];
 

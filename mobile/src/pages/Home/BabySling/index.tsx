@@ -7,6 +7,7 @@ import { View } from 'react-native';
 import ImageWrapper from 'components/ImageWrapper';
 import OptionsList from 'components/OptionList';
 import { PaddedScrollView } from 'lib/sharedStyles';
+import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
@@ -18,6 +19,7 @@ import Banner from '@assets/images/banner_canguru.png';
 import IcVideo from '@assets/images/ic_video.svg';
 
 const BabySling: React.FC = () => {
+  const { languageTag } = getBestLocale();
   const navigation = useNavigation<RootStackProps>();
 
   const options: OptionListEntry[] = [
@@ -25,19 +27,28 @@ const BabySling: React.FC = () => {
       image: { source: IcVideo },
       title: i18n.t('BabySlingPage.1'),
       onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['IhKyaqGX_MQ'] }),
+        navigation.navigate('VideoPage', {
+          videos:
+            languageTag === 'pt'
+              ? ['IhKyaqGX_MQ']
+              : ['TpMlfCph8P4', 'VOjGhwMuWFU'],
+        }),
     },
     {
       image: { source: IcVideo },
       title: i18n.t('BabySlingPage.2'),
       onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['rdTTyKGrq_s'] }),
+        navigation.navigate('VideoPage', {
+          videos: languageTag === 'pt' ? ['rdTTyKGrq_s'] : ['svNB3yz2v8E'],
+        }),
     },
     {
       image: { source: IcVideo },
       title: i18n.t('BabySlingPage.3'),
       onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['wx1ofoCZw9w'] }),
+        navigation.navigate('VideoPage', {
+          videos: languageTag === 'pt' ? ['wx1ofoCZw9w'] : ['JGAoHkkrGnk'],
+        }),
     },
   ];
 

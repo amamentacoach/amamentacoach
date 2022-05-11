@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { Linking } from 'react-native';
 
 import OptionsList from 'components/OptionList';
+import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
@@ -13,6 +14,38 @@ import ScrollView from './styles';
 import Music from '@assets/images/music.svg';
 
 const MusicPlaylists: React.FC = () => {
+  const { languageTag } = getBestLocale();
+
+  const ptLinks = [
+    {
+      image: { source: Music },
+      title: i18n.t('MusicPlaylistsPage.3'),
+      onPress: () =>
+        Linking.openURL(
+          'https://youtube.com/playlist?list=PLK7oeiGgzDtitdfAYT5bQNWTpsBOqiWc7',
+        ),
+    },
+    {
+      image: { source: Music },
+      title: i18n.t('MusicPlaylistsPage.4'),
+      onPress: () =>
+        Linking.openURL(
+          'https://youtube.com/playlist?list=PLK7oeiGgzDtj2PhNH_958pOx30vfuZ8ZS',
+        ),
+    },
+  ];
+  const enLinks = [
+    {
+      image: { source: Music },
+      title: i18n.t('MusicPlaylistsPage.3'),
+      onPress: () =>
+        Linking.openURL(
+          'https://www.youtube.com/watch?v=LoV5F_FwbBM&list=PLK7oeiGgzDtjvPIh49VD8m7TLJihv5-iU',
+        ),
+    },
+  ];
+  const links = languageTag === 'pt' ? ptLinks : enLinks;
+
   const options: OptionListEntry[] = [
     {
       image: { source: Music },
@@ -30,22 +63,7 @@ const MusicPlaylists: React.FC = () => {
           'https://youtube.com/playlist?list=PLK7oeiGgzDthw88gK7lCBtoYxdX4XhqvJ',
         ),
     },
-    {
-      image: { source: Music },
-      title: i18n.t('MusicPlaylistsPage.3'),
-      onPress: () =>
-        Linking.openURL(
-          'https://youtube.com/playlist?list=PLK7oeiGgzDtitdfAYT5bQNWTpsBOqiWc7',
-        ),
-    },
-    {
-      image: { source: Music },
-      title: i18n.t('MusicPlaylistsPage.4'),
-      onPress: () =>
-        Linking.openURL(
-          'https://youtube.com/playlist?list=PLK7oeiGgzDtj2PhNH_958pOx30vfuZ8ZS',
-        ),
-    },
+    ...links,
   ];
 
   useEffect(() => {

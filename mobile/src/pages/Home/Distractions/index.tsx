@@ -6,6 +6,7 @@ import { Linking } from 'react-native';
 
 import OptionsList from 'components/OptionList';
 import { PaddedScrollView } from 'lib/sharedStyles';
+import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
@@ -19,7 +20,9 @@ import Puzzle from '@assets/images/puzzle.svg';
 
 const Distractions: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
-  const options: OptionListEntry[] = [
+  const { languageTag } = getBestLocale();
+
+  const ptLinks = [
     {
       image: { source: Puzzle },
       title: i18n.t('DistractionsPage.1'),
@@ -34,6 +37,26 @@ const Distractions: React.FC = () => {
           'https://cruzadasclube.com.br/jogo/categoria/id/1/n/cruzadas-classicas',
         ),
     },
+  ];
+  const enLinks = [
+    {
+      image: { source: Puzzle },
+      title: i18n.t('DistractionsPage.1'),
+      onPress: () => Linking.openURL('https://color.method.ac/'),
+    },
+    {
+      image: { source: Crosswords },
+      title: i18n.t('DistractionsPage.2'),
+      onPress: () =>
+        Linking.openURL(
+          'https://www.mind.org.uk/need-urgent-help/how-can-i-distract-myself/games-and-puzzles/',
+        ),
+    },
+  ];
+  const links = languageTag === 'pt' ? ptLinks : enLinks;
+
+  const options: OptionListEntry[] = [
+    ...links,
     {
       image: { source: Music },
       title: i18n.t('DistractionsPage.3'),
