@@ -1,3 +1,4 @@
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 
 import { ManjariBold, OpenSansRegular } from 'lib/sharedStyles';
@@ -7,7 +8,6 @@ interface OptionProps {
 }
 
 export const Header = styled.View`
-  width: 100%;
   height: 184px;
 `;
 
@@ -47,30 +47,25 @@ export const LocationContainer = styled.View`
 
 export const HeaderBackground = styled.View`
   background-color: ${props => props.theme.babyPink};
-  align-items: center;
   height: 95%;
-  padding: 24px;
 `;
 
 export const HeaderText = styled(ManjariBold)`
   font-size: 24px;
+  align-self: center;
   color: ${props => props.theme.black};
   margin: 10px 0;
 `;
 
-export const Banner = styled.View`
+export const Banner = styled(TouchableOpacity)`
   background-color: ${props => props.theme.primary};
-  position: absolute;
-  margin-top: 80px;
-  padding: 10px 0;
-  flex: 1;
-  width: 100%;
+  padding: 12px 0;
   justify-content: center;
   align-items: center;
-  top: 0;
+  margin: 0 24px;
 `;
 
-export const BannerButton = styled.TouchableOpacity`
+export const BannerButtonTextContainer = styled.View`
   background-color: ${props => props.theme.accent};
   height: 40px;
   width: 100%;
@@ -90,6 +85,5 @@ export const ContentContainer = styled.View`
 `;
 
 export const ContentHeader = styled(ManjariBold)`
-  font-size: 20px;
   margin-bottom: 20px;
 `;

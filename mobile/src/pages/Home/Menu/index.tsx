@@ -30,7 +30,7 @@ import {
   HeaderBackground,
   HeaderText,
   Banner,
-  BannerButton,
+  BannerButtonTextContainer,
   BannerButtonText,
   InnerCircle,
   LocationContainer,
@@ -352,18 +352,15 @@ const Home: React.FC = () => {
         <Header>
           <HeaderBackground>
             <HeaderText>{i18n.t('Begin')}</HeaderText>
-            <Banner>
+            <Banner activeOpacity={1} onPress={() => navigation.navigate('HU')}>
               <ImageWrapper height={100} resizeMode="contain" source={Logo} />
-              <BannerButton
-                activeOpacity={0.7}
-                onPress={() => navigation.navigate('HU')}>
+              <BannerButtonTextContainer>
                 <BannerButtonText>
                   {i18n.t('HomePage.BannerButton')}
                 </BannerButtonText>
-              </BannerButton>
+              </BannerButtonTextContainer>
             </Banner>
           </HeaderBackground>
-          {/* </BannerImage> */}
         </Header>
         <ContentContainer>
           <ContentHeader>{i18n.t('Content')}</ContentHeader>
