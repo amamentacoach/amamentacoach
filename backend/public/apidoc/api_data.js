@@ -1297,7 +1297,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"email\":\"fulana@email.com\",\n    \"senha\":\"abc123\",\n    \"nome\": \"Fulana de Tal\",\n    \"data_nascimento\":\"1990-05-05\",\n    \"companheiro\":true,\n    \"localizacao\": \"HU-UEL\",\n    \"bebes\": [\n         {\n             \"nome\":\"Enzo Gabriel\",\n             \"data_parto\":\"2020-08-28\",\n             \"local\":\"UCI Neonatal\"\n         }                \n    ]\n}",
+          "content": "{\n    \"email\":\"fulanateste@email.com\",\n    \"senha\":\"abc123\",\n    \"nome\": \"Fulana de Tal\",\n    \"data_nascimento\":\"1990-05-05\",\n    \"localizacao\": \"HU-UEL\",\n    \"categoria\":\"Gestante\", // MaePrematuro, Gestante, ProfissionalSaude, Outros\n    \"whatsapp\":\"43 991814181\",\n    \"veiculo_midia\": \"Facebook\", // Como ficou sabendo sobre o app\n    \"semanas_gestante\": 22, // Somente se for gestante\n    \"data_provavel_parto\": \"2022-07-14\" // Somente se for gestante\n    \"companheiro\": true\n    \"bebes\": [ // Não informar quando for gestante\n         {\n             \"nome\":\"Enzo Gabriel\",\n             \"data_parto\":\"2020-08-28\",\n             \"local\":\"UCI Neonatal\"\n         }                \n    ]\n}",
           "type": "json"
         }
       ]

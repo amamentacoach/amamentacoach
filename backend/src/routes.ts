@@ -94,13 +94,18 @@ routes.post('/maes',maesController.create);
  *
  * @apiParamExample {json} Exemplo Request:
  *      {
- *          "email":"fulana@email.com",
+ *          "email":"fulanateste@email.com",
  *          "senha":"abc123",
  *          "nome": "Fulana de Tal",
  *          "data_nascimento":"1990-05-05",
- *          "companheiro":true,
  *          "localizacao": "HU-UEL",
- *          "bebes": [
+ *          "categoria":"Gestante", // MaePrematuro, Gestante, ProfissionalSaude, Outros
+ *          "whatsapp":"43 991814181",
+ *          "veiculo_midia": "Facebook", // Como ficou sabendo sobre o app
+ *          "semanas_gestante": 22, // Somente se for gestante
+ *          "data_provavel_parto": "2022-07-14" // Somente se for gestante
+ *          "companheiro": true
+ *          "bebes": [ // Não informar quando for gestante
  *               {
  *                   "nome":"Enzo Gabriel",
  *                   "data_parto":"2020-08-28",

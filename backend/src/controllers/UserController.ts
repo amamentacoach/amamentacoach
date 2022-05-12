@@ -10,21 +10,44 @@ class UserController{
         const {
             email,
             senha,
-            nome, 
-            companheiro,
+            nome,
+            whatsapp,
+            categoria,
             localizacao,
             data_nascimento,
+            veiculo_midia,
+            semanas_gestante,
+            data_provavel_parto,
+            companheiro,
             bebes
         } = req.body;
 
         await knex.transaction(async trx =>{
-            const mae = {email, senha:await bcrypt.hash(senha,10), nome, companheiro, localizacao, data_nascimento, ultimo_acesso:new Date(), primeiro_acesso: new Date()};
+
+            const mae = {
+                email, 
+                senha:await bcrypt.hash(senha,10), 
+                nome, 
+                localizacao, 
+                data_nascimento, 
+                ultimo_acesso:new Date(), 
+                primeiro_acesso: new Date(), 
+                categoria, 
+                whatsapp, 
+                veiculo_midia,
+                semanas_gestante,
+                companheiro: companheiro || false,
+                data_provavel_parto
+            };
+
             const [id] = await trx('mae').insert(mae).returning('id')
 
-            for (const bebe of bebes) {
-                bebe.mae_id = id
-                bebe.local_cadastro = bebe.local
-                await trx('bebe').insert(bebe);
+            if(bebes){
+                for (const bebe of bebes) {
+                    bebe.mae_id = id
+                    bebe.local_cadastro = bebe.local
+                    await trx('bebe').insert(bebe);
+                }
             }
 
             const secret = process.env.SECRET
