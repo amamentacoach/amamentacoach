@@ -603,9 +603,6 @@
         }
       },
       "10": {
-        "Description": "Na ocasião, ele tinha qual idade gestacional corrigida?"
-      },
-      "11": {
         "Description": "Na última semana, qual foi a frequência com que você e seu bebê permaneceram em contato pele a pele (sem nenhum tipo de tecido entre vocês), durante, no mínimo, 1 hora, sem interrupções?",
         "Options": {
           "1": "Nenhuma",

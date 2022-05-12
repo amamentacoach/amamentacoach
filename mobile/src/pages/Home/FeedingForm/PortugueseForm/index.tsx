@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { Formik, FormikHelpers } from 'formik';
 import i18n from 'i18n-js';
-import React from 'react';
 import * as Yup from 'yup';
 
 import FormRadioGroupInput from 'components/FormRadioGroup';
@@ -24,8 +23,6 @@ interface FormValues {
   currentFelling: string;
   alreadyBreastfeed: string;
   daysFirstBreastfeed: string;
-  weeksFirstBreastfeed: string;
-  gestationalAge: string;
   skinToSkinContactPeriod: string;
 }
 
@@ -45,8 +42,6 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
     currentFelling: '',
     alreadyBreastfeed: '',
     daysFirstBreastfeed: '',
-    weeksFirstBreastfeed: '',
-    gestationalAge: '',
     skinToSkinContactPeriod: '',
   };
 
@@ -82,12 +77,6 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
     daysFirstBreastfeed: alreadyBreastfeedOptionalQuestions
       .min(0, i18n.t('Yup.MinEqualError', { num: 0 }))
       .max(6, i18n.t('Yup.MaxEqualError', { num: 6 })),
-    weeksFirstBreastfeed: alreadyBreastfeedOptionalQuestions
-      .min(30, i18n.t('Yup.MinEqualError', { num: 30 }))
-      .max(40, i18n.t('Yup.MaxEqualError', { num: 40 })),
-    gestationalAge: alreadyBreastfeedOptionalQuestions
-      .min(0, i18n.t('Yup.MinEqualError', { num: 0 }))
-      .max(6, i18n.t('Yup.MaxEqualError', { num: 6 })),
     skinToSkinContactPeriod: Yup.string().required(i18n.t('Yup.Required')),
   });
 
@@ -105,9 +94,7 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
       values.largestVolume || 'null',
       values.currentFelling,
       values.alreadyBreastfeed,
-      `${values.weeksFirstBreastfeed || 'null'},${
-        values.daysFirstBreastfeed || 'null'
-      }`,
+      `${values.daysFirstBreastfeed || 'null'}`,
       values.skinToSkinContactPeriod,
     ];
     const status = await answerFeedingForm(situation, answers);
@@ -266,23 +253,15 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
                 onChange={_ => {
                   let value = null;
                   // Alterna a ativação dos campos abaixo (inserção de semanas e dias).
-                  if (values.weeksFirstBreastfeed === null) {
+                  if (values.daysFirstBreastfeed === null) {
                     value = '';
                   }
-                  setFieldValue('weeksFirstBreastfeed', value);
                   setFieldValue('daysFirstBreastfeed', value);
                 }}
               />
-              {values.weeksFirstBreastfeed !== null && (
+              {values.daysFirstBreastfeed !== null && (
                 <>
                   <Row>
-                    <FormTextInput
-                      color={theme.babyBlue}
-                      error={errors.weeksFirstBreastfeed}
-                      keyboardType="numeric"
-                      label={i18n.t('Week', { count: 2 })}
-                      onChangeText={handleChange('weeksFirstBreastfeed')}
-                    />
                     <Spacer width={4} />
                     <FormTextInput
                       color={theme.babyBlue}
@@ -292,13 +271,6 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
                       onChangeText={handleChange('daysFirstBreastfeed')}
                     />
                   </Row>
-                  <FormTextInput
-                    color={theme.babyBlue}
-                    error={errors.gestationalAge}
-                    keyboardType="numeric"
-                    label={i18n.t('FeedingFormPage.Questions.10.Description')}
-                    onChangeText={handleChange('gestationalAge')}
-                  />
                 </>
               )}
             </>
@@ -306,13 +278,13 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
           <FormRadioGroupInput
             color={theme.babyBlue}
             error={errors.skinToSkinContactPeriod}
-            label={i18n.t('FeedingFormPage.Questions.11.Description')}
+            label={i18n.t('FeedingFormPage.Questions.10.Description')}
             options={[
-              i18n.t('FeedingFormPage.Questions.11.Options.1'),
-              i18n.t('FeedingFormPage.Questions.11.Options.2'),
-              i18n.t('FeedingFormPage.Questions.11.Options.3'),
-              i18n.t('FeedingFormPage.Questions.11.Options.4'),
-              i18n.t('FeedingFormPage.Questions.11.Options.5'),
+              i18n.t('FeedingFormPage.Questions.10.Options.1'),
+              i18n.t('FeedingFormPage.Questions.10.Options.2'),
+              i18n.t('FeedingFormPage.Questions.10.Options.3'),
+              i18n.t('FeedingFormPage.Questions.10.Options.4'),
+              i18n.t('FeedingFormPage.Questions.10.Options.5'),
             ]}
             onChange={selectedValues =>
               setFieldValue('skinToSkinContactPeriod', selectedValues[0])
