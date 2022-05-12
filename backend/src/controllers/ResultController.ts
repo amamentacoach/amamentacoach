@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import path from 'path';
 import knex from '../database/connection';  
 import {createObjectCsvWriter} from 'csv-writer';
-const convertCsvToXlsx = require('@aternus/csv-to-xlsx');
+//const convertCsvToXlsx = require('@aternus/csv-to-xlsx');
 import moment from 'moment'
 require('dotenv/config');
 
@@ -348,14 +348,14 @@ class ResultController{
         }
 
 
-        await csv.writeRecords(maes)
-        try{
-            convertCsvToXlsx(pathCsv, pathXlsx)
-        }catch (e){
-            console.error(e.toString());
-        }
-        //res.sendStatus(200)
-        res.download(pathXlsx,"dados_gerais.xlsx")
+        //await csv.writeRecords(maes)
+        //try{
+        //    convertCsvToXlsx(pathCsv, pathXlsx)
+        //}catch (e){
+         //   console.error(e.toString());
+        //}
+        res.sendStatus(200)
+        //res.download(pathXlsx,"dados_gerais.xlsx")
     }
 }
 
