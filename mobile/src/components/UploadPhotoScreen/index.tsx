@@ -151,7 +151,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
               text={
                 isSendingForm
                   ? i18n.t('Status.Sending')
-                  : i18n.t('Actions.Send')
+                  : i18n.t('Actions.Submit')
               }
               onPress={handleSubmitNewPhoto}
             />

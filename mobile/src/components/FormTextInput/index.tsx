@@ -1,15 +1,13 @@
 import { ErrorContainer, ErrorText } from 'lib/sharedStyles';
 
-import type { ComponentProps } from 'react';
+import type { TextInputProps } from 'react-native';
 
 import { Container, LabelText, TextInput } from './styles';
 
-type TextInputProps = ComponentProps<typeof TextInput>;
-
-interface FormTextProps extends TextInputProps {
+type FormTextProps = TextInputProps & {
   label?: string;
   error?: string;
-}
+};
 
 const FormTextInput: React.FC<FormTextProps> = ({ label, error, ...props }) => {
   return (

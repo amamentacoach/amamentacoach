@@ -19,7 +19,7 @@ export const Button = styled.TouchableOpacity<ButtonProps>`
   border-radius: 3.6px;
 `;
 
-export const TextButton = styled.Text<ButtonProps>`
+export const Text = styled.Text<ButtonProps>`
   font-family: 'OpenSans-Bold';
   text-align: center;
   font-size: 16px;

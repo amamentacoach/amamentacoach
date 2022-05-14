@@ -1,6 +1,6 @@
 import type { TouchableOpacityProps } from 'react-native';
 
-import { Button, TextButton } from './styles';
+import { Button, Text } from './styles';
 
 interface MainButtonProps extends TouchableOpacityProps {
   text: string;
@@ -19,9 +19,9 @@ const MainButton: React.FC<MainButtonProps> = ({
       color={color}
       disabled={disabled}
       onPress={onPress}>
-      <TextButton color={color} disabled={disabled}>
+      <Text color={color} disabled={disabled}>
         {text}
-      </TextButton>
+      </Text>
     </Button>
   );
 };

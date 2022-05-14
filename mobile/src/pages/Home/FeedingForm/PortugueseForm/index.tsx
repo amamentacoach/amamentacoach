@@ -207,7 +207,6 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
                 }
               />
               <FormTextInput
-                color={theme.babyBlue}
                 error={errors.largestVolume}
                 keyboardType="numeric"
                 label={i18n.t('FeedingFormPage.Questions.6.Description')}
@@ -264,7 +263,6 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
                   <Row>
                     <Spacer width={4} />
                     <FormTextInput
-                      color={theme.babyBlue}
                       error={errors.daysFirstBreastfeed}
                       keyboardType="numeric"
                       label={i18n.t('Day', { count: 2 })}
