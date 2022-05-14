@@ -9,9 +9,9 @@ import FormPickerInput from 'components/FormPickerInput';
 import FormRadioGroupInput from 'components/FormRadioGroup';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
+import PaddedScrollView from 'components/PaddedScrollView';
 import { useAuth } from 'contexts/auth';
 import { formatWithLocale } from 'lib/date-fns';
-import { PaddedScrollView } from 'lib/sharedStyles';
 import { BirthLocation, updateUserProfile } from 'services/user';
 
 import { HeaderIconContainer } from '../Profile/styles';
@@ -41,7 +41,7 @@ const EditForm: React.FC<EditFormProps> = ({
   const { motherInfo, refreshMotherInfo } = useAuth();
   const babyFormSchema = Yup.object()
     .shape({
-      birthday: Yup.string().required(i18n.t('Yup.Required')),
+      birthday: Yup.date().required(i18n.t('Yup.Required')),
       postBirthLocation: Yup.string().required(i18n.t('Yup.Required')),
       name: Yup.string().required(i18n.t('Yup.Required')),
     })
@@ -102,7 +102,7 @@ const EditForm: React.FC<EditFormProps> = ({
             label={i18n.t('BabyFormPage.BirthDate')}
             placeholder={i18n.t('BabyFormPage.Placeholder.BirthDate')}
             value={values.birthday}
-            onChange={handleChange('birthday')}
+            onChange={date => setFieldValue('birthday', date)}
           />
 
           <FormRadioGroupInput

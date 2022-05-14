@@ -10,9 +10,10 @@ import FormPickerInput from 'components/FormPickerInput';
 import FormRadioGroupInput from 'components/FormRadioGroup';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
+import PaddedScrollView from 'components/PaddedScrollView';
 import { useAuth } from 'contexts/auth';
 import { formatWithLocale } from 'lib/date-fns';
-import { Center, Flex, PaddedScrollView } from 'lib/sharedStyles';
+import { Center, Flex } from 'lib/sharedStyles';
 import { BirthLocation, updateUserProfile } from 'services/user';
 
 import type { FormikHelpers } from 'formik';
@@ -30,7 +31,7 @@ import {
 import IcEdit from '@assets/images/icons/ic_edit.svg';
 
 interface FormValues {
-  birthday: string;
+  birthday?: Date;
   hasPartner: boolean | undefined;
   birthLocation: string;
   name: string;
@@ -68,7 +69,7 @@ const EditForm: React.FC<EditFormProps> = ({ setDisplayEditForm }) => {
     const updatedUserInfo = {
       email: motherInfo.email,
       name: formValues.name,
-      birthday: formValues.birthday,
+      birthday: formValues.birthday!,
       hasPartner: formValues.hasPartner!,
       birthLocation: formValues.birthLocation,
       babies: motherInfo.babies,
@@ -109,7 +110,7 @@ const EditForm: React.FC<EditFormProps> = ({ setDisplayEditForm }) => {
             label={i18n.t('MotherFormPage.Birthday')}
             placeholder={i18n.t('MotherFormPage.BirthdayPlaceholder')}
             value={motherInfo.birthday}
-            onChange={handleChange('birthday')}
+            onChange={date => setFieldValue('birthday', date)}
           />
 
           <FormRadioGroupInput

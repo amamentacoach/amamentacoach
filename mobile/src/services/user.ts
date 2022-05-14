@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import i18n from 'i18n-js';
 
 import api from 'services/api';
@@ -8,7 +9,7 @@ export enum BirthLocation {
 }
 
 interface BabyInfo {
-  birthday: string;
+  birthday: Date;
   id: number;
   name: string;
   postBirthLocation: string;
@@ -16,7 +17,7 @@ interface BabyInfo {
 
 interface MotherUpdateInfo {
   babies: BabyInfo[];
-  birthday: string;
+  birthday: Date;
   birthLocation: string;
   email: string;
   hasPartner: boolean;
@@ -24,7 +25,7 @@ interface MotherUpdateInfo {
 }
 
 export interface MotherInfo {
-  birthday: string;
+  birthday: Date;
   birthLocation: BirthLocation;
   email: string;
   name: string;
@@ -70,7 +71,7 @@ export async function getMotherInfo(): Promise<MotherInfo | null> {
     const { data } = await api.get('/maes');
     // Recebe todos os ids e nome dos bebês.
     const babies: MotherInfo['babies'] = data.bebes.map((baby: any) => ({
-      birthday: baby.data_parto,
+      birthday: new Date(baby.data_parto),
       id: baby.id,
       name: baby.nome,
       postBirthLocation: baby.local,
@@ -122,7 +123,7 @@ export async function getMotherInfo(): Promise<MotherInfo | null> {
       babiesBirthLocations,
       birthLocation,
       email: data.email,
-      birthday: data.data_nascimento,
+      birthday: new Date(data.data_nascimento),
       name: data.nome,
       hasPartner: data.companheiro,
       images: {
@@ -143,7 +144,7 @@ export async function updateUserProfile(
   try {
     await api.put('/user', {
       companheiro: userInfo.hasPartner,
-      data_nascimento: userInfo.birthday,
+      data_nascimento: format(userInfo.birthday, 'yyyy-MM-dd'),
       email: userInfo.email,
       localizacao: userInfo.birthLocation,
       nome: userInfo.name,

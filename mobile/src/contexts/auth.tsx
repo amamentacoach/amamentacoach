@@ -21,7 +21,7 @@ interface AuthContextData {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const defaultMotherInfo: MotherInfo = {
-  birthday: '',
+  birthday: new Date(),
   birthLocation: BirthLocation.MATERNITY,
   email: '',
   name: '',

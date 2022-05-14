@@ -5,16 +5,18 @@ import { Platform, TouchableOpacity } from 'react-native';
 import { formatWithLocale } from 'lib/date-fns';
 import { Flex, ErrorContainer, ErrorText } from 'lib/sharedStyles';
 
+import type { FormikErrors } from 'formik';
+
 import { LabelText, TextInput } from './styles';
 
 interface FormDateProps {
-  placeholder: string;
+  placeholder?: string;
   label?: string;
-  error?: string;
+  error?: string | FormikErrors<any>;
   mode?: string;
   maxDate?: Date;
-  value?: string;
-  onChange: (fieldValue: string) => void;
+  value?: Date;
+  onChange: (fieldValue: Date) => void;
 }
 
 const FormDateInput: React.FC<FormDateProps> = ({
@@ -27,6 +29,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
   onChange,
 }) => {
   const [show, setShow] = useState(false);
+  const [date, setDate] = useState<Date | undefined>(value ?? undefined);
 
   // Formata a data salva para ser exibida no TextInput do componente.
   function formatDisplayDate(dateToFormat: Date): string {
@@ -36,28 +39,16 @@ const FormDateInput: React.FC<FormDateProps> = ({
     return formatWithLocale(dateToFormat, 'P');
   }
 
-  // Formata a data salva para ser armazenada no useState do componente e valor final do formulário.
-  function formatStateDate(dateToFormat: Date): string {
-    if (mode === 'time') {
-      return formatWithLocale(dateToFormat, 'HH:mm');
-    }
-    return formatWithLocale(dateToFormat, 'yyyy-MM-dd');
-  }
-
   // Exibe o seletor.
   function showDatePicker(): void {
     setShow(true);
   }
 
-  const [date, setDate] = useState<Date | undefined>(
-    value ? new Date(value) : undefined,
-  );
-
   // Esconde o seletor e salva o valor escolhido.
   function handleDateSelected(_: Event, selectedDate?: Date): void {
     setShow(Platform.OS === 'ios');
     if (selectedDate) {
-      onChange(formatStateDate(selectedDate));
+      onChange(selectedDate);
       setDate(selectedDate);
     }
   }
