@@ -1,6 +1,7 @@
 import { Action, AppScreen } from '@common/telemetria';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { isToday } from 'date-fns';
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
 import { hide } from 'react-native-bootsplash';
@@ -18,6 +19,7 @@ import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
+import type { PendingForms } from 'services/telemetry';
 
 import {
   ContentContainer,
@@ -40,21 +42,20 @@ import HomeMoreInformation from '@assets/images/home_more_information.svg';
 import LogoEN from '@assets/images/logo_white_en.svg';
 import LogoPT from '@assets/images/logo_white_pt.svg';
 
+interface FormsModal {
+  isVisible: boolean;
+  action: PendingForms;
+}
+
 const Home: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
+  const isFocused = useIsFocused();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
   const { languageTag } = getBestLocale();
-  const isFocused = useIsFocused();
-
-  // const [babyModalVisibility, setBabyModalVisibility] =
-  //   useState<boolean>(false);
-
-  const [formModalVisibility, setFormModalVisibility] =
-    useState<boolean>(false);
-  const [formAction, setFormAction] = useState<'1D' | '15D' | '1M' | null>(
-    null,
-  );
-
+  const [formsModalData, setFormsModalData] = useState<FormsModal>({
+    action: null,
+    isVisible: false,
+  });
   const [expectationsModalVisibility, setExpectationsModalVisibility] =
     useState<Boolean>(false);
 
@@ -114,8 +115,10 @@ const Home: React.FC = () => {
     async function checkForms(): Promise<void> {
       const action = await setHomePageOpened();
       if (action) {
-        setFormAction(action);
-        setFormModalVisibility(true);
+        setFormsModalData({
+          action,
+          isVisible: true,
+        });
       }
     }
 
@@ -131,23 +134,32 @@ const Home: React.FC = () => {
     }
 
     // Verifica a última data que o aplicativo foi aberto. Se um dia tiver passado ou é a primeira
-    // vez abrindo o app é buscado os bebês que podem receber alta.
+    // vez abrindo o app.
     async function checkUserActions(): Promise<void> {
-      // Menos de um dia se passou.
-      if (await storageIsToday('@AmamentaCoach:lastOpenedDate')) {
-        return;
+      setTemporaryNotFirstRun('home');
+      const storageString = await AsyncStorage.getItem(
+        '@AmamentaCoach:lastOpenedDate',
+      );
+      // Verifica se a última data de acesso foi hoje.
+      const alreadyDisplayedToday = storageString
+        ? isToday(new Date(storageString))
+        : false;
+
+      if (storageString && !alreadyDisplayedToday) {
+        // Caso não seja a primeira vez acessando o app, apresenta o popup para visitar a tela de
+        // expectativas.
+        checkExpectations();
       }
 
-      // Verifica se algum formulário deve ser respondido
-      await checkForms();
-      // Verifica se o usuário já abriu as expectativas hoje.
-      await checkExpectations();
-
-      await AsyncStorage.setItem(
-        '@AmamentaCoach:lastOpenedDate',
-        new Date().toISOString(),
-      );
-      setTemporaryNotFirstRun('home');
+      if (!storageString || !alreadyDisplayedToday) {
+        // Verifica se algum formulário deve ser respondido
+        checkForms();
+        // Atualiza a data de acesso.
+        AsyncStorage.setItem(
+          '@AmamentaCoach:lastOpenedDate',
+          new Date().toISOString(),
+        );
+      }
     }
 
     // Executa pela primeira vez ao abrir o aplicativo
@@ -170,7 +182,10 @@ const Home: React.FC = () => {
   // Fecha todos os modais.
   function hideAllModals(): void {
     setExpectationsModalVisibility(false);
-    setFormModalVisibility(false);
+    setFormsModalData({
+      action: null,
+      isVisible: false,
+    });
   }
 
   return (
@@ -191,12 +206,12 @@ const Home: React.FC = () => {
             onPress: () => setExpectationsModalVisibility(false),
           },
         ]}
-        visible={expectationsModalVisibility && !formModalVisibility}
+        visible={expectationsModalVisibility && !formsModalData.isVisible}
       />
       <Modal
         color={theme.babyPink}
         content={
-          formAction === '1D'
+          formsModalData.action === '1D'
             ? i18n.t('HomePage.FirstStatusPopup')
             : i18n.t('HomePage.StatusPopup')
         }
@@ -206,16 +221,17 @@ const Home: React.FC = () => {
             onPress: () => {
               hideAllModals();
               navigation.navigate('StatusForm', {
-                situation: formAction,
+                situation: formsModalData.action,
               });
             },
           },
           {
             text: i18n.t('No'),
-            onPress: () => setFormModalVisibility(false),
+            onPress: () =>
+              setFormsModalData({ action: null, isVisible: false }),
           },
         ]}
-        visible={formModalVisibility}
+        visible={formsModalData.isVisible}
       />
       <ScrollView>
         <Header>
