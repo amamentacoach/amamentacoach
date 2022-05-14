@@ -18,7 +18,6 @@ import type { MotherSignUpInfo } from 'services/signUp';
 import {
   FirstSubOptionContainer,
   FormContainer,
-  HeaderSubText,
   HeaderText,
   SubmitButtonContainer,
 } from './styles';
@@ -74,7 +73,6 @@ const MotherForm: React.FC = () => {
       <HeaderText>
         {i18n.t('Auth.SignUpStep', { current: '2', max: '4' })}
       </HeaderText>
-      <HeaderSubText>{i18n.t('MotherFormPage.HeaderSubText')}</HeaderSubText>
       <Formik
         initialValues={formInitialValues}
         validateOnChange={false}
