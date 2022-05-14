@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
+import PaddedScrollView from 'components/PaddedScrollView';
 import SecondaryButton from 'components/SecondaryButton';
-import { PaddedScrollView } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import {

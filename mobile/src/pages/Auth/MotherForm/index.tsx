@@ -8,8 +8,9 @@ import FormPickerInput from 'components/FormPickerInput';
 import FormRadioGroupInput from 'components/FormRadioGroup';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
+import PaddedScrollView from 'components/PaddedScrollView';
 import SecondaryButton from 'components/SecondaryButton';
-import { Flex, PaddedScrollView } from 'lib/sharedStyles';
+import { Flex } from 'lib/sharedStyles';
 
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
 import type { MotherSignUpInfo } from 'services/signUp';
@@ -23,9 +24,9 @@ import {
 } from './styles';
 
 interface FormValues {
-  birthday: string;
+  birthday?: Date;
   currentGestationCount: string;
-  hasPartner: boolean | undefined;
+  hasPartner?: boolean;
   birthLocation: string;
   name: string;
 }
@@ -35,7 +36,7 @@ const MotherForm: React.FC = () => {
   const { email, password } = useRoute<AuthRouteProp<'MotherForm'>>().params;
 
   const formInitialValues: FormValues = {
-    birthday: '',
+    birthday: undefined,
     currentGestationCount: '',
     birthLocation: '',
     name: '',
@@ -43,7 +44,7 @@ const MotherForm: React.FC = () => {
   };
 
   const motherFormSchema = Yup.object({
-    birthday: Yup.string().required(i18n.t('Yup.Required')),
+    birthday: Yup.date().required(i18n.t('Yup.Required')),
     currentGestationCount: Yup.number()
       .integer(i18n.t('Yup.MustBeIntegerError'))
       .typeError(i18n.t('Yup.MustBeIntegerError'))
@@ -57,7 +58,7 @@ const MotherForm: React.FC = () => {
   // Avança para a próxima página passando as informações do usuário.
   function handleFormSubmit(formValues: FormValues): void {
     const motherInfo: MotherSignUpInfo = {
-      birthday: formValues.birthday,
+      birthday: formValues.birthday!,
       currentGestationCount: Number(formValues.currentGestationCount),
       email,
       hasPartner: formValues.hasPartner!,
@@ -100,7 +101,7 @@ const MotherForm: React.FC = () => {
               error={errors.birthday}
               label={i18n.t('MotherFormPage.Birthday')}
               placeholder={i18n.t('MotherFormPage.BirthdayPlaceholder')}
-              onChange={handleChange('birthday')}
+              onChange={date => setFieldValue('birthday', date)}
             />
 
             <FormRadioGroupInput

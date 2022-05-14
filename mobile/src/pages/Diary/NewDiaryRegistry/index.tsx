@@ -8,7 +8,8 @@ import * as Yup from 'yup';
 import FormDateInput from 'components/FormDateInput';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
-import { PaddedScrollView, Flex, ErrorText } from 'lib/sharedStyles';
+import PaddedScrollView from 'components/PaddedScrollView';
+import { Flex, ErrorText } from 'lib/sharedStyles';
 import { createExtractionEntry } from 'services/diaryRegistry';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -30,7 +31,7 @@ import CheckedBox from '@assets/images/icons/checkbox_checked.svg';
 import UncheckedBox from '@assets/images/icons/checkbox_unchecked.svg';
 
 interface FormValues {
-  time: string;
+  time?: Date;
   quantity: string;
   duration: string;
   breastLeft: string;
@@ -41,8 +42,8 @@ const NewDiaryRegistry: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const { params } = useRoute<RootRouteProp<'NewDiaryRegistry'>>();
   const [isSendingForm, setIsSendingForm] = useState(false);
-  const formInitialValues = {
-    time: '',
+  const formInitialValues: FormValues = {
+    time: undefined,
     quantity: '',
     duration: '',
     breastLeft: '',
@@ -94,18 +95,12 @@ const NewDiaryRegistry: React.FC = () => {
       breast += breastLeft;
     }
 
-    const [minutes, seconds] = time
-      .split(':')
-      .map(value => parseInt(value, 10));
-    const now = new Date();
-    now.setHours(minutes, seconds);
-
     setIsSendingForm(true);
     const status = await createExtractionEntry(
       breast,
       parseInt(duration, 10),
       parseFloat(quantity),
-      now,
+      time!,
     );
 
     if (status) {
@@ -149,7 +144,7 @@ const NewDiaryRegistry: React.FC = () => {
                 label={i18n.t('Time')}
                 mode="time"
                 placeholder={i18n.t('NewDiaryRegistryPage.TimePlaceholder')}
-                onChange={handleChange('time')}
+                onChange={date => setFieldValue('time', date)}
               />
 
               <FormTextInput

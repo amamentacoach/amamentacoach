@@ -9,8 +9,9 @@ import FormDateInput from 'components/FormDateInput';
 import FormPickerInput from 'components/FormPickerInput';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
+import PaddedScrollView from 'components/PaddedScrollView';
 import { useAuth } from 'contexts/auth';
-import { Flex, PaddedScrollView, ErrorText } from 'lib/sharedStyles';
+import { Flex, ErrorText } from 'lib/sharedStyles';
 import { createBreastfeedEntry } from 'services/diaryRegistry';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -33,7 +34,7 @@ import UncheckedBox from '@assets/images/icons/checkbox_unchecked.svg';
 
 interface FormValues {
   babyName: string;
-  time: string;
+  time?: Date;
   duration: string;
   breastLeft: string;
   breastRight: string;
@@ -44,19 +45,18 @@ const NewBreastfeedEntry: React.FC = () => {
   const { params } = useRoute<RootRouteProp<'NewBreastfeedEntry'>>();
   const { motherInfo } = useAuth();
   const [isSendingForm, setIsSendingForm] = useState(false);
-
-  const formInitialValues = {
+  const formInitialValues: FormValues = {
     babyName: '',
-    time: '',
+    time: undefined,
     duration: '',
     breastLeft: '',
     breastRight: '',
   };
-  const newDiaryRegistrySchema = Yup.object()
+  const formSchema = Yup.object()
     .shape(
       {
         babyName: Yup.string().required(i18n.t('Yup.Required')),
-        time: Yup.string().required(i18n.t('Yup.Required')),
+        time: Yup.date().required(i18n.t('Yup.Required')),
         duration: Yup.number()
           .integer(i18n.t('Yup.MustBeIntegerError'))
           .typeError(i18n.t('Yup.MustBeIntegerError'))
@@ -97,18 +97,12 @@ const NewBreastfeedEntry: React.FC = () => {
       breast += breastLeft;
     }
 
-    const [minutes, seconds] = time
-      .split(':')
-      .map(value => parseInt(value, 10));
-    const now = new Date();
-    now.setHours(minutes, seconds);
-
     setIsSendingForm(true);
     const status = await createBreastfeedEntry(
       selectedBaby.id,
       breast,
       parseInt(duration, 10),
-      now,
+      time!,
     );
 
     if (status) {
@@ -137,7 +131,7 @@ const NewBreastfeedEntry: React.FC = () => {
       <Formik
         initialValues={formInitialValues}
         validateOnChange={false}
-        validationSchema={newDiaryRegistrySchema}
+        validationSchema={formSchema}
         onSubmit={handleFormSubmit}>
         {({
           handleChange,
@@ -164,7 +158,7 @@ const NewBreastfeedEntry: React.FC = () => {
                 placeholder={i18n.t(
                   'NewBreastfeedEntryPage.BreastfeedTimePlaceholder',
                 )}
-                onChange={handleChange('time')}
+                onChange={date => setFieldValue('time', date)}
               />
 
               <FormTextInput

@@ -5,11 +5,11 @@ import { useState } from 'react';
 
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
+import PaddedScrollView from 'components/PaddedScrollView';
 import {
   AdultTermsOfService,
   MinorTermsOfService,
 } from 'components/TermsOfService';
-import { PaddedScrollView } from 'lib/sharedStyles';
 import signUp from 'services/signUp';
 
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';

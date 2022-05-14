@@ -6,7 +6,7 @@ import { View } from 'react-native';
 
 import ImageWrapper from 'components/ImageWrapper';
 import OptionsList from 'components/OptionList';
-import { PaddedScrollView } from 'lib/sharedStyles';
+import PaddedScrollView from 'components/PaddedScrollView';
 import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 

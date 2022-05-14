@@ -4,7 +4,7 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import OptionsList from 'components/OptionList';
-import { PaddedScrollView } from 'lib/sharedStyles';
+import PaddedScrollView from 'components/PaddedScrollView';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';

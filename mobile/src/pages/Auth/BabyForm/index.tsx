@@ -8,8 +8,9 @@ import FormDateInput from 'components/FormDateInput';
 import FormRadioGroupInput from 'components/FormRadioGroup';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
+import PaddedScrollView from 'components/PaddedScrollView';
 import SecondaryButton from 'components/SecondaryButton';
-import { Center, PaddedScrollView } from 'lib/sharedStyles';
+import { Center } from 'lib/sharedStyles';
 
 import type { FormikErrors } from 'formik';
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
@@ -24,8 +25,8 @@ import {
 } from './styles';
 
 interface FormBabyInfo {
-  birthday: string;
-  postBirthLocation: string;
+  birthday?: Date;
+  postBirthLocation?: Date;
   name: string;
 }
 
@@ -39,15 +40,15 @@ const BabyForm: React.FC = () => {
     ...Array(motherInfo.currentGestationCount),
   ].map(_ => ({
     name: '',
-    birthday: '',
-    postBirthLocation: '',
+    birthday: undefined,
+    postBirthLocation: undefined,
   }));
 
   const babyFormSchema = Yup.array()
     .of(
       Yup.object().shape({
-        birthday: Yup.string().required(i18n.t('Yup.Required')),
-        postBirthLocation: Yup.string().required(i18n.t('Yup.Required')),
+        birthday: Yup.date().required(i18n.t('Yup.Required')),
+        postBirthLocation: Yup.date().required(i18n.t('Yup.Required')),
         name: Yup.string().required(i18n.t('Yup.Required')),
       }),
     )
@@ -64,18 +65,11 @@ const BabyForm: React.FC = () => {
     return '';
   }
 
-  function prepareNewBabiesData(formValues: FormValues): BabySignUpInfo[] {
-    const babiesInfo: BabySignUpInfo[] = formValues.map(baby => ({
-      birthday: baby.birthday,
-      postBirthLocation: baby.postBirthLocation,
-      name: baby.name,
-    }));
-    return babiesInfo;
-  }
-
   function handleFormSubmit(formValues: FormValues): void {
-    const babiesInfo = prepareNewBabiesData(formValues);
-    navigation.navigate('AcceptTermsOfService', { motherInfo, babiesInfo });
+    navigation.navigate('AcceptTermsOfService', {
+      motherInfo,
+      babiesInfo: formValues as unknown as BabySignUpInfo[],
+    });
   }
 
   return (
@@ -113,7 +107,7 @@ const BabyForm: React.FC = () => {
                   error={getBabyError(errors, index, 'birthday')}
                   label={i18n.t('BabyFormPage.BirthDate')}
                   placeholder={i18n.t('BabyFormPage.Placeholder.BirthDate')}
-                  onChange={handleChange(`${index}.birthday`)}
+                  onChange={date => setFieldValue(`${index}.birthday`, date)}
                 />
 
                 <FormRadioGroupInput
