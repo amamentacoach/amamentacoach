@@ -477,7 +477,7 @@
     "InfoValue5": "muito confiante",
     "LowEfficacy": "baixa",
     "WhenMyBaby": "Quando meu bebê estiver realmente pronto para mamar no peito:",
-    "Score": "Obrigada por responder.\nSua pontuação é %{score}, que significa que sua autoconfiança é %{meaning}.",
+    "Score": "Obrigada por responder.\nSua pontuação é %{score}, que significa que sua autoconfiança está %{meaning}.",
     "Questions": {
       "1": {
         "Description": "Eu consigo retirar leite da mama suficiente para o meu bebê."
