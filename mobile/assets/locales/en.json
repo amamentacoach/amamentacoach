@@ -29,6 +29,7 @@
   "Profile": "Profile",
   "Quantity": "Amount",
   "Question": "Question",
+  "Reason": "Reason",
   "Right": "Right",
   "SignUp": "Registration",
   "SelectBaby": "Select baby",
@@ -65,7 +66,7 @@
   "Actions": {
     "SaveAndExit": "Save and exit",
     "SelectPicture": "Select photo",
-    "Send": "Send",
+    "Submit": "Send",
     "Save": "Save",
     "End": "Finish",
     "SendQuestion": "Submit Question",
@@ -114,6 +115,16 @@
     "3": "Video 3",
     "PageName": "Benefits of skin-to-skin “kangaroo” care",
     "Header": "Be sure to use the “Kangaroo” care method! Learn more and get inspired by the videos below:"
+  },
+  "BabyLocationUpdate": {
+    "BabyLocation": "Where is your baby right now?",
+    "BabyStatusPopUp": "Have any of your babies been discharged?",
+    "DischargeDate": "Discharge date",
+    "Options": {
+      "Home": "Home",
+      "Other": "Other"
+    },
+    "PageName": "Baby status"
   },
   "BreastfeedingBenefitsPage": {
     "TitleBaby": "Benefits of breastfeeding for the baby",
@@ -255,10 +266,8 @@
     "6": "Meet The BreastfeedingCoach app"
   },
   "HomePage": {
-    "BabyLocation": "Where is your baby right now?",
     "BannerButton": "Start here!",
     "ExpectationPopUp": "Would you like to visit your goals for today?",
-    "BabyStatusPopUp": "Have any of your babies been discharged?",
     "FirstStatusPopup": "The time has come to evaluate your self-confidence level regarding breastfeed. Let's go?",
     "StatusPopup": "The time has come to evaluate your self-confidence level regarding breastfeed. Again Let's go?",
     "Option1": "Hello, I'm the “Preemie” baby",

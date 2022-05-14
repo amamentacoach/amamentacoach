@@ -29,6 +29,7 @@
   "Profile": "Perfil",
   "Quantity": "Quantidade",
   "Question": "Pergunta",
+  "Reason": "Motivo",
   "Right": "Direita",
   "SelectBaby": "Selecionar bebê",
   "SignUp": "Cadastro",
@@ -65,7 +66,7 @@
   "Actions": {
     "SaveAndExit": "Salvar e sair",
     "SelectPicture": "Selecionar foto",
-    "Send": "Enviar",
+    "Submit": "Enviar",
     "Save": "Salvar",
     "End": "Finalizar",
     "SendQuestion": "Enviar Pergunta",
@@ -113,6 +114,16 @@
     "3": "Video 3",
     "PageName": "Benefícios do canguru",
     "Header": "Use e abuse do Canguru! Informe-se e inspire-se nos vídeos abaixo:"
+  },
+  "BabyLocationUpdate": {
+    "BabyLocation": "Onde se encontra agora?",
+    "BabyStatusPopUp": "Algum dos(as) seus(as) bebês já recebeu alta?",
+    "DischargeDate": "Quando seu bebê recebeu alta hospitalar?",
+    "Options": {
+      "Home": "Em casa",
+      "Other": "Não se aplica"
+    },
+    "PageName": "Situação do bebê"
   },
   "BreastfeedingBenefitsPage": {
     "TitleBaby": "Benefícios da amamentação para o bebê",
@@ -253,10 +264,8 @@
     "6": "Conheça o AmamentaCoach"
   },
   "HomePage": {
-    "BabyLocation": "Onde se encontra agora?",
     "BannerButton": "Comece por aqui!",
     "ExpectationPopUp": "Você gostaria de visitar as expectativas hoje?",
-    "BabyStatusPopUp": "Algum dos(as) seus(as) bebês já recebeu alta?",
     "FirstStatusPopup": "Chegou o momento de avaliar sua pontuação na escala de confiança materna para amamentar! Vamos lá?",
     "StatusPopup": "Chegou o momento de avaliar novamente sua pontuação na escala de confiança materna para amamentar! Vamos lá?",
     "Option1": "Olá, sou o prematuro",
