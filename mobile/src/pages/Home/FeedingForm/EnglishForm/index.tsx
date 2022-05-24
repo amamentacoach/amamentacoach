@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { Formik, FormikHelpers } from 'formik';
 import i18n from 'i18n-js';
-import React from 'react';
 import * as Yup from 'yup';
 
 import FormRadioGroupInput from 'components/FormRadioGroup';

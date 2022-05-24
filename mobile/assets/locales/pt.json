@@ -250,13 +250,11 @@
   },
   "HUPage": {
     "5": "Vídeo AmamentaCoach",
-    "6": "Conheça o AmamentaCoach",
-    "7": "Video HU Londrina",
-    "8": "Conheça o HU"
+    "6": "Conheça o AmamentaCoach"
   },
   "HomePage": {
     "BabyLocation": "Onde se encontra agora?",
-    "HUButton": "Comece por aqui!",
+    "BannerButton": "Comece por aqui!",
     "ExpectationPopUp": "Você gostaria de visitar as expectativas hoje?",
     "BabyStatusPopUp": "Algum dos(as) seus(as) bebês já recebeu alta?",
     "FirstStatusPopup": "Chegou o momento de avaliar sua pontuação na escala de confiança materna para amamentar! Vamos lá?",
@@ -605,9 +603,6 @@
         }
       },
       "10": {
-        "Description": "Na ocasião, ele tinha qual idade gestacional corrigida?"
-      },
-      "11": {
         "Description": "Na última semana, qual foi a frequência com que você e seu bebê permaneceram em contato pele a pele (sem nenhum tipo de tecido entre vocês), durante, no mínimo, 1 hora, sem interrupções?",
         "Options": {
           "1": "Nenhuma",

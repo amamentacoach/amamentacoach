@@ -5,7 +5,7 @@ import OneSignal from 'react-native-onesignal';
 
 import api from 'services/api';
 import { LoginStatus, signIn as authSignIn } from 'services/signIn';
-import { getMotherInfo, isMotherInfo } from 'services/user';
+import { BirthLocation, getMotherInfo, isMotherInfo } from 'services/user';
 import initPushNotifications from 'utils/notifications';
 
 import type { MotherInfo } from 'services/user';
@@ -20,9 +20,29 @@ interface AuthContextData {
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
+const defaultMotherInfo: MotherInfo = {
+  birthday: '',
+  birthLocation: BirthLocation.MATERNITY,
+  email: '',
+  name: '',
+  hasPartner: false,
+  babies: [],
+  babiesBirthLocations: {
+    AC: false,
+    UCI: false,
+    UCIN: false,
+    UTI: false,
+  },
+  images: {
+    mother: null,
+    baby: null,
+    father: null,
+  },
+};
+
 export const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
-  const [motherInfo, setMotherInfo] = useState<MotherInfo>({} as MotherInfo);
+  const [motherInfo, setMotherInfo] = useState<MotherInfo>(defaultMotherInfo);
   const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
 
@@ -89,7 +109,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     OneSignal.disablePush(true);
 
     await AsyncStorage.removeItem('@AmamentaCoach:motherInfo');
-    setMotherInfo({} as MotherInfo);
+    setMotherInfo(defaultMotherInfo);
 
     await AsyncStorage.removeItem('@AmamentaCoach:token');
     api.defaults.headers.common.Authorization = null;

@@ -80,7 +80,8 @@
     "7": "Reframing expectations",
     "8": "Adjust unlikely expectations to be more realistic",
     "9": "Offer breast milk in a cup",
-    "10": "Demo Video"
+    "10": "Demo Video",
+    "11": "Cannabis on pregnancy and breastfeeding"
   },
   "AppIntroductionPage": {
     "1": "Welcome! The Breastfeeding Coach app was created to assist you in the challenging journey of breastfeeding a baby born prematurely.",
@@ -155,6 +156,7 @@
     "2": "How to do it?",
     "3": "When to do it?",
     "4": "How long to do it?",
+    "5": "Hand Expressing Breastmilk",
     "Header": "All you need to know about pumping breast milk"
   },
   "CreditsPage": {
@@ -250,13 +252,11 @@
   },
   "HUPage": {
     "5": "The BreastfeedingCoach app video",
-    "6": "Meet The BreastfeedingCoach app",
-    "7": "University Hospital of Londrina Video",
-    "8": "Discover the University Hospital of Londrina"
+    "6": "Meet The BreastfeedingCoach app"
   },
   "HomePage": {
     "BabyLocation": "Where is your baby right now?",
-    "HUButton": "Start here!",
+    "BannerButton": "Start here!",
     "ExpectationPopUp": "Would you like to visit your goals for today?",
     "BabyStatusPopUp": "Have any of your babies been discharged?",
     "FirstStatusPopup": "The time has come to evaluate your self-confidence level regarding breastfeed. Let's go?",
@@ -701,7 +701,11 @@
     "ModalErrorText": "Failed to upload image!\nPlease, try again later..."
   },
   "VideoMenuPage": {
-    "Tutorial": "Tutorial video"
+    "Tutorial": "Tutorial video",
+    "NICU1": "What is the NICU - Welcome to the NICU | Video 1",
+    "NICU2": "What can I do in the NICU? - Welcome to the NICU | Video 2",
+    "NICU3": "Feeding your baby in the NICU - Welcome to the NICU | Video 3",
+    "NICU4": "Feeding your baby in the NICU - Welcome to the NICU | Video 4"
   },
   "WeeklyReportPage": {
     "Header": "Questions of the week",
