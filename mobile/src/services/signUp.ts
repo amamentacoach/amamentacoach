@@ -2,41 +2,65 @@ import { format } from 'date-fns';
 
 import api from 'services/api';
 
-export interface MotherSignUpInfo {
-  birthday: Date;
-  birthLocation: string;
-  currentGestationCount: number;
-  email: string;
-  hasPartner: boolean;
-  name: string;
-  password: string;
-}
-
 export interface BabySignUpInfo {
   birthday: Date;
   postBirthLocation: string;
   name: string;
 }
 
-// Cadastra uma mãe e seus bebês.
-async function signUp(
-  motherInfo: MotherSignUpInfo,
-  babiesInfo: BabySignUpInfo[],
-): Promise<boolean> {
+export interface UserSignUpInfo {
+  birthday: Date;
+  email: string;
+  name: string;
+  institution: string;
+  socialMedia: string;
+  password: string;
+  phone: string;
+  userType: string;
+  // Campos caso a usuária seja gestante.
+  possibleBirthDate: Date | null;
+  weeksPregnant: string | null;
+  // Campos caso a usuária seja mãe.
+  currentGestationCount: number;
+  birthDate: Date | null;
+  birthWeeks: string;
+  city: string;
+  hasPartner: boolean;
+  state: string;
+  babies: BabySignUpInfo[];
+}
+
+async function signUp(userInfo: UserSignUpInfo): Promise<boolean> {
+  const user = {
+    data_nascimento: format(userInfo.birthday, 'yyyy-MM-dd'),
+    email: userInfo.email,
+    nome: userInfo.name,
+    localizacao: userInfo.institution,
+    veiculo_midia: userInfo.socialMedia,
+    senha: userInfo.password,
+    // Gestante
+    semanas_gestante: userInfo.weeksPregnant || null,
+    data_provavel_parto: userInfo.possibleBirthDate
+      ? format(userInfo.possibleBirthDate, 'yyyy-MM-dd')
+      : null,
+    // Mãe de prematuro.
+    data_parto: userInfo.birthDate
+      ? format(userInfo.birthDate, 'yyyy-MM-dd')
+      : null,
+    semanas_gestacao: userInfo.birthWeeks,
+    cidade: userInfo.city,
+    estado: userInfo.state,
+    companheiro: userInfo.hasPartner,
+    bebes: userInfo.babies.map(baby => ({
+      instituicao: baby.birthInstitution,
+      local_atual: baby.currentLocation,
+      local_nascimento: baby.birthLocation,
+      nome: baby.name,
+    })),
+  };
+
   try {
-    const { data } = await api.post('/user', {
-      companheiro: motherInfo.hasPartner,
-      data_nascimento: format(motherInfo.birthday, 'yyyy-MM-dd'),
-      email: motherInfo.email,
-      localizacao: motherInfo.birthLocation,
-      nome: motherInfo.name,
-      senha: motherInfo.password,
-      bebes: babiesInfo.map(info => ({
-        data_parto: format(info.birthday, 'yyyy-MM-dd'),
-        local: info.postBirthLocation,
-        nome: info.name,
-      })),
-    });
+    const { data } = await api.post('/user', user);
     return !!data.token;
   } catch (error) {
     return false;

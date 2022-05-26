@@ -10,7 +10,7 @@ import PaddedScrollView from 'components/PaddedScrollView';
 import { Flex } from 'lib/sharedStyles';
 
 import type { AuthStackProps } from 'routes/auth';
-import type { MotherSignUpInfo } from 'services/signUp';
+import type { UserSignUpInfo } from 'services/signUp';
 
 import {
   Header,
@@ -20,7 +20,7 @@ import {
   SubmitButtonContainer,
 } from './styles';
 
-type FilteredMotherValues = Pick<MotherSignUpInfo, 'email' | 'password'>;
+type FilteredMotherValues = Pick<UserSignUpInfo, 'email' | 'password'>;
 
 interface FormValues extends FilteredMotherValues {
   password_confirmation: FilteredMotherValues['password'];

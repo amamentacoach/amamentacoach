@@ -34,10 +34,11 @@ type FormValues = FormBabyInfo[];
 
 const BabyForm: React.FC = () => {
   const navigation = useNavigation<AuthStackProps>();
-  const { motherInfo } = useRoute<AuthRouteProp<'BabyForm'>>().params;
+  const { userInfo } = useRoute<AuthRouteProp<'BabyForm'>>().params;
+  const wasExternalFormOpened = useRef(false);
 
-  const formInitialValues: FormValues = [
-    ...Array(motherInfo.currentGestationCount),
+  const formInitialValues: BabySignUpInfo[] = [
+    ...Array(userInfo.currentGestationCount),
   ].map(_ => ({
     name: '',
     birthday: undefined,
@@ -65,11 +66,9 @@ const BabyForm: React.FC = () => {
     return '';
   }
 
-  function handleFormSubmit(formValues: FormValues): void {
-    navigation.navigate('AcceptTermsOfService', {
-      motherInfo,
-      babiesInfo: formValues as unknown as BabySignUpInfo[],
-    });
+  function handleFormSubmit(values: BabySignUpInfo[]): void {
+    userInfo.babies = values;
+    navigation.navigate('AcceptTermsOfService', { userInfo });
   }
 
   return (

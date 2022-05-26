@@ -3,34 +3,40 @@ import i18n from 'i18n-js';
 
 import api from 'services/api';
 
-export enum BirthLocation {
+import type { BabySignUpInfo, UserSignUpInfo } from './signUp';
+
+export enum Institution {
   HU_UEL,
   MATERNITY,
+  OTHER,
 }
 
-interface BabyInfo {
-  birthday: Date;
+interface BabyInfo extends BabySignUpInfo {
   id: number;
-  name: string;
-  postBirthLocation: string;
 }
 
-interface MotherUpdateInfo {
+interface MotherUpdateInfo extends UserSignUpInfo {
   babies: BabyInfo[];
-  birthday: Date;
-  birthLocation: string;
-  email: string;
-  hasPartner: boolean;
-  name: string;
 }
 
-export interface MotherInfo {
-  birthday: Date;
-  birthLocation: BirthLocation;
-  email: string;
-  name: string;
-  hasPartner: boolean;
-  babies: BabyInfo[];
+type FilteredUserSignUpInfo = Omit<
+  MotherUpdateInfo,
+  | 'birthDate'
+  | 'birthWeeks'
+  | 'institution'
+  | 'city'
+  | 'currentGestationCount'
+  | 'origin'
+  | 'password'
+  | 'phone'
+  | 'possibleBirthDate'
+  | 'socialMedia'
+  | 'state'
+  | 'weeksPregnant'
+>;
+
+export interface UserInfo extends FilteredUserSignUpInfo {
+  institution: Institution;
   babiesBirthLocations: {
     AC: boolean;
     UCI: boolean;
@@ -48,6 +54,7 @@ export interface MotherInfo {
 export function isMotherInfo(object: any): object is MotherInfo {
   return (
     object &&
+    object.institution &&
     object.babies &&
     object.babiesBirthLocations &&
     object.babiesBirthLocations.AC !== undefined &&
@@ -106,26 +113,28 @@ export async function getMotherInfo(): Promise<MotherInfo | null> {
     });
 
     const dataBirthLocation = data.localizacao?.toLowerCase();
-    let birthLocation = BirthLocation.HU_UEL;
+    let institution = Institution.HU_UEL;
     switch (dataBirthLocation) {
       case i18n.t('MotherFormPage.LocationOptions.HU').toLowerCase():
-        birthLocation = BirthLocation.HU_UEL;
+        institution = Institution.HU_UEL;
         break;
       case i18n.t('MotherFormPage.LocationOptions.Maternity').toLowerCase():
-        birthLocation = BirthLocation.MATERNITY;
+        institution = Institution.MATERNITY;
         break;
       default:
+        institution = Institution.OTHER;
         break;
     }
 
     return {
       babies,
       babiesBirthLocations,
-      birthLocation,
-      email: data.email,
       birthday: new Date(data.data_nascimento),
-      name: data.nome,
+      institution,
+      email: data.email,
       hasPartner: data.companheiro,
+      name: data.nome,
+      userType: data.categoria,
       images: {
         mother: data.imagem_mae,
         baby: data.imagem_bebe,
@@ -146,12 +155,13 @@ export async function updateUserProfile(
       companheiro: userInfo.hasPartner,
       data_nascimento: format(userInfo.birthday, 'yyyy-MM-dd'),
       email: userInfo.email,
-      localizacao: userInfo.birthLocation,
+      localizacao: userInfo.institution,
+      data_parto: userInfo.birthDate,
       nome: userInfo.name,
       bebes: userInfo.babies.map(baby => ({
         id: baby.id,
-        data_parto: baby.birthday,
-        local: baby.postBirthLocation,
+        local_nascimento: baby.birthLocation,
+        local_atual: baby.currentLocation,
         nome: baby.name,
       })),
     });

@@ -5,7 +5,7 @@ import OneSignal from 'react-native-onesignal';
 
 import api from 'services/api';
 import { LoginStatus, signIn as authSignIn } from 'services/signIn';
-import { BirthLocation, getMotherInfo, isMotherInfo } from 'services/user';
+import { Institution, getUserInfo, isUserInfo } from 'services/user';
 import initPushNotifications from 'utils/notifications';
 
 import type { MotherInfo } from 'services/user';
@@ -22,10 +22,11 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const defaultMotherInfo: MotherInfo = {
   birthday: new Date(),
-  birthLocation: BirthLocation.MATERNITY,
+  institution: Institution.HU_UEL,
   email: '',
-  name: '',
   hasPartner: false,
+  name: '',
+  userType: '',
   babies: [],
   babiesBirthLocations: {
     AC: false,
