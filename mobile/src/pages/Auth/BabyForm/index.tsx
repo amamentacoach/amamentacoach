@@ -26,7 +26,7 @@ import {
 
 interface FormBabyInfo {
   birthday?: Date;
-  postBirthLocation?: Date;
+  postBirthLocation: string;
   name: string;
 }
 
@@ -41,14 +41,14 @@ const BabyForm: React.FC = () => {
   ].map(_ => ({
     name: '',
     birthday: undefined,
-    postBirthLocation: undefined,
+    postBirthLocation: '',
   }));
 
   const babyFormSchema = Yup.array()
     .of(
       Yup.object().shape({
         birthday: Yup.date().required(i18n.t('Yup.Required')),
-        postBirthLocation: Yup.date().required(i18n.t('Yup.Required')),
+        postBirthLocation: Yup.string().required(i18n.t('Yup.Required')),
         name: Yup.string().required(i18n.t('Yup.Required')),
       }),
     )
