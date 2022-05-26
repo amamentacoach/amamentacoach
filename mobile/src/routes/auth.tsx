@@ -17,9 +17,17 @@ import type { RouteProp } from '@react-navigation/core';
 import type { StackNavigationProp } from '@react-navigation/stack';
 import type { BabySignUpInfo, MotherSignUpInfo } from 'services/signUp';
 
+type AuthMotherInfo = Omit<
+  MotherSignUpInfo,
+  'birthday' | 'possibleBirthDate'
+> & {
+  birthday: string;
+  possibleBirthDate: string | null;
+};
+
 type AuthStackParamList = {
   BabyForm: {
-    motherInfo: MotherSignUpInfo;
+    motherInfo: AuthMotherInfo;
   };
   MotherForm: {
     email: string;
@@ -29,7 +37,7 @@ type AuthStackParamList = {
     date: string;
   };
   AcceptTermsOfService: {
-    motherInfo: MotherSignUpInfo;
+    motherInfo: AuthMotherInfo;
     babiesInfo: BabySignUpInfo[];
   };
   Login: undefined;

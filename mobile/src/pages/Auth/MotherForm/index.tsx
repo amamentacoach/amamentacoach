@@ -1,6 +1,8 @@
+import 'yup-phone';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
+import { getCountry } from 'react-native-localize';
 import * as Yup from 'yup';
 
 import FormDateInput from 'components/FormDateInput';
@@ -13,11 +15,9 @@ import SecondaryButton from 'components/SecondaryButton';
 import { Flex } from 'lib/sharedStyles';
 
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
-import type { MotherSignUpInfo } from 'services/signUp';
 
 import {
   FirstSubOptionContainer,
-  FormContainer,
   HeaderText,
   SubmitButtonContainer,
 } from './styles';
@@ -28,6 +28,14 @@ interface FormValues {
   hasPartner?: boolean;
   birthLocation: string;
   name: string;
+  phone: string;
+  userType: string;
+  socialMedia: string;
+  origin: string;
+  weeksPregnant: string;
+  possibleBirthDate?: Date;
+  birthWeeks: string;
+  birthDate?: Date;
 }
 
 const MotherForm: React.FC = () => {
@@ -40,32 +48,100 @@ const MotherForm: React.FC = () => {
     birthLocation: '',
     name: '',
     hasPartner: undefined,
+    phone: '',
+    userType: '',
+    origin: '',
+    socialMedia: '',
+    weeksPregnant: '',
+    possibleBirthDate: undefined,
+    birthWeeks: '',
+    birthDate: undefined,
   };
 
-  const motherFormSchema = Yup.object({
-    birthday: Yup.date().required(i18n.t('Yup.Required')),
-    currentGestationCount: Yup.number()
-      .integer(i18n.t('Yup.MustBeIntegerError'))
-      .typeError(i18n.t('Yup.MustBeIntegerError'))
-      .min(1, i18n.t('Yup.MinEqualError', { num: 1 }))
-      .required(i18n.t('Yup.Required')),
-    hasPartner: Yup.boolean().required(i18n.t('Yup.Required')),
-    birthLocation: Yup.string().required(i18n.t('Yup.Required')),
+  const formSchema = Yup.object({
     name: Yup.string().required(i18n.t('Yup.Required')),
+    birthday: Yup.date().required(i18n.t('Yup.Required')),
+    phone: Yup.string()
+      .required(i18n.t('Yup.Required'))
+      .phone(getCountry(), true, i18n.t('Yup.Phone')),
+    userType: Yup.string().required(i18n.t('Yup.Required')),
+    origin: Yup.string().required(i18n.t('Yup.Required')),
+    socialMedia: Yup.string().when('origin', {
+      is: i18n.t('MotherFormPage.OriginOptions.SocialMedia'),
+      then: Yup.string().required(i18n.t('Yup.Required')),
+      otherwise: Yup.string(),
+    }),
+    // Caso seja gestante.
+    weeksPregnant: Yup.number()
+      .min(0, i18n.t('Yup.MinError', { num: 0 }))
+      .when('userType', {
+        is: i18n.t('MotherFormPage.UserTypeOptions.Pregnant'),
+        then: Yup.number().required(i18n.t('Yup.Required')),
+        otherwise: Yup.number(),
+      }),
+    possibleBirthDate: Yup.date().when('userType', {
+      is: i18n.t('MotherFormPage.UserTypeOptions.Pregnant'),
+      then: Yup.date().required(i18n.t('Yup.Required')),
+      otherwise: Yup.date(),
+    }),
+    // Caso seja mãe de prematuro.
+    birthWeeks: Yup.string().when('userType', {
+      is: i18n.t('MotherFormPage.UserTypeOptions.Mother'),
+      then: Yup.string().required(i18n.t('Yup.Required')),
+      otherwise: Yup.string(),
+    }),
+    birthDate: Yup.string().when('userType', {
+      is: i18n.t('MotherFormPage.UserTypeOptions.Mother'),
+      then: Yup.string().required(i18n.t('Yup.Required')),
+      otherwise: Yup.string(),
+    }),
+    currentGestationCount: Yup.number().when('userType', {
+      is: i18n.t('MotherFormPage.UserTypeOptions.Mother'),
+      then: Yup.number()
+        .integer(i18n.t('Yup.MustBeIntegerError'))
+        .typeError(i18n.t('Yup.MustBeIntegerError'))
+        .min(1, i18n.t('Yup.MinEqualError', { num: 1 }))
+        .required(i18n.t('Yup.Required')),
+      otherwise: Yup.number(),
+    }),
+    hasPartner: Yup.boolean().when('userType', {
+      is: i18n.t('MotherFormPage.UserTypeOptions.Mother'),
+      then: Yup.boolean().required(i18n.t('Yup.Required')),
+      otherwise: Yup.boolean(),
+    }),
+    birthLocation: Yup.string().when('userType', {
+      is: i18n.t('MotherFormPage.UserTypeOptions.Mother'),
+      then: Yup.string().required(i18n.t('Yup.Required')),
+      otherwise: Yup.string(),
+    }),
   }).required();
 
   // Avança para a próxima página passando as informações do usuário.
   function handleFormSubmit(formValues: FormValues): void {
-    const motherInfo: MotherSignUpInfo = {
-      birthday: formValues.birthday!,
+    const motherInfo = {
+      ...formValues,
+      birthday: formValues.birthday!.toISOString(),
+      possibleBirthDate: formValues.possibleBirthDate
+        ? formValues.possibleBirthDate.toISOString()
+        : null,
+      birthDate: formValues.birthDate
+        ? formValues.birthDate.toISOString()
+        : null,
       currentGestationCount: Number(formValues.currentGestationCount),
-      email,
       hasPartner: formValues.hasPartner!,
-      birthLocation: formValues.birthLocation,
-      name: formValues.name,
+      email,
       password,
     };
-    navigation.navigate('BabyForm', { motherInfo });
+    if (
+      motherInfo.userType === i18n.t('MotherFormPage.UserTypeOptions.Mother')
+    ) {
+      navigation.navigate('BabyForm', { motherInfo });
+    } else {
+      navigation.navigate('AcceptTermsOfService', {
+        motherInfo,
+        babiesInfo: [],
+      });
+    }
   }
 
   return (
@@ -76,7 +152,7 @@ const MotherForm: React.FC = () => {
       <Formik
         initialValues={formInitialValues}
         validateOnChange={false}
-        validationSchema={motherFormSchema}
+        validationSchema={formSchema}
         onSubmit={values => handleFormSubmit(values)}>
         {({
           handleChange,
@@ -86,13 +162,22 @@ const MotherForm: React.FC = () => {
           errors,
           values,
         }) => (
-          <FormContainer>
+          <Flex>
             <FormTextInput
               error={errors.name}
               label={i18n.t('MotherFormPage.Name')}
               placeholder={i18n.t('Name')}
               value={values.name}
               onChangeText={handleChange('name')}
+            />
+
+            <FormTextInput
+              error={errors.phone}
+              keyboardType="phone-pad"
+              label={i18n.t('MotherFormPage.Phone')}
+              placeholder={i18n.t('MotherFormPage.Phone')}
+              value={values.phone}
+              onChangeText={handleChange('phone')}
             />
 
             <FormDateInput
@@ -102,35 +187,134 @@ const MotherForm: React.FC = () => {
               onChange={date => setFieldValue('birthday', date)}
             />
 
-            <FormRadioGroupInput
-              error={errors.hasPartner}
-              label={i18n.t('MotherFormPage.Partner')}
-              options={[i18n.t('Yes'), i18n.t('No')]}
-              onChange={fieldValues =>
-                setFieldValue('hasPartner', fieldValues[0] === i18n.t('Yes'))
-              }
-            />
-
             <Flex>
               <FormPickerInput
-                error={errors.birthLocation}
-                label={i18n.t('MotherFormPage.Location')}
+                error={errors.origin}
+                label={i18n.t('MotherFormPage.Origin')}
                 options={[
-                  i18n.t('MotherFormPage.LocationOptions.HU'),
-                  i18n.t('MotherFormPage.LocationOptions.Maternity'),
+                  i18n.t('MotherFormPage.OriginOptions.HU'),
+                  i18n.t('MotherFormPage.OriginOptions.HMDI'),
+                  i18n.t('MotherFormPage.OriginOptions.AHC'),
+                  i18n.t('MotherFormPage.OriginOptions.SocialMedia'),
                 ]}
-                onChange={handleChange('birthLocation')}
+                onChange={handleChange('origin')}
               />
             </Flex>
 
-            <FormTextInput
-              error={errors.currentGestationCount}
-              keyboardType="numeric"
-              label={i18n.t('MotherFormPage.CurrentGestationCount')}
-              placeholder={i18n.t('MotherFormPage.CountPlaceholder')}
-              value={values.currentGestationCount}
-              onChangeText={handleChange('currentGestationCount')}
-            />
+            {values.origin ===
+              i18n.t('MotherFormPage.OriginOptions.SocialMedia') && (
+              <FormPickerInput
+                error={errors.socialMedia}
+                label={i18n.t('MotherFormPage.SocialMedia')}
+                options={[
+                  'Facebook',
+                  'Instagram',
+                  'Whatsapp',
+                  i18n.t('MotherFormPage.SocialMediaOptions.TVOrRadio'),
+                  'Folder',
+                  i18n.t('Other'),
+                ]}
+                onChange={handleChange('socialMedia')}
+              />
+            )}
+
+            <Flex>
+              <FormPickerInput
+                error={errors.userType}
+                label={i18n.t('MotherFormPage.UserType')}
+                options={[
+                  i18n.t('MotherFormPage.UserTypeOptions.Pregnant'),
+                  i18n.t('MotherFormPage.UserTypeOptions.Mother'),
+                  i18n.t('MotherFormPage.UserTypeOptions.HealthcareWorker'),
+                  i18n.t('Other'),
+                ]}
+                onChange={newValue => {
+                  setFieldValue('userType', newValue);
+                  if (newValue !== values.userType) {
+                    setFieldValue('hasPartner', '');
+                    setFieldValue('location', '');
+                    setFieldValue('currentGestationCount', '');
+                    setFieldValue('weeksPregnant', '');
+                    setFieldValue('possibleBirthDate', '');
+                  }
+                }}
+              />
+            </Flex>
+
+            {values.userType ===
+              i18n.t('MotherFormPage.UserTypeOptions.Mother') && (
+              <>
+                <FormTextInput
+                  error={errors.birthWeeks}
+                  keyboardType="numeric"
+                  // TODO
+                  label="Seu parto ocorreu com quantas semanas de gestação?"
+                  placeholder={i18n.t('Week', { count: 2 })}
+                  value={values.birthWeeks}
+                  onChangeText={handleChange('birthWeeks')}
+                />
+                <FormDateInput
+                  error={errors.birthDate}
+                  // TODO Mover para a página da mãe.
+                  label={i18n.t('BabyFormPage.BirthDate')}
+                  // TODO Mover para a página da mãe.
+                  placeholder={i18n.t('BabyFormPage.Placeholder.BirthDate')}
+                  onChange={date => setFieldValue('birthDate', date)}
+                />
+                <FormRadioGroupInput
+                  error={errors.hasPartner}
+                  label={i18n.t('MotherFormPage.Partner')}
+                  options={[i18n.t('Yes'), i18n.t('No')]}
+                  onChange={fieldValues =>
+                    setFieldValue(
+                      'hasPartner',
+                      fieldValues[0] === i18n.t('Yes'),
+                    )
+                  }
+                />
+                <Flex>
+                  <FormPickerInput
+                    error={errors.birthLocation}
+                    label={i18n.t('MotherFormPage.Location')}
+                    options={[
+                      i18n.t('MotherFormPage.LocationOptions.HU'),
+                      i18n.t('MotherFormPage.LocationOptions.Maternity'),
+                    ]}
+                    onChange={handleChange('birthLocation')}
+                  />
+                </Flex>
+                <FormTextInput
+                  error={errors.currentGestationCount}
+                  keyboardType="numeric"
+                  label={i18n.t('MotherFormPage.CurrentGestationCount')}
+                  placeholder={i18n.t('MotherFormPage.CountPlaceholder')}
+                  value={values.currentGestationCount}
+                  onChangeText={handleChange('currentGestationCount')}
+                />
+              </>
+            )}
+
+            {values.userType ===
+              i18n.t('MotherFormPage.UserTypeOptions.Pregnant') && (
+              <>
+                <FormTextInput
+                  error={errors.weeksPregnant}
+                  keyboardType="numeric"
+                  // TODO
+                  label="De quantas semanas está gestante?"
+                  placeholder={i18n.t('Week', { count: 2 })}
+                  value={values.weeksPregnant}
+                  onChangeText={handleChange('weeksPregnant')}
+                />
+
+                <FormDateInput
+                  error={errors.possibleBirthDate}
+                  label={i18n.t('MotherFormPage.PossibleBirthDate')}
+                  placeholder={i18n.t('Date')}
+                  onChange={date => setFieldValue('possibleBirthDate', date)}
+                />
+              </>
+            )}
 
             <SubmitButtonContainer>
               <FirstSubOptionContainer>
@@ -147,7 +331,7 @@ const MotherForm: React.FC = () => {
                 />
               </Flex>
             </SubmitButtonContainer>
-          </FormContainer>
+          </Flex>
         )}
       </Formik>
     </PaddedScrollView>

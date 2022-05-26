@@ -6,6 +6,7 @@
   "Cancel": "Cancel",
   "Close": "Close",
   "Content": "Content",
+  "Date": "Date",
   "Diary": "Diary",
   "Duration": "Duration",
   "Email": "Email",
@@ -361,9 +362,29 @@
     "Location": "Place of delivery",
     "Name": "Your name",
     "Partner": "Do you have a partner?",
+    "Phone": "Phone number",
+    // TODO Translate
+    "UserType": "Em qual dessas situações você se enquadra?",
+    "Origin": "Como você ficou sabendo deste estudo?",
+    "SocialMedia": "Por qual veículo de mídia você ficou sabendo sobre o app AmamentaCoach?",
+    "PossibleBirthDate": "Qual a data provável do seu parto?",
     "LocationOptions": {
       "HU": "HU",
       "Maternity": "Maternidade Dona Íris"
+    },
+    "UserTypeOptions": {
+      "Pregnant": "Pregnant",
+      "Mother": "Mãe de bebê prematuro",
+      "HealthcareWorker": "Profissional de saúde"
+    },
+    "OriginOptions": {
+      "HU": "Sou paciente do HU - Londrina",
+      "HMDI": "Sou paciente do HMDI-Goiânia",
+      "AHC": "Sou paciente do AHC Londrina",
+      "SocialMedia": "Pela divulgação da pesquisa na mídia ou nas redes sociais"
+    },
+    "SocialMediaOptions": {
+      "TVOrRadio": "TV ou rádio"
     }
   },
   "MusicPlaylistsPage": {
@@ -761,6 +782,7 @@
     "MustBeNumberError": "Must be a number",
     "NoOptionSelectedError": "At least one option must be selected",
     "PasswordMustMatch": "Passwords must match",
-    "Required": "Required field"
+    "Required": "Required field",
+    "Phone": "Invalid phone number"
   }
 }

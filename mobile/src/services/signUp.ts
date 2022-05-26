@@ -4,12 +4,22 @@ import api from 'services/api';
 
 export interface MotherSignUpInfo {
   birthday: Date;
-  birthLocation: string;
-  currentGestationCount: number;
   email: string;
-  hasPartner: boolean;
   name: string;
+  origin: string;
   password: string;
+  phone: string;
+  socialMedia: string;
+  userType: string;
+  // Campos caso a usuária seja gestante.
+  possibleBirthDate: Date | null;
+  weeksPregnant: string;
+  // Campos caso a usuária seja mãe.
+  birthDate: Date | null;
+  birthLocation: string;
+  birthWeeks: string;
+  currentGestationCount: number;
+  hasPartner: boolean;
 }
 
 export interface BabySignUpInfo {

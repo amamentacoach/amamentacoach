@@ -32,7 +32,14 @@ const AcceptTermsOfService: React.FC = () => {
 
   async function handleSubmit(): Promise<void> {
     setIsSendingForm(true);
-    const status = await signUp(motherInfo, babiesInfo);
+    const motherSignUpInfo = {
+      ...motherInfo,
+      birthday: new Date(motherInfo.birthday),
+      possibleBirthDate: motherInfo.possibleBirthDate
+        ? new Date(motherInfo.possibleBirthDate)
+        : null,
+    };
+    const status = await signUp(motherSignUpInfo, babiesInfo);
     setIsErrorModalVisible(!status);
     setIsSignUpModalVisible(status);
   }

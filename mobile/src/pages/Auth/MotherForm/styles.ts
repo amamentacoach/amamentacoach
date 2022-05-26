@@ -7,11 +7,6 @@ export const HeaderText = styled(OpenSansBold)`
   text-align: center;
 `;
 
-export const FormContainer = styled.View`
-  flex: 1;
-  margin-bottom: 20px;
-`;
-
 export const FirstSubOptionContainer = styled.View`
   flex: 1;
   margin-right: 4px;
@@ -21,5 +16,5 @@ export const SubmitButtonContainer = styled.View`
   flex: 1;
   align-items: flex-end;
   flex-direction: row;
-  padding: 15px 0px;
+  margin-top: 20px;
 `;
