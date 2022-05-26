@@ -24,8 +24,9 @@ const defaultMotherInfo: MotherInfo = {
   birthday: new Date(),
   birthLocation: BirthLocation.MATERNITY,
   email: '',
-  name: '',
   hasPartner: false,
+  name: '',
+  userType: '',
   babies: [],
   babiesBirthLocations: {
     AC: false,

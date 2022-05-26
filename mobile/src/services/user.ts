@@ -3,34 +3,43 @@ import i18n from 'i18n-js';
 
 import api from 'services/api';
 
+import type { BabySignUpInfo, MotherSignUpInfo } from './signUp';
+
 export enum BirthLocation {
   HU_UEL,
   MATERNITY,
 }
 
-interface BabyInfo {
-  birthday: Date;
+interface BabyInfo extends BabySignUpInfo {
   id: number;
-  name: string;
-  postBirthLocation: string;
 }
 
-interface MotherUpdateInfo {
+interface MotherBaseInfo extends MotherSignUpInfo {
   babies: BabyInfo[];
-  birthday: Date;
+}
+
+interface MotherUpdateInfo extends MotherBaseInfo {
   birthLocation: string;
-  email: string;
-  hasPartner: boolean;
-  name: string;
 }
 
-export interface MotherInfo {
-  birthday: Date;
+type FilteredMotherSignUpInfo = Omit<
+  MotherBaseInfo,
+  | 'birthDate'
+  | 'birthLocation'
+  | 'birthWeeks'
+  | 'city'
+  | 'currentGestationCount'
+  | 'origin'
+  | 'password'
+  | 'phone'
+  | 'possibleBirthDate'
+  | 'socialMedia'
+  | 'state'
+  | 'weeksPregnant'
+>;
+
+export interface MotherInfo extends FilteredMotherSignUpInfo {
   birthLocation: BirthLocation;
-  email: string;
-  name: string;
-  hasPartner: boolean;
-  babies: BabyInfo[];
   babiesBirthLocations: {
     AC: boolean;
     UCI: boolean;
@@ -126,6 +135,7 @@ export async function getMotherInfo(): Promise<MotherInfo | null> {
       birthday: new Date(data.data_nascimento),
       name: data.nome,
       hasPartner: data.companheiro,
+      userType: data.categoria,
       images: {
         mother: data.imagem_mae,
         baby: data.imagem_bebe,
@@ -147,11 +157,12 @@ export async function updateUserProfile(
       data_nascimento: format(userInfo.birthday, 'yyyy-MM-dd'),
       email: userInfo.email,
       localizacao: userInfo.birthLocation,
+      data_parto: userInfo.birthDate,
       nome: userInfo.name,
       bebes: userInfo.babies.map(baby => ({
         id: baby.id,
-        data_parto: baby.birthday,
-        local: baby.postBirthLocation,
+        local_nascimento: baby.birthLocation,
+        local_atual: baby.currentLocation,
         nome: baby.name,
       })),
     });

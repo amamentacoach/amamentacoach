@@ -13,5 +13,4 @@ export const LabelText = styled(OpenSansRegular)`
 
 export const PickerContainer = styled.View`
   border: 1px solid ${props => props.theme.grey};
-  margin-bottom: 5px;
 `;
