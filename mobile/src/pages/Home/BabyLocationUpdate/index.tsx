@@ -1,9 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
-import { useEffect } from 'react';
 import { View } from 'react-native';
-import { hide } from 'react-native-bootsplash';
 import * as Yup from 'yup';
 
 import FormDateInput from 'components/FormDateInput';
@@ -17,6 +15,7 @@ import { updateBabyLocation } from 'services/babyLocation';
 
 import type { FormikHelpers } from 'formik';
 import type { RootStackProps } from 'routes/app';
+import type { BabyLocationUpdate as IBabyLocationUpdate } from 'services/babyLocation';
 import type { MotherInfo } from 'services/user';
 
 import {
@@ -29,12 +28,10 @@ import {
 
 type Baby = MotherInfo['babies'][number];
 
-type BabyOption = Baby & {
-  date?: Date;
-  newLocation: string;
-  isSelected?: boolean;
-  doesntApplyReason: string;
-};
+type BabyOption = Baby &
+  IBabyLocationUpdate & {
+    isSelected?: boolean;
+  };
 
 const BabyLocationUpdate: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
@@ -44,7 +41,7 @@ const BabyLocationUpdate: React.FC = () => {
     isSelected: false,
     newLocation: '',
     date: undefined,
-    doesntApplyReason: '',
+    reason: '',
   }));
 
   const formValidationSchema = Yup.array()
@@ -61,7 +58,7 @@ const BabyLocationUpdate: React.FC = () => {
           then: Yup.date().required(i18n.t('Yup.Required')),
           otherwise: Yup.date(),
         }),
-        doesntApplyReason: Yup.string().when('newLocation', {
+        reason: Yup.string().when('newLocation', {
           is: i18n.t('BabyLocationUpdate.Options.Other'),
           then: Yup.string().required(i18n.t('Yup.Required')),
           otherwise: Yup.string(),
@@ -70,11 +67,6 @@ const BabyLocationUpdate: React.FC = () => {
     )
     .required();
 
-  // TODO Remove
-  useEffect(() => {
-    hide({ duration: 250 });
-  }, []);
-
   async function handleFormSubmit(
     values: BabyOption[],
     { setSubmitting }: FormikHelpers<BabyOption[]>,
@@ -82,10 +74,7 @@ const BabyLocationUpdate: React.FC = () => {
     const selected = values.filter(value => value.isSelected);
     if (selected.length > 0) {
       setSubmitting(true);
-      const updates = selected.map(
-        async ({ id, newLocation, date, doesntApplyReason }) =>
-          updateBabyLocation(id, newLocation, date!, doesntApplyReason),
-      );
+      const updates = selected.map(value => updateBabyLocation(value));
       await Promise.all(updates);
       setSubmitting(false);
     }
@@ -148,12 +137,10 @@ const BabyLocationUpdate: React.FC = () => {
                       {baby.newLocation ===
                         i18n.t('BabyLocationUpdate.Options.Other') && (
                         <FormTextInput
-                          error={errors[index]?.doesntApplyReason}
+                          error={errors[index]?.reason}
                           label={i18n.t('Reason')}
-                          value={baby.doesntApplyReason}
-                          onChangeText={handleChange(
-                            `${index}.doesntApplyReason`,
-                          )}
+                          value={baby.reason}
+                          onChangeText={handleChange(`${index}.reason`)}
                         />
                       )}
                     </View>
