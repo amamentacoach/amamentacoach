@@ -19,6 +19,8 @@ class UserController{
             semanas_gestante,
             data_provavel_parto,
             companheiro,
+            data_parto,
+            semanas_gestacao,
             bebes
         } = req.body;
 
@@ -37,16 +39,30 @@ class UserController{
                 veiculo_midia,
                 semanas_gestante,
                 companheiro: companheiro || false,
-                data_provavel_parto
+                data_provavel_parto,
+                data_parto,
+                semanas_gestacao
             };
 
             const [id] = await trx('mae').insert(mae).returning('id')
 
             if(bebes){
                 for (const bebe of bebes) {
-                    bebe.mae_id = id
-                    bebe.local_cadastro = bebe.local
-                    await trx('bebe').insert(bebe);
+                    const {
+                        nome,
+                        local_nascimento,
+                        local_atual,
+                        cidade,
+                        estado
+                    } =  bebe
+                    const bebeCadastro = {
+                        nome,
+                        mae_id: id,
+                        local_cadastro: local_nascimento,
+                        local: local_atual,
+                        cidade_estado: `${cidade} - ${estado}`
+                    };
+                    await trx('bebe').insert(bebeCadastro);
                 }
             }
 

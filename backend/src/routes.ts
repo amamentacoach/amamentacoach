@@ -103,13 +103,17 @@ routes.post('/maes',maesController.create);
  *          "whatsapp":"43 991814181",
  *          "veiculo_midia": "Facebook", // Como ficou sabendo sobre o app
  *          "semanas_gestante": 22, // Somente se for gestante
- *          "data_provavel_parto": "2022-07-14" // Somente se for gestante
- *          "companheiro": true
+ *          "data_provavel_parto": "2022-07-14", // Somente se for gestante
+ *          "companheiro": true,
+ *          "data_parto": 2020-08-28", // Somente mae prematuro
+ *          "semanas_gestacao": 32, // Somente mae prematuro
  *          "bebes": [ // Não informar quando for gestante
  *               {
  *                   "nome":"Enzo Gabriel",
- *                   "data_parto":"2020-08-28",
- *                   "local":"UCI Neonatal"
+ *                   "local_nascimento":"UCI Neonatal",
+ *                   "local_atual": "Casa",
+ *                   "cidade": "Londrina",
+ *                   "estado": "PR"
  *               }                
  *          ]
  *      }
