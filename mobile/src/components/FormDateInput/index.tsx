@@ -15,6 +15,7 @@ interface FormDateProps {
   error?: string | FormikErrors<any>;
   mode?: string;
   maxDate?: Date;
+  minDate?: Date;
   value?: Date;
   onChange: (fieldValue: Date) => void;
 }
@@ -24,8 +25,9 @@ const FormDateInput: React.FC<FormDateProps> = ({
   error,
   placeholder,
   value,
+  maxDate,
+  minDate,
   mode = 'date',
-  maxDate = new Date(),
   onChange,
 }) => {
   const [show, setShow] = useState(false);
@@ -72,10 +74,11 @@ const FormDateInput: React.FC<FormDateProps> = ({
         <DateTimePicker
           display="default"
           maximumDate={maxDate}
+          minimumDate={minDate}
           // @ts-ignore
           mode={mode}
           testID="dateTimePicker"
-          value={date || maxDate}
+          value={date || new Date()}
           onChange={handleDateSelected}
         />
       )}

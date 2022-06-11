@@ -129,6 +129,7 @@ const BabyLocationUpdate: React.FC = () => {
                           error={errors[index]?.date}
                           label={i18n.t('BabyLocationUpdate.DischargeDate')}
                           value={baby.date}
+                          maxDate={new Date()}
                           onChange={date =>
                             setFieldValue(`${index}.date`, date)
                           }
