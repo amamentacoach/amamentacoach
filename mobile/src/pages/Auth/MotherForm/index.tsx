@@ -2,7 +2,6 @@ import 'yup-phone';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
-import React from 'react';
 import { getCountry } from 'react-native-localize';
 import * as Yup from 'yup';
 
@@ -13,7 +12,7 @@ import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import PaddedScrollView from 'components/PaddedScrollView';
 import SecondaryButton from 'components/SecondaryButton';
-import { Center, Flex, Row, Spacer } from 'lib/sharedStyles';
+import { Flex, Row, Spacer } from 'lib/sharedStyles';
 import { getCountryStates } from 'utils/localize';
 
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';

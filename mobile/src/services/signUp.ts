@@ -3,8 +3,9 @@ import { format } from 'date-fns';
 import api from 'services/api';
 
 export interface BabySignUpInfo {
-  birthday: Date;
-  postBirthLocation: string;
+  birthLocation: string;
+  currentLocation: string;
+  institution: string;
   name: string;
 }
 
