@@ -1,10 +1,13 @@
 import { Picker } from '@react-native-picker/picker';
 import i18n from 'i18n-js';
 import { useState } from 'react';
+import { View } from 'react-native';
 
 import { ErrorContainer, ErrorText } from 'lib/sharedStyles';
 
-import { Container, LabelText, PickerContainer } from './styles';
+import type { StyleProp, ViewStyle } from 'react-native';
+
+import { LabelText, PickerContainer } from './styles';
 
 interface FormPickerProps {
   options: string[];
@@ -12,6 +15,7 @@ interface FormPickerProps {
   value?: string;
   label?: string;
   error?: string;
+  style?: StyleProp<ViewStyle>;
   onChange: (fieldValue: string) => void;
 }
 
@@ -21,6 +25,7 @@ const FormPickerInput: React.FC<FormPickerProps> = ({
   label,
   error,
   options,
+  style,
   onChange,
 }) => {
   const [selectedItem, setSelectedItem] = useState(value);
@@ -31,10 +36,13 @@ const FormPickerInput: React.FC<FormPickerProps> = ({
   }
 
   return (
-    <Container>
+    <View>
       {label !== undefined && <LabelText>{label}</LabelText>}
       <PickerContainer>
-        <Picker selectedValue={selectedItem} onValueChange={handleItemSelected}>
+        <Picker
+          selectedValue={selectedItem}
+          style={style}
+          onValueChange={handleItemSelected}>
           {[placeholder, ...options]
             .filter(option => option !== '')
             .map(option => (
@@ -49,7 +57,7 @@ const FormPickerInput: React.FC<FormPickerProps> = ({
       <ErrorContainer>
         {!!error && <ErrorText>{error}</ErrorText>}
       </ErrorContainer>
-    </Container>
+    </View>
   );
 };
 

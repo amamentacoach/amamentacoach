@@ -23,6 +23,5 @@ export const SubmitButtonContainer = styled.View`
   flex: 1;
   align-items: flex-end;
   flex-direction: row;
-  padding: 15px 0px;
-  margin-bottom: 20px;
+  margin-top: 15px;
 `;

@@ -4,11 +4,6 @@ import { OpenSansRegular } from 'lib/sharedStyles';
 
 import type { ColorValue } from 'react-native';
 
-export const Container = styled.View`
-  flex: 1;
-  width: 100%;
-`;
-
 export const LabelText = styled(OpenSansRegular)`
   font-size: 14px;
   margin-bottom: 5px;
