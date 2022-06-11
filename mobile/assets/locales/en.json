@@ -4,16 +4,19 @@
   "Begin": "Begin",
   "Breast": "Breast",
   "Cancel": "Cancel",
+  "City": "Cidade",
   "Close": "Close",
   "Content": "Content",
   "Date": "Date",
   "Diary": "Diary",
+  "DonaIrisMaternity": "Maternidade Dona Íris",
   "Duration": "Duration",
   "Email": "Email",
   "ErrorSurveyAlreadyAnswered": "Oops! You've already answered the survey today. Please return tomorrow.",
   "Expectations": "Expectations",
   "GoBack": "Back",
   "Home": "Home",
+  "HU": "HU",
   "Infograph": "Infographic",
   "Later": "Later",
   "Leave": "Exit",
@@ -32,14 +35,15 @@
   "Question": "Question",
   "Reason": "Reason",
   "Right": "Right",
-  "SignUp": "Registration",
   "SelectBaby": "Select baby",
+  "SignUp": "Registration",
   "Skip": "Skip",
+  "State": "State",
   "TermsOfService": "Consent Form",
   "Time": "Time",
   "UCI": "Neonatal Intermediate Care Unit",
-  "UTI": "Neonatal Intensive Care Unit",
   "UCIN Kangaroo": "\"Kangaroo\" maternal care unit",
+  "UTI": "Neonatal Intensive Care Unit",
   "Years": "Years",
   "Yes": "Yes",
   "Day": {
@@ -102,13 +106,28 @@
     "Step4": "The baby will lick the milk and follow by swallowing. Be careful not to pour the milk into the baby's mouth."
   },
   "BabyFormPage": {
-    "BirthDate": "Date of birth",
     "BirthLocation": "Once born, your baby went to:",
+    // TODO Translate
+    "BirthPlace": "Ao nascer, seu bebê ficou internado",
+    "CurrentLocation": {
+      "Description": "Onde seu bebê nesse momento?",
+      "Options": {
+        "Home": "Em casa"
+      }
+    },
+    "Institution": {
+      "Description": "Instituição em que seu bebê ficou internado:",
+      "Options": {
+        "1": "Hospital Universitário de Londrina",
+        "2": "Hospital e Maternidade Dona Íris-Goiânia"
+      }
+    },
+    "ExternalForm": {
+      "Message": "Conforme explicamos, você está participando de uma pesquisa sobre esse App que você terá acesso. Para tanto, precisamos da sua valiosa contribuição, que viabiliza todo o estudo, preenchendo um formulário com poucas questões que está disponível no link abaixo. Logo depois, você poderá acessar o App AmamentaCoach.  Esperamos que goste e aproveite muito essa experiência!",
+      "LinkWarning": "Clique aqui para acessar o formulário"
+    },
     "Header": "You are almost there! Now we're going to ask you a few questions about your birth and your baby.",
-    "Name": "Your baby's name",
-    "Placeholder": {
-      "BirthDate": "Enter the date of birth"
-    }
+    "Name": "Your baby's name"
   },
   "BabySlingPage": {
     "1": "Video 1",
@@ -359,19 +378,18 @@
     "BirthdayPlaceholder": "Date of birth",
     "CountPlaceholder": "Enter the number of times",
     "CurrentGestationCount": "What is the number of children in this pregnancy?",
-    "Location": "Place of delivery",
     "Name": "Your name",
     "Partner": "Do you have a partner?",
     "Phone": "Phone number",
     // TODO Translate
+    "BirthCityStateHeader": "Onde seu bebê nasceu?",
+    "BirthWeeks": "Seu parto ocorreu com quantas semanas de gestação?",
     "UserType": "Em qual dessas situações você se enquadra?",
+    "WeeksPregnant": "De quantas semanas está gestante?",
+    "BirthDate": "Date of birth",
     "Origin": "Como você ficou sabendo deste estudo?",
     "SocialMedia": "Por qual veículo de mídia você ficou sabendo sobre o app AmamentaCoach?",
     "PossibleBirthDate": "Qual a data provável do seu parto?",
-    "LocationOptions": {
-      "HU": "HU",
-      "Maternity": "Maternidade Dona Íris"
-    },
     "UserTypeOptions": {
       "Pregnant": "Pregnant",
       "Mother": "Mãe de bebê prematuro",
@@ -385,6 +403,9 @@
     },
     "SocialMediaOptions": {
       "TVOrRadio": "TV ou rádio"
+    },
+    "Placeholder": {
+      "BirthDate": "Enter the date of birth"
     }
   },
   "MusicPlaylistsPage": {
