@@ -1,23 +1,11 @@
 import { Request, Response } from 'express';
 import knex from '../database/connection';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 require('dotenv/config');
 
-class UserController{
+class GestanteController{
 
-    async create(req:Request, res:Response){
+    async informarNascimento(req:Request, res:Response){
         const {
-            email,
-            senha,
-            nome,
-            whatsapp,
-            categoria,
-            localizacao,
-            data_nascimento,
-            veiculo_midia,
-            semanas_gestante,
-            data_provavel_parto,
             companheiro,
             data_parto,
             semanas_gestacao,
@@ -26,28 +14,19 @@ class UserController{
             bebes
         } = req.body;
 
+        const { mae_id } = req;
+
         await knex.transaction(async trx =>{
 
             const mae = {
-                email, 
-                senha:await bcrypt.hash(senha,10), 
-                nome, 
-                localizacao, 
-                data_nascimento, 
-                ultimo_acesso:new Date(), 
-                primeiro_acesso: new Date(), 
-                categoria, 
-                whatsapp, 
-                veiculo_midia,
-                semanas_gestante,
                 companheiro: companheiro || false,
-                data_provavel_parto,
                 data_parto,
                 semanas_gestacao,
+                categoria: 'Mae',
                 cidade_estado: `${cidade} - ${estado}`
             };
 
-            const [id] = await trx('mae').insert(mae).returning('id')
+            await trx('mae').update(mae).where({id: mae_id})
 
             if(bebes){
                 for (const bebe of bebes) {
@@ -59,7 +38,7 @@ class UserController{
                     } =  bebe
                     const bebeCadastro = {
                         nome,
-                        mae_id: id,
+                        mae_id,
                         local_cadastro: local_nascimento,
                         local: local_atual,
                         instituicao
@@ -67,38 +46,7 @@ class UserController{
                     await trx('bebe').insert(bebeCadastro);
                 }
             }
-
-            const secret = process.env.SECRET
-            const token = jwt.sign({id},secret?secret:"segredo",{
-                    expiresIn:3600
-            })
-            res.json({token})
         })
-    }
-
-    async update(req:Request, res:Response){
-        const {
-            email,
-            nome, 
-            companheiro,
-            localizacao,
-            data_nascimento,
-            bebes
-        } = req.body;
-
-        const { mae_id } = req;
-
-        await knex.transaction(async trx =>{
-
-            const mae = {email, nome, companheiro, localizacao, data_nascimento};
-            await trx('mae').where({id: mae_id}).update(mae);
-
-            for (let bebe of bebes) {
-                bebe.local_cadastro = bebe.local
-                const { id, ...bebeUpdate} = bebe;
-                await trx('bebe').where({mae_id}).andWhere({id}).update(bebeUpdate);
-            }
-        });
 
         const result = await knex('mae')
         .select('*')
@@ -121,9 +69,6 @@ class UserController{
         result.ordenhas=ordenhas
         return res.json(result);
     }
-
-
-
 }
 
-export default UserController;
+export default GestanteController;
