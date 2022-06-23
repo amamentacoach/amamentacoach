@@ -1,11 +1,14 @@
 import styled from 'styled-components/native';
 
-import FormPickerInput from 'components/FormPickerInput';
 import { OpenSansRegular, OpenSansBold, Center } from 'lib/sharedStyles';
 
 export const HeaderText = styled(OpenSansBold)`
   font-size: 18px;
   text-align: center;
+`;
+
+export const QuestionContainer = styled.View`
+  margin: 10px 0;
 `;
 
 export const HeaderSubText = styled(OpenSansRegular)`

@@ -27,7 +27,7 @@ export interface MotherSignUpInfo {
 export interface BabySignUpInfo {
   birthLocation: string;
   currentLocation: string;
-  institution: string;
+  birthInstitution: string;
   name: string;
 }
 
@@ -56,7 +56,7 @@ async function signUp(
       : null,
     semanas_gestacao: motherInfo.birthWeeks,
     bebes: babiesInfo.map(baby => ({
-      instituicao: baby.institution,
+      instituicao: baby.birthInstitution,
       local_atual: baby.currentLocation,
       local_nascimento: baby.birthLocation,
       nome: baby.name,

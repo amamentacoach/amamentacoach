@@ -1,6 +1,7 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
+import { useRef } from 'react';
 import { Linking, View } from 'react-native';
 import * as Yup from 'yup';
 
@@ -21,26 +22,56 @@ import type { FormikErrors } from 'formik';
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
 import type { BabySignUpInfo } from 'services/signUp';
 
-import { ExternalFormContainer, HeaderSubText, HeaderText } from './styles';
+import {
+  ExternalFormContainer,
+  HeaderSubText,
+  HeaderText,
+  QuestionContainer,
+} from './styles';
 
 const BabyForm: React.FC = () => {
   const navigation = useNavigation<AuthStackProps>();
   const { motherInfo } = useRoute<AuthRouteProp<'BabyForm'>>().params;
+  const wasExternalFormOpened = useRef(false);
 
   const formInitialValues: BabySignUpInfo[] = [
     ...Array(motherInfo.currentGestationCount),
   ].map(_ => ({
     birthLocation: '',
-    institution: '',
+    birthInstitution: '',
     currentLocation: '',
     name: '',
   }));
+
+  // Verifica se um bebê nasceu em uma instituição que não faz parte do estudo.
+  function checkBabyBirthInstitution(
+    birthInstitution: string | undefined,
+  ): boolean {
+    return (
+      birthInstitution !== undefined &&
+      birthInstitution !== '' &&
+      birthInstitution !== i18n.t('BabyFormPage.Institution.Options.1') &&
+      birthInstitution !== i18n.t('BabyFormPage.Institution.Options.2')
+    );
+  }
 
   const babyFormSchema = Yup.array()
     .of(
       Yup.object().shape({
         birthLocation: Yup.string().required(i18n.t('Yup.Required')),
-        institution: Yup.string().required(i18n.t('Yup.Required')),
+        birthInstitution: Yup.string()
+          // Caso o bebê tenha nascido em uma instituição que não faz parte do estudo é necessário
+          // abrir o formulário externo.
+          .test(
+            'user-opened-form',
+            // TODO Tradução
+            'O formulário externo precisa ser respondido',
+            (value, _) =>
+              checkBabyBirthInstitution(value)
+                ? wasExternalFormOpened.current
+                : true,
+          )
+          .required(i18n.t('Yup.Required')),
         currentLocation: Yup.string().required(i18n.t('Yup.Required')),
         name: Yup.string().required(i18n.t('Yup.Required')),
       }),
@@ -88,72 +119,79 @@ const BabyForm: React.FC = () => {
           <Flex>
             {values.map((_, index) => (
               <View key={index}>
-                <FormTextInput
-                  error={getBabyError(errors, index, 'name')}
-                  label={i18n.t('BabyFormPage.Name')}
-                  placeholder={i18n.t('Name')}
-                  value={values[index].name}
-                  onChangeText={handleChange(`${index}.name`)}
-                />
+                <QuestionContainer>
+                  <FormTextInput
+                    error={getBabyError(errors, index, 'name')}
+                    label={i18n.t('BabyFormPage.Name')}
+                    placeholder={i18n.t('Name')}
+                    value={values[index].name}
+                    onChangeText={handleChange(`${index}.name`)}
+                  />
+                </QuestionContainer>
 
-                <FormRadioGroupInput
-                  error={getBabyError(errors, index, 'institution')}
-                  label={i18n.t('BabyFormPage.Institution.Description')}
-                  options={[
-                    i18n.t('BabyFormPage.Institution.Options.1'),
-                    i18n.t('BabyFormPage.Institution.Options.2'),
-                  ]}
-                  displayOtherField
-                  onChange={fieldValues =>
-                    setFieldValue(`${index}.institution`, fieldValues[0])
-                  }
-                />
+                <QuestionContainer>
+                  <FormRadioGroupInput
+                    error={getBabyError(errors, index, 'birthInstitution')}
+                    label={i18n.t('BabyFormPage.Institution.Description')}
+                    options={[
+                      i18n.t('BabyFormPage.Institution.Options.1'),
+                      i18n.t('BabyFormPage.Institution.Options.2'),
+                    ]}
+                    displayOtherField
+                    onChange={fieldValues =>
+                      setFieldValue(`${index}.birthInstitution`, fieldValues[0])
+                    }
+                  />
+                </QuestionContainer>
 
-                {values[index].institution !== undefined &&
-                  values[index].institution !== '' &&
-                  values[index].institution !==
-                    i18n.t('BabyFormPage.Institution.Options.1') &&
-                  values[index].institution !==
-                    i18n.t('BabyFormPage.Institution.Options.2') && (
-                    <ExternalFormContainer>
-                      <OpenSansRegular>
-                        {i18n.t('BabyFormPage.ExternalForm.Message')}
-                      </OpenSansRegular>
-                      {/* TODO Adicionar link */}
-                      <OpenSansBold onPress={() => Linking.openURL('TODO')}>
-                        {i18n.t('BabyFormPage.ExternalForm.LinkWarning')}
-                      </OpenSansBold>
-                    </ExternalFormContainer>
-                  )}
+                {checkBabyBirthInstitution(values[index].birthInstitution) && (
+                  <ExternalFormContainer>
+                    <OpenSansRegular>
+                      {i18n.t('BabyFormPage.ExternalForm.Message')}
+                    </OpenSansRegular>
+                    {/* TODO Adicionar link */}
+                    <OpenSansBold
+                      onPress={() => {
+                        wasExternalFormOpened.current = true;
+                        Linking.openURL('TODO');
+                      }}>
+                      {i18n.t('BabyFormPage.ExternalForm.LinkWarning')}
+                    </OpenSansBold>
+                  </ExternalFormContainer>
+                )}
 
-                <FormRadioGroupInput
-                  error={getBabyError(errors, index, 'birthLocation')}
-                  label={i18n.t('BabyFormPage.BirthPlace')}
-                  options={[
-                    i18n.t('Lodging'),
-                    i18n.t('UCI'),
-                    i18n.t('UCIN Kangaroo'),
-                    i18n.t('UTI'),
-                  ]}
-                  onChange={fieldValues =>
-                    setFieldValue(`${index}.birthLocation`, fieldValues[0])
-                  }
-                />
+                <QuestionContainer>
+                  <FormRadioGroupInput
+                    error={getBabyError(errors, index, 'birthLocation')}
+                    label={i18n.t('BabyFormPage.BirthPlace')}
+                    options={[
+                      i18n.t('Lodging'),
+                      i18n.t('UCI'),
+                      i18n.t('UCIN Kangaroo'),
+                      i18n.t('UTI'),
+                    ]}
+                    onChange={fieldValues =>
+                      setFieldValue(`${index}.birthLocation`, fieldValues[0])
+                    }
+                  />
+                </QuestionContainer>
 
-                <FormRadioGroupInput
-                  error={getBabyError(errors, index, 'currentLocation')}
-                  label={i18n.t('BabyFormPage.CurrentLocation.Description')}
-                  options={[
-                    i18n.t('Lodging'),
-                    i18n.t('UCI'),
-                    i18n.t('UCIN Kangaroo'),
-                    i18n.t('UTI'),
-                    i18n.t('BabyFormPage.CurrentLocation.Options.Home'),
-                  ]}
-                  onChange={fieldValues =>
-                    setFieldValue(`${index}.currentLocation`, fieldValues[0])
-                  }
-                />
+                <QuestionContainer>
+                  <FormRadioGroupInput
+                    error={getBabyError(errors, index, 'currentLocation')}
+                    label={i18n.t('BabyFormPage.CurrentLocation.Description')}
+                    options={[
+                      i18n.t('Lodging'),
+                      i18n.t('UCI'),
+                      i18n.t('UCIN Kangaroo'),
+                      i18n.t('UTI'),
+                      i18n.t('BabyFormPage.CurrentLocation.Options.Home'),
+                    ]}
+                    onChange={fieldValues =>
+                      setFieldValue(`${index}.currentLocation`, fieldValues[0])
+                    }
+                  />
+                </QuestionContainer>
               </View>
             ))}
 
