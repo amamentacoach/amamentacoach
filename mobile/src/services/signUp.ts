@@ -5,7 +5,7 @@ import api from 'services/api';
 export interface BabySignUpInfo {
   birthLocation: string;
   currentLocation: string;
-  institution: string;
+  birthInstitution: string;
   name: string;
 }
 
