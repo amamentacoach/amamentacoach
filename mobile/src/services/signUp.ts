@@ -37,20 +37,20 @@ async function signUp(
   babiesInfo: BabySignUpInfo[],
 ): Promise<boolean> {
   const userData = {
-    companheiro: motherInfo.hasPartner,
     data_nascimento: format(motherInfo.birthday, 'yyyy-MM-dd'),
     email: motherInfo.email,
     localizacao: motherInfo.birthLocation,
     nome: motherInfo.name,
     senha: motherInfo.password,
-    cidade: motherInfo.city,
-    estado: motherInfo.state,
     // Gestante
     semanas_gestante: motherInfo.weeksPregnant || null,
     data_provavel_parto: motherInfo.possibleBirthDate
       ? format(motherInfo.possibleBirthDate, 'yyyy-MM-dd')
       : null,
     // Mãe de prematuro.
+    cidade: motherInfo.city,
+    estado: motherInfo.state,
+    companheiro: motherInfo.hasPartner,
     data_parto: motherInfo.birthDate
       ? format(motherInfo.birthDate, 'yyyy-MM-dd')
       : null,

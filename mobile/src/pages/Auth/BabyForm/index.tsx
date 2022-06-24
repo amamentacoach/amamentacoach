@@ -64,8 +64,7 @@ const BabyForm: React.FC = () => {
           // abrir o formulário externo.
           .test(
             'user-opened-form',
-            // TODO Tradução
-            'O formulário externo precisa ser respondido',
+            i18n.t('BabyFormPage.ExternalForm.Error'),
             (value, _) =>
               checkBabyBirthInstitution(value)
                 ? wasExternalFormOpened.current
