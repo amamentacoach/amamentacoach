@@ -10,15 +10,15 @@ import { ScrollView } from 'lib/sharedStyles';
 import { Container } from './styles';
 
 const AcceptTermsOfService: React.FC = () => {
-  const { motherInfo } = useAuth();
+  const { userInfo } = useAuth();
 
   return (
     <ScrollView>
       <Container>
-        {differenceInYears(new Date(), new Date(motherInfo.birthday)) >= 18 ? (
-          <AdultTermsOfService name={motherInfo.name} />
+        {differenceInYears(new Date(), new Date(userInfo.birthday)) >= 18 ? (
+          <AdultTermsOfService name={userInfo.name} />
         ) : (
-          <MinorTermsOfService name={motherInfo.name} />
+          <MinorTermsOfService name={userInfo.name} />
         )}
       </Container>
     </ScrollView>

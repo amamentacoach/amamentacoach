@@ -51,7 +51,7 @@ export interface UserInfo extends FilteredUserSignUpInfo {
 }
 
 // Verifica se um objeto carrega as informações da mãe.
-export function isMotherInfo(object: any): object is MotherInfo {
+export function isUserInfo(object: any): object is UserInfo {
   return (
     object &&
     object.institution &&
@@ -73,18 +73,18 @@ export function isMotherInfo(object: any): object is MotherInfo {
 }
 
 // Retorna os dados de uma mãe.
-export async function getMotherInfo(): Promise<MotherInfo | null> {
+export async function getUserInfo(): Promise<UserInfo | null> {
   try {
     const { data } = await api.get('/maes');
     // Recebe todos os ids e nome dos bebês.
-    const babies: MotherInfo['babies'] = data.bebes.map((baby: any) => ({
+    const babies: UserInfo['babies'] = data.bebes.map((baby: any) => ({
       birthday: new Date(baby.data_parto),
       id: baby.id,
       name: baby.nome,
       postBirthLocation: baby.local,
     }));
 
-    const babiesBirthLocations: MotherInfo['babiesBirthLocations'] = {
+    const babiesBirthLocations: UserInfo['babiesBirthLocations'] = {
       AC: false,
       UCI: false,
       UCIN: false,

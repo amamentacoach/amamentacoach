@@ -16,7 +16,7 @@ import { updateBabyLocation } from 'services/babyLocation';
 import type { FormikHelpers } from 'formik';
 import type { RootStackProps } from 'routes/app';
 import type { BabyLocationUpdate as IBabyLocationUpdate } from 'services/babyLocation';
-import type { MotherInfo } from 'services/user';
+import type { UserInfo } from 'services/user';
 
 import {
   ExtraOptionsContainer,
@@ -26,7 +26,7 @@ import {
   TextModal,
 } from './styles';
 
-type Baby = MotherInfo['babies'][number];
+type Baby = UserInfo['babies'][number];
 
 type BabyOption = Baby &
   IBabyLocationUpdate & {
@@ -35,8 +35,8 @@ type BabyOption = Baby &
 
 const BabyLocationUpdate: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
-  const { motherInfo } = useAuth();
-  const options: BabyOption[] = motherInfo.babies.map(baby => ({
+  const { userInfo } = useAuth();
+  const options: BabyOption[] = userInfo.babies.map(baby => ({
     ...baby,
     isSelected: false,
     newLocation: '',
@@ -128,8 +128,8 @@ const BabyLocationUpdate: React.FC = () => {
                         <FormDateInput
                           error={errors[index]?.date}
                           label={i18n.t('BabyLocationUpdate.DischargeDate')}
-                          value={baby.date}
                           maxDate={new Date()}
+                          value={baby.date}
                           onChange={date =>
                             setFieldValue(`${index}.date`, date)
                           }

@@ -25,7 +25,7 @@ import { Container, DateText, ListContainer } from './styles';
 const DiaryBreastfeed: React.FC = () => {
   const { params } = useRoute<RootRouteProp<'DiaryBreastfeed'>>();
   const navigation = useNavigation<RootStackProps>();
-  const { motherInfo } = useAuth();
+  const { userInfo } = useAuth();
   const isFocused = useIsFocused();
   const [registries, setRegistries] = useState<BreastfeedEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -54,7 +54,7 @@ const DiaryBreastfeed: React.FC = () => {
       setIsLoading(true);
       // Recebe os registros de todos os bebês da mãe.
       const oldRegistries = await Promise.all(
-        motherInfo.babies.map(async ({ id }) =>
+        userInfo.babies.map(async ({ id }) =>
           listBreastfeedEntries(id, selectedDate),
         ),
       );

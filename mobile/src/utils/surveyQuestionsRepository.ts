@@ -1,6 +1,6 @@
 import { getTranslationFiles } from 'utils/localize';
 
-import type { MotherInfo } from 'services/user';
+import type { UserInfo } from 'services/user';
 
 export interface SurveyQuestion {
   id: number;
@@ -15,11 +15,11 @@ export interface SurveyQuestion {
 class SurveyQuestionsRepository {
   private survey: SurveyQuestion[];
 
-  constructor(motherInfo?: MotherInfo) {
-    this.survey = this.loadQuestions(motherInfo);
+  constructor(userInfo?: UserInfo) {
+    this.survey = this.loadQuestions(userInfo);
   }
 
-  private loadQuestions(motherInfo?: MotherInfo): SurveyQuestion[] {
+  private loadQuestions(userInfo?: UserInfo): SurveyQuestion[] {
     const { getSurvey } = getTranslationFiles();
     let questions = getSurvey().map(question => ({
       id: question.id,
@@ -32,16 +32,16 @@ class SurveyQuestionsRepository {
     }));
 
     // Filtra as questões com base nos dados da mãe.
-    if (motherInfo) {
+    if (userInfo) {
       questions = questions.filter(question => {
         // Caso o alvo seja UCI ou UTI e a mãe não possua bebês em nenhum dos dois essa pergunta não
         // deve ser retornada.
         if (
           question.target === 'UCI/UTI' &&
-          motherInfo &&
-          !motherInfo.babiesBirthLocations.UCI &&
-          !motherInfo.babiesBirthLocations.UCIN &&
-          !motherInfo.babiesBirthLocations.UTI
+          userInfo &&
+          !userInfo.babiesBirthLocations.UCI &&
+          !userInfo.babiesBirthLocations.UCIN &&
+          !userInfo.babiesBirthLocations.UTI
         ) {
           return false;
         }
