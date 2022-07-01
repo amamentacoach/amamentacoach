@@ -86,7 +86,7 @@ const MotherForm: React.FC = () => {
     institution: Yup.string().required(i18n.t('Yup.Required')),
     socialMedia: requiredWhen(
       'institution',
-      i18n.t('MotherFormPage.OriginOptions.SocialMedia'),
+      i18n.t('MotherFormPage.InstitutionOptions.SocialMedia'),
       Yup.string(),
     ),
     // Caso seja gestante.
@@ -216,19 +216,19 @@ const MotherForm: React.FC = () => {
             <QuestionContainer>
               <FormPickerInput
                 error={errors.institution}
-                label={i18n.t('MotherFormPage.Origin')}
+                label={i18n.t('MotherFormPage.Institution')}
                 options={[
-                  i18n.t('MotherFormPage.OriginOptions.HU'),
-                  i18n.t('MotherFormPage.OriginOptions.HMDI'),
-                  i18n.t('MotherFormPage.OriginOptions.AHC'),
-                  i18n.t('MotherFormPage.OriginOptions.SocialMedia'),
+                  i18n.t('MotherFormPage.InstitutionOptions.HU'),
+                  i18n.t('MotherFormPage.InstitutionOptions.HMDI'),
+                  i18n.t('MotherFormPage.InstitutionOptions.AHC'),
+                  i18n.t('MotherFormPage.InstitutionOptions.SocialMedia'),
                 ]}
                 onChange={handleChange('institution')}
               />
             </QuestionContainer>
 
             {values.institution ===
-              i18n.t('MotherFormPage.OriginOptions.SocialMedia') && (
+              i18n.t('MotherFormPage.InstitutionOptions.SocialMedia') && (
               <QuestionContainer>
                 <FormPickerInput
                   error={errors.socialMedia}

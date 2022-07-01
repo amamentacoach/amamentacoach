@@ -33,12 +33,13 @@ export interface UserSignUpInfo {
 
 async function signUp(userInfo: UserSignUpInfo): Promise<boolean> {
   const user = {
+    categoria: userInfo.userType,
     data_nascimento: format(userInfo.birthday, 'yyyy-MM-dd'),
     email: userInfo.email,
-    nome: userInfo.name,
     localizacao: userInfo.institution,
-    veiculo_midia: userInfo.socialMedia,
+    nome: userInfo.name,
     senha: userInfo.password,
+    veiculo_midia: userInfo.socialMedia,
     // Gestante
     semanas_gestante: userInfo.weeksPregnant || null,
     data_provavel_parto: userInfo.possibleBirthDate

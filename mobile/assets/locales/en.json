@@ -387,7 +387,7 @@
     "UserType": "Em qual dessas situações você se enquadra?",
     "WeeksPregnant": "De quantas semanas está gestante?",
     "BirthDate": "Date of birth",
-    "Origin": "Como você ficou sabendo deste estudo?",
+    "Institution": "Como você ficou sabendo deste estudo?",
     "SocialMedia": "Por qual veículo de mídia você ficou sabendo sobre o app AmamentaCoach?",
     "PossibleBirthDate": "Qual a data provável do seu parto?",
     "UserTypeOptions": {
@@ -395,7 +395,7 @@
       "Mother": "Mãe de bebê prematuro",
       "HealthcareWorker": "Profissional de saúde"
     },
-    "OriginOptions": {
+    "InstitutionOptions": {
       "HU": "Sou paciente do HU - Londrina",
       "HMDI": "Sou paciente do HMDI-Goiânia",
       "AHC": "Sou paciente do AHC Londrina",

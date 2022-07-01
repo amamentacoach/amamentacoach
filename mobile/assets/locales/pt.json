@@ -379,7 +379,7 @@
     "Partner": "Tem companheiro?",
     "Phone": "Telefone",
     "UserType": "Em qual dessas situações você se enquadra?",
-    "Origin": "Como você ficou sabendo deste estudo?",
+    "Institution": "Como você ficou sabendo deste estudo?",
     "BirthWeeks": "Seu parto ocorreu com quantas semanas de gestação?",
     "WeeksPregnant": "De quantas semanas está gestante?",
     "BirthDate": "Data do parto",
@@ -390,7 +390,7 @@
       "Mother": "Mãe de bebê prematuro",
       "HealthcareWorker": "Profissional de saúde"
     },
-    "OriginOptions": {
+    "InstitutionOptions": {
       "HU": "Sou paciente do HU - Londrina",
       "HMDI": "Sou paciente do HMDI-Goiânia",
       "AHC": "Sou paciente do AHC Londrina",
