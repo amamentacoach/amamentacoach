@@ -4,15 +4,19 @@
   "Begin": "Begin",
   "Breast": "Breast",
   "Cancel": "Cancel",
+  "City": "Cidade",
   "Close": "Close",
   "Content": "Content",
+  "Date": "Date",
   "Diary": "Diary",
+  "DonaIrisMaternity": "Maternidade Dona Íris",
   "Duration": "Duration",
   "Email": "Email",
   "ErrorSurveyAlreadyAnswered": "Oops! You've already answered the survey today. Please return tomorrow.",
   "Expectations": "Expectations",
   "GoBack": "Back",
   "Home": "Home",
+  "HU": "HU",
   "Infograph": "Infographic",
   "Later": "Later",
   "Leave": "Exit",
@@ -31,14 +35,15 @@
   "Question": "Question",
   "Reason": "Reason",
   "Right": "Right",
-  "SignUp": "Registration",
   "SelectBaby": "Select baby",
+  "SignUp": "Registration",
   "Skip": "Skip",
+  "State": "State",
   "TermsOfService": "Consent Form",
   "Time": "Time",
   "UCI": "Neonatal Intermediate Care Unit",
-  "UTI": "Neonatal Intensive Care Unit",
   "UCIN Kangaroo": "\"Kangaroo\" maternal care unit",
+  "UTI": "Neonatal Intensive Care Unit",
   "Years": "Years",
   "Yes": "Yes",
   "Day": {
@@ -101,13 +106,28 @@
     "Step4": "The baby will lick the milk and follow by swallowing. Be careful not to pour the milk into the baby's mouth."
   },
   "BabyFormPage": {
-    "BirthDate": "Date of birth",
     "BirthLocation": "Once born, your baby went to:",
+    // TODO Translate
+    "BirthPlace": "Ao nascer, seu bebê ficou internado",
+    "CurrentLocation": {
+      "Description": "Onde seu bebê nesse momento?",
+      "Options": {
+        "Home": "Em casa"
+      }
+    },
+    "Institution": {
+      "Description": "Instituição em que seu bebê ficou internado:",
+      "Options": {
+        "1": "Hospital Universitário de Londrina",
+        "2": "Hospital e Maternidade Dona Íris-Goiânia"
+      }
+    },
+    "ExternalForm": {
+      "Message": "Conforme explicamos, você está participando de uma pesquisa sobre esse App que você terá acesso. Para tanto, precisamos da sua valiosa contribuição, que viabiliza todo o estudo, preenchendo um formulário com poucas questões que está disponível no link abaixo. Logo depois, você poderá acessar o App AmamentaCoach.  Esperamos que goste e aproveite muito essa experiência!",
+      "LinkWarning": "Clique aqui para acessar o formulário"
+    },
     "Header": "You are almost there! Now we're going to ask you a few questions about your birth and your baby.",
-    "Name": "Your baby's name",
-    "Placeholder": {
-      "BirthDate": "Enter the date of birth"
-    }
+    "Name": "Your baby's name"
   },
   "BabySlingPage": {
     "1": "Video 1",
@@ -358,12 +378,34 @@
     "BirthdayPlaceholder": "Date of birth",
     "CountPlaceholder": "Enter the number of times",
     "CurrentGestationCount": "What is the number of children in this pregnancy?",
-    "Location": "Place of delivery",
     "Name": "Your name",
     "Partner": "Do you have a partner?",
-    "LocationOptions": {
-      "HU": "HU",
-      "Maternity": "Maternidade Dona Íris"
+    "Phone": "Phone number",
+    // TODO Translate
+    "BirthCityStateHeader": "Onde seu bebê nasceu?",
+    "BirthWeeks": "Seu parto ocorreu com quantas semanas de gestação?",
+    "UserType": "Em qual dessas situações você se enquadra?",
+    "WeeksPregnant": "De quantas semanas está gestante?",
+    "BirthDate": "Date of birth",
+    "Institution": "Como você ficou sabendo deste estudo?",
+    "SocialMedia": "Por qual veículo de mídia você ficou sabendo sobre o app AmamentaCoach?",
+    "PossibleBirthDate": "Qual a data provável do seu parto?",
+    "UserTypeOptions": {
+      "Pregnant": "Pregnant",
+      "Mother": "Mãe de bebê prematuro",
+      "HealthcareWorker": "Profissional de saúde"
+    },
+    "InstitutionOptions": {
+      "HU": "Sou paciente do HU - Londrina",
+      "HMDI": "Sou paciente do HMDI-Goiânia",
+      "AHC": "Sou paciente do AHC Londrina",
+      "SocialMedia": "Pela divulgação da pesquisa na mídia ou nas redes sociais"
+    },
+    "SocialMediaOptions": {
+      "TVOrRadio": "TV ou rádio"
+    },
+    "Placeholder": {
+      "BirthDate": "Enter the date of birth"
     }
   },
   "MusicPlaylistsPage": {
@@ -470,7 +512,7 @@
     "AverageEfficacy": "moderate",
     "FormName": "Scale",
     "Header": "Breastfeeding self-efficacy",
-    // TODO Translate.
+    // TODO Translate
     "Intro": "Para cada uma das afirmações a seguir, por favor, escolha a resposta que melhor descreve sua autoconfiança em amamentar seu bebê. Por favor, marque sua resposta circulando o número que melhor descreve como você se sente.  Não há respostas certas ou erradas.",
     "HighEfficacy": "high",
     "InfoValue1": "not at all confident",
@@ -540,7 +582,7 @@
     }
   },
   "FeedingFormPage": {
-    // TODO Translate.
+    // TODO Translate
     "FormName": "Informações sobre a alimentação",
     "Questions": {
       "1": {
@@ -607,86 +649,51 @@
     "SurveyMotivation": "Motivation"
   },
   "TermsOfServiceText": {
+    // TODO Translate
+    "Header": {
+      "Text1": "Prezada,",
+      "Text2": "Gostaríamos de convidá-la para participar da pesquisa",
+      "Text3": "\"Coaching via App: uma abordagem inovadora para o aleitamento materno de bebês prematuros\"",
+      "Text4": ", a ser realizada no Hospital Universitário de Londrina (HU/UEL), no Paraná, no Hospital e Maternidade Dona Íris, em Goiânia-GO e também por recrutamento voluntário via mídias sociais.",
+      "Text5": "Os objetivos da pesquisa são avaliar um aplicativo (app) de celular (smartphone) desenvolvido para ajudar gestantes de risco para parto prematuro e mães de bebês prematuros ou doentes a amamentarem seus bebês, contribuindo assim, para promoção do aleitamento materno (AM) de bebês prematuros; e validar a Escala de Autoeficácia para o Aleitamento Materno de mães de bebês prematuros ou doentes – versão brasileira."
+    },
+    // TODO Translate
     "Adult": {
-      "Title": "Informed consent form – Mothers",
-      "Text1": "Dear participant",
-      "Text2": "We would like to invite you to participate in the research",
-      "Text3": "\"Coaching by App: an innovative approach to breastfeeding of premature babies\"",
-      "Text4": ", to be held at the University Hospital of Londrina (HU / UEL). The purpose of the research is to elaborate and validate an application (APP) via smartphone focused on mothers for the promotion of breastfeeding of premature babies.",
-      "Text5": "Your participation is very important and it would be as follows: Mothers participating in the research will be divided into 2 groups that will receive assistance to succeed in breastfeeding their premature child. One group will receive the routine care of the healthcare service, and the other group, in addition to receiving routine care, will also use an smartphone App for supporting and offer instruction on breastfeeding. The definition of the group to which each mother will be random, through draw. During the survey, you will be asked to respond to a questionnaire about your personal data, and a scale to measure your self-confidence in the breastfeeding process. Regardless of the group that you be part, your breastfeeding process will be supported and accompanied all the time, and you will be contacted by phone at two moments after the baby's discharge, for follow-up.",
-      "Text6": "In addition, a month after discharge, you can be invited to attend an interview on experiences during your premature child's breastfeeding process. Your perceptions will be valuable for a better understanding by health professionals and researchers regarding the process of breastfeeding a premature baby. In this case, you will be interviewed or at the premature clinic, or at home, or remotely, per video calls, according to your possibilities. The interviews will be recorded and subsequently transcribed in full, lasting approximately 40 minutes and a maximum of 1 hour.",
-      "Text7": "The information will be treated with the absolute confidentiality and confidentiality in order to preserve your identity and it will be used only for the search purposes.",
-      "Text8": "We clarify that your participation is totally voluntary, you can: refuse to participate, or even give up at any time, without this lead to any burden or damage to your person. We also emphasize that your information will be used only for the research purposes and will be treated with the absolute confidentiality and confidentiality in order to preserve your identity.",
-      "Text9": "We ensure that you will not pay or will be remunerated by participation, however, if there are any expenses resulting from the research, these are the responsibility of the researcher.",
-      "Text10": "The possible benefits of your participation in this research will be the contribution to the construction of an App that intends to benefit and facilitate the breastfeeding process by promoting the dissemination of knowledge and information on the breastfeeding among the mothers of premature babies.",
-      "Text11": "As for the risks, which are minimal, they apply to time for the use of the App and reading, questionnaires response, and the interview. To minimize this factor you can use the App on the time you find it timely and still interrupt the interview at any time, resuming or not when you find it convenient. We will do the possible to assist it in every process if any discomfort occurs, clarifying it whenever necessary.",
-      "Text12": "If you have questions or require more clarifications you can contact us:",
-      "Text13": "Edilaine Giovanini Rossetto, PhD, (43) 98837-6610, Rua Gil de Abreu Souza, 1501, Condomínio Royal Park, Esperança, Londrina-PR, ediluizrossetto@gmail.com",
-      "Text14": "Gabriela Ramos Ferreira Curan, MSc, RN, Nurse, (43) 99921-6607, Rua Reverendo João Batista Ribeiro Neto, 75, apto 1903 torre 1 – Gleba Palhano, Londrina, gcuran@uel.br",
-      "Text15": "Louise Marina Silva Fontana, RN, (43) 99147-9194, Av. Garibaldi Deliberador, 99 – ap 77, Bloco Dom Pedro I, Jardim Claudia, Londrina-PR, louise.fontana@uel.br",
-      "Text16": "Or look for the Research Ethics Committee Involving Human Beings from the State University of Londrina, situated next to the Labesc building - school laboratory, university campus, telephone 3371-5455, e-mail: cep268@uel.br.",
-      "Text17": "This term should be filled in two ways of equal content, one of them being duly filled, signed and delivered to you.",
-      "Text18": "Londrina, %{date}.",
-      "Text19": "Gabriela Ramos Ferreira Curan",
-      "Text20": "RG: 9.786.358-0",
-      "Text21": "I, %{name} have been properly enlightened about the research procedures, agreeing to participate voluntarily from the research described above."
+      "Text1": "Ao concordar em participar da pesquisa, após a assinatura em termo de consentimento e cadastro de informações iniciais, você fará o download do app, na Play Store, de forma gratuita e terá acesso ilimitado a todo conteúdo interativo disponível. Você também preencherá questionários em momentos específicos, com informações sobre você e o bebê, para os quais o próprio aplicativo irá lembrá-la.",
+      "Text2": "Durante o período em que estiver participando, você também será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
+      "Text3": "Além disso, após um mês de alta, você poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, você será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
+      "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que sua participação é totalmente voluntária, podendo você: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
+      "Text5": "Salientamos que suas informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você não pagará ou será remunerada pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
+      "Text6": "Os potenciais benefícios da sua participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do App e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator você poderá utilizar o App no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
     },
+    // TODO Translate
     "Parent": {
-      "Title": "Free and Informed Consent Form - Responsible for minor mothers",
-      "Text1": "Dear participant",
-      "Text2": "We would like to invite the teenager under your responsibility to participate in the research",
-      "Text3": "\"Coaching by App: an innovative approach to breastfeeding of premature babies\"",
-      "Text4": ", to be held at the University Hospital at the State University of Londrina (HU / UEL). The purpose of the research is to elaborate and validate an application (APP) via smartphone (cellular) for mothers aiming at promoting maternal breastfeeding (AM) of premature babies.",
-      "Text5": "The participation of the adolescent under your responsibility is very important and it would be as follows: the mothers participating in the research will be divided into 2 groups that will receive assistance to succeed in breastfeeding their premature child.",
-      "Text6": "One group will receive the routine care of the maternity unit and the neonatal unit of the HU / UEL, and the other group, as well as receiving routine care, will also use an APP for monitoring and guidelines on AM. The choice of which group it will be part will be random, through draw.",
-      "Text7": "During the survey, the teenager will be asked to respond to a questionnaire about his personal data, and to a scale to measure his confidence in the breastfeeding process.",
-      "Text8": "Regardless of the group that is part, the breastfeeding process will be supported and accompanied all the time, and the adolescent will be contacted by phone at two moments after the baby's discharge, for follow-up of this follow-up.",
-      "Text9": "In addition, after one month of discharge, she may be invited to participate in an interview about the experiences during the breastfeeding process of the premature child, and these perceptions will be valuable for a better understanding by health professionals and researchers in the area about the process of breastfeeding a premature baby.",
-      "Text10": "The adolescents will be interviewed at the outpatient clinic for the follow up of the premature infant or at home, according to the possibilities of the interviewees. The interviews will be recorded and then transcribed in full, lasting approximately 40 minutes and a maximum of 1 hour.",
-      "Text11": "The information will be treated with absolute secrecy and confidentiality in order to preserve your identity and will be used only for research purposes.",
-      "Text12": "We clarify that the participation of the adolescent under her responsibility is totally voluntary, and may request the refusal or withdrawal of participation at any time, without this causing any burden or injury to you.",
-      "Text13": "We assure you that you will not pay or be remunerated for participation, however, if there are any expenses arising from the research, these are the responsibility of the researcher.",
-      "Text14": "The possible benefits of their authorization to participate in this research will be the contribution to the construction of an App that intends to benefit and facilitate the breastfeeding process, promoting the dissemination of knowledge and information about breastfeeding among mothers of premature babies.",
-      "Text15": "As for the risks, which are minimal, they apply to the time allocated to the use of the App, reading and responding to the questionnaires, and to conducting the interview. To minimize this factor she can use the App at the time she finds it appropriate and still interrupt the interview at any time, resuming or not when she finds it convenient. We will do our best to assist you in any process in case any discomfort occurs, clarifying it whenever necessary.",
-      "Text16": "We inform you that this research meets and respects the rights provided for in the Statute of the Child and Adolescent - ECA, Federal Law No. 8069 of July 13, 1990, being them: to life, health, food, education, sport, leisure, professionalization, culture, dignity, respect, freedom and family and community coexistence. We also guarantee that Article 18 of the ECA will be met: \"It is everyone's duty to ensure the dignity of the child and adolescent, making them safe from any inhuman, violent, terrifying, vexatious or embarrassing treatment.\"",
-      "Text17": "If you have any questions or need further clarification, you can contact us:",
-      "Text18": "Edilaine Giovanini Rossetto, RN, PhD, (43) 98837-6610, Rua Gil de Abreu Souza, 1501, Condomínio Royal Park, Esperança, Londrina-PR, ediluizrossetto@gmail.com",
-      "Text19": "Gabriela Ramos Ferreira Curan, RN, MsC, (43) 99921-6607, Rua Reverendo João Batista Ribeiro Neto, 75, apto 1903 torre 1 – Gleba Palhano, Londrina, gcuran@uel.br",
-      "Text20": "Louise Marina Silva Fontana, RN, (43) 99147-9194, Av. Garibaldi Deliberador, 99 – ap 77, Bloco Dom Pedro I, Jardim Claudia, Londrina-PR, louise fontana@uel.br",
-      "Text21": "Or look for the Ethics Committee on Research Involving Human Beings of the State University of Londrina, located next to the building of LABESC – Laboratório Escola, on the University Campus, telephone 3371-5455, e-mail: cep268@uel.br.",
-      "Text22": "Or look for the Ethics Committee on Research Involving Human Beings of the State University of Londrina, located next to the building of LABESC – Laboratório Escola, on the University Campus, telephone 3371-5455, e-mail: cep268@uel.br.",
-      "Text23": "City, %{date}.",
-      "Text24": "Gabriela Ramos Ferreira Curan",
-      "Text25": "RG: 9.786.358-0",
-      "Text26": "I, having been duly informed about the research procedures, agree with the voluntary participation of the child or adolescent under my responsibility in the research described above."
+      "Text1": "Ao concordar em autorizar a participação da adolescente na pesquisa, após a assinatura de ambas em termo de consentimento e cadastro de informações iniciais, ela fará o download do app, na Play Store, de forma gratuita e terá acesso ilimitado a todo conteúdo interativo disponível. Ela também preencherá questionários em momentos específicos, com informações sobre ela e o bebê, para os quais o próprio aplicativo irá lembrá-la.",
+      "Text2": "Durante o período em que estiver participando, ela também será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
+      "Text3": "Além disso, após um mês de alta, ela poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, ela será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
+      "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que a participação da adolescente é totalmente voluntária, podendo ela: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
+      "Text5": "Salientamos que as informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você e ela não pagarão ou serão remuneradas pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
+      "Text6": "Os potenciais benefícios da participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do App e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator ela poderá utilizar o App no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
     },
+    // TODO Translate
     "Minor": {
-      "Title": "Term of Assent - Mothers",
-      "Text1": "Dear,",
-      "Text2": "We would like to invite you to participate in the survey",
-      "Text3": "Coaching via App: an innovative approach to breastfeeding premature baby\"",
-      "Text4": ", to be held at Hospital xxxxx. The objective of the research is to develop and validate an application (App) via smartphone (cellular) for the promotion of breastfeeding (BF) of premature babies, aimed at mothers.",
-      "Text5": "Your participation is very important and it would happen as follows: the mothers participating in the research will be divided into 2 groups that will receive assistance to successfully breastfeed their premature child. One group will receive routine care, and the other group, in addition to receiving routine care, will use an App for monitoring and guidance on BF.",
-      "Text6": "The definition of which group you will be part of will be random, through a draw. During the survey, you will be asked to answer a questionnaire about your personal data, and a scale to measure your confidence in the breastfeeding process.",
-      "Text7": "Regardless of the group that is part of, the breastfeeding process will be supported and monitored at all times, and the teenager will be contacted by phone two times after the baby's hospital discharge, to follow up on this follow-up.",
-      "Text8": "In addition, you may be invited to participate in an interview about the experiences during the breastfeeding process of the premature child, and these insights will be valuable for a better understanding by health professionals and researchers in the area respect of the process of breastfeeding a premature baby.",
-      "Text9": "You can be interviewed at the preterm follow-up clinic, at home, or remotely, depending on your possibilities. The interviews will be recorded and later transcribed in full, lasting approximately 40 minutes and a maximum of 1 hour.",
-      "Text10": "The information will be treated with the utmost secrecy and confidentiality, in order to preserve your identity and will only be used for research purposes.",
-      "Text11": "We clarify that your participation is completely voluntary, and you can: refuse to participate, or even give up at any time, without this entailing any burden or harm to you.",
-      "Text12": "We ensure that you will not pay or be remunerated for participation, however, if there are any expenses arising from the research, these are the responsibility of the researcher.",
-      "Text13": "The possible benefits of your participation in this research will be the contribution to the construction of an App that is intended to benefit and facilitate the breastfeeding process, promoting the dissemination of knowledge and information about breastfeeding among mothers of premature babies.",
-      "Text14": "As for the risks, which are minimal, they apply to the time spent using the App, reading and answering the questionnaires, and conducting the interview. To minimize this factor, you can use the App at the time you see fit and still interrupt the interview at any time, resuming or not when you see fit. We will do our best to assist you in the entire process if any discomfort occurs, clarifying whenever necessary.",
-      "Text15": "We inform you that this research meets and respects the rights provided for in the Statute of Children and Adolescents - ECA, Federal Law No. 8069 of July 13, 1990, namely: to life, health, food, education, sport, leisure, professionalization, culture, dignity, respect, freedom and family and community life. We also guarantee that Article 18 of the ECA will be complied with: \"It is everyone's duty to ensure the dignity of children and adolescents, keeping them safe from any inhuman, violent, terrifying, vexatious or embarrassing treatment.\"",
-      "Text16": "If you have any questions or need further clarification, you can contact us:",
-      "Text17": "Edilaine Giovanini Rossetto, RN, PhD, (43) 98837-6610, Rua Gil de Abreu Souza, 1501, Condomínio Royal Park, Esperança, Londrina-PR, ediluizrossetto@gmail.com",
-      "Text18": "Gabriela Ramos Ferreira Curan, RN, MsC, (43) 99921-6607, Rua Reverendo João Batista Ribeiro Neto, 75, apto 1903 torre 1 – Gleba Palhano, Londrina, gcuran@uel.br",
-      "Text19": "Louise Marina Silva Fontana, RN, (43) 99147-9194, Av. Garibaldi Deliberador, 99 – ap 77, Bloco Dom Pedro I, Jardim Claudia, Londrina-PR, louise. fontana@uel.br",
-      "Text20": "Or look for the Ethics Committee on Research Involving Human Beings of the State University of Londrina, located next to the building of LABESC – Laboratório Escola, on the University Campus, telephone 3371-5455, e-mail: cep268@uel.br.",
-      "Text21": "Or look for the Ethics Committee on Research Involving Human Beings of the State University of Londrina, located next to the building of LABESC – Laboratório Escola, on the University Campus, telephone 3371-5455, e-mail: cep268@uel.br.",
-      "Text22": "City, %{date}.",
-      "Text23": "Gabriela Ramos Ferreira Curan",
-      "Text24": "RG: 9.786.358-0",
-      "Text25": "I, %{name} having been duly informed about the research procedures, agree to voluntarily participate in the research described above."
+      "Text1": "Ao concordar em participar da pesquisa, após as assinaturas suas e de seu responsável legal em termos de consentimento/assentimento e cadastro de informações iniciais, você fará o download do app, na Play Store, de forma gratuita e terá acesso ilimitado a todo conteúdo interativo disponível. Você também preencherá questionários em momentos específicos, com informações sobre você e o bebê, para os quais o próprio aplicativo irá lembrá-la.",
+      "Text2": "Durante o período em que estiver participando, você também será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
+      "Text3": "Além disso, após um mês de alta, você poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, você será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
+      "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que a participação da adolescente é totalmente voluntária, podendo ela: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
+      "Text5": "Salientamos que suas informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você não pagará ou será remunerada pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
+      "Text6": "Os potenciais benefícios da sua participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do App e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator você poderá utilizar o App no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
+    },
+    // TODO Translate
+    "Footer": {
+      "Text1": "Faremos o possível para auxiliá-la em todo processo caso algum desconforto ocorra, esclarecendo-a sempre que for necessário. Caso você tenha dúvidas ou necessite de maiores esclarecimentos poderá nos contatar:",
+      "Text2": "Profª Drª Edilaine Giovanini Rossetto, (43) 98837-6610, Rua Gil de Abreu Souza, 1501, Condomínio Royal Park, Esperança, Londrina-PR, ediluizrossetto@gmail.com",
+      "Text3": "Profª Drª Thaíla Correa Castral, (62) 98147-9900, Rua 227, Qd 68, S/N, Setor Leste Universitário, Goiânia-GO, thailacastral@ufg.com.br",
+      "Text4": "Enfermeira Ms. Gabriela Ramos Ferreira Curan, (43) 99921-6607, rua Reverendo João Batista Ribeiro Neto, 75, apto 1903 torre 1 – Gleba Palhano, Londrina-PR, gcuran@uel.br",
+      "Text5": "Enfermeira Ms. Júlia Carneiro Godoy de Sousa, (62) 99161-7186, Rua R12, n.554, Ed Premier Lac de Rose, apt1201, Setor Oeste, Goiânia-GO, juliacgsousa@hotmail.com",
+      "Text6": "Enfermeira Esp. Mariana Lamante Bueno, (62) 98149-9994, Av C255, Ed Josephine Ceze, apt 601, Setor Nova Suíça, Goiânia-GO, ma_lamante@hotmail.com",
+      "Text7": "Ou procurar o Comitê de Ética em Pesquisa Envolvendo Seres Humanos da Universidade Estadual de Londrina, situado junto ao prédio do LABESC – Laboratório Escola, no Campus Universitário, telefone (43) 3371-5455, e-mail: cep268@uel.br",
+      "Text8": "Este termo foi assinado digitalmente, via formulário eletrônico e encontra-se disponível no app para consulta (via da participante)."
     }
   },
   "ThePrematurePage": {
@@ -761,6 +768,7 @@
     "MustBeNumberError": "Must be a number",
     "NoOptionSelectedError": "At least one option must be selected",
     "PasswordMustMatch": "Passwords must match",
-    "Required": "Required field"
+    "Required": "Required field",
+    "Phone": "Invalid phone number"
   }
 }

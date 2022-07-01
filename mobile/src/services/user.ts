@@ -3,34 +3,49 @@ import i18n from 'i18n-js';
 
 import api from 'services/api';
 
-export enum BirthLocation {
+import type { BabySignUpInfo, UserSignUpInfo } from './signUp';
+
+export enum Institution {
   HU_UEL,
-  MATERNITY,
+  HMDI,
+  AHC,
+  OTHER,
 }
 
-interface BabyInfo {
-  birthday: Date;
+export enum UserTypes {
+  MOTHER,
+  PREGNANT,
+  HEALTHCARE_WORKER,
+  OTHER,
+}
+
+interface BabyInfo extends BabySignUpInfo {
   id: number;
-  name: string;
-  postBirthLocation: string;
 }
 
-interface MotherUpdateInfo {
+interface MotherUpdateInfo extends UserSignUpInfo {
   babies: BabyInfo[];
-  birthday: Date;
-  birthLocation: string;
-  email: string;
-  hasPartner: boolean;
-  name: string;
 }
 
-export interface MotherInfo {
-  birthday: Date;
-  birthLocation: BirthLocation;
-  email: string;
-  name: string;
-  hasPartner: boolean;
-  babies: BabyInfo[];
+type FilteredUserSignUpInfo = Omit<
+  MotherUpdateInfo,
+  | 'birthDate'
+  | 'birthWeeks'
+  | 'city'
+  | 'currentGestationCount'
+  | 'institution'
+  | 'password'
+  | 'phone'
+  | 'possibleBirthDate'
+  | 'socialMedia'
+  | 'state'
+  | 'userType'
+  | 'weeksPregnant'
+>;
+
+export interface UserInfo extends FilteredUserSignUpInfo {
+  institution: Institution;
+  type: UserTypes;
   babiesBirthLocations: {
     AC: boolean;
     UCI: boolean;
@@ -45,9 +60,11 @@ export interface MotherInfo {
 }
 
 // Verifica se um objeto carrega as informações da mãe.
-export function isMotherInfo(object: any): object is MotherInfo {
+export function isUserInfo(object: any): object is UserInfo {
   return (
     object &&
+    object.institution &&
+    object.type &&
     object.babies &&
     object.babiesBirthLocations &&
     object.babiesBirthLocations.AC !== undefined &&
@@ -66,18 +83,10 @@ export function isMotherInfo(object: any): object is MotherInfo {
 }
 
 // Retorna os dados de uma mãe.
-export async function getMotherInfo(): Promise<MotherInfo | null> {
+export async function getUserInfo(): Promise<UserInfo | null> {
   try {
     const { data } = await api.get('/maes');
-    // Recebe todos os ids e nome dos bebês.
-    const babies: MotherInfo['babies'] = data.bebes.map((baby: any) => ({
-      birthday: new Date(baby.data_parto),
-      id: baby.id,
-      name: baby.nome,
-      postBirthLocation: baby.local,
-    }));
-
-    const babiesBirthLocations: MotherInfo['babiesBirthLocations'] = {
+    const babiesBirthLocations: UserInfo['babiesBirthLocations'] = {
       AC: false,
       UCI: false,
       UCIN: false,
@@ -105,33 +114,71 @@ export async function getMotherInfo(): Promise<MotherInfo | null> {
       }
     });
 
-    const dataBirthLocation = data.localizacao?.toLowerCase();
-    let birthLocation = BirthLocation.HU_UEL;
-    switch (dataBirthLocation) {
-      case i18n.t('MotherFormPage.LocationOptions.HU').toLowerCase():
-        birthLocation = BirthLocation.HU_UEL;
+    const dataUserType = data.categoria?.toLowerCase();
+    let userType;
+    switch (dataUserType) {
+      case i18n.t('MotherFormPage.UserTypeOptions.Mother').toLowerCase():
+      case null:
+        userType = UserTypes.MOTHER;
         break;
-      case i18n.t('MotherFormPage.LocationOptions.Maternity').toLowerCase():
-        birthLocation = BirthLocation.MATERNITY;
+      case i18n.t('MotherFormPage.UserTypeOptions.Pregnant').toLowerCase():
+        userType = UserTypes.PREGNANT;
+        break;
+      case i18n
+        .t('MotherFormPage.UserTypeOptions.HealthcareWorker')
+        .toLowerCase():
+        userType = UserTypes.HEALTHCARE_WORKER;
         break;
       default:
+        userType = UserTypes.OTHER;
         break;
     }
 
-    return {
-      babies,
+    const dataBirthLocation = data.localizacao?.toLowerCase();
+    let institution;
+    switch (dataBirthLocation) {
+      case i18n.t('MotherFormPage.InstitutionOptions.HU').toLowerCase():
+      case 'hu':
+        institution = Institution.HU_UEL;
+        break;
+      case i18n.t('MotherFormPage.InstitutionOptions.HMDI').toLowerCase():
+      case 'maternidade dona íris':
+        institution = Institution.HMDI;
+        break;
+      case i18n.t('MotherFormPage.InstitutionOptions.AHCH').toLowerCase():
+        institution = Institution.AHC;
+        break;
+      case i18n
+        .t('MotherFormPage.InstitutionOptions.SocialMedia')
+        .toLowerCase():
+      default:
+        institution = Institution.OTHER;
+        break;
+    }
+
+    const userInfo = {
+      babies: data.bebes.map((baby: any) => ({
+        birthday: new Date(baby.data_parto),
+        id: baby.id,
+        name: baby.nome,
+        postBirthLocation: baby.local,
+      })),
       babiesBirthLocations,
-      birthLocation,
-      email: data.email,
       birthday: new Date(data.data_nascimento),
-      name: data.nome,
+      email: data.email,
       hasPartner: data.companheiro,
       images: {
         mother: data.imagem_mae,
         baby: data.imagem_bebe,
         father: data.imagem_pai,
       },
+      institution,
+      name: data.nome,
+      type: userType,
     };
+    console.log(userInfo);
+
+    return userInfo;
   } catch (error) {
     return null;
   }
@@ -146,12 +193,13 @@ export async function updateUserProfile(
       companheiro: userInfo.hasPartner,
       data_nascimento: format(userInfo.birthday, 'yyyy-MM-dd'),
       email: userInfo.email,
-      localizacao: userInfo.birthLocation,
+      localizacao: userInfo.institution,
+      data_parto: userInfo.birthDate,
       nome: userInfo.name,
       bebes: userInfo.babies.map(baby => ({
         id: baby.id,
-        data_parto: baby.birthday,
-        local: baby.postBirthLocation,
+        local_nascimento: baby.birthLocation,
+        local_atual: baby.currentLocation,
         nome: baby.name,
       })),
     });

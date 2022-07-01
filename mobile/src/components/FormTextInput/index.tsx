@@ -1,8 +1,10 @@
+import { View } from 'react-native';
+
 import { ErrorContainer, ErrorText } from 'lib/sharedStyles';
 
 import type { TextInputProps } from 'react-native';
 
-import { Container, LabelText, TextInput } from './styles';
+import { LabelText, TextInput } from './styles';
 
 type FormTextProps = TextInputProps & {
   label?: string;
@@ -11,13 +13,13 @@ type FormTextProps = TextInputProps & {
 
 const FormTextInput: React.FC<FormTextProps> = ({ label, error, ...props }) => {
   return (
-    <Container>
+    <View>
       {label !== undefined && <LabelText>{label}</LabelText>}
       <TextInput {...props} />
       <ErrorContainer>
         {!!error && <ErrorText>{error}</ErrorText>}
       </ErrorContainer>
-    </Container>
+    </View>
   );
 };
 

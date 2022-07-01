@@ -42,7 +42,7 @@ interface EditFormProps {
 }
 
 const EditForm: React.FC<EditFormProps> = ({ setDisplayEditForm }) => {
-  const { motherInfo, refreshMotherInfo } = useAuth();
+  const { userInfo, refreshUserInfo } = useAuth();
   const motherFormSchema = Yup.object({
     birthday: Yup.string().required(i18n.t('Yup.Required')),
     hasPartner: Yup.boolean().required(i18n.t('Yup.Required')),
@@ -51,13 +51,13 @@ const EditForm: React.FC<EditFormProps> = ({ setDisplayEditForm }) => {
   }).required();
 
   const initialValues = {
-    birthday: motherInfo.birthday,
-    hasPartner: motherInfo.hasPartner!,
+    birthday: userInfo.birthday,
+    hasPartner: userInfo.hasPartner!,
     birthLocation:
-      motherInfo.birthLocation === BirthLocation.MATERNITY
+      userInfo.birthLocation === BirthLocation.MATERNITY
         ? i18n.t('MotherFormPage.LocationOptions.Maternity')
         : i18n.t('MotherFormPage.LocationOptions.HU'),
-    name: motherInfo.name,
+    name: userInfo.name,
   };
 
   // Avança para a próxima página passando as informações do usuário.
@@ -67,17 +67,17 @@ const EditForm: React.FC<EditFormProps> = ({ setDisplayEditForm }) => {
   ): Promise<void> {
     setSubmitting(true);
     const updatedUserInfo = {
-      email: motherInfo.email,
+      email: userInfo.email,
       name: formValues.name,
       birthday: formValues.birthday!,
       hasPartner: formValues.hasPartner!,
       birthLocation: formValues.birthLocation,
-      babies: motherInfo.babies,
+      babies: userInfo.babies,
     };
     const status = await updateUserProfile(updatedUserInfo);
     setSubmitting(false);
     if (status) {
-      await refreshMotherInfo();
+      await refreshUserInfo();
       setDisplayEditForm(false);
     }
   }
@@ -109,7 +109,7 @@ const EditForm: React.FC<EditFormProps> = ({ setDisplayEditForm }) => {
             error={errors.birthday}
             label={i18n.t('MotherFormPage.Birthday')}
             placeholder={i18n.t('MotherFormPage.BirthdayPlaceholder')}
-            value={motherInfo.birthday}
+            value={userInfo.birthday}
             onChange={date => setFieldValue('birthday', date)}
           />
 
@@ -117,7 +117,7 @@ const EditForm: React.FC<EditFormProps> = ({ setDisplayEditForm }) => {
             error={errors.hasPartner}
             label={i18n.t('MotherFormPage.Partner')}
             options={[i18n.t('Yes'), i18n.t('No')]}
-            values={motherInfo.hasPartner ? [i18n.t('Yes')] : [i18n.t('No')]}
+            values={userInfo.hasPartner ? [i18n.t('Yes')] : [i18n.t('No')]}
             onChange={fieldValues =>
               setFieldValue('hasPartner', fieldValues[0] === i18n.t('Yes'))
             }
@@ -131,7 +131,7 @@ const EditForm: React.FC<EditFormProps> = ({ setDisplayEditForm }) => {
               i18n.t('MotherFormPage.LocationOptions.Maternity'),
             ]}
             value={
-              motherInfo.birthLocation === BirthLocation.MATERNITY
+              userInfo.birthLocation === BirthLocation.MATERNITY
                 ? i18n.t('MotherFormPage.LocationOptions.Maternity')
                 : i18n.t('MotherFormPage.LocationOptions.HU')
             }
@@ -152,7 +152,7 @@ const EditForm: React.FC<EditFormProps> = ({ setDisplayEditForm }) => {
 };
 
 const DisplayValues: React.FC = () => {
-  const { motherInfo } = useAuth();
+  const { userInfo } = useAuth();
   const navigation = useNavigation<RootStackProps>();
 
   return (
@@ -160,7 +160,7 @@ const DisplayValues: React.FC = () => {
       <Center>
         <UserImage
           source={{
-            uri: `${config.API_URL}/uploads/${motherInfo.images.mother}`,
+            uri: `${config.API_URL}/uploads/${userInfo.images.mother}`,
           }}
         />
         <UploadText onPress={() => navigation.navigate('UploadMotherPhoto')}>
@@ -172,26 +172,26 @@ const DisplayValues: React.FC = () => {
           editable={false}
           label={i18n.t('MotherFormPage.Name')}
           selectTextOnFocus={false}
-          value={motherInfo.name}
+          value={userInfo.name}
         />
         <FormTextInput
           editable={false}
           label={i18n.t('MotherFormPage.Birthday')}
           selectTextOnFocus={false}
-          value={formatWithLocale(new Date(motherInfo.birthday), 'P')}
+          value={formatWithLocale(new Date(userInfo.birthday), 'P')}
         />
         <FormTextInput
           editable={false}
           label={i18n.t('MotherFormPage.Partner')}
           selectTextOnFocus={false}
-          value={motherInfo.hasPartner ? i18n.t('Yes') : i18n.t('No')}
+          value={userInfo.hasPartner ? i18n.t('Yes') : i18n.t('No')}
         />
         <FormTextInput
           editable={false}
           label={i18n.t('MotherFormPage.Location')}
           selectTextOnFocus={false}
           value={
-            motherInfo.birthLocation === BirthLocation.MATERNITY
+            userInfo.birthLocation === BirthLocation.MATERNITY
               ? i18n.t('MotherFormPage.LocationOptions.Maternity')
               : i18n.t('MotherFormPage.LocationOptions.HU')
           }

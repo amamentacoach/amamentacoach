@@ -2,15 +2,17 @@ import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 
 import FormRadioGroup from 'components/FormRadioGroup';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
 import theme from 'config/theme';
+import { useAuth } from 'contexts/auth';
 import { Flex, ScrollView } from 'lib/sharedStyles';
 import { answerStatusForm } from 'services/survey';
+import { UserTypes } from 'services/user';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { FormikHelpers } from 'formik';
@@ -35,6 +37,7 @@ type FormValuesKey = keyof FormValues;
 
 const StatusForm: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
+  const { userInfo } = useAuth();
   const { situation } = useRoute<RootRouteProp<'StatusForm'>>().params;
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState('');
@@ -109,6 +112,15 @@ const StatusForm: React.FC = () => {
     });
   }
 
+  function handleFeedbackModalClose(): void {
+    setFeedbackMessage('');
+    if (userInfo.type === UserTypes.PREGNANT) {
+      navigation.navigate('Home');
+    } else {
+      navigation.navigate('FeedingForm', { situation });
+    }
+  }
+
   return (
     <>
       <Modal
@@ -118,10 +130,7 @@ const StatusForm: React.FC = () => {
           {
             text: i18n.t('Close'),
             isBold: true,
-            onPress: () => {
-              setFeedbackMessage('');
-              navigation.navigate('FeedingForm', { situation });
-            },
+            onPress: handleFeedbackModalClose,
           },
         ]}
         visible={!!feedbackMessage}

@@ -21,7 +21,7 @@ import SurveysThree from '@assets/images/surveys_three.svg';
 import SurveysTwo from '@assets/images/surveys_two.svg';
 
 const SurveyMenu: React.FC = () => {
-  const { motherInfo } = useAuth();
+  const { userInfo } = useAuth();
   const navigation = useNavigation<RootStackProps>();
   const isFocused = useIsFocused();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -68,7 +68,7 @@ const SurveyMenu: React.FC = () => {
   ];
 
   // Exibe o formulário de participação do pai apenas se a mãe tem um companheiro.
-  if (motherInfo.hasPartner) {
+  if (userInfo.hasPartner) {
     options = [
       ...options,
       {

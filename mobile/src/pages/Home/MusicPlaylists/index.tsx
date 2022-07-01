@@ -4,12 +4,11 @@ import { useEffect } from 'react';
 import { Linking } from 'react-native';
 
 import OptionsList from 'components/OptionList';
+import PaddedScrollView from 'components/PaddedScrollView';
 import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
-
-import ScrollView from './styles';
 
 import Music from '@assets/images/music.svg';
 
@@ -74,9 +73,9 @@ const MusicPlaylists: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <OptionsList options={options} displayArrows />
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

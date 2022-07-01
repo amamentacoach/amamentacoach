@@ -4,12 +4,11 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import OptionsList from 'components/OptionList';
+import PaddedScrollView from 'components/PaddedScrollView';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
-
-import ScrollView from './styles';
 
 import PrematureBaby from '@assets/images/premature_baby.svg';
 import PrematureBirth from '@assets/images/premature_birth.svg';
@@ -50,9 +49,9 @@ const Premature: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <OptionsList options={options} />
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

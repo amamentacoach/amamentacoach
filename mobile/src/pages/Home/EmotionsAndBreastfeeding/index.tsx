@@ -4,13 +4,12 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import OptionsList from 'components/OptionList';
+import PaddedScrollView from 'components/PaddedScrollView';
 import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
-
-import ScrollView from './styles';
 
 import EmotionsBox from '@assets/images/emotions_box.svg';
 import EmotionsJacobson from '@assets/images/emotions_jacobson.svg';
@@ -43,9 +42,9 @@ const EmotionsAndBreastfeeding: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <OptionsList options={options} />
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 
