@@ -87,9 +87,9 @@ const AcceptTermsOfService: React.FC = () => {
         </HeaderSubText>
 
         {differenceInYears(new Date(), new Date(userInfo.birthday)) >= 18 ? (
-          <AdultTermsOfService name={userInfo.name} />
+          <AdultTermsOfService />
         ) : (
-          <MinorTermsOfService name={userInfo.name} />
+          <MinorTermsOfService />
         )}
 
         <SubmitButtonContainer>
