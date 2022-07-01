@@ -136,6 +136,11 @@
     "PageName": "Benefits of skin-to-skin “kangaroo” care",
     "Header": "Be sure to use the “Kangaroo” care method! Learn more and get inspired by the videos below:"
   },
+  // TODO Translate
+  "BabyBirthStatusUpdate": {
+    "PageName": "Situação do nascimento",
+    "BirthStatus": "Olá, gostaríamos de saber se o seu parto já aconteceu."
+  },
   "BabyLocationUpdate": {
     "BabyLocation": "Where is your baby right now?",
     "BabyStatusPopUp": "Have any of your babies been discharged?",

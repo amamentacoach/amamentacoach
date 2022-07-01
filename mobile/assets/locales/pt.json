@@ -121,7 +121,8 @@
     },
     "ExternalForm": {
       "Message": "Conforme explicamos, você está participando de uma pesquisa sobre esse App que você terá acesso. Para tanto, precisamos da sua valiosa contribuição, que viabiliza todo o estudo, preenchendo um formulário com poucas questões que está disponível no link abaixo. Logo depois, você poderá acessar o App AmamentaCoach.  Esperamos que goste e aproveite muito essa experiência!",
-      "LinkWarning": "Clique aqui para acessar o formulário"
+      "LinkWarning": "Clique aqui para acessar o formulário",
+      "Error": "O formulário externo precisa ser respondido"
     },
     "Header": "Você está quase lá! Agora faremos algumas perguntas sobre seu parto e seu bebê.",
     "Name": "Nome do seu bebê"
@@ -132,6 +133,10 @@
     "3": "Video 3",
     "PageName": "Benefícios do canguru",
     "Header": "Use e abuse do Canguru! Informe-se e inspire-se nos vídeos abaixo:"
+  },
+  "BabyBirthStatusUpdate": {
+    "PageName": "Situação do nascimento",
+    "BirthStatus": "Olá, gostaríamos de saber se o seu parto já aconteceu."
   },
   "BabyLocationUpdate": {
     "BabyLocation": "Onde se encontra agora?",

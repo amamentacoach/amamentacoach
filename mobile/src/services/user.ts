@@ -167,6 +167,7 @@ export async function getUserInfo(): Promise<UserInfo | null> {
       birthday: new Date(data.data_nascimento),
       email: data.email,
       hasPartner: data.companheiro,
+      userType: data.categoria,
       images: {
         mother: data.imagem_mae,
         baby: data.imagem_bebe,

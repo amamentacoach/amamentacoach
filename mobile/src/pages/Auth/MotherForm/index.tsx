@@ -83,7 +83,6 @@ const MotherForm: React.FC = () => {
       .required(i18n.t('Yup.Required'))
       .phone(getCountry(), true, i18n.t('Yup.Phone')),
     userType: Yup.string().required(i18n.t('Yup.Required')),
-    institution: Yup.string().required(i18n.t('Yup.Required')),
     socialMedia: requiredWhen(
       'institution',
       i18n.t('MotherFormPage.InstitutionOptions.SocialMedia'),

@@ -5,7 +5,7 @@ import OneSignal from 'react-native-onesignal';
 
 import api from 'services/api';
 import { LoginStatus, signIn as authSignIn } from 'services/signIn';
-import { Institution, getUserInfo, isUserInfo } from 'services/user';
+import { Institution, getUserInfo, isUserInfo, UserTypes } from 'services/user';
 import initPushNotifications from 'utils/notifications';
 
 import type { UserInfo } from 'services/user';
@@ -26,7 +26,7 @@ const defaultUserInfo: UserInfo = {
   email: '',
   hasPartner: false,
   name: '',
-  userType: '',
+  type: UserTypes.MOTHER,
   babies: [],
   babiesBirthLocations: {
     AC: false,
