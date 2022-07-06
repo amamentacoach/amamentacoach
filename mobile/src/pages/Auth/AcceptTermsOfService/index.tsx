@@ -29,6 +29,11 @@ const AcceptTermsOfService: React.FC = () => {
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
 
+  const currentSignUpStep =
+    userInfo.userType === i18n.t('MotherFormPage.UserTypeOptions.Mother')
+      ? '4'
+      : '3';
+
   async function handleSubmit(): Promise<void> {
     setIsSendingForm(true);
     const userSignUpInfo = {
@@ -80,7 +85,10 @@ const AcceptTermsOfService: React.FC = () => {
       />
       <FormContainer>
         <HeaderText>
-          {i18n.t('Auth.SignUpStep', { current: '4', max: '4' })}
+          {i18n.t('Auth.SignUpStep', {
+            current: currentSignUpStep,
+            max: currentSignUpStep,
+          })}
         </HeaderText>
         <HeaderSubText>
           {i18n.t('AcceptTermsOfServicePage.HeaderSubText')}

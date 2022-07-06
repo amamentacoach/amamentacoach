@@ -164,9 +164,6 @@ const MotherForm: React.FC = () => {
 
   return (
     <PaddedScrollView>
-      <HeaderText>
-        {i18n.t('Auth.SignUpStep', { current: '2', max: '4' })}
-      </HeaderText>
       <Formik
         initialValues={formInitialValues}
         validateOnChange={false}
@@ -180,209 +177,223 @@ const MotherForm: React.FC = () => {
           errors,
           values,
         }) => (
-          <Flex>
-            <QuestionContainer>
-              <FormTextInput
-                error={errors.name}
-                label={i18n.t('MotherFormPage.Name')}
-                placeholder={i18n.t('Name')}
-                value={values.name}
-                onChangeText={handleChange('name')}
-              />
-            </QuestionContainer>
-
-            <QuestionContainer>
-              <FormTextInput
-                error={errors.phone}
-                keyboardType="phone-pad"
-                label={i18n.t('MotherFormPage.Phone')}
-                placeholder={i18n.t('MotherFormPage.Phone')}
-                value={values.phone}
-                onChangeText={handleChange('phone')}
-              />
-            </QuestionContainer>
-
-            <QuestionContainer>
-              <FormDateInput
-                error={errors.birthday}
-                label={i18n.t('MotherFormPage.Birthday')}
-                maxDate={new Date()}
-                placeholder={i18n.t('MotherFormPage.BirthdayPlaceholder')}
-                onChange={date => setFieldValue('birthday', date)}
-              />
-            </QuestionContainer>
-
-            <QuestionContainer>
-              <FormPickerInput
-                error={errors.institution}
-                label={i18n.t('MotherFormPage.Institution')}
-                options={[
-                  i18n.t('MotherFormPage.InstitutionOptions.HU'),
-                  i18n.t('MotherFormPage.InstitutionOptions.HMDI'),
-                  i18n.t('MotherFormPage.InstitutionOptions.AHC'),
-                  i18n.t('MotherFormPage.InstitutionOptions.SocialMedia'),
-                ]}
-                onChange={handleChange('institution')}
-              />
-            </QuestionContainer>
-
-            {values.institution ===
-              i18n.t('MotherFormPage.InstitutionOptions.SocialMedia') && (
+          <>
+            <HeaderText>
+              {i18n.t('Auth.SignUpStep', {
+                current: '2',
+                max:
+                  values.userType ===
+                  i18n.t('MotherFormPage.UserTypeOptions.Mother')
+                    ? '4'
+                    : '3',
+              })}
+            </HeaderText>
+            <Flex>
               <QuestionContainer>
-                <FormPickerInput
-                  error={errors.socialMedia}
-                  label={i18n.t('MotherFormPage.SocialMedia')}
-                  options={[
-                    'Facebook',
-                    'Instagram',
-                    'Whatsapp',
-                    i18n.t('MotherFormPage.SocialMediaOptions.TVOrRadio'),
-                    'Folder',
-                    i18n.t('Other'),
-                  ]}
-                  onChange={handleChange('socialMedia')}
+                <FormTextInput
+                  error={errors.name}
+                  label={i18n.t('MotherFormPage.Name')}
+                  placeholder={i18n.t('Name')}
+                  value={values.name}
+                  onChangeText={handleChange('name')}
                 />
               </QuestionContainer>
-            )}
 
-            <FormPickerInput
-              error={errors.userType}
-              label={i18n.t('MotherFormPage.UserType')}
-              options={[
-                i18n.t('MotherFormPage.UserTypeOptions.Pregnant'),
-                i18n.t('MotherFormPage.UserTypeOptions.Mother'),
-                i18n.t('MotherFormPage.UserTypeOptions.HealthcareWorker'),
-                i18n.t('Other'),
-              ]}
-              onChange={newValue => {
-                setFieldValue('userType', newValue);
-                if (newValue !== values.userType) {
-                  setFieldValue('hasPartner', '');
-                  setFieldValue('location', '');
-                  setFieldValue('currentGestationCount', '');
-                  setFieldValue('weeksPregnant', '');
-                  setFieldValue('possibleBirthDate', '');
-                }
-              }}
-            />
-
-            {values.userType ===
-              i18n.t('MotherFormPage.UserTypeOptions.Mother') && (
-              <>
-                <QuestionContainer>
-                  <FormTextInput
-                    error={errors.birthWeeks}
-                    keyboardType="numeric"
-                    label={i18n.t('MotherFormPage.BirthWeeks')}
-                    placeholder={i18n.t('Week', { count: 2 })}
-                    value={values.birthWeeks}
-                    onChangeText={handleChange('birthWeeks')}
-                  />
-                </QuestionContainer>
-
-                <QuestionContainer>
-                  <FormDateInput
-                    error={errors.birthDate}
-                    label={i18n.t('MotherFormPage.BirthDate')}
-                    maxDate={new Date()}
-                    placeholder={i18n.t('MotherFormPage.Placeholder.BirthDate')}
-                    onChange={date => setFieldValue('birthDate', date)}
-                  />
-                </QuestionContainer>
-
-                <QuestionContainer>
-                  <StateQuestion>
-                    {i18n.t('MotherFormPage.BirthCityStateHeader')}
-                  </StateQuestion>
-                  <Row>
-                    <Flex>
-                      <FormTextInput
-                        error={errors.city}
-                        label={i18n.t('City')}
-                        placeholder={i18n.t('City')}
-                        onChangeText={handleChange('city')}
-                      />
-                    </Flex>
-                    {availableStates.length > 0 && (
-                      <>
-                        <Spacer width={4} />
-                        <Flex>
-                          <StatePicker
-                            error={errors.state}
-                            label={i18n.t('State')}
-                            options={availableStates}
-                            onChange={handleChange('state')}
-                          />
-                        </Flex>
-                      </>
-                    )}
-                  </Row>
-                </QuestionContainer>
-
-                <FormRadioGroupInput
-                  error={errors.hasPartner}
-                  label={i18n.t('MotherFormPage.Partner')}
-                  options={[i18n.t('Yes'), i18n.t('No')]}
-                  onChange={fieldValues => {
-                    let value;
-                    if (fieldValues[0]) {
-                      value = fieldValues[0] === i18n.t('Yes');
-                    }
-                    setFieldValue('hasPartner', value);
-                  }}
-                />
-                <QuestionContainer>
-                  <FormTextInput
-                    error={errors.currentGestationCount}
-                    keyboardType="numeric"
-                    label={i18n.t('MotherFormPage.CurrentGestationCount')}
-                    placeholder={i18n.t('MotherFormPage.CountPlaceholder')}
-                    value={values.currentGestationCount}
-                    onChangeText={handleChange('currentGestationCount')}
-                  />
-                </QuestionContainer>
-              </>
-            )}
-
-            {values.userType ===
-              i18n.t('MotherFormPage.UserTypeOptions.Pregnant') && (
-              <>
+              <QuestionContainer>
                 <FormTextInput
-                  error={errors.weeksPregnant}
-                  keyboardType="numeric"
-                  label={i18n.t('MotherFormPage.WeeksPregnant')}
-                  placeholder={i18n.t('Week', { count: 2 })}
-                  value={values.weeksPregnant}
-                  onChangeText={handleChange('weeksPregnant')}
+                  error={errors.phone}
+                  keyboardType="phone-pad"
+                  label={i18n.t('MotherFormPage.Phone')}
+                  placeholder={i18n.t('MotherFormPage.Phone')}
+                  value={values.phone}
+                  onChangeText={handleChange('phone')}
                 />
+              </QuestionContainer>
 
+              <QuestionContainer>
                 <FormDateInput
-                  error={errors.possibleBirthDate}
-                  label={i18n.t('MotherFormPage.PossibleBirthDate')}
-                  minDate={new Date()}
-                  placeholder={i18n.t('Date')}
-                  onChange={date => setFieldValue('possibleBirthDate', date)}
+                  error={errors.birthday}
+                  label={i18n.t('MotherFormPage.Birthday')}
+                  maxDate={new Date()}
+                  placeholder={i18n.t('MotherFormPage.BirthdayPlaceholder')}
+                  onChange={date => setFieldValue('birthday', date)}
                 />
-              </>
-            )}
+              </QuestionContainer>
 
-            <SubmitButtonContainer>
-              <Flex>
-                <SecondaryButton
-                  text={i18n.t('GoBack')}
-                  onPress={() => navigation.goBack()}
+              <QuestionContainer>
+                <FormPickerInput
+                  error={errors.institution}
+                  label={i18n.t('MotherFormPage.Institution')}
+                  options={[
+                    i18n.t('MotherFormPage.InstitutionOptions.HU'),
+                    i18n.t('MotherFormPage.InstitutionOptions.HMDI'),
+                    i18n.t('MotherFormPage.InstitutionOptions.AHC'),
+                    i18n.t('MotherFormPage.InstitutionOptions.SocialMedia'),
+                  ]}
+                  onChange={handleChange('institution')}
                 />
-              </Flex>
-              <Spacer width={4} />
-              <Flex>
-                <MainButton
-                  disabled={!dirty}
-                  text={i18n.t('Next')}
-                  onPress={handleSubmit}
-                />
-              </Flex>
-            </SubmitButtonContainer>
-          </Flex>
+              </QuestionContainer>
+
+              {values.institution ===
+                i18n.t('MotherFormPage.InstitutionOptions.SocialMedia') && (
+                <QuestionContainer>
+                  <FormPickerInput
+                    error={errors.socialMedia}
+                    label={i18n.t('MotherFormPage.SocialMedia')}
+                    options={[
+                      'Facebook',
+                      'Instagram',
+                      'Whatsapp',
+                      i18n.t('MotherFormPage.SocialMediaOptions.TVOrRadio'),
+                      'Folder',
+                      i18n.t('Other'),
+                    ]}
+                    onChange={handleChange('socialMedia')}
+                  />
+                </QuestionContainer>
+              )}
+
+              <FormPickerInput
+                error={errors.userType}
+                label={i18n.t('MotherFormPage.UserType')}
+                options={[
+                  i18n.t('MotherFormPage.UserTypeOptions.Pregnant'),
+                  i18n.t('MotherFormPage.UserTypeOptions.Mother'),
+                  i18n.t('MotherFormPage.UserTypeOptions.HealthcareWorker'),
+                  i18n.t('Other'),
+                ]}
+                onChange={newValue => {
+                  setFieldValue('userType', newValue);
+                  if (newValue !== values.userType) {
+                    setFieldValue('hasPartner', '');
+                    setFieldValue('location', '');
+                    setFieldValue('currentGestationCount', '');
+                    setFieldValue('weeksPregnant', '');
+                    setFieldValue('possibleBirthDate', '');
+                  }
+                }}
+              />
+
+              {values.userType ===
+                i18n.t('MotherFormPage.UserTypeOptions.Mother') && (
+                <>
+                  <QuestionContainer>
+                    <FormTextInput
+                      error={errors.birthWeeks}
+                      keyboardType="numeric"
+                      label={i18n.t('MotherFormPage.BirthWeeks')}
+                      placeholder={i18n.t('Week', { count: 2 })}
+                      value={values.birthWeeks}
+                      onChangeText={handleChange('birthWeeks')}
+                    />
+                  </QuestionContainer>
+
+                  <QuestionContainer>
+                    <FormDateInput
+                      error={errors.birthDate}
+                      label={i18n.t('MotherFormPage.BirthDate')}
+                      maxDate={new Date()}
+                      placeholder={i18n.t(
+                        'MotherFormPage.Placeholder.BirthDate',
+                      )}
+                      onChange={date => setFieldValue('birthDate', date)}
+                    />
+                  </QuestionContainer>
+
+                  <QuestionContainer>
+                    <StateQuestion>
+                      {i18n.t('MotherFormPage.BirthCityStateHeader')}
+                    </StateQuestion>
+                    <Row>
+                      <Flex>
+                        <FormTextInput
+                          error={errors.city}
+                          label={i18n.t('City')}
+                          placeholder={i18n.t('City')}
+                          onChangeText={handleChange('city')}
+                        />
+                      </Flex>
+                      {availableStates.length > 0 && (
+                        <>
+                          <Spacer width={4} />
+                          <Flex>
+                            <StatePicker
+                              error={errors.state}
+                              label={i18n.t('State')}
+                              options={availableStates}
+                              onChange={handleChange('state')}
+                            />
+                          </Flex>
+                        </>
+                      )}
+                    </Row>
+                  </QuestionContainer>
+
+                  <FormRadioGroupInput
+                    error={errors.hasPartner}
+                    label={i18n.t('MotherFormPage.Partner')}
+                    options={[i18n.t('Yes'), i18n.t('No')]}
+                    onChange={fieldValues => {
+                      let value;
+                      if (fieldValues[0]) {
+                        value = fieldValues[0] === i18n.t('Yes');
+                      }
+                      setFieldValue('hasPartner', value);
+                    }}
+                  />
+                  <QuestionContainer>
+                    <FormTextInput
+                      error={errors.currentGestationCount}
+                      keyboardType="numeric"
+                      label={i18n.t('MotherFormPage.CurrentGestationCount')}
+                      placeholder={i18n.t('MotherFormPage.CountPlaceholder')}
+                      value={values.currentGestationCount}
+                      onChangeText={handleChange('currentGestationCount')}
+                    />
+                  </QuestionContainer>
+                </>
+              )}
+
+              {values.userType ===
+                i18n.t('MotherFormPage.UserTypeOptions.Pregnant') && (
+                <>
+                  <FormTextInput
+                    error={errors.weeksPregnant}
+                    keyboardType="numeric"
+                    label={i18n.t('MotherFormPage.WeeksPregnant')}
+                    placeholder={i18n.t('Week', { count: 2 })}
+                    value={values.weeksPregnant}
+                    onChangeText={handleChange('weeksPregnant')}
+                  />
+
+                  <FormDateInput
+                    error={errors.possibleBirthDate}
+                    label={i18n.t('MotherFormPage.PossibleBirthDate')}
+                    minDate={new Date()}
+                    placeholder={i18n.t('Date')}
+                    onChange={date => setFieldValue('possibleBirthDate', date)}
+                  />
+                </>
+              )}
+
+              <SubmitButtonContainer>
+                <Flex>
+                  <SecondaryButton
+                    text={i18n.t('GoBack')}
+                    onPress={() => navigation.goBack()}
+                  />
+                </Flex>
+                <Spacer width={4} />
+                <Flex>
+                  <MainButton
+                    disabled={!dirty}
+                    text={i18n.t('Next')}
+                    onPress={handleSubmit}
+                  />
+                </Flex>
+              </SubmitButtonContainer>
+            </Flex>
+          </>
         )}
       </Formik>
     </PaddedScrollView>
