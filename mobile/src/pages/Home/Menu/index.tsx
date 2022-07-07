@@ -41,6 +41,8 @@ import HomeMilk from '@assets/images/home_milk.svg';
 import HomeMoreInformation from '@assets/images/home_more_information.svg';
 import LogoEN from '@assets/images/logo_white_en.svg';
 import LogoPT from '@assets/images/logo_white_pt.svg';
+import { useAuth } from 'contexts/auth';
+import { UserTypes } from 'services/user';
 
 interface FormsModal {
   isVisible: boolean;
@@ -50,6 +52,7 @@ interface FormsModal {
 const Home: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const isFocused = useIsFocused();
+  const { userInfo } = useAuth();
   const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
   const { languageTag } = getBestLocale();
   const [formsModalData, setFormsModalData] = useState<FormsModal>({
@@ -88,11 +91,6 @@ const Home: React.FC = () => {
       onPress: () => navigation.navigate('AdditionalInformation'),
     },
     {
-      image: { source: HomeCredits, height: 100, width: 100 },
-      title: i18n.t('StatusFormPage.FormName', { count: 1 }),
-      onPress: () => navigation.navigate('StatusForm', { situation: null }),
-    },
-    {
       image: { source: HomeMessage, height: 100, width: 100 },
       title: i18n.t('HomePage.Option6'),
       onPress: () => navigation.navigate('Messages'),
@@ -108,6 +106,15 @@ const Home: React.FC = () => {
       onPress: () => navigation.navigate('Credits'),
     },
   ];
+
+  // Exibe o upload de imagem do pai apenas se a mãe tem um companheiro.
+  if (userInfo.type === UserTypes.MOTHER) {
+    options.splice(5, 0, {
+      image: { source: HomeCredits, height: 100, width: 100 },
+      title: i18n.t('StatusFormPage.FormName', { count: 1 }),
+      onPress: () => navigation.navigate('StatusForm', { situation: null }),
+    });
+  }
 
   useEffect(() => {
     // Envia uma mensagem de telemetria que o usuário abriu o aplicativo e verifica se algum
