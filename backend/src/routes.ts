@@ -137,21 +137,25 @@ routes.post('/maes',maesController.create);
  * @apiHeader {String} authorization Token de acesso.
  *
  * @apiParamExample {json} Exemplo Request:
- *      {
- *          "email":"fulana@email.com",
- *          "nome": "Fulana de Tal",
- *          "data_nascimento":"1990-05-05",
- *          "companheiro":true,
- *          "localizacao": "HU-UEL",
- *          "bebes": [
- *               {
- *                   "id": 1,
- *                   "nome":"Enzo Gabriel",
- *                   "data_parto":"2020-08-28",
- *                   "local":"UCI Neonatal"
- *               }                
- *          ]
- *      }
+ * {
+ *     "email":"fulana123@email.com",
+ *     "nome": "Fulana de Tal da Silva",
+ *     "whatsapp": "44 998877225",
+ *     "data_provavel_parto": "2022-07-02", // SOMENTE GESTANTES
+ *     "data_nascimento":"1990-05-05",
+ *     "companheiro":false,
+ *     "cidade":"Londrina",
+ *     "estado":"PR",
+ *     "bebes": [
+ *         {
+ *             "id": 4,
+ *             "nome":"Enzo Gabriel",
+ *             "local_nascimento":"Alojamento Conjunto",
+ *             "local_atual":"Casa",
+ *             "instituicao": "DONA IRIS"
+ *         }                
+ *     ]
+ * }
  * 
 * @apiSuccessExample {json} Sucesso:
  *   {

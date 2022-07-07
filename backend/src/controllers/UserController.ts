@@ -79,10 +79,13 @@ class UserController{
     async update(req:Request, res:Response){
         const {
             email,
-            nome, 
-            companheiro,
-            localizacao,
+            nome,
+            whatsapp,
             data_nascimento,
+            data_provavel_parto,
+            companheiro,
+            cidade,
+            estado,
             bebes
         } = req.body;
 
@@ -90,13 +93,16 @@ class UserController{
 
         await knex.transaction(async trx =>{
 
-            const mae = {email, nome, companheiro, localizacao, data_nascimento};
+            const mae = {email, nome, companheiro, data_nascimento, whatsapp, data_provavel_parto, cidade_estado: `${cidade} - ${estado}`};
             await trx('mae').where({id: mae_id}).update(mae);
 
-            for (let bebe of bebes) {
-                bebe.local_cadastro = bebe.local
-                const { id, ...bebeUpdate} = bebe;
-                await trx('bebe').where({mae_id}).andWhere({id}).update(bebeUpdate);
+            if(bebes){
+                for (let bebe of bebes) {
+                    bebe.local_cadastro = bebe.local_nascimento
+                    bebe.local = bebe.local_atual
+                    const { id, local_nascimento, local_atual, ...bebeUpdate} = bebe;
+                    await trx('bebe').where({mae_id}).andWhere({id}).update(bebeUpdate);
+                }
             }
         });
 
@@ -112,10 +118,13 @@ class UserController{
         const bebesResult = await knex('bebe').select('*').where('mae_id',mae_id)
         const ordenhas = await knex('ordenha').select('*').where('mae_id',mae_id)
 
-        for (let index = 0; index < bebes.length; index++){
-            bebesResult[index].primeiro_estimulo = bebesResult[index].primeiro_estimulo?.split('|')
-            bebesResult[index].mamadas = await knex('mamada').select('id','data_hora','mama','duracao').where('bebe_id','=',`${bebesResult[index].id}`)
+        if(bebesResult.length>0){
+            for (let index = 0; index < bebes.length; index++){
+                bebesResult[index].primeiro_estimulo = bebesResult[index].primeiro_estimulo?.split('|')
+                bebesResult[index].mamadas = await knex('mamada').select('id','data_hora','mama','duracao').where('bebe_id','=',`${bebesResult[index].id}`)
+            }
         }
+
            
         result.bebes=bebesResult
         result.ordenhas=ordenhas

@@ -924,6 +924,16 @@ define({ "api": [
   },
   {
     "type": "get",
+    "url": "/enviarNotificacoesGestantes",
+    "title": "Notificação de Gestantes",
+    "group": "Notificação",
+    "version": "0.0.0",
+    "filename": "./src/routes.ts",
+    "groupTitle": "Notificação",
+    "name": "GetEnviarnotificacoesgestantes"
+  },
+  {
+    "type": "get",
     "url": "/maes/ordenhas",
     "title": "Listagem",
     "description": "<p>Lista as ordenhas da mãe logada informado</p>",
@@ -1338,7 +1348,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Exemplo Request:",
-          "content": "{\n    \"email\":\"fulana@email.com\",\n    \"nome\": \"Fulana de Tal\",\n    \"data_nascimento\":\"1990-05-05\",\n    \"companheiro\":true,\n    \"localizacao\": \"HU-UEL\",\n    \"bebes\": [\n         {\n             \"id\": 1,\n             \"nome\":\"Enzo Gabriel\",\n             \"data_parto\":\"2020-08-28\",\n             \"local\":\"UCI Neonatal\"\n         }                \n    ]\n}",
+          "content": "{\n    \"email\":\"fulana123@email.com\",\n    \"nome\": \"Fulana de Tal da Silva\",\n    \"whatsapp\": \"44 998877225\",\n    \"data_provavel_parto\": \"2022-07-02\", // SOMENTE GESTANTES\n    \"data_nascimento\":\"1990-05-05\",\n    \"companheiro\":false,\n    \"cidade\":\"Londrina\",\n    \"estado\":\"PR\",\n    \"bebes\": [\n        {\n            \"id\": 4,\n            \"nome\":\"Enzo Gabriel\",\n            \"local_nascimento\":\"Alojamento Conjunto\",\n            \"local_atual\":\"Casa\",\n            \"instituicao\": \"DONA IRIS\"\n        }                \n    ]\n}",
           "type": "json"
         }
       ]
