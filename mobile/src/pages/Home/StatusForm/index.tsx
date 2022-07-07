@@ -230,7 +230,7 @@ const StatusForm: React.FC = () => {
                 <MainButton
                   color={theme.babyBlue}
                   disabled={isSubmitting}
-                  text={i18n.t('Actions.End')}
+                  text={i18n.t('Next')}
                   onPress={submitForm}
                 />
               </Footer>
