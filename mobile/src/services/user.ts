@@ -118,6 +118,7 @@ export async function getUserInfo(): Promise<UserInfo | null> {
     let userType;
     switch (dataUserType) {
       case i18n.t('MotherFormPage.UserTypeOptions.Mother').toLowerCase():
+      case 'mae':
       case null:
         userType = UserTypes.MOTHER;
         break;
@@ -133,7 +134,6 @@ export async function getUserInfo(): Promise<UserInfo | null> {
         userType = UserTypes.OTHER;
         break;
     }
-
     const dataBirthLocation = data.localizacao?.toLowerCase();
     let institution;
     switch (dataBirthLocation) {
@@ -156,7 +156,7 @@ export async function getUserInfo(): Promise<UserInfo | null> {
         break;
     }
 
-    const userInfo = {
+    const userInfo: UserInfo = {
       babies: data.bebes.map((baby: any) => ({
         birthday: new Date(baby.data_parto),
         id: baby.id,
@@ -167,7 +167,6 @@ export async function getUserInfo(): Promise<UserInfo | null> {
       birthday: new Date(data.data_nascimento),
       email: data.email,
       hasPartner: data.companheiro,
-      userType: data.categoria,
       images: {
         mother: data.imagem_mae,
         baby: data.imagem_bebe,
