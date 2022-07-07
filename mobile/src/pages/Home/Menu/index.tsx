@@ -10,10 +10,12 @@ import ImageWrapper from 'components/ImageWrapper';
 import Modal from 'components/Modal';
 import OptionsList from 'components/OptionList';
 import theme from 'config/theme';
+import { useAuth } from 'contexts/auth';
 import { useIsFirstRun } from 'contexts/firstRun';
 import { storageIsToday } from 'lib/date-fns';
 import { ScrollView } from 'lib/sharedStyles';
 import { setHomePageOpened } from 'services/telemetry';
+import { UserTypes } from 'services/user';
 import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
@@ -41,8 +43,6 @@ import HomeMilk from '@assets/images/home_milk.svg';
 import HomeMoreInformation from '@assets/images/home_more_information.svg';
 import LogoEN from '@assets/images/logo_white_en.svg';
 import LogoPT from '@assets/images/logo_white_pt.svg';
-import { useAuth } from 'contexts/auth';
-import { UserTypes } from 'services/user';
 
 interface FormsModal {
   isVisible: boolean;
@@ -107,12 +107,21 @@ const Home: React.FC = () => {
     },
   ];
 
-  // Exibe o upload de imagem do pai apenas se a mãe tem um companheiro.
+  // Exibe a escala apenas se for mãe.
   if (userInfo.type === UserTypes.MOTHER) {
     options.splice(5, 0, {
       image: { source: HomeCredits, height: 100, width: 100 },
       title: i18n.t('StatusFormPage.FormName', { count: 1 }),
       onPress: () => navigation.navigate('StatusForm', { situation: null }),
+    });
+  }
+  // Exibe um botão para informar o nascimento do bebê se for gestante.
+  if (userInfo.type === UserTypes.PREGNANT) {
+    options.splice(5, 0, {
+      image: { source: HomeCredits, height: 100, width: 100 },
+      title: i18n.t('HomePage.UpdateBabyBirthStatus.Text'),
+      subtitle: i18n.t('HomePage.UpdateBabyBirthStatus.Subtext'),
+      onPress: () => navigation.navigate('BabyBirthStatusUpdate'),
     });
   }
 
