@@ -22,6 +22,7 @@ export type RootStackParamList = {
   AdditionalInformation: undefined;
   BabyCup: undefined;
   BabySling: undefined;
+  BabyBirthStatusUpdate: undefined;
   BabyLocationUpdate: undefined;
   Breastfeeding: undefined;
   BreastfeedingBenefits: undefined;

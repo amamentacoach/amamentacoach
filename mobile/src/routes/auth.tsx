@@ -15,11 +15,22 @@ import SignUp from 'pages/Auth/SignUp';
 
 import type { RouteProp } from '@react-navigation/core';
 import type { StackNavigationProp } from '@react-navigation/stack';
-import type { BabySignUpInfo, MotherSignUpInfo } from 'services/signUp';
+import type { UserSignUpInfo } from 'services/signUp';
+
+// É preciso utilizar strings, já que datas não são serializadas automaticamente ao navegar entre
+// telas
+type AuthUserInfo = Omit<
+  UserSignUpInfo,
+  'birthday' | 'possibleBirthDate' | 'birthDate'
+> & {
+  birthday: string;
+  possibleBirthDate: string | null;
+  birthDate: string | null;
+};
 
 type AuthStackParamList = {
   BabyForm: {
-    motherInfo: MotherSignUpInfo;
+    userInfo: AuthUserInfo;
   };
   MotherForm: {
     email: string;
@@ -29,8 +40,7 @@ type AuthStackParamList = {
     date: string;
   };
   AcceptTermsOfService: {
-    motherInfo: MotherSignUpInfo;
-    babiesInfo: BabySignUpInfo[];
+    userInfo: AuthUserInfo;
   };
   Login: undefined;
   ForgotPassword: undefined;

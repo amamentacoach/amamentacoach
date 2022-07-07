@@ -75,7 +75,6 @@ export const ManjariRegular = styled.Text<TextProps>`
 
 export const ErrorContainer = styled.View`
   flex: 1;
-  min-height: 20px;
   margin-top: 5px;
 `;
 

@@ -19,9 +19,8 @@ export const HeaderSubText = styled(OpenSansRegular)`
   padding-top: 20px;
 `;
 
-export const FormContainer = styled.View`
-  flex: 1;
-  margin: 0 24px;
+export const QuestionContainer = styled.View`
+  margin: 10px 0;
 `;
 
 export const SubmitButtonContainer = styled.View`

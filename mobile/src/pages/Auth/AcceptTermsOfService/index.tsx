@@ -23,8 +23,7 @@ import {
 
 const AcceptTermsOfService: React.FC = () => {
   const navigation = useNavigation<AuthStackProps>();
-  const { motherInfo, babiesInfo } =
-    useRoute<AuthRouteProp<'AcceptTermsOfService'>>().params;
+  const { userInfo } = useRoute<AuthRouteProp<'AcceptTermsOfService'>>().params;
 
   const [isSendingForm, setIsSendingForm] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
@@ -32,7 +31,15 @@ const AcceptTermsOfService: React.FC = () => {
 
   async function handleSubmit(): Promise<void> {
     setIsSendingForm(true);
-    const status = await signUp(motherInfo, babiesInfo);
+    const userSignUpInfo = {
+      ...userInfo,
+      birthday: new Date(userInfo.birthday),
+      birthDate: userInfo.birthDate ? new Date(userInfo.birthDate) : null,
+      possibleBirthDate: userInfo.possibleBirthDate
+        ? new Date(userInfo.possibleBirthDate)
+        : null,
+    };
+    const status = await signUp(userSignUpInfo);
     setIsErrorModalVisible(!status);
     setIsSignUpModalVisible(status);
   }
@@ -79,10 +86,10 @@ const AcceptTermsOfService: React.FC = () => {
           {i18n.t('AcceptTermsOfServicePage.HeaderSubText')}
         </HeaderSubText>
 
-        {differenceInYears(new Date(), new Date(motherInfo.birthday)) >= 18 ? (
-          <AdultTermsOfService name={motherInfo.name} />
+        {differenceInYears(new Date(), new Date(userInfo.birthday)) >= 18 ? (
+          <AdultTermsOfService />
         ) : (
-          <MinorTermsOfService name={motherInfo.name} />
+          <MinorTermsOfService />
         )}
 
         <SubmitButtonContainer>

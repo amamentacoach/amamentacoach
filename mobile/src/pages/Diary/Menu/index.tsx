@@ -26,7 +26,7 @@ import PrematureHeart from '@assets/images/premature_heart.svg';
 import Report from '@assets/images/report.svg';
 
 const DiaryMenu: React.FC = () => {
-  const { motherInfo } = useAuth();
+  const { userInfo } = useAuth();
   const navigation = useNavigation<RootStackProps>();
   const isFocused = useIsFocused();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -104,7 +104,7 @@ const DiaryMenu: React.FC = () => {
   ];
 
   // Exibe o upload de imagem do pai apenas se a mãe tem um companheiro.
-  if (motherInfo.hasPartner) {
+  if (userInfo.hasPartner) {
     options.splice(7, 0, {
       image: { source: Father },
       title: i18n.t('DiaryMenuPage.Option9'),

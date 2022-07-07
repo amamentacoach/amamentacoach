@@ -1,9 +1,9 @@
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useState } from 'react';
-import { Platform, TouchableOpacity } from 'react-native';
+import { Platform, TouchableOpacity, View } from 'react-native';
 
 import { formatWithLocale } from 'lib/date-fns';
-import { Flex, ErrorContainer, ErrorText } from 'lib/sharedStyles';
+import { ErrorContainer, ErrorText } from 'lib/sharedStyles';
 
 import type { FormikErrors } from 'formik';
 
@@ -15,6 +15,7 @@ interface FormDateProps {
   error?: string | FormikErrors<any>;
   mode?: string;
   maxDate?: Date;
+  minDate?: Date;
   value?: Date;
   onChange: (fieldValue: Date) => void;
 }
@@ -24,8 +25,9 @@ const FormDateInput: React.FC<FormDateProps> = ({
   error,
   placeholder,
   value,
+  maxDate,
+  minDate,
   mode = 'date',
-  maxDate = new Date(),
   onChange,
 }) => {
   const [show, setShow] = useState(false);
@@ -54,7 +56,7 @@ const FormDateInput: React.FC<FormDateProps> = ({
   }
 
   return (
-    <Flex>
+    <View>
       {label !== undefined && <LabelText>{label}</LabelText>}
       <TouchableOpacity activeOpacity={1} onPress={showDatePicker}>
         <TextInput
@@ -72,14 +74,15 @@ const FormDateInput: React.FC<FormDateProps> = ({
         <DateTimePicker
           display="default"
           maximumDate={maxDate}
+          minimumDate={minDate}
           // @ts-ignore
           mode={mode}
           testID="dateTimePicker"
-          value={date || maxDate}
+          value={date || new Date()}
           onChange={handleDateSelected}
         />
       )}
-    </Flex>
+    </View>
   );
 };
 

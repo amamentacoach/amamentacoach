@@ -5,27 +5,28 @@ import OneSignal from 'react-native-onesignal';
 
 import api from 'services/api';
 import { LoginStatus, signIn as authSignIn } from 'services/signIn';
-import { BirthLocation, getMotherInfo, isMotherInfo } from 'services/user';
+import { Institution, getUserInfo, isUserInfo, UserTypes } from 'services/user';
 import initPushNotifications from 'utils/notifications';
 
-import type { MotherInfo } from 'services/user';
+import type { UserInfo } from 'services/user';
 
 interface AuthContextData {
   isSigned: boolean;
-  motherInfo: MotherInfo;
-  refreshMotherInfo: () => Promise<boolean>;
+  userInfo: UserInfo;
+  refreshUserInfo: () => Promise<boolean>;
   signIn: (email: string, password: string) => Promise<LoginStatus>;
   signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
-const defaultMotherInfo: MotherInfo = {
+const defaultUserInfo: UserInfo = {
   birthday: new Date(),
-  birthLocation: BirthLocation.MATERNITY,
+  institution: Institution.HU_UEL,
   email: '',
-  name: '',
   hasPartner: false,
+  name: '',
+  type: UserTypes.MOTHER,
   babies: [],
   babiesBirthLocations: {
     AC: false,
@@ -42,58 +43,58 @@ const defaultMotherInfo: MotherInfo = {
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [token, setToken] = useState<string | null>(null);
-  const [motherInfo, setMotherInfo] = useState<MotherInfo>(defaultMotherInfo);
+  const [userInfo, setUserInfo] = useState<UserInfo>(defaultUserInfo);
   const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
 
-  // Verifica se os dados da mãe já estão salvos no dispositivo.
-  async function loadMotherInfoFromStorage(): Promise<MotherInfo | null> {
-    const storageMotherInfo = await AsyncStorage.getItem(
-      '@AmamentaCoach:motherInfo',
+  // Verifica se os dados do usuário já estão salvos no dispositivo.
+  async function loadUserInfoFromStorage(): Promise<UserInfo | null> {
+    const storageUserInfo = await AsyncStorage.getItem(
+      '@AmamentaCoach:userInfo',
     );
-    if (!storageMotherInfo) {
+    if (!storageUserInfo) {
       return null;
     }
-    const savedMotherInfo = JSON.parse(storageMotherInfo);
+    const savedUserInfo = JSON.parse(storageUserInfo);
     // Verifica se os dados salvos possuem todos os campos necessários.
-    if (!isMotherInfo(savedMotherInfo)) {
-      await AsyncStorage.removeItem('@AmamentaCoach:motherInfo');
+    if (!isUserInfo(savedUserInfo)) {
+      await AsyncStorage.removeItem('@AmamentaCoach:userInfo');
       return null;
     }
-    return savedMotherInfo;
+    return savedUserInfo;
   }
 
-  // Carrega os dados da mãe.
-  async function loadMotherInfo(): Promise<boolean> {
-    let info = await loadMotherInfoFromStorage();
+  // Carrega os dados do usuário.
+  async function loadUserInfo(): Promise<boolean> {
+    let info = await loadUserInfoFromStorage();
     // Não existe dados salvos, consulta a API.
     if (!info) {
-      const apiMotherInfo = await getMotherInfo();
-      if (!apiMotherInfo) {
+      const apiUserInfo = await getUserInfo();
+      if (!apiUserInfo) {
         return false;
       }
-      info = apiMotherInfo;
+      info = apiUserInfo;
       await AsyncStorage.setItem(
-        '@AmamentaCoach:motherInfo',
-        JSON.stringify(apiMotherInfo),
+        '@AmamentaCoach:userInfo',
+        JSON.stringify(apiUserInfo),
       );
     }
-    setMotherInfo(info);
+    setUserInfo(info);
     return true;
   }
 
-  async function refreshMotherInfo(): Promise<boolean> {
-    await AsyncStorage.removeItem('@AmamentaCoach:motherInfo');
-    return loadMotherInfo();
+  async function refreshUserInfo(): Promise<boolean> {
+    await AsyncStorage.removeItem('@AmamentaCoach:userInfo');
+    return loadUserInfo();
   }
 
   async function signIn(email: string, password: string): Promise<LoginStatus> {
     const { token: newToken, status } = await authSignIn(email, password);
     if (status === LoginStatus.Success) {
       api.defaults.headers.common.Authorization = newToken;
-      const motherInfoStatus = await loadMotherInfo();
-      // Não foi possível carregar os dados da mãe.
-      if (!motherInfoStatus) {
+      const userInfoStatus = await loadUserInfo();
+      // Não foi possível carregar os dados do usuário.
+      if (!userInfoStatus) {
         api.defaults.headers.common.Authorization = null;
         return LoginStatus.FailedToConnect;
       }
@@ -108,8 +109,8 @@ export const AuthProvider: React.FC = ({ children }) => {
   async function signOut(): Promise<void> {
     OneSignal.disablePush(true);
 
-    await AsyncStorage.removeItem('@AmamentaCoach:motherInfo');
-    setMotherInfo(defaultMotherInfo);
+    await AsyncStorage.removeItem('@AmamentaCoach:userInfo');
+    setUserInfo(defaultUserInfo);
 
     await AsyncStorage.removeItem('@AmamentaCoach:token');
     api.defaults.headers.common.Authorization = null;
@@ -117,16 +118,16 @@ export const AuthProvider: React.FC = ({ children }) => {
   }
 
   useEffect(() => {
-    // Carrega o token de identificação e os dados da mãe.
+    // Carrega o token de identificação e os dados do usuário.
     async function loadLoginDataInStorage(): Promise<void> {
       const storageToken = await AsyncStorage.getItem('@AmamentaCoach:token');
       if (storageToken) {
         api.defaults.headers.common.Authorization = storageToken;
-        const motherInfoStatus = await loadMotherInfo();
-        if (motherInfoStatus) {
+        const userInfoStatus = await loadUserInfo();
+        if (userInfoStatus) {
           setToken(storageToken);
         } else {
-          // Os dados da mãe não estão armazenados no dispositivo e não foi possível consultar a
+          // Os dados do usuário não estão armazenados no dispositivo e não foi possível consultar a
           // API.
           await AsyncStorage.removeItem('@AmamentaCoach:token');
           api.defaults.headers.common.Authorization = null;
@@ -143,8 +144,8 @@ export const AuthProvider: React.FC = ({ children }) => {
     <AuthContext.Provider
       value={{
         isSigned: !!token,
-        motherInfo,
-        refreshMotherInfo,
+        userInfo,
+        refreshUserInfo,
         signIn,
         signOut,
       }}>

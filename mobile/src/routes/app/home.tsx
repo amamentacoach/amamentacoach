@@ -3,6 +3,7 @@ import i18n from 'i18n-js';
 import theme from 'config/theme';
 import { useIsFirstRun } from 'contexts/firstRun';
 import AdditionalInformation from 'pages/Home/AdditionalInformation';
+import BabyBirthStatusUpdate from 'pages/Home/BabyBirthStatusUpdate';
 import BabyCup from 'pages/Home/BabyCup';
 import BabyLocationUpdate from 'pages/Home/BabyLocationUpdate';
 import BabySling from 'pages/Home/BabySling';
@@ -49,6 +50,12 @@ const CreateHomeRoutes = (Stack: StackScreens): JSX.Element[] => {
       key="AdditionalInformation"
       name="AdditionalInformation"
       options={{ title: i18n.t('HomePage.Option5') }}
+    />,
+    <Stack.Screen
+      component={BabyBirthStatusUpdate}
+      key="BabyBirthStatusUpdate"
+      name="BabyBirthStatusUpdate"
+      options={{ title: i18n.t('BabyBirthStatusUpdate.PageName') }}
     />,
     <Stack.Screen
       component={BabyCup}

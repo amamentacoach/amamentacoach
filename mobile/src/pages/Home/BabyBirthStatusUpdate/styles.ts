@@ -1,12 +1,7 @@
 import styled from 'styled-components/native';
 
 import FormPickerInput from 'components/FormPickerInput';
-import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
-
-export const HeaderText = styled(OpenSansBold)`
-  font-size: 18px;
-  text-align: center;
-`;
+import { OpenSansRegular, Center } from 'lib/sharedStyles';
 
 export const StateQuestion = styled(OpenSansRegular)`
   font-size: 14px;
@@ -25,4 +20,8 @@ export const SubmitButtonContainer = styled.View`
   align-items: flex-end;
   flex-direction: row;
   margin-top: 20px;
+`;
+
+export const ExternalFormContainer = styled(Center)`
+  margin: 10px 0;
 `;

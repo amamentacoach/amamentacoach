@@ -4,15 +4,19 @@
   "Begin": "Início",
   "Breast": "Mama",
   "Cancel": "Cancelar",
+  "City": "Cidade",
   "Close": "Fechar",
   "Content": "Conteúdo",
+  "Date": "Data",
   "Diary": "Diário",
+  "DonaIrisMaternity": "Maternidade Dona Íris",
   "Duration": "Duração",
   "Email": "Email",
   "ErrorSurveyAlreadyAnswered": "Ops! Você já respondeu a enquete hoje. Volte novamente amanhã.",
   "Expectations": "Expectativas",
   "GoBack": "Voltar",
   "Home": "Casa",
+  "HU": "HU",
   "Infograph": "Infográfico",
   "Later": "Mais Tarde",
   "Leave": "Sair",
@@ -34,11 +38,12 @@
   "SelectBaby": "Selecionar bebê",
   "SignUp": "Cadastro",
   "Skip": "Pular",
+  "State": "Estado",
   "TermsOfService": "Termo de Consentimento",
   "Time": "Horário",
   "UCI": "UCI Neonatal",
-  "UTI": "UTI Neonatal",
   "UCIN Kangaroo": "UCIN Canguru",
+  "UTI": "UTI Neonatal",
   "Years": "Anos",
   "Yes": "Sim",
   "Day": {
@@ -100,13 +105,27 @@
     "Step4": "O bebê fará movimentos de lambida do leite seguidos de deglutição, cuida para não despejar o leite na boca do bebê."
   },
   "BabyFormPage": {
-    "BirthDate": "Data do parto",
-    "BirthLocation": "Ao nascer, seu bebê foi para:",
+    "BirthPlace": "Ao nascer, seu bebê ficou internado",
+    "CurrentLocation": {
+      "Description": "Onde seu bebê nesse momento?",
+      "Options": {
+        "Home": "Em casa"
+      }
+    },
+    "Institution": {
+      "Description": "Instituição em que seu bebê ficou internado:",
+      "Options": {
+        "1": "Hospital Universitário de Londrina",
+        "2": "Hospital e Maternidade Dona Íris-Goiânia"
+      }
+    },
+    "ExternalForm": {
+      "Message": "Conforme explicamos, você está participando de uma pesquisa sobre esse App que você terá acesso. Para tanto, precisamos da sua valiosa contribuição, que viabiliza todo o estudo, preenchendo um formulário com poucas questões que está disponível no link abaixo. Logo depois, você poderá acessar o App AmamentaCoach.  Esperamos que goste e aproveite muito essa experiência!",
+      "LinkWarning": "Clique aqui para acessar o formulário",
+      "Error": "O formulário externo precisa ser respondido"
+    },
     "Header": "Você está quase lá! Agora faremos algumas perguntas sobre seu parto e seu bebê.",
-    "Name": "Nome do seu bebê",
-    "Placeholder": {
-      "BirthDate": "Insira a data do parto"
-    }
+    "Name": "Nome do seu bebê"
   },
   "BabySlingPage": {
     "1": "Video 1",
@@ -114,6 +133,10 @@
     "3": "Video 3",
     "PageName": "Benefícios do canguru",
     "Header": "Use e abuse do Canguru! Informe-se e inspire-se nos vídeos abaixo:"
+  },
+  "BabyBirthStatusUpdate": {
+    "PageName": "Situação do nascimento",
+    "BirthStatus": "Olá, gostaríamos de saber se o seu parto já aconteceu."
   },
   "BabyLocationUpdate": {
     "BabyLocation": "Onde se encontra agora?",
@@ -353,15 +376,36 @@
   },
   "MotherFormPage": {
     "Birthday": "Sua data de nascimento",
+    "BirthCityStateHeader": "Onde seu bebê nasceu?",
     "BirthdayPlaceholder": "Data de nascimento",
     "CountPlaceholder": "Insira o número de vezes",
     "CurrentGestationCount": "Número de filhos nessa gestação?",
-    "Location": "Local do parto",
     "Name": "Seu Nome",
     "Partner": "Tem companheiro?",
-    "LocationOptions": {
-      "HU": "HU",
-      "Maternity": "Maternidade Dona Íris"
+    "Phone": "Telefone",
+    "UserType": "Em qual dessas situações você se enquadra?",
+    "Institution": "Como você ficou sabendo deste estudo?",
+    "BirthWeeks": "Seu parto ocorreu com quantas semanas de gestação?",
+    "WeeksPregnant": "De quantas semanas está gestante?",
+    "BirthDate": "Data do parto",
+    "SocialMedia": "Por qual veículo de mídia você ficou sabendo sobre o app AmamentaCoach?",
+    "PossibleBirthDate": "Qual a data provável do seu parto?",
+    "UserTypeOptions": {
+      "Pregnant": "Gestante",
+      "Mother": "Mãe de bebê prematuro",
+      "HealthcareWorker": "Profissional de saúde"
+    },
+    "InstitutionOptions": {
+      "HU": "Sou paciente do HU - Londrina",
+      "HMDI": "Sou paciente do HMDI-Goiânia",
+      "AHC": "Sou paciente do AHC Londrina",
+      "SocialMedia": "Pela divulgação da pesquisa na mídia ou nas redes sociais"
+    },
+    "SocialMediaOptions": {
+      "TVOrRadio": "TV ou rádio"
+    },
+    "Placeholder": {
+      "BirthDate": "Insira a data do parto"
     }
   },
   "MusicPlaylistsPage": {
@@ -672,86 +716,46 @@
     "SurveyMotivation": "Motivação"
   },
   "TermsOfServiceText": {
-    "Adult": {
-      "Title": "Termo de Consentimento Livre e Esclarecido - Mães",
-      "Text1": "Prezada senhora,",
+    "Header": {
+      "Text1": "Prezada,",
       "Text2": "Gostaríamos de convidá-la para participar da pesquisa",
-      "Text3": "“Coaching via App: uma abordagem inovadora para o aleitamento materno de bebês prematuros”",
-      "Text4": ", a ser realizada no Hospital Universitário de Londrina (HU/UEL). O objetivo da pesquisa é elaborar e validar um aplicativo (App) via smartphone (celular) para a promoção do aleitamento materno (AM) de bebês prematuros, voltado para as mães.",
-      "Text5": "Sua participação é muito importante e ela se daria da seguinte forma: as mães participantes da pesquisa serão divididas em 2 grupos que receberão assistência para ter sucesso na amamentação de seu filho prematuro. Um grupo receberá os cuidados de rotina da Maternidade e da Unidade Neonatal do HU/UEL, e o outro grupo, além de receber os cuidados de rotina, utilizará um App para acompanhamento e orientações sobre AM. A escolha de qual grupo que ela fará parte será aleatória, por meio de sorteio. Durante a pesquisa, será solicitado que você responda a um questionário sobre seus dados pessoais, e a uma escala para mensurar sua confiança no processo de amamentação. Independente do grupo que fizer parte, seu processo de amamentação será apoiado e acompanhado todo o tempo, e você será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
-      "Text6": "Além disso, após um mês de alta, você poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro, e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, você será entrevistada no ambulatório de seguimento do prematuro ou no domicilio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
-      "Text7": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa.",
-      "Text8": "Esclarecemos que sua participação é totalmente voluntária, podendo você: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa. Salientamos também que suas informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade.",
-      "Text9": "Asseguramos que você não pagará ou será remunerada pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
-      "Text10": "Os possíveis benefícios da sua participação nesta pesquisa serão a contribuição para a construção de um App que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros.",
-      "Text11": "Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do App e leitura, resposta dos questionários, e à realização da entrevista. Para minimizar esse fator você poderá utilizar o App no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente. Faremos o possível para auxiliá-la em todo processo caso algum desconforto ocorra, esclarecendo-a sempre que for necessário.",
-      "Text12": "Caso você tenha dúvidas ou necessite de maiores esclarecimentos poderá nos contatar:",
-      "Text13": "Profª Drª Edilaine Giovanini Rossetto, (43) 98837-6610, Rua Gil de Abreu Souza, 1501, Condomínio Royal Park, Esperança, Londrina-PR, ediluizrossetto@gmail.com",
-      "Text14": "Enfermeira Ms. Gabriela Ramos Ferreira Curan, (43) 99921-6607, Rua Reverendo João Batista Ribeiro Neto, 75, apto 1903 torre 1 – Gleba Palhano, Londrina, gcuran@uel.br",
-      "Text15": "Enfermeira Louise Marina Silva Fontana, (43) 99147-9194, Av. Garibaldi Deliberador, 99 – ap 77, Bloco Dom Pedro I, Jardim Claudia, Londrina-PR, louise.fontana@uel.br",
-      "Text16": "Ou procurar o Comitê de Ética em Pesquisa Envolvendo Seres Humanos da Universidade Estadual de Londrina, situado junto ao prédio do LABESC – Laboratório Escola, no Campus Universitário, telefone 3371-5455, e-mail: cep268@uel.br.",
-      "Text17": "Este termo deverá ser preenchido em duas vias de igual teor, sendo uma delas devidamente preenchida, assinada e entregue a você.",
-      "Text18": "Londrina, %{date}.",
-      "Text19": "Gabriela Ramos Ferreira Curan",
-      "Text20": "RG: 9.786.358-0",
-      "Text21": "Eu, %{name}, tendo sido devidamente esclarecida sobre os procedimentos da pesquisa, concordo em participar voluntariamente da pesquisa descrita acima."
+      "Text3": "\"Coaching via App: uma abordagem inovadora para o aleitamento materno de bebês prematuros\"",
+      "Text4": ", a ser realizada no Hospital Universitário de Londrina (HU/UEL), no Paraná, no Hospital e Maternidade Dona Íris, em Goiânia-GO e também por recrutamento voluntário via mídias sociais.",
+      "Text5": "Os objetivos da pesquisa são avaliar um aplicativo (app) de celular (smartphone) desenvolvido para ajudar gestantes de risco para parto prematuro e mães de bebês prematuros ou doentes a amamentarem seus bebês, contribuindo assim, para promoção do aleitamento materno (AM) de bebês prematuros; e validar a Escala de Autoeficácia para o Aleitamento Materno de mães de bebês prematuros ou doentes – versão brasileira."
+    },
+    "Adult": {
+      "Text1": "Ao concordar em participar da pesquisa, após a assinatura em termo de consentimento e cadastro de informações iniciais, você fará o download do app, na Play Store, de forma gratuita e terá acesso ilimitado a todo conteúdo interativo disponível. Você também preencherá questionários em momentos específicos, com informações sobre você e o bebê, para os quais o próprio aplicativo irá lembrá-la.",
+      "Text2": "Durante o período em que estiver participando, você também será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
+      "Text3": "Além disso, após um mês de alta, você poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, você será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
+      "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que sua participação é totalmente voluntária, podendo você: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
+      "Text5": "Salientamos que suas informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você não pagará ou será remunerada pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
+      "Text6": "Os potenciais benefícios da sua participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do App e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator você poderá utilizar o App no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
     },
     "Parent": {
-      "Title": "Termo de Consentimento Livre e Esclarecido – Responsáveis pelas mães menores de idade",
-      "Text1": "Prezado(a) senhor(a),",
-      "Text2": "Gostaríamos de convidar a adolescente sob sua responsabilidade para participar da pesquisa",
-      "Text3": "“Coaching via App: uma abordagem inovadora para o aleitamento materno de bebês prematuros”",
-      "Text4": ", a ser realizada no Hospital Universitário da Universidade Estadual de Londrina (HU/UEL). O objetivo da pesquisa é elaborar e validar um aplicativo (App) via smartphone (celular) para as mães visando a promoção do aleitamento materno (AM) de bebês prematuros.",
-      "Text5": "A participação da adolescente sob sua responsabilidade é muito importante e ela se daria da seguinte forma: as mães participantes da pesquisa serão divididas em 2 grupos que receberão assistência para ter sucesso na amamentação de seu filho prematuro.",
-      "Text6": "Um grupo receberá os cuidados de rotina da Maternidade e da Unidade Neonatal do HU/UEL, e o outro grupo, além de receber os cuidados de rotina, utilizará um App para acompanhamento e orientações sobre AM. A escolha de qual grupo que ela fará parte será aleatória, por meio de sorteio.",
-      "Text7": "Durante a pesquisa, será solicitado que a adolescente responda a um questionário sobre seus dados pessoais, e a uma escala para mensurar sua confiança no processo de amamentação.",
-      "Text8": "Independente do grupo que fizer parte, o processo de amamentação será apoiado e acompanhado todo o tempo, e a adolescente será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
-      "Text9": "Além disso, após um mês de alta, ela poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro, e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro.",
-      "Text10": "As adolescentes serão entrevistadas no ambulatório de seguimento do prematuro ou no domicilio, conforme as possibilidades das entrevistadas. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
-      "Text11": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa.",
-      "Text12": "Esclarecemos que a participação da adolescente sob sua responsabilidade é totalmente voluntária, podendo solicitar a recusa ou desistência de participação a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo a vocês.",
-      "Text13": "Asseguramos que vocês não pagarão ou serão remunerados pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
-      "Text14": "Os possíveis benefícios da sua autorização de participação nesta pesquisa serão a contribuição para a construção de um App que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros.",
-      "Text15": "Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do App, leitura e resposta dos questionários, e à realização da entrevista. Para minimizar esse fator ela poderá utilizar o App no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente. Faremos o possível para auxiliá-la em todo processo caso algum desconforto ocorra, esclarecendo-a sempre que for necessário.",
-      "Text16": "Informamos que esta pesquisa atende e respeita os direitos previstos no Estatuto da Criança e do Adolescente - ECA, Lei Federal nº 8069 de 13 de julho de 1990, sendo eles: à vida, à saúde, à alimentação, à educação, ao esporte, ao lazer, à profissionalização, à cultura, à dignidade, ao respeito, à liberdade e à convivência familiar e comunitária. Garantimos também que será atendido o Artigo 18 do ECA: “É dever de todos velar pela dignidade da criança e do adolescente, pondo-os a salvo de qualquer tratamento desumano, violento, aterrorizante, vexatório ou constrangedor.”",
-      "Text17": "Caso você tenha dúvidas ou necessite de maiores esclarecimentos poderá nos contatar:",
-      "Text18": "Profª Drª Edilaine Giovanini Rossetto, (43) 98837-6610, Rua Gil de Abreu Souza, 1501, Condomínio Royal Park, Esperança, Londrina-PR, ediluizrossetto@gmail.com",
-      "Text19": "Enfermeira Ms. Gabriela Ramos Ferreira Curan, (43) 99921-6607, Rua Reverendo João Batista Ribeiro Neto, 75, apto 1903 torre 1 – Gleba Palhano, Londrina, gcuran@uel.br",
-      "Text20": "Enfermeira Louise Marina Silva Fontana, (43) 99147-9194, Av. Garibaldi Deliberador, 99 – ap 77, Bloco Dom Pedro I, Jardim Claudia, Londrina-PR, louise.fontana@uel.br",
-      "Text21": "Ou procurar o Comitê de Ética em Pesquisa Envolvendo Seres Humanos da Universidade Estadual de Londrina, situado junto ao prédio do LABESC – Laboratório Escola, no Campus Universitário, telefone 3371-5455, e-mail: cep268@uel.br.",
-      "Text22": "Este termo deverá ser preenchido em duas vias de igual teor, sendo uma delas devidamente preenchida, assinada e entregue ao(à) senhor(a).",
-      "Text23": "Londrina, %{date}.",
-      "Text24": "Gabriela Ramos Ferreira Curan",
-      "Text25": "RG: 9.786.358-0",
-      "Text26": "Eu, tendo sido devidamente esclarecido sobre os procedimentos da pesquisa, concordo com a participação voluntária da criança ou do adolescente sob minha responsabilidade na pesquisa descrita acima."
+      "Text1": "Ao concordar em autorizar a participação da adolescente na pesquisa, após a assinatura de ambas em termo de consentimento e cadastro de informações iniciais, ela fará o download do app, na Play Store, de forma gratuita e terá acesso ilimitado a todo conteúdo interativo disponível. Ela também preencherá questionários em momentos específicos, com informações sobre ela e o bebê, para os quais o próprio aplicativo irá lembrá-la.",
+      "Text2": "Durante o período em que estiver participando, ela também será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
+      "Text3": "Além disso, após um mês de alta, ela poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, ela será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
+      "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que a participação da adolescente é totalmente voluntária, podendo ela: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
+      "Text5": "Salientamos que as informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você e ela não pagarão ou serão remuneradas pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
+      "Text6": "Os potenciais benefícios da participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do App e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator ela poderá utilizar o App no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
     },
     "Minor": {
-      "Title": "Termo de Assentimento – Mães",
-      "Text1": "Prezada, ",
-      "Text2": "Gostaríamos de convidá-la para participar da pesquisa",
-      "Text3": "“Coaching via App: uma abordagem inovadora para o aleitamento materno de bebês prematuros”",
-      "Text4": ", a ser realizada no Hospital Universitário de Londrina (HU/UEL). O objetivo da pesquisa é elaborar e validar um aplicativo (App) via smartphone (celular) para a promoção do aleitamento materno (AM) de bebês prematuros, voltado para as mães.",
-      "Text5": "Sua participação é muito importante e ela se daria da seguinte forma: as mães participantes da pesquisa serão divididas em 2 grupos que receberão assistência para ter sucesso na amamentação de seu filho prematuro. Um grupo receberá os cuidados de rotina da Maternidade e da Unidade Neonatal do HU/UEL, e o outro grupo, além de receber os cuidados de rotina, utilizará um App para acompanhamento e orientações sobre AM.",
-      "Text6": "A escolha de qual grupo que ela fará parte será aleatória, por meio de sorteio. Durante a pesquisa, será solicitado que a adolescente responda a um questionário sobre seus dados pessoais, e a uma escala para mensurar sua confiança no processo de amamentação.",
-      "Text7": "Independente do grupo que fizer parte, o processo de amamentação será apoiado e acompanhado todo o tempo, e a adolescente será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
-      "Text8": "Além disso, após um mês de alta, você poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro, e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro.",
-      "Text9": "Você poderá ser entrevistada no ambulatório de seguimento do prematuro ou no domicilio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
-      "Text10": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa.",
-      "Text11": "Esclarecemos que sua participação é totalmente voluntária, podendo você: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
-      "Text12": "Asseguramos que você não pagará ou será remunerada pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
-      "Text13": "Os possíveis benefícios da sua participação nesta pesquisa serão a contribuição para a construção de um App que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros.",
-      "Text14": "Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do App, leitura e resposta dos questionários, e à realização da entrevista. Para minimizar esse fator você poderá utilizar o App no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente. Faremos o possível para auxiliá-la em todo processo caso algum desconforto ocorra, esclarecendo-a sempre que for necessário.",
-      "Text15": "Informamos que esta pesquisa atende e respeita os direitos previstos no Estatuto da Criança e do Adolescente - ECA, Lei Federal nº 8069 de 13 de julho de 1990, sendo eles: à vida, à saúde, à alimentação, à educação, ao esporte, ao lazer, à profissionalização, à cultura, à dignidade, ao respeito, à liberdade e à convivência familiar e comunitária. Garantimos também que será atendido o Artigo 18 do ECA: “É dever de todos velar pela dignidade da criança e do adolescente, pondo-os a salvo de qualquer tratamento desumano, violento, aterrorizante, vexatório ou constrangedor.”",
-      "Text16": "Caso você tenha dúvidas ou necessite de maiores esclarecimentos poderá nos contatar:",
-      "Text17": "Profª Drª Edilaine Giovanini Rossetto, (43) 98837-6610, Rua Gil de Abreu Souza, 1501, Condomínio Royal Park, Esperança, Londrina-PR, ediluizrossetto@gmail.com",
-      "Text18": "Enfermeira Ms. Gabriela Ramos Ferreira Curan, (43) 99921-6607, Rua Reverendo João Batista Ribeiro Neto, 75, apto 1903 torre 1 – Gleba Palhano, Londrina, gcuran@uel.br",
-      "Text19": "Enfermeira Louise Marina Silva Fontana, (43) 99147-9194, Av. Garibaldi Deliberador, 99 – ap 77, Bloco Dom Pedro I, Jardim Claudia, Londrina-PR, louise.fontana@uel.br",
-      "Text20": "Ou procurar o Comitê de Ética em Pesquisa Envolvendo Seres Humanos da Universidade Estadual de Londrina, situado junto ao prédio do LABESC – Laboratório Escola, no Campus Universitário, telefone 3371-5455, e-mail: cep268@uel.br.",
-      "Text21": "Este termo deverá ser preenchido em duas vias de igual teor, sendo uma delas devidamente preenchida, assinada e entregue a você.",
-      "Text22": "Londrina, %{date}.",
-      "Text23": "Gabriela Ramos Ferreira Curan",
-      "Text24": "RG: 9.786.358-0",
-      "Text25": "Eu, %{name}, tendo sido devidamente esclarecida sobre os procedimentos da pesquisa, concordo em participar voluntariamente da pesquisa descrita acima."
+      "Text1": "Ao concordar em participar da pesquisa, após as assinaturas suas e de seu responsável legal em termos de consentimento/assentimento e cadastro de informações iniciais, você fará o download do app, na Play Store, de forma gratuita e terá acesso ilimitado a todo conteúdo interativo disponível. Você também preencherá questionários em momentos específicos, com informações sobre você e o bebê, para os quais o próprio aplicativo irá lembrá-la.",
+      "Text2": "Durante o período em que estiver participando, você também será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
+      "Text3": "Além disso, após um mês de alta, você poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, você será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
+      "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que a participação da adolescente é totalmente voluntária, podendo ela: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
+      "Text5": "Salientamos que suas informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você não pagará ou será remunerada pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
+      "Text6": "Os potenciais benefícios da sua participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do App e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator você poderá utilizar o App no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
+    },
+    "Footer": {
+      "Text1": "Faremos o possível para auxiliá-la em todo processo caso algum desconforto ocorra, esclarecendo-a sempre que for necessário. Caso você tenha dúvidas ou necessite de maiores esclarecimentos poderá nos contatar:",
+      "Text2": "Profª Drª Edilaine Giovanini Rossetto, (43) 98837-6610, Rua Gil de Abreu Souza, 1501, Condomínio Royal Park, Esperança, Londrina-PR, ediluizrossetto@gmail.com",
+      "Text3": "Profª Drª Thaíla Correa Castral, (62) 98147-9900, Rua 227, Qd 68, S/N, Setor Leste Universitário, Goiânia-GO, thailacastral@ufg.com.br",
+      "Text4": "Enfermeira Ms. Gabriela Ramos Ferreira Curan, (43) 99921-6607, rua Reverendo João Batista Ribeiro Neto, 75, apto 1903 torre 1 – Gleba Palhano, Londrina-PR, gcuran@uel.br",
+      "Text5": "Enfermeira Ms. Júlia Carneiro Godoy de Sousa, (62) 99161-7186, Rua R12, n.554, Ed Premier Lac de Rose, apt1201, Setor Oeste, Goiânia-GO, juliacgsousa@hotmail.com",
+      "Text6": "Enfermeira Esp. Mariana Lamante Bueno, (62) 98149-9994, Av C255, Ed Josephine Ceze, apt 601, Setor Nova Suíça, Goiânia-GO, ma_lamante@hotmail.com",
+      "Text7": "Ou procurar o Comitê de Ética em Pesquisa Envolvendo Seres Humanos da Universidade Estadual de Londrina, situado junto ao prédio do LABESC – Laboratório Escola, no Campus Universitário, telefone (43) 3371-5455, e-mail: cep268@uel.br",
+      "Text8": "Este termo foi assinado digitalmente, via formulário eletrônico e encontra-se disponível no app para consulta (via da participante)."
     }
   },
   "ThePrematurePage": {
@@ -822,6 +826,7 @@
     "MustBeNumberError": "Deve ser um número",
     "NoOptionSelectedError": "Pelo menos uma opção deve ser selecionada",
     "PasswordMustMatch": "As senhas precisam ser iguais",
-    "Required": "Campo obrigatório"
+    "Required": "Campo obrigatório",
+    "Phone": "Telefone inválido"
   }
 }

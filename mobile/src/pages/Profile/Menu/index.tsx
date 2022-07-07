@@ -16,7 +16,7 @@ import { OptionText } from './styles';
 const ProfileMenu: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const isFocused = useIsFocused();
-  const { motherInfo, signOut } = useAuth();
+  const { userInfo, signOut } = useAuth();
 
   const options = [
     {
@@ -26,7 +26,7 @@ const ProfileMenu: React.FC = () => {
     {
       onPress: () => navigation.navigate('MyBabies'),
       text: i18n.t('ProfileMenuPage.MyBabies', {
-        count: motherInfo.babies.length,
+        count: userInfo.babies.length,
       }),
     },
     {

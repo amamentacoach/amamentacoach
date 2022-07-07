@@ -11,7 +11,7 @@ import ReadTermsOfService from 'pages/Profile/ReadTermsOfService';
 import type { StackScreens } from 'routes/config/getNavigatorType';
 
 const CreateProfileRoutes = (Stack: StackScreens): JSX.Element[] => {
-  const { motherInfo } = useAuth();
+  const { userInfo } = useAuth();
 
   return [
     <Stack.Screen
@@ -26,7 +26,7 @@ const CreateProfileRoutes = (Stack: StackScreens): JSX.Element[] => {
       name="MyBabies"
       options={{
         title: i18n.t('ProfileMenuPage.MyBabies', {
-          count: motherInfo.babies.length,
+          count: userInfo.babies.length,
         }),
       }}
     />,

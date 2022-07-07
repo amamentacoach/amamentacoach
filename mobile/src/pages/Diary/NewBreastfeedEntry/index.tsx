@@ -43,7 +43,7 @@ interface FormValues {
 const NewBreastfeedEntry: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const { params } = useRoute<RootRouteProp<'NewBreastfeedEntry'>>();
-  const { motherInfo } = useAuth();
+  const { userInfo } = useAuth();
   const [isSendingForm, setIsSendingForm] = useState(false);
   const formInitialValues: FormValues = {
     babyName: '',
@@ -85,7 +85,7 @@ const NewBreastfeedEntry: React.FC = () => {
     duration,
     time,
   }: FormValues): Promise<void> {
-    const selectedBaby = motherInfo.babies.find(baby => baby.name === babyName);
+    const selectedBaby = userInfo.babies.find(baby => baby.name === babyName);
     if (!selectedBaby) {
       return;
     }
@@ -146,7 +146,7 @@ const NewBreastfeedEntry: React.FC = () => {
             <FormContent>
               <FormPickerInput
                 error={errors.babyName}
-                options={motherInfo.babies.map(baby => baby.name.toString())}
+                options={userInfo.babies.map(baby => baby.name.toString())}
                 placeholder={i18n.t('SelectBaby')}
                 onChange={handleChange('babyName')}
               />
