@@ -161,16 +161,16 @@ const Home: React.FC = () => {
         ? isToday(new Date(storageString))
         : false;
 
-      if (storageString && !alreadyDisplayedToday) {
-        // Caso não seja a primeira vez acessando o app, apresenta o popup para visitar a tela de
-        // expectativas.
-        checkExpectations();
-      }
+      if (!alreadyDisplayedToday) {
+        // Caso não seja a primeira vez utilizando o app.
+        if (storageString) {
+          // Apresenta o popup para visitar a tela de expectativas.
+          checkExpectations();
+          // Verifica se algum formulário deve ser respondido
+          checkForms();
+        }
 
-      if (!storageString || !alreadyDisplayedToday) {
-        // Verifica se algum formulário deve ser respondido
-        checkForms();
-        // Atualiza a data de acesso.
+        // Atualiza a data do último acesso ao app.
         AsyncStorage.setItem(
           '@AmamentaCoach:lastOpenedDate',
           new Date().toISOString(),
