@@ -176,8 +176,6 @@ export async function getUserInfo(): Promise<UserInfo | null> {
       name: data.nome,
       type: userType,
     };
-    console.log(userInfo);
-
     return userInfo;
   } catch (error) {
     return null;

@@ -13,7 +13,7 @@ import TabNavigator from 'routes/tabNavigator';
 
 import type { RouteProp } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
-import type { StatusFormSituation } from 'services/survey';
+import type { StatusFormSituation, StatusFormAnswer } from 'services/survey';
 
 import BackIcon from '@assets/images/icons/ic_back.svg';
 
@@ -34,7 +34,10 @@ export type RootStackParamList = {
   DiaryRegistry: { date: string };
   Distractions: undefined;
   EmotionsAndBreastfeeding: undefined;
-  FeedingForm: { situation: StatusFormSituation };
+  FeedingForm: {
+    situation: StatusFormSituation;
+    statusFormAnswers: StatusFormAnswer[];
+  };
   Feelings: undefined;
   Goals: undefined;
   HelpReceived: undefined;
