@@ -70,6 +70,11 @@ module.exports = {
             group: 'object',
             patternOptions: { dot: true, nocomment: true, matchBase: true },
           },
+          {
+            pattern: '*.webp',
+            group: 'object',
+            patternOptions: { dot: true, nocomment: true, matchBase: true },
+          },
         ],
         pathGroupsExcludedImportTypes: ['react'],
         'newlines-between': 'always',

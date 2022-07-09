@@ -13,8 +13,8 @@ import {
   ContentWrapper,
 } from './styles';
 
-import Withdrawal1 from '@assets/images/withdrawal_premature_1.png';
-import Withdrawal2 from '@assets/images/withdrawal_premature_2.png';
+import Withdrawal1 from '@assets/images/withdrawal_premature_1.webp';
+import Withdrawal2 from '@assets/images/withdrawal_premature_2.webp';
 
 const HowLongToBreastfeed: React.FC = () => {
   useEffect(() => {

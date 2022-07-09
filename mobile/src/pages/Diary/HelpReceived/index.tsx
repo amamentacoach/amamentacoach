@@ -11,8 +11,8 @@ import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 
-import HelpReceived1 from '@assets/images/help_received_1.png';
-import HelpReceived2 from '@assets/images/help_received_2.png';
+import HelpReceived1 from '@assets/images/help_received_1.webp';
+import HelpReceived2 from '@assets/images/help_received_2.webp';
 
 const HelpReceived: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

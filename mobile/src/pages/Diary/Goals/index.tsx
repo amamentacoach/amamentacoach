@@ -14,18 +14,18 @@ import type { RootStackProps } from 'routes/app';
 
 import { ModalContainer } from './styles';
 
-import ENMotivation1 from '@assets/images/motivation_1_en.png';
-import PTMotivation1 from '@assets/images/motivation_1_pt.png';
-import ENMotivation2 from '@assets/images/motivation_2_en.png';
-import PTMotivation2 from '@assets/images/motivation_2_pt.png';
-import ENMotivation3 from '@assets/images/motivation_3_en.png';
-import PTMotivation3 from '@assets/images/motivation_3_pt.png';
-import ENMotivation4 from '@assets/images/motivation_4_en.png';
-import PTMotivation4 from '@assets/images/motivation_4_pt.png';
-import ENMotivation5 from '@assets/images/motivation_5_en.png';
-import PTMotivation5 from '@assets/images/motivation_5_pt.png';
-import ENMotivation6 from '@assets/images/motivation_6_en.png';
-import ENMotivation7 from '@assets/images/motivation_7_en.png';
+import ENMotivation1 from '@assets/images/motivation_1_en.webp';
+import PTMotivation1 from '@assets/images/motivation_1_pt.webp';
+import ENMotivation2 from '@assets/images/motivation_2_en.webp';
+import PTMotivation2 from '@assets/images/motivation_2_pt.webp';
+import ENMotivation3 from '@assets/images/motivation_3_en.webp';
+import PTMotivation3 from '@assets/images/motivation_3_pt.webp';
+import ENMotivation4 from '@assets/images/motivation_4_en.webp';
+import PTMotivation4 from '@assets/images/motivation_4_pt.webp';
+import ENMotivation5 from '@assets/images/motivation_5_en.webp';
+import PTMotivation5 from '@assets/images/motivation_5_pt.webp';
+import ENMotivation6 from '@assets/images/motivation_6_en.webp';
+import ENMotivation7 from '@assets/images/motivation_7_en.webp';
 
 const Goals: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

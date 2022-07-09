@@ -12,7 +12,7 @@ import type { RootStackProps } from 'routes/app';
 
 import { BannerImage, Header } from './styles';
 
-import HUBanner from '@assets/images/banner_hu.png';
+import HUBanner from '@assets/images/banner_hu.webp';
 import IcVideo from '@assets/images/ic_video.svg';
 
 const HU: React.FC = () => {

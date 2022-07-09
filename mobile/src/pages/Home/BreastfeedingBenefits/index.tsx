@@ -3,6 +3,9 @@ import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
+import BreastfeedBenefits3 from '@assets/images/breastfeed_benefits_3.webp';
+import BreastfeedBenefits5 from '@assets/images/breastfeed_benefits_5.webp';
+import BreastfeedBenefits6 from '@assets/images/breastfeed_benefits_6.webp';
 import createGenericInfoPage from 'components/GenericInfoPage';
 import InformationPages from 'components/InformationPages';
 import { createTelemetryAction } from 'utils/telemetryAction';
@@ -10,12 +13,9 @@ import { createTelemetryAction } from 'utils/telemetryAction';
 import type { InfoPageItem } from 'components/InformationPages';
 import type { RootStackProps } from 'routes/app';
 
-import BreastfeedBenefits1 from '@assets/images/breastfeed_benefits_1.png';
-import BreastfeedBenefits2 from '@assets/images/breastfeed_benefits_2.png';
-import BreastfeedBenefits3 from '@assets/images/breastfeed_benefits_3.png';
-import BreastfeedBenefits4 from '@assets/images/breastfeed_benefits_4.png';
-import BreastfeedBenefits5 from '@assets/images/breastfeed_benefits_5.png';
-import BreastfeedBenefits6 from '@assets/images/breastfeed_benefits_6.png';
+import BreastfeedBenefits1 from '@assets/images/breastfeed_benefits_1.webp';
+import BreastfeedBenefits2 from '@assets/images/breastfeed_benefits_2.webp';
+import BreastfeedBenefits4 from '@assets/images/breastfeed_benefits_4.webp';
 
 const BreastfeedingBenefits: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

@@ -1,4 +1,5 @@
 declare module '*.png';
+declare module '*.webp';
 
 declare module '*.svg' {
   import type { SvgProps } from 'react-native-svg';
