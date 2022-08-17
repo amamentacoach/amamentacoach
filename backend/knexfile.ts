@@ -1,14 +1,10 @@
-import path from 'path'
+import path from 'path';
+import 'dotenv/config';
 
 module.exports = {
 
   client:'pg',
-  connection:process.env.DATABASE_URL ||{
-      host:'localhost',
-      user:'postgres',
-      password:'joao',
-      database:'amamentacoach',
-  },
+  connection:process.env.DATABASE_URL,
 
   ssl: { rejectUnauthorized: false },
 

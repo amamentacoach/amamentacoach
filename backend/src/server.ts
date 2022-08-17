@@ -1,11 +1,10 @@
+import 'dotenv/config';
 import express  from 'express';
 import path from 'path';
 import routes from './routes';
-import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import scheduleJobs from './utils/scheduleJobs';
 const cors = require('cors');
-dotenv.config()
 
 scheduleJobs()
 

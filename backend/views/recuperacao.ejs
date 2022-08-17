@@ -16,15 +16,15 @@
                 </div>
                 <div class="card card-signin my-2">
                     <div class="card-body">
-                        <h2>Olá, <%=mae.nome%></h2>
-                        <h5>Email:<%=mae.email%></h2>
-                        <h5>Digite uma nova senha para recuperar o acesso ao Amamenta Coach.</h5>
-                        <form class="form-signin" id="form-login" method="post">
+                        <h5>Digite o email da mae que deseja recuperar e a senha administrativa.</h5>
+                        <form class="form-signin" id="form-recovery" method="post">
                             <div class="form-group">
-                                <input type="password" id="senha" name="senha" class="form-control" placeholder="Digite sua nova senha" required autofocus>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Digite o email da mae" required autofocus>
+                                <br>
+                                <input type="password" id="senha" name="senha" class="form-control" placeholder="Digite a senha administrativa" required autofocus>
                             </div>
                             <button class="btn btn-lg btn-primary btn-block" style="background-color: #7D5CD7;border-color: #7D5CD7;" type="submit" id="submit-login">
-                                Salvar
+                                Continuar
                             </button>
                         </form>
                     </div>

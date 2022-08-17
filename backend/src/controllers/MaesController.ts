@@ -129,6 +129,7 @@ class MaesController{
     async forgot(req:Request,res:Response){
         const {email} = req.body;
         const resul = await knex('mae').select('*').where('email','=',email).first()
+        console.log(resul)
         if(resul){
             const transporter = nodemailer.createTransport({
                     service: 'Hotmail',
@@ -142,6 +143,8 @@ class MaesController{
             const token = jwt.sign({id:resul.id},secret?secret:"segredo",{
                 expiresIn:86400
             })
+
+            console.log(token)
 
 
             const link = `${process.env.HOST}/recuperar/${token}` // gerar link
@@ -160,6 +163,12 @@ class MaesController{
                 else return res.sendStatus(200)
             })
         }
+    }
+
+    async recoveryPage(req:Request,res:Response){
+        const mae = await knex('mae').select('nome', 'email').where('id', req.mae_id).first()
+        console.log(mae)
+        res.render('recuperar', {mae})
     }
 
     async recuperarSenha(req:Request,res:Response){

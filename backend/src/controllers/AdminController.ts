@@ -181,6 +181,32 @@ class AdminController{
         
         }else res.sendStatus(404);     
     }
+
+    async recoveryPassword(req:Request, res:Response){
+        console.log(req.body);
+
+        const {email, senha} = req.body;
+
+        if(senha !== process.env.ADMIN_PASSWORD){
+            return res.send('<h1>Senha administrativa inválida</h1>');
+        }
+
+        const resul = await knex('mae').select('*').where('email','=',email).first()
+        console.log(resul)
+        if(resul){
+
+            const secret = process.env.SECRET
+            const token = jwt.sign({id:resul.id},secret?secret:"segredo",{
+                expiresIn:86400
+            })
+
+            console.log(token)
+
+            return res.redirect(`/recuperar/${token}`)// gerar link
+        }else{
+            return res.send('<h1>Não foi encontrada uma mãe com este email. Clique em voltar e verifique os dados inseridos.</h1>');
+        }
+    }
     
 }
 

@@ -897,9 +897,7 @@ routes.post('/alterarsenha',verifyJWT,maesController.alterarSenha)
  */
 routes.post('/subscribe',verifyJWT,maesController.subscribe);
 
-routes.get('/recuperar/:token',(req,res)=>{
-    res.render('recuperar')
-});
+routes.get('/recuperar/:token',verifyJWT, maesController.recoveryPage);
 
 routes.post('/recuperar/:token',verifyJWT,maesController.recuperarSenha)
 
@@ -1230,6 +1228,10 @@ routes.get('/duvidas/frequentes',verifyJWT, duvidasController.list)
  routes.put('/admin/babies/:id', verifyJWT, adminController.saveBaby)
 
  routes.get('/login', (req,res) => res.render('login'))
+
+ routes.get('/recuperacao', (req,res) => res.render('recuperacao'))
+
+ routes.post('/recuperacao', adminController.recoveryPassword)
 
  /**
  * @api {post} /acessos/videos-inicio Acessos Inicio dos Videos
