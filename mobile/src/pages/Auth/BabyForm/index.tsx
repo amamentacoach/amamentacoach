@@ -146,11 +146,12 @@ const BabyForm: React.FC = () => {
                     <OpenSansRegular>
                       {i18n.t('BabyFormPage.ExternalForm.Message')}
                     </OpenSansRegular>
-                    {/* TODO Adicionar link */}
                     <OpenSansBold
                       onPress={() => {
                         wasExternalFormOpened.current = true;
-                        Linking.openURL('TODO');
+                        Linking.openURL(
+                          'https://docs.google.com/forms/d/e/1FAIpQLSd_Q2gkMHjgI7VzzXSNzXWwyBQ11_sM_sPSxG0FtzHTTDBxbQ/viewform',
+                        );
                       }}>
                       {i18n.t('BabyFormPage.ExternalForm.LinkWarning')}
                     </OpenSansBold>

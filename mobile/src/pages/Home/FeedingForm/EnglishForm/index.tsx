@@ -1,26 +1,21 @@
-import { useNavigation } from '@react-navigation/native';
-import { Formik, FormikHelpers } from 'formik';
+import { Formik } from 'formik';
 import i18n from 'i18n-js';
 import * as Yup from 'yup';
 
 import FormRadioGroupInput from 'components/FormRadioGroup';
 import MainButton from 'components/MainButton';
 import theme from 'config/theme';
-import { answerFeedingForm } from 'services/survey';
 
 import type { GenericFeedingFormProps } from '..';
-import type { RootStackProps } from 'routes/app';
+import type { FormikHelpers } from 'formik';
 
 interface FormValues {
   howMyBabyIsFeeding: string;
 }
 
-// Página do formulário.
 const EnglishStatusForm: React.FC<GenericFeedingFormProps> = ({
-  situation,
-  setIsErrorModalVisible,
+  handleSubmitAnswers,
 }) => {
-  const navigation = useNavigation<RootStackProps>();
   const formInitialValues: FormValues = {
     howMyBabyIsFeeding: '',
   };
@@ -29,19 +24,12 @@ const EnglishStatusForm: React.FC<GenericFeedingFormProps> = ({
     howMyBabyIsFeeding: Yup.string().required(i18n.t('Yup.Required')),
   });
 
-  async function handleSubmit(
+  function handleSubmit(
     values: FormValues,
-    { setSubmitting }: FormikHelpers<FormValues>,
-  ): Promise<void> {
-    setSubmitting(true);
+    helpers: FormikHelpers<FormValues>,
+  ): void {
     const answers = Object.values(values);
-    const status = await answerFeedingForm(situation, answers);
-    setSubmitting(false);
-    if (status) {
-      navigation.navigate('Home');
-    } else {
-      setIsErrorModalVisible(true);
-    }
+    handleSubmitAnswers(answers, helpers);
   }
 
   return (

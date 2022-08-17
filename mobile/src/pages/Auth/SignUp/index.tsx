@@ -53,7 +53,7 @@ const FormSignUp: React.FC = () => {
     <PaddedScrollView>
       <Header>
         <HeaderText>
-          {i18n.t('Auth.SignUpStep', { current: '1', max: '4' })}
+          {i18n.t('Auth.SignUpStep', { current: '1', max: '3' })}
         </HeaderText>
         <HeaderSubText>
           <HeaderSubText>{i18n.t('SignUpPage.Header')}</HeaderSubText>

@@ -1,7 +1,7 @@
 import api from 'services/api';
 
 export type StatusFormSituation = 'ALTA' | '1D' | '15D' | '1M' | null;
-type StatusFormAnswer = { id: number; content: string };
+export type StatusFormAnswer = { id: number; content: string };
 
 export interface SurveyStatistics {
   id: number;

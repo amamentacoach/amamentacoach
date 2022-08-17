@@ -1,5 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
-import { Formik, FormikHelpers } from 'formik';
+import { Formik } from 'formik';
 import i18n from 'i18n-js';
 import * as Yup from 'yup';
 
@@ -7,11 +6,10 @@ import FormRadioGroupInput from 'components/FormRadioGroup';
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import theme from 'config/theme';
-import { Flex, Row, Spacer } from 'lib/sharedStyles';
-import { answerFeedingForm } from 'services/survey';
+import { Flex } from 'lib/sharedStyles';
 
 import type { GenericFeedingFormProps } from '../';
-import type { RootStackProps } from 'routes/app';
+import type { FormikHelpers } from 'formik';
 
 interface FormValues {
   currentMoment: string;
@@ -26,12 +24,9 @@ interface FormValues {
   skinToSkinContactPeriod: string;
 }
 
-// Página do formulário.
 const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
-  situation,
-  setIsErrorModalVisible,
+  handleSubmitAnswers,
 }) => {
-  const navigation = useNavigation<RootStackProps>();
   const formInitialValues: FormValues = {
     currentMoment: '',
     feedingType: [],
@@ -80,11 +75,10 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
     skinToSkinContactPeriod: Yup.string().required(i18n.t('Yup.Required')),
   });
 
-  async function handleSubmit(
+  function handleSubmit(
     values: FormValues,
-    { setSubmitting }: FormikHelpers<FormValues>,
-  ): Promise<void> {
-    setSubmitting(true);
+    helpers: FormikHelpers<FormValues>,
+  ): void {
     const answers = [
       values.currentMoment,
       values.feedingType.join('|'),
@@ -97,13 +91,7 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
       `${values.daysFirstBreastfeed || 'null'}`,
       values.skinToSkinContactPeriod,
     ];
-    const status = await answerFeedingForm(situation, answers);
-    setSubmitting(false);
-    if (status) {
-      navigation.navigate('Home');
-    } else {
-      setIsErrorModalVisible(true);
-    }
+    handleSubmitAnswers(answers, helpers);
   }
 
   return (
@@ -259,17 +247,12 @@ const PortugueseStatusForm: React.FC<GenericFeedingFormProps> = ({
                 }}
               />
               {values.daysFirstBreastfeed !== null && (
-                <>
-                  <Row>
-                    <Spacer width={4} />
-                    <FormTextInput
-                      error={errors.daysFirstBreastfeed}
-                      keyboardType="numeric"
-                      label={i18n.t('Day', { count: 2 })}
-                      onChangeText={handleChange('daysFirstBreastfeed')}
-                    />
-                  </Row>
-                </>
+                <FormTextInput
+                  error={errors.daysFirstBreastfeed}
+                  keyboardType="numeric"
+                  label={i18n.t('Day', { count: 2 })}
+                  onChangeText={handleChange('daysFirstBreastfeed')}
+                />
               )}
             </>
           )}

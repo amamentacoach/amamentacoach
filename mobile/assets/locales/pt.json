@@ -298,7 +298,11 @@
     "Option5": "Você sabia?",
     "Option6": "Depoimento das mamães",
     "Option7": "Perguntas",
-    "Option8": "Créditos"
+    "Option8": "Créditos",
+    "UpdateBabyBirthStatus": {
+      "Text": "O seu bebê nasceu?",
+      "Subtext": "Informe aqui"
+    }
   },
   "HowLongToBreastfeedPage": {
     "Header": "Por quanto tempo fazer a retirada do leite?",

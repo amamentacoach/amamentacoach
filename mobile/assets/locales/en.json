@@ -302,7 +302,12 @@
     "Option5": "Did you know?",
     "Option6": "Testimonies from moms",
     "Option7": "Questions",
-    "Option8": "Credits"
+    "Option8": "Credits",
+    // TODO Translate
+    "UpdateBabyBirthStatus": {
+      "Text": "O seu bebê nasceu?",
+      "Subtext": "Informe aqui"
+    }
   },
   "HowLongToBreastfeedPage": {
     "Header": "How long should you pump milk?",
