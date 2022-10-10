@@ -11,6 +11,7 @@ const perguntas: Pergunta[] = [
       "The feeling of empowerment (dealing with this challenge makes me believe that I am capable of other great things)|" +
       "Gratitude for the opportunity (I think many women, for many reasons, don’t have the opportunity to even try)|" +
       "The formation of a powerful bond while taking on this challenge in partnership with my baby|" +
+      "Ability to provide preemie with breastmilk for health benefits|" +
       "I can't identify anything good",
     outro: true,
     multiplas: true,
