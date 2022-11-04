@@ -4,13 +4,14 @@ import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
-import Father from '@assets/images/dad.webp';
 import createGenericSurveyPage from 'components/GenericSurveyPage';
 import Survey from 'components/Survey';
 import theme from 'config/theme';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
+
+import Father from '@assets/images/dad.webp';
 
 const SurveyFather: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

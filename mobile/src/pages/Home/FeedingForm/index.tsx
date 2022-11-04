@@ -56,19 +56,18 @@ const FeedingForm: React.FC = () => {
     setFeedbackMessage(feedback);
   }
 
-  // Envia as respostas recebidas da página anterior (StatusForm.tsx) para o servidor.
+  // Envia as respostas recebidas da página anterior (StatusForm.tsx) e da página atual para o servidor.
   async function handleSubmitAnswers(
     feedingFormAnswers: string[],
     { setSubmitting }: FormikHelpers<unknown>,
   ): Promise<void> {
     setSubmitting(true);
-    const responses = await Promise.all([
+    const [statusFormScore, feedingFormReqStatus] = await Promise.all([
       answerStatusForm(situation, statusFormAnswers),
       answerFeedingForm(situation, feedingFormAnswers),
     ]);
     setSubmitting(false);
 
-    const [statusFormScore, feedingFormReqStatus] = responses;
     if (statusFormScore === null || !feedingFormReqStatus) {
       setIsErrorModalVisible(true);
       return;

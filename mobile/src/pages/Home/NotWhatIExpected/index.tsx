@@ -66,6 +66,10 @@ const NotWhatIExpected: React.FC = () => {
           id: '1',
           text: i18n.t('NotWhatIExpectedPage.Text3'),
         },
+        {
+          id: '2',
+          text: i18n.t('NotWhatIExpectedPage.Text4'),
+        },
       ],
     },
   ];

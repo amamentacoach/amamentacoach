@@ -63,9 +63,6 @@ const MilkAdditionalInformation: React.FC = () => {
         <ContentText>
           {i18n.t('MilkAdditionalInformationPage.Text6')}
         </ContentText>
-        <ContentText>
-          {i18n.t('MilkAdditionalInformationPage.Text7')}
-        </ContentText>
       </ContentWrapper>
     </ScrollView>
   );

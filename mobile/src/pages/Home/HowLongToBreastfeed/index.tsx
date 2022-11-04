@@ -49,6 +49,7 @@ const HowLongToBreastfeed: React.FC = () => {
         <ContentText>
           {i18n.t('HowLongToBreastfeedPage.Text3')}{' '}
           <ColoredText>{i18n.t('HowLongToBreastfeedPage.Text4')}</ColoredText>.
+          {i18n.t('HowLongToBreastfeedPage.Text5')}
         </ContentText>
       </ContentWrapper>
     </ScrollView>

@@ -5,13 +5,14 @@ import { useEffect } from 'react';
 import { Linking } from 'react-native';
 
 import OptionsList from 'components/OptionList';
+import PaddedScrollView from 'components/PaddedScrollView';
 import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
 
-import ScrollView from './styles';
+import { HeaderText } from './styles';
 
 import Change from '@assets/images/change.svg';
 import DiarySmile from '@assets/images/diary_smile.svg';
@@ -73,9 +74,10 @@ const AdditionalInformation: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
+      <HeaderText>{i18n.t('AdditionalInformation.Header')}</HeaderText>
       <OptionsList options={options} />
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

@@ -78,6 +78,7 @@
     "SignIn": "Entrar"
   },
   "AdditionalInformationPage": {
+    "Header": "Informações relevantes sobre amamentação, respostas emocionais, emotional responses, and coping.",
     "1": "Como meu leite é produzido?",
     "2": "Saiba como seu corpo produz o leite",
     "4": "Como o canguru pode ajudar",
@@ -90,15 +91,17 @@
   },
   "AppIntroductionPage": {
     "1": "Bem vinda! O AmamentaCoach foi pensado para te auxiliar na desafiadora jornada de amamentar um bebê prematuro.",
-    "2": "Explore cada ícone e faça do App seu grande aliado!",
+    "2": "Você registrará seus avanços diários e terá acesso a conteúdos exclusivos para te instruir e te motivar!",
     "3": "Quanto mais você usar o AmamentaCoach , mais recursos terá para amamentar seu bebê prematuro!",
-    "4": "Você registrará seus avanços diários e terá acesso a conteúdos exclusivos para te instruir e te motivar!"
+    "4": "Explore cada ícone e faça do app seu grande aliado!"
   },
   "Auth": {
     "SignUpStep": "Passo %{current} de %{max}"
   },
   "BabyCupPage": {
     "Header": "Demonstração",
+    // TODO Traduzir
+    "Subtitle": "It is important that you have initial face-to-face training with a professional to adopt this milk-feeding technique.  Feeding your baby with a cup avoids the use of a bottle, which can harm the baby's learning to suckle at the breast",
     "Step1": "Despertar o bebê, massagear os pés e a face. Não deixar que o bebê esteja agitado de fome ou outro desconforto, pois dificulta a manobra.",
     "Step2": "Acomodar o bebê na posição sentada ou semi-sentada em seu colo, sendo que a cabeça forme um ângulo de 90º com o pescoço.",
     "Step3": "Encostar a borda do copo no lábio inferior do bebê e deixar o leite materno tocar o lábio.",
@@ -120,7 +123,7 @@
       }
     },
     "ExternalForm": {
-      "Message": "Conforme explicamos, você está participando de uma pesquisa sobre esse App que você terá acesso. Para tanto, precisamos da sua valiosa contribuição, que viabiliza todo o estudo, preenchendo um formulário com poucas questões que está disponível no link abaixo. Logo depois, você poderá acessar o App AmamentaCoach.  Esperamos que goste e aproveite muito essa experiência!",
+      "Message": "Conforme explicamos, você está participando de uma pesquisa sobre esse app que você terá acesso. Para tanto, precisamos da sua valiosa contribuição, que viabiliza todo o estudo, preenchendo um formulário com poucas questões que está disponível no link abaixo. Logo depois, você poderá acessar o app AmamentaCoach.  Esperamos que goste e aproveite muito essa experiência!",
       "LinkWarning": "Clique aqui para acessar o formulário",
       "Error": "O formulário externo precisa ser respondido"
     },
@@ -309,7 +312,8 @@
     "Text1": "Enquanto seu bebê ainda não estiver",
     "Text2": "mamando regularmente",
     "Text3": "Enquanto ele ainda não estiver mamando",
-    "Text4": "exclusivamente em você"
+    "Text4": "exclusivamente em você.",
+    "Text5": ""
   },
   "HowToBreastfeedPage": {
     "Title": "Como fazer a retirada do leite?",
@@ -329,13 +333,13 @@
   },
   "LeaveResearchPage": {
     "Introduction": "Prezada Senhora",
-    "Header": "Ao confirmar o descadastramento, todos os seus dados serão excluídos e você não fará mais parte da pesquisa “Coaching via App: uma abordagem inovadora para o aleitamento materno de bebês prematuros”.",
+    "Header": "Ao confirmar o descadastramento, todos os seus dados serão excluídos e você não fará mais parte da pesquisa “Coaching via app: uma abordagem inovadora para o aleitamento materno de bebês prematuros”.",
     "Content": "Seu acesso ao app será apagado e não será possível ver o conteúdo presente nesta plataforma.",
     "Leave": "Descadastrar",
     "Reason": "Poderia nos informar o motivo do descadastramento?",
     "Text": "Descadastrar da pesquisa",
     "Error": "Erro ao descadastrar, verifique sua conexão.",
-    "PopUp": "Tem certeza? Ao se descadastrar da pesquisa “Coaching via App: \"uma abordagem inovadora para o aleitamento materno de bebês prematuros” você não terá mais acesso ao app e ao conteúdo aqui presente.",
+    "PopUp": "Tem certeza? Ao se descadastrar da pesquisa “Coaching via app: \"uma abordagem inovadora para o aleitamento materno de bebês prematuros” você não terá mais acesso ao app e ao conteúdo aqui presente.",
     "Confirm": "Tenho Certeza"
   },
   "LoginPage": {
@@ -375,15 +379,14 @@
     "Text3": "Conforme o bebê suga o peito, ou conforme o leite é retirado, o cérebro produz mais e mais hormônio ocitocina.",
     "Text4": "Dentro da mama, a ocitocina é responsável por “espremer” os lóbulos, o que ajuda a empurrar o leite com mais naturalidade pelos ductos até os saquinhos chamados ampolas.",
     "Text5": "A ocitocina é produzida e liberada com mais facilidade quando a mulher sente-se bem, está calma e confiante. Também quando vê o bebê, toca nele e sente seu cheirinho, ou até quando pensa nele.",
-    "Text6": "Quanto mais se retira o leite (seja pela sucção do bebê, seja manualmente ou com bombinha), mais hormônios do leite o cérebro produz",
-    "Text7": "Fonte: Adaptado do site https://bebe.abril.com.br/amamentacao/leite-materno-infografico-mostra-como-ele-e-produzido/"
+    "Text6": "Quanto mais se retira o leite (seja pela sucção do bebê, seja manualmente ou com bombinha), mais hormônios do leite o cérebro produz"
   },
   "MotherFormPage": {
     "Birthday": "Sua data de nascimento",
     "BirthCityStateHeader": "Onde seu bebê nasceu?",
     "BirthdayPlaceholder": "Data de nascimento",
-    "CountPlaceholder": "Insira o número de vezes",
-    "CurrentGestationCount": "Número de filhos nessa gestação?",
+    // TODO Translate
+    "CurrentGestationCount": "Are you pregnant with multiples?",
     "Name": "Seu Nome",
     "Partner": "Tem companheiro?",
     "Phone": "Telefone",
@@ -394,6 +397,12 @@
     "BirthDate": "Data do parto",
     "SocialMedia": "Por qual veículo de mídia você ficou sabendo sobre o app AmamentaCoach?",
     "PossibleBirthDate": "Qual a data provável do seu parto?",
+    // TODO Translate
+    "CurrentGestationCountOptions": {
+      "OneBaby": "No - just one baby",
+      "Twins": "Yes - twins",
+      "Triplets": "Yes - triplets"
+    },
     "UserTypeOptions": {
       "Pregnant": "Gestante",
       "Mother": "Mãe de bebê prematuro",
@@ -472,9 +481,9 @@
     "Message": "Digite aqui sua mensagem..."
   },
   "PrematurePage": {
-    "Header1": "Parto prematuro: não era isso que eu esperava",
-    "Header2": "Muito prazer, eu sou o Prematuro",
-    "Header3": "Minha maior motivação para amamentar",
+    "Header1": "Muito prazer, eu sou o Prematuro",
+    "Header2": "Minha maior motivação para amamentar",
+    "Header3": "Parto prematuro: não era isso que eu esperava",
     "Header4": "Um período de luta, toda uma vida de resultados",
     "Subtitle5": "Benefícios da amamentação"
   },
@@ -500,7 +509,7 @@
     "Option2": "2. Buscar apoio social e conexão de grupo",
     "Option3": "3. Desenvolver uma maneira positiva de pensar",
     "Option4": "4. Construir força e autoconfiança",
-    "Text": "Cientistas afirmam que é possível AUMENTAR a RESILIÊNCIA adotando pelo menos 4 comportamentos favoráveis.'\n'Várias atividades do App contemplam um ou mais desses ingredientes poderosos! Aumente sua força, turbine sua resiliência: escolha por onde quer começar e aproveite todo o conteúdo!",
+    "Text": "Cientistas afirmam que é possível AUMENTAR a RESILIÊNCIA adotando pelo menos 4 comportamentos favoráveis.'\n'Várias atividades do app contemplam um ou mais desses ingredientes poderosos! Aumente sua força, turbine sua resiliência: escolha por onde quer começar e aproveite todo o conteúdo!",
     "TextHeader": "Mamães mais resilientes!"
   },
   "SignUpPage": {
@@ -708,7 +717,7 @@
     "Father": "Sobre a participação do companheiro(a)"
   },
   "SurveyStatisticsPage": {
-    "FormSubmitted": "Obrigada por responder a nossa enquete! Veja abaixo as respostas mais votadas no App pelas mães"
+    "FormSubmitted": "Obrigada por responder a nossa enquete! Veja abaixo as respostas mais votadas no app pelas mães"
   },
   "SurveyTitles": {
     "DiaryActions": "Ações Realizadas com o bebê",
@@ -723,7 +732,7 @@
     "Header": {
       "Text1": "Prezada,",
       "Text2": "Gostaríamos de convidá-la para participar da pesquisa",
-      "Text3": "\"Coaching via App: uma abordagem inovadora para o aleitamento materno de bebês prematuros\"",
+      "Text3": "\"Coaching via app: uma abordagem inovadora para o aleitamento materno de bebês prematuros\"",
       "Text4": ", a ser realizada no Hospital Universitário de Londrina (HU/UEL), no Paraná, no Hospital e Maternidade Dona Íris, em Goiânia-GO e também por recrutamento voluntário via mídias sociais.",
       "Text5": "Os objetivos da pesquisa são avaliar um aplicativo (app) de celular (smartphone) desenvolvido para ajudar gestantes de risco para parto prematuro e mães de bebês prematuros ou doentes a amamentarem seus bebês, contribuindo assim, para promoção do aleitamento materno (AM) de bebês prematuros; e validar a Escala de Autoeficácia para o Aleitamento Materno de mães de bebês prematuros ou doentes – versão brasileira."
     },
@@ -733,7 +742,7 @@
       "Text3": "Além disso, após um mês de alta, você poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, você será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
       "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que sua participação é totalmente voluntária, podendo você: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
       "Text5": "Salientamos que suas informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você não pagará ou será remunerada pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
-      "Text6": "Os potenciais benefícios da sua participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do App e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator você poderá utilizar o App no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
+      "Text6": "Os potenciais benefícios da sua participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do app e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator você poderá utilizar o app no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
     },
     "Parent": {
       "Text1": "Ao concordar em autorizar a participação da adolescente na pesquisa, após a assinatura de ambas em termo de consentimento e cadastro de informações iniciais, ela fará o download do app, na Play Store, de forma gratuita e terá acesso ilimitado a todo conteúdo interativo disponível. Ela também preencherá questionários em momentos específicos, com informações sobre ela e o bebê, para os quais o próprio aplicativo irá lembrá-la.",
@@ -741,7 +750,7 @@
       "Text3": "Além disso, após um mês de alta, ela poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, ela será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
       "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que a participação da adolescente é totalmente voluntária, podendo ela: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
       "Text5": "Salientamos que as informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você e ela não pagarão ou serão remuneradas pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
-      "Text6": "Os potenciais benefícios da participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do App e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator ela poderá utilizar o App no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
+      "Text6": "Os potenciais benefícios da participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do app e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator ela poderá utilizar o app no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
     },
     "Minor": {
       "Text1": "Ao concordar em participar da pesquisa, após as assinaturas suas e de seu responsável legal em termos de consentimento/assentimento e cadastro de informações iniciais, você fará o download do app, na Play Store, de forma gratuita e terá acesso ilimitado a todo conteúdo interativo disponível. Você também preencherá questionários em momentos específicos, com informações sobre você e o bebê, para os quais o próprio aplicativo irá lembrá-la.",
@@ -749,7 +758,7 @@
       "Text3": "Além disso, após um mês de alta, você poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, você será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
       "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que a participação da adolescente é totalmente voluntária, podendo ela: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
       "Text5": "Salientamos que suas informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você não pagará ou será remunerada pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
-      "Text6": "Os potenciais benefícios da sua participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do App e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator você poderá utilizar o App no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
+      "Text6": "Os potenciais benefícios da sua participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do app e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator você poderá utilizar o app no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
     },
     "Footer": {
       "Text1": "Faremos o possível para auxiliá-la em todo processo caso algum desconforto ocorra, esclarecendo-a sempre que for necessário. Caso você tenha dúvidas ou necessite de maiores esclarecimentos poderá nos contatar:",

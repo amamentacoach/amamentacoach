@@ -41,7 +41,7 @@ const Introduction: React.FC = () => {
     {
       id: '2',
       image: IntroDiaryHeart,
-      content: [{ id: '1', text: i18n.t('AppIntroductionPage.4') }],
+      content: [{ id: '1', text: i18n.t('AppIntroductionPage.2') }],
     },
     {
       id: '3',
@@ -51,7 +51,7 @@ const Introduction: React.FC = () => {
     {
       id: '4',
       image: IntroMobile,
-      content: [{ id: '1', text: i18n.t('AppIntroductionPage.2') }],
+      content: [{ id: '1', text: i18n.t('AppIntroductionPage.4') }],
     },
   ];
 
