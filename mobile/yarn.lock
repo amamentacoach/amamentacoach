@@ -3764,13 +3764,12 @@ __metadata:
     eslint-plugin-react: ^7.25.1
     formik: ^2.2.9
     i18n-js: ^3.8.0
-    install: ^0.13.0
     jest: ^26.6.3
     metro-config: ^0.58.0
     metro-react-native-babel-preset: ^0.66.0
     prettier: ^2.4.0
     react: 17.0.2
-    react-native: 0.65.1
+    react-native: 0.65.3
     react-native-bootsplash: ^2.2.6
     react-native-charts-wrapper: ^0.5.7
     react-native-codegen: ^0.0.7
@@ -3784,7 +3783,7 @@ __metadata:
     react-native-screens: ^3.7.0
     react-native-svg: ^12.1.1
     react-native-svg-transformer: ^0.14.3
-    react-native-webview: ^11.13.0
+    react-native-webview: ^11.23.1
     react-native-youtube-iframe: ^2.1.2
     react-test-renderer: 17.0.2
     styled-components: ^5.3.3
@@ -7394,13 +7393,6 @@ __metadata:
   version: 2.0.4
   resolution: "inherits@npm:2.0.4"
   checksum: 4a48a733847879d6cf6691860a6b1e3f0f4754176e4d71494c41f3475553768b10f84b5ce1d40fbd0e34e6bfbb864ee35858ad4dd2cf31e02fc4a154b724d7f1
-  languageName: node
-  linkType: hard
-
-"install@npm:^0.13.0":
-  version: 0.13.0
-  resolution: "install@npm:0.13.0"
-  checksum: 645bad1253115309c64d791c901caa8acd61a4012731015e3ee5eef88baaca026f3a48dc15a73a2827f7f5b05609804968ea1e3c6525dc0b3a21241837b9cf59
   languageName: node
   linkType: hard
 
@@ -11315,15 +11307,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-webview@npm:^11.13.0":
-  version: 11.13.0
-  resolution: "react-native-webview@npm:11.13.0"
+"react-native-webview@npm:^11.23.1":
+  version: 11.23.1
+  resolution: "react-native-webview@npm:11.23.1"
   dependencies:
     escape-string-regexp: 2.0.0
     invariant: 2.2.4
   peerDependencies:
-    react-native: ">=0.60"
-  checksum: 0e70cba3cb44be2802b6ee488a79e72095d5607c3cc82c837138477fdcd16daed06cc5e590d13e80135f1dd167cbc1fcd9acb1b1354e350dfec3d3c29ec76772
+    react: "*"
+    react-native: "*"
+  checksum: 58367276b4457a12c0ecb24084c237048a31a8b4d49f53615634052c2dfcb318824e9239909b6bfb80cc8abacab658d278f480f7ff96267d10d5ff84a8ff1373
   languageName: node
   linkType: hard
 
@@ -11341,9 +11334,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native@npm:0.65.1":
-  version: 0.65.1
-  resolution: "react-native@npm:0.65.1"
+"react-native@npm:0.65.3":
+  version: 0.65.3
+  resolution: "react-native@npm:0.65.3"
   dependencies:
     "@jest/create-cache-key-function": ^27.0.1
     "@react-native-community/cli": ^6.0.0
@@ -11379,7 +11372,7 @@ __metadata:
     react: 17.0.2
   bin:
     react-native: cli.js
-  checksum: 4462aa29ad940dc797b150cb6af9b481e6a013d5201818299e203e36f23bce389d705af25d75eea9e9fb31c0bcafdc349fd23fb6628db0a4cdadde6e1fbd3902
+  checksum: 1fc6d03e317a2b351352639a67f234758619b404fa67d5f37b0efc63369d2319397a8dc12cbc87eba3a07a5b5e4541d30b515326f5aa708e8c870c35186fa0cc
   languageName: node
   linkType: hard
 
