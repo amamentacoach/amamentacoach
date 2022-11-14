@@ -126,12 +126,6 @@ const CreateHomeRoutes = (Stack: StackScreens): JSX.Element[] => {
       options={{ title: i18n.t('PageTitles.1') }}
     />,
     <Stack.Screen
-      component={ManageExpectations}
-      key="ManageExpectations"
-      name="ManageExpectations"
-      options={{ title: i18n.t('Expectations') }}
-    />,
-    <Stack.Screen
       component={Messages}
       key="Messages"
       name="Messages"
