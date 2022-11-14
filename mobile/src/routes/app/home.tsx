@@ -17,7 +17,6 @@ import HowLongToBreastfeed from 'pages/Home/HowLongToBreastfeed';
 import HowToBreastfeed from 'pages/Home/HowToBreastfeed';
 import HU from 'pages/Home/HU';
 import IntroductionStatusForm from 'pages/Home/IntroductionStatusForm';
-import ManageExpectations from 'pages/Home/ManageExpectations';
 import Messages from 'pages/Home/Messages';
 import MilkAdditionalInformation from 'pages/Home/MilkAdditionalInformation';
 import MusicPlaylists from 'pages/Home/MusicPlaylists';

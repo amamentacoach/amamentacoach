@@ -60,13 +60,11 @@ const InformationPages: React.FC<InformationPagesProps> = ({
       renderItem={({ item, index }) => (
         <PageContainer width={width}>
           <PageModel
-            content={item.content}
             flatListRef={flatListRef}
             goToPage={goToPage}
-            image={item.image}
             index={index}
             pagesLength={pages.length}
-            title={item.title}
+            {...item}
           />
         </PageContainer>
       )}

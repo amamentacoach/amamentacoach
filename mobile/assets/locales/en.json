@@ -160,10 +160,6 @@
       "Title": "Benefits of breastfeeding for mother and baby",
       "Text1": "Breastfeeding helps in forming a bond from an early age.\n\nBreast milk is the most complete food for a baby, in addition to offering many other advantages.\n\nIt is recommended that babies receive only breastmilk for the first six months of life, followed by breastfeeding in combination with other foods for up to 2 years or more. You can strive to give as much breast milk as possible to your baby."
     },
-    "Page2": {
-      "Section1": "IMMUNE SYSTEM",
-      "Text1": "Breast milk helps defend the body from various diseases. The effect of vaccines is better in breastfed children, and breastfeeding decreases the risk of childhood cancer."
-    },
     "Page3": {
       "Section1": "MOUTH",
       "Text1": "Being fed at the breast stimulate the growth and development of the face, mouth, and teeth.",
@@ -321,7 +317,6 @@
   },
   "HowToBreastfeedPage": {
     "Title": "How to hand express breastmilk",
-    "Page1": "Secure your hair. Wearing a shower cap or wet towel is recommended to prevent any hair or follicle contamination.",
     "Page2": "Choose a clean and quiet place.",
     "Page3": "Massage the breast with the tips of two fingers, starting from the region closest to the areola and going to the farthest from the breast, supporting it with the other hand.",
     "Page4": "Massage the most fullness areas longer.",
@@ -354,24 +349,6 @@
     "GenericError": "Error logging in.\nPlease try again later.",
     "WrongInfoError": "Incorrect email or password!",
     "NotAuthorizedError": "Unauthorized account!"
-  },
-  "ManageExpectationsPage": {
-    "Header": "Adjusting improbable expectations to be more realistic helps with resilience!\nClick on \"Swap\", if you'd like to change the expectation. If you don't want to, click on \"Keep expectation\".",
-    "PopUp": "Congratulations on exchanging this unlikely expectation for a more realistic expectation! Come back tomorrow to shift other expectations.",
-    "Switch": "Swap",
-    "Keep": "Keep expectation",
-    "OldExpectation1": "Sleep as before",
-    "NewExpectation1": "Seize Every Nap Opportunity",
-    "OldExpectation2": "Take care of everything",
-    "NewExpectation2": "Do what I can with love",
-    "OldExpectation3": "Having a healthy, plump, and blushing baby ",
-    "NewExpectation3": "Love my preemie as they are",
-    "OldExpectation4": "Fulfill all my baby's needs alone",
-    "NewExpectation4": "Do my part to help my baby",
-    "OldExpectation5": "Fulfill all my family's needs as I used to before",
-    "NewExpectation5": "Delegate tasks to other people who can also help my family",
-    "OldExpectation6": "Close myself off from others to preserve my energy",
-    "NewExpectation6": "Opening up with trustworthy people to preserve my mental health"
   },
   "MenuTermsOfServicePage": {
     "ReadTermsOfService": "Read Consent Form",
@@ -460,8 +437,7 @@
     "Header": "Premature birth:\nThis is not what I expected",
     "Text1": "Premature birth is something that affects the whole family. The reality of premature birth may be different than what you dreamed of during pregnancy.",
     "Text2": "It is normal to feel a mixture of fear, frustration, insecurity, anxiety, or stress.",
-    "Text3": "Be patient with yourself! Take a deep breath...pick someone to open up with and talk to about how you're feeling...and then accept your baby just the way they are. Decide to embrace this new situation!\n",
-    "Text4": "You can seek help from qualified breastfeeding support professionals (e.g., lactation consultants) if you have questions, concerns, or are experiencing breastfeeding challenges."
+    "Text3": "Be patient with yourself! Take a deep breath...pick someone to open up with and talk to about how you're feeling...and then accept your baby just the way they are. Decide to embrace this new situation!\n\nYou can seek help from qualified breastfeeding support professionals (e.g., lactation consultants) if you have questions, concerns, or are experiencing breastfeeding challenges.\n\nLactation consultants: https://portal.ilca.org/i4a/memberDirectory/index.cfm?directory_id=19&pagelD=4356\n\nBilingual Online Ontario Breastfeeding Services: https://ontariobreastfeeds.ca/\n\nWhat You Need to Know About Mental Health and Motherhood - https://roomforher.ca/blog/mind/what-vou-need-to-known"
   },
   "PageTitles": {
     "1": "Make yourself at home!",
@@ -509,6 +485,7 @@
   },
   "ResiliencePage": {
     "Header": "Do you know what Resilience is?",
+    "InfoModal": "Central to resilience are two basic tenets: the perception of an adverse event and subsequent positive adaptation. Everyone agrees that premature birth is an unexpected event.  Resilience is viewed as an adaptive process, rather than a specific state, and is a predictor of positive coping in stressful situations. Resilience has also been characterized as the ability to bounce back or rebound from adverse experiences by remaining flexible and developing strategies that result in positive outcomes and enhanced quality of life",
     "Option1": "1. Maintain realistic expectations",
     "Option2": "2. Seek social support and group connection",
     "Option3": "3. Develop a positive way of thinking",
@@ -618,7 +595,7 @@
   },
   "StepByStepPrematurePage": {
     "Page1": {
-      "Title": "Six good advices for breastfeeding a premature baby",
+      "Title": "Seven good advices for breastfeeding a premature baby",
       "Text": "With a premature birth, it's common for the baby to not be able to latch to the breast at birth and for the baby to be hospitalized to receive some ongoing care.\n\nFirst of all, know that feeding a premature baby with breastmilk is possible, and that is very valuable!\n\nThe following steps summarize the journey towards success in breastfeeding a premature baby."
     },
     "Page2": {
@@ -644,6 +621,14 @@
     "Page7": {
       "Title": "6. Be patient",
       "Text": "When your baby starts to feed at the breast, consider that as they was born prematurely, they may have less energy available.\nAlso, it is expected that babies born at less than 34 weeks gestation cannot generate and coordinate sucking with swallowing and breathing.\nThey need time and training to achieve this"
+    },
+    "Page8": {
+      "Title": "7. Helping your baby latch on well",
+      "Text": "Here are some tips:\nMake sure you are comfortable and well supported.\nBring your baby in close – tummy-to-tummy.\nThe baby's ears, shoulders, and hips should be in a straight line.\nLine up the baby’s nose to your nipple.\nThe baby’s head should be slightly tilted back.\nSupport your baby’s shoulders and neck.\nBring the baby’s chin and lower lip to the breast.\nThe nose should not be touching the breast.\nWait for the baby to open his mouth wide then bring him on, directing your nipple to the back of his mouth.\nWhile supporting the breast, ensure your fingers are placed far away from your areola.\n\nSource: https://breastfeedinginfo.ca/table-of-contents/how-to-breastfeed/#latch"
+    },
+    "Page9": {
+      "Title": "8. Transitioning from tube feeding to breastfeeding",
+      "Text": "Some preterm infants are tube fed until they are ready to begin the process of learning to suck. As the sucking reflexes develop and when the infants were clinically stable, they are transitioned from tube feeding to breastfeeding."
     }
   },
   "SurveyComponent": {
@@ -716,7 +701,7 @@
   "ThePrematurePage": {
     "Option1": "Video \"Pleased to meet you, I'm the \"Preemie\" baby\"",
     "Option2": "Poll: Breastfeeding a premature baby",
-    "Option3": "Infographic: 6 steps to breastfeeding"
+    "Option3": "Infographic: 8 steps to breastfeeding"
   },
   "UploadBabyPhotoPage": {
     "SelectPhoto": "Choose a photo of your baby(ies) from the gallery and upload it here to remind you of your biggest motivation to breastfeed."

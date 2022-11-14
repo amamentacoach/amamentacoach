@@ -158,10 +158,6 @@
       "Title": "Benefícios da amamentação para a mãe e o bebê",
       "Text1": "A amamentação ajuda na formação do vínculo desde muito cedo.\n\nO leite materno é o alimento mais completo para o bebê, além de oferecer muitas outras vantagens.\n\nNão há nada melhor do que amamentar o bebê somente no peito até o 6º mês de vida, e manter o aleitamento junto com alimentos saudáveis até 2 anos ou mais."
     },
-    "Page2": {
-      "Section1": "SISTEMA IMUNOLÓGICO",
-      "Text1": "O leite materno ajuda a defender o organismo de várias doenças. O efeito das vacinas é melhor em crianças amamentadas. Diminui o risco de câncer infantil."
-    },
     "Page3": {
       "Section1": "BOCA",
       "Text1": "Favorece o desenvolvimento da face, da boca e da dentição.",
@@ -317,7 +313,6 @@
   },
   "HowToBreastfeedPage": {
     "Title": "Como fazer a retirada do leite?",
-    "Page1": "Prenda os cabelos e use uma touca de banho ou pano molhado.",
     "Page2": "Escolha um lugar limpo e tranquilo.",
     "Page3": "Massageie o peito com a ponta de dois dedos, iniciando na região mais próxima da aréola indo até a mais distante do peito, apoiando-o com a outra mão.",
     "Page4": "Massageie por mais tempo as áreas mais doloridas.",
@@ -350,24 +345,6 @@
     "GenericError": "Erro ao realizar login.\nPor favor tente novamente mais tarde.",
     "WrongInfoError": "E-mail ou senha incorretos!",
     "NotAuthorizedError": "Conta não autorizada!"
-  },
-  "ManageExpectationsPage": {
-    "Header": "Trocar expectativas improváveis por expectativas realistas ajuda na resiliência!\nClique em “Trocar”, se desejar ou precisar. Caso não queira, clique em “Manter expectativa”.",
-    "PopUp": "Parabéns por trocar essa expectativa improvável pela expectativa realista! Volte amanhã para trocar outras expectativas.",
-    "Switch": "Trocar",
-    "Keep": "Manter expectativa",
-    "OldExpectation1": "Dormir como antes",
-    "NewExpectation1": "Aproveitar cada oportunidade de cochilo",
-    "OldExpectation2": "Dar conta de tudo",
-    "NewExpectation2": "Fazer o que estiver ao meu alcance, com amor",
-    "OldExpectation3": "Ter um bebê saudável, gorduxo e corado",
-    "NewExpectation3": "Amar meu prematurinho como ele é",
-    "OldExpectation4": "Suprir todas as necessidades do meu bebê sozinha",
-    "NewExpectation4": "Fazer a minha parte para ajudar o meu bebê",
-    "OldExpectation5": "Suprir todas as necessidades da minha família como fazia antes",
-    "NewExpectation5": "Mobilizar pessoas que também possam ajudar a minha família",
-    "OldExpectation6": "Me fechar para me preservar",
-    "NewExpectation6": "Me abrir com pessoas de confiança para preservar minha saúde mental"
   },
   "MenuTermsOfServicePage": {
     "ReadTermsOfService": "Ler Termo de Consentimento",

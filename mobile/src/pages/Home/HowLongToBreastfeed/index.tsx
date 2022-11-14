@@ -13,8 +13,7 @@ import {
   ContentWrapper,
 } from './styles';
 
-import Withdrawal1 from '@assets/images/withdrawal_premature_1.webp';
-import Withdrawal2 from '@assets/images/withdrawal_premature_2.webp';
+import Withdrawal from '@assets/images/withdrawal_premature.webp';
 
 const HowLongToBreastfeed: React.FC = () => {
   useEffect(() => {
@@ -30,12 +29,6 @@ const HowLongToBreastfeed: React.FC = () => {
         {i18n.t('HowLongToBreastfeedPage.Header')}
       </ContentTitleText>
       <ContentWrapper>
-        <ImageWrapper
-          height={190}
-          resizeMode="contain"
-          source={Withdrawal1}
-          width="100%"
-        />
         <ContentText>
           {i18n.t('HowLongToBreastfeedPage.Text1')}{' '}
           <ColoredText>{i18n.t('HowLongToBreastfeedPage.Text2')}</ColoredText>.
@@ -43,7 +36,7 @@ const HowLongToBreastfeed: React.FC = () => {
         <ImageWrapper
           height={190}
           resizeMode="contain"
-          source={Withdrawal2}
+          source={Withdrawal}
           width="100%"
         />
         <ContentText>

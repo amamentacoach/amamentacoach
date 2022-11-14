@@ -14,7 +14,6 @@ import type { RootStackProps } from 'routes/app';
 
 import { HeaderText } from './styles';
 
-import Change from '@assets/images/change.svg';
 import DiarySmile from '@assets/images/diary_smile.svg';
 import EmotionsInfo from '@assets/images/emotions_info.svg';
 import PrematureBaby from '@assets/images/premature_baby.svg';
@@ -43,12 +42,6 @@ const AdditionalInformation: React.FC = () => {
       onPress: () => navigation.navigate('Resilience'),
     },
     {
-      image: { source: Change },
-      title: i18n.t('AdditionalInformationPage.7'),
-      subtitle: i18n.t('AdditionalInformationPage.8'),
-      onPress: () => navigation.navigate('ManageExpectations'),
-    },
-    {
       image: { source: EmotionsInfo },
       title: i18n.t('AdditionalInformationPage.9'),
       subtitle: i18n.t('AdditionalInformationPage.10'),
@@ -75,7 +68,7 @@ const AdditionalInformation: React.FC = () => {
 
   return (
     <PaddedScrollView>
-      <HeaderText>{i18n.t('AdditionalInformation.Header')}</HeaderText>
+      <HeaderText>{i18n.t('AdditionalInformationPage.Header')}</HeaderText>
       <OptionsList options={options} />
     </PaddedScrollView>
   );

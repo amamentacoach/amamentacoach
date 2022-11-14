@@ -42,12 +42,6 @@ const HowToBreastfeed: React.FC = () => {
 
   const pages: InfoPageItem[] = [
     {
-      id: '1',
-      title: i18n.t('HowToBreastfeedPage.Title'),
-      image: MilkWithdrawalOne,
-      content: [{ id: '1', text: i18n.t('HowToBreastfeedPage.Page1') }],
-    },
-    {
       id: '2',
       title: i18n.t('HowToBreastfeedPage.Title'),
       image: MilkWithdrawalTwo,
