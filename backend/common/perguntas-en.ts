@@ -229,9 +229,8 @@ const perguntas: Pergunta[] = [
       "Put baby to sleep|" +
       "Stimulated and played with them|" +
       "Accompanied consultations|" +
-      "Helped more at home so I could rest|" +
-      "None of the above",
-    outro: false,
+      "Helped more at home so I could rest",
+    outro: true,
     multiplas: true,
     alvo: "AC",
   },
