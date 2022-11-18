@@ -369,15 +369,14 @@
     "Name": "Your name",
     "Partner": "Do you have a partner?",
     "Phone": "Phone number",
-    // TODO Translate
-    "BirthCityStateHeader": "Onde seu bebê nasceu?",
-    "BirthWeeks": "Seu parto ocorreu com quantas semanas de gestação?",
-    "UserType": "Em qual dessas situações você se enquadra?",
-    "WeeksPregnant": "De quantas semanas está gestante?",
+    "BirthCityStateHeader": "Where was your baby born?",
+    "BirthWeeks": "How many weeks of pregnancy did you give birth?",
+    "UserType": "Which of these situations do you fall into?",
+    "WeeksPregnant": "How many weeks are you pregnant?",
     "BirthDate": "Date of birth",
-    "Institution": "Como você ficou sabendo deste estudo?",
-    "SocialMedia": "Por qual veículo de mídia você ficou sabendo sobre o app AmamentaCoach?",
-    "PossibleBirthDate": "Qual a data provável do seu parto?",
+    "Institution": "How did you find out about this study?",
+    "SocialMedia": "Through which media channel did you find out about the AmamentaCoach app?",
+    "PossibleBirthDate": "What is your estimated pregnancy due date?",
     "CurrentGestationCountOptions": {
       "OneBaby": "No - just one baby",
       "Twins": "Yes - twins",
@@ -385,8 +384,8 @@
     },
     "UserTypeOptions": {
       "Pregnant": "Pregnant",
-      "Mother": "Mãe de bebê prematuro",
-      "HealthcareWorker": "Profissional de saúde"
+      "Mother": "Mother of premature baby",
+      "HealthcareWorker": "Healthcare professional"
     },
     "InstitutionOptions": {
       "HU": "Sou paciente do HU - Londrina",
