@@ -6,13 +6,13 @@ const perguntas: Pergunta[] = [
     id: 1,
     categoria: 1,
     descricao:
-      "For you personally, what's the best part about breastfeeding a premature baby? (Select as many responses as you’d like",
+      "What's the best part about feeding breastmilk to your premature baby?",
     alternativas:
       "The feeling of empowerment (dealing with this challenge makes me believe that I am capable of other great things)|" +
-      "Gratitude for the opportunity (I think many women, for many reasons, don’t have the opportunity to even try)|" +
-      "The formation of a powerful bond while taking on this challenge in partnership with my baby|" +
-      "Ability to provide preemie with breastmilk for health benefits|" +
-      "I can't identify anything good",
+      "I am grateful for the possibility of trying to establish breastfeeding." +
+      "Strengthening the bond with my little partner as we strive to establish breastfeeding" +
+      "Ability to provide preemie with breastmilk for health benefits." +
+      "I can't identify anything good about breastfeeding a premature baby",
     outro: true,
     multiplas: true,
     alvo: "GERAL",
@@ -21,15 +21,14 @@ const perguntas: Pergunta[] = [
   {
     id: 2,
     categoria: 8,
-    descricao:
-      "What motivates you to keep trying to breastfeed? (Select as many responses as you’d like)",
+    descricao: "What motivates you to keep trying to breastfeed?",
     alternativas:
-      "Thinking it's what’s best for my baby|" +
-      "The encouragement I'm receiving from professionals|" +
-      "The encouragement I'm receiving from my family|" +
+      "Thinking it's what's best for my baby|" +
+      "The encouragement and advice from health professionals|" +
+      "The cost of formula|" +
       "Considering the cost of the formula|" +
       "Other motivations|" +
-      "I'm not too motivated to continue",
+      "I'm not feeling motivated to continue breastfeeding",
     outro: false,
     multiplas: true,
     alvo: "GERAL",
@@ -71,7 +70,7 @@ const perguntas: Pergunta[] = [
   {
     id: 5,
     categoria: 10,
-    descricao: "How is my baby is:",
+    descricao: "How my baby is doing:",
     alternativas:
       "🙂 Continues as he or she was|" + "🙁 Worsened|" + "😁 Better",
     outro: false,
@@ -123,11 +122,11 @@ const perguntas: Pergunta[] = [
     categoria: 3,
     descricao: "Goals for Thoughts and Feelings",
     alternativas:
-      "Think more about positive things|" +
-      "Value the little things more|" +
-      "Increase my confidence|" +
+      "Think positively|" +
+      "Value the little things|" +
+      "Increase my self-confidence|" +
       "Live one day at a time|" +
-      "Master my anxiety or concern|" +
+      "Manage my anxiety or concern|" +
       "Think less about things that are out of my control",
     outro: false,
     multiplas: true,
@@ -139,10 +138,10 @@ const perguntas: Pergunta[] = [
     descricao: "Goals for actions",
     alternativas:
       'Engage in skin-to-skin "kangaroo" care with my baby|' +
-      "Pump whenever necessary|" +
-      "Offer my fresh milk to my baby whenever necessary as a supplement|" +
-      "Being confident in caring for my baby|" +
-      "Have the courage to ask for help|" +
+      "Pump every three hours|" +
+      "Offer fresh breast milk to my baby to supplement as needed|" +
+      "Feel confident taking care of my baby|" +
+      "Say no to offers or advice that are not helpful to me|" +
       "Have the courage to distance myself from people who may be harming me in some way",
     outro: false,
     multiplas: true,
@@ -153,14 +152,13 @@ const perguntas: Pergunta[] = [
     categoria: 3,
     descricao: "Goals for actions",
     alternativas:
-      "Stay longer in the NICU|" +
-      'Engage in more skin-to-skin "kangaroo" care with my baby |' +
-      "Bring my breast milk|" +
-      "Offer my fresh breast milk to my baby|" +
-      "Perform more care tasks with my baby|" +
-      "Have the courage to ask for help|" +
+      "I engaged in kangaroo care or skin-to-skin with my baby|" +
+      "I pumped as much as possible|" +
+      "I offered fresh breast milk to supplement my baby|" +
+      "I felt confident taking care of my baby|" +
+      "I said no to offers or advice that was not helpful to me|" +
       "Seek more information about my baby from the physicians and nurses",
-    outro: false,
+    outro: true,
     multiplas: true,
     alvo: "UCI/UTI",
   },
@@ -168,7 +166,7 @@ const perguntas: Pergunta[] = [
   {
     id: 11,
     categoria: 4,
-    descricao: "I needed a specific help...",
+    descricao: "I needed help with...",
     alternativas:
       "nurses|" +
       "physicians|" +
@@ -200,7 +198,8 @@ const perguntas: Pergunta[] = [
   {
     id: 13,
     categoria: 5,
-    descricao: "This week, what has your partner been doing for your baby?",
+    descricao:
+      "This week, what has your partner been performing with your baby?",
     alternativas:
       "Visit in the NICU 1 to 2 times|" +
       "Visit the NICU more than 2 times|" +
@@ -210,7 +209,9 @@ const perguntas: Pergunta[] = [
       "Cleaned the baby's eyes and mouth|" +
       "Diaper changes|" +
       "Bathed the baby|" +
-      "Helped more at home so I could spend more time in the NICU|" +
+      "Soothed the baby|" +
+      "Accompanied me and/or the baby to medical appointments|" +
+      "Helped out at home so I could rest|" +
       "None of the above",
     outro: true,
     multiplas: true,
