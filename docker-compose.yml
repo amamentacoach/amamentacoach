@@ -14,7 +14,7 @@ services:
 
   database-postgres:
     container_name: amamentacoach-postgres
-    image: postgres
+    image: postgres:14
     ports:
       - "5432:5432"
     env_file:
@@ -24,7 +24,7 @@ services:
 
   database-mongo:
     container_name: amamentacoach-mongo
-    image: mongo
+    image: mongo:5
     ports:
       - "27017:27017"
     env_file:
