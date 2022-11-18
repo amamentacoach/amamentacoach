@@ -41,12 +41,12 @@ const Introduction: React.FC = () => {
     },
     {
       id: '2',
-      image: IntroDiaryHeart,
+      image: IntroChart,
       content: [{ id: '1', text: i18n.t('AppIntroductionPage.2') }],
     },
     {
       id: '3',
-      image: IntroChart,
+      image: IntroDiaryHeart,
       content: [{ id: '1', text: i18n.t('AppIntroductionPage.3') }],
     },
     {
