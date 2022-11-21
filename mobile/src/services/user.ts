@@ -1,4 +1,3 @@
-import { format } from 'date-fns';
 import i18n from 'i18n-js';
 
 import api from 'services/api';
@@ -180,30 +179,5 @@ export async function getUserInfo(): Promise<UserInfo | null> {
     return userInfo;
   } catch (error) {
     return null;
-  }
-}
-
-// Atualiza os dados de um usuário.
-export async function updateUserProfile(
-  userInfo: MotherUpdateInfo,
-): Promise<boolean> {
-  try {
-    await api.put('/user', {
-      companheiro: userInfo.hasPartner,
-      data_nascimento: format(userInfo.birthday, 'yyyy-MM-dd'),
-      email: userInfo.email,
-      localizacao: userInfo.institution,
-      data_parto: userInfo.birthDate,
-      nome: userInfo.name,
-      bebes: userInfo.babies.map(baby => ({
-        id: baby.id,
-        local_nascimento: baby.birthLocation,
-        local_atual: baby.currentLocation,
-        nome: baby.name,
-      })),
-    });
-    return true;
-  } catch (error) {
-    return false;
   }
 }

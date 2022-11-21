@@ -1,35 +1,14 @@
 import i18n from 'i18n-js';
 
-import { useAuth } from 'contexts/auth';
 import LeaveResearch from 'pages/Profile/LeaveResearch';
 import MenuTermsOfService from 'pages/Profile/MenuTermsOfService';
-import MyBabies from 'pages/Profile/MyBabies';
 import NewPassword from 'pages/Profile/NewPassword';
-import Profile from 'pages/Profile/Profile';
 import ReadTermsOfService from 'pages/Profile/ReadTermsOfService';
 
 import type { StackScreens } from 'routes/config/getNavigatorType';
 
 const CreateProfileRoutes = (Stack: StackScreens): JSX.Element[] => {
-  const { userInfo } = useAuth();
-
   return [
-    <Stack.Screen
-      component={Profile}
-      key="Profile"
-      name="Profile"
-      options={{ title: i18n.t('ProfileMenuPage.MyProfile') }}
-    />,
-    <Stack.Screen
-      component={MyBabies}
-      key="MyBabies"
-      name="MyBabies"
-      options={{
-        title: i18n.t('ProfileMenuPage.MyBabies', {
-          count: userInfo.babies.length,
-        }),
-      }}
-    />,
     <Stack.Screen
       component={NewPassword}
       key="NewPassword"

@@ -2,14 +2,14 @@ import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
 import { useEffect, useLayoutEffect, useState } from 'react';
-import { View, ActivityIndicator, Dimensions } from 'react-native';
+import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
 import Modal from 'components/Modal';
 import OptionsList from 'components/OptionList';
 import PaddedScrollView from 'components/PaddedScrollView';
 import theme from 'config/theme';
-import { OpenSansRegular, Center } from 'lib/sharedStyles';
+import { OpenSansRegular } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
@@ -26,7 +26,6 @@ import {
 
 import ErlenmeyerGreen from '@assets/images/erlenmeyer_green.svg';
 import ErlenmeyerPink from '@assets/images/erlenmeyer_pink.svg';
-import ErlenmeyerPrimary from '@assets/images/erlenmeyer_primary.svg';
 import ErlenmeyerYellow from '@assets/images/erlenmeyer_yellow.svg';
 import IcQuestion from '@assets/images/icons/ic_question.svg';
 
@@ -50,11 +49,6 @@ const Resilience: React.FC = () => {
   }, []);
 
   const options: OptionListEntry[] = [
-    {
-      image: { source: ErlenmeyerPrimary },
-      title: i18n.t('ResiliencePage.Option1'),
-      onPress: () => navigation.navigate('ManageExpectations'),
-    },
     {
       image: { source: ErlenmeyerYellow },
       title: i18n.t('ResiliencePage.Option2'),
