@@ -6,7 +6,7 @@ import UploadPhotoScreen from 'components/UploadPhotoScreen';
 import { uploadFatherPhoto } from 'services/uploadPhoto';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
-import Family from '@assets/images/family.png';
+import Family from '@assets/images/family.webp';
 
 const UploadFatherPhoto: React.FC = () => {
   useEffect(() => {

@@ -8,9 +8,9 @@ import { createTelemetryAction } from 'utils/telemetryAction';
 
 import { ContentText, ContentWrapper } from './styles';
 
-import MilkAdditionalInfoOne from '@assets/images/milk_additional_info_one.png';
-import MilkAdditionalInfoThree from '@assets/images/milk_additional_info_three.png';
-import MilkAdditionalInfoTwo from '@assets/images/milk_additional_info_two.png';
+import MilkAdditionalInfoOne from '@assets/images/milk_additional_info_one.webp';
+import MilkAdditionalInfoThree from '@assets/images/milk_additional_info_three.webp';
+import MilkAdditionalInfoTwo from '@assets/images/milk_additional_info_two.webp';
 
 const MilkAdditionalInformation: React.FC = () => {
   useEffect(() => {
@@ -62,9 +62,6 @@ const MilkAdditionalInformation: React.FC = () => {
         </ContentText>
         <ContentText>
           {i18n.t('MilkAdditionalInformationPage.Text6')}
-        </ContentText>
-        <ContentText>
-          {i18n.t('MilkAdditionalInformationPage.Text7')}
         </ContentText>
       </ContentWrapper>
     </ScrollView>

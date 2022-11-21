@@ -115,14 +115,10 @@ const MotherForm: React.FC = () => {
       i18n.t('MotherFormPage.UserTypeOptions.Mother'),
       Yup.string(),
     ),
-    currentGestationCount: Yup.number().when('userType', {
+    currentGestationCount: Yup.string().when('userType', {
       is: i18n.t('MotherFormPage.UserTypeOptions.Mother'),
-      then: Yup.number()
-        .integer(i18n.t('Yup.MustBeIntegerError'))
-        .typeError(i18n.t('Yup.MustBeIntegerError'))
-        .min(1, i18n.t('Yup.MinEqualError', { num: 1 }))
-        .required(i18n.t('Yup.Required')),
-      otherwise: Yup.number(),
+      then: Yup.string().required(i18n.t('Yup.Required')),
+      otherwise: Yup.string(),
     }),
     hasPartner: requiredWhen(
       'userType',
@@ -147,12 +143,25 @@ const MotherForm: React.FC = () => {
       birthDate: formValues.birthDate
         ? formValues.birthDate.toISOString()
         : null,
-      currentGestationCount: Number(formValues.currentGestationCount),
       hasPartner: formValues.hasPartner!,
+      currentGestationCount: 0,
       email,
       password,
       babies: [],
     };
+
+    switch (formValues.currentGestationCount) {
+      case i18n.t('MotherFormPage.CurrentGestationCountOptions.OneBaby'):
+        userInfo.currentGestationCount = 1;
+        break;
+      case i18n.t('MotherFormPage.CurrentGestationCountOptions.Twins'):
+        userInfo.currentGestationCount = 3;
+        break;
+      case i18n.t('MotherFormPage.CurrentGestationCountOptions.Triplets'):
+        userInfo.currentGestationCount = 2;
+        break;
+    }
+
     if (userInfo.userType === i18n.t('MotherFormPage.UserTypeOptions.Mother')) {
       navigation.navigate('BabyForm', { userInfo });
     } else {
@@ -342,13 +351,21 @@ const MotherForm: React.FC = () => {
                     }}
                   />
                   <QuestionContainer>
-                    <FormTextInput
+                    <StatePicker
                       error={errors.currentGestationCount}
-                      keyboardType="numeric"
                       label={i18n.t('MotherFormPage.CurrentGestationCount')}
-                      placeholder={i18n.t('MotherFormPage.CountPlaceholder')}
-                      value={values.currentGestationCount}
-                      onChangeText={handleChange('currentGestationCount')}
+                      options={[
+                        i18n.t(
+                          'MotherFormPage.CurrentGestationCountOptions.OneBaby',
+                        ),
+                        i18n.t(
+                          'MotherFormPage.CurrentGestationCountOptions.Twins',
+                        ),
+                        i18n.t(
+                          'MotherFormPage.CurrentGestationCountOptions.Triplets',
+                        ),
+                      ]}
+                      onChange={handleChange('currentGestationCount')}
                     />
                   </QuestionContainer>
                 </>

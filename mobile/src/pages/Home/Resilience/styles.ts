@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { ManjariBold, OpenSansRegular } from 'lib/sharedStyles';
+import { Center, ManjariBold, OpenSansRegular } from 'lib/sharedStyles';
 
 interface VideoContainerProps {
   display: boolean;
@@ -10,6 +10,10 @@ export const PageHeader = styled(OpenSansRegular)`
   margin-bottom: 20px;
   color: ${props => props.theme.grey};
   text-align: center;
+`;
+
+export const MoreInfoContainer = styled(Center)`
+  margin-right: 10px;
 `;
 
 export const VideoContainer = styled.View<VideoContainerProps>`

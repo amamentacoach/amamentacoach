@@ -6,7 +6,7 @@ import UploadPhotoScreen from 'components/UploadPhotoScreen';
 import { uploadMotherPhoto } from 'services/uploadPhoto';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
-import Mirror from '@assets/images/mirror.png';
+import Mirror from '@assets/images/mirror.webp';
 
 const UploadMotherPhoto: React.FC = () => {
   useEffect(() => {

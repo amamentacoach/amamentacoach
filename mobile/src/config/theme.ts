@@ -5,6 +5,7 @@ const theme = {
   babyGreen: '#D6EEDF',
   babyPink: '#F5C3CF',
   babyPurple: '#C1ACFC',
+  babyYellow: '#FCD7AC',
   black: '#161026',
   brightGrey: '#C5C2CC',
   darkBlue: '#10485B',

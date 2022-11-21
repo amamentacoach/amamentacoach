@@ -46,7 +46,6 @@ export type RootStackParamList = {
   HowToBreastfeed: undefined;
   HU: undefined;
   LeaveResearch: undefined;
-  ManageExpectations: undefined;
   MenuTermsOfService: undefined;
   Messages: undefined;
   MilkAdditionalInformation: undefined;

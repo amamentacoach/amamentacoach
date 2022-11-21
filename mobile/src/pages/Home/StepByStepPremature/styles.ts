@@ -16,7 +16,7 @@ interface LastPageButtonWrapperProps {
 }
 
 interface ContentProps {
-  index: number;
+  shouldDisplayImage: boolean;
 }
 
 export const Background = styled.View<BackgroundProps>`
@@ -42,8 +42,9 @@ export const ContentWrapper = styled.View<ContentProps>`
   align-items: center;
   justify-content: center;
   margin: 24px;
-  flex: ${({ index }) => (index === 0 ? 1 : 0)};
-  margin-top: ${({ index }) => (index === 0 ? 10 : -200)}px;
+  padding-top: 20px;
+  flex: ${({ shouldDisplayImage }) => (shouldDisplayImage ? 0 : 1)};
+  margin-top: ${({ shouldDisplayImage }) => (shouldDisplayImage ? -200 : 10)}px;
 `;
 
 export const ContentHeaderText = styled(OpenSansRegular)`
@@ -57,8 +58,7 @@ export const ContentText = styled(OpenSansRegular)`
   color: ${props => props.theme.grey};
 `;
 
-export const Footer = styled.View<ContentProps>`
-  flex: ${({ index }) => (index === 0 ? 0 : 1)};
+export const Footer = styled.View`
   flex-direction: column;
   padding: 30px 0 60px 0px;
 `;

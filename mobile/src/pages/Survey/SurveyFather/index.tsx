@@ -11,7 +11,7 @@ import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
 
-import Father from '@assets/images/dad.png';
+import Father from '@assets/images/dad.webp';
 
 const SurveyFather: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

@@ -158,10 +158,11 @@ export async function getUserInfo(): Promise<UserInfo | null> {
 
     const userInfo: UserInfo = {
       babies: data.bebes.map((baby: any) => ({
-        birthday: new Date(baby.data_parto),
         id: baby.id,
         name: baby.nome,
-        postBirthLocation: baby.local,
+        currentLocation: baby.local,
+        birthLocation: baby.local_cadastro,
+        birthInstitution: baby.instituicao,
       })),
       babiesBirthLocations,
       birthday: new Date(data.data_nascimento),

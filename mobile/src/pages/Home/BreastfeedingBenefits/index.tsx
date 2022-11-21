@@ -10,12 +10,11 @@ import { createTelemetryAction } from 'utils/telemetryAction';
 import type { InfoPageItem } from 'components/InformationPages';
 import type { RootStackProps } from 'routes/app';
 
-import BreastfeedBenefits1 from '@assets/images/breastfeed_benefits_1.png';
-import BreastfeedBenefits2 from '@assets/images/breastfeed_benefits_2.png';
-import BreastfeedBenefits3 from '@assets/images/breastfeed_benefits_3.png';
-import BreastfeedBenefits4 from '@assets/images/breastfeed_benefits_4.png';
-import BreastfeedBenefits5 from '@assets/images/breastfeed_benefits_5.png';
-import BreastfeedBenefits6 from '@assets/images/breastfeed_benefits_6.png';
+import BreastfeedBenefits1 from '@assets/images/breastfeed_benefits_1.webp';
+import BreastfeedBenefits3 from '@assets/images/breastfeed_benefits_3.webp';
+import BreastfeedBenefits4 from '@assets/images/breastfeed_benefits_4.webp';
+import BreastfeedBenefits5 from '@assets/images/breastfeed_benefits_5.webp';
+import BreastfeedBenefits6 from '@assets/images/breastfeed_benefits_6.webp';
 
 const BreastfeedingBenefits: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
@@ -27,18 +26,6 @@ const BreastfeedingBenefits: React.FC = () => {
       title: i18n.t('BreastfeedingBenefitsPage.Page1.Title'),
       content: [
         { id: '1', text: i18n.t('BreastfeedingBenefitsPage.Page1.Text1') },
-      ],
-    },
-    {
-      id: '2',
-      image: BreastfeedBenefits2,
-      title: i18n.t('BreastfeedingBenefitsPage.TitleBaby'),
-      content: [
-        {
-          id: '1',
-          sectionHeader: i18n.t('BreastfeedingBenefitsPage.Page2.Section1'),
-          text: i18n.t('BreastfeedingBenefitsPage.Page2.Text1'),
-        },
       ],
     },
     {

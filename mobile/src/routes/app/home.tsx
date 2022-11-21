@@ -17,7 +17,6 @@ import HowLongToBreastfeed from 'pages/Home/HowLongToBreastfeed';
 import HowToBreastfeed from 'pages/Home/HowToBreastfeed';
 import HU from 'pages/Home/HU';
 import IntroductionStatusForm from 'pages/Home/IntroductionStatusForm';
-import ManageExpectations from 'pages/Home/ManageExpectations';
 import Messages from 'pages/Home/Messages';
 import MilkAdditionalInformation from 'pages/Home/MilkAdditionalInformation';
 import MusicPlaylists from 'pages/Home/MusicPlaylists';
@@ -125,12 +124,6 @@ const CreateHomeRoutes = (Stack: StackScreens): JSX.Element[] => {
       key="HU"
       name="HU"
       options={{ title: i18n.t('PageTitles.1') }}
-    />,
-    <Stack.Screen
-      component={ManageExpectations}
-      key="ManageExpectations"
-      name="ManageExpectations"
-      options={{ title: i18n.t('Expectations') }}
     />,
     <Stack.Screen
       component={Messages}

@@ -15,7 +15,7 @@ import type { RootStackProps } from 'routes/app';
 
 import { Container, Text } from './styles';
 
-import Banner from '@assets/images/banner_canguru.png';
+import Banner from '@assets/images/banner_canguru.webp';
 import IcVideo from '@assets/images/ic_video.svg';
 
 const BabySling: React.FC = () => {

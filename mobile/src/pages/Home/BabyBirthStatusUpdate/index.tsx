@@ -257,13 +257,21 @@ const BabyBirthStatusUpdate: React.FC = () => {
                     }}
                   />
                   <QuestionContainer>
-                    <FormTextInput
+                    <StatePicker
                       error={errors.currentGestationCount}
-                      keyboardType="numeric"
                       label={i18n.t('MotherFormPage.CurrentGestationCount')}
-                      placeholder={i18n.t('MotherFormPage.CountPlaceholder')}
-                      value={values.currentGestationCount.toString()}
-                      onChangeText={handleChange('currentGestationCount')}
+                      options={[
+                        i18n.t(
+                          'MotherFormPage.CurrentGestationCountOptions.OneBaby',
+                        ),
+                        i18n.t(
+                          'MotherFormPage.CurrentGestationCountOptions.Twins',
+                        ),
+                        i18n.t(
+                          'MotherFormPage.CurrentGestationCountOptions.Triplets',
+                        ),
+                      ]}
+                      onChange={handleChange('currentGestationCount')}
                     />
                   </QuestionContainer>
 

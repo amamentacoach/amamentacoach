@@ -13,7 +13,7 @@ import {
   ScrollView,
 } from './styles';
 
-import WithdrawalWhen from '@assets/images/withdrawal_when.png';
+import WithdrawalWhen from '@assets/images/withdrawal_when.webp';
 
 const WhenToBreastfeed: React.FC = () => {
   useEffect(() => {

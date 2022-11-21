@@ -12,7 +12,6 @@ import OptionsList from 'components/OptionList';
 import theme from 'config/theme';
 import { useAuth } from 'contexts/auth';
 import { useIsFirstRun } from 'contexts/firstRun';
-import { storageIsToday } from 'lib/date-fns';
 import { ScrollView } from 'lib/sharedStyles';
 import { setHomePageOpened } from 'services/telemetry';
 import { UserTypes } from 'services/user';
@@ -59,8 +58,6 @@ const Home: React.FC = () => {
     action: null,
     isVisible: false,
   });
-  const [expectationsModalVisibility, setExpectationsModalVisibility] =
-    useState<Boolean>(false);
 
   const Logo = languageTag === 'pt' ? LogoPT : LogoEN;
 
@@ -138,17 +135,6 @@ const Home: React.FC = () => {
       }
     }
 
-    // Verifica se o usuário acessou a tela de expectativas hoje.
-    async function checkExpectations(): Promise<void> {
-      const openedToday = await storageIsToday(
-        '@AmamentaCoach:alreadySelectedExpectations',
-        storage => storage.lastRunDate,
-      );
-      if (!openedToday) {
-        setExpectationsModalVisibility(true);
-      }
-    }
-
     // Verifica a última data que o aplicativo foi aberto. Se um dia tiver passado ou é a primeira
     // vez abrindo o app.
     async function checkUserActions(): Promise<void> {
@@ -164,8 +150,6 @@ const Home: React.FC = () => {
       if (!alreadyDisplayedToday) {
         // Caso não seja a primeira vez utilizando o app.
         if (storageString) {
-          // Apresenta o popup para visitar a tela de expectativas.
-          checkExpectations();
           // Verifica se algum formulário deve ser respondido
           checkForms();
         }
@@ -197,7 +181,6 @@ const Home: React.FC = () => {
 
   // Fecha todos os modais.
   function hideAllModals(): void {
-    setExpectationsModalVisibility(false);
     setFormsModalData({
       action: null,
       isVisible: false,
@@ -206,24 +189,6 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Modal
-        color={theme.babyPink}
-        content={i18n.t('HomePage.ExpectationPopUp')}
-        options={[
-          {
-            text: i18n.t('Yes'),
-            onPress: () => {
-              hideAllModals();
-              navigation.navigate('ManageExpectations');
-            },
-          },
-          {
-            text: i18n.t('No'),
-            onPress: () => setExpectationsModalVisibility(false),
-          },
-        ]}
-        visible={expectationsModalVisibility && !formsModalData.isVisible}
-      />
       <Modal
         color={theme.babyPink}
         content={
