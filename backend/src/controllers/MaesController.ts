@@ -132,7 +132,7 @@ class MaesController{
         console.log(resul)
         if(resul){
             const transporter = nodemailer.createTransport({
-                    service: 'Hotmail',
+                    service:'gmail',
                     auth: {
                         user: process.env.EMAIL,
                         pass: process.env.SENHA
@@ -158,8 +158,10 @@ class MaesController{
             }
 
             transporter.sendMail(email,(err,resul)=>{
-                if(err)
+                if(err){
+                    console.log(err)
                     return res.sendStatus(401)
+                }
                 else return res.sendStatus(200)
             })
         }
