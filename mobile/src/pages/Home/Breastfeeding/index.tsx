@@ -54,6 +54,14 @@ const Breastfeeding: React.FC = () => {
           'https://www.healthlinkbc.ca/pregnancy-parenting/parenting-babies-0-12-months/breastfeeding/video-hand-expressing-breastmilk',
         ),
     });
+    options.push({
+      image: { source: PrematureBreastfeed },
+      title: i18n.t('BreastfeedingPage.6'),
+      onPress: () =>
+        Linking.openURL(
+          'https://www.youtube.com/watch?v=_btCMw5WYas',
+        ),
+    });
   }
 
   useEffect(() => {
