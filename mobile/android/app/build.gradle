@@ -158,8 +158,8 @@ android {
         applicationId "com.amamentacoach"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 27
-        versionName "1.26.0"
+        versionCode 28
+        versionName "1.27.0"
         multiDexEnabled true
         setProperty("archivesBaseName", "amamentacoach" + "-v" + versionName + "-" + project.env.get("ENV_NAME"))
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
