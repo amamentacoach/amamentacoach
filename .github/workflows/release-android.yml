@@ -34,8 +34,8 @@ jobs:
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
 
-      - name: Check for linting errors
-        run: yarn lint
+      # - name: Check for linting errors
+      #   run: yarn lint
 
   build-github-release:
     needs: setup
