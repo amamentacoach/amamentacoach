@@ -1,22 +1,29 @@
 import styled from 'styled-components/native';
 
+import type { ScrollViewProps } from 'react-native';
+
 interface SpacerProps {
   width: number;
+}
+
+interface TextProps {
+  color?: string;
 }
 
 export const ScrollView = styled.ScrollView.attrs(() => ({
   contentContainerStyle: { flexGrow: 1 },
   keyboardShouldPersistTaps: 'handled',
-}))`
+}))<ScrollViewProps>`
   flex: 1;
-`;
-
-export const PaddedScrollView = styled(ScrollView)`
-  padding: 24px;
 `;
 
 export const Flex = styled.View`
   flex: 1;
+`;
+
+export const Footer = styled.View`
+  flex: 1;
+  justify-content: flex-end;
 `;
 
 export const Row = styled.View`
@@ -42,33 +49,32 @@ export const Line = styled.View`
   width: 100%;
 `;
 
-export const OpenSansBold = styled.Text`
-  color: ${({ theme }) => theme.primary};
+export const OpenSansBold = styled.Text<TextProps>`
+  color: ${({ theme, color }) => color ?? theme.primary};
   font-family: 'OpenSans-Bold';
   font-size: 16px;
 `;
 
-export const OpenSansRegular = styled.Text`
-  color: ${({ theme }) => theme.black};
+export const OpenSansRegular = styled.Text<TextProps>`
+  color: ${({ theme, color }) => color ?? theme.black};
   font-family: 'OpenSans-Regular';
   font-size: 16px;
 `;
 
-export const ManjariBold = styled.Text`
-  color: ${({ theme }) => theme.black};
+export const ManjariBold = styled.Text<TextProps>`
+  color: ${({ theme, color }) => color ?? theme.black};
   font-family: 'Manjari-Bold';
   font-size: 18px;
 `;
 
-export const ManjariRegular = styled.Text`
-  color: ${({ theme }) => theme.black};
+export const ManjariRegular = styled.Text<TextProps>`
+  color: ${({ theme, color }) => color ?? theme.black};
   font-family: 'Manjari-Regular';
   font-size: 18px;
 `;
 
 export const ErrorContainer = styled.View`
   flex: 1;
-  min-height: 20px;
   margin-top: 5px;
 `;
 

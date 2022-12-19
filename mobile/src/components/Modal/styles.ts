@@ -10,12 +10,13 @@ interface OptionTextProps {
 }
 
 export const Container = styled.View`
+  align-items: center;
+  background-color: ${props => props.theme.white};
+  border-radius: 3.6px;
+  border: 1px ${props => props.theme.brightGrey} solid;
+  justify-content: center;
   margin: auto 50px;
   padding: 15px;
-  background-color: ${props => props.theme.white};
-  align-items: center;
-  justify-content: center;
-  border-radius: 3.6px;
 `;
 
 export const Content = styled(OpenSansRegular)`

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import path from 'path';
 import knex from '../database/connection';  
 import {createObjectCsvWriter} from 'csv-writer';
-//const convertCsvToXlsx = require('@aternus/csv-to-xlsx');
+const convertCsvToXlsx = require('@aternus/csv-to-xlsx');
 import moment from 'moment'
 require('dotenv/config');
 
@@ -144,7 +144,7 @@ class ResultController{
                 {id:'baby_feed6', title:'BabyFeed6'}
             ]
         })
-        const maes = await knex('mae').select('*').where('status',1);
+        const maes = await knex('mae').select('*').where('status',1).limit(100).orderBy('primeiro_acesso','asc');
         
         for(const mae of maes){
             mae['grupo'] = 1
@@ -348,14 +348,14 @@ class ResultController{
         }
 
 
-        //await csv.writeRecords(maes)
-        //try{
-        //    convertCsvToXlsx(pathCsv, pathXlsx)
-        //}catch (e){
-         //   console.error(e.toString());
-        //}
+        await csv.writeRecords(maes)
+        try{
+           convertCsvToXlsx(pathCsv, pathXlsx)
+        }catch (e){
+           console.error(e);
+        }
         res.sendStatus(200)
-        //res.download(pathXlsx,"dados_gerais.xlsx")
+        res.download(pathXlsx,"dados_gerais.xlsx")
     }
 }
 

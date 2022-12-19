@@ -33,7 +33,7 @@ export const TextContainer = styled.View`
 
 export const CenterAlignedText = styled(OpenSansRegular)`
   text-align: center;
-  font-size: 14;
+  font-size: 14px;
 `;
 
 export const ValuesInfoText = styled(OpenSansRegular)`

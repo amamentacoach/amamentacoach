@@ -4,8 +4,9 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 
+import PaddedScrollView from 'components/PaddedScrollView';
 import { useAuth } from 'contexts/auth';
-import { PaddedScrollView, Line } from 'lib/sharedStyles';
+import { Line } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';
@@ -15,19 +16,9 @@ import { OptionText } from './styles';
 const ProfileMenu: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const isFocused = useIsFocused();
-  const { motherInfo, signOut } = useAuth();
+  const { signOut } = useAuth();
 
   const options = [
-    {
-      onPress: () => navigation.navigate('Profile'),
-      text: i18n.t('ProfileMenuPage.MyProfile'),
-    },
-    {
-      onPress: () => navigation.navigate('MyBabies'),
-      text: i18n.t('ProfileMenuPage.MyBabies', {
-        count: motherInfo.babies.length,
-      }),
-    },
     {
       onPress: () => navigation.navigate('NewPassword'),
       text: i18n.t('ProfileMenuPage.ChangePassword'),

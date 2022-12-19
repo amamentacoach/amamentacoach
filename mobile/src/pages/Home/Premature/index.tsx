@@ -4,12 +4,11 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import OptionsList from 'components/OptionList';
+import PaddedScrollView from 'components/PaddedScrollView';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
-
-import ScrollView from './styles';
 
 import PrematureBaby from '@assets/images/premature_baby.svg';
 import PrematureBirth from '@assets/images/premature_birth.svg';
@@ -20,19 +19,19 @@ const Premature: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const options: OptionListEntry[] = [
     {
-      image: { source: PrematureBirth },
-      title: i18n.t('PrematurePage.Header1'),
-      onPress: () => navigation.navigate('NotWhatIExpected'),
-    },
-    {
       image: { source: PrematureBaby },
-      title: i18n.t('PrematurePage.Header2'),
+      title: i18n.t('PrematurePage.Header1'),
       onPress: () => navigation.navigate('ThePremature'),
     },
     {
       image: { source: PrematureHeart },
-      title: i18n.t('PrematurePage.Header3'),
+      title: i18n.t('PrematurePage.Header2'),
       onPress: () => navigation.navigate('UploadBabyPhoto'),
+    },
+    {
+      image: { source: PrematureBirth },
+      title: i18n.t('PrematurePage.Header3'),
+      onPress: () => navigation.navigate('NotWhatIExpected'),
     },
     {
       image: { source: PrematureTrophy },
@@ -50,9 +49,9 @@ const Premature: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <OptionsList options={options} />
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

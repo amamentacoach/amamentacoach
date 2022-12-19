@@ -45,7 +45,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
   uploadFunction,
 }) => {
   const { width } = Dimensions.get('window');
-  const { motherInfo, refreshMotherInfo } = useAuth();
+  const { userInfo, refreshUserInfo } = useAuth();
 
   const [photo, setPhoto] = useState<ImagePickerResponse | null>(null);
   const [isSendingForm, setIsSendingForm] = useState(false);
@@ -62,7 +62,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
     const filename = await uploadFunction(photo);
     if (filename) {
       // Atualiza o endereço da imagem do alvo (bebê/mãe/pai) nas informações da mãe.
-      await refreshMotherInfo();
+      await refreshUserInfo();
       setPhoto(null);
       setSubmitModalMessage(modalSuccessText);
     } else {
@@ -96,13 +96,13 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
       <ScrollView>
         <Center>
           {/* Usuário já fez o upload de uma foto e não tem nenhuma foto selecionada atualmente*/}
-          {!photo && motherInfo.images[target] && (
+          {!photo && userInfo.images[target] && (
             <>
               <SelectedImage
                 isVisible={!isLoadingImage}
                 resizeMode="contain"
                 source={{
-                  uri: `${config.API_URL}/uploads/${motherInfo.images[target]}`,
+                  uri: `${config.API_URL}/uploads/${userInfo.images[target]}`,
                 }}
                 width={width}
                 onLoadEnd={() => setIsLoadingImage(false)}
@@ -125,7 +125,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
             />
           )}
           {/* Usuário ainda não enviou uma foto e não selecionou nenhuma para ser enviada */}
-          {!photo && !motherInfo.images[target] && (
+          {!photo && !userInfo.images[target] && (
             <>
               <ImageWrapper
                 height={250}
@@ -151,7 +151,7 @@ const UploadPhotoScreen: React.FC<UploadPhotoScreenProps> = ({
               text={
                 isSendingForm
                   ? i18n.t('Status.Sending')
-                  : i18n.t('Actions.Send')
+                  : i18n.t('Actions.Submit')
               }
               onPress={handleSubmitNewPhoto}
             />

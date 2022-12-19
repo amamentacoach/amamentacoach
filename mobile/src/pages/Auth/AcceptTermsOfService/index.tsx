@@ -5,11 +5,11 @@ import { useState } from 'react';
 
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
+import PaddedScrollView from 'components/PaddedScrollView';
 import {
   AdultTermsOfService,
   MinorTermsOfService,
 } from 'components/TermsOfService';
-import { PaddedScrollView } from 'lib/sharedStyles';
 import signUp from 'services/signUp';
 
 import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
@@ -23,16 +23,28 @@ import {
 
 const AcceptTermsOfService: React.FC = () => {
   const navigation = useNavigation<AuthStackProps>();
-  const { motherInfo, babiesInfo } =
-    useRoute<AuthRouteProp<'AcceptTermsOfService'>>().params;
+  const { userInfo } = useRoute<AuthRouteProp<'AcceptTermsOfService'>>().params;
 
   const [isSendingForm, setIsSendingForm] = useState(false);
   const [isErrorModalVisible, setIsErrorModalVisible] = useState(false);
   const [isSignUpModalVisible, setIsSignUpModalVisible] = useState(false);
 
+  const currentSignUpStep =
+    userInfo.userType === i18n.t('MotherFormPage.UserTypeOptions.Mother')
+      ? '4'
+      : '3';
+
   async function handleSubmit(): Promise<void> {
     setIsSendingForm(true);
-    const status = await signUp(motherInfo, babiesInfo);
+    const userSignUpInfo = {
+      ...userInfo,
+      birthday: new Date(userInfo.birthday),
+      birthDate: userInfo.birthDate ? new Date(userInfo.birthDate) : null,
+      possibleBirthDate: userInfo.possibleBirthDate
+        ? new Date(userInfo.possibleBirthDate)
+        : null,
+    };
+    const status = await signUp(userSignUpInfo);
     setIsErrorModalVisible(!status);
     setIsSignUpModalVisible(status);
   }
@@ -73,16 +85,19 @@ const AcceptTermsOfService: React.FC = () => {
       />
       <FormContainer>
         <HeaderText>
-          {i18n.t('Auth.SignUpStep', { current: '4', max: '4' })}
+          {i18n.t('Auth.SignUpStep', {
+            current: currentSignUpStep,
+            max: currentSignUpStep,
+          })}
         </HeaderText>
         <HeaderSubText>
           {i18n.t('AcceptTermsOfServicePage.HeaderSubText')}
         </HeaderSubText>
 
-        {differenceInYears(new Date(), new Date(motherInfo.birthday)) >= 18 ? (
-          <AdultTermsOfService name={motherInfo.name} />
+        {differenceInYears(new Date(), new Date(userInfo.birthday)) >= 18 ? (
+          <AdultTermsOfService />
         ) : (
-          <MinorTermsOfService name={motherInfo.name} />
+          <MinorTermsOfService />
         )}
 
         <SubmitButtonContainer>

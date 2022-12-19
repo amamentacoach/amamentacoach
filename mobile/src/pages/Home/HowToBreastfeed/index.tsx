@@ -27,26 +27,19 @@ import {
   TextContinueButton,
 } from './styles';
 
-import MilkWithdrawalEight from '@assets/images/milk_withdrawal_eight.png';
-import MilkWithdrawalFive from '@assets/images/milk_withdrawal_five.png';
-import MilkWithdrawalFour from '@assets/images/milk_withdrawal_four.png';
-import MilkWithdrawalNine from '@assets/images/milk_withdrawal_nine.png';
-import MilkWithdrawalOne from '@assets/images/milk_withdrawal_one.png';
-import MilkWithdrawalSeven from '@assets/images/milk_withdrawal_seven.png';
-import MilkWithdrawalSix from '@assets/images/milk_withdrawal_six.png';
-import MilkWithdrawalThree from '@assets/images/milk_withdrawal_three.png';
-import MilkWithdrawalTwo from '@assets/images/milk_withdrawal_two.png';
+import MilkWithdrawalEight from '@assets/images/milk_withdrawal_eight.webp';
+import MilkWithdrawalFive from '@assets/images/milk_withdrawal_five.webp';
+import MilkWithdrawalFour from '@assets/images/milk_withdrawal_four.webp';
+import MilkWithdrawalNine from '@assets/images/milk_withdrawal_nine.webp';
+import MilkWithdrawalSeven from '@assets/images/milk_withdrawal_seven.webp';
+import MilkWithdrawalSix from '@assets/images/milk_withdrawal_six.webp';
+import MilkWithdrawalThree from '@assets/images/milk_withdrawal_three.webp';
+import MilkWithdrawalTwo from '@assets/images/milk_withdrawal_two.webp';
 
 const HowToBreastfeed: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
 
   const pages: InfoPageItem[] = [
-    {
-      id: '1',
-      title: i18n.t('HowToBreastfeedPage.Title'),
-      image: MilkWithdrawalOne,
-      content: [{ id: '1', text: i18n.t('HowToBreastfeedPage.Page1') }],
-    },
     {
       id: '2',
       title: i18n.t('HowToBreastfeedPage.Title'),

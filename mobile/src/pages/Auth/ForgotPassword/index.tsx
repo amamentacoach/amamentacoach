@@ -1,16 +1,17 @@
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
 import * as Yup from 'yup';
 
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import Modal from 'components/Modal';
-import { Flex, PaddedScrollView } from 'lib/sharedStyles';
+import PaddedScrollView from 'components/PaddedScrollView';
+import { Flex, Footer } from 'lib/sharedStyles';
 import { forgotPassword } from 'services/forgotPassword';
 
-import { HeaderText, SubmitButtonContainer } from './styles';
+import { HeaderText } from './styles';
 
 interface FormValues {
   email: string;
@@ -70,13 +71,13 @@ const ForgotPassword: React.FC = () => {
               />
             </View>
 
-            <SubmitButtonContainer>
+            <Footer>
               <MainButton
                 disabled={!dirty || isSendingForm}
-                text={i18n.t('Actions.Send')}
+                text={i18n.t('Actions.Submit')}
                 onPress={handleSubmit}
               />
-            </SubmitButtonContainer>
+            </Footer>
           </Flex>
         )}
       </Formik>

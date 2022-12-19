@@ -1,37 +1,28 @@
+import { format } from 'date-fns';
+
 import api from 'services/api';
 
-export interface BabyStatus {
-  id: string;
-  name: string;
-  location: 'alojamento conjunto' | 'uci neonatal' | 'uti neonatal';
-  date: string;
-}
-
-// Lista os bebês que podem receber alta.
-export async function checkBabiesLocation(): Promise<BabyStatus[] | null> {
-  try {
-    const { data } = await api.get('/bebes/alta');
-    const babies = data.map((baby: any) => ({
-      id: baby.id.toString(),
-      name: baby.nome,
-      location: baby.local.toLowerCase(),
-      date: baby.data_parto,
-    }));
-    return babies;
-  } catch (error) {
-    return null;
-  }
+export interface BabyLocationUpdate {
+  id: number;
+  newLocation: string;
+  date?: Date;
+  reason?: string;
 }
 
 // Atualiza a localização de um bebê.
-export async function updateBabyLocation(
-  id: string,
-  newLocation: string,
-): Promise<boolean> {
+export async function updateBabyLocation({
+  id,
+  newLocation,
+  date,
+  reason,
+}: BabyLocationUpdate): Promise<boolean> {
+  const updatedLocation = {
+    local: newLocation,
+    data: date ? format(date, 'yyyy-MM-dd') : '',
+    motivo: reason ?? '',
+  };
   try {
-    await api.post(`/bebes/${id}/alta`, {
-      local: newLocation,
-    });
+    await api.post(`/bebes/${id}/alta`, updatedLocation);
     return true;
   } catch (error) {
     return false;

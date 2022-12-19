@@ -2,6 +2,8 @@ import api from 'services/api';
 
 import type { TelemetryPayload } from '@common/telemetria';
 
+export type PendingForms = '1D' | '15D' | '1M' | null;
+
 // Enviar que o usuário começou a assistir um vídeo.
 async function setUserTelemetry(route: string): Promise<boolean> {
   try {
@@ -23,7 +25,7 @@ export async function setUserVideoSeen(): Promise<boolean> {
 }
 
 // Marca que o usuário abriu o aplicativo.
-export async function setHomePageOpened(): Promise<'1D' | '15D' | '1M' | null> {
+export async function setHomePageOpened(): Promise<PendingForms> {
   try {
     const { data } = await api.post('/acessos/app');
     return data.acao || null;

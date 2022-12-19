@@ -3,7 +3,9 @@ import i18n from 'i18n-js';
 import theme from 'config/theme';
 import { useIsFirstRun } from 'contexts/firstRun';
 import AdditionalInformation from 'pages/Home/AdditionalInformation';
+import BabyBirthStatusUpdate from 'pages/Home/BabyBirthStatusUpdate';
 import BabyCup from 'pages/Home/BabyCup';
+import BabyLocationUpdate from 'pages/Home/BabyLocationUpdate';
 import BabySling from 'pages/Home/BabySling';
 import Breastfeeding from 'pages/Home/Breastfeeding';
 import BreastfeedingBenefits from 'pages/Home/BreastfeedingBenefits';
@@ -15,7 +17,6 @@ import HowLongToBreastfeed from 'pages/Home/HowLongToBreastfeed';
 import HowToBreastfeed from 'pages/Home/HowToBreastfeed';
 import HU from 'pages/Home/HU';
 import IntroductionStatusForm from 'pages/Home/IntroductionStatusForm';
-import ManageExpectations from 'pages/Home/ManageExpectations';
 import Messages from 'pages/Home/Messages';
 import MilkAdditionalInformation from 'pages/Home/MilkAdditionalInformation';
 import MusicPlaylists from 'pages/Home/MusicPlaylists';
@@ -50,10 +51,22 @@ const CreateHomeRoutes = (Stack: StackScreens): JSX.Element[] => {
       options={{ title: i18n.t('HomePage.Option5') }}
     />,
     <Stack.Screen
+      component={BabyBirthStatusUpdate}
+      key="BabyBirthStatusUpdate"
+      name="BabyBirthStatusUpdate"
+      options={{ title: i18n.t('BabyBirthStatusUpdate.PageName') }}
+    />,
+    <Stack.Screen
       component={BabyCup}
       key="BabyCup"
       name="BabyCup"
       options={{ title: i18n.t('PageTitles.2') }}
+    />,
+    <Stack.Screen
+      component={BabyLocationUpdate}
+      key="BabyLocationUpdate"
+      name="BabyLocationUpdate"
+      options={{ title: i18n.t('BabyLocationUpdate.PageName') }}
     />,
     <Stack.Screen
       component={BabySling}
@@ -113,12 +126,6 @@ const CreateHomeRoutes = (Stack: StackScreens): JSX.Element[] => {
       options={{ title: i18n.t('PageTitles.1') }}
     />,
     <Stack.Screen
-      component={ManageExpectations}
-      key="ManageExpectations"
-      name="ManageExpectations"
-      options={{ title: i18n.t('Expectations') }}
-    />,
-    <Stack.Screen
       component={Messages}
       key="Messages"
       name="Messages"
@@ -146,7 +153,7 @@ const CreateHomeRoutes = (Stack: StackScreens): JSX.Element[] => {
       component={NewQuestion}
       key="NewQuestion"
       name="NewQuestion"
-      options={{ title: i18n.t('Actions.SendQuestion') }}
+      options={{ title: i18n.t('Actions.SubmitQuestion') }}
     />,
     <Stack.Screen
       component={Credits}

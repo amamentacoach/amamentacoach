@@ -39,7 +39,7 @@ const NewQuestion: React.FC = () => {
         action: Action.Pressed,
         context: {
           screen: AppScreen.NewQuestion,
-          target: 'Actions.Send',
+          target: 'Actions.Submit',
         },
       });
 
@@ -100,7 +100,7 @@ const NewQuestion: React.FC = () => {
                 text={
                   isSendingForm
                     ? i18n.t('Status.Sending')
-                    : i18n.t('Actions.Send')
+                    : i18n.t('Actions.Submit')
                 }
                 onPress={handleSubmit}
               />

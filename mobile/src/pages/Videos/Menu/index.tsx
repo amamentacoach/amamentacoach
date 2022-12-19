@@ -4,7 +4,8 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import OptionsList from 'components/OptionList';
-import { PaddedScrollView } from 'lib/sharedStyles';
+import PaddedScrollView from 'components/PaddedScrollView';
+import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
@@ -15,6 +16,7 @@ import { Header, HeaderTitle } from './styles';
 import IcVideo from '@assets/images/ic_video.svg';
 
 const VideosMenu: React.FC = () => {
+  const { languageTag } = getBestLocale();
   const navigation = useNavigation<RootStackProps>();
 
   let options: OptionListEntry[] = [
@@ -22,25 +24,33 @@ const VideosMenu: React.FC = () => {
       image: { source: IcVideo },
       title: i18n.t('BabySlingPage.1'),
       onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['IhKyaqGX_MQ'] }),
+        navigation.navigate('VideoPage', {
+          videos: languageTag === 'pt' ? ['IhKyaqGX_MQ'] : ['TpMlfCph8P4'],
+        }),
     },
     {
       image: { source: IcVideo },
       title: i18n.t('BabySlingPage.2'),
       onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['rdTTyKGrq_s'] }),
+        navigation.navigate('VideoPage', {
+          videos: languageTag === 'pt' ? ['rdTTyKGrq_s'] : ['KTm8mI26ro4'],
+        }),
     },
     {
       image: { source: IcVideo },
       title: i18n.t('BabySlingPage.3'),
       onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['wx1ofoCZw9w'] }),
+        navigation.navigate('VideoPage', {
+          videos: languageTag === 'pt' ? ['wx1ofoCZw9w'] : ['JGAoHkkrGnk'],
+        }),
     },
     {
       image: { source: IcVideo },
       title: i18n.t('EmotionsAndBreastfeedingPage.2'),
       onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['C2hFGeJj48k'] }),
+        navigation.navigate('VideoPage', {
+          videos: languageTag === 'pt' ? ['C2hFGeJj48k'] : ['nmJVBId9Uh8'],
+        }),
     },
     {
       image: { source: IcVideo },
@@ -50,23 +60,38 @@ const VideosMenu: React.FC = () => {
     },
     {
       image: { source: IcVideo },
-      title: i18n.t('HUPage.5'),
-      onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['z9V26A0Lipg'] }),
-    },
-    {
-      image: { source: IcVideo },
-      title: i18n.t('HUPage.7'),
-      onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['CLOZL3N_QXs'] }),
-    },
-    {
-      image: { source: IcVideo },
       title: i18n.t('VideoMenuPage.Tutorial'),
       onPress: () =>
         navigation.navigate('VideoPage', { videos: ['-B6OZnuG8gw'] }),
     },
   ];
+
+  if (languageTag === 'en') {
+    options.push({
+      image: { source: IcVideo },
+      title: i18n.t('VideoMenuPage.NICU1'),
+      onPress: () =>
+        navigation.navigate('VideoPage', { videos: ['uNs_yauE8j8'] }),
+    });
+    options.push({
+      image: { source: IcVideo },
+      title: i18n.t('VideoMenuPage.NICU2'),
+      onPress: () =>
+        navigation.navigate('VideoPage', { videos: ['5c9uR1HKS2o'] }),
+    });
+    options.push({
+      image: { source: IcVideo },
+      title: i18n.t('VideoMenuPage.NICU3'),
+      onPress: () =>
+        navigation.navigate('VideoPage', { videos: ['WDhLULqdyG0'] }),
+    });
+    options.push({
+      image: { source: IcVideo },
+      title: i18n.t('VideoMenuPage.NICU4'),
+      onPress: () =>
+        navigation.navigate('VideoPage', { videos: ['WROguZyQDEw'] }),
+    });
+  }
 
   useEffect(() => {
     createTelemetryAction({

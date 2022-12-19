@@ -4,32 +4,18 @@ import { useEffect } from 'react';
 import { Linking } from 'react-native';
 
 import OptionsList from 'components/OptionList';
+import PaddedScrollView from 'components/PaddedScrollView';
+import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 
-import ScrollView from './styles';
-
 import Music from '@assets/images/music.svg';
 
 const MusicPlaylists: React.FC = () => {
-  const options: OptionListEntry[] = [
-    {
-      image: { source: Music },
-      title: i18n.t('MusicPlaylistsPage.1'),
-      onPress: () =>
-        Linking.openURL(
-          'https://youtube.com/playlist?list=PLK7oeiGgzDtiNeJduFPY8Kep7mq9wRQ7l',
-        ),
-    },
-    {
-      image: { source: Music },
-      title: i18n.t('MusicPlaylistsPage.2'),
-      onPress: () =>
-        Linking.openURL(
-          'https://youtube.com/playlist?list=PLK7oeiGgzDthw88gK7lCBtoYxdX4XhqvJ',
-        ),
-    },
+  const { languageTag } = getBestLocale();
+
+  const ptLinks = [
     {
       image: { source: Music },
       title: i18n.t('MusicPlaylistsPage.3'),
@@ -47,6 +33,37 @@ const MusicPlaylists: React.FC = () => {
         ),
     },
   ];
+  const enLinks = [
+    {
+      image: { source: Music },
+      title: i18n.t('MusicPlaylistsPage.3'),
+      onPress: () =>
+        Linking.openURL(
+          'https://www.youtube.com/watch?v=LoV5F_FwbBM&list=PLK7oeiGgzDtjvPIh49VD8m7TLJihv5-iU',
+        ),
+    },
+  ];
+  const links = languageTag === 'pt' ? ptLinks : enLinks;
+
+  const options: OptionListEntry[] = [
+    {
+      image: { source: Music },
+      title: i18n.t('MusicPlaylistsPage.1'),
+      onPress: () =>
+        Linking.openURL(
+          'https://youtube.com/playlist?list=PLK7oeiGgzDtiNeJduFPY8Kep7mq9wRQ7l',
+        ),
+    },
+    {
+      image: { source: Music },
+      title: i18n.t('MusicPlaylistsPage.2'),
+      onPress: () =>
+        Linking.openURL(
+          'https://youtube.com/playlist?list=PLK7oeiGgzDthw88gK7lCBtoYxdX4XhqvJ',
+        ),
+    },
+    ...links,
+  ];
 
   useEffect(() => {
     createTelemetryAction({
@@ -56,9 +73,9 @@ const MusicPlaylists: React.FC = () => {
   }, []);
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <OptionsList options={options} displayArrows />
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

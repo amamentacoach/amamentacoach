@@ -69,7 +69,7 @@ const Survey: React.FC<SurveyProps> = ({
   onFeedbackAccepted,
 }) => {
   const { width } = Dimensions.get('window');
-  const { motherInfo } = useAuth();
+  const { userInfo } = useAuth();
   const navigation = useNavigation<RootStackProps>();
   const pageFlatListRef = useRef<FlatList>(null);
 
@@ -87,7 +87,7 @@ const Survey: React.FC<SurveyProps> = ({
 
   useEffect(() => {
     function fetchQuestions(): void {
-      const surveyQuestionsRepo = new SurveyQuestionsRepository(motherInfo);
+      const surveyQuestionsRepo = new SurveyQuestionsRepository(userInfo);
       const questions = surveyQuestionsRepo.findByCategory(category);
 
       // Inicia todas as respostas vazias.

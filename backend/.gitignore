@@ -6,6 +6,7 @@
 !.vscode/extensions.json
 *.code-workspace
 
+
 # Local History for Visual Studio Code
 .history/
 # Logs
@@ -124,5 +125,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+yarn.lock
+
+# local database config
+database.config
 
 uploads/

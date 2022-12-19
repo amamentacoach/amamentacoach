@@ -1,21 +1,16 @@
+import 'dotenv/config';
 import express  from 'express';
 import path from 'path';
 import routes from './routes';
-import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import scheduleJobs from './utils/scheduleJobs';
 const cors = require('cors');
-dotenv.config()
-//import * as schedule from "node-schedule";
-//import sendPushNotification from './utils/sendPushNotification';
+
+scheduleJobs()
 
 const app = express()
 
-//const rule = new schedule.RecurrenceRule();
-//rule.tz = 'America/Sao_Paulo'
-//rule.dayOfWeek = [0, new schedule.Range(0,6)]
-//rule.hour = 21;
-//rule.minute = 0;
-//schedule.scheduleJob(rule,sendPushNotification)
+
 const mongo_url = process.env.MONGO_URL || ""
 
 

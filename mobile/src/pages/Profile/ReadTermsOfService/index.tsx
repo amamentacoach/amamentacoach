@@ -1,27 +1,23 @@
 import { differenceInYears } from 'date-fns';
 
+import PaddedScrollView from 'components/PaddedScrollView';
 import {
   AdultTermsOfService,
   MinorTermsOfService,
 } from 'components/TermsOfService';
 import { useAuth } from 'contexts/auth';
-import { ScrollView } from 'lib/sharedStyles';
-
-import { Container } from './styles';
 
 const AcceptTermsOfService: React.FC = () => {
-  const { motherInfo } = useAuth();
+  const { userInfo } = useAuth();
 
   return (
-    <ScrollView>
-      <Container>
-        {differenceInYears(new Date(), new Date(motherInfo.birthday)) >= 18 ? (
-          <AdultTermsOfService name={motherInfo.name} />
-        ) : (
-          <MinorTermsOfService name={motherInfo.name} />
-        )}
-      </Container>
-    </ScrollView>
+    <PaddedScrollView>
+      {differenceInYears(new Date(), userInfo.birthday) >= 18 ? (
+        <AdultTermsOfService />
+      ) : (
+        <MinorTermsOfService />
+      )}
+    </PaddedScrollView>
   );
 };
 

@@ -24,10 +24,10 @@ import {
   SkipButton,
 } from './styles';
 
+import IntroMother from '@assets/images/breastfeed_premature_2.svg';
 import IntroChart from '@assets/images/intro_chart.svg';
 import IntroDiaryHeart from '@assets/images/intro_diary_pencil.svg';
 import IntroMobile from '@assets/images/intro_mobile.svg';
-import IntroMother from '@assets/images/intro_mother.svg';
 
 const Introduction: React.FC = () => {
   const { setPersistentNotFirstRun } = useIsFirstRun();
@@ -36,22 +36,23 @@ const Introduction: React.FC = () => {
     {
       id: '1',
       image: IntroMother,
+
       content: [{ id: '1', text: i18n.t('AppIntroductionPage.1') }],
     },
     {
       id: '2',
-      image: IntroDiaryHeart,
-      content: [{ id: '1', text: i18n.t('AppIntroductionPage.4') }],
+      image: IntroChart,
+      content: [{ id: '1', text: i18n.t('AppIntroductionPage.2') }],
     },
     {
       id: '3',
-      image: IntroChart,
+      image: IntroDiaryHeart,
       content: [{ id: '1', text: i18n.t('AppIntroductionPage.3') }],
     },
     {
       id: '4',
       image: IntroMobile,
-      content: [{ id: '1', text: i18n.t('AppIntroductionPage.2') }],
+      content: [{ id: '1', text: i18n.t('AppIntroductionPage.4') }],
     },
   ];
 

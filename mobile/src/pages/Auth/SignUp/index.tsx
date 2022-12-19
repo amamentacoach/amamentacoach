@@ -6,20 +6,21 @@ import * as Yup from 'yup';
 
 import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
-import { ScrollView } from 'lib/sharedStyles';
+import PaddedScrollView from 'components/PaddedScrollView';
+import { Flex } from 'lib/sharedStyles';
 
 import type { AuthStackProps } from 'routes/auth';
-import type { MotherSignUpInfo } from 'services/signUp';
+import type { UserSignUpInfo } from 'services/signUp';
 
 import {
-  FormContainer,
   Header,
   HeaderSubText,
   HeaderText,
+  QuestionContainer,
   SubmitButtonContainer,
 } from './styles';
 
-type FilteredMotherValues = Pick<MotherSignUpInfo, 'email' | 'password'>;
+type FilteredMotherValues = Pick<UserSignUpInfo, 'email' | 'password'>;
 
 interface FormValues extends FilteredMotherValues {
   password_confirmation: FilteredMotherValues['password'];
@@ -49,10 +50,10 @@ const FormSignUp: React.FC = () => {
   }
 
   return (
-    <ScrollView>
+    <PaddedScrollView>
       <Header>
         <HeaderText>
-          {i18n.t('Auth.SignUpStep', { current: '1', max: '4' })}
+          {i18n.t('Auth.SignUpStep', { current: '1', max: '3' })}
         </HeaderText>
         <HeaderSubText>
           <HeaderSubText>{i18n.t('SignUpPage.Header')}</HeaderSubText>
@@ -64,34 +65,39 @@ const FormSignUp: React.FC = () => {
         validationSchema={signUpSchema}
         onSubmit={values => handleFormSubmit(values)}>
         {({ handleChange, handleSubmit, dirty, errors, values }) => (
-          <FormContainer>
+          <Flex>
             <View>
-              <FormTextInput
-                error={errors.email}
-                keyboardType="email-address"
-                label={i18n.t('Email')}
-                placeholder={i18n.t('Email')}
-                value={values.email}
-                onChangeText={handleChange('email')}
-              />
+              <QuestionContainer>
+                <FormTextInput
+                  error={errors.email}
+                  keyboardType="email-address"
+                  label={i18n.t('Email')}
+                  placeholder={i18n.t('Email')}
+                  value={values.email}
+                  onChangeText={handleChange('email')}
+                />
+              </QuestionContainer>
 
-              <FormTextInput
-                error={errors.password}
-                label={i18n.t('Password')}
-                placeholder={i18n.t('Password')}
-                value={values.password}
-                secureTextEntry
-                onChangeText={handleChange('password')}
-              />
-
-              <FormTextInput
-                error={errors.password_confirmation}
-                label={i18n.t('SignUpPage.ConfirmPassword')}
-                placeholder={i18n.t('SignUpPage.ConfirmPassword')}
-                value={values.password_confirmation}
-                secureTextEntry
-                onChangeText={handleChange('password_confirmation')}
-              />
+              <QuestionContainer>
+                <FormTextInput
+                  error={errors.password}
+                  label={i18n.t('Password')}
+                  placeholder={i18n.t('Password')}
+                  value={values.password}
+                  secureTextEntry
+                  onChangeText={handleChange('password')}
+                />
+              </QuestionContainer>
+              <QuestionContainer>
+                <FormTextInput
+                  error={errors.password_confirmation}
+                  label={i18n.t('SignUpPage.ConfirmPassword')}
+                  placeholder={i18n.t('SignUpPage.ConfirmPassword')}
+                  value={values.password_confirmation}
+                  secureTextEntry
+                  onChangeText={handleChange('password_confirmation')}
+                />
+              </QuestionContainer>
             </View>
 
             <SubmitButtonContainer>
@@ -101,10 +107,10 @@ const FormSignUp: React.FC = () => {
                 onPress={handleSubmit}
               />
             </SubmitButtonContainer>
-          </FormContainer>
+          </Flex>
         )}
       </Formik>
-    </ScrollView>
+    </PaddedScrollView>
   );
 };
 

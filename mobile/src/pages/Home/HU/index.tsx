@@ -4,7 +4,7 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 
 import OptionsList from 'components/OptionList';
-import { PaddedScrollView } from 'lib/sharedStyles';
+import PaddedScrollView from 'components/PaddedScrollView';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
@@ -12,7 +12,7 @@ import type { RootStackProps } from 'routes/app';
 
 import { BannerImage, Header } from './styles';
 
-import HUBanner from '@assets/images/banner_hu.png';
+import HUBanner from '@assets/images/banner_hu.webp';
 import IcVideo from '@assets/images/ic_video.svg';
 
 const HU: React.FC = () => {
@@ -23,14 +23,7 @@ const HU: React.FC = () => {
       title: i18n.t('HUPage.5'),
       subtitle: i18n.t('HUPage.6'),
       onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['z9V26A0Lipg'] }),
-    },
-    {
-      image: { source: IcVideo },
-      title: i18n.t('HUPage.7'),
-      subtitle: i18n.t('HUPage.8'),
-      onPress: () =>
-        navigation.navigate('VideoPage', { videos: ['CLOZL3N_QXs'] }),
+        navigation.navigate('VideoPage', { videos: ['-B6OZnuG8gw'] }),
     },
   ];
 

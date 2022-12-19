@@ -4,7 +4,8 @@ import i18n from 'i18n-js';
 import { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 
-import { PaddedScrollView, Line } from 'lib/sharedStyles';
+import PaddedScrollView from 'components/PaddedScrollView';
+import { Line } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { RootStackProps } from 'routes/app';

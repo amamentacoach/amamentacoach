@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 
+import FormPickerInput from 'components/FormPickerInput';
 import { OpenSansBold, OpenSansRegular } from 'lib/sharedStyles';
 
 export const HeaderText = styled(OpenSansBold)`
@@ -7,26 +8,21 @@ export const HeaderText = styled(OpenSansBold)`
   text-align: center;
 `;
 
-export const HeaderSubText = styled(OpenSansRegular)`
+export const StateQuestion = styled(OpenSansRegular)`
   font-size: 14px;
-  margin: 0 auto 15px auto;
-  text-align: center;
-  padding-top: 20px;
 `;
 
-export const FormContainer = styled.View`
-  flex: 1;
-  margin-bottom: 20px;
+export const StatePicker = styled(FormPickerInput)`
+  height: 49px;
 `;
 
-export const FirstSubOptionContainer = styled.View`
-  flex: 1;
-  margin-right: 4px;
+export const QuestionContainer = styled.View`
+  margin: 10px 0;
 `;
 
 export const SubmitButtonContainer = styled.View`
   flex: 1;
   align-items: flex-end;
   flex-direction: row;
-  padding: 15px 0px;
+  margin-top: 20px;
 `;

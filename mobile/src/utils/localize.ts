@@ -1,6 +1,6 @@
 import i18n from 'i18n-js';
 import { I18nManager } from 'react-native';
-import * as RNLocalize from 'react-native-localize';
+import { getCountry, findBestAvailableLanguage } from 'react-native-localize';
 
 import { dateFNSSetLocale } from 'lib/date-fns';
 
@@ -51,9 +51,7 @@ interface LocaleInfo {
 // Caso nenhuma língua suportada pelo app seja encontrada é retornado o idioma de fallback.
 export function getBestLocale(): LocaleInfo {
   const fallbackLocale = { languageTag: fallbackLanguage, isRTL: false };
-  const bestMatch = RNLocalize.findBestAvailableLanguage(
-    Object.values(SupportedLocales),
-  );
+  const bestMatch = findBestAvailableLanguage(Object.values(SupportedLocales));
   return (bestMatch as LocaleInfo) || fallbackLocale;
 }
 
@@ -74,4 +72,19 @@ export function setI18nConfig(): void {
 export function getTranslationFiles(): Translation {
   const { languageTag } = getBestLocale();
   return translations[languageTag];
+}
+
+export function getCountryStates(): string[] {
+  const countryCode = getCountry();
+  let states: string[] = [];
+  if (countryCode === 'BR') {
+    // prettier-ignore
+    states = [
+      'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA',
+      'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO',
+    ];
+  } else {
+    states = ['ON', 'QC', 'NS', 'NB', 'MB', 'BC', 'PE', 'SK', 'AB', 'NL'];
+  }
+  return states;
 }

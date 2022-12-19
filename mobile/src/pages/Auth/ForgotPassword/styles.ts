@@ -8,9 +8,3 @@ export const HeaderText = styled(OpenSansRegular)`
   text-align: center;
   margin: 25px 0;
 `;
-
-export const SubmitButtonContainer = styled.View`
-  flex: 1;
-  margin-bottom: 15px;
-  justify-content: flex-end;
-`;

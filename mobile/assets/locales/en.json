@@ -4,15 +4,19 @@
   "Begin": "Begin",
   "Breast": "Breast",
   "Cancel": "Cancel",
+  "City": "City",
   "Close": "Close",
   "Content": "Content",
+  "Date": "Date",
   "Diary": "Diary",
+  "DonaIrisMaternity": "Maternidade Dona Íris",
   "Duration": "Duration",
   "Email": "Email",
   "ErrorSurveyAlreadyAnswered": "Oops! You've already answered the survey today. Please return tomorrow.",
   "Expectations": "Expectations",
   "GoBack": "Back",
   "Home": "Home",
+  "HU": "HU",
   "Infograph": "Infographic",
   "Later": "Later",
   "Leave": "Exit",
@@ -29,15 +33,17 @@
   "Profile": "Profile",
   "Quantity": "Amount",
   "Question": "Question",
+  "Reason": "Reason",
   "Right": "Right",
-  "SignUp": "Registration",
   "SelectBaby": "Select baby",
+  "SignUp": "Registration",
   "Skip": "Skip",
+  "State": "State",
   "TermsOfService": "Consent Form",
   "Time": "Time",
   "UCI": "Neonatal Intermediate Care Unit",
-  "UTI": "Neonatal Intensive Care Unit",
   "UCIN Kangaroo": "\"Kangaroo\" maternal care unit",
+  "UTI": "Neonatal Intensive Care Unit",
   "Years": "Years",
   "Yes": "Yes",
   "Day": {
@@ -57,7 +63,7 @@
     "other": "Weeks"
   },
   "AcceptTermsOfServicePage": {
-    "AccountCreated": "Account created successfully! Welcome to The BreastfeedingCoach app!",
+    "AccountCreated": "Account created successfully! Welcome to The Breastfeeding Coach App!",
     "HeaderSubText": "You're almost there! Lastly, you must review and accept the terms of commitment:",
     "Agree": "I agree to the terms of commitment.",
     "ErrorPopUp": "Registration error.\nPlease try again later."
@@ -65,89 +71,118 @@
   "Actions": {
     "SaveAndExit": "Save and exit",
     "SelectPicture": "Select photo",
-    "Send": "Send",
+    "Submit": "Send",
     "Save": "Save",
     "End": "Finish",
     "SendQuestion": "Submit Question",
     "SignIn": "Enter"
   },
   "AdditionalInformationPage": {
+    "Header": "Relevant information about breastfeeding, emotional responses, and coping.",
     "1": "How is my milk produced?",
     "2": "Learn how your body produces milk",
-    "4": "How Kangaroo Can Help",
-    "5": "Do you know what Resilience is?",
+    "4": "Find out how can kangaroo care can help",
+    "5": "Do you know what resilience is?",
     "6": "We'll explain it to you!",
     "7": "Reframing expectations",
     "8": "Adjust unlikely expectations to be more realistic",
     "9": "Offer breast milk in a cup",
-    "10": "Demo Video"
+    "10": "Breast milk can be offered through a cup",
+    "11": "Cannabis on pregnancy and breastfeeding"
   },
   "AppIntroductionPage": {
     "1": "Welcome! The Breastfeeding Coach app was created to assist you in the challenging journey of breastfeeding a baby born prematurely.",
-    "2": "Explore each icon and discover how the App makes for a great ally!",
-    "3": "The more you use The BreastfeedingCoach app, the more resources you will have to breastfeed your preterm baby!",
-    "4": "You'll record your daily advances and have access to exclusive content to instruct and motivate you!"
+    "2": "You'll record your daily advances and have access to exclusive content to instruct and motivate you!",
+    "3": "Keep a record of your daily progress and access exclusive content to guide and motivate you",
+    "4": "Explore each icon and discover how the app makes for a great ally!"
   },
   "Auth": {
     "SignUpStep": "Step %{current} of %{max}"
   },
   "BabyCupPage": {
     "Header": "Demonstration",
+    "Subtitle": "It is important that you have initial face- Offering breast milk using a cup to-face training with a professional to adopt this milk-feeding technique.  Feeding your baby with a cup avoids the use of a bottle, which can harm the baby's learning to suckle at the breast.",
     "Step1": "Wake the baby, massage their feet and face. Ensure the baby isn't agitated due to hunger or other discomfort, as this makes the maneuver more difficult.",
     "Step2": "Place the baby in a sitting or semi-sitting position on your lap, with the head at a 90º angle with the neck.",
-    "Step3": "Place the edge of the glass to the baby's bottom lip and let the breast milk touch the lip.",
+    "Step3": "Place the edge of the cup to the baby's bottom lip and let the breast milk touch the lip.",
     "Step4": "The baby will lick the milk and follow by swallowing. Be careful not to pour the milk into the baby's mouth."
   },
   "BabyFormPage": {
-    "BirthDate": "Date of birth",
     "BirthLocation": "Once born, your baby went to:",
+    // TODO Translate
+    "BirthPlace": "Ao nascer, seu bebê ficou internado",
+    "CurrentLocation": {
+      "Description": "Onde seu bebê nesse momento?",
+      "Options": {
+        "Home": "Em casa"
+      }
+    },
+    "Institution": {
+      "Description": "Instituição em que seu bebê ficou internado:",
+      "Options": {
+        "1": "Hospital Universitário de Londrina",
+        "2": "Hospital e Maternidade Dona Íris-Goiânia"
+      }
+    },
+    "ExternalForm": {
+      "Message": "Conforme explicamos, você está participando de uma pesquisa sobre esse app que você terá acesso. Para tanto, precisamos da sua valiosa contribuição, que viabiliza todo o estudo, preenchendo um formulário com poucas questões que está disponível no link abaixo. Logo depois, você poderá acessar o app AmamentaCoach.  Esperamos que goste e aproveite muito essa experiência!",
+      "LinkWarning": "Clique aqui para acessar o formulário"
+    },
     "Header": "You are almost there! Now we're going to ask you a few questions about your birth and your baby.",
-    "Name": "Your baby's name",
-    "Placeholder": {
-      "BirthDate": "Enter the date of birth"
-    }
+    "Name": "Your baby's name"
   },
   "BabySlingPage": {
     "1": "Video 1",
     "2": "Video 2",
     "3": "Video 3",
     "PageName": "Benefits of skin-to-skin “kangaroo” care",
-    "Header": "Be sure to use the “Kangaroo” care method! Learn more and get inspired by the videos below:"
+    "Header": "Consider practicing the Kangaroo care method."
+  },
+  // TODO Translate
+  "BabyBirthStatusUpdate": {
+    "PageName": "Situação do nascimento",
+    "BirthStatus": "Olá, gostaríamos de saber se o seu parto já aconteceu."
+  },
+  "BabyLocationUpdate": {
+    "BabyLocation": "Where is your baby right now?",
+    "BabyStatusPopUp": "Have any of your babies been discharged?",
+    "DischargeDate": "Discharge date",
+    "Options": {
+      "Home": "Home",
+      "Other": "Other"
+    },
+    "PageName": "Baby status"
   },
   "BreastfeedingBenefitsPage": {
     "TitleBaby": "Benefits of breastfeeding for the baby",
     "TitleMom": "Benefits of breastfeeding for the mother",
     "Page1": {
       "Title": "Benefits of breastfeeding for mother and baby",
-      "Text1": "Breastfeeding helps in forming a bond from an early age.\n\nBreast milk is the most complete food for a baby, in addition to offering many other advantages.\n\nThere is nothing better than feeding a baby only breastmilk for the first six months of their life, and then breastfeeding in combination with healthy foods for up to 2 years or more."
-    },
-    "Page2": {
-      "Section1": "IMMUNE SYSTEM",
-      "Text1": "Breast milk helps defend the body from various diseases. The effect of vaccines is better in breastfed children, and breastfeeding decreases the risk of childhood cancer."
+      "Text1": "Breastfeeding helps in forming a bond from an early age.\n\nBreast milk is the most complete food for a baby, in addition to offering many other advantages.\n\nIt is recommended that babies receive only breastmilk for the first six months of life, followed by breastfeeding in combination with other foods for up to 2 years or more. You can strive to give as much breast milk as possible to your baby."
     },
     "Page3": {
       "Section1": "MOUTH",
-      "Text1": "It favours the development of the face, mouth, and teeth.",
+      "Text1": "Being fed at the breast stimulate the growth and development of the face, mouth, and teeth.",
       "Section2": "INTELLIGENCE",
-      "Text2": "Children breastfed for more than a year have larger intelligence coefficients (Iqs)."
+      "Text2": "There is some evidence to suggest that breastfed children may have improved intelligence"
     },
     "Page4": {
-      "Section1": "PROTECTION",
+      "Section1": "PROTECTION AND IMMUNITY",
       "Text1": "Protects against a number of diseases, infections, and problems like diarrhea and constipation.",
-      "Section2": "WHEN ADULTS...",
-      "Text2": "Reduces the risk of having problems such as diabetes and high cholesterol."
+      "Section2": "CHRONIC DISEASE",
+      "Text2": "Reduces the risk of health problems such as diabetes and high cholesterol in adulthood."
     },
     "Page5": {
-      "Section1": "REDUCES RISK",
+      "Section1": "REDUCES RISK OF CANCER",
       "Text1": "Research shows that it reduces the risk of breast, ovarian, and bone cancer."
     },
     "Page6": {
       "Section1": "IT HELPS",
-      "Text1": "Return to your pre-pregnancy weight.",
+      "Text1": "You return to your pre-pregnancy weight.",
       "Section2": "PREVENTS",
-      "Text2": "Postpartum hemorrhages.",
+      "Text2": "Can reduce the risk and/or severity of postpartum hemorrhage, which is a excessive bleeding following the baby birth.",
       "Section3": "PROMOTES",
-      "Text3": "Uterine involution, that is, PROMOTESs the return of the uterus to its normal size."
+      "Text3": "The return of the uterus to its normal size."
     }
   },
   "BreastfeedingPage": {
@@ -155,7 +190,9 @@
     "2": "How to do it?",
     "3": "When to do it?",
     "4": "How long to do it?",
-    "Header": "All you need to know about pumping breast milk"
+    "5": "Hand Expressing Breastmilk",
+    "6": "Producing more milk using hands + pump",
+    "Header": "The World Health Organization states that all mothers should be taught hygienic hand expression. Frequent hand expression in addition to electric pumping can increase milk supply by more thorough emptying of the breasts, as well as increase the caloric content of the milk. If electric double-pumping (both breasts simultaneously) is not available, manual pumps can be used.\nAvoid being discouraged if you get nothing or a few drops the first day, this is normal. It all takes time."
   },
   "CreditsPage": {
     "AvailableAt": "Available at",
@@ -208,7 +245,7 @@
     "CreateBreastfeedingEntry": "Register breastfeeding"
   },
   "DiaryIntroductionPage": {
-    "Text1": "This is your DIARY! A space to record your progress and offer resources that can help you on this journey!",
+    "Text1": "This is your DIARY! A space to record your progress and offer resources that can help you on this journey!\nResearch shows that journaling represents a low-cost, portable, and flexible intervention to promote parents' emotional wellbeing by potentially decreasing anxiety and depression symptoms.",
     "Text2": "It will be very important that you access your diary every day and note information about yourself, your baby, and your milk production."
   },
   "DiaryMenuPage": {
@@ -230,7 +267,7 @@
     "1": "Puzzle",
     "2": "Crosswords",
     "3": "Music to Relax",
-    "Header": "You not only can but should think about other things besides the challenges of prematurity and breastfeeding. And, sometimes, you should think of NOTHING at all!"
+    "Header": "Distraction can promote relaxation, which favors not only milk production but also your mental health. Consider thinking about other things besides the challenges of prematurity and breastfeeding. And if you want, sometimes you can think of nothing at all!"
   },
   "EmotionsAndBreastfeedingPage": {
     "1": "Distraction box",
@@ -240,7 +277,7 @@
     "SaveGoals": "Save and track goals"
   },
   "ForgotPasswordPage": {
-    "Header": "Fill in the field below with your registration email so that we can send a password reset link.",
+    "Header": "Fill in the field below with the email you registered with so that we can send you a link to reset your password",
     "PopUp": "Check your email inbox and follow the link we sent you to reset your password."
   },
   "GoalsPage": {
@@ -250,44 +287,45 @@
   },
   "HUPage": {
     "5": "The BreastfeedingCoach app video",
-    "6": "Meet The BreastfeedingCoach app",
-    "7": "University Hospital of Londrina Video",
-    "8": "Discover the University Hospital of Londrina"
+    "6": "Meet The BreastfeedingCoach app"
   },
   "HomePage": {
-    "BabyLocation": "Where is your baby right now?",
-    "HUButton": "Start here!",
+    "BannerButton": "Start here!",
     "ExpectationPopUp": "Would you like to visit your goals for today?",
-    "BabyStatusPopUp": "Have any of your babies been discharged?",
     "FirstStatusPopup": "The time has come to evaluate your self-confidence level regarding breastfeed. Let's go?",
     "StatusPopup": "The time has come to evaluate your self-confidence level regarding breastfeed. Again Let's go?",
     "Option1": "Hello, I'm the “Preemie” baby",
-    "Option2": "Step-by-step guide to breastfeed the premature baby",
+    "Option2": "Step-by-step guide to feeding breastmilk to your premature baby",
     "Option3": "Pumping milk",
     "Option4": "Emotions and Breastfeeding",
     "Option5": "Did you know?",
     "Option6": "Testimonies from moms",
     "Option7": "Questions",
-    "Option8": "Credits"
+    "Option8": "Credits",
+    // TODO Translate
+    "UpdateBabyBirthStatus": {
+      "Text": "O seu bebê nasceu?",
+      "Subtext": "Informe aqui"
+    }
   },
   "HowLongToBreastfeedPage": {
-    "Header": "How long should you pump milk?",
-    "Text1": "While your baby is not yet",
-    "Text2": "suckling regularly",
-    "Text3": "As long as the baby is not breastfeeding",
-    "Text4": "exclusively from your breast"
+    "Header": "How long hand express or pump breast milk",
+    "Text1": "As long as your baby is still",
+    "Text2": "suckling irregularly.",
+    "Text3": "While your baby is not yet suckling",
+    "Text4": "at the breast",
+    "Text5": "regularly."
   },
   "HowToBreastfeedPage": {
-    "Title": "How to pump the milk?",
-    "Page1": "Secure your hair. Wearing a shower cap or wet towel is recommended to prevent any hair or follicle contamination.",
+    "Title": "How to hand express breastmilk",
     "Page2": "Choose a clean and quiet place.",
     "Page3": "Massage the breast with the tips of two fingers, starting from the region closest to the areola and going to the farthest from the breast, supporting it with the other hand.",
-    "Page4": "Massage the most painful areas longer.",
-    "Page5": "Place the tip of the fingers (thumb and indicator) above and below the areola, tightening the breast against the chest.",
+    "Page4": "Massage the most fullness areas longer.",
+    "Page5": "Place the tip of the fingers (thumb and index finger) above and below the areola, tightening the breast against the chest.",
     "Page6": "Press on the breast with rhythmic movements as if trying to connect the tips of your fingers and thumb, but without sliding on the skin. ",
-    "Page7": "Discard the first few drops and store the rest in the bottle.",
-    "Page8": "If you cannot store the breast milk immediately in the refrigerator, the milk can be kept in a cool place and used up to 6 hours after being collected.",
-    "Page9": "In the refrigerator, breast milk can be safely stored for up to 12 hours, or frozen for up to 15 days. Before feeding the baby with the kept milk, heat it in a hot water bath. "
+    "Page7": "Discard the first few drops and store the rest in the sterile bottle.",
+    "Page8": "If you cannot store the breast milk immediately in the refrigerator, it can remain at room temperature if used within 6 hours.",
+    "Page9": "Breast milk can be safely stored for up to 5 days in fridge, 6 months in freezer or 12 months in deep freeze. Before feeding the baby with the stored milk, heat it in a hot water bath."
   },
   "IntroductionStatusFormPage": {
     "Text1": "How do you feel about your self-confidence to breastfeed?\n\nFor each of the following statements, please choose the answer that best describes your self-confidence in breastfeeding your baby.",
@@ -295,13 +333,13 @@
   },
   "LeaveResearchPage": {
     "Introduction": "Dear Ma'am",
-    "Header": "By confirming the unsubscribe, all your data will be deleted, and you will no longer be part of the study \"Coaching via App: an innovative approach to breastfeeding premature babies\".",
+    "Header": "By confirming the unsubscribe, all your data will be deleted, and you will no longer be part of the study \"Coaching via app: an innovative approach to breastfeeding premature babies\".",
     "Content": "Your access to the app will be removed and you will not be able to see the content on this platform.",
     "Leave": "Unsubscribe",
     "Reason": "Could you share the reason for the unsubscribe?",
     "Text": "Unsubscribe from the research",
     "Error": "There was an error when completing the unsubscribe, please check your connection.",
-    "PopUp": "Are you sure? When you unsubscribe from the study \"Coaching via App: an innovative approach to breastfeeding premature babies\" you will no longer have access to the app and its content.",
+    "PopUp": "Are you sure? When you unsubscribe from the study \"Coaching via app: an innovative approach to breastfeeding premature babies\" you will no longer have access to the app and its content.",
     "Confirm": "I am sure"
   },
   "LoginPage": {
@@ -313,49 +351,54 @@
     "WrongInfoError": "Incorrect email or password!",
     "NotAuthorizedError": "Unauthorized account!"
   },
-  "ManageExpectationsPage": {
-    "Header": "Adjusting improbable expectations to be more realistic helps with resilience!\nClick on \"Swap\", if you'd like to change the expectation. If you don't want to, click on \"Keep expectation\".",
-    "PopUp": "Congratulations on exchanging this unlikely expectation for a more realistic expectation! Come back tomorrow to shift other expectations.",
-    "Switch": "Swap",
-    "Keep": "Keep expectation",
-    "OldExpectation1": "Sleep as before",
-    "NewExpectation1": "Seize Every Nap Opportunity",
-    "OldExpectation2": "Take care of everything",
-    "NewExpectation2": "Do what I can with love",
-    "OldExpectation3": "Having a healthy, plump, and blushing baby ",
-    "NewExpectation3": "Love my preemie as they are",
-    "OldExpectation4": "Fulfill all my baby's needs alone",
-    "NewExpectation4": "Do my part to help my baby",
-    "OldExpectation5": "Fulfill all my family's needs as I used to before",
-    "NewExpectation5": "Delegate tasks to other people who can also help my family",
-    "OldExpectation6": "Close myself off from others to preserve my energy",
-    "NewExpectation6": "Opening up with trustworthy people to preserve my mental health"
-  },
   "MenuTermsOfServicePage": {
     "ReadTermsOfService": "Read Consent Form",
     "LeaveResearch": "Unsubscribe from the research"
   },
   "MilkAdditionalInformationPage": {
-    "Text1": "When the baby is born and the placenta is removed, important changes take place in the body that help initiate milk production. Hormones are released by the brain and act on the breasts.",
-    "Text2": "During this process, the breast lobes – which look like bunches of grapes and are located at the end of channels known as ducts – begin to produce and store breast milk.",
+    "Text1": "When the baby is born and the placenta is removed, important changes take place in the body that help initiate milk production. The brain triggers the production and secretion of hormones that work in the breasts.",
+    "Text2": "During this process, the breast lobes – which look like bunches of grapes and are located at the ducts – begin to produce and store breast milk.",
     "Text3": "As the baby suckles the breast, or as milk is withdrawn, the brain produces more and more of the hormone oxytocin.",
-    "Text4": "Inside the breast, oxytocin is responsible for “squeezing” the lobes, which helps to push the milk more naturally through the ducts into the small bags called ampoules.",
-    "Text5": "Oxytocin is most easily produced and released when a woman feels good, is calm and confident. It is also produced when you see the baby, you touch or smell them, or even when you think about them.",
-    "Text6": "The more the milk is withdrawn (either by the baby's suckling, manually, or with a pump), the more the brain releases hormones to facilitate the production of milk. ",
-    "Text7": "Source: Adapted from the website https://bebe.abril.com.br/amamentacao/leite materno-infografico-mostra-como-ele-e-produtor/"
+    "Text4": "Inside the breast, oxytocin is responsible for “squeezing” the lobes, which helps to push the milk more naturally through the ducts.",
+    "Text5": "Oxytocin is produced and released when you feel relaxed, calm, and confident. It is also produced when you see your baby, you touch or smell them, or when you think about them.",
+    "Text6": "The more milk that is withdrawn from the breast (either by baby's suckling, by hand expression, or by a pump) the more the brain releases hormones to facilitate milk production."
   },
   "MotherFormPage": {
     "Birthday": "Your date of birth",
     "BirthdayPlaceholder": "Date of birth",
-    "CountPlaceholder": "Enter the number of times",
-    "CurrentGestationCount": "What is the number of children in this pregnancy?",
-    "HeaderSubText": "Now, we will ask a series of questions about you, Mom, in order  to share the most relevant content with you:",
-    "Location": "Place of delivery",
+    "CurrentGestationCount": "Are you pregnant with multiples?",
     "Name": "Your name",
     "Partner": "Do you have a partner?",
-    "LocationOptions": {
-      "HU": "HU",
-      "Maternity": "Maternidade Dona Íris"
+    "Phone": "Phone number",
+    "BirthCityStateHeader": "Where was your baby born?",
+    "BirthWeeks": "How many weeks of pregnancy did you give birth?",
+    "UserType": "Which of these situations do you fall into?",
+    "WeeksPregnant": "How many weeks are you pregnant?",
+    "BirthDate": "Date of birth",
+    "Institution": "How did you find out about this study?",
+    "SocialMedia": "Through which media channel did you find out about the BreastfeedingCoach app?",
+    "PossibleBirthDate": "What is your estimated pregnancy due date?",
+    "CurrentGestationCountOptions": {
+      "OneBaby": "No - just one baby",
+      "Twins": "Yes - twins",
+      "Triplets": "Yes - triplets"
+    },
+    "UserTypeOptions": {
+      "Pregnant": "Pregnant",
+      "Mother": "Mother of premature baby",
+      "HealthcareWorker": "Healthcare professional"
+    },
+    "InstitutionOptions": {
+      "HU": "Sou paciente do HU - Londrina",
+      "HMDI": "Sou paciente do HMDI-Goiânia",
+      "AHC": "Sou paciente do AHC Londrina",
+      "SocialMedia": "Pela divulgação da pesquisa na mídia ou nas redes sociais"
+    },
+    "SocialMediaOptions": {
+      "TVOrRadio": "TV ou rádio"
+    },
+    "Placeholder": {
+      "BirthDate": "Enter the date of birth"
     }
   },
   "MusicPlaylistsPage": {
@@ -376,7 +419,7 @@
   "NewMessagePage": {
     "SendMessage": "Send message",
     "MessageSent": "Message sent!",
-    "Message": "Send a message to other moms"
+    "Message": "Send a message to other preterm babies moms. Being in contact with people who are experiencing the same situation that you can be strengthening."
   },
   "NewPasswordPage": {
     "2": "New password",
@@ -386,28 +429,28 @@
     "PasswordChanged": "Password changed successfully!"
   },
   "NewQuestionPage": {
-    "SubmitYourQuestion": "Send your question",
+    "SubmitYourQuestion": "Send your question\n\nWould you like to answer any questions about breastfeeding or prematurity? Submit your question and our team of experts will respond as soon as possible.",
     "QuestionSent": "Question sent!",
     "QuestionPlaceholder": "Enter your question here..."
   },
   "NotWhatIExpectedPage": {
     "Header": "Premature birth:\nThis is not what I expected",
-    "Text1": "Premature birth is something that always affects the structure of the family. In general, the reality of a premature birth is nothing like what was dreamed of during pregnancy...",
-    "Text2": "There is nothing wrong with you if you are feeling a mixture of fear, frustration, insecurity, anxiety, stress...",
-    "Text3": "Be patient with yourself! Take a deep breath...pick someone to open up with and talk to about how you're feeling...and then accept your baby just the way they are. Decide to embrace this new situation!"
+    "Text1": "Premature birth is something that affects the whole family. The reality of premature birth may be different than what you dreamed of during pregnancy.",
+    "Text2": "It is normal to feel a mixture of fear, frustration, insecurity, anxiety, or stress.",
+    "Text3": "Be patient with yourself! Take a deep breath...pick someone to open up with and talk to about how you're feeling...and then accept your baby just the way they are. Decide to embrace this new situation!\n\nYou can seek help from qualified breastfeeding support professionals (e.g., lactation consultants) if you have questions, concerns, or are experiencing breastfeeding challenges.\n\nLactation consultants: https://portal.ilca.org/i4a/memberDirectory/index.cfm?directory_id=19&pagelD=4356\n\nBilingual Online Ontario Breastfeeding Services: https://ontariobreastfeeds.ca/\n\nWhat You Need to Know About Mental Health and Motherhood - https://roomforher.ca/blog/mind/what-vou-need-to-known"
   },
   "PageTitles": {
     "1": "Make yourself at home!",
     "2": "Feeding your baby with a cup",
     "3": "Message board",
-    "4": "Milk production",
+    "4": "How is my milk produced",
     "5": "The premature baby",
     "6": "Resilience",
-    "7": "I'm the premature",
+    "7": "I'm the premature baby",
     "8": "My biggest motivation",
     "9": "The Partner",
     "10": "Mirror",
-    "11": "Pumping breast milk"
+    "11": "How to hand express"
   },
   "PickerComponent": {
     "DefaultPlaceholder": "Select an option"
@@ -418,9 +461,9 @@
     "Message": "Enter your message here..."
   },
   "PrematurePage": {
-    "Header1": "Premature birth: not what I expected",
-    "Header2": "Nice to meet you, I'm the \"Preemie\" baby",
-    "Header3": "My biggest motivation to breastfeed",
+    "Header1": "Nice to meet you, I'm the \"Preemie\" baby",
+    "Header2": "My biggest motivation to breastfeed",
+    "Header3": "Premature birth: not what I expected",
     "Header4": "A period of struggle, a lifetime of results",
     "Subtitle5": "Benefits of breastfeeding"
   },
@@ -442,11 +485,12 @@
   },
   "ResiliencePage": {
     "Header": "Do you know what Resilience is?",
+    "InfoModal": "Central to resilience are two basic tenets: the perception of an adverse event and subsequent positive adaptation. Everyone agrees that premature birth is an unexpected event.  Resilience is viewed as an adaptive process, rather than a specific state, and is a predictor of positive coping in stressful situations. Resilience has also been characterized as the ability to bounce back or rebound from adverse experiences by remaining flexible and developing strategies that result in positive outcomes and enhanced quality of life",
     "Option1": "1. Maintain realistic expectations",
     "Option2": "2. Seek social support and group connection",
     "Option3": "3. Develop a positive way of thinking",
     "Option4": "4. Build strength and self-confidence",
-    "Text": "Scientists claim that it is possible to INCREASE RESILIENCE by adopting at least 4 favourable behaviours. Various App activities feature one or more of these powerful ingredients! Increase your strength, boost your resilience: choose where you want to start and enjoy all the content!",
+    "Text": "Scientists claim that it is possible to INCREASE RESILIENCE by adopting at least 4 favourable behaviours. Various app activities feature one or more of these powerful ingredients! Increase your confidence, boost your resilience: choose where you want to start and enjoy all the content!",
     "TextHeader": "More Resilient Moms!"
   },
   "SignUpPage": {
@@ -460,9 +504,9 @@
   },
   "StatusFormPage": {
     "AverageEfficacy": "moderate",
-    "FormName": "Scale",
+    "FormName": "Breastfeeding Self-Efficacy Scale",
     "Header": "Breastfeeding self-efficacy",
-    // TODO Translate.
+    // TODO Translate
     "Intro": "Para cada uma das afirmações a seguir, por favor, escolha a resposta que melhor descreve sua autoconfiança em amamentar seu bebê. Por favor, marque sua resposta circulando o número que melhor descreve como você se sente.  Não há respostas certas ou erradas.",
     "HighEfficacy": "high",
     "InfoValue1": "not at all confident",
@@ -532,7 +576,7 @@
     }
   },
   "FeedingFormPage": {
-    // TODO Translate.
+    // TODO Translate
     "FormName": "Informações sobre a alimentação",
     "Questions": {
       "1": {
@@ -551,32 +595,40 @@
   },
   "StepByStepPrematurePage": {
     "Page1": {
-      "Title": "6 steps for breastfeeding a premature baby",
-      "Text": "With a premature birth, it's common for the baby to not be able to latch to the breast at birth and for the baby to be hospitalized to receive some ongoing care.\n\nDespite the challenges, know that breastfeeding a baby born prematurely is possible, and that it's worth every effort!\n\nThe following steps summarize the journey towards success in breastfeeding a premature baby."
+      "Title": "Eight good advices for breastfeeding a premature baby",
+      "Text": "With a premature birth, it's common for the baby to not be able to latch to the breast at birth and for the baby to be hospitalized to receive some ongoing care.\n\nFirst of all, know that feeding a premature baby with breastmilk is possible, and that is very valuable!\n\nThe following steps summarize the journey towards success in breastfeeding a premature baby."
     },
     "Page2": {
       "Title": "1. Look for serenity",
-      "Text": "Premature birth: frustrated expectations, uncertainties, fear ... Who hopes for their baby to be born pre-term?\nRecover from the shock, take a deep breath, let the new reality set in your head and your heart, and then embrace it!"
+      "Text": "Premature birth: frustrations, uncertainties, fear... The birth of a preterm baby is an unexpected situation.\nAccepting this event can be a good start to live it more serenely. Take a deep breath, let the new reality set in your head and your heart, and then embrace it!"
     },
     "Page3": {
       "Title": "2. Stimulate Milk Production",
-      "Text": "While your baby is unable to latch to your breast, or while they aren't able to breastfeed sufficiently, you'll need to take up the task of ensuring you continue producing milk. To do this, you must pump every 3 hours at least."
+      "Text": "While your baby is unable to latch to your breast, or while they aren't able to breastfeed sufficiently, you'll need to take up the task of ensuring you continue producing milk. To do this, it is recommended to pump every 3 hours at least."
     },
     "Page4": {
       "Title": "3. Strengthen the bond",
-      "Text": "Stay as long as possible in the neonatal unit, have as much skin-to-skin contact as possible, observe your baby, touch them, talk and sing to them... all of this will stimulate your body to produce more milk."
+      "Text": "Spend as much time as you can with your baby in the neonatal unit, have as much skin-to-skin contact as possible, observe your baby, touch them, talk and sing to them... all of this will stimulate your body to produce more milk."
     },
     "Page5": {
-      "Title": "4. Be the protagonist",
-      "Text": "Take care of your baby: Clean their little eyes and mouth, change their diapers, bathe them; watch them and learn about their behaviours and preferences. Only you can play your mother role!"
+      "Title": "4. Take the leading role",
+      "Text": "When your newborn's condition permits, take care of your baby: Clean their little eyes and mouth, change their diapers, and bathe them; watch them and learn about their behaviours and preferences. You are the best person to play the leading role"
     },
     "Page6": {
-      "Title": "5. Invest in a support network",
-      "Text": "Seek the support of professionals (nurses, technicians, doctors, psychologists, social workers ...) and of people in your support network that do you good. Remember: You're not alone!"
+      "Title": "5. Seek out a support network",
+      "Text": "Seek support from a lactation consultant or other provider with the skills to help with breastmilk feeding. Remember: You're not alone!"
     },
     "Page7": {
-      "Title": "6. Keep the patience",
-      "Text": "When your baby starts to breastfeed, don't forget that by being premature, they can be more tired, \"softer\", and may need more time until they can perform the task."
+      "Title": "6. Be patient",
+      "Text": "When your baby starts to feed at the breast, consider that as they was born prematurely, they may have less energy available.\nAlso, it is expected that babies born at less than 34 weeks gestation cannot generate and coordinate sucking with swallowing and breathing.\nThey need time and training to achieve this"
+    },
+    "Page8": {
+      "Title": "7. Helping your baby latch on well",
+      "Text": "Here are some tips:\nMake sure you are comfortable and well supported.\nBring your baby in close – tummy-to-tummy.\nThe baby's ears, shoulders, and hips should be in a straight line.\nLine up the baby’s nose to your nipple.\nThe baby’s head should be slightly tilted back.\nSupport your baby’s shoulders and neck.\nBring the baby’s chin and lower lip to the breast.\nThe nose should not be touching the breast.\nWait for the baby to open his mouth wide then bring him on, directing your nipple to the back of his mouth.\nWhile supporting the breast, ensure your fingers are placed far away from your areola.\n\nSource: https://breastfeedinginfo.ca/table-of-contents/how-to-breastfeed/#latch"
+    },
+    "Page9": {
+      "Title": "8. Transitioning from tube feeding to breastfeeding",
+      "Text": "Some preterm infants are tube fed until they are ready to begin the process of learning to suck. As the sucking reflexes develop and when the infants were clinically stable, they are transitioned from tube feeding to breastfeeding."
     }
   },
   "SurveyComponent": {
@@ -587,7 +639,7 @@
     "Father": "About partner's participation"
   },
   "SurveyStatisticsPage": {
-    "FormSubmitted": "Thank you for answering our poll! See below for the highest voted answers by mothers in the App"
+    "FormSubmitted": "Thank you for answering our poll! See below for the highest voted answers by mothers in the app"
   },
   "SurveyTitles": {
     "DiaryActions": "Tasks completed with the baby",
@@ -599,109 +651,78 @@
     "SurveyMotivation": "Motivation"
   },
   "TermsOfServiceText": {
+    // TODO Translate
+    "Header": {
+      "Text1": "Prezada,",
+      "Text2": "Gostaríamos de convidá-la para participar da pesquisa",
+      "Text3": "\"Coaching via app: uma abordagem inovadora para o aleitamento materno de bebês prematuros\"",
+      "Text4": ", a ser realizada no Hospital Universitário de Londrina (HU/UEL), no Paraná, no Hospital e Maternidade Dona Íris, em Goiânia-GO e também por recrutamento voluntário via mídias sociais.",
+      "Text5": "Os objetivos da pesquisa são avaliar um aplicativo (app) de celular (smartphone) desenvolvido para ajudar gestantes de risco para parto prematuro e mães de bebês prematuros ou doentes a amamentarem seus bebês, contribuindo assim, para promoção do aleitamento materno (AM) de bebês prematuros; e validar a Escala de Autoeficácia para o Aleitamento Materno de mães de bebês prematuros ou doentes – versão brasileira."
+    },
+    // TODO Translate
     "Adult": {
-      "Title": "Informed consent form – Mothers",
-      "Text1": "Dear participant",
-      "Text2": "We would like to invite you to participate in the research",
-      "Text3": "\"Coaching by App: an innovative approach to breastfeeding of premature babies\"",
-      "Text4": ", to be held at the University Hospital of Londrina (HU / UEL). The purpose of the research is to elaborate and validate an application (APP) via smartphone focused on mothers for the promotion of breastfeeding of premature babies.",
-      "Text5": "Your participation is very important and it would be as follows: Mothers participating in the research will be divided into 2 groups that will receive assistance to succeed in breastfeeding their premature child. One group will receive the routine care of the healthcare service, and the other group, in addition to receiving routine care, will also use an smartphone App for supporting and offer instruction on breastfeeding. The definition of the group to which each mother will be random, through draw. During the survey, you will be asked to respond to a questionnaire about your personal data, and a scale to measure your self-confidence in the breastfeeding process. Regardless of the group that you be part, your breastfeeding process will be supported and accompanied all the time, and you will be contacted by phone at two moments after the baby's discharge, for follow-up.",
-      "Text6": "In addition, a month after discharge, you can be invited to attend an interview on experiences during your premature child's breastfeeding process. Your perceptions will be valuable for a better understanding by health professionals and researchers regarding the process of breastfeeding a premature baby. In this case, you will be interviewed or at the premature clinic, or at home, or remotely, per video calls, according to your possibilities. The interviews will be recorded and subsequently transcribed in full, lasting approximately 40 minutes and a maximum of 1 hour.",
-      "Text7": "The information will be treated with the absolute confidentiality and confidentiality in order to preserve your identity and it will be used only for the search purposes.",
-      "Text8": "We clarify that your participation is totally voluntary, you can: refuse to participate, or even give up at any time, without this lead to any burden or damage to your person. We also emphasize that your information will be used only for the research purposes and will be treated with the absolute confidentiality and confidentiality in order to preserve your identity.",
-      "Text9": "We ensure that you will not pay or will be remunerated by participation, however, if there are any expenses resulting from the research, these are the responsibility of the researcher.",
-      "Text10": "The possible benefits of your participation in this research will be the contribution to the construction of an App that intends to benefit and facilitate the breastfeeding process by promoting the dissemination of knowledge and information on the breastfeeding among the mothers of premature babies.",
-      "Text11": "As for the risks, which are minimal, they apply to time for the use of the App and reading, questionnaires response, and the interview. To minimize this factor you can use the App on the time you find it timely and still interrupt the interview at any time, resuming or not when you find it convenient. We will do the possible to assist it in every process if any discomfort occurs, clarifying it whenever necessary.",
-      "Text12": "If you have questions or require more clarifications you can contact us:",
-      "Text13": "Edilaine Giovanini Rossetto, PhD, (43) 98837-6610, Rua Gil de Abreu Souza, 1501, Condomínio Royal Park, Esperança, Londrina-PR, ediluizrossetto@gmail.com",
-      "Text14": "Gabriela Ramos Ferreira Curan, MSc, RN, Nurse, (43) 99921-6607, Rua Reverendo João Batista Ribeiro Neto, 75, apto 1903 torre 1 – Gleba Palhano, Londrina, gcuran@uel.br",
-      "Text15": "Louise Marina Silva Fontana, RN, (43) 99147-9194, Av. Garibaldi Deliberador, 99 – ap 77, Bloco Dom Pedro I, Jardim Claudia, Londrina-PR, louise.fontana@uel.br",
-      "Text16": "Or look for the Research Ethics Committee Involving Human Beings from the State University of Londrina, situated next to the Labesc building - school laboratory, university campus, telephone 3371-5455, e-mail: cep268@uel.br.",
-      "Text17": "This term should be filled in two ways of equal content, one of them being duly filled, signed and delivered to you.",
-      "Text18": "Londrina, %{date}.",
-      "Text19": "Gabriela Ramos Ferreira Curan",
-      "Text20": "RG: 9.786.358-0",
-      "Text21": "I, %{name} have been properly enlightened about the research procedures, agreeing to participate voluntarily from the research described above."
+      "Text1": "Ao concordar em participar da pesquisa, após a assinatura em termo de consentimento e cadastro de informações iniciais, você fará o download do app, na Play Store, de forma gratuita e terá acesso ilimitado a todo conteúdo interativo disponível. Você também preencherá questionários em momentos específicos, com informações sobre você e o bebê, para os quais o próprio aplicativo irá lembrá-la.",
+      "Text2": "Durante o período em que estiver participando, você também será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
+      "Text3": "Além disso, após um mês de alta, você poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, você será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
+      "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que sua participação é totalmente voluntária, podendo você: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
+      "Text5": "Salientamos que suas informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você não pagará ou será remunerada pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
+      "Text6": "Os potenciais benefícios da sua participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do app e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator você poderá utilizar o app no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
     },
+    // TODO Translate
     "Parent": {
-      "Title": "Free and Informed Consent Form - Responsible for minor mothers",
-      "Text1": "Dear participant",
-      "Text2": "We would like to invite the teenager under your responsibility to participate in the research",
-      "Text3": "\"Coaching by App: an innovative approach to breastfeeding of premature babies\"",
-      "Text4": ", to be held at the University Hospital at the State University of Londrina (HU / UEL). The purpose of the research is to elaborate and validate an application (APP) via smartphone (cellular) for mothers aiming at promoting maternal breastfeeding (AM) of premature babies.",
-      "Text5": "The participation of the adolescent under your responsibility is very important and it would be as follows: the mothers participating in the research will be divided into 2 groups that will receive assistance to succeed in breastfeeding their premature child.",
-      "Text6": "One group will receive the routine care of the maternity unit and the neonatal unit of the HU / UEL, and the other group, as well as receiving routine care, will also use an APP for monitoring and guidelines on AM. The choice of which group it will be part will be random, through draw.",
-      "Text7": "During the survey, the teenager will be asked to respond to a questionnaire about his personal data, and to a scale to measure his confidence in the breastfeeding process.",
-      "Text8": "Regardless of the group that is part, the breastfeeding process will be supported and accompanied all the time, and the adolescent will be contacted by phone at two moments after the baby's discharge, for follow-up of this follow-up.",
-      "Text9": "In addition, after one month of discharge, she may be invited to participate in an interview about the experiences during the breastfeeding process of the premature child, and these perceptions will be valuable for a better understanding by health professionals and researchers in the area about the process of breastfeeding a premature baby.",
-      "Text10": "The adolescents will be interviewed at the outpatient clinic for the follow up of the premature infant or at home, according to the possibilities of the interviewees. The interviews will be recorded and then transcribed in full, lasting approximately 40 minutes and a maximum of 1 hour.",
-      "Text11": "The information will be treated with absolute secrecy and confidentiality in order to preserve your identity and will be used only for research purposes.",
-      "Text12": "We clarify that the participation of the adolescent under her responsibility is totally voluntary, and may request the refusal or withdrawal of participation at any time, without this causing any burden or injury to you.",
-      "Text13": "We assure you that you will not pay or be remunerated for participation, however, if there are any expenses arising from the research, these are the responsibility of the researcher.",
-      "Text14": "The possible benefits of their authorization to participate in this research will be the contribution to the construction of an App that intends to benefit and facilitate the breastfeeding process, promoting the dissemination of knowledge and information about breastfeeding among mothers of premature babies.",
-      "Text15": "As for the risks, which are minimal, they apply to the time allocated to the use of the App, reading and responding to the questionnaires, and to conducting the interview. To minimize this factor she can use the App at the time she finds it appropriate and still interrupt the interview at any time, resuming or not when she finds it convenient. We will do our best to assist you in any process in case any discomfort occurs, clarifying it whenever necessary.",
-      "Text16": "We inform you that this research meets and respects the rights provided for in the Statute of the Child and Adolescent - ECA, Federal Law No. 8069 of July 13, 1990, being them: to life, health, food, education, sport, leisure, professionalization, culture, dignity, respect, freedom and family and community coexistence. We also guarantee that Article 18 of the ECA will be met: \"It is everyone's duty to ensure the dignity of the child and adolescent, making them safe from any inhuman, violent, terrifying, vexatious or embarrassing treatment.\"",
-      "Text17": "If you have any questions or need further clarification, you can contact us:",
-      "Text18": "Edilaine Giovanini Rossetto, RN, PhD, (43) 98837-6610, Rua Gil de Abreu Souza, 1501, Condomínio Royal Park, Esperança, Londrina-PR, ediluizrossetto@gmail.com",
-      "Text19": "Gabriela Ramos Ferreira Curan, RN, MsC, (43) 99921-6607, Rua Reverendo João Batista Ribeiro Neto, 75, apto 1903 torre 1 – Gleba Palhano, Londrina, gcuran@uel.br",
-      "Text20": "Louise Marina Silva Fontana, RN, (43) 99147-9194, Av. Garibaldi Deliberador, 99 – ap 77, Bloco Dom Pedro I, Jardim Claudia, Londrina-PR, louise fontana@uel.br",
-      "Text21": "Or look for the Ethics Committee on Research Involving Human Beings of the State University of Londrina, located next to the building of LABESC – Laboratório Escola, on the University Campus, telephone 3371-5455, e-mail: cep268@uel.br.",
-      "Text22": "Or look for the Ethics Committee on Research Involving Human Beings of the State University of Londrina, located next to the building of LABESC – Laboratório Escola, on the University Campus, telephone 3371-5455, e-mail: cep268@uel.br.",
-      "Text23": "City, %{date}.",
-      "Text24": "Gabriela Ramos Ferreira Curan",
-      "Text25": "RG: 9.786.358-0",
-      "Text26": "I, having been duly informed about the research procedures, agree with the voluntary participation of the child or adolescent under my responsibility in the research described above."
+      "Text1": "Ao concordar em autorizar a participação da adolescente na pesquisa, após a assinatura de ambas em termo de consentimento e cadastro de informações iniciais, ela fará o download do app, na Play Store, de forma gratuita e terá acesso ilimitado a todo conteúdo interativo disponível. Ela também preencherá questionários em momentos específicos, com informações sobre ela e o bebê, para os quais o próprio aplicativo irá lembrá-la.",
+      "Text2": "Durante o período em que estiver participando, ela também será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
+      "Text3": "Além disso, após um mês de alta, ela poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, ela será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
+      "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que a participação da adolescente é totalmente voluntária, podendo ela: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
+      "Text5": "Salientamos que as informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você e ela não pagarão ou serão remuneradas pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
+      "Text6": "Os potenciais benefícios da participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do app e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator ela poderá utilizar o app no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
     },
+    // TODO Translate
     "Minor": {
-      "Title": "Term of Assent - Mothers",
-      "Text1": "Dear,",
-      "Text2": "We would like to invite you to participate in the survey",
-      "Text3": "Coaching via App: an innovative approach to breastfeeding premature baby\"",
-      "Text4": ", to be held at Hospital xxxxx. The objective of the research is to develop and validate an application (App) via smartphone (cellular) for the promotion of breastfeeding (BF) of premature babies, aimed at mothers.",
-      "Text5": "Your participation is very important and it would happen as follows: the mothers participating in the research will be divided into 2 groups that will receive assistance to successfully breastfeed their premature child. One group will receive routine care, and the other group, in addition to receiving routine care, will use an App for monitoring and guidance on BF.",
-      "Text6": "The definition of which group you will be part of will be random, through a draw. During the survey, you will be asked to answer a questionnaire about your personal data, and a scale to measure your confidence in the breastfeeding process.",
-      "Text7": "Regardless of the group that is part of, the breastfeeding process will be supported and monitored at all times, and the teenager will be contacted by phone two times after the baby's hospital discharge, to follow up on this follow-up.",
-      "Text8": "In addition, you may be invited to participate in an interview about the experiences during the breastfeeding process of the premature child, and these insights will be valuable for a better understanding by health professionals and researchers in the area respect of the process of breastfeeding a premature baby.",
-      "Text9": "You can be interviewed at the preterm follow-up clinic, at home, or remotely, depending on your possibilities. The interviews will be recorded and later transcribed in full, lasting approximately 40 minutes and a maximum of 1 hour.",
-      "Text10": "The information will be treated with the utmost secrecy and confidentiality, in order to preserve your identity and will only be used for research purposes.",
-      "Text11": "We clarify that your participation is completely voluntary, and you can: refuse to participate, or even give up at any time, without this entailing any burden or harm to you.",
-      "Text12": "We ensure that you will not pay or be remunerated for participation, however, if there are any expenses arising from the research, these are the responsibility of the researcher.",
-      "Text13": "The possible benefits of your participation in this research will be the contribution to the construction of an App that is intended to benefit and facilitate the breastfeeding process, promoting the dissemination of knowledge and information about breastfeeding among mothers of premature babies.",
-      "Text14": "As for the risks, which are minimal, they apply to the time spent using the App, reading and answering the questionnaires, and conducting the interview. To minimize this factor, you can use the App at the time you see fit and still interrupt the interview at any time, resuming or not when you see fit. We will do our best to assist you in the entire process if any discomfort occurs, clarifying whenever necessary.",
-      "Text15": "We inform you that this research meets and respects the rights provided for in the Statute of Children and Adolescents - ECA, Federal Law No. 8069 of July 13, 1990, namely: to life, health, food, education, sport, leisure, professionalization, culture, dignity, respect, freedom and family and community life. We also guarantee that Article 18 of the ECA will be complied with: \"It is everyone's duty to ensure the dignity of children and adolescents, keeping them safe from any inhuman, violent, terrifying, vexatious or embarrassing treatment.\"",
-      "Text16": "If you have any questions or need further clarification, you can contact us:",
-      "Text17": "Edilaine Giovanini Rossetto, RN, PhD, (43) 98837-6610, Rua Gil de Abreu Souza, 1501, Condomínio Royal Park, Esperança, Londrina-PR, ediluizrossetto@gmail.com",
-      "Text18": "Gabriela Ramos Ferreira Curan, RN, MsC, (43) 99921-6607, Rua Reverendo João Batista Ribeiro Neto, 75, apto 1903 torre 1 – Gleba Palhano, Londrina, gcuran@uel.br",
-      "Text19": "Louise Marina Silva Fontana, RN, (43) 99147-9194, Av. Garibaldi Deliberador, 99 – ap 77, Bloco Dom Pedro I, Jardim Claudia, Londrina-PR, louise. fontana@uel.br",
-      "Text20": "Or look for the Ethics Committee on Research Involving Human Beings of the State University of Londrina, located next to the building of LABESC – Laboratório Escola, on the University Campus, telephone 3371-5455, e-mail: cep268@uel.br.",
-      "Text21": "Or look for the Ethics Committee on Research Involving Human Beings of the State University of Londrina, located next to the building of LABESC – Laboratório Escola, on the University Campus, telephone 3371-5455, e-mail: cep268@uel.br.",
-      "Text22": "City, %{date}.",
-      "Text23": "Gabriela Ramos Ferreira Curan",
-      "Text24": "RG: 9.786.358-0",
-      "Text25": "I, %{name} having been duly informed about the research procedures, agree to voluntarily participate in the research described above."
+      "Text1": "Ao concordar em participar da pesquisa, após as assinaturas suas e de seu responsável legal em termos de consentimento/assentimento e cadastro de informações iniciais, você fará o download do app, na Play Store, de forma gratuita e terá acesso ilimitado a todo conteúdo interativo disponível. Você também preencherá questionários em momentos específicos, com informações sobre você e o bebê, para os quais o próprio aplicativo irá lembrá-la.",
+      "Text2": "Durante o período em que estiver participando, você também será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
+      "Text3": "Além disso, após um mês de alta, você poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, você será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
+      "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que a participação da adolescente é totalmente voluntária, podendo ela: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
+      "Text5": "Salientamos que suas informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você não pagará ou será remunerada pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
+      "Text6": "Os potenciais benefícios da sua participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do app e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator você poderá utilizar o app no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
+    },
+    // TODO Translate
+    "Footer": {
+      "Text1": "Faremos o possível para auxiliá-la em todo processo caso algum desconforto ocorra, esclarecendo-a sempre que for necessário. Caso você tenha dúvidas ou necessite de maiores esclarecimentos poderá nos contatar:",
+      "Text2": "Profª Drª Edilaine Giovanini Rossetto, (43) 98837-6610, Rua Gil de Abreu Souza, 1501, Condomínio Royal Park, Esperança, Londrina-PR, ediluizrossetto@gmail.com",
+      "Text3": "Profª Drª Thaíla Correa Castral, (62) 98147-9900, Rua 227, Qd 68, S/N, Setor Leste Universitário, Goiânia-GO, thailacastral@ufg.com.br",
+      "Text4": "Enfermeira Ms. Gabriela Ramos Ferreira Curan, (43) 99921-6607, rua Reverendo João Batista Ribeiro Neto, 75, apto 1903 torre 1 – Gleba Palhano, Londrina-PR, gcuran@uel.br",
+      "Text5": "Enfermeira Ms. Júlia Carneiro Godoy de Sousa, (62) 99161-7186, Rua R12, n.554, Ed Premier Lac de Rose, apt1201, Setor Oeste, Goiânia-GO, juliacgsousa@hotmail.com",
+      "Text6": "Enfermeira Esp. Mariana Lamante Bueno, (62) 98149-9994, Av C255, Ed Josephine Ceze, apt 601, Setor Nova Suíça, Goiânia-GO, ma_lamante@hotmail.com",
+      "Text7": "Ou procurar o Comitê de Ética em Pesquisa Envolvendo Seres Humanos da Universidade Estadual de Londrina, situado junto ao prédio do LABESC – Laboratório Escola, no Campus Universitário, telefone (43) 3371-5455, e-mail: cep268@uel.br",
+      "Text8": "Este termo foi assinado digitalmente, via formulário eletrônico e encontra-se disponível no app para consulta (via da participante)."
     }
   },
   "ThePrematurePage": {
     "Option1": "Video \"Pleased to meet you, I'm the \"Preemie\" baby\"",
     "Option2": "Poll: Breastfeeding a premature baby",
-    "Option3": "Infographic: 6 steps to breastfeeding"
+    "Option3": "Infographic: 8 steps to breastfeeding"
   },
   "UploadBabyPhotoPage": {
     "SelectPhoto": "Choose a photo of your baby(ies) from the gallery and upload it here to remind you of your biggest motivation to breastfeed."
   },
   "UploadFatherPhotoPage": {
-    "Text": "Involving the baby's second parent in this journey makes all the difference! Click on the button below and upload a photo of a cute moment between daddy and baby.If it's not possible to involve the baby's father, you can choose another important person to be that fundamental support for you and your baby!"
+    "Text": "Involving the baby's second caregiver in this journey makes all the difference. Click on the button below and upload a photo of a moment between your partner and your baby. If it's not possible to involve your partner, you can choose another important person to be that fundamental support for your and your baby."
   },
   "UploadMotherPhotoPage": {
     "BestMother": "YOU are the best mom in the world for your baby! Simply because YOU gave them life, which no one else could! YOUR BREAST MILK is the best food your baby can get!",
-    "Mirror": "Mirror, mirror on the wall... who's the most capable of breastfeeding of all?Click on the button below and upload a picture of yourself!"
+    "Mirror": "Mirror, mirror on the wall... who's the most capable of breastfeeding of all? Click on the button below and upload a picture of yourself!"
   },
   "UploadPhotoScreen": {
     "ModalSuccessText": "Image uploaded successfully",
     "ModalErrorText": "Failed to upload image!\nPlease, try again later..."
   },
   "VideoMenuPage": {
-    "Tutorial": "Tutorial video"
+    "Tutorial": "Tutorial video",
+    "NICU1": "What is the NICU - Welcome to the NICU | Video 1",
+    "NICU2": "What can I do in the NICU? - Welcome to the NICU | Video 2",
+    "NICU3": "Feeding your baby in the NICU - Welcome to the NICU | Video 3",
+    "NICU4": "Feeding your baby in the NICU - Welcome to the NICU | Video 4"
   },
   "WeeklyReportPage": {
     "Header": "Questions of the week",
@@ -710,28 +731,28 @@
     "YourAnswers": "Your answers"
   },
   "WhenToBreastfeedPage": {
-    "Header": "When to pump breastmilk?",
-    "Text1": "We are trying",
+    "Header": "When to hand express or pump breast milk",
+    "Text1": "Remember: you are trying",
     "Text2": "to help your body understand",
-    "Text3": "that you need to produce milk for the baby, remember? So, the withdrawal of milk must be regular, occurring at least ",
+    "Text3": "that it needs to produce milk for the baby. So, milk extraction must be regular, occurring at least",
     "Text4": "every three hours",
-    "Text5": "so that the breasts are always empty."
+    "Text5": "so the breasts are regularly emptied."
   },
   "WhyBreastfeedPage": {
     "Header": "Why should I pump my breast milk?",
     "Page1": {
-      "Text1": "Remember those countless benefits of breast milk for premature babies?",
-      "Text2": "Frequent milk withdrawal is how you",
-      "Text3": "can prevent milk production from ceasing",
-      "Text4": "while the baby can't breastfeed."
+      "Text1": "Remember those countless benefits of breast milk for premature babies?\n\nThe key reason for expressing/pumping is to provide breastmilk to the baby!",
+      "Text2": "Frequent milk removal from the breast is how you",
+      "Text3": "can help maintain your milk production",
+      "Text4": "while your baby can't feed directly at the breast."
     },
     "Page2": {
       "Text1": "Milk \"stuck\" in the breast leads the body to understand that it doesn't need to produce more!"
     },
     "Page3": {
-      "Text1": "So, on the other hand…",
-      "Text2": "the more you empty your breast, extracting the milk",
-      "Text3": ", the more it produces! Because your body \"understands\" that milk is continuously needed! [1]"
+      "Text1": "So,",
+      "Text2": "the more you empty your breasts of milk, the more they produce.",
+      "Text3": "When milk is extracted and your breasts empty, your body understands that more milk is needed.\n\nBecause your body \"understands\" that milk is continuously needed for lactation."
     }
   },
   "Yup": {
@@ -749,6 +770,7 @@
     "MustBeNumberError": "Must be a number",
     "NoOptionSelectedError": "At least one option must be selected",
     "PasswordMustMatch": "Passwords must match",
-    "Required": "Required field"
+    "Required": "Required field",
+    "Phone": "Invalid phone number"
   }
 }

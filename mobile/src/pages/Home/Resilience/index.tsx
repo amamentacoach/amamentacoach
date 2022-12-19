@@ -1,13 +1,15 @@
 import { Action, AppScreen } from '@common/telemetria';
 import { useNavigation } from '@react-navigation/native';
 import i18n from 'i18n-js';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
+import Modal from 'components/Modal';
 import OptionsList from 'components/OptionList';
+import PaddedScrollView from 'components/PaddedScrollView';
 import theme from 'config/theme';
-import { PaddedScrollView } from 'lib/sharedStyles';
+import { OpenSansRegular } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
@@ -19,24 +21,34 @@ import {
   PageHeader,
   Text,
   VideoContainer,
+  MoreInfoContainer,
 } from './styles';
 
 import ErlenmeyerGreen from '@assets/images/erlenmeyer_green.svg';
 import ErlenmeyerPink from '@assets/images/erlenmeyer_pink.svg';
-import ErlenmeyerPrimary from '@assets/images/erlenmeyer_primary.svg';
 import ErlenmeyerYellow from '@assets/images/erlenmeyer_yellow.svg';
+import IcQuestion from '@assets/images/icons/ic_question.svg';
 
 const Resilience: React.FC = () => {
   const { height } = Dimensions.get('window');
   const navigation = useNavigation<RootStackProps>();
   const [isLoadingVideo, setIsLoadingVideo] = useState(true);
+  const [isInfoModalVisible, setIsInfoModalVisible] = useState(false);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <MoreInfoContainer>
+          <IcQuestion
+            title="About"
+            onPress={() => setIsInfoModalVisible(true)}
+          />
+        </MoreInfoContainer>
+      ),
+    });
+  }, []);
 
   const options: OptionListEntry[] = [
-    {
-      image: { source: ErlenmeyerPrimary },
-      title: i18n.t('ResiliencePage.Option1'),
-      onPress: () => navigation.navigate('ManageExpectations'),
-    },
     {
       image: { source: ErlenmeyerYellow },
       title: i18n.t('ResiliencePage.Option2'),
@@ -63,6 +75,17 @@ const Resilience: React.FC = () => {
 
   return (
     <PaddedScrollView>
+      <Modal
+        options={[
+          {
+            text: i18n.t('Close'),
+            isBold: true,
+            onPress: () => setIsInfoModalVisible(false),
+          },
+        ]}
+        visible={isInfoModalVisible}>
+        <OpenSansRegular>{i18n.t('ResiliencePage.InfoModal')}</OpenSansRegular>
+      </Modal>
       <PageHeader>{i18n.t('ResiliencePage.Header')}</PageHeader>
       {isLoadingVideo && (
         <LoadingContainer>

@@ -27,9 +27,9 @@ import {
   SecondButtonContainer,
 } from './styles';
 
-import ExpectationVsReality1 from '@assets/images/expectation_vs_reality_1.png';
-import ExpectationVsReality2 from '@assets/images/expectation_vs_reality_2.png';
-import ExpectationVsReality3 from '@assets/images/expectation_vs_reality_3.png';
+import ExpectationVsReality1 from '@assets/images/expectation_vs_reality_1.webp';
+import ExpectationVsReality2 from '@assets/images/expectation_vs_reality_2.webp';
+import ExpectationVsReality3 from '@assets/images/expectation_vs_reality_3.webp';
 
 const NotWhatIExpected: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

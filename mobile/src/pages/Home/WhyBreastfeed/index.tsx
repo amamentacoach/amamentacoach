@@ -12,8 +12,8 @@ import type { RootStackProps } from 'routes/app';
 
 import { ColoredContentText, ContentText } from './styles';
 
-import MilkWithdrawalSeven from '@assets/images/milk_withdrawal_seven.png';
-import WhyMilkWithdrawalTwo from '@assets/images/why_milk_withdrawal_two.png';
+import MilkWithdrawalSeven from '@assets/images/milk_withdrawal_seven.webp';
+import WhyMilkWithdrawalTwo from '@assets/images/why_milk_withdrawal_two.webp';
 
 const WhyBreastfeed: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();

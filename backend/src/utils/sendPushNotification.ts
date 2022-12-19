@@ -150,4 +150,37 @@ export async function sendPushNotificationAlta(){
     }
 }
 
+export async function sendPushNotificationGestantes(){
+    console.log("Enviando notificacoes de gestantes...")
+
+    const gestantes = await knex('mae').select('user_id').where('categoria','=', 'Gestante');
+    console.log(gestantes)
+
+    let include_player_ids_alta:string[] = [];
+
+    for(const mae of gestantes){
+        if(mae.user_id) include_player_ids_alta.push(mae.user_id)
+    }
+
+    if(include_player_ids_alta.length>0){
+        
+        console.log(include_player_ids_alta.length + " gestantes notificadas...")
+        const data: OneSignalData = {
+            app_id:process.env.OS_APP_ID || '',
+            include_player_ids: include_player_ids_alta,
+            template_id:'1d81ca83-b70c-4a2a-bb39-cf50ce2f1ed8'
+        };
+
+        try {
+            await sendOneSignalNotification(data, include_player_ids_alta)
+        }catch(error){
+            console.log(error)
+            return error
+        }
+
+    }else{
+        console.log("Nenhuma gestante foi notificada!")
+    }
+}
+
 export default sendPushNotification;

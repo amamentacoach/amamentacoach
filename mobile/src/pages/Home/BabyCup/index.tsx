@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { ActivityIndicator, Dimensions } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
 
+import PaddedScrollView from 'components/PaddedScrollView';
 import theme from 'config/theme';
-import { PaddedScrollView } from 'lib/sharedStyles';
+import { OpenSansRegular } from 'lib/sharedStyles';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import {
@@ -38,6 +39,7 @@ const BabyCup: React.FC = () => {
   return (
     <PaddedScrollView>
       <VideoLink>{i18n.t('BabyCupPage.Header')}</VideoLink>
+      <OpenSansRegular>{i18n.t('BabyCupPage.Subtitle')}</OpenSansRegular>
       {isLoadingVideo && (
         <LoadingContainer>
           <ActivityIndicator

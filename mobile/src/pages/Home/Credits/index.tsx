@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { Linking, TouchableOpacity } from 'react-native';
 
 import { ScrollView } from 'lib/sharedStyles';
+import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import { Container, Link, Text, TextContainer } from './styles';
@@ -31,6 +32,8 @@ const Item: React.FC<ItemProps> = ({ texts, link }) => {
 };
 
 const Credits: React.FC = () => {
+  const { languageTag } = getBestLocale();
+
   useEffect(() => {
     createTelemetryAction({
       action: Action.Opened,
@@ -60,7 +63,11 @@ const Credits: React.FC = () => {
           ]}
         />
         <Item
-          link="https://www.saoraimundo.com/amamentar-entenda-os-beneficios-e-sua-importancia/"
+          link={
+            languageTag === 'pt'
+              ? 'https://www.saoraimundo.com/amamentar-entenda-os-beneficios-e-sua-importancia/'
+              : 'https://en.beststart.org/topics-tools/early-childhood-development/breastfeeding'
+          }
           texts={[
             i18n.t('CreditsPage.Item3.1'),
             i18n.t('CreditsPage.Item3.2'),
@@ -69,7 +76,11 @@ const Credits: React.FC = () => {
           ]}
         />
         <Item
-          link="https://www.saoraimundo.com/amamentar-entenda-os-beneficios-e-sua-importancia/"
+          link={
+            languageTag === 'pt'
+              ? 'https://www.saoraimundo.com/amamentar-entenda-os-beneficios-e-sua-importancia/'
+              : 'https://en.beststart.org/topics-tools/early-childhood-development/breastfeeding'
+          }
           texts={[
             i18n.t('CreditsPage.Item4.1'),
             i18n.t('CreditsPage.Item4.2'),

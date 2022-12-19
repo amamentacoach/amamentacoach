@@ -1,75 +1,65 @@
 import { Action, AppScreen } from '@common/telemetria';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { isToday } from 'date-fns';
 import i18n from 'i18n-js';
 import { useEffect, useState } from 'react';
-import { View } from 'react-native';
 import { hide } from 'react-native-bootsplash';
 
-import FormPickerInput from 'components/FormPickerInput';
+import ImageWrapper from 'components/ImageWrapper';
 import Modal from 'components/Modal';
 import OptionsList from 'components/OptionList';
 import theme from 'config/theme';
+import { useAuth } from 'contexts/auth';
 import { useIsFirstRun } from 'contexts/firstRun';
-import { storageIsToday } from 'lib/date-fns';
 import { ScrollView } from 'lib/sharedStyles';
-import { checkBabiesLocation, updateBabyLocation } from 'services/babyLocation';
 import { setHomePageOpened } from 'services/telemetry';
+import { UserTypes } from 'services/user';
+import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import type { OptionListEntry } from 'components/OptionList';
 import type { RootStackProps } from 'routes/app';
-import type { BabyStatus } from 'services/babyLocation';
+import type { PendingForms } from 'services/telemetry';
 
 import {
-  BannerImage,
   ContentContainer,
   ContentHeader,
   Header,
   HeaderBackground,
   HeaderText,
-  HUButton,
-  HUButtonText,
-  InnerCircle,
-  LocationContainer,
-  ModalOption,
-  OuterCircle,
-  TextModal,
+  Banner,
+  BannerButtonTextContainer,
+  BannerButtonText,
 } from './styles';
 
 import HomeBaby from '@assets/images/home_baby.svg';
-import Banner from '@assets/images/home_banner.png';
 import HomeBreastfeed from '@assets/images/home_breastfeed.svg';
 import HomeCredits from '@assets/images/home_credits.svg';
 import HomeEmotions from '@assets/images/home_emotions.svg';
 import HomeMessage from '@assets/images/home_message.svg';
 import HomeMilk from '@assets/images/home_milk.svg';
 import HomeMoreInformation from '@assets/images/home_more_information.svg';
+import LogoEN from '@assets/images/logo_white_en.svg';
+import LogoPT from '@assets/images/logo_white_pt.svg';
 
-interface BabyModalOption {
-  newLocation: string;
-  selected: boolean;
+interface FormsModal {
+  isVisible: boolean;
+  action: PendingForms;
 }
 
 const Home: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
-  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
   const isFocused = useIsFocused();
-  const [babiesData, setBabiesData] = useState<BabyStatus[]>([]);
-  const [babyModalVisibility, setBabyModalVisibility] =
-    useState<boolean>(false);
-  const [selectedModalOptions, setSelectedModalOptions] = useState<
-    BabyModalOption[]
-  >([]);
+  const { userInfo } = useAuth();
+  const { isFirstRun, setTemporaryNotFirstRun } = useIsFirstRun();
+  const { languageTag } = getBestLocale();
+  const [formsModalData, setFormsModalData] = useState<FormsModal>({
+    action: null,
+    isVisible: false,
+  });
 
-  const [formModalVisibility, setFormModalVisibility] =
-    useState<boolean>(false);
-  const [formAction, setFormAction] = useState<'1D' | '15D' | '1M' | null>(
-    null,
-  );
-
-  const [expectationsModalVisibility, setExpectationsModalVisibility] =
-    useState<Boolean>(false);
+  const Logo = languageTag === 'pt' ? LogoPT : LogoEN;
 
   const options: OptionListEntry[] = [
     {
@@ -98,11 +88,6 @@ const Home: React.FC = () => {
       onPress: () => navigation.navigate('AdditionalInformation'),
     },
     {
-      image: { source: HomeCredits, height: 100, width: 100 },
-      title: i18n.t('StatusFormPage.FormName', { count: 1 }),
-      onPress: () => navigation.navigate('StatusForm', { situation: null }),
-    },
-    {
       image: { source: HomeMessage, height: 100, width: 100 },
       title: i18n.t('HomePage.Option6'),
       onPress: () => navigation.navigate('Messages'),
@@ -119,63 +104,62 @@ const Home: React.FC = () => {
     },
   ];
 
-  useEffect(() => {
-    // Busca bebês que podem receber alta e exibe os modais necessários.
-    async function checkBabies(): Promise<void> {
-      const babiesToCheck = await checkBabiesLocation();
-      if (babiesToCheck) {
-        setSelectedModalOptions(
-          babiesToCheck.map(() => ({
-            selected: false,
-            newLocation: '',
-          })),
-        );
-        setBabyModalVisibility(true);
-        setBabiesData(babiesToCheck);
-      }
-    }
+  // Exibe a escala apenas se for mãe.
+  if (userInfo.type === UserTypes.MOTHER) {
+    options.splice(5, 0, {
+      image: { source: HomeCredits, height: 100, width: 100 },
+      title: i18n.t('StatusFormPage.FormName', { count: 1 }),
+      onPress: () => navigation.navigate('StatusForm', { situation: null }),
+    });
+  }
+  // Exibe um botão para informar o nascimento do bebê se for gestante.
+  if (userInfo.type === UserTypes.PREGNANT) {
+    options.splice(5, 0, {
+      image: { source: HomeCredits, height: 100, width: 100 },
+      title: i18n.t('HomePage.UpdateBabyBirthStatus.Text'),
+      subtitle: i18n.t('HomePage.UpdateBabyBirthStatus.Subtext'),
+      onPress: () => navigation.navigate('BabyBirthStatusUpdate'),
+    });
+  }
 
+  useEffect(() => {
     // Envia uma mensagem de telemetria que o usuário abriu o aplicativo e verifica se algum
     // formulário deve ser preenchido.
     async function checkForms(): Promise<void> {
       const action = await setHomePageOpened();
       if (action) {
-        setFormAction(action);
-        setFormModalVisibility(true);
-      }
-    }
-
-    // Verifica se o usuário acessou a tela de expectativas hoje.
-    async function checkExpectations(): Promise<void> {
-      const openedToday = await storageIsToday(
-        '@AmamentaCoach:alreadySelectedExpectations',
-        storage => storage.lastRunDate,
-      );
-      if (!openedToday) {
-        setExpectationsModalVisibility(true);
+        setFormsModalData({
+          action,
+          isVisible: true,
+        });
       }
     }
 
     // Verifica a última data que o aplicativo foi aberto. Se um dia tiver passado ou é a primeira
-    // vez abrindo o app é buscado os bebês que podem receber alta.
+    // vez abrindo o app.
     async function checkUserActions(): Promise<void> {
-      // Menos de um dia se passou.
-      if (await storageIsToday('@AmamentaCoach:lastOpenedDate')) {
-        return;
-      }
-
-      // Verifica se algum formulário deve ser respondido
-      await checkForms();
-      // Verifica se algum bebê pode receber alta.
-      await checkBabies();
-      // Verifica se o usuário já abriu as expectativas hoje.
-      await checkExpectations();
-
-      await AsyncStorage.setItem(
-        '@AmamentaCoach:lastOpenedDate',
-        new Date().toISOString(),
-      );
       setTemporaryNotFirstRun('home');
+      const storageString = await AsyncStorage.getItem(
+        '@AmamentaCoach:lastOpenedDate',
+      );
+      // Verifica se a última data de acesso foi hoje.
+      const alreadyDisplayedToday = storageString
+        ? isToday(new Date(storageString))
+        : false;
+
+      if (!alreadyDisplayedToday) {
+        // Caso não seja a primeira vez utilizando o app.
+        if (storageString) {
+          // Verifica se algum formulário deve ser respondido
+          checkForms();
+        }
+
+        // Atualiza a data do último acesso ao app.
+        AsyncStorage.setItem(
+          '@AmamentaCoach:lastOpenedDate',
+          new Date().toISOString(),
+        );
+      }
     }
 
     // Executa pela primeira vez ao abrir o aplicativo
@@ -197,79 +181,18 @@ const Home: React.FC = () => {
 
   // Fecha todos os modais.
   function hideAllModals(): void {
-    setBabyModalVisibility(false);
-    setExpectationsModalVisibility(false);
-    setFormModalVisibility(false);
-  }
-
-  // Fecha os modais, marca que os bebês selecionados tiveram alta e navega para o formulário.
-  function handleUpdateBabyLocation(): void {
-    hideAllModals();
-    babiesData.forEach(async (baby, index) => {
-      await updateBabyLocation(
-        baby.id,
-        selectedModalOptions[index].newLocation,
-      );
+    setFormsModalData({
+      action: null,
+      isVisible: false,
     });
-    navigation.navigate('StatusForm', {
-      situation: 'ALTA',
-    });
-  }
-
-  // Seleciona um bebê no modal.
-  function handleBabySelected(index: number): void {
-    const selected = [...selectedModalOptions];
-    selected[index].selected = !selected[index].selected;
-    if (!selected[index].selected) {
-      selected[index].newLocation = '';
-    }
-    setSelectedModalOptions(selected);
-  }
-
-  // Atualiza o valor da localização de um bebê selecionado.
-  function handleBabyLocationSelected(index: number, value: string): void {
-    const values = [...selectedModalOptions];
-    values[index].newLocation = value;
-    setSelectedModalOptions(values);
-  }
-
-  // Checa se pelo menos um bebê foi selecionado e sua nova localização fornecida.
-  function validateModalFields(): boolean {
-    const atLeastOneSelected = selectedModalOptions.some(op => op.selected);
-    const selectedAreValid = selectedModalOptions.every(op =>
-      op.selected ? op.newLocation : !op.selected,
-    );
-    return atLeastOneSelected && selectedAreValid;
   }
 
   return (
     <>
       <Modal
         color={theme.babyPink}
-        content={i18n.t('HomePage.ExpectationPopUp')}
-        options={[
-          {
-            text: i18n.t('Yes'),
-            onPress: () => {
-              hideAllModals();
-              navigation.navigate('ManageExpectations');
-            },
-          },
-          {
-            text: i18n.t('No'),
-            onPress: () => setExpectationsModalVisibility(false),
-          },
-        ]}
-        visible={
-          expectationsModalVisibility &&
-          !babyModalVisibility &&
-          !formModalVisibility
-        }
-      />
-      <Modal
-        color={theme.babyPink}
         content={
-          formAction === '1D'
+          formsModalData.action === '1D'
             ? i18n.t('HomePage.FirstStatusPopup')
             : i18n.t('HomePage.StatusPopup')
         }
@@ -279,80 +202,31 @@ const Home: React.FC = () => {
             onPress: () => {
               hideAllModals();
               navigation.navigate('StatusForm', {
-                situation: formAction,
+                situation: formsModalData.action,
               });
             },
           },
           {
             text: i18n.t('No'),
-            onPress: () => setFormModalVisibility(false),
+            onPress: () =>
+              setFormsModalData({ action: null, isVisible: false }),
           },
         ]}
-        visible={formModalVisibility}
+        visible={formsModalData.isVisible}
       />
-      {babiesData.length > 0 && (
-        <Modal
-          color={theme.babyPurple}
-          options={[
-            {
-              text: i18n.t('Yes'),
-              disabled: !validateModalFields(),
-              onPress: handleUpdateBabyLocation,
-            },
-            {
-              text: i18n.t('No'),
-              onPress: () => setBabyModalVisibility(false),
-            },
-          ]}
-          visible={babyModalVisibility && !formModalVisibility}>
-          <View>
-            <TextModal>{i18n.t('HomePage.BabyStatusPopUp')}</TextModal>
-            {babiesData.map((baby, index) => (
-              <View key={baby.id}>
-                <ModalOption
-                  activeOpacity={0.7}
-                  onPress={() => handleBabySelected(index)}>
-                  <OuterCircle selected={selectedModalOptions[index].selected}>
-                    <InnerCircle
-                      selected={selectedModalOptions[index].selected}
-                    />
-                  </OuterCircle>
-                  <TextModal key={baby.id}>{baby.name}</TextModal>
-                </ModalOption>
-
-                {selectedModalOptions[index].selected && (
-                  <LocationContainer>
-                    <FormPickerInput
-                      options={[
-                        i18n.t('Lodging'),
-                        i18n.t('Home'),
-                        i18n.t('UCI'),
-                      ]}
-                      placeholder={i18n.t('HomePage.BabyLocation')}
-                      onChange={value =>
-                        handleBabyLocationSelected(index, value)
-                      }
-                    />
-                  </LocationContainer>
-                )}
-              </View>
-            ))}
-          </View>
-        </Modal>
-      )}
-
       <ScrollView>
         <Header>
           <HeaderBackground>
             <HeaderText>{i18n.t('Begin')}</HeaderText>
+            <Banner activeOpacity={1} onPress={() => navigation.navigate('HU')}>
+              <ImageWrapper height={100} resizeMode="contain" source={Logo} />
+              <BannerButtonTextContainer>
+                <BannerButtonText>
+                  {i18n.t('HomePage.BannerButton')}
+                </BannerButtonText>
+              </BannerButtonTextContainer>
+            </Banner>
           </HeaderBackground>
-          <BannerImage source={Banner}>
-            <HUButton
-              activeOpacity={0.7}
-              onPress={() => navigation.navigate('HU')}>
-              <HUButtonText>{i18n.t('HomePage.HUButton')}</HUButtonText>
-            </HUButton>
-          </BannerImage>
         </Header>
         <ContentContainer>
           <ContentHeader>{i18n.t('Content')}</ContentHeader>
