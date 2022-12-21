@@ -21,7 +21,7 @@ jobs:
 
       - name: Set release name using tag
         id: version
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        run: echo "name=tag::${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
 
       - name: Cache files
         uses: actions/cache@v2
@@ -32,7 +32,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       # - name: Check for linting errors
       #   run: yarn lint
@@ -53,7 +53,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Create release.keystore
         run: base64 -di <<< ${{ secrets.RELEASE_KEYSTORE_BASE64 }} > "./android/app/release.keystore"
@@ -102,7 +102,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       - name: Create release.keystore
         run: base64 -di <<< ${{ secrets.RELEASE_KEYSTORE_BASE64 }} > "./android/app/release.keystore"
