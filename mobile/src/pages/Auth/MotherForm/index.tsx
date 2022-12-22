@@ -1,8 +1,8 @@
 import 'yup-phone';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { Formik } from 'formik';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {Formik} from 'formik';
 import i18n from 'i18n-js';
-import { getCountry } from 'react-native-localize';
+import {getCountry} from 'react-native-localize';
 import * as Yup from 'yup';
 
 import FormDateInput from 'components/FormDateInput';
@@ -12,10 +12,10 @@ import FormTextInput from 'components/FormTextInput';
 import MainButton from 'components/MainButton';
 import PaddedScrollView from 'components/PaddedScrollView';
 import SecondaryButton from 'components/SecondaryButton';
-import { Flex, Row, Spacer } from 'lib/sharedStyles';
-import { getCountryStates } from 'utils/localize';
+import {Flex, Row, Spacer} from 'lib/sharedStyles';
+import {getCountryStates} from 'utils/localize';
 
-import type { AuthRouteProp, AuthStackProps } from 'routes/auth';
+import type {AuthRouteProp, AuthStackProps} from 'routes/auth';
 
 import {
   HeaderText,
@@ -44,7 +44,7 @@ interface FormValues {
 
 const MotherForm: React.FC = () => {
   const navigation = useNavigation<AuthStackProps>();
-  const { email, password } = useRoute<AuthRouteProp<'MotherForm'>>().params;
+  const {email, password} = useRoute<AuthRouteProp<'MotherForm'>>().params;
 
   const availableStates = getCountryStates();
   const formInitialValues: FormValues = {
@@ -93,7 +93,7 @@ const MotherForm: React.FC = () => {
       'userType',
       i18n.t('MotherFormPage.UserTypeOptions.Pregnant'),
       Yup.number(),
-    ).min(0, i18n.t('Yup.MinError', { num: 0 })),
+    ).min(0, i18n.t('Yup.MinError', {num: 0})),
     possibleBirthDate: requiredWhen(
       'userType',
       i18n.t('MotherFormPage.UserTypeOptions.Pregnant'),
@@ -163,7 +163,7 @@ const MotherForm: React.FC = () => {
     }
 
     if (userInfo.userType === i18n.t('MotherFormPage.UserTypeOptions.Mother')) {
-      navigation.navigate('BabyForm', { userInfo });
+      navigation.navigate('BabyForm', {userInfo});
     } else {
       navigation.navigate('AcceptTermsOfService', {
         userInfo,
@@ -291,7 +291,7 @@ const MotherForm: React.FC = () => {
                       error={errors.birthWeeks}
                       keyboardType="numeric"
                       label={i18n.t('MotherFormPage.BirthWeeks')}
-                      placeholder={i18n.t('Week', { count: 2 })}
+                      placeholder={i18n.t('Week', {count: 2})}
                       value={values.birthWeeks}
                       onChangeText={handleChange('birthWeeks')}
                     />
@@ -378,7 +378,7 @@ const MotherForm: React.FC = () => {
                     error={errors.weeksPregnant}
                     keyboardType="numeric"
                     label={i18n.t('MotherFormPage.WeeksPregnant')}
-                    placeholder={i18n.t('Week', { count: 2 })}
+                    placeholder={i18n.t('Week', {count: 2})}
                     value={values.weeksPregnant}
                     onChangeText={handleChange('weeksPregnant')}
                   />

@@ -63,7 +63,7 @@
     "other": "Weeks"
   },
   "AcceptTermsOfServicePage": {
-    "AccountCreated": "Account created successfully! Welcome to The BreastfeedingCoach app!",
+    "AccountCreated": "Account created successfully! Welcome to The Breastfeeding Coach App!",
     "HeaderSubText": "You're almost there! Lastly, you must review and accept the terms of commitment:",
     "Agree": "I agree to the terms of commitment.",
     "ErrorPopUp": "Registration error.\nPlease try again later."
@@ -191,7 +191,8 @@
     "3": "When to do it?",
     "4": "How long to do it?",
     "5": "Hand Expressing Breastmilk",
-    "Header": "All you need to know about hand expressing breast milk breast milk"
+    "6": "Producing more milk using hands + pump",
+    "Header": "The World Health Organization states that all mothers should be taught hygienic hand expression. Frequent hand expression in addition to electric pumping can increase milk supply by more thorough emptying of the breasts, as well as increase the caloric content of the milk. If electric double-pumping (both breasts simultaneously) is not available, manual pumps can be used.\nAvoid being discouraged if you get nothing or a few drops the first day, this is normal. It all takes time."
   },
   "CreditsPage": {
     "AvailableAt": "Available at",
@@ -375,7 +376,7 @@
     "WeeksPregnant": "How many weeks are you pregnant?",
     "BirthDate": "Date of birth",
     "Institution": "How did you find out about this study?",
-    "SocialMedia": "Through which media channel did you find out about the AmamentaCoach app?",
+    "SocialMedia": "Through which media channel did you find out about the BreastfeedingCoach app?",
     "PossibleBirthDate": "What is your estimated pregnancy due date?",
     "CurrentGestationCountOptions": {
       "OneBaby": "No - just one baby",

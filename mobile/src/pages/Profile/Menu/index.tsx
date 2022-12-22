@@ -16,19 +16,9 @@ import { OptionText } from './styles';
 const ProfileMenu: React.FC = () => {
   const navigation = useNavigation<RootStackProps>();
   const isFocused = useIsFocused();
-  const { userInfo, signOut } = useAuth();
+  const { signOut } = useAuth();
 
   const options = [
-    {
-      onPress: () => navigation.navigate('Profile'),
-      text: i18n.t('ProfileMenuPage.MyProfile'),
-    },
-    {
-      onPress: () => navigation.navigate('MyBabies'),
-      text: i18n.t('ProfileMenuPage.MyBabies', {
-        count: userInfo.babies.length,
-      }),
-    },
     {
       onPress: () => navigation.navigate('NewPassword'),
       text: i18n.t('ProfileMenuPage.ChangePassword'),

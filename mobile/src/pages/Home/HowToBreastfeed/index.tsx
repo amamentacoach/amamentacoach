@@ -31,7 +31,6 @@ import MilkWithdrawalEight from '@assets/images/milk_withdrawal_eight.webp';
 import MilkWithdrawalFive from '@assets/images/milk_withdrawal_five.webp';
 import MilkWithdrawalFour from '@assets/images/milk_withdrawal_four.webp';
 import MilkWithdrawalNine from '@assets/images/milk_withdrawal_nine.webp';
-import MilkWithdrawalOne from '@assets/images/milk_withdrawal_one.webp';
 import MilkWithdrawalSeven from '@assets/images/milk_withdrawal_seven.webp';
 import MilkWithdrawalSix from '@assets/images/milk_withdrawal_six.webp';
 import MilkWithdrawalThree from '@assets/images/milk_withdrawal_three.webp';

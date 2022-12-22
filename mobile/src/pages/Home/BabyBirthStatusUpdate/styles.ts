@@ -15,13 +15,6 @@ export const QuestionContainer = styled.View`
   margin: 10px 0;
 `;
 
-export const SubmitButtonContainer = styled.View`
-  flex: 1;
-  align-items: flex-end;
-  flex-direction: row;
-  margin-top: 20px;
-`;
-
 export const ExternalFormContainer = styled(Center)`
   margin: 10px 0;
 `;

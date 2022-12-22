@@ -16,8 +16,6 @@
 -keep class com.amamentacoach.BuildConfig { *; }
 
 # Reanimated
+-keep class com.swmansion.reanimated.** { *; }
 -keep class com.facebook.react.turbomodule.** { *; }
 
-# Hermes
--keep class com.facebook.hermes.unicode.** { *; }
--keep class com.facebook.jni.** { *; }

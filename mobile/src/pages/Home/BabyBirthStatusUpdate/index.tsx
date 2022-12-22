@@ -89,13 +89,7 @@ const BabyBirthStatusUpdate: React.FC = () => {
     birthWeeks: dependsOn('isBabyBorn', Yup.string()),
     birthDate: dependsOn('isBabyBorn', Yup.string()),
     city: dependsOn('isBabyBorn', Yup.string()),
-    currentGestationCount: dependsOn(
-      'isBabyBorn',
-      Yup.number()
-        .integer(i18n.t('Yup.MustBeIntegerError'))
-        .typeError(i18n.t('Yup.MustBeIntegerError'))
-        .min(1, i18n.t('Yup.MinEqualError', { num: 1 })),
-    ),
+    currentGestationCount: dependsOn('isBabyBorn', Yup.string()),
     hasPartner: dependsOn('isBabyBorn', Yup.boolean()),
     state: dependsOn('isBabyBorn', Yup.string()),
     babies: dependsOn(
@@ -275,110 +269,114 @@ const BabyBirthStatusUpdate: React.FC = () => {
                     />
                   </QuestionContainer>
 
-                  {[...Array(Number(values.currentGestationCount) || 0)].map(
-                    (_, index) => (
-                      <View key={index}>
-                        <QuestionContainer>
-                          <FormTextInput
-                            error={getBabyError(errors, index, 'name')}
-                            label={i18n.t('BabyFormPage.Name')}
-                            placeholder={i18n.t('Name')}
-                            onChangeText={handleChange(`babies[${index}].name`)}
-                          />
-                        </QuestionContainer>
-
-                        <QuestionContainer>
-                          <FormRadioGroupInput
-                            error={getBabyError(
-                              errors,
-                              index,
-                              'birthInstitution',
-                            )}
-                            label={i18n.t(
-                              'BabyFormPage.Institution.Description',
-                            )}
-                            options={[
-                              i18n.t('BabyFormPage.Institution.Options.1'),
-                              i18n.t('BabyFormPage.Institution.Options.2'),
-                            ]}
-                            displayOtherField
-                            onChange={fieldValues =>
-                              setFieldValue(
-                                `babies[${index}].birthInstitution`,
-                                fieldValues[0],
-                              )
-                            }
-                          />
-                        </QuestionContainer>
-
-                        {checkBabyBirthInstitution(
-                          values.babies[index]?.birthInstitution,
-                        ) && (
-                          <ExternalFormContainer>
-                            <OpenSansRegular>
-                              {i18n.t('BabyFormPage.ExternalForm.Message')}
-                            </OpenSansRegular>
-                            <OpenSansBold
-                              onPress={() => {
-                                wasExternalFormOpened.current = true;
-                                Linking.openURL(
-                                  'https://docs.google.com/forms/d/e/1FAIpQLSd_Q2gkMHjgI7VzzXSNzXWwyBQ11_sM_sPSxG0FtzHTTDBxbQ/viewform',
-                                );
-                              }}>
-                              {i18n.t('BabyFormPage.ExternalForm.LinkWarning')}
-                            </OpenSansBold>
-                          </ExternalFormContainer>
-                        )}
-
-                        <QuestionContainer>
-                          <FormRadioGroupInput
-                            error={getBabyError(errors, index, 'birthLocation')}
-                            label={i18n.t('BabyFormPage.BirthPlace')}
-                            options={[
-                              i18n.t('Lodging'),
-                              i18n.t('UCI'),
-                              i18n.t('UCIN Kangaroo'),
-                              i18n.t('UTI'),
-                            ]}
-                            onChange={fieldValues =>
-                              setFieldValue(
-                                `babies[${index}].birthLocation`,
-                                fieldValues[0],
-                              )
-                            }
-                          />
-                        </QuestionContainer>
-
-                        <QuestionContainer>
-                          <FormRadioGroupInput
-                            error={getBabyError(
-                              errors,
-                              index,
-                              'currentLocation',
-                            )}
-                            label={i18n.t(
-                              'BabyFormPage.CurrentLocation.Description',
-                            )}
-                            options={[
-                              i18n.t('Lodging'),
-                              i18n.t('UCI'),
-                              i18n.t('UCIN Kangaroo'),
-                              i18n.t('UTI'),
-                              i18n.t(
-                                'BabyFormPage.CurrentLocation.Options.Home',
-                              ),
-                            ]}
-                            onChange={fieldValues =>
-                              setFieldValue(
-                                `babies[${index}].currentLocation`,
-                                fieldValues[0],
-                              )
-                            }
-                          />
-                        </QuestionContainer>
-                      </View>
+                  {[
+                    ...Array(
+                      values.currentGestationCount ===
+                        i18n.t(
+                          'MotherFormPage.CurrentGestationCountOptions.OneBaby',
+                        )
+                        ? 1
+                        : values.currentGestationCount ===
+                          i18n.t(
+                            'MotherFormPage.CurrentGestationCountOptions.Twins',
+                          )
+                        ? 2
+                        : 3,
                     ),
-                  )}
+                  ].map((_, index) => (
+                    <View key={index}>
+                      <QuestionContainer>
+                        <FormTextInput
+                          error={getBabyError(errors, index, 'name')}
+                          label={i18n.t('BabyFormPage.Name')}
+                          placeholder={i18n.t('Name')}
+                          onChangeText={handleChange(`babies[${index}].name`)}
+                        />
+                      </QuestionContainer>
+
+                      <QuestionContainer>
+                        <FormRadioGroupInput
+                          error={getBabyError(
+                            errors,
+                            index,
+                            'birthInstitution',
+                          )}
+                          label={i18n.t('BabyFormPage.Institution.Description')}
+                          options={[
+                            i18n.t('BabyFormPage.Institution.Options.1'),
+                            i18n.t('BabyFormPage.Institution.Options.2'),
+                          ]}
+                          displayOtherField
+                          onChange={fieldValues =>
+                            setFieldValue(
+                              `babies[${index}].birthInstitution`,
+                              fieldValues[0],
+                            )
+                          }
+                        />
+                      </QuestionContainer>
+
+                      {checkBabyBirthInstitution(
+                        values.babies[index]?.birthInstitution,
+                      ) && (
+                        <ExternalFormContainer>
+                          <OpenSansRegular>
+                            {i18n.t('BabyFormPage.ExternalForm.Message')}
+                          </OpenSansRegular>
+                          <OpenSansBold
+                            onPress={() => {
+                              wasExternalFormOpened.current = true;
+                              Linking.openURL(
+                                'https://docs.google.com/forms/d/e/1FAIpQLSd_Q2gkMHjgI7VzzXSNzXWwyBQ11_sM_sPSxG0FtzHTTDBxbQ/viewform',
+                              );
+                            }}>
+                            {i18n.t('BabyFormPage.ExternalForm.LinkWarning')}
+                          </OpenSansBold>
+                        </ExternalFormContainer>
+                      )}
+
+                      <QuestionContainer>
+                        <FormRadioGroupInput
+                          error={getBabyError(errors, index, 'birthLocation')}
+                          label={i18n.t('BabyFormPage.BirthPlace')}
+                          options={[
+                            i18n.t('Lodging'),
+                            i18n.t('UCI'),
+                            i18n.t('UCIN Kangaroo'),
+                            i18n.t('UTI'),
+                          ]}
+                          onChange={fieldValues =>
+                            setFieldValue(
+                              `babies[${index}].birthLocation`,
+                              fieldValues[0],
+                            )
+                          }
+                        />
+                      </QuestionContainer>
+
+                      <QuestionContainer>
+                        <FormRadioGroupInput
+                          error={getBabyError(errors, index, 'currentLocation')}
+                          label={i18n.t(
+                            'BabyFormPage.CurrentLocation.Description',
+                          )}
+                          options={[
+                            i18n.t('Lodging'),
+                            i18n.t('UCI'),
+                            i18n.t('UCIN Kangaroo'),
+                            i18n.t('UTI'),
+                            i18n.t('BabyFormPage.CurrentLocation.Options.Home'),
+                          ]}
+                          onChange={fieldValues =>
+                            setFieldValue(
+                              `babies[${index}].currentLocation`,
+                              fieldValues[0],
+                            )
+                          }
+                        />
+                      </QuestionContainer>
+                    </View>
+                  ))}
                 </Flex>
               )}
             </Flex>

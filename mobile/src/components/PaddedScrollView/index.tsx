@@ -1,8 +1,8 @@
-import { ScrollView } from 'lib/sharedStyles';
+import {ScrollView} from 'lib/sharedStyles';
 
-import { Container } from './styles';
+import {Container} from './styles';
 
-const PaddedScrollView: React.FC = ({ children }) => {
+const PaddedScrollView: React.FC = ({children}) => {
   return (
     <ScrollView>
       <Container>{children}</Container>
