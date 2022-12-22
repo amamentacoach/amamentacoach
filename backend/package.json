@@ -37,6 +37,6 @@
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "build": "tsc && cp -r public dist/",
-    "start": "npm run build && node dist/src/server.js"
+    "start": "node dist/src/server.js"
   }
 }
