@@ -44,7 +44,8 @@ class UserController{
                 data_provavel_parto,
                 data_parto,
                 semanas_gestacao,
-                cidade_estado: `${cidade} - ${estado}`
+                cidade_estado: `${cidade} - ${estado}`,
+                status: 1
             };
 
             const [id] = await trx('mae').insert(mae).returning('id')
