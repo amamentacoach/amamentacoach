@@ -1,4 +1,3 @@
-import 'yup-phone';
 import { useNavigation } from '@react-navigation/native';
 import { Formik } from 'formik';
 import i18n from 'i18n-js';
