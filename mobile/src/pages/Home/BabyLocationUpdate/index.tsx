@@ -68,13 +68,13 @@ const BabyLocationUpdate: React.FC = () => {
     .required();
 
   async function handleFormSubmit(
-    values: BabyOption[],
+    options: BabyOption[],
     { setSubmitting }: FormikHelpers<BabyOption[]>,
   ): Promise<void> {
-    const selected = values.filter(value => value.isSelected);
+    const selected = options.filter(option => option.isSelected);
     if (selected.length > 0) {
       setSubmitting(true);
-      const updates = selected.map(value => updateBabyLocation(value));
+      const updates = selected.map(baby => updateBabyLocation(baby));
       await Promise.all(updates);
       setSubmitting(false);
     }
