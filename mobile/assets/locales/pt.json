@@ -100,8 +100,7 @@
   },
   "BabyCupPage": {
     "Header": "Demonstração",
-    // TODO Traduzir
-    "Subtitle": "It is important that you have initial face-to-face training with a professional to adopt this milk-feeding technique.  Feeding your baby with a cup avoids the use of a bottle, which can harm the baby's learning to suckle at the breast",
+    "Subtitle": "É importante que um profissional demonstre a você pessoalmente essa técnica de oferta de leite. Alimentar seu bebê com um copo evita o uso de mamadeira, o que pode prejudicar o aprendizado do bebê de mamar no peito",
     "Step1": "Despertar o bebê, massagear os pés e a face. Não deixar que o bebê esteja agitado de fome ou outro desconforto, pois dificulta a manobra.",
     "Step2": "Acomodar o bebê na posição sentada ou semi-sentada em seu colo, sendo que a cabeça forme um ângulo de 90º com o pescoço.",
     "Step3": "Encostar a borda do copo no lábio inferior do bebê e deixar o leite materno tocar o lábio.",
@@ -124,7 +123,7 @@
     },
     "ExternalForm": {
       "Message": "Conforme explicamos, você está participando de uma pesquisa sobre esse app que você terá acesso. Para tanto, precisamos da sua valiosa contribuição, que viabiliza todo o estudo, preenchendo um formulário com poucas questões que está disponível no link abaixo. Logo depois, você poderá acessar o app AmamentaCoach.  Esperamos que goste e aproveite muito essa experiência!",
-      "LinkWarning": "Clique aqui para acessar o formulário",
+      "LinkWarning": "Pressione aqui para acessar o formulário",
       "Error": "O formulário externo precisa ser respondido"
     },
     "Header": "Você está quase lá! Agora faremos algumas perguntas sobre seu parto e seu bebê.",
@@ -362,8 +361,7 @@
     "Birthday": "Sua data de nascimento",
     "BirthCityStateHeader": "Onde seu bebê nasceu?",
     "BirthdayPlaceholder": "Data de nascimento",
-    // TODO Translate
-    "CurrentGestationCount": "Are you pregnant with multiples?",
+    "CurrentGestationCount": "Você está grávida de gêmeos?",
     "Name": "Seu Nome",
     "Partner": "Tem companheiro?",
     "Phone": "Telefone",
@@ -374,11 +372,10 @@
     "BirthDate": "Data do parto",
     "SocialMedia": "Por qual veículo de mídia você ficou sabendo sobre o app AmamentaCoach?",
     "PossibleBirthDate": "Qual a data provável do seu parto?",
-    // TODO Translate
     "CurrentGestationCountOptions": {
-      "OneBaby": "No - just one baby",
-      "Twins": "Yes - twins",
-      "Triplets": "Yes - triplets"
+      "OneBaby": "Não, apenas de 1 bebê",
+      "Twins": "Sim, estou grávida de gêmeos",
+      "Triplets": "Sim, estou grávida de trigêmeos"
     },
     "UserTypeOptions": {
       "Pregnant": "Gestante",
@@ -757,11 +754,11 @@
     "SelectPhoto": "Escolha uma foto de seu(s) bebê(s) na galeria e deixe aqui para lembrar qual a sua grande motivação para amamentar."
   },
   "UploadFatherPhotoPage": {
-    "Text": "Envolver o companheiro(a) nessa jornada faz toda a diferença! Clique no botão abaixo e envie uma foto de um momento legal do companheiro(a) com o bebê.\nCaso não seja possível envolver o companheiro(a), você pode escolher outra pessoa importante pra ser esse apoio fundamental a você e seu bebê!"
+    "Text": "Envolver o companheiro(a) nessa jornada faz toda a diferença! Pressione no botão abaixo e envie uma foto de um momento legal do companheiro(a) com o bebê.\nCaso não seja possível envolver o companheiro(a), você pode escolher outra pessoa importante pra ser esse apoio fundamental a você e seu bebê!"
   },
   "UploadMotherPhotoPage": {
     "BestMother": "VOCÊ é a melhor mãe do mundo para o seu bebê! Isso simplesmente porque VOCÊ deu a vida a ele, o que ninguém mais poderia fazer! O SEU LEITE é o melhor alimento que ele pode receber!",
-    "Mirror": "Espelho, espelho meu... existe alguém mais capaz de amamentar do que eu?”\nClique no botão abaixo e faça o upload de uma foto sua!"
+    "Mirror": "Espelho, espelho meu... existe alguém mais capaz de amamentar do que eu?”\nPressione no botão abaixo e faça o upload de uma foto sua!"
   },
   "UploadPhotoScreen": {
     "ModalSuccessText": "Imagem enviada com sucesso",
