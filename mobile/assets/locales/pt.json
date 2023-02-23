@@ -171,7 +171,7 @@
     },
     "Page5": {
       "Section1": "REDUZ O RISCO",
-      "Text1": "Pesquisas defendem que reduz o risco de câncer de mama, do ovário e de osteoporose."
+      "Text1": "Pesquisas defendem que reduz o risco de câncer de mama e do ovário."
     },
     "Page6": {
       "Section1": "AJUDA",
@@ -681,6 +681,14 @@
     "Page7": {
       "Title": "6. Mantenha a paciência",
       "Text": "Quando seu bebê começar a mamar, não se esqueça de que por ser prematuro, ele pode ser mais sonolento, mais “molinho”, e poderá precisar de mais tempo até conseguir dar conta do recado. "
+    },
+    "Page8": {
+      "Title": "7. Ajudando seu bebê fazer uma boa pega",
+      "Text": "- Posicione-se de forma confortável; se estiver sentada, com apoio para as costas e os pés\n- Traga o bebê para perto do seu corpo, barriga com barriga\n- As orelhas, os ombros e o quadril do bebê deverão estar alinhados\n- Alinhe o nariz do bebê com seu mamilo\n- A cabeça do bebê deverá reclinar levemente para trás\n- Apoie os ombros e o pescoço do bebê.\n- Aproxime o queixo e o lábio inferior do bebê à mama\n- O nariz do bebê estará bem próximo da mama, mas ele deverá conseguir respirar normalmente\n-  Espere o bebê abrir bem a boca, e então traga-o de maneira a abocanhar a maior parte da aréola, direcionando o mamilo ao céu da boca\n- Apoie a mama com os dedos longe da aréola"
+    },
+    "Page9": {
+      "Title": "8. Realizando a transição do cateter gástrico para o peito",
+      "Text": "Alguns bebês prematuros recebem leite por um cateter gástrico antes de começar o processo de aprender a mamar no peito.\nConforme o reflexo de sucção se desenvolve e o bebê vai ficando estável, ele inicia a transição de ser alimentado via cateter para ser amamentado."
     }
   },
   "SurveyComponent": {

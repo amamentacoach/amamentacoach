@@ -38,7 +38,7 @@
   "SelectBaby": "Select baby",
   "SignUp": "Registration",
   "Skip": "Skip",
-  "State": "State",
+  "State": "Province",
   "TermsOfService": "Consent Form",
   "Time": "Time",
   "UCI": "Neonatal Intermediate Care Unit",
@@ -75,13 +75,13 @@
     "Save": "Save",
     "End": "Finish",
     "SendQuestion": "Submit Question",
-    "SignIn": "Enter"
+    "SignIn": "SignIn"
   },
   "AdditionalInformationPage": {
     "Header": "Relevant information about breastfeeding, emotional responses, and coping.",
     "1": "How is my milk produced?",
     "2": "Learn how your body produces milk",
-    "4": "Find out how can kangaroo care can help",
+    "4": "Find out how kangaroo care can help",
     "5": "Do you know what resilience is?",
     "6": "We'll explain it to you!",
     "7": "Reframing expectations",
@@ -94,14 +94,14 @@
     "1": "Welcome! The Breastfeeding Coach app was created to assist you in the challenging journey of breastfeeding a baby born prematurely.",
     "2": "You'll record your daily advances and have access to exclusive content to instruct and motivate you!",
     "3": "Keep a record of your daily progress and access exclusive content to guide and motivate you",
-    "4": "Explore each icon and discover how the app makes for a great ally!"
+    "4": "Explore each icon and discover how the app makes for a great help!"
   },
   "Auth": {
     "SignUpStep": "Step %{current} of %{max}"
   },
   "BabyCupPage": {
     "Header": "Demonstration",
-    "Subtitle": "It is important that you have initial face- Offering breast milk using a cup to-face training with a professional to adopt this milk-feeding technique.  Feeding your baby with a cup avoids the use of a bottle, which can harm the baby's learning to suckle at the breast.",
+    "Subtitle": "It is important to have initial face-to-face training with a professional to adopt this milk-feeding technique. Feeding your baby with a cup avoids using a bottle, which can affect the baby's learning to suckle at the breast.",
     "Step1": "Wake the baby, massage their feet and face. Ensure the baby isn't agitated due to hunger or other discomfort, as this makes the maneuver more difficult.",
     "Step2": "Place the baby in a sitting or semi-sitting position on your lap, with the head at a 90º angle with the neck.",
     "Step3": "Place the edge of the cup to the baby's bottom lip and let the breast milk touch the lip.",
@@ -109,24 +109,27 @@
   },
   "BabyFormPage": {
     "BirthLocation": "Once born, your baby went to:",
-    // TODO Translate
-    "BirthPlace": "Ao nascer, seu bebê ficou internado",
+    "BirthPlace": "After birth, to which unit was your baby referred?",
     "CurrentLocation": {
-      "Description": "Onde seu bebê nesse momento?",
+      "Description": "Where is your baby right now?",
       "Options": {
-        "Home": "Em casa"
+        "Home": "Home"
       }
     },
     "Institution": {
+      // TODO Translate
       "Description": "Instituição em que seu bebê ficou internado:",
       "Options": {
+        // TODO Translate
         "1": "Hospital Universitário de Londrina",
+        // TODO Translate
         "2": "Hospital e Maternidade Dona Íris-Goiânia"
       }
     },
     "ExternalForm": {
-      "Message": "Conforme explicamos, você está participando de uma pesquisa sobre esse app que você terá acesso. Para tanto, precisamos da sua valiosa contribuição, que viabiliza todo o estudo, preenchendo um formulário com poucas questões que está disponível no link abaixo. Logo depois, você poderá acessar o app AmamentaCoach.  Esperamos que goste e aproveite muito essa experiência!",
-      "LinkWarning": "Clique aqui para acessar o formulário"
+      // TODO Translate
+      "Message": "Conforme explicamos, você está participando de uma pesquisa sobre esse app que você terá acesso. Para tanto, precisamos da sua valiosa contribuição, que viabiliza todo o estudo, preenchendo um formulário com poucas questões que está disponível no link abaixo. Logo depois, você poderá acessar o app The Breastfeeding Coach.  Esperamos que goste e aproveite muito essa experiência!",
+      "LinkWarning": "Press here to access the form"
     },
     "Header": "You are almost there! Now we're going to ask you a few questions about your birth and your baby.",
     "Name": "Your baby's name"
@@ -138,10 +141,9 @@
     "PageName": "Benefits of skin-to-skin “kangaroo” care",
     "Header": "Consider practicing the Kangaroo care method."
   },
-  // TODO Translate
   "BabyBirthStatusUpdate": {
-    "PageName": "Situação do nascimento",
-    "BirthStatus": "Olá, gostaríamos de saber se o seu parto já aconteceu."
+    "PageName": "Birth status",
+    "BirthStatus": "Hello, we would like to know if your delivery has happened yet."
   },
   "BabyLocationUpdate": {
     "BabyLocation": "Where is your baby right now?",
@@ -162,9 +164,9 @@
     },
     "Page3": {
       "Section1": "MOUTH",
-      "Text1": "Being fed at the breast stimulate the growth and development of the face, mouth, and teeth.",
+      "Text1": "Being fed at the breast stimulates the growth and development of the face, mouth, and teeth.",
       "Section2": "INTELLIGENCE",
-      "Text2": "There is some evidence to suggest that breastfed children may have improved intelligence"
+      "Text2": "There is evidence to suggest that breastfed children may have improved cognitive performance."
     },
     "Page4": {
       "Section1": "PROTECTION AND IMMUNITY",
@@ -174,13 +176,13 @@
     },
     "Page5": {
       "Section1": "REDUCES RISK OF CANCER",
-      "Text1": "Research shows that it reduces the risk of breast, ovarian, and bone cancer."
+      "Text1": "Research shows that it reduces the risk of breast and ovarian cancer."
     },
     "Page6": {
       "Section1": "IT HELPS",
       "Text1": "You return to your pre-pregnancy weight.",
       "Section2": "PREVENTS",
-      "Text2": "Can reduce the risk and/or severity of postpartum hemorrhage, which is a excessive bleeding following the baby birth.",
+      "Text2": "Can reduce the risk and/or severity of postpartum hemorrhage, which is excessive bleeding following childbirth.",
       "Section3": "PROMOTES",
       "Text3": "The return of the uterus to its normal size."
     }
@@ -192,7 +194,7 @@
     "4": "How long to do it?",
     "5": "Hand Expressing Breastmilk",
     "6": "Producing more milk using hands + pump",
-    "Header": "The World Health Organization states that all mothers should be taught hygienic hand expression. Frequent hand expression in addition to electric pumping can increase milk supply by more thorough emptying of the breasts, as well as increase the caloric content of the milk. If electric double-pumping (both breasts simultaneously) is not available, manual pumps can be used.\nAvoid being discouraged if you get nothing or a few drops the first day, this is normal. It all takes time."
+    "Header": "The World Health Organization states that all mothers should be taught hygienic hand expression. Frequent hand expression in addition to electric pumping can increase milk supply by more thorough emptying of the breasts. If electric double-pumping (both breasts simultaneously) is not available, manual pumps can be used.\nAvoid being discouraged if you get nothing or a few drops the first day, this is normal. It all takes time."
   },
   "CreditsPage": {
     "AvailableAt": "Available at",
@@ -294,25 +296,22 @@
     "ExpectationPopUp": "Would you like to visit your goals for today?",
     "FirstStatusPopup": "The time has come to evaluate your self-confidence level regarding breastfeed. Let's go?",
     "StatusPopup": "The time has come to evaluate your self-confidence level regarding breastfeed. Again Let's go?",
-    "Option1": "Hello, I'm the “Preemie” baby",
+    "Option1": "Hello, I'm the \"Preemie\" baby",
     "Option2": "Step-by-step guide to feeding breastmilk to your premature baby",
-    "Option3": "Pumping milk",
+    "Option3": "Hand expression and pumping",
     "Option4": "Emotions and Breastfeeding",
     "Option5": "Did you know?",
     "Option6": "Testimonies from moms",
     "Option7": "Questions",
     "Option8": "Credits",
-    // TODO Translate
     "UpdateBabyBirthStatus": {
-      "Text": "O seu bebê nasceu?",
-      "Subtext": "Informe aqui"
+      "Text": "Has your baby been born?",
+      "Subtext": "Report here"
     }
   },
   "HowLongToBreastfeedPage": {
-    "Header": "How long hand express or pump breast milk",
-    "Text1": "As long as your baby is still",
-    "Text2": "suckling irregularly.",
-    "Text3": "While your baby is not yet suckling",
+    "Header": "How long to continue hand expressing or pumping breast milk",
+    "Text3": "You can hand express or pump your breast milk while your baby is not yet suckling",
     "Text4": "at the breast",
     "Text5": "regularly."
   },
@@ -320,12 +319,12 @@
     "Title": "How to hand express breastmilk",
     "Page2": "Choose a clean and quiet place.",
     "Page3": "Massage the breast with the tips of two fingers, starting from the region closest to the areola and going to the farthest from the breast, supporting it with the other hand.",
-    "Page4": "Massage the most fullness areas longer.",
+    "Page4": "Massage the areas of the breast that are most full for longer.",
     "Page5": "Place the tip of the fingers (thumb and index finger) above and below the areola, tightening the breast against the chest.",
     "Page6": "Press on the breast with rhythmic movements as if trying to connect the tips of your fingers and thumb, but without sliding on the skin. ",
     "Page7": "Discard the first few drops and store the rest in the sterile bottle.",
     "Page8": "If you cannot store the breast milk immediately in the refrigerator, it can remain at room temperature if used within 6 hours.",
-    "Page9": "Breast milk can be safely stored for up to 5 days in fridge, 6 months in freezer or 12 months in deep freeze. Before feeding the baby with the stored milk, heat it in a hot water bath."
+    "Page9": "Breast milk can be safely stored for up to 5 days in fridge, 6 months in freezer or 12 months in deep freezer. Before feeding the baby with the stored milk, heat it in a container of hot water."
   },
   "IntroductionStatusFormPage": {
     "Text1": "How do you feel about your self-confidence to breastfeed?\n\nFor each of the following statements, please choose the answer that best describes your self-confidence in breastfeeding your baby.",
@@ -358,10 +357,10 @@
   "MilkAdditionalInformationPage": {
     "Text1": "When the baby is born and the placenta is removed, important changes take place in the body that help initiate milk production. The brain triggers the production and secretion of hormones that work in the breasts.",
     "Text2": "During this process, the breast lobes – which look like bunches of grapes and are located at the ducts – begin to produce and store breast milk.",
-    "Text3": "As the baby suckles the breast, or as milk is withdrawn, the brain produces more and more of the hormone oxytocin.",
+    "Text3": "As the baby suckles at the breast, or as milk is withdrawn, the brain produces more and more of the hormone oxytocin.",
     "Text4": "Inside the breast, oxytocin is responsible for “squeezing” the lobes, which helps to push the milk more naturally through the ducts.",
     "Text5": "Oxytocin is produced and released when you feel relaxed, calm, and confident. It is also produced when you see your baby, you touch or smell them, or when you think about them.",
-    "Text6": "The more milk that is withdrawn from the breast (either by baby's suckling, by hand expression, or by a pump) the more the brain releases hormones to facilitate milk production."
+    "Text6": "The more milk is withdrawn from the breast (either by baby's suckling, by hand expression, or by a pump) the more the brain releases hormones to facilitate milk production."
   },
   "MotherFormPage": {
     "Birthday": "Your date of birth",
@@ -371,10 +370,10 @@
     "Partner": "Do you have a partner?",
     "Phone": "Phone number",
     "BirthCityStateHeader": "Where was your baby born?",
-    "BirthWeeks": "How many weeks of pregnancy did you give birth?",
-    "UserType": "Which of these situations do you fall into?",
+    "BirthWeeks": "At what gestational age was your baby born?",
+    "UserType": "Which best describes your situation?",
     "WeeksPregnant": "How many weeks are you pregnant?",
-    "BirthDate": "Date of birth",
+    "BirthDate": "Baby's date of birth",
     "Institution": "How did you find out about this study?",
     "SocialMedia": "Through which media channel did you find out about the BreastfeedingCoach app?",
     "PossibleBirthDate": "What is your estimated pregnancy due date?",
@@ -389,13 +388,17 @@
       "HealthcareWorker": "Healthcare professional"
     },
     "InstitutionOptions": {
+      // TODO Translate
       "HU": "Sou paciente do HU - Londrina",
+      // TODO Translate
       "HMDI": "Sou paciente do HMDI-Goiânia",
+      // TODO Translate
       "AHC": "Sou paciente do AHC Londrina",
+      // TODO Translate
       "SocialMedia": "Pela divulgação da pesquisa na mídia ou nas redes sociais"
     },
     "SocialMediaOptions": {
-      "TVOrRadio": "TV ou rádio"
+      "TVOrRadio": "TV or rádio"
     },
     "Placeholder": {
       "BirthDate": "Enter the date of birth"
@@ -419,7 +422,7 @@
   "NewMessagePage": {
     "SendMessage": "Send message",
     "MessageSent": "Message sent!",
-    "Message": "Send a message to other preterm babies moms. Being in contact with people who are experiencing the same situation that you can be strengthening."
+    "Message": "Send a message to other other app users. Being in contact with people who are going through a similar situation can help you cope."
   },
   "NewPasswordPage": {
     "2": "New password",
@@ -429,7 +432,7 @@
     "PasswordChanged": "Password changed successfully!"
   },
   "NewQuestionPage": {
-    "SubmitYourQuestion": "Send your question\n\nWould you like to answer any questions about breastfeeding or prematurity? Submit your question and our team of experts will respond as soon as possible.",
+    "SubmitYourQuestion": "Send your question\n\nWould you like to ask any questions about breastfeeding or prematurity? Submit your question and our team of experts will respond as soon as possible.",
     "QuestionSent": "Question sent!",
     "QuestionPlaceholder": "Enter your question here..."
   },
@@ -437,7 +440,7 @@
     "Header": "Premature birth:\nThis is not what I expected",
     "Text1": "Premature birth is something that affects the whole family. The reality of premature birth may be different than what you dreamed of during pregnancy.",
     "Text2": "It is normal to feel a mixture of fear, frustration, insecurity, anxiety, or stress.",
-    "Text3": "Be patient with yourself! Take a deep breath...pick someone to open up with and talk to about how you're feeling...and then accept your baby just the way they are. Decide to embrace this new situation!\n\nYou can seek help from qualified breastfeeding support professionals (e.g., lactation consultants) if you have questions, concerns, or are experiencing breastfeeding challenges.\n\nLactation consultants: https://portal.ilca.org/i4a/memberDirectory/index.cfm?directory_id=19&pagelD=4356\n\nBilingual Online Ontario Breastfeeding Services: https://ontariobreastfeeds.ca/\n\nWhat You Need to Know About Mental Health and Motherhood - https://roomforher.ca/blog/mind/what-vou-need-to-known"
+    "Text3": "Be patient with yourself and take a deep breath! Find someone to open up to and to talk about how you're feeling. This could be a family member, a friend, or a health professional (e.g. social worker).\n\nYou can seek help from qualified breastfeeding support professionals (e.g., lactation consultants) if you have questions, concerns, or are experiencing breastfeeding challenges.\n\nLactation consultants: https://portal.ilca.org/i4a/memberDirectory/index.cfm?directory_id=19&pagelD=4356\n\nBilingual Online Ontario Breastfeeding Services: https://ontariobreastfeeds.ca/\n\nWhat You Need to Know About Mental Health and Motherhood - https://roomforher.ca/blog/mind/what-vou-need-to-known"
   },
   "PageTitles": {
     "1": "Make yourself at home!",
@@ -485,12 +488,12 @@
   },
   "ResiliencePage": {
     "Header": "Do you know what Resilience is?",
-    "InfoModal": "Central to resilience are two basic tenets: the perception of an adverse event and subsequent positive adaptation. Everyone agrees that premature birth is an unexpected event.  Resilience is viewed as an adaptive process, rather than a specific state, and is a predictor of positive coping in stressful situations. Resilience has also been characterized as the ability to bounce back or rebound from adverse experiences by remaining flexible and developing strategies that result in positive outcomes and enhanced quality of life",
+    "InfoModal": "Central to resilience are two basic tenets: the perception of an adverse event and subsequent positive adaptation. Everyone agrees that premature birth is an unexpected event.  Resilience is viewed as an adaptive process, rather than a specific state, and is a predictor of positive coping in stressful situations. Resilience has also been characterized as the ability to bounce back or rebound from adverse experiences by remaining flexible and developing strategies that result in positive outcomes and enhanced quality of life.",
     "Option1": "1. Maintain realistic expectations",
     "Option2": "2. Seek social support and group connection",
     "Option3": "3. Develop a positive way of thinking",
     "Option4": "4. Build strength and self-confidence",
-    "Text": "Scientists claim that it is possible to INCREASE RESILIENCE by adopting at least 4 favourable behaviours. Various app activities feature one or more of these powerful ingredients! Increase your confidence, boost your resilience: choose where you want to start and enjoy all the content!",
+    "Text": "Scientists claim that it is possible to INCREASE RESILIENCE by adopting at least 4 favorable behaviours. Various app activities feature one or more of these powerful ingredients! Increase your confidence, boost your resilience: choose where you want to start and enjoy all the content!",
     "TextHeader": "More Resilient Moms!"
   },
   "SignUpPage": {
@@ -500,14 +503,13 @@
   "Status": {
     "Saving": "Saving...",
     "Sending": "Sending...",
-    "SignIn": "Entering..."
+    "SignIn": "Signing in..."
   },
   "StatusFormPage": {
     "AverageEfficacy": "moderate",
     "FormName": "Breastfeeding Self-Efficacy Scale",
     "Header": "Breastfeeding self-efficacy",
-    // TODO Translate
-    "Intro": "Para cada uma das afirmações a seguir, por favor, escolha a resposta que melhor descreve sua autoconfiança em amamentar seu bebê. Por favor, marque sua resposta circulando o número que melhor descreve como você se sente.  Não há respostas certas ou erradas.",
+    "Intro": "For each of the following statements, please choose the answer that best describes how confident you are about breastfeeding your new baby. Please mark your answer by circling the number that is closest to how you feel. There are no right or wrong answers.",
     "HighEfficacy": "high",
     "InfoValue1": "not at all confident",
     "InfoValue2": "not very confident",
@@ -516,8 +518,7 @@
     "InfoValue5": "very confident",
     "LowEfficacy": "low",
     "Score": "Thank you for replying.\nYour score is %{score}, which means your self-confidence is %{meaning}.",
-    // TODO Translate
-    "WhenMyBaby": "Quando meu bebê estiver realmente pronto para mamar no peito:",
+    "WhenMyBaby": "When my baby is ready to actually breastfeed:",
     "Questions": {
       "1": {
         "Description": "I can pump enough milk for my baby."
@@ -576,8 +577,7 @@
     }
   },
   "FeedingFormPage": {
-    // TODO Translate
-    "FormName": "Informações sobre a alimentação",
+    "FormName": "Baby feed information",
     "Questions": {
       "1": {
         "Description": "How my baby is feeding:",
@@ -595,16 +595,16 @@
   },
   "StepByStepPrematurePage": {
     "Page1": {
-      "Title": "Eight good advices for breastfeeding a premature baby",
-      "Text": "With a premature birth, it's common for the baby to not be able to latch to the breast at birth and for the baby to be hospitalized to receive some ongoing care.\n\nFirst of all, know that feeding a premature baby with breastmilk is possible, and that is very valuable!\n\nThe following steps summarize the journey towards success in breastfeeding a premature baby."
+      "Title": "Infographics: 8 good pieces of advice for breastfeeding a premature baby",
+      "Text": "With a premature birth, it's common for the baby to not be able to latch to the breast right away and for the baby to be hospitalized to receive medical care.\n\nHowever, know that feeding a premature baby with breastmilk is possible and is very valuable!\n\nThe following infographics provide advice to help you successfully breastfeed your premature baby."
     },
     "Page2": {
       "Title": "1. Look for serenity",
-      "Text": "Premature birth: frustrations, uncertainties, fear... The birth of a preterm baby is an unexpected situation.\nAccepting this event can be a good start to live it more serenely. Take a deep breath, let the new reality set in your head and your heart, and then embrace it!"
+      "Text": "Premature birth may result in frustrations, uncertainties, and fear. The birth of a preterm baby is an unexpected situation. Take a deep breath, let the new reality set in, and try to embrace it!"
     },
     "Page3": {
       "Title": "2. Stimulate Milk Production",
-      "Text": "While your baby is unable to latch to your breast, or while they aren't able to breastfeed sufficiently, you'll need to take up the task of ensuring you continue producing milk. To do this, it is recommended to pump every 3 hours at least."
+      "Text": "While your baby is unable to latch at the breast, or while they are unable to drink enough milk from directly from the breast, you'll need to take up the task of ensuring your continue producing milk.  To do this, it is recommended to pump at least every 3 hours."
     },
     "Page4": {
       "Title": "3. Strengthen the bond",
@@ -612,23 +612,23 @@
     },
     "Page5": {
       "Title": "4. Take the leading role",
-      "Text": "When your newborn's condition permits, take care of your baby: Clean their little eyes and mouth, change their diapers, and bathe them; watch them and learn about their behaviours and preferences. You are the best person to play the leading role"
+      "Text": "When your newborn's condition permits, take care of your baby: Clean their little eyes and mouth, change their diapers, and bathe them; watch them and learn about their behaviours and preferences. You are the best person to play the leading role in caring for your baby."
     },
     "Page6": {
       "Title": "5. Seek out a support network",
-      "Text": "Seek support from a lactation consultant or other provider with the skills to help with breastmilk feeding. Remember: You're not alone!"
+      "Text": "Seek support from a lactation consultant or other skilled healthcare professional to help with breastmilk feed. Remember: you're not alone!"
     },
     "Page7": {
       "Title": "6. Be patient",
-      "Text": "When your baby starts to feed at the breast, consider that as they was born prematurely, they may have less energy available.\nAlso, it is expected that babies born at less than 34 weeks gestation cannot generate and coordinate sucking with swallowing and breathing.\nThey need time and training to achieve this"
+      "Text": "When your baby starts to feed at the breast, they may not have enough energy since they were born prematurely. Also, babies born less than 34 weeks gestation have trouble with the suck-swallow-breathe reflex that's needed to feed. They need time and practice to learn how to feed."
     },
     "Page8": {
-      "Title": "7. Helping your baby latch on well",
-      "Text": "Here are some tips:\nMake sure you are comfortable and well supported.\nBring your baby in close – tummy-to-tummy.\nThe baby's ears, shoulders, and hips should be in a straight line.\nLine up the baby’s nose to your nipple.\nThe baby’s head should be slightly tilted back.\nSupport your baby’s shoulders and neck.\nBring the baby’s chin and lower lip to the breast.\nThe nose should not be touching the breast.\nWait for the baby to open his mouth wide then bring him on, directing your nipple to the back of his mouth.\nWhile supporting the breast, ensure your fingers are placed far away from your areola.\n\nSource: https://breastfeedinginfo.ca/table-of-contents/how-to-breastfeed/#latch"
+      "Title": "7. Tips to help your baby latch to the breast",
+      "Text": "Make sure you are comfortable and well supported.\nBring your baby in close – tummy-to-tummy.\nThe baby's ears, shoulders, and hips should be in a straight line.\nLine up the baby's nose to your nipple.\nThe baby's head should be slightly tilted back.\nSupport your baby's shoulders and neck.\nBring the baby's chin and lower lip to the breast.\nThe baby's nose will be very close to the breast, but he should be able to breathe normally.\nWait for the baby to open their mouth wide then bring him on, directing your nipple to the back of his mouth.\nWhile supporting the breast, ensure your fingers are placed far away from your areola.\n\nSource: https://breastfeedinginfo.ca/table-of-contents/how-to-breastfeed/#latch"
     },
     "Page9": {
       "Title": "8. Transitioning from tube feeding to breastfeeding",
-      "Text": "Some preterm infants are tube fed until they are ready to begin the process of learning to suck. As the sucking reflexes develop and when the infants were clinically stable, they are transitioned from tube feeding to breastfeeding."
+      "Text": "Some premature infants are tube fed until they are ready to begin the process of learning to suck. As the sucking reflexes develop and when the infant is clinically stable, they are transitioned from tube feeding to breastfeeding."
     }
   },
   "SurveyComponent": {
@@ -639,75 +639,70 @@
     "Father": "About partner's participation"
   },
   "SurveyStatisticsPage": {
-    "FormSubmitted": "Thank you for answering our poll! See below for the highest voted answers by mothers in the app"
+    "FormSubmitted": "Thank you for answering our survey! See below for the highest voted answers by mothers in the app"
   },
   "SurveyTitles": {
     "DiaryActions": "Tasks completed with the baby",
     "DiaryBaby": "My baby today",
     "HelpReceived": "My support network",
-    "SurveyBreastfeed": "Breastfeeding a premature baby",
+    "SurveyBreastfeed": "Providing breastmilk for your premature baby",
     "SurveyFather": "Partner's Participation",
     "SurveyHelp": "About help",
     "SurveyMotivation": "Motivation"
   },
   "TermsOfServiceText": {
-    // TODO Translate
     "Header": {
-      "Text1": "Prezada,",
-      "Text2": "Gostaríamos de convidá-la para participar da pesquisa",
-      "Text3": "\"Coaching via app: uma abordagem inovadora para o aleitamento materno de bebês prematuros\"",
-      "Text4": ", a ser realizada no Hospital Universitário de Londrina (HU/UEL), no Paraná, no Hospital e Maternidade Dona Íris, em Goiânia-GO e também por recrutamento voluntário via mídias sociais.",
-      "Text5": "Os objetivos da pesquisa são avaliar um aplicativo (app) de celular (smartphone) desenvolvido para ajudar gestantes de risco para parto prematuro e mães de bebês prematuros ou doentes a amamentarem seus bebês, contribuindo assim, para promoção do aleitamento materno (AM) de bebês prematuros; e validar a Escala de Autoeficácia para o Aleitamento Materno de mães de bebês prematuros ou doentes – versão brasileira."
+      "Text1": "Dear participant,",
+      "Text2": "You are being asked to take part in a research study named",
+      "Text3": "\"Translation, cultural adaptation, and user experience evaluation of a Brazilian app for mothers of premature infants in Canada\"",
+      "Text4": "Please read this explanation about the study and its risks and benefits before deciding if you would like to participate. You should take as much time as you need to make your decision. You should ask the research team to explain anything you do not understand and ensure that all your questions have been answered before signing this consent form. Before making your decision, feel free to discuss this study with anyone you wish. Participation in this study is voluntary.",
+      "Text5": "Recent studies have found that both websites available through Google and mobile apps currently accessible in Canada in English for parents of infants in the NICU are lacking, with the concern of the quality and credibility of existing resources. Additionally, considering a complete development of a new mobile app is usually a costly process, a partnership between Brazilian and Canadian researchers was established to translate and culturally adapt the Brazilian mobile App to mothers who live in Canada and have English as their first language, evaluate user experience in this new context. "
     },
-    // TODO Translate
     "Adult": {
-      "Text1": "Ao concordar em participar da pesquisa, após a assinatura em termo de consentimento e cadastro de informações iniciais, você fará o download do app, na Play Store, de forma gratuita e terá acesso ilimitado a todo conteúdo interativo disponível. Você também preencherá questionários em momentos específicos, com informações sobre você e o bebê, para os quais o próprio aplicativo irá lembrá-la.",
-      "Text2": "Durante o período em que estiver participando, você também será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
-      "Text3": "Além disso, após um mês de alta, você poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, você será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
-      "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que sua participação é totalmente voluntária, podendo você: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
-      "Text5": "Salientamos que suas informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você não pagará ou será remunerada pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
-      "Text6": "Os potenciais benefícios da sua participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do app e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator você poderá utilizar o app no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
+      "Text1": "After your consent is given, you will be provided information on downloading the app via the Google Play platform. You will receive a login and password to access the App and will be asked to use it over two weeks. After this period, you will receive a questionnaire by email with objective questions about your experience as a user of this mobile app. You will also be asked to complete an interview that can be face-to-face, by telephone, or by video call, which will be arranged between you and the researcher responsible for it. We estimate that each interview will last about 20 minutes, and with your consent, it will be recorded for later coding, transcribed, and analyzed.",
+      "Text2": "",
+      "Text3": "",
+      "Text4": "All electronic data will be password-protected and encrypted on a secured computer server. The security of the transmission of the information entered by mothers in the App is ensured since the App's server implements the HTTPS protocol that guarantees TLS encryption in all requests. All electronic and hard copy data will be destroyed after seven years.",
+      "Text5": "We emphasize that your information will be used only for research purposes and will be treated with the strictest secrecy and confidentiality to preserve your identity. We assure you that you will not pay or be reimbursed for your participation; however, any expenses arising from the research are the researcher's responsibility.",
+      "Text6": "The potential benefits of your participation in this research will be the contribution to the improvement of the app that intends to benefit and facilitate the breastfeeding process, promoting the dissemination of knowledge and information on breastfeeding among mothers of premature infants. As for the risks, they are minimal and apply to the time spent using the app and reading, answering the questionnaires, and conducting the interview. To minimize this factor, you can use the app as long as you see fit and interrupt the interview at any time, resuming it or not at your convenience."
     },
-    // TODO Translate
     "Parent": {
-      "Text1": "Ao concordar em autorizar a participação da adolescente na pesquisa, após a assinatura de ambas em termo de consentimento e cadastro de informações iniciais, ela fará o download do app, na Play Store, de forma gratuita e terá acesso ilimitado a todo conteúdo interativo disponível. Ela também preencherá questionários em momentos específicos, com informações sobre ela e o bebê, para os quais o próprio aplicativo irá lembrá-la.",
-      "Text2": "Durante o período em que estiver participando, ela também será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
-      "Text3": "Além disso, após um mês de alta, ela poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, ela será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
-      "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que a participação da adolescente é totalmente voluntária, podendo ela: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
-      "Text5": "Salientamos que as informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você e ela não pagarão ou serão remuneradas pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
-      "Text6": "Os potenciais benefícios da participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do app e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator ela poderá utilizar o app no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
+      "Text1": "Your participation in this study is voluntary. You may decide not to be in this study or to be in the study now and then change your mind later. You may leave the study anytime without affecting your {care/employment status/academic standing}. You may refuse to answer any question you do not want to answer or not answer an interview question by saying “pass.” We will give you new information learned during the study that might affect your decision to stay in the study. ",
+      "Text2": "During the period that you are participating, you will also be contacted by telephone call or message for follow-up on two occasions after the baby's discharge from the hospital.",
+      "Text3": "In addition, one month after discharge, you may be invited to participate in an interview about your experiences during the process of breastfeeding your premature infant, and these insights will be valuable for a better understanding by health professionals and researchers of the field regarding the process of breastfeeding a premature infant. You will be interviewed at the premature infant's outpatient clinic or at home, according to your possibilities. The interviews will be recorded and later transcribed in their entirety, lasting approximately 30 minutes and no more than 1 hour.",
+      "Text4": "The information will be treated with the utmost secrecy and confidentiality to preserve her identity and will be used only for research purposes. We clarify that the adolescent's participation is voluntary, and she can refuse to participate or even give up at any moment without entailing any burden or damage to her person.",
+      "Text5": "Information such as name, telephone number, and email address will be omitted from any research reports resulting from the study. These data will only be used to establish contact with the participants and organize the information collected in preliminary tables, filed completely confidentially during the study. Where possible, any personal identifying information (such as name) will be “de-identified” by replacing your personal identifying information with a “unique code/number” and kept securely. Participants' names will not appear on any questionnaires or data forms. The principal investigator will safeguard the link between the study code number and the participants' personal identities. No information identifying participants will be sent off-site except in a secure communication to retrieve data as described above. Records identifying participants will be kept confidential and will not be publicly available or disclosed unless required by law. It is expected that the combined information collected during this study will be presented to the scientific community at meetings, published in journals, and reported to policymakers. Participants will not be named in any study reports, publications, or presentations.",
+      "Text6": "You will not be paid for taking part in this study. But if you participate in the user experience evaluation, you will have access to prematurity and breastfeeding-related information and resources via the app. You may find this resource useful for yourself and your premature baby. This is a direct benefit. Also, participants will contribute to the cultural adaptation of a mobile App designed to support the difficult breastfeeding process experienced by mothers of premature infants. This contribution will facilitate the dissemination of a more accessible eHealth resource - in English, a more global language - of accurate breastfeeding support and information to a broader range of mothers. This is an indirect benefit."
     },
-    // TODO Translate
     "Minor": {
-      "Text1": "Ao concordar em participar da pesquisa, após as assinaturas suas e de seu responsável legal em termos de consentimento/assentimento e cadastro de informações iniciais, você fará o download do app, na Play Store, de forma gratuita e terá acesso ilimitado a todo conteúdo interativo disponível. Você também preencherá questionários em momentos específicos, com informações sobre você e o bebê, para os quais o próprio aplicativo irá lembrá-la.",
-      "Text2": "Durante o período em que estiver participando, você também será contatada por telefone em dois momentos após a alta hospitalar do bebê, para seguimento deste acompanhamento.",
-      "Text3": "Além disso, após um mês de alta, você poderá ser convidada a participar de uma entrevista sobre as vivências durante o processo de amamentação do filho prematuro e estas percepções serão valiosas para uma melhor compreensão por parte dos profissionais da saúde e pesquisadores da área a respeito do processo de amamentar um bebê prematuro. Neste caso, você será entrevistada no ambulatório de seguimento do prematuro ou no domicílio, conforme suas possibilidades. As entrevistas serão gravadas e posteriormente transcritas na íntegra, com duração de aproximadamente 40 minutos e no máximo 1 hora.",
-      "Text4": "As informações serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade e serão utilizadas somente para os fins de pesquisa. Esclarecemos que a participação da adolescente é totalmente voluntária, podendo ela: recusar-se a participar, ou mesmo desistir a qualquer momento, sem que isto acarrete qualquer ônus ou prejuízo à sua pessoa.",
-      "Text5": "Salientamos que suas informações serão utilizadas somente para os fins de pesquisa e serão tratadas com o mais absoluto sigilo e confidencialidade, de modo a preservar a sua identidade. Asseguramos que você não pagará ou será remunerada pela participação, no entanto, se houver quaisquer despesas decorrentes da pesquisa, estas são de responsabilidade do pesquisador.",
-      "Text6": "Os potenciais benefícios da sua participação nesta pesquisa serão a contribuição para o aperfeiçoamento do app que tem a intenção de beneficiar e facilitar o processo de amamentação, promovendo a disseminação de conhecimentos e informações sobre o AM entre as mães de bebês prematuros. Quanto aos riscos, que são mínimos, se aplicam ao tempo destinado à utilização do app e leitura, resposta dos questionários e à realização da entrevista. Para minimizar esse fator você poderá utilizar o app no tempo em que achar oportuno e ainda interromper a entrevista a qualquer momento, retomando ou não quando achar conveniente."
+      "Text1": "",
+      "Text2": "During the period that you are participating, you will also be contacted by telephone call or message for follow-up on two occasions after the baby's discharge from the hospital.",
+      "Text3": "In addition, one month after discharge, you may be invited to participate in an interview about your experiences during the process of breastfeeding your premature infant, and these insights will be valuable for a better understanding by health professionals and researchers of the field regarding the process of breastfeeding a premature infant. You will be interviewed at the premature infant's outpatient clinic or at home, according to your possibilities. The interviews will be recorded and later transcribed in their entirety, lasting approximately 30 minutes and no more than 1 hour.",
+      "Text4": "The information will be treated with the utmost secrecy and confidentiality to preserve her identity and will be used only for research purposes. We clarify that the adolescent's participation is voluntary, and she can refuse to participate or even give up at any moment without entailing any burden or damage to her person.",
+      "Text5": "We emphasize that your information will be used only for research purposes and will be treated with the strictest secrecy and confidentiality to preserve your identity. We assure you that you will not pay or be reimbursed for your participation; however, any expenses arising from the research are the researcher's responsibility.",
+      "Text6": "The potential benefits of your participation in this research will be the contribution to the improvement of the app that intends to benefit and facilitate the breastfeeding process, promoting the dissemination of knowledge and information on breastfeeding among mothers of premature infants. As for the risks, they are minimal and apply to the time spent using the app and reading, answering the questionnaires, and conducting the interview. To minimize this factor, you can use the app as long as you see fit and interrupt the interview at any time, resuming it or not at your convenience."
     },
-    // TODO Translate
     "Footer": {
-      "Text1": "Faremos o possível para auxiliá-la em todo processo caso algum desconforto ocorra, esclarecendo-a sempre que for necessário. Caso você tenha dúvidas ou necessite de maiores esclarecimentos poderá nos contatar:",
-      "Text2": "Profª Drª Edilaine Giovanini Rossetto, (43) 98837-6610, Rua Gil de Abreu Souza, 1501, Condomínio Royal Park, Esperança, Londrina-PR, ediluizrossetto@gmail.com",
-      "Text3": "Profª Drª Thaíla Correa Castral, (62) 98147-9900, Rua 227, Qd 68, S/N, Setor Leste Universitário, Goiânia-GO, thailacastral@ufg.com.br",
-      "Text4": "Enfermeira Ms. Gabriela Ramos Ferreira Curan, (43) 99921-6607, rua Reverendo João Batista Ribeiro Neto, 75, apto 1903 torre 1 – Gleba Palhano, Londrina-PR, gcuran@uel.br",
-      "Text5": "Enfermeira Ms. Júlia Carneiro Godoy de Sousa, (62) 99161-7186, Rua R12, n.554, Ed Premier Lac de Rose, apt1201, Setor Oeste, Goiânia-GO, juliacgsousa@hotmail.com",
-      "Text6": "Enfermeira Esp. Mariana Lamante Bueno, (62) 98149-9994, Av C255, Ed Josephine Ceze, apt 601, Setor Nova Suíça, Goiânia-GO, ma_lamante@hotmail.com",
-      "Text7": "Ou procurar o Comitê de Ética em Pesquisa Envolvendo Seres Humanos da Universidade Estadual de Londrina, situado junto ao prédio do LABESC – Laboratório Escola, no Campus Universitário, telefone (43) 3371-5455, e-mail: cep268@uel.br",
-      "Text8": "Este termo foi assinado digitalmente, via formulário eletrônico e encontra-se disponível no app para consulta (via da participante)."
+      "Text1": "The risks related to participating in this study are minimal and apply to the time spent evaluating or using the App and reading and responding to the consent form and data collection instruments. To minimize this factor, you can use the App at any time you see fit and pause filling out the data collection instruments at any time, resuming when you see fit, or even deciding to withdraw your participation from the study without it impacting their future or current care. You will be asked to provide the sociodemographic, obstetric, birth-related, and birth conditions of the baby, but you may decide not to answer any questions if you wish. We will do our best to help participants throughout the process in case any discomfort occurs, clarifying them whenever necessary.",
+      "Text2": "Gabriela Curan, RN, PhD: gcuran@uel.br",
+      "Text3": "Thaíla Correa Castral, RN, PhD: thaccastral@gmail.com",
+      "Text4": "Phone: #1.416-946-8608",
+      "Text5": "Júlia de Sousa, RN, doctoral student: amamentacoach@gmail.com",
+      "Text6": "",
+      "Text7": "If you have questions about your rights as a participant or about ethical issues related to this study, you can talk to someone who is not involved in the study at all. You may contact Mount Sinai Hospital Research Ethics Board (REB), at 416-586-4875 or by email REB.Office@sinaihealth.ca",
+      "Text8": "This term was signed digitally via an electronic form and is available in the app for consultation."
     }
   },
   "ThePrematurePage": {
     "Option1": "Video \"Pleased to meet you, I'm the \"Preemie\" baby\"",
-    "Option2": "Poll: Breastfeeding a premature baby",
-    "Option3": "Infographic: 8 steps to breastfeeding"
+    "Option2": "Survey: Providing breastmilk for your premature baby",
+    "Option3": "Infographics: 8 good pieces of advice for breastfeeding a premature baby"
   },
   "UploadBabyPhotoPage": {
     "SelectPhoto": "Choose a photo of your baby(ies) from the gallery and upload it here to remind you of your biggest motivation to breastfeed."
   },
   "UploadFatherPhotoPage": {
-    "Text": "Involving the baby's second caregiver in this journey makes all the difference. Click on the button below and upload a photo of a moment between your partner and your baby. If it's not possible to involve your partner, you can choose another important person to be that fundamental support for your and your baby."
+    "Text": "Involving the baby's second caregiver in this journey makes all the difference. Click on the button below and upload a photo of a moment between your partner and your baby. If it's not possible to involve your partner, you can choose another important person to be that fundamental support for you and your baby."
   },
   "UploadMotherPhotoPage": {
     "BestMother": "YOU are the best mom in the world for your baby! Simply because YOU gave them life, which no one else could! YOUR BREAST MILK is the best food your baby can get!",
@@ -734,12 +729,12 @@
     "Header": "When to hand express or pump breast milk",
     "Text1": "Remember: you are trying",
     "Text2": "to help your body understand",
-    "Text3": "that it needs to produce milk for the baby. So, milk extraction must be regular, occurring at least",
-    "Text4": "every three hours",
-    "Text5": "so the breasts are regularly emptied."
+    "Text3": "that it needs to produce milk for the baby. Milk should be extracted from the breasts at least",
+    "Text4": "every 3 hours",
+    "Text5": "so that the breasts are regularly emptied."
   },
   "WhyBreastfeedPage": {
-    "Header": "Why should I pump my breast milk?",
+    "Header": "Why should I hand express or pump my breast milk?",
     "Page1": {
       "Text1": "Remember those countless benefits of breast milk for premature babies?\n\nThe key reason for expressing/pumping is to provide breastmilk to the baby!",
       "Text2": "Frequent milk removal from the breast is how you",
@@ -751,8 +746,8 @@
     },
     "Page3": {
       "Text1": "So,",
-      "Text2": "the more you empty your breasts of milk, the more they produce.",
-      "Text3": "When milk is extracted and your breasts empty, your body understands that more milk is needed.\n\nBecause your body \"understands\" that milk is continuously needed for lactation."
+      "Text2": " the more you empty your breasts of milk, the more they produce.",
+      "Text3": " When milk is extracted and your breasts empty, your body understands that more milk is needed.\n\nBecause your body \"understands\" that milk is continuously needed for lactation."
     }
   },
   "Yup": {

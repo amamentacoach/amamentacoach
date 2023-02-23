@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 import ImageWrapper from 'components/ImageWrapper';
 import { ScrollView } from 'lib/sharedStyles';
+import { getBestLocale } from 'utils/localize';
 import { createTelemetryAction } from 'utils/telemetryAction';
 
 import {
@@ -16,6 +17,8 @@ import {
 import Withdrawal from '@assets/images/withdrawal_premature.webp';
 
 const HowLongToBreastfeed: React.FC = () => {
+  const { languageTag } = getBestLocale();
+
   useEffect(() => {
     createTelemetryAction({
       action: Action.Opened,
@@ -28,11 +31,14 @@ const HowLongToBreastfeed: React.FC = () => {
       <ContentTitleText>
         {i18n.t('HowLongToBreastfeedPage.Header')}
       </ContentTitleText>
+
       <ContentWrapper>
-        <ContentText>
-          {i18n.t('HowLongToBreastfeedPage.Text1')}{' '}
-          <ColoredText>{i18n.t('HowLongToBreastfeedPage.Text2')}</ColoredText>.
-        </ContentText>
+        {languageTag === 'pt' && (
+          <ContentText>
+            {i18n.t('HowLongToBreastfeedPage.Text1')}{' '}
+            <ColoredText>{i18n.t('HowLongToBreastfeedPage.Text2')}</ColoredText>
+          </ContentText>
+        )}
         <ImageWrapper
           height={190}
           resizeMode="contain"
